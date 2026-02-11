@@ -1,4 +1,4 @@
-// Cibo Spirituale Theme
+// Amen! Theme
 export const COLORS = {
   primary: '#6B7F5B',      // Deep Sage Green
   secondary: '#F5F3F0',    // Warm Cream

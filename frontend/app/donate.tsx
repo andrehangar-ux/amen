@@ -117,7 +117,7 @@ export default function DonateScreen() {
           <Ionicons name="heart" size={40} color={COLORS.error} />
           <Text style={styles.heroTitle}>Offerta Libera</Text>
           <Text style={styles.heroText}>
-            La tua generosità permette di mantenere Cibo Spirituale gratuito e di
+            La tua generosità permette di mantenere Amen! gratuito e di
             sviluppare nuove funzionalità per la crescita spirituale di tutti.
           </Text>
         </View>
@@ -232,7 +232,7 @@ export default function DonateScreen() {
             </View>
 
             <Text style={styles.causaleText}>
-              Causale: Offerta libera Cibo Spirituale
+              Causale: Offerta libera Amen!
             </Text>
           </View>
         )}

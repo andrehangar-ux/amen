@@ -26,7 +26,7 @@ db = client[os.environ.get('DB_NAME', 'cibo_spirituale')]
 EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY', '')
 
 # Create the main app
-app = FastAPI(title="Cibo Spirituale API")
+app = FastAPI(title="Amen! API")
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
@@ -1563,7 +1563,7 @@ async def create_donation(data: DonationRequest, user: User = Depends(require_au
             "iban": DONATION_CONFIG["iban"],
             "intestatario": DONATION_CONFIG["intestatario"],
             "banca": DONATION_CONFIG["banca"],
-            "causale": f"Donazione Cibo Spirituale - {donation['donation_id'][:8]}"
+            "causale": f"Donazione Amen! - {donation['donation_id'][:8]}"
         }
     elif data.method == "paypal":
         donation["paypal_email"] = DONATION_CONFIG["paypal_email"]
@@ -3049,8 +3049,8 @@ FAQ_DATA = [
     {
         "id": "faq1",
         "category": "generale",
-        "question": "Cos'è Cibo Spirituale?",
-        "answer": "Cibo Spirituale è un'app cristiana evangelica per la crescita spirituale. Include lettura della Bibbia (Nuova Diodati e Reina Valera), assistente AI spirituale, diario personale, quiz biblici, dizionario dei termini antichi, e una comunità di credenti."
+        "question": "Cos'è Amen!?",
+        "answer": "Amen! è un'app cristiana evangelica per la crescita spirituale. Include lettura della Bibbia (Nuova Diodati e Reina Valera), assistente AI spirituale, diario personale, quiz biblici, dizionario dei termini antichi, e una comunità di credenti."
     },
     {
         "id": "faq2",
@@ -3142,7 +3142,7 @@ async def contact_support(request: Request, user: User = Depends(require_auth)):
 
 @api_router.get("/")
 async def root():
-    return {"message": "Cibo Spirituale API", "version": "2.0.0", "features": ["multilang", "community", "translation"]}
+    return {"message": "Amen! API", "version": "2.0.0", "features": ["multilang", "community", "translation"]}
 
 @api_router.get("/health")
 async def health():

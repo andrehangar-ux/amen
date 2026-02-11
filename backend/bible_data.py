@@ -1,5 +1,5 @@
 # Bible Data - Nuova Diodati (IT) e Reina Valera 1960 (ES)
-# Contenuti biblici reali per l'app Cibo Spirituale
+# Contenuti biblici reali per l'app Amen!
 
 # ===================== NUOVA DIODATI - ITALIANO =====================
 
