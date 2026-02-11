@@ -1393,12 +1393,14 @@ async def get_donations(user: User = Depends(require_auth)):
 # ==================== RADIO ENDPOINTS ====================
 
 EVANGELICAL_RADIOS = [
-    {"name": "Radio Evangelo", "url": "https://www.radioevangeloroma.it/", "country": "Italia", "language": "it"},
-    {"name": "Radio Luce", "url": "https://www.radioluce.it/", "country": "Italia", "language": "it"},
-    {"name": "BBN Radio", "url": "https://bbnradio.org/", "country": "USA", "language": "en"},
-    {"name": "Radio Cristiana", "url": "https://www.radiocristiana.com/", "country": "España", "language": "es"},
-    {"name": "Rádio Trans Mundial", "url": "https://www.transmundial.com.br/", "country": "Brasil", "language": "pt"},
-    {"name": "Radio Vie", "url": "https://www.radiovie.com/", "country": "France", "language": "fr"},
+    {"name": "Radio Evangelo Roma", "url": "https://www.radioevangeloroma.it/", "stream_url": "https://stream.radioevangeloroma.it/stream", "country": "Italia", "language": "it"},
+    {"name": "Radio Luce", "url": "https://www.radioluce.it/", "stream_url": "https://www.radioluce.it/player", "country": "Italia", "language": "it"},
+    {"name": "RTB Network", "url": "https://www.rtbnetwork.it/", "stream_url": "https://stream.rtbnetwork.it/", "country": "Italia", "language": "it"},
+    {"name": "BBN Radio", "url": "https://bbnradio.org/", "stream_url": "https://bbnradio.org/listen-live", "country": "USA", "language": "en"},
+    {"name": "Radio Unción", "url": "https://www.radiouncion.com/", "stream_url": "https://www.radiouncion.com/", "country": "España", "language": "es"},
+    {"name": "Rádio Trans Mundial", "url": "https://www.transmundial.com.br/", "stream_url": "https://www.transmundial.com.br/aovivo", "country": "Brasil", "language": "pt"},
+    {"name": "Radio Vie", "url": "https://www.radiovie.com/", "stream_url": "https://www.radiovie.com/ecouter", "country": "France", "language": "fr"},
+    {"name": "Radio RCR", "url": "https://www.rcr.it/", "stream_url": "https://www.rcr.it/diretta", "country": "Italia", "language": "it"},
 ]
 
 @api_router.get("/radios")
