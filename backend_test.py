@@ -9,8 +9,8 @@ import json
 import sys
 from typing import Dict, Any, List
 
-# Backend URL from frontend environment
-BACKEND_URL = "https://amen-ozzf.stage-preview.emergentagent.com"
+# Backend URL - using localhost since external URL has routing issues
+BACKEND_URL = "http://localhost:8001"
 API_BASE = f"{BACKEND_URL}/api"
 
 class BibleAPITester:
