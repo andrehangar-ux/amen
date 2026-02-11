@@ -389,12 +389,84 @@ async def logout(request: Request, response: Response):
     response.delete_cookie(key="session_token", path="/")
     return {"message": "Disconnesso con successo"}
 
+# ==================== BIBLE EDITIONS ====================
+
+BIBLE_EDITIONS = {
+    "nuova_diodati": {
+        "name": "Nuova Diodati",
+        "language": "it",
+        "year": "1991",
+        "description": "Traduzione italiana moderna basata sul Textus Receptus"
+    },
+    "diodati_classica": {
+        "name": "Diodati Classica",
+        "language": "it",
+        "year": "1607",
+        "description": "La storica traduzione di Giovanni Diodati"
+    },
+    "cei": {
+        "name": "CEI",
+        "language": "it",
+        "year": "2008",
+        "description": "Traduzione della Conferenza Episcopale Italiana"
+    },
+    "reina_valera": {
+        "name": "Reina Valera",
+        "language": "es",
+        "year": "1960",
+        "description": "La clásica traducción española protestante"
+    },
+    "reina_valera_antigua": {
+        "name": "Reina Valera Antigua",
+        "language": "es",
+        "year": "1569",
+        "description": "La traducción original de Casiodoro de Reina"
+    },
+    "kjv": {
+        "name": "King James Version",
+        "language": "en",
+        "year": "1611",
+        "description": "The classic English translation"
+    },
+    "niv": {
+        "name": "New International Version",
+        "language": "en",
+        "year": "1978",
+        "description": "Modern English translation"
+    },
+    "almeida": {
+        "name": "Almeida Revista",
+        "language": "pt",
+        "year": "1969",
+        "description": "Tradução clássica portuguesa"
+    },
+    "louis_segond": {
+        "name": "Louis Segond",
+        "language": "fr",
+        "year": "1910",
+        "description": "Traduction française classique"
+    },
+    "luther": {
+        "name": "Luther Bibel",
+        "language": "de",
+        "year": "1545",
+        "description": "Die klassische deutsche Übersetzung"
+    },
+}
+
 # ==================== LANGUAGES ENDPOINT ====================
 
 @api_router.get("/languages")
 async def get_languages():
     """Get all supported languages"""
     return SUPPORTED_LANGUAGES
+
+@api_router.get("/bible/editions")
+async def get_bible_editions(lang: str = None):
+    """Get available Bible editions, optionally filtered by language"""
+    if lang:
+        return {k: v for k, v in BIBLE_EDITIONS.items() if v["language"] == lang}
+    return BIBLE_EDITIONS
 
 # ==================== TRANSLATION ENDPOINT ====================
 
