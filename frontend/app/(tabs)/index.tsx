@@ -409,4 +409,31 @@ const styles = StyleSheet.create({
     color: COLORS.textLight,
     lineHeight: 22,
   },
+  exploreScroll: {
+    marginHorizontal: -SPACING.md,
+    paddingHorizontal: SPACING.md,
+  },
+  exploreCard: {
+    backgroundColor: COLORS.card,
+    borderRadius: BORDER_RADIUS.lg,
+    padding: SPACING.md,
+    marginRight: SPACING.md,
+    alignItems: 'center',
+    width: 100,
+    ...SHADOWS.small,
+  },
+  exploreIcon: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: SPACING.sm,
+  },
+  exploreTitle: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: COLORS.text,
+    textAlign: 'center',
+  },
 });
