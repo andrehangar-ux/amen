@@ -8,6 +8,7 @@ export const api = {
     
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
+      'bypass-tunnel-reminder': 'true',  // Required for localtunnel
       ...options.headers,
     };
     
