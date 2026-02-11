@@ -1,413 +1,418 @@
 diff --git a/model.patch b/model.patch
-index 6a5b169..e69de29 100644
+index 4383fd7..e69de29 100644
 --- a/model.patch
 +++ b/model.patch
-@@ -1,408 +0,0 @@
+@@ -1,413 +0,0 @@
 -diff --git a/model.patch b/model.patch
--index f4713d2..e69de29 100644
+-index 6a5b169..e69de29 100644
 ---- a/model.patch
 -+++ b/model.patch
--@@ -1,403 +0,0 @@
+-@@ -1,408 +0,0 @@
 --diff --git a/model.patch b/model.patch
---index f9933bb..e69de29 100644
+--index f4713d2..e69de29 100644
 ----- a/model.patch
 --+++ b/model.patch
---@@ -1,299 +0,0 @@
+--@@ -1,403 +0,0 @@
 ---diff --git a/model.patch b/model.patch
----index a620730..e69de29 100644
+---index f9933bb..e69de29 100644
 ------ a/model.patch
 ---+++ b/model.patch
----@@ -1,294 +0,0 @@
-----diff --git a/backend/server.py b/backend/server.py
-----index dcf31b0..8a3e343 100644
-------- a/backend/server.py
-----+++ b/backend/server.py
-----@@ -933,6 +933,197 @@ async def get_chapter(book: str, chapter: int, lang: str = "it"):
-----     
-----     return {"book": book, "chapter": chapter, "verses": verses, "language": lang}
----- 
-----+# ==================== BIBLE STUDY TOOLS ====================
-----+
-----+# Cross-references - Versetti correlati
-----+CROSS_REFERENCES = {
-----+    "Genesi:1:1": [
-----+        {"ref": "Giovanni 1:1-3", "text": "Nel principio era la Parola..."},
-----+        {"ref": "Colossesi 1:16", "text": "Poiché in lui sono state create tutte le cose"},
-----+        {"ref": "Ebrei 11:3", "text": "Per fede comprendiamo che l'universo è stato formato dalla parola di Dio"},
-----+        {"ref": "Salmi 33:6", "text": "I cieli furono fatti dalla parola dell'Eterno"},
-----+    ],
-----+    "Genesi:1:26": [
-----+        {"ref": "Genesi 5:1", "text": "Nel giorno che Dio creò l'uomo, lo fece a somiglianza di Dio"},
-----+        {"ref": "1 Corinzi 11:7", "text": "L'uomo è immagine e gloria di Dio"},
-----+        {"ref": "Colossesi 3:10", "text": "Rivestiti del nuovo uomo che si va rinnovando"},
-----+    ],
-----+    "Salmi:23:1": [
-----+        {"ref": "Giovanni 10:11", "text": "Io sono il buon pastore; il buon pastore dà la sua vita per le pecore"},
-----+        {"ref": "Ezechiele 34:11-12", "text": "Io stesso cercherò le mie pecore"},
-----+        {"ref": "Isaia 40:11", "text": "Come un pastore, egli pascerà il suo gregge"},
-----+    ],
-----+    "Giovanni:3:16": [
-----+        {"ref": "Romani 5:8", "text": "Ma Dio dimostra il suo amore verso di noi"},
-----+        {"ref": "1 Giovanni 4:9-10", "text": "In questo si è manifestato l'amore di Dio"},
-----+        {"ref": "Giovanni 1:14", "text": "E la Parola si è fatta carne"},
-----+    ],
-----+    "Giovanni:14:6": [
-----+        {"ref": "Atti 4:12", "text": "Non c'è salvezza in nessun altro"},
-----+        {"ref": "1 Timoteo 2:5", "text": "C'è un solo mediatore fra Dio e gli uomini"},
-----+        {"ref": "Ebrei 10:19-20", "text": "Una via nuova e vivente"},
-----+    ],
-----+    "Romani:8:28": [
-----+        {"ref": "Geremia 29:11", "text": "Io so i pensieri che ho per voi"},
-----+        {"ref": "Efesini 1:11", "text": "Secondo il proponimento di colui che opera tutte le cose"},
-----+        {"ref": "Genesi 50:20", "text": "Voi avete pensato del male contro di me; ma Dio ha pensato di farlo servire al bene"},
-----+    ],
-----+    "Filippesi:4:13": [
-----+        {"ref": "2 Corinzi 12:9", "text": "La mia grazia ti basta"},
-----+        {"ref": "Giovanni 15:5", "text": "Senza di me non potete far nulla"},
-----+        {"ref": "Isaia 40:31", "text": "Quelli che sperano nell'Eterno acquistano nuove forze"},
-----+    ],
-----+}
-----+
-----+# Termini chiave collegati al dizionario
-----+VERSE_DICTIONARY_LINKS = {
-----+    "Genesi:1:1": ["elohim"],
-----+    "Genesi:1:2": ["ruach"],
-----+    "Genesi:2:7": ["ruach"],
-----+    "Salmi:23:1": ["yhwh", "shalom"],
-----+    "Giovanni:1:1": ["logos"],
-----+    "Giovanni:3:16": ["agape"],
-----+    "Romani:8:28": ["agape"],
-----+    "1 Corinzi:13:4": ["agape"],
-----+    "Salmi:136:1": ["chesed"],
-----+    "Numeri:6:26": ["shalom"],
-----+}
-----+
-----+# Studio contestuale - Contesto storico e note
-----+STUDY_CONTEXT = {
-----+    "Genesi:1": {
-----+        "historical_context": "Il racconto della creazione in Genesi presenta una visione teologica dell'origine dell'universo, distinta dai miti cosmogonici delle culture circostanti (Babilonese, Egiziana). Scritto probabilmente durante o dopo l'esilio babilonese.",
-----+        "literary_structure": "Struttura settenaria con formula ripetitiva: 'Dio disse... e fu così... Dio vide che era buono'. I sei giorni mostrano un parallelismo: giorni 1-3 (separazione), giorni 4-6 (riempimento).",
-----+        "key_themes": ["Sovranità di Dio", "Bontà della creazione", "Dignità dell'uomo", "Riposo sabbatico"],
-----+        "application": "La creazione testimonia la potenza e la sapienza di Dio. L'uomo, creato a immagine di Dio, ha responsabilità di cura verso il creato."
-----+    },
-----+    "Salmi:23": {
-----+        "historical_context": "Salmo attribuito a Davide, probabilmente composto riflettendo sulla sua esperienza come pastore di pecore a Betlemme prima di diventare re. Uno dei salmi più amati nella storia della Chiesa.",
-----+        "literary_structure": "Due metafore principali: il pastore (vv. 1-4) e l'ospite (vv. 5-6). Cambio dal 'lui' al 'tu' indica intimità crescente con Dio.",
-----+        "key_themes": ["Provvidenza divina", "Guida spirituale", "Protezione nella prova", "Comunione con Dio"],
-----+        "application": "Il Signore provvede a tutti i nostri bisogni. Anche nelle difficoltà ('valle dell'ombra'), possiamo confidare nella Sua presenza."
-----+    },
-----+    "Giovanni:3": {
-----+        "historical_context": "Dialogo notturno tra Gesù e Nicodemo, un fariseo membro del Sinedrio. Ambientato probabilmente a Gerusalemme durante la Pasqua (Giovanni 2:23).",
-----+        "literary_structure": "Dialogo che procede per incomprensioni: Nicodemo interpreta letteralmente, Gesù parla spiritualmente. Culmina nella dichiarazione teologica di 3:16.",
-----+        "key_themes": ["Nuova nascita", "Fede in Cristo", "Amore di Dio", "Vita eterna vs condanna"],
-----+        "application": "La salvezza richiede una trasformazione radicale (nuova nascita) operata dallo Spirito Santo. Giovanni 3:16 riassume l'intero vangelo."
-----+    },
-----+    "Romani:8": {
-----+        "historical_context": "Lettera scritta da Paolo da Corinto (ca. 57 d.C.) alla chiesa di Roma che non aveva fondato. Capitolo 8 rappresenta il culmine della sezione dottrinale.",
-----+        "literary_structure": "Struttura: vita nello Spirito (1-17), sofferenza presente vs gloria futura (18-30), inno di trionfo (31-39).",
-----+        "key_themes": ["Nessuna condanna", "Vita nello Spirito", "Adozione filiale", "Perseveranza dei santi", "Amore inseparabile di Dio"],
-----+        "application": "Chi è in Cristo non è più sotto condanna. Lo Spirito ci guida, intercede per noi, e nulla può separarci dall'amore di Dio."
-----+    },
-----+}
-----+
-----+class StudyNoteCreate(BaseModel):
-----+    book: str
-----+    chapter: int
-----+    verse: Optional[int] = None
-----+    note: str
-----+    highlight_color: Optional[str] = None
-----+    tags: List[str] = []
-----+
-----+@api_router.get("/bible/study/{book}/{chapter}")
-----+async def get_study_data(book: str, chapter: int, verse: Optional[int] = None, user: User = Depends(require_auth)):
-----+    """Get study tools for a chapter/verse"""
-----+    chapter_key = f"{book}:{chapter}"
-----+    
-----+    # Get cross-references
-----+    cross_refs = {}
-----+    for key, refs in CROSS_REFERENCES.items():
-----+        if key.startswith(chapter_key):
-----+            cross_refs[key] = refs
-----+    
-----+    # Get dictionary links
-----+    dict_links = {}
-----+    for key, terms in VERSE_DICTIONARY_LINKS.items():
-----+        if key.startswith(chapter_key):
-----+            dict_links[key] = terms
-----+    
-----+    # Get study context
-----+    context = STUDY_CONTEXT.get(chapter_key, None)
-----+    
-----+    # Get user's personal notes
-----+    user_notes = await db.study_notes.find(
-----+        {"user_id": user.user_id, "book": book, "chapter": chapter},
-----+        {"_id": 0}
-----+    ).to_list(100)
-----+    
-----+    return {
-----+        "book": book,
-----+        "chapter": chapter,
-----+        "cross_references": cross_refs,
-----+        "dictionary_links": dict_links,
-----+        "study_context": context,
-----+        "user_notes": user_notes
-----+    }
-----+
-----+@api_router.post("/bible/study/notes")
-----+async def create_study_note(data: StudyNoteCreate, user: User = Depends(require_auth)):
-----+    """Create a personal study note"""
-----+    note = {
-----+        "note_id": str(uuid.uuid4()),
-----+        "user_id": user.user_id,
-----+        "book": data.book,
-----+        "chapter": data.chapter,
-----+        "verse": data.verse,
-----+        "note": data.note,
-----+        "highlight_color": data.highlight_color,
-----+        "tags": data.tags,
-----+        "created_at": datetime.now(timezone.utc),
-----+        "updated_at": datetime.now(timezone.utc)
-----+    }
-----+    
-----+    await db.study_notes.insert_one(note)
-----+    note.pop("_id", None)
-----+    return note
-----+
-----+@api_router.get("/bible/study/notes")
-----+async def get_all_study_notes(user: User = Depends(require_auth)):
-----+    """Get all user's study notes"""
-----+    notes = await db.study_notes.find(
-----+        {"user_id": user.user_id},
-----+        {"_id": 0}
-----+    ).sort("created_at", -1).to_list(500)
-----+    return notes
-----+
-----+@api_router.delete("/bible/study/notes/{note_id}")
-----+async def delete_study_note(note_id: str, user: User = Depends(require_auth)):
-----+    """Delete a study note"""
-----+    result = await db.study_notes.delete_one({"note_id": note_id, "user_id": user.user_id})
-----+    if result.deleted_count == 0:
-----+        raise HTTPException(status_code=404, detail="Nota non trovata")
-----+    return {"success": True}
-----+
-----+@api_router.post("/bible/study/ai-explain")
-----+async def ai_explain_verse(request: Request, user: User = Depends(require_auth)):
-----+    """AI explanation of a verse"""
-----+    body = await request.json()
-----+    verse_ref = body.get("verse_ref", "")
-----+    verse_text = body.get("verse_text", "")
-----+    question = body.get("question", "Spiega questo versetto")
-----+    
-----+    try:
-----+        chat = LlmChat(
-----+            api_key=EMERGENT_LLM_KEY,
-----+            session_id=f"study_{user.user_id}_{uuid.uuid4().hex[:8]}",
-----+            system_message="""Sei un teologo e biblista cristiano evangelico esperto. Spiega i versetti biblici in modo:
-----+- Fedele al testo originale (ebraico/greco quando rilevante)
-----+- Contestualizzato storicamente e culturalmente
-----+- Applicabile alla vita quotidiana
-----+- Con riferimenti ad altri versetti correlati
-----+Rispondi in italiano in modo chiaro e accessibile."""
-----+        ).with_model("openai", "gpt-4o")
-----+        
-----+        prompt = f"Versetto: {verse_ref}\nTesto: {verse_text}\n\nDomanda: {question}"
-----+        response = await chat.send_message(UserMessage(text=prompt))
-----+        
-----+        return {"explanation": response}
-----+    except Exception as e:
-----+        raise HTTPException(status_code=500, detail=f"Errore AI: {str(e)}")
-----+
----- @api_router.get("/bible/daily-verse")
----- async def get_daily_verse(lang: str = "it"):
-----     """Get daily verse in specified language"""
+---@@ -1,299 +0,0 @@
 ----diff --git a/model.patch b/model.patch
-----index 1bebf46..8502b51 100644
+----index a620730..e69de29 100644
 ------- a/model.patch
 ----+++ b/model.patch
-----@@ -1,87 +0,0 @@
+----@@ -1,294 +0,0 @@
 -----diff --git a/backend/server.py b/backend/server.py
------index 9fa8a63..dcf31b0 100644
+-----index dcf31b0..8a3e343 100644
 -------- a/backend/server.py
 -----+++ b/backend/server.py
------@@ -1393,21 +1393,71 @@ async def get_donations(user: User = Depends(require_auth)):
------ # ==================== RADIO ENDPOINTS ====================
+-----@@ -933,6 +933,197 @@ async def get_chapter(book: str, chapter: int, lang: str = "it"):
+-----     
+-----     return {"book": book, "chapter": chapter, "verses": verses, "language": lang}
 ----- 
------ EVANGELICAL_RADIOS = [
-------    {"name": "Radio Evangelo Roma", "url": "https://www.radioevangeloroma.it/", "stream_url": "https://stream.radioevangeloroma.it/stream", "country": "Italia", "language": "it"},
-------    {"name": "Radio Luce", "url": "https://www.radioluce.it/", "stream_url": "https://www.radioluce.it/player", "country": "Italia", "language": "it"},
-------    {"name": "RTB Network", "url": "https://www.rtbnetwork.it/", "stream_url": "https://stream.rtbnetwork.it/", "country": "Italia", "language": "it"},
-------    {"name": "BBN Radio", "url": "https://bbnradio.org/", "stream_url": "https://bbnradio.org/listen-live", "country": "USA", "language": "en"},
-------    {"name": "Radio Unción", "url": "https://www.radiouncion.com/", "stream_url": "https://www.radiouncion.com/", "country": "España", "language": "es"},
-------    {"name": "Rádio Trans Mundial", "url": "https://www.transmundial.com.br/", "stream_url": "https://www.transmundial.com.br/aovivo", "country": "Brasil", "language": "pt"},
-------    {"name": "Radio Vie", "url": "https://www.radiovie.com/", "stream_url": "https://www.radiovie.com/ecouter", "country": "France", "language": "fr"},
-------    {"name": "Radio RCR", "url": "https://www.rcr.it/", "stream_url": "https://www.rcr.it/diretta", "country": "Italia", "language": "it"},
------+    # ITALIA
------+    {"name": "Radio Evangelo Roma", "url": "https://www.radioevangeloroma.it/", "stream_url": "https://stream.radioevangeloroma.it/stream", "country": "Italia", "language": "it", "region": "Europa"},
------+    {"name": "Radio Luce", "url": "https://www.radioluce.it/", "stream_url": "https://www.radioluce.it/player", "country": "Italia", "language": "it", "region": "Europa"},
------+    {"name": "RTB Network", "url": "https://www.rtbnetwork.it/", "stream_url": "https://stream.rtbnetwork.it/", "country": "Italia", "language": "it", "region": "Europa"},
------+    {"name": "Radio RCR", "url": "https://www.rcr.it/", "stream_url": "https://www.rcr.it/diretta", "country": "Italia", "language": "it", "region": "Europa"},
------+    # USA
------+    {"name": "BBN Radio", "url": "https://bbnradio.org/", "stream_url": "https://bbnradio.org/listen-live", "country": "USA", "language": "en", "region": "USA"},
------+    {"name": "K-LOVE Radio", "url": "https://www.klove.com/", "stream_url": "https://www.klove.com/listen", "country": "USA", "language": "en", "region": "USA"},
------+    {"name": "Air1 Worship", "url": "https://www.air1.com/", "stream_url": "https://www.air1.com/listen", "country": "USA", "language": "en", "region": "USA"},
------+    # SUDAMERICA
------+    {"name": "Radio Unción", "url": "https://www.radiouncion.com/", "stream_url": "https://www.radiouncion.com/", "country": "España", "language": "es", "region": "Europa"},
------+    {"name": "Radio Nuevo Tiempo", "url": "https://nuevotiempo.org/radio/", "stream_url": "https://nuevotiempo.org/radio/", "country": "Argentina", "language": "es", "region": "Sudamerica"},
------+    {"name": "Radio Bethel Peru", "url": "https://radiobethel.pe/", "stream_url": "https://radiobethel.pe/en-vivo", "country": "Perú", "language": "es", "region": "Sudamerica"},
------+    {"name": "Radio Paz Colombia", "url": "https://radiopaz.co/", "stream_url": "https://radiopaz.co/", "country": "Colombia", "language": "es", "region": "Sudamerica"},
------+    {"name": "Radio Vida Brasil", "url": "https://radiovida.com.br/", "stream_url": "https://radiovida.com.br/ao-vivo", "country": "Brasil", "language": "pt", "region": "Sudamerica"},
------+    {"name": "Rádio Trans Mundial", "url": "https://www.transmundial.com.br/", "stream_url": "https://www.transmundial.com.br/aovivo", "country": "Brasil", "language": "pt", "region": "Sudamerica"},
------+    # AFRICA
------+    {"name": "Radio Palabre Vie", "url": "https://radioparolevie.org/", "stream_url": "https://radioparolevie.org/", "country": "Côte d'Ivoire", "language": "fr", "region": "Africa"},
------+    {"name": "Transworld Radio Africa", "url": "https://www.twr.org/africa", "stream_url": "https://www.twr.org/africa", "country": "South Africa", "language": "en", "region": "Africa"},
------+    {"name": "Radio Vie Abondante", "url": "https://rva.fm/", "stream_url": "https://rva.fm/ecouter", "country": "RDC", "language": "fr", "region": "Africa"},
------+    # EUROPA
------+    {"name": "Radio Vie", "url": "https://www.radiovie.com/", "stream_url": "https://www.radiovie.com/ecouter", "country": "France", "language": "fr", "region": "Europa"},
------+    {"name": "Premier Christian Radio", "url": "https://premierchristianradio.com/", "stream_url": "https://premierchristianradio.com/Listen", "country": "UK", "language": "en", "region": "Europa"},
------+    {"name": "ERF Radio", "url": "https://www.erf.de/", "stream_url": "https://www.erf.de/radio", "country": "Deutschland", "language": "de", "region": "Europa"},
------ ]
------ 
------+# Worship/Lodi Content - Multilingual
------+WORSHIP_CONTENT = [
------+    # Italiano
------+    {"title": "Grande è il Signore", "artist": "Hillsong Italia", "type": "song", "language": "it", "youtube_url": "https://www.youtube.com/watch?v=example1", "duration": "5:32"},
------+    {"title": "Sei Degno", "artist": "Gen Verde", "type": "song", "language": "it", "youtube_url": "https://www.youtube.com/watch?v=example2", "duration": "4:15"},
------+    {"title": "Tu Sei Fedele", "artist": "Adorazione 5", "type": "song", "language": "it", "youtube_url": "https://www.youtube.com/watch?v=example3", "duration": "6:00"},
------+    # Español
------+    {"title": "Reckless Love (Amor Incomparable)", "artist": "Cory Asbury", "type": "song", "language": "es", "youtube_url": "https://www.youtube.com/watch?v=example4", "duration": "5:45"},
------+    {"title": "Océanos", "artist": "Hillsong United", "type": "song", "language": "es", "youtube_url": "https://www.youtube.com/watch?v=example5", "duration": "8:56"},
------+    {"title": "Grande es Tu Fidelidad", "artist": "Marco Barrientos", "type": "song", "language": "es", "youtube_url": "https://www.youtube.com/watch?v=example6", "duration": "4:30"},
------+    {"title": "Poderoso Dios", "artist": "Marcos Witt", "type": "song", "language": "es", "youtube_url": "https://www.youtube.com/watch?v=example7", "duration": "5:12"},
------+    # English
------+    {"title": "What a Beautiful Name", "artist": "Hillsong Worship", "type": "song", "language": "en", "youtube_url": "https://www.youtube.com/watch?v=example8", "duration": "5:42"},
------+    {"title": "Goodness of God", "artist": "Bethel Music", "type": "song", "language": "en", "youtube_url": "https://www.youtube.com/watch?v=example9", "duration": "7:20"},
------+    {"title": "Way Maker", "artist": "Sinach", "type": "song", "language": "en", "youtube_url": "https://www.youtube.com/watch?v=example10", "duration": "6:15"},
------+    # Português
------+    {"title": "Quão Grande é o Meu Deus", "artist": "Soraya Moraes", "type": "song", "language": "pt", "youtube_url": "https://www.youtube.com/watch?v=example11", "duration": "5:30"},
------+    {"title": "Deus é Deus", "artist": "Delino Marçal", "type": "song", "language": "pt", "youtube_url": "https://www.youtube.com/watch?v=example12", "duration": "4:45"},
------+    # French
------+    {"title": "Roi des Rois", "artist": "Hillsong France", "type": "song", "language": "fr", "youtube_url": "https://www.youtube.com/watch?v=example13", "duration": "6:30"},
------+    {"title": "Mon Dieu est Plus Grand", "artist": "Glorious", "type": "song", "language": "fr", "youtube_url": "https://www.youtube.com/watch?v=example14", "duration": "5:00"},
------+]
+-----+# ==================== BIBLE STUDY TOOLS ====================
 -----+
------+@api_router.get("/worship")
------+async def get_worship_content(lang: Optional[str] = None):
------+    """Get worship/lodi content"""
------+    if lang:
------+        return [w for w in WORSHIP_CONTENT if w["language"] == lang]
------+    return WORSHIP_CONTENT
+-----+# Cross-references - Versetti correlati
+-----+CROSS_REFERENCES = {
+-----+    "Genesi:1:1": [
+-----+        {"ref": "Giovanni 1:1-3", "text": "Nel principio era la Parola..."},
+-----+        {"ref": "Colossesi 1:16", "text": "Poiché in lui sono state create tutte le cose"},
+-----+        {"ref": "Ebrei 11:3", "text": "Per fede comprendiamo che l'universo è stato formato dalla parola di Dio"},
+-----+        {"ref": "Salmi 33:6", "text": "I cieli furono fatti dalla parola dell'Eterno"},
+-----+    ],
+-----+    "Genesi:1:26": [
+-----+        {"ref": "Genesi 5:1", "text": "Nel giorno che Dio creò l'uomo, lo fece a somiglianza di Dio"},
+-----+        {"ref": "1 Corinzi 11:7", "text": "L'uomo è immagine e gloria di Dio"},
+-----+        {"ref": "Colossesi 3:10", "text": "Rivestiti del nuovo uomo che si va rinnovando"},
+-----+    ],
+-----+    "Salmi:23:1": [
+-----+        {"ref": "Giovanni 10:11", "text": "Io sono il buon pastore; il buon pastore dà la sua vita per le pecore"},
+-----+        {"ref": "Ezechiele 34:11-12", "text": "Io stesso cercherò le mie pecore"},
+-----+        {"ref": "Isaia 40:11", "text": "Come un pastore, egli pascerà il suo gregge"},
+-----+    ],
+-----+    "Giovanni:3:16": [
+-----+        {"ref": "Romani 5:8", "text": "Ma Dio dimostra il suo amore verso di noi"},
+-----+        {"ref": "1 Giovanni 4:9-10", "text": "In questo si è manifestato l'amore di Dio"},
+-----+        {"ref": "Giovanni 1:14", "text": "E la Parola si è fatta carne"},
+-----+    ],
+-----+    "Giovanni:14:6": [
+-----+        {"ref": "Atti 4:12", "text": "Non c'è salvezza in nessun altro"},
+-----+        {"ref": "1 Timoteo 2:5", "text": "C'è un solo mediatore fra Dio e gli uomini"},
+-----+        {"ref": "Ebrei 10:19-20", "text": "Una via nuova e vivente"},
+-----+    ],
+-----+    "Romani:8:28": [
+-----+        {"ref": "Geremia 29:11", "text": "Io so i pensieri che ho per voi"},
+-----+        {"ref": "Efesini 1:11", "text": "Secondo il proponimento di colui che opera tutte le cose"},
+-----+        {"ref": "Genesi 50:20", "text": "Voi avete pensato del male contro di me; ma Dio ha pensato di farlo servire al bene"},
+-----+    ],
+-----+    "Filippesi:4:13": [
+-----+        {"ref": "2 Corinzi 12:9", "text": "La mia grazia ti basta"},
+-----+        {"ref": "Giovanni 15:5", "text": "Senza di me non potete far nulla"},
+-----+        {"ref": "Isaia 40:31", "text": "Quelli che sperano nell'Eterno acquistano nuove forze"},
+-----+    ],
+-----+}
 -----+
------ @api_router.get("/radios")
-------async def get_radios(lang: str = None):
------+async def get_radios(lang: Optional[str] = None, region: Optional[str] = None):
------+    """Get evangelical radio stations filtered by language or region"""
------+    radios = EVANGELICAL_RADIOS
------     if lang:
-------        return [r for r in EVANGELICAL_RADIOS if r["language"] == lang]
-------    return EVANGELICAL_RADIOS
------+        radios = [r for r in radios if r["language"] == lang]
------+    if region:
------+        radios = [r for r in radios if r.get("region") == region]
------+    return radios
------ 
------ # ==================== USER SETTINGS ====================
------ 
---diff --git a/test_result.md b/test_result.md
---index 187cba4..21d5dbc 100644
------ a/test_result.md
---+++ b/test_result.md
---@@ -100,4 +100,91 @@
--- 
--- #====================================================================================================
--- # Testing Data - Main Agent and testing sub agent both should log testing data below this section
----#====================================================================================================
---\ No newline at end of file
---+#====================================================================================================
---+
---+user_problem_statement: "Test the Bible reader API for the Amen! app. Test Bible books endpoint and specific chapter endpoints for Genesis 1, Genesis 4, Exodus 20, and Psalm 23 in Italian."
---+
---+backend:
---+  - task: "Bible Books API Endpoint"
---+    implemented: true
---+    working: true
---+    file: "/app/backend/server.py"
---+    stuck_count: 0
---+    priority: "high"
---+    needs_retesting: false
---+    status_history:
---+        - working: true
---+          agent: "testing"
---+          comment: "✅ GET /api/bible/books?lang=it returns 37 Italian Bible books with correct structure (name, chapters, abbrev). Found expected books: Genesi, Esodo, Salmi, Matteo, Giovanni."
---+
---+  - task: "Genesis Chapter 1 API"
---+    implemented: true
---+    working: true
---+    file: "/app/backend/server.py"
---+    stuck_count: 0
---+    priority: "high"
---+    needs_retesting: false
---+    status_history:
---+        - working: true
---+          agent: "testing"
---+          comment: "✅ GET /api/bible/chapter/Genesi/1?lang=it returns exactly 31 verses from local database. First verse correctly shows 'Nel principio Dio creò i cieli e la terra.' Real Bible content confirmed."
---+
---+  - task: "Genesis Chapter 4 API (External Fetch)"
---+    implemented: true
---+    working: true
---+    file: "/app/backend/server.py"
---+    stuck_count: 0
---+    priority: "high"
---+    needs_retesting: false
---+    status_history:
---+        - working: true
---+          agent: "testing"
---+          comment: "✅ GET /api/bible/chapter/Genesi/4?lang=it returns 26 verses fetched from laparola.net and cached. First verse shows real Bible content about Cain and Abel: 'Or Adamo conobbe Eva sua moglie, la quale concepì e partorì Caino...' External API integration working correctly."
---+
---+  - task: "Exodus Chapter 20 API (Ten Commandments)"
---+    implemented: true
---+    working: true
---+    file: "/app/backend/server.py"
---+    stuck_count: 0
---+    priority: "high"
---+    needs_retesting: false
---+    status_history:
---+        - working: true
---+          agent: "testing"
---+          comment: "✅ GET /api/bible/chapter/Esodo/20?lang=it returns 26 verses with Ten Commandments content from laparola.net. Verified commandments text including 'Non avrai altri dèi davanti a me' and other commandments. Real Bible content confirmed."
---+
---+  - task: "Psalm 23 API (Local Database)"
---+    implemented: true
---+    working: true
---+    file: "/app/backend/server.py"
---+    stuck_count: 0
---+    priority: "high"
---+    needs_retesting: false
---+    status_history:
---+        - working: true
---+          agent: "testing"
---+          comment: "✅ GET /api/bible/chapter/Salmi/23?lang=it returns exactly 6 verses from local database. First verse correctly shows famous Psalm 23:1: 'L'Eterno è il mio pastore, nulla mi mancherà.' Local database content working perfectly."
---+
---+frontend:
---+  # No frontend testing performed as per instructions
---+
---+metadata:
---+  created_by: "testing_agent"
---+  version: "1.0"
---+  test_sequence: 1
---+  run_ui: false
---+
---+test_plan:
---+  current_focus:
---+    - "Bible Books API Endpoint"
---+    - "Genesis Chapter 1 API"
---+    - "Genesis Chapter 4 API (External Fetch)"
---+    - "Exodus Chapter 20 API (Ten Commandments)"
---+    - "Psalm 23 API (Local Database)"
---+  stuck_tasks: []
---+  test_all: false
---+  test_priority: "high_first"
---+
---+agent_communication:
---+    - agent: "testing"
---+      message: "✅ ALL BIBLE API TESTS PASSED (5/5 - 100% success rate). Backend Bible reader functionality is working correctly. Local database chapters (Genesis 1, Psalm 23) return immediately with correct content. External API integration with laparola.net works for chapters not in local database (Genesis 4, Exodus 20). All responses have proper structure with book, chapter, verses fields. Real Bible text confirmed in all cases. NOTE: External URL routing has issues (404 errors), but backend works perfectly on localhost:8001."
---\ No newline at end of file
+-----+# Termini chiave collegati al dizionario
+-----+VERSE_DICTIONARY_LINKS = {
+-----+    "Genesi:1:1": ["elohim"],
+-----+    "Genesi:1:2": ["ruach"],
+-----+    "Genesi:2:7": ["ruach"],
+-----+    "Salmi:23:1": ["yhwh", "shalom"],
+-----+    "Giovanni:1:1": ["logos"],
+-----+    "Giovanni:3:16": ["agape"],
+-----+    "Romani:8:28": ["agape"],
+-----+    "1 Corinzi:13:4": ["agape"],
+-----+    "Salmi:136:1": ["chesed"],
+-----+    "Numeri:6:26": ["shalom"],
+-----+}
+-----+
+-----+# Studio contestuale - Contesto storico e note
+-----+STUDY_CONTEXT = {
+-----+    "Genesi:1": {
+-----+        "historical_context": "Il racconto della creazione in Genesi presenta una visione teologica dell'origine dell'universo, distinta dai miti cosmogonici delle culture circostanti (Babilonese, Egiziana). Scritto probabilmente durante o dopo l'esilio babilonese.",
+-----+        "literary_structure": "Struttura settenaria con formula ripetitiva: 'Dio disse... e fu così... Dio vide che era buono'. I sei giorni mostrano un parallelismo: giorni 1-3 (separazione), giorni 4-6 (riempimento).",
+-----+        "key_themes": ["Sovranità di Dio", "Bontà della creazione", "Dignità dell'uomo", "Riposo sabbatico"],
+-----+        "application": "La creazione testimonia la potenza e la sapienza di Dio. L'uomo, creato a immagine di Dio, ha responsabilità di cura verso il creato."
+-----+    },
+-----+    "Salmi:23": {
+-----+        "historical_context": "Salmo attribuito a Davide, probabilmente composto riflettendo sulla sua esperienza come pastore di pecore a Betlemme prima di diventare re. Uno dei salmi più amati nella storia della Chiesa.",
+-----+        "literary_structure": "Due metafore principali: il pastore (vv. 1-4) e l'ospite (vv. 5-6). Cambio dal 'lui' al 'tu' indica intimità crescente con Dio.",
+-----+        "key_themes": ["Provvidenza divina", "Guida spirituale", "Protezione nella prova", "Comunione con Dio"],
+-----+        "application": "Il Signore provvede a tutti i nostri bisogni. Anche nelle difficoltà ('valle dell'ombra'), possiamo confidare nella Sua presenza."
+-----+    },
+-----+    "Giovanni:3": {
+-----+        "historical_context": "Dialogo notturno tra Gesù e Nicodemo, un fariseo membro del Sinedrio. Ambientato probabilmente a Gerusalemme durante la Pasqua (Giovanni 2:23).",
+-----+        "literary_structure": "Dialogo che procede per incomprensioni: Nicodemo interpreta letteralmente, Gesù parla spiritualmente. Culmina nella dichiarazione teologica di 3:16.",
+-----+        "key_themes": ["Nuova nascita", "Fede in Cristo", "Amore di Dio", "Vita eterna vs condanna"],
+-----+        "application": "La salvezza richiede una trasformazione radicale (nuova nascita) operata dallo Spirito Santo. Giovanni 3:16 riassume l'intero vangelo."
+-----+    },
+-----+    "Romani:8": {
+-----+        "historical_context": "Lettera scritta da Paolo da Corinto (ca. 57 d.C.) alla chiesa di Roma che non aveva fondato. Capitolo 8 rappresenta il culmine della sezione dottrinale.",
+-----+        "literary_structure": "Struttura: vita nello Spirito (1-17), sofferenza presente vs gloria futura (18-30), inno di trionfo (31-39).",
+-----+        "key_themes": ["Nessuna condanna", "Vita nello Spirito", "Adozione filiale", "Perseveranza dei santi", "Amore inseparabile di Dio"],
+-----+        "application": "Chi è in Cristo non è più sotto condanna. Lo Spirito ci guida, intercede per noi, e nulla può separarci dall'amore di Dio."
+-----+    },
+-----+}
+-----+
+-----+class StudyNoteCreate(BaseModel):
+-----+    book: str
+-----+    chapter: int
+-----+    verse: Optional[int] = None
+-----+    note: str
+-----+    highlight_color: Optional[str] = None
+-----+    tags: List[str] = []
+-----+
+-----+@api_router.get("/bible/study/{book}/{chapter}")
+-----+async def get_study_data(book: str, chapter: int, verse: Optional[int] = None, user: User = Depends(require_auth)):
+-----+    """Get study tools for a chapter/verse"""
+-----+    chapter_key = f"{book}:{chapter}"
+-----+    
+-----+    # Get cross-references
+-----+    cross_refs = {}
+-----+    for key, refs in CROSS_REFERENCES.items():
+-----+        if key.startswith(chapter_key):
+-----+            cross_refs[key] = refs
+-----+    
+-----+    # Get dictionary links
+-----+    dict_links = {}
+-----+    for key, terms in VERSE_DICTIONARY_LINKS.items():
+-----+        if key.startswith(chapter_key):
+-----+            dict_links[key] = terms
+-----+    
+-----+    # Get study context
+-----+    context = STUDY_CONTEXT.get(chapter_key, None)
+-----+    
+-----+    # Get user's personal notes
+-----+    user_notes = await db.study_notes.find(
+-----+        {"user_id": user.user_id, "book": book, "chapter": chapter},
+-----+        {"_id": 0}
+-----+    ).to_list(100)
+-----+    
+-----+    return {
+-----+        "book": book,
+-----+        "chapter": chapter,
+-----+        "cross_references": cross_refs,
+-----+        "dictionary_links": dict_links,
+-----+        "study_context": context,
+-----+        "user_notes": user_notes
+-----+    }
+-----+
+-----+@api_router.post("/bible/study/notes")
+-----+async def create_study_note(data: StudyNoteCreate, user: User = Depends(require_auth)):
+-----+    """Create a personal study note"""
+-----+    note = {
+-----+        "note_id": str(uuid.uuid4()),
+-----+        "user_id": user.user_id,
+-----+        "book": data.book,
+-----+        "chapter": data.chapter,
+-----+        "verse": data.verse,
+-----+        "note": data.note,
+-----+        "highlight_color": data.highlight_color,
+-----+        "tags": data.tags,
+-----+        "created_at": datetime.now(timezone.utc),
+-----+        "updated_at": datetime.now(timezone.utc)
+-----+    }
+-----+    
+-----+    await db.study_notes.insert_one(note)
+-----+    note.pop("_id", None)
+-----+    return note
+-----+
+-----+@api_router.get("/bible/study/notes")
+-----+async def get_all_study_notes(user: User = Depends(require_auth)):
+-----+    """Get all user's study notes"""
+-----+    notes = await db.study_notes.find(
+-----+        {"user_id": user.user_id},
+-----+        {"_id": 0}
+-----+    ).sort("created_at", -1).to_list(500)
+-----+    return notes
+-----+
+-----+@api_router.delete("/bible/study/notes/{note_id}")
+-----+async def delete_study_note(note_id: str, user: User = Depends(require_auth)):
+-----+    """Delete a study note"""
+-----+    result = await db.study_notes.delete_one({"note_id": note_id, "user_id": user.user_id})
+-----+    if result.deleted_count == 0:
+-----+        raise HTTPException(status_code=404, detail="Nota non trovata")
+-----+    return {"success": True}
+-----+
+-----+@api_router.post("/bible/study/ai-explain")
+-----+async def ai_explain_verse(request: Request, user: User = Depends(require_auth)):
+-----+    """AI explanation of a verse"""
+-----+    body = await request.json()
+-----+    verse_ref = body.get("verse_ref", "")
+-----+    verse_text = body.get("verse_text", "")
+-----+    question = body.get("question", "Spiega questo versetto")
+-----+    
+-----+    try:
+-----+        chat = LlmChat(
+-----+            api_key=EMERGENT_LLM_KEY,
+-----+            session_id=f"study_{user.user_id}_{uuid.uuid4().hex[:8]}",
+-----+            system_message="""Sei un teologo e biblista cristiano evangelico esperto. Spiega i versetti biblici in modo:
+-----+- Fedele al testo originale (ebraico/greco quando rilevante)
+-----+- Contestualizzato storicamente e culturalmente
+-----+- Applicabile alla vita quotidiana
+-----+- Con riferimenti ad altri versetti correlati
+-----+Rispondi in italiano in modo chiaro e accessibile."""
+-----+        ).with_model("openai", "gpt-4o")
+-----+        
+-----+        prompt = f"Versetto: {verse_ref}\nTesto: {verse_text}\n\nDomanda: {question}"
+-----+        response = await chat.send_message(UserMessage(text=prompt))
+-----+        
+-----+        return {"explanation": response}
+-----+    except Exception as e:
+-----+        raise HTTPException(status_code=500, detail=f"Errore AI: {str(e)}")
+-----+
+----- @api_router.get("/bible/daily-verse")
+----- async def get_daily_verse(lang: str = "it"):
+-----     """Get daily verse in specified language"""
+-----diff --git a/model.patch b/model.patch
+-----index 1bebf46..8502b51 100644
+-------- a/model.patch
+-----+++ b/model.patch
+-----@@ -1,87 +0,0 @@
+------diff --git a/backend/server.py b/backend/server.py
+------index 9fa8a63..dcf31b0 100644
+--------- a/backend/server.py
+------+++ b/backend/server.py
+------@@ -1393,21 +1393,71 @@ async def get_donations(user: User = Depends(require_auth)):
+------ # ==================== RADIO ENDPOINTS ====================
+------ 
+------ EVANGELICAL_RADIOS = [
+-------    {"name": "Radio Evangelo Roma", "url": "https://www.radioevangeloroma.it/", "stream_url": "https://stream.radioevangeloroma.it/stream", "country": "Italia", "language": "it"},
+-------    {"name": "Radio Luce", "url": "https://www.radioluce.it/", "stream_url": "https://www.radioluce.it/player", "country": "Italia", "language": "it"},
+-------    {"name": "RTB Network", "url": "https://www.rtbnetwork.it/", "stream_url": "https://stream.rtbnetwork.it/", "country": "Italia", "language": "it"},
+-------    {"name": "BBN Radio", "url": "https://bbnradio.org/", "stream_url": "https://bbnradio.org/listen-live", "country": "USA", "language": "en"},
+-------    {"name": "Radio Unción", "url": "https://www.radiouncion.com/", "stream_url": "https://www.radiouncion.com/", "country": "España", "language": "es"},
+-------    {"name": "Rádio Trans Mundial", "url": "https://www.transmundial.com.br/", "stream_url": "https://www.transmundial.com.br/aovivo", "country": "Brasil", "language": "pt"},
+-------    {"name": "Radio Vie", "url": "https://www.radiovie.com/", "stream_url": "https://www.radiovie.com/ecouter", "country": "France", "language": "fr"},
+-------    {"name": "Radio RCR", "url": "https://www.rcr.it/", "stream_url": "https://www.rcr.it/diretta", "country": "Italia", "language": "it"},
+------+    # ITALIA
+------+    {"name": "Radio Evangelo Roma", "url": "https://www.radioevangeloroma.it/", "stream_url": "https://stream.radioevangeloroma.it/stream", "country": "Italia", "language": "it", "region": "Europa"},
+------+    {"name": "Radio Luce", "url": "https://www.radioluce.it/", "stream_url": "https://www.radioluce.it/player", "country": "Italia", "language": "it", "region": "Europa"},
+------+    {"name": "RTB Network", "url": "https://www.rtbnetwork.it/", "stream_url": "https://stream.rtbnetwork.it/", "country": "Italia", "language": "it", "region": "Europa"},
+------+    {"name": "Radio RCR", "url": "https://www.rcr.it/", "stream_url": "https://www.rcr.it/diretta", "country": "Italia", "language": "it", "region": "Europa"},
+------+    # USA
+------+    {"name": "BBN Radio", "url": "https://bbnradio.org/", "stream_url": "https://bbnradio.org/listen-live", "country": "USA", "language": "en", "region": "USA"},
+------+    {"name": "K-LOVE Radio", "url": "https://www.klove.com/", "stream_url": "https://www.klove.com/listen", "country": "USA", "language": "en", "region": "USA"},
+------+    {"name": "Air1 Worship", "url": "https://www.air1.com/", "stream_url": "https://www.air1.com/listen", "country": "USA", "language": "en", "region": "USA"},
+------+    # SUDAMERICA
+------+    {"name": "Radio Unción", "url": "https://www.radiouncion.com/", "stream_url": "https://www.radiouncion.com/", "country": "España", "language": "es", "region": "Europa"},
+------+    {"name": "Radio Nuevo Tiempo", "url": "https://nuevotiempo.org/radio/", "stream_url": "https://nuevotiempo.org/radio/", "country": "Argentina", "language": "es", "region": "Sudamerica"},
+------+    {"name": "Radio Bethel Peru", "url": "https://radiobethel.pe/", "stream_url": "https://radiobethel.pe/en-vivo", "country": "Perú", "language": "es", "region": "Sudamerica"},
+------+    {"name": "Radio Paz Colombia", "url": "https://radiopaz.co/", "stream_url": "https://radiopaz.co/", "country": "Colombia", "language": "es", "region": "Sudamerica"},
+------+    {"name": "Radio Vida Brasil", "url": "https://radiovida.com.br/", "stream_url": "https://radiovida.com.br/ao-vivo", "country": "Brasil", "language": "pt", "region": "Sudamerica"},
+------+    {"name": "Rádio Trans Mundial", "url": "https://www.transmundial.com.br/", "stream_url": "https://www.transmundial.com.br/aovivo", "country": "Brasil", "language": "pt", "region": "Sudamerica"},
+------+    # AFRICA
+------+    {"name": "Radio Palabre Vie", "url": "https://radioparolevie.org/", "stream_url": "https://radioparolevie.org/", "country": "Côte d'Ivoire", "language": "fr", "region": "Africa"},
+------+    {"name": "Transworld Radio Africa", "url": "https://www.twr.org/africa", "stream_url": "https://www.twr.org/africa", "country": "South Africa", "language": "en", "region": "Africa"},
+------+    {"name": "Radio Vie Abondante", "url": "https://rva.fm/", "stream_url": "https://rva.fm/ecouter", "country": "RDC", "language": "fr", "region": "Africa"},
+------+    # EUROPA
+------+    {"name": "Radio Vie", "url": "https://www.radiovie.com/", "stream_url": "https://www.radiovie.com/ecouter", "country": "France", "language": "fr", "region": "Europa"},
+------+    {"name": "Premier Christian Radio", "url": "https://premierchristianradio.com/", "stream_url": "https://premierchristianradio.com/Listen", "country": "UK", "language": "en", "region": "Europa"},
+------+    {"name": "ERF Radio", "url": "https://www.erf.de/", "stream_url": "https://www.erf.de/radio", "country": "Deutschland", "language": "de", "region": "Europa"},
+------ ]
+------ 
+------+# Worship/Lodi Content - Multilingual
+------+WORSHIP_CONTENT = [
+------+    # Italiano
+------+    {"title": "Grande è il Signore", "artist": "Hillsong Italia", "type": "song", "language": "it", "youtube_url": "https://www.youtube.com/watch?v=example1", "duration": "5:32"},
+------+    {"title": "Sei Degno", "artist": "Gen Verde", "type": "song", "language": "it", "youtube_url": "https://www.youtube.com/watch?v=example2", "duration": "4:15"},
+------+    {"title": "Tu Sei Fedele", "artist": "Adorazione 5", "type": "song", "language": "it", "youtube_url": "https://www.youtube.com/watch?v=example3", "duration": "6:00"},
+------+    # Español
+------+    {"title": "Reckless Love (Amor Incomparable)", "artist": "Cory Asbury", "type": "song", "language": "es", "youtube_url": "https://www.youtube.com/watch?v=example4", "duration": "5:45"},
+------+    {"title": "Océanos", "artist": "Hillsong United", "type": "song", "language": "es", "youtube_url": "https://www.youtube.com/watch?v=example5", "duration": "8:56"},
+------+    {"title": "Grande es Tu Fidelidad", "artist": "Marco Barrientos", "type": "song", "language": "es", "youtube_url": "https://www.youtube.com/watch?v=example6", "duration": "4:30"},
+------+    {"title": "Poderoso Dios", "artist": "Marcos Witt", "type": "song", "language": "es", "youtube_url": "https://www.youtube.com/watch?v=example7", "duration": "5:12"},
+------+    # English
+------+    {"title": "What a Beautiful Name", "artist": "Hillsong Worship", "type": "song", "language": "en", "youtube_url": "https://www.youtube.com/watch?v=example8", "duration": "5:42"},
+------+    {"title": "Goodness of God", "artist": "Bethel Music", "type": "song", "language": "en", "youtube_url": "https://www.youtube.com/watch?v=example9", "duration": "7:20"},
+------+    {"title": "Way Maker", "artist": "Sinach", "type": "song", "language": "en", "youtube_url": "https://www.youtube.com/watch?v=example10", "duration": "6:15"},
+------+    # Português
+------+    {"title": "Quão Grande é o Meu Deus", "artist": "Soraya Moraes", "type": "song", "language": "pt", "youtube_url": "https://www.youtube.com/watch?v=example11", "duration": "5:30"},
+------+    {"title": "Deus é Deus", "artist": "Delino Marçal", "type": "song", "language": "pt", "youtube_url": "https://www.youtube.com/watch?v=example12", "duration": "4:45"},
+------+    # French
+------+    {"title": "Roi des Rois", "artist": "Hillsong France", "type": "song", "language": "fr", "youtube_url": "https://www.youtube.com/watch?v=example13", "duration": "6:30"},
+------+    {"title": "Mon Dieu est Plus Grand", "artist": "Glorious", "type": "song", "language": "fr", "youtube_url": "https://www.youtube.com/watch?v=example14", "duration": "5:00"},
+------+]
+------+
+------+@api_router.get("/worship")
+------+async def get_worship_content(lang: Optional[str] = None):
+------+    """Get worship/lodi content"""
+------+    if lang:
+------+        return [w for w in WORSHIP_CONTENT if w["language"] == lang]
+------+    return WORSHIP_CONTENT
+------+
+------ @api_router.get("/radios")
+-------async def get_radios(lang: str = None):
+------+async def get_radios(lang: Optional[str] = None, region: Optional[str] = None):
+------+    """Get evangelical radio stations filtered by language or region"""
+------+    radios = EVANGELICAL_RADIOS
+------     if lang:
+-------        return [r for r in EVANGELICAL_RADIOS if r["language"] == lang]
+-------    return EVANGELICAL_RADIOS
+------+        radios = [r for r in radios if r["language"] == lang]
+------+    if region:
+------+        radios = [r for r in radios if r.get("region") == region]
+------+    return radios
+------ 
+------ # ==================== USER SETTINGS ====================
+------ 
+---diff --git a/test_result.md b/test_result.md
+---index 187cba4..21d5dbc 100644
+------ a/test_result.md
+---+++ b/test_result.md
+---@@ -100,4 +100,91 @@
+--- 
+--- #====================================================================================================
+--- # Testing Data - Main Agent and testing sub agent both should log testing data below this section
+----#====================================================================================================
+---\ No newline at end of file
+---+#====================================================================================================
+---+
+---+user_problem_statement: "Test the Bible reader API for the Amen! app. Test Bible books endpoint and specific chapter endpoints for Genesis 1, Genesis 4, Exodus 20, and Psalm 23 in Italian."
+---+
+---+backend:
+---+  - task: "Bible Books API Endpoint"
+---+    implemented: true
+---+    working: true
+---+    file: "/app/backend/server.py"
+---+    stuck_count: 0
+---+    priority: "high"
+---+    needs_retesting: false
+---+    status_history:
+---+        - working: true
+---+          agent: "testing"
+---+          comment: "✅ GET /api/bible/books?lang=it returns 37 Italian Bible books with correct structure (name, chapters, abbrev). Found expected books: Genesi, Esodo, Salmi, Matteo, Giovanni."
+---+
+---+  - task: "Genesis Chapter 1 API"
+---+    implemented: true
+---+    working: true
+---+    file: "/app/backend/server.py"
+---+    stuck_count: 0
+---+    priority: "high"
+---+    needs_retesting: false
+---+    status_history:
+---+        - working: true
+---+          agent: "testing"
+---+          comment: "✅ GET /api/bible/chapter/Genesi/1?lang=it returns exactly 31 verses from local database. First verse correctly shows 'Nel principio Dio creò i cieli e la terra.' Real Bible content confirmed."
+---+
+---+  - task: "Genesis Chapter 4 API (External Fetch)"
+---+    implemented: true
+---+    working: true
+---+    file: "/app/backend/server.py"
+---+    stuck_count: 0
+---+    priority: "high"
+---+    needs_retesting: false
+---+    status_history:
+---+        - working: true
+---+          agent: "testing"
+---+          comment: "✅ GET /api/bible/chapter/Genesi/4?lang=it returns 26 verses fetched from laparola.net and cached. First verse shows real Bible content about Cain and Abel: 'Or Adamo conobbe Eva sua moglie, la quale concepì e partorì Caino...' External API integration working correctly."
+---+
+---+  - task: "Exodus Chapter 20 API (Ten Commandments)"
+---+    implemented: true
+---+    working: true
+---+    file: "/app/backend/server.py"
+---+    stuck_count: 0
+---+    priority: "high"
+---+    needs_retesting: false
+---+    status_history:
+---+        - working: true
+---+          agent: "testing"
+---+          comment: "✅ GET /api/bible/chapter/Esodo/20?lang=it returns 26 verses with Ten Commandments content from laparola.net. Verified commandments text including 'Non avrai altri dèi davanti a me' and other commandments. Real Bible content confirmed."
+---+
+---+  - task: "Psalm 23 API (Local Database)"
+---+    implemented: true
+---+    working: true
+---+    file: "/app/backend/server.py"
+---+    stuck_count: 0
+---+    priority: "high"
+---+    needs_retesting: false
+---+    status_history:
+---+        - working: true
+---+          agent: "testing"
+---+          comment: "✅ GET /api/bible/chapter/Salmi/23?lang=it returns exactly 6 verses from local database. First verse correctly shows famous Psalm 23:1: 'L'Eterno è il mio pastore, nulla mi mancherà.' Local database content working perfectly."
+---+
+---+frontend:
+---+  # No frontend testing performed as per instructions
+---+
+---+metadata:
+---+  created_by: "testing_agent"
+---+  version: "1.0"
+---+  test_sequence: 1
+---+  run_ui: false
+---+
+---+test_plan:
+---+  current_focus:
+---+    - "Bible Books API Endpoint"
+---+    - "Genesis Chapter 1 API"
+---+    - "Genesis Chapter 4 API (External Fetch)"
+---+    - "Exodus Chapter 20 API (Ten Commandments)"
+---+    - "Psalm 23 API (Local Database)"
+---+  stuck_tasks: []
+---+  test_all: false
+---+  test_priority: "high_first"
+---+
+---+agent_communication:
+---+    - agent: "testing"
+---+      message: "✅ ALL BIBLE API TESTS PASSED (5/5 - 100% success rate). Backend Bible reader functionality is working correctly. Local database chapters (Genesis 1, Psalm 23) return immediately with correct content. External API integration with laparola.net works for chapters not in local database (Genesis 4, Exodus 20). All responses have proper structure with book, chapter, verses fields. Real Bible text confirmed in all cases. NOTE: External URL routing has issues (404 errors), but backend works perfectly on localhost:8001."
+---\ No newline at end of file
