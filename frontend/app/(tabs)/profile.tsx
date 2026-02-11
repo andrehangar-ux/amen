@@ -172,14 +172,14 @@ export default function ProfileScreen() {
               icon="settings"
               title="Impostazioni"
               subtitle="Preferenze, notifiche"
-              onPress={() => {}}
+              onPress={() => router.push('/settings')}
               color={COLORS.textLight}
             />
             <MenuItem
               icon="help-circle"
               title="Aiuto"
               subtitle="FAQ, contattaci"
-              onPress={() => {}}
+              onPress={() => router.push('/faq')}
               color={COLORS.primary}
             />
             <MenuItem
