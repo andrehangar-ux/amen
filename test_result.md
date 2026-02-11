@@ -101,3 +101,90 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Test the Bible reader API for the Amen! app. Test Bible books endpoint and specific chapter endpoints for Genesis 1, Genesis 4, Exodus 20, and Psalm 23 in Italian."
+
+backend:
+  - task: "Bible Books API Endpoint"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ GET /api/bible/books?lang=it returns 37 Italian Bible books with correct structure (name, chapters, abbrev). Found expected books: Genesi, Esodo, Salmi, Matteo, Giovanni."
+
+  - task: "Genesis Chapter 1 API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ GET /api/bible/chapter/Genesi/1?lang=it returns exactly 31 verses from local database. First verse correctly shows 'Nel principio Dio creò i cieli e la terra.' Real Bible content confirmed."
+
+  - task: "Genesis Chapter 4 API (External Fetch)"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ GET /api/bible/chapter/Genesi/4?lang=it returns 26 verses fetched from laparola.net and cached. First verse shows real Bible content about Cain and Abel: 'Or Adamo conobbe Eva sua moglie, la quale concepì e partorì Caino...' External API integration working correctly."
+
+  - task: "Exodus Chapter 20 API (Ten Commandments)"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ GET /api/bible/chapter/Esodo/20?lang=it returns 26 verses with Ten Commandments content from laparola.net. Verified commandments text including 'Non avrai altri dèi davanti a me' and other commandments. Real Bible content confirmed."
+
+  - task: "Psalm 23 API (Local Database)"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ GET /api/bible/chapter/Salmi/23?lang=it returns exactly 6 verses from local database. First verse correctly shows famous Psalm 23:1: 'L'Eterno è il mio pastore, nulla mi mancherà.' Local database content working perfectly."
+
+frontend:
+  # No frontend testing performed as per instructions
+
+metadata:
+  created_by: "testing_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Bible Books API Endpoint"
+    - "Genesis Chapter 1 API"
+    - "Genesis Chapter 4 API (External Fetch)"
+    - "Exodus Chapter 20 API (Ten Commandments)"
+    - "Psalm 23 API (Local Database)"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "testing"
+      message: "✅ ALL BIBLE API TESTS PASSED (5/5 - 100% success rate). Backend Bible reader functionality is working correctly. Local database chapters (Genesis 1, Psalm 23) return immediately with correct content. External API integration with laparola.net works for chapters not in local database (Genesis 4, Exodus 20). All responses have proper structure with book, chapter, verses fields. Real Bible text confirmed in all cases. NOTE: External URL routing has issues (404 errors), but backend works perfectly on localhost:8001."
