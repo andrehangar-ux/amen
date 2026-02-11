@@ -180,8 +180,9 @@ export default function BibleScreen() {
 
     return (
       <FlatList
+        key="books-list"
         data={books}
-        keyExtractor={(item, index) => `${item.abbrev}-${index}`}
+        keyExtractor={(item, index) => `book-${item.abbrev}-${index}`}
         numColumns={2}
         columnWrapperStyle={styles.bookRow}
         contentContainerStyle={styles.listContent}
