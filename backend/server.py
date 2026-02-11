@@ -1341,6 +1341,20 @@ async def update_reading_progress(user: User = Depends(require_auth)):
 
 # ==================== DONATION ENDPOINTS ====================
 
+# Donation Configuration
+DONATION_CONFIG = {
+    "paypal_email": "andrehangar@live.it",
+    "paypal_link": "https://www.paypal.com/paypalme/andrehangar",
+    "iban": "IT46I0366160085802855893200",
+    "intestatario": "Andrea Confortino",
+    "banca": "Banca Sella",
+}
+
+@api_router.get("/donations/config")
+async def get_donation_config():
+    """Get donation configuration (PayPal, IBAN)"""
+    return DONATION_CONFIG
+
 @api_router.post("/donations")
 async def create_donation(data: DonationRequest, user: User = Depends(require_auth)):
     donation = {
@@ -1355,12 +1369,14 @@ async def create_donation(data: DonationRequest, user: User = Depends(require_au
     
     if data.method == "bonifico":
         donation["bank_details"] = {
-            "iban": "IT00X0000000000000000000000",
-            "intestatario": "Cibo Spirituale Ministry",
-            "causale": f"Donazione - {donation['donation_id'][:8]}"
+            "iban": DONATION_CONFIG["iban"],
+            "intestatario": DONATION_CONFIG["intestatario"],
+            "banca": DONATION_CONFIG["banca"],
+            "causale": f"Donazione Cibo Spirituale - {donation['donation_id'][:8]}"
         }
     elif data.method == "paypal":
-        donation["paypal_link"] = "https://paypal.me/cibospirituale"
+        donation["paypal_email"] = DONATION_CONFIG["paypal_email"]
+        donation["paypal_link"] = DONATION_CONFIG["paypal_link"]
     
     await db.donations.insert_one(donation)
     donation.pop("_id", None)
