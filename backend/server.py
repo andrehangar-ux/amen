@@ -1347,7 +1347,7 @@ DONATION_CONFIG = {
     "paypal_link": "https://www.paypal.com/paypalme/andrehangar",
     "iban": "IT46I0366160085802855893200",
     "intestatario": "Andrea Confortino",
-    "banca": "Banca Sella",
+    "banca": "Revolut",
 }
 
 @api_router.get("/donations/config")
