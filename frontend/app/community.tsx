@@ -1,0 +1,417 @@
+import React, { useState, useEffect, useCallback } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  RefreshControl,
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
+import { api } from '../src/utils/api';
+import { useLanguageStore, useTranslation } from '../src/store/languageStore';
+import { useAuthStore } from '../src/store/authStore';
+import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, MOODS } from '../src/utils/theme';
+import { format } from 'date-fns';
+
+interface CommunityMessage {
+  message_id: string;
+  user_id: string;
+  user_name: string;
+  user_country: string | null;
+  content: string;
+  translated_content?: string;
+  original_language: string;
+  message_type: string;
+  likes: number;
+  created_at: string;
+}
+
+export default function CommunityScreen() {
+  const { user } = useAuthStore();
+  const { currentLanguage, languages } = useLanguageStore();
+  const { t } = useTranslation();
+  const [messages, setMessages] = useState<CommunityMessage[]>([]);
+  const [newMessage, setNewMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const loadMessages = useCallback(async () => {
+    try {
+      const data = await api.getCommunityMessages(currentLanguage);
+      setMessages(data);
+    } catch (error) {
+      console.log('Error loading messages:', error);
+    }
+  }, [currentLanguage]);
+
+  useEffect(() => {
+    setLoading(true);
+    loadMessages().finally(() => setLoading(false));
+  }, [loadMessages]);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await loadMessages();
+    setRefreshing(false);
+  };
+
+  const handleSend = async () => {
+    if (!newMessage.trim()) return;
+
+    setSending(true);
+    try {
+      await api.createCommunityMessage(newMessage, currentLanguage);
+      setNewMessage('');
+      await loadMessages();
+    } catch (error) {
+      console.log('Error sending message:', error);
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const handleLike = async (messageId: string) => {
+    try {
+      await api.likeCommunityMessage(messageId);
+      await loadMessages();
+    } catch (error) {
+      console.log('Error liking message:', error);
+    }
+  };
+
+  const getFlag = (lang: string) => {
+    return languages[lang]?.flag || '🌐';
+  };
+
+  const renderMessage = ({ item }: { item: CommunityMessage }) => {
+    const isOwn = item.user_id === user?.user_id;
+    const showTranslation = item.original_language !== currentLanguage && item.translated_content;
+
+    return (
+      <View style={[styles.messageCard, isOwn && styles.ownMessage]}>
+        <View style={styles.messageHeader}>
+          <View style={styles.userInfo}>
+            <View style={styles.avatar}>
+              <Text style={styles.avatarText}>{item.user_name.charAt(0).toUpperCase()}</Text>
+            </View>
+            <View>
+              <Text style={styles.userName}>{item.user_name}</Text>
+              <View style={styles.messageMeta}>
+                <Text style={styles.flag}>{getFlag(item.original_language)}</Text>
+                <Text style={styles.timeText}>
+                  {format(new Date(item.created_at), 'HH:mm')}
+                </Text>
+              </View>
+            </View>
+          </View>
+          {item.message_type === 'prayer_request' && (
+            <View style={styles.prayerBadge}>
+              <Ionicons name="hand-left" size={12} color={COLORS.accent} />
+              <Text style={styles.prayerText}>Preghiera</Text>
+            </View>
+          )}
+        </View>
+
+        <Text style={styles.messageContent}>
+          {showTranslation ? item.translated_content : item.content}
+        </Text>
+
+        {showTranslation && (
+          <View style={styles.originalContainer}>
+            <Text style={styles.originalLabel}>Originale ({getFlag(item.original_language)}):</Text>
+            <Text style={styles.originalText}>{item.content}</Text>
+          </View>
+        )}
+
+        <View style={styles.messageActions}>
+          <TouchableOpacity
+            style={styles.likeButton}
+            onPress={() => handleLike(item.message_id)}
+          >
+            <Ionicons name="heart-outline" size={18} color={COLORS.textLight} />
+            <Text style={styles.likeCount}>{item.likes}</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={24} color={COLORS.text} />
+        </TouchableOpacity>
+        <View style={styles.headerContent}>
+          <Text style={styles.headerTitle}>{t('community')}</Text>
+          <Text style={styles.headerSubtitle}>Connettiti con fratelli nel mondo</Text>
+        </View>
+        <View style={styles.languageBadge}>
+          <Text style={styles.languageFlag}>{languages[currentLanguage]?.flag}</Text>
+        </View>
+      </View>
+
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.keyboardView}
+      >
+        {/* Messages List */}
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color={COLORS.primary} />
+          </View>
+        ) : (
+          <FlatList
+            data={messages}
+            keyExtractor={(item) => item.message_id}
+            renderItem={renderMessage}
+            contentContainerStyle={styles.listContent}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[COLORS.primary]} />
+            }
+            ListEmptyComponent={
+              <View style={styles.emptyContainer}>
+                <Ionicons name="people-outline" size={64} color={COLORS.textMuted} />
+                <Text style={styles.emptyText}>Nessun messaggio</Text>
+                <Text style={styles.emptySubtext}>Sii il primo a condividere!</Text>
+              </View>
+            }
+          />
+        )}
+
+        {/* Input Area */}
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Condividi un pensiero, una preghiera..."
+            placeholderTextColor={COLORS.textMuted}
+            value={newMessage}
+            onChangeText={setNewMessage}
+            multiline
+            maxLength={500}
+          />
+          <TouchableOpacity
+            style={[styles.sendButton, !newMessage.trim() && styles.sendButtonDisabled]}
+            onPress={handleSend}
+            disabled={!newMessage.trim() || sending}
+          >
+            {sending ? (
+              <ActivityIndicator size="small" color="#fff" />
+            ) : (
+              <Ionicons name="send" size={20} color="#fff" />
+            )}
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.background,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: SPACING.md,
+    paddingVertical: SPACING.sm,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.border,
+    backgroundColor: COLORS.card,
+  },
+  backButton: {
+    padding: SPACING.sm,
+  },
+  headerContent: {
+    flex: 1,
+    marginLeft: SPACING.sm,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: COLORS.text,
+  },
+  headerSubtitle: {
+    fontSize: 12,
+    color: COLORS.textLight,
+  },
+  languageBadge: {
+    padding: SPACING.sm,
+  },
+  languageFlag: {
+    fontSize: 24,
+  },
+  keyboardView: {
+    flex: 1,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  listContent: {
+    padding: SPACING.md,
+    paddingBottom: 100,
+  },
+  messageCard: {
+    backgroundColor: COLORS.card,
+    borderRadius: BORDER_RADIUS.lg,
+    padding: SPACING.md,
+    marginBottom: SPACING.md,
+    ...SHADOWS.small,
+  },
+  ownMessage: {
+    borderLeftWidth: 3,
+    borderLeftColor: COLORS.primary,
+  },
+  messageHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: SPACING.sm,
+  },
+  userInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: COLORS.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: SPACING.sm,
+  },
+  avatarText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 16,
+  },
+  userName: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: COLORS.text,
+  },
+  messageMeta: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.xs,
+  },
+  flag: {
+    fontSize: 14,
+  },
+  timeText: {
+    fontSize: 12,
+    color: COLORS.textMuted,
+  },
+  prayerBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.accent + '20',
+    paddingHorizontal: SPACING.sm,
+    paddingVertical: SPACING.xs,
+    borderRadius: BORDER_RADIUS.full,
+    gap: SPACING.xs,
+  },
+  prayerText: {
+    fontSize: 11,
+    color: COLORS.accent,
+    fontWeight: '600',
+  },
+  messageContent: {
+    fontSize: 15,
+    color: COLORS.text,
+    lineHeight: 22,
+  },
+  originalContainer: {
+    marginTop: SPACING.sm,
+    paddingTop: SPACING.sm,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.border,
+  },
+  originalLabel: {
+    fontSize: 11,
+    color: COLORS.textMuted,
+    marginBottom: SPACING.xs,
+  },
+  originalText: {
+    fontSize: 13,
+    color: COLORS.textLight,
+    fontStyle: 'italic',
+  },
+  messageActions: {
+    flexDirection: 'row',
+    marginTop: SPACING.sm,
+  },
+  likeButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.xs,
+  },
+  likeCount: {
+    fontSize: 13,
+    color: COLORS.textLight,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    padding: SPACING.md,
+    backgroundColor: COLORS.card,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.border,
+    gap: SPACING.sm,
+  },
+  input: {
+    flex: 1,
+    backgroundColor: COLORS.secondary,
+    borderRadius: BORDER_RADIUS.lg,
+    paddingHorizontal: SPACING.md,
+    paddingVertical: SPACING.sm,
+    fontSize: 15,
+    color: COLORS.text,
+    maxHeight: 100,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+  },
+  sendButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: COLORS.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  sendButtonDisabled: {
+    backgroundColor: COLORS.textMuted,
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 100,
+  },
+  emptyText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: COLORS.textLight,
+    marginTop: SPACING.md,
+  },
+  emptySubtext: {
+    fontSize: 14,
+    color: COLORS.textMuted,
+    marginTop: SPACING.xs,
+  },
+});

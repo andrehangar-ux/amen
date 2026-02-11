@@ -13,22 +13,27 @@ import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import * as Speech from 'expo-speech';
 import { useAuthStore } from '../../src/store/authStore';
+import { useLanguageStore, useTranslation } from '../../src/store/languageStore';
 import { api } from '../../src/utils/api';
 import { DailyVerseCard } from '../../src/components/DailyVerseCard';
 import { MoodSelector } from '../../src/components/MoodSelector';
+import { LanguageSelector } from '../../src/components/LanguageSelector';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
 
 export default function HomeScreen() {
   const { user } = useAuthStore();
+  const { currentLanguage, languages, loadLanguage } = useLanguageStore();
+  const { t } = useTranslation();
   const [dailyVerse, setDailyVerse] = useState<{ reference: string; text: string } | null>(null);
   const [progress, setProgress] = useState<any>(null);
   const [refreshing, setRefreshing] = useState(false);
   const [moodCheckinResult, setMoodCheckinResult] = useState<any>(null);
+  const [showLanguageSelector, setShowLanguageSelector] = useState(false);
 
   const loadData = useCallback(async () => {
     try {
       const [verse, prog] = await Promise.all([
-        api.getDailyVerse(),
+        api.getDailyVerse(currentLanguage),
         api.getProgress(),
       ]);
       setDailyVerse(verse);
@@ -36,6 +41,10 @@ export default function HomeScreen() {
     } catch (error) {
       console.log('Error loading data:', error);
     }
+  }, [currentLanguage]);
+
+  useEffect(() => {
+    loadLanguage();
   }, []);
 
   useEffect(() => {
@@ -50,13 +59,14 @@ export default function HomeScreen() {
 
   const handleSpeak = () => {
     if (dailyVerse) {
-      Speech.speak(dailyVerse.text, { language: 'it-IT' });
+      const ttsCode = languages[currentLanguage]?.tts_code || 'it-IT';
+      Speech.speak(dailyVerse.text, { language: ttsCode });
     }
   };
 
   const handleMoodSelect = async (mood: string) => {
     try {
-      const result = await api.moodCheckin(mood);
+      const result = await api.moodCheckin(mood, currentLanguage);
       setMoodCheckinResult(result);
     } catch (error: any) {
       Alert.alert('Errore', error.message);
@@ -65,9 +75,9 @@ export default function HomeScreen() {
 
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return 'Buongiorno';
-    if (hour < 18) return 'Buon pomeriggio';
-    return 'Buonasera';
+    if (hour < 12) return t('goodMorning');
+    if (hour < 18) return t('goodAfternoon');
+    return t('goodEvening');
   };
 
   return (
@@ -85,9 +95,17 @@ export default function HomeScreen() {
             <Text style={styles.greeting}>{getGreeting()},</Text>
             <Text style={styles.userName}>{user?.name || 'Fratello'}</Text>
           </View>
-          <TouchableOpacity style={styles.notificationButton}>
-            <Ionicons name="notifications-outline" size={24} color={COLORS.text} />
-          </TouchableOpacity>
+          <View style={styles.headerActions}>
+            <TouchableOpacity
+              style={styles.languageButton}
+              onPress={() => setShowLanguageSelector(true)}
+            >
+              <Text style={styles.languageFlag}>{languages[currentLanguage]?.flag || '🇮🇹'}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.notificationButton}>
+              <Ionicons name="notifications-outline" size={24} color={COLORS.text} />
+            </TouchableOpacity>
+          </View>
         </View>
 
         {/* Daily Verse */}
@@ -101,7 +119,7 @@ export default function HomeScreen() {
 
         {/* Mood Check-in */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Come ti senti oggi?</Text>
+          <Text style={styles.sectionTitle}>{t('howAreYou')}</Text>
           <MoodSelector
             selectedMood={moodCheckinResult?.mood || null}
             onSelect={handleMoodSelect}
@@ -122,7 +140,7 @@ export default function HomeScreen() {
 
         {/* Quick Actions */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Azioni Rapide</Text>
+          <Text style={styles.sectionTitle}>{t('quickActions')}</Text>
           <View style={styles.quickActions}>
             <TouchableOpacity
               style={styles.quickActionCard}
@@ -131,8 +149,8 @@ export default function HomeScreen() {
               <View style={[styles.quickActionIcon, { backgroundColor: COLORS.primary + '20' }]}>
                 <Ionicons name="book" size={24} color={COLORS.primary} />
               </View>
-              <Text style={styles.quickActionTitle}>Leggi</Text>
-              <Text style={styles.quickActionSubtitle}>La Bibbia</Text>
+              <Text style={styles.quickActionTitle}>{t('read')}</Text>
+              <Text style={styles.quickActionSubtitle}>{t('theBible')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -142,19 +160,19 @@ export default function HomeScreen() {
               <View style={[styles.quickActionIcon, { backgroundColor: COLORS.accent + '20' }]}>
                 <Ionicons name="create" size={24} color={COLORS.accent} />
               </View>
-              <Text style={styles.quickActionTitle}>Scrivi</Text>
-              <Text style={styles.quickActionSubtitle}>Nel Diario</Text>
+              <Text style={styles.quickActionTitle}>{t('write')}</Text>
+              <Text style={styles.quickActionSubtitle}>{t('inJournal')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.quickActionCard}
-              onPress={() => router.push('/assistant')}
+              onPress={() => router.push('/community')}
             >
-              <View style={[styles.quickActionIcon, { backgroundColor: '#A29BFE20' }]}>
-                <Ionicons name="chatbubble-ellipses" size={24} color="#A29BFE" />
+              <View style={[styles.quickActionIcon, { backgroundColor: '#74B9FF20' }]}>
+                <Ionicons name="people" size={24} color="#74B9FF" />
               </View>
-              <Text style={styles.quickActionTitle}>Chiedi</Text>
-              <Text style={styles.quickActionSubtitle}>All'Assistente</Text>
+              <Text style={styles.quickActionTitle}>{t('community')}</Text>
+              <Text style={styles.quickActionSubtitle}>Mondiale</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -162,14 +180,14 @@ export default function HomeScreen() {
         {/* Progress Overview */}
         {progress && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Il Tuo Progresso</Text>
+            <Text style={styles.sectionTitle}>{t('yourProgress')}</Text>
             <View style={styles.progressCard}>
               <View style={styles.progressItem}>
                 <View style={styles.progressIconContainer}>
                   <Ionicons name="flame" size={24} color={COLORS.error} />
                 </View>
                 <Text style={styles.progressValue}>{progress.reading_streak || 0}</Text>
-                <Text style={styles.progressLabel}>Giorni di fila</Text>
+                <Text style={styles.progressLabel}>{t('daysInRow')}</Text>
               </View>
               <View style={styles.progressDivider} />
               <View style={styles.progressItem}>
@@ -177,7 +195,7 @@ export default function HomeScreen() {
                   <Ionicons name="book" size={24} color={COLORS.primary} />
                 </View>
                 <Text style={styles.progressValue}>{progress.total_chapters_read || 0}</Text>
-                <Text style={styles.progressLabel}>Capitoli letti</Text>
+                <Text style={styles.progressLabel}>{t('chaptersRead')}</Text>
               </View>
               <View style={styles.progressDivider} />
               <View style={styles.progressItem}>
@@ -185,12 +203,18 @@ export default function HomeScreen() {
                   <Ionicons name="create" size={24} color={COLORS.accent} />
                 </View>
                 <Text style={styles.progressValue}>{progress.total_journal_entries || 0}</Text>
-                <Text style={styles.progressLabel}>Voci diario</Text>
+                <Text style={styles.progressLabel}>{t('journalEntries')}</Text>
               </View>
             </View>
           </View>
         )}
       </ScrollView>
+
+      {/* Language Selector Modal */}
+      <LanguageSelector
+        visible={showLanguageSelector}
+        onClose={() => setShowLanguageSelector(false)}
+      />
     </SafeAreaView>
   );
 }
@@ -218,6 +242,23 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '700',
     color: COLORS.text,
+  },
+  headerActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.sm,
+  },
+  languageButton: {
+    width: 44,
+    height: 44,
+    borderRadius: BORDER_RADIUS.full,
+    backgroundColor: COLORS.card,
+    justifyContent: 'center',
+    alignItems: 'center',
+    ...SHADOWS.small,
+  },
+  languageFlag: {
+    fontSize: 22,
   },
   notificationButton: {
     width: 44,

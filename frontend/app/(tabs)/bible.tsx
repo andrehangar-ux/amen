@@ -7,11 +7,14 @@ import {
   TouchableOpacity,
   FlatList,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
 import { api } from '../../src/utils/api';
+import { useLanguageStore, useTranslation } from '../../src/store/languageStore';
+import { LanguageSelector } from '../../src/components/LanguageSelector';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
 
 interface Book {
@@ -26,6 +29,8 @@ interface Verse {
 }
 
 export default function BibleScreen() {
+  const { currentLanguage, languages } = useLanguageStore();
+  const { t } = useTranslation();
   const [books, setBooks] = useState<Book[]>([]);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
@@ -33,14 +38,19 @@ export default function BibleScreen() {
   const [loading, setLoading] = useState(false);
   const [view, setView] = useState<'books' | 'chapters' | 'reading'>('books');
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [showLanguageSelector, setShowLanguageSelector] = useState(false);
+  const [translating, setTranslating] = useState(false);
+  const [translatedVerses, setTranslatedVerses] = useState<Verse[]>([]);
+  const [showTranslation, setShowTranslation] = useState(false);
+  const [targetLang, setTargetLang] = useState('en');
 
   useEffect(() => {
     loadBooks();
-  }, []);
+  }, [currentLanguage]);
 
   const loadBooks = async () => {
     try {
-      const data = await api.getBibleBooks();
+      const data = await api.getBibleBooks(currentLanguage);
       setBooks(data);
     } catch (error) {
       console.log('Error loading books:', error);
@@ -50,11 +60,11 @@ export default function BibleScreen() {
   const loadChapter = async (book: string, chapter: number) => {
     setLoading(true);
     try {
-      const data = await api.getChapter(book, chapter);
+      const data = await api.getChapter(book, chapter, currentLanguage);
       setVerses(data.verses);
+      setTranslatedVerses([]);
+      setShowTranslation(false);
       setView('reading');
-      
-      // Update reading progress
       await api.updateReadingProgress();
     } catch (error) {
       console.log('Error loading chapter:', error);
@@ -79,6 +89,7 @@ export default function BibleScreen() {
     if (view === 'reading') {
       setView('chapters');
       setVerses([]);
+      setTranslatedVerses([]);
     } else if (view === 'chapters') {
       setView('books');
       setSelectedBook(null);
@@ -90,13 +101,43 @@ export default function BibleScreen() {
       Speech.stop();
       setIsSpeaking(false);
     } else {
-      const fullText = verses.map(v => v.text).join(' ');
-      Speech.speak(fullText, {
-        language: 'it-IT',
+      const textToSpeak = showTranslation && translatedVerses.length > 0
+        ? translatedVerses.map(v => v.text).join(' ')
+        : verses.map(v => v.text).join(' ');
+      
+      const ttsCode = showTranslation
+        ? languages[targetLang]?.tts_code || 'en-US'
+        : languages[currentLanguage]?.tts_code || 'it-IT';
+      
+      Speech.speak(textToSpeak, {
+        language: ttsCode,
         onDone: () => setIsSpeaking(false),
         onStopped: () => setIsSpeaking(false),
       });
       setIsSpeaking(true);
+    }
+  };
+
+  const handleTranslate = async () => {
+    if (translatedVerses.length > 0) {
+      setShowTranslation(!showTranslation);
+      return;
+    }
+
+    setTranslating(true);
+    try {
+      const translated = await Promise.all(
+        verses.map(async (v) => {
+          const result = await api.translateVerse(v.text, currentLanguage, targetLang);
+          return { verse: v.verse, text: result.translated };
+        })
+      );
+      setTranslatedVerses(translated);
+      setShowTranslation(true);
+    } catch (error) {
+      Alert.alert('Errore', 'Traduzione non disponibile');
+    } finally {
+      setTranslating(false);
     }
   };
 
@@ -142,9 +183,37 @@ export default function BibleScreen() {
     );
   };
 
+  const displayVerses = showTranslation && translatedVerses.length > 0 ? translatedVerses : verses;
+
   const renderReading = () => (
     <ScrollView contentContainerStyle={styles.readingContent}>
-      {verses.map((verse) => (
+      {/* Translation toggle */}
+      <View style={styles.translationBar}>
+        <TouchableOpacity
+          style={styles.translateButton}
+          onPress={handleTranslate}
+          disabled={translating}
+        >
+          {translating ? (
+            <ActivityIndicator size="small" color={COLORS.primary} />
+          ) : (
+            <>
+              <Ionicons name="language" size={20} color={COLORS.primary} />
+              <Text style={styles.translateText}>
+                {showTranslation ? `Mostra ${languages[currentLanguage]?.name}` : `Traduci in ${languages[targetLang]?.name}`}
+              </Text>
+            </>
+          )}
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.langSelectButton}
+          onPress={() => setShowLanguageSelector(true)}
+        >
+          <Text style={styles.langFlag}>{languages[targetLang]?.flag}</Text>
+        </TouchableOpacity>
+      </View>
+
+      {displayVerses.map((verse) => (
         <View key={verse.verse} style={styles.verseContainer}>
           <Text style={styles.verseNumber}>{verse.verse}</Text>
           <Text style={styles.verseText}>{verse.text}</Text>
@@ -165,12 +234,12 @@ export default function BibleScreen() {
         <View style={styles.headerTitleContainer}>
           <Text style={styles.headerTitle}>
             {view === 'books'
-              ? 'La Bibbia'
+              ? t('bible')
               : view === 'chapters'
               ? selectedBook?.name
               : `${selectedBook?.name} ${selectedChapter}`}
           </Text>
-          <Text style={styles.headerSubtitle}>Nuova Diodati</Text>
+          <Text style={styles.headerSubtitle}>{languages[currentLanguage]?.flag} {languages[currentLanguage]?.name}</Text>
         </View>
         {view === 'reading' && (
           <TouchableOpacity style={styles.speakButton} onPress={handleSpeak}>
@@ -179,6 +248,14 @@ export default function BibleScreen() {
               size={24}
               color={COLORS.primary}
             />
+          </TouchableOpacity>
+        )}
+        {view === 'books' && (
+          <TouchableOpacity
+            style={styles.langButton}
+            onPress={() => setShowLanguageSelector(true)}
+          >
+            <Text style={styles.langButtonText}>{languages[currentLanguage]?.flag}</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -195,6 +272,17 @@ export default function BibleScreen() {
       ) : (
         renderReading()
       )}
+
+      {/* Language Selector for Translation Target */}
+      <LanguageSelector
+        visible={showLanguageSelector}
+        onClose={() => {
+          setShowLanguageSelector(false);
+          if (view === 'books') {
+            loadBooks();
+          }
+        }}
+      />
     </SafeAreaView>
   );
 }
@@ -230,6 +318,12 @@ const styles = StyleSheet.create({
   },
   speakButton: {
     padding: SPACING.sm,
+  },
+  langButton: {
+    padding: SPACING.sm,
+  },
+  langButtonText: {
+    fontSize: 24,
   },
   listContent: {
     padding: SPACING.md,
@@ -277,6 +371,32 @@ const styles = StyleSheet.create({
   readingContent: {
     padding: SPACING.lg,
     paddingBottom: 120,
+  },
+  translationBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: COLORS.card,
+    padding: SPACING.sm,
+    borderRadius: BORDER_RADIUS.md,
+    marginBottom: SPACING.lg,
+  },
+  translateButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.sm,
+    padding: SPACING.sm,
+  },
+  translateText: {
+    fontSize: 14,
+    color: COLORS.primary,
+    fontWeight: '500',
+  },
+  langSelectButton: {
+    padding: SPACING.sm,
+  },
+  langFlag: {
+    fontSize: 24,
   },
   verseContainer: {
     flexDirection: 'row',
