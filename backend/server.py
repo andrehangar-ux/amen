@@ -1393,21 +1393,71 @@ async def get_donations(user: User = Depends(require_auth)):
 # ==================== RADIO ENDPOINTS ====================
 
 EVANGELICAL_RADIOS = [
-    {"name": "Radio Evangelo Roma", "url": "https://www.radioevangeloroma.it/", "stream_url": "https://stream.radioevangeloroma.it/stream", "country": "Italia", "language": "it"},
-    {"name": "Radio Luce", "url": "https://www.radioluce.it/", "stream_url": "https://www.radioluce.it/player", "country": "Italia", "language": "it"},
-    {"name": "RTB Network", "url": "https://www.rtbnetwork.it/", "stream_url": "https://stream.rtbnetwork.it/", "country": "Italia", "language": "it"},
-    {"name": "BBN Radio", "url": "https://bbnradio.org/", "stream_url": "https://bbnradio.org/listen-live", "country": "USA", "language": "en"},
-    {"name": "Radio Unción", "url": "https://www.radiouncion.com/", "stream_url": "https://www.radiouncion.com/", "country": "España", "language": "es"},
-    {"name": "Rádio Trans Mundial", "url": "https://www.transmundial.com.br/", "stream_url": "https://www.transmundial.com.br/aovivo", "country": "Brasil", "language": "pt"},
-    {"name": "Radio Vie", "url": "https://www.radiovie.com/", "stream_url": "https://www.radiovie.com/ecouter", "country": "France", "language": "fr"},
-    {"name": "Radio RCR", "url": "https://www.rcr.it/", "stream_url": "https://www.rcr.it/diretta", "country": "Italia", "language": "it"},
+    # ITALIA
+    {"name": "Radio Evangelo Roma", "url": "https://www.radioevangeloroma.it/", "stream_url": "https://stream.radioevangeloroma.it/stream", "country": "Italia", "language": "it", "region": "Europa"},
+    {"name": "Radio Luce", "url": "https://www.radioluce.it/", "stream_url": "https://www.radioluce.it/player", "country": "Italia", "language": "it", "region": "Europa"},
+    {"name": "RTB Network", "url": "https://www.rtbnetwork.it/", "stream_url": "https://stream.rtbnetwork.it/", "country": "Italia", "language": "it", "region": "Europa"},
+    {"name": "Radio RCR", "url": "https://www.rcr.it/", "stream_url": "https://www.rcr.it/diretta", "country": "Italia", "language": "it", "region": "Europa"},
+    # USA
+    {"name": "BBN Radio", "url": "https://bbnradio.org/", "stream_url": "https://bbnradio.org/listen-live", "country": "USA", "language": "en", "region": "USA"},
+    {"name": "K-LOVE Radio", "url": "https://www.klove.com/", "stream_url": "https://www.klove.com/listen", "country": "USA", "language": "en", "region": "USA"},
+    {"name": "Air1 Worship", "url": "https://www.air1.com/", "stream_url": "https://www.air1.com/listen", "country": "USA", "language": "en", "region": "USA"},
+    # SUDAMERICA
+    {"name": "Radio Unción", "url": "https://www.radiouncion.com/", "stream_url": "https://www.radiouncion.com/", "country": "España", "language": "es", "region": "Europa"},
+    {"name": "Radio Nuevo Tiempo", "url": "https://nuevotiempo.org/radio/", "stream_url": "https://nuevotiempo.org/radio/", "country": "Argentina", "language": "es", "region": "Sudamerica"},
+    {"name": "Radio Bethel Peru", "url": "https://radiobethel.pe/", "stream_url": "https://radiobethel.pe/en-vivo", "country": "Perú", "language": "es", "region": "Sudamerica"},
+    {"name": "Radio Paz Colombia", "url": "https://radiopaz.co/", "stream_url": "https://radiopaz.co/", "country": "Colombia", "language": "es", "region": "Sudamerica"},
+    {"name": "Radio Vida Brasil", "url": "https://radiovida.com.br/", "stream_url": "https://radiovida.com.br/ao-vivo", "country": "Brasil", "language": "pt", "region": "Sudamerica"},
+    {"name": "Rádio Trans Mundial", "url": "https://www.transmundial.com.br/", "stream_url": "https://www.transmundial.com.br/aovivo", "country": "Brasil", "language": "pt", "region": "Sudamerica"},
+    # AFRICA
+    {"name": "Radio Palabre Vie", "url": "https://radioparolevie.org/", "stream_url": "https://radioparolevie.org/", "country": "Côte d'Ivoire", "language": "fr", "region": "Africa"},
+    {"name": "Transworld Radio Africa", "url": "https://www.twr.org/africa", "stream_url": "https://www.twr.org/africa", "country": "South Africa", "language": "en", "region": "Africa"},
+    {"name": "Radio Vie Abondante", "url": "https://rva.fm/", "stream_url": "https://rva.fm/ecouter", "country": "RDC", "language": "fr", "region": "Africa"},
+    # EUROPA
+    {"name": "Radio Vie", "url": "https://www.radiovie.com/", "stream_url": "https://www.radiovie.com/ecouter", "country": "France", "language": "fr", "region": "Europa"},
+    {"name": "Premier Christian Radio", "url": "https://premierchristianradio.com/", "stream_url": "https://premierchristianradio.com/Listen", "country": "UK", "language": "en", "region": "Europa"},
+    {"name": "ERF Radio", "url": "https://www.erf.de/", "stream_url": "https://www.erf.de/radio", "country": "Deutschland", "language": "de", "region": "Europa"},
 ]
 
-@api_router.get("/radios")
-async def get_radios(lang: str = None):
+# Worship/Lodi Content - Multilingual
+WORSHIP_CONTENT = [
+    # Italiano
+    {"title": "Grande è il Signore", "artist": "Hillsong Italia", "type": "song", "language": "it", "youtube_url": "https://www.youtube.com/watch?v=example1", "duration": "5:32"},
+    {"title": "Sei Degno", "artist": "Gen Verde", "type": "song", "language": "it", "youtube_url": "https://www.youtube.com/watch?v=example2", "duration": "4:15"},
+    {"title": "Tu Sei Fedele", "artist": "Adorazione 5", "type": "song", "language": "it", "youtube_url": "https://www.youtube.com/watch?v=example3", "duration": "6:00"},
+    # Español
+    {"title": "Reckless Love (Amor Incomparable)", "artist": "Cory Asbury", "type": "song", "language": "es", "youtube_url": "https://www.youtube.com/watch?v=example4", "duration": "5:45"},
+    {"title": "Océanos", "artist": "Hillsong United", "type": "song", "language": "es", "youtube_url": "https://www.youtube.com/watch?v=example5", "duration": "8:56"},
+    {"title": "Grande es Tu Fidelidad", "artist": "Marco Barrientos", "type": "song", "language": "es", "youtube_url": "https://www.youtube.com/watch?v=example6", "duration": "4:30"},
+    {"title": "Poderoso Dios", "artist": "Marcos Witt", "type": "song", "language": "es", "youtube_url": "https://www.youtube.com/watch?v=example7", "duration": "5:12"},
+    # English
+    {"title": "What a Beautiful Name", "artist": "Hillsong Worship", "type": "song", "language": "en", "youtube_url": "https://www.youtube.com/watch?v=example8", "duration": "5:42"},
+    {"title": "Goodness of God", "artist": "Bethel Music", "type": "song", "language": "en", "youtube_url": "https://www.youtube.com/watch?v=example9", "duration": "7:20"},
+    {"title": "Way Maker", "artist": "Sinach", "type": "song", "language": "en", "youtube_url": "https://www.youtube.com/watch?v=example10", "duration": "6:15"},
+    # Português
+    {"title": "Quão Grande é o Meu Deus", "artist": "Soraya Moraes", "type": "song", "language": "pt", "youtube_url": "https://www.youtube.com/watch?v=example11", "duration": "5:30"},
+    {"title": "Deus é Deus", "artist": "Delino Marçal", "type": "song", "language": "pt", "youtube_url": "https://www.youtube.com/watch?v=example12", "duration": "4:45"},
+    # French
+    {"title": "Roi des Rois", "artist": "Hillsong France", "type": "song", "language": "fr", "youtube_url": "https://www.youtube.com/watch?v=example13", "duration": "6:30"},
+    {"title": "Mon Dieu est Plus Grand", "artist": "Glorious", "type": "song", "language": "fr", "youtube_url": "https://www.youtube.com/watch?v=example14", "duration": "5:00"},
+]
+
+@api_router.get("/worship")
+async def get_worship_content(lang: Optional[str] = None):
+    """Get worship/lodi content"""
     if lang:
-        return [r for r in EVANGELICAL_RADIOS if r["language"] == lang]
-    return EVANGELICAL_RADIOS
+        return [w for w in WORSHIP_CONTENT if w["language"] == lang]
+    return WORSHIP_CONTENT
+
+@api_router.get("/radios")
+async def get_radios(lang: Optional[str] = None, region: Optional[str] = None):
+    """Get evangelical radio stations filtered by language or region"""
+    radios = EVANGELICAL_RADIOS
+    if lang:
+        radios = [r for r in radios if r["language"] == lang]
+    if region:
+        radios = [r for r in radios if r.get("region") == region]
+    return radios
 
 # ==================== USER SETTINGS ====================
 
