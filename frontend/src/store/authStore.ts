@@ -137,7 +137,10 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       }
       
       const response = await fetch(`${API_URL}/api/auth/me`, {
-        headers: { 'Authorization': `Bearer ${token}` },
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'bypass-tunnel-reminder': 'true'
+        },
       });
       
       if (response.ok) {
