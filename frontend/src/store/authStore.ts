@@ -113,7 +113,10 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       if (token) {
         await fetch(`${API_URL}/api/auth/logout`, {
           method: 'POST',
-          headers: { 'Authorization': `Bearer ${token}` },
+          headers: { 
+            'Authorization': `Bearer ${token}`,
+            'bypass-tunnel-reminder': 'true'
+          },
         });
       }
     } catch (e) {
