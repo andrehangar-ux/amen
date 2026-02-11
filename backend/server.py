@@ -1378,6 +1378,490 @@ async def update_settings(request: Request, user: User = Depends(require_auth)):
     updated_user = await db.users.find_one({"user_id": user.user_id}, {"_id": 0, "password_hash": 0})
     return updated_user
 
+# ==================== FEELINGS - COME MI SENTO ====================
+
+@api_router.post("/feelings/analyze")
+async def analyze_feeling(data: FeelingRequest, user: User = Depends(require_auth)):
+    """Analyze user's feelings and provide personalized Bible verses and guidance"""
+    try:
+        lang = data.language or user.language or "it"
+        
+        system_prompts = {
+            "it": """Sei un consigliere spirituale cristiano compassionevole. L'utente ti condivide come si sente.
+            
+Rispondi in italiano con:
+1. Empatia e comprensione per il suo stato d'animo
+2. 3 versetti biblici specifici che parlano alla sua situazione (con riferimento completo)
+3. Una breve riflessione su come questi versetti possono aiutarlo
+4. Un'applicazione pratica per la sua vita quotidiana
+5. Una preghiera breve e personale
+
+Formatta la risposta in modo chiaro con sezioni separate.""",
+            "es": """Eres un consejero espiritual cristiano compasivo. El usuario comparte cómo se siente.
+Responde en español con empatía, 3 versículos bíblicos relevantes, reflexión y oración.""",
+            "en": """You are a compassionate Christian spiritual counselor. The user shares how they feel.
+Respond in English with empathy, 3 relevant Bible verses, reflection and prayer.""",
+        }
+        
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=f"feelings_{user.user_id}_{datetime.now().strftime('%Y%m%d%H%M%S')}",
+            system_message=system_prompts.get(lang, system_prompts["it"])
+        ).with_model("openai", "gpt-4o")
+        
+        response = await chat.send_message(UserMessage(text=data.text))
+        
+        # Save feeling entry
+        feeling_entry = {
+            "feeling_id": str(uuid.uuid4()),
+            "user_id": user.user_id,
+            "text": data.text,
+            "response": response,
+            "language": lang,
+            "created_at": datetime.now(timezone.utc)
+        }
+        await db.feelings.insert_one(feeling_entry)
+        
+        # Create notification
+        await db.notifications.insert_one({
+            "notification_id": str(uuid.uuid4()),
+            "user_id": user.user_id,
+            "title": "La Parola per Te",
+            "body": "Ho preparato dei versetti speciali per te oggi",
+            "notification_type": "verse",
+            "data": {"feeling_id": feeling_entry["feeling_id"]},
+            "is_read": False,
+            "created_at": datetime.now(timezone.utc)
+        })
+        
+        return {
+            "feeling_id": feeling_entry["feeling_id"],
+            "response": response,
+            "language": lang
+        }
+    except Exception as e:
+        logger.error(f"Feeling analysis error: {e}")
+        raise HTTPException(status_code=500, detail=f"Errore: {str(e)}")
+
+@api_router.get("/feelings/history")
+async def get_feelings_history(user: User = Depends(require_auth), limit: int = 20):
+    """Get user's feelings history"""
+    feelings = await db.feelings.find(
+        {"user_id": user.user_id},
+        {"_id": 0}
+    ).sort("created_at", -1).limit(limit).to_list(limit)
+    return feelings
+
+# ==================== BIBLE STUDY NOTES ====================
+
+STUDY_NOTES = {
+    "Giovanni:3:16": {
+        "historical_context": "Questo versetto fa parte del dialogo tra Gesù e Nicodemo, un fariseo e membro del Sinedrio. Il contesto è la Pasqua ebraica a Gerusalemme, circa 27-30 d.C.",
+        "cross_references": ["Romani 5:8", "1 Giovanni 4:9", "Romani 8:32", "Isaia 9:6"],
+        "hebrew_greek": "ἀγαπάω (agapao) - amore incondizionato, sacrificale. μονογενής (monogenes) - unigenito, unico nel suo genere.",
+        "application": "Questo versetto ci ricorda che la salvezza è un dono gratuito di Dio. Non dobbiamo guadagnarla, ma semplicemente credere.",
+        "commentary": "Considerato il 'Vangelo in miniatura', questo versetto riassume l'intero messaggio della salvezza cristiana: l'amore di Dio, il dono del Figlio, la fede come risposta, e la vita eterna come risultato."
+    },
+    "Salmi:23:1": {
+        "historical_context": "Scritto da Davide, che era lui stesso un pastore prima di diventare re. Probabilmente scritto durante un periodo di riflessione sulla fedeltà di Dio.",
+        "cross_references": ["Giovanni 10:11", "Ezechiele 34:11-16", "Isaia 40:11", "1 Pietro 2:25"],
+        "hebrew_greek": "רָעָה (ra'ah) - pascolare, guidare, proteggere. La metafora del pastore era comune nel Medio Oriente antico per descrivere i re.",
+        "application": "Possiamo confidare che Dio provvede per tutti i nostri bisogni, spirituali e materiali.",
+        "commentary": "Il pastore nel mondo antico era responsabile della sicurezza, del nutrimento e della guida del gregge. Davide applica questa immagine a Dio."
+    },
+    "Filippesi:4:13": {
+        "historical_context": "Paolo scrisse questa lettera dalla prigione a Roma, circa 61-62 d.C. Nonostante le difficoltà, esprime gioia e gratitudine.",
+        "cross_references": ["2 Corinzi 12:9-10", "Giovanni 15:5", "Colossesi 1:11", "Efesini 3:16"],
+        "hebrew_greek": "ἰσχύω (ischyo) - avere forza, essere capace. ἐνδυναμόω (endynamoo) - rafforzare internamente.",
+        "application": "La vera forza viene da Cristo, non da noi stessi. In ogni situazione possiamo attingere alla Sua potenza.",
+        "commentary": "Questo versetto è spesso citato fuori contesto. Paolo parla della capacità di affrontare qualsiasi circostanza, abbondanza o bisogno, attraverso Cristo."
+    }
+}
+
+@api_router.get("/bible/study/{book}/{chapter}/{verse}")
+async def get_study_notes(book: str, chapter: int, verse: int):
+    """Get study notes for a specific verse"""
+    key = f"{book}:{chapter}:{verse}"
+    if key in STUDY_NOTES:
+        return {
+            "book": book,
+            "chapter": chapter,
+            "verse": verse,
+            "notes": STUDY_NOTES[key]
+        }
+    
+    # Generate AI study notes for verses not in database
+    try:
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=f"study_{key}",
+            system_message="""Sei un esperto biblista. Fornisci note di studio complete per il versetto richiesto in italiano.
+            Includi:
+            - Contesto storico (2-3 frasi)
+            - 4 riferimenti incrociati con altri versetti
+            - Note sul greco/ebraico originale
+            - Applicazione pratica
+            - Breve commentario"""
+        ).with_model("openai", "gpt-4o")
+        
+        response = await chat.send_message(UserMessage(text=f"Fornisci note di studio per {book} {chapter}:{verse}"))
+        
+        return {
+            "book": book,
+            "chapter": chapter,
+            "verse": verse,
+            "notes": {
+                "ai_generated": True,
+                "content": response
+            }
+        }
+    except Exception as e:
+        return {
+            "book": book,
+            "chapter": chapter, 
+            "verse": verse,
+            "notes": None,
+            "error": "Note di studio non disponibili"
+        }
+
+# ==================== GROUPS - FORUM STYLE ====================
+
+GROUP_TOPICS = {
+    "prayer": {"name": "Preghiera", "icon": "🙏", "color": "#6B7F5B"},
+    "study": {"name": "Studio Biblico", "icon": "📖", "color": "#D4A574"},
+    "testimony": {"name": "Testimonianze", "icon": "✨", "color": "#74B9FF"},
+    "support": {"name": "Supporto", "icon": "💝", "color": "#FF7675"},
+    "worship": {"name": "Adorazione", "icon": "🎵", "color": "#A29BFE"},
+    "youth": {"name": "Giovani", "icon": "🌟", "color": "#FDCB6E"},
+}
+
+@api_router.get("/groups/topics")
+async def get_group_topics():
+    """Get available group topics"""
+    return GROUP_TOPICS
+
+@api_router.post("/groups")
+async def create_group(data: GroupCreate, user: User = Depends(require_auth)):
+    """Create a new group"""
+    group = {
+        "group_id": str(uuid.uuid4()),
+        "name": data.name,
+        "description": data.description,
+        "topic": data.topic,
+        "creator_id": user.user_id,
+        "creator_name": user.name,
+        "members": [user.user_id],
+        "members_count": 1,
+        "is_public": data.is_public,
+        "language": data.language,
+        "created_at": datetime.now(timezone.utc)
+    }
+    await db.groups.insert_one(group)
+    group.pop("_id", None)
+    return group
+
+@api_router.get("/groups")
+async def get_groups(topic: str = None, lang: str = None, user: User = Depends(require_auth)):
+    """Get all public groups"""
+    query = {"is_public": True}
+    if topic:
+        query["topic"] = topic
+    if lang:
+        query["language"] = lang
+    
+    groups = await db.groups.find(query, {"_id": 0}).sort("created_at", -1).to_list(50)
+    return groups
+
+@api_router.get("/groups/my")
+async def get_my_groups(user: User = Depends(require_auth)):
+    """Get user's groups"""
+    groups = await db.groups.find(
+        {"members": user.user_id},
+        {"_id": 0}
+    ).sort("created_at", -1).to_list(50)
+    return groups
+
+@api_router.get("/groups/{group_id}")
+async def get_group(group_id: str, user: User = Depends(require_auth)):
+    """Get group details"""
+    group = await db.groups.find_one({"group_id": group_id}, {"_id": 0})
+    if not group:
+        raise HTTPException(status_code=404, detail="Gruppo non trovato")
+    return group
+
+@api_router.post("/groups/{group_id}/join")
+async def join_group(group_id: str, user: User = Depends(require_auth)):
+    """Join a group"""
+    result = await db.groups.update_one(
+        {"group_id": group_id},
+        {
+            "$addToSet": {"members": user.user_id},
+            "$inc": {"members_count": 1}
+        }
+    )
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Gruppo non trovato")
+    
+    # Notify group creator
+    group = await db.groups.find_one({"group_id": group_id}, {"_id": 0})
+    if group and group["creator_id"] != user.user_id:
+        await db.notifications.insert_one({
+            "notification_id": str(uuid.uuid4()),
+            "user_id": group["creator_id"],
+            "title": "Nuovo membro",
+            "body": f"{user.name} si è unito al gruppo {group['name']}",
+            "notification_type": "group",
+            "data": {"group_id": group_id},
+            "is_read": False,
+            "created_at": datetime.now(timezone.utc)
+        })
+    
+    return {"message": "Ti sei unito al gruppo"}
+
+@api_router.post("/groups/{group_id}/leave")
+async def leave_group(group_id: str, user: User = Depends(require_auth)):
+    """Leave a group"""
+    await db.groups.update_one(
+        {"group_id": group_id},
+        {
+            "$pull": {"members": user.user_id},
+            "$inc": {"members_count": -1}
+        }
+    )
+    return {"message": "Hai lasciato il gruppo"}
+
+# Group Posts (Forum style)
+@api_router.post("/groups/{group_id}/posts")
+async def create_group_post(group_id: str, data: GroupPostCreate, user: User = Depends(require_auth)):
+    """Create a post in a group"""
+    # Verify user is member
+    group = await db.groups.find_one({"group_id": group_id, "members": user.user_id})
+    if not group:
+        raise HTTPException(status_code=403, detail="Devi essere membro del gruppo")
+    
+    post = {
+        "post_id": str(uuid.uuid4()),
+        "group_id": group_id,
+        "user_id": user.user_id,
+        "user_name": user.name,
+        "content": data.content,
+        "post_type": data.post_type,
+        "bible_reference": data.bible_reference,
+        "likes": 0,
+        "liked_by": [],
+        "comments": [],
+        "comments_count": 0,
+        "created_at": datetime.now(timezone.utc)
+    }
+    await db.group_posts.insert_one(post)
+    
+    # Notify group members
+    for member_id in group["members"]:
+        if member_id != user.user_id:
+            await db.notifications.insert_one({
+                "notification_id": str(uuid.uuid4()),
+                "user_id": member_id,
+                "title": f"Nuovo post in {group['name']}",
+                "body": f"{user.name} ha pubblicato: {data.content[:50]}...",
+                "notification_type": "group",
+                "data": {"group_id": group_id, "post_id": post["post_id"]},
+                "is_read": False,
+                "created_at": datetime.now(timezone.utc)
+            })
+    
+    post.pop("_id", None)
+    return post
+
+@api_router.get("/groups/{group_id}/posts")
+async def get_group_posts(group_id: str, user: User = Depends(require_auth), limit: int = 50):
+    """Get posts in a group"""
+    posts = await db.group_posts.find(
+        {"group_id": group_id},
+        {"_id": 0}
+    ).sort("created_at", -1).limit(limit).to_list(limit)
+    return posts
+
+@api_router.post("/groups/{group_id}/posts/{post_id}/like")
+async def like_post(group_id: str, post_id: str, user: User = Depends(require_auth)):
+    """Like a post"""
+    result = await db.group_posts.update_one(
+        {"post_id": post_id, "liked_by": {"$ne": user.user_id}},
+        {
+            "$inc": {"likes": 1},
+            "$addToSet": {"liked_by": user.user_id}
+        }
+    )
+    return {"liked": result.modified_count > 0}
+
+@api_router.post("/groups/{group_id}/posts/{post_id}/comment")
+async def add_comment(group_id: str, post_id: str, request: Request, user: User = Depends(require_auth)):
+    """Add a comment to a post"""
+    body = await request.json()
+    content = body.get("content", "")
+    
+    if not content:
+        raise HTTPException(status_code=400, detail="Contenuto richiesto")
+    
+    comment = {
+        "comment_id": str(uuid.uuid4()),
+        "user_id": user.user_id,
+        "user_name": user.name,
+        "content": content,
+        "created_at": datetime.now(timezone.utc).isoformat()
+    }
+    
+    await db.group_posts.update_one(
+        {"post_id": post_id},
+        {
+            "$push": {"comments": comment},
+            "$inc": {"comments_count": 1}
+        }
+    )
+    
+    # Notify post author
+    post = await db.group_posts.find_one({"post_id": post_id})
+    if post and post["user_id"] != user.user_id:
+        await db.notifications.insert_one({
+            "notification_id": str(uuid.uuid4()),
+            "user_id": post["user_id"],
+            "title": "Nuovo commento",
+            "body": f"{user.name} ha commentato il tuo post",
+            "notification_type": "comment",
+            "data": {"group_id": group_id, "post_id": post_id},
+            "is_read": False,
+            "created_at": datetime.now(timezone.utc)
+        })
+    
+    return comment
+
+# ==================== PRIVATE MESSAGES ====================
+
+@api_router.post("/messages")
+async def send_private_message(data: PrivateMessageCreate, user: User = Depends(require_auth)):
+    """Send a private message"""
+    # Verify receiver exists
+    receiver = await db.users.find_one({"user_id": data.receiver_id})
+    if not receiver:
+        raise HTTPException(status_code=404, detail="Utente non trovato")
+    
+    message = {
+        "message_id": str(uuid.uuid4()),
+        "sender_id": user.user_id,
+        "sender_name": user.name,
+        "receiver_id": data.receiver_id,
+        "content": data.content,
+        "is_read": False,
+        "created_at": datetime.now(timezone.utc)
+    }
+    await db.private_messages.insert_one(message)
+    
+    # Notify receiver
+    await db.notifications.insert_one({
+        "notification_id": str(uuid.uuid4()),
+        "user_id": data.receiver_id,
+        "title": "Nuovo messaggio",
+        "body": f"{user.name} ti ha inviato un messaggio",
+        "notification_type": "message",
+        "data": {"sender_id": user.user_id, "message_id": message["message_id"]},
+        "is_read": False,
+        "created_at": datetime.now(timezone.utc)
+    })
+    
+    message.pop("_id", None)
+    return message
+
+@api_router.get("/messages")
+async def get_messages(user: User = Depends(require_auth)):
+    """Get all conversations"""
+    # Get unique conversation partners
+    sent = await db.private_messages.find(
+        {"sender_id": user.user_id},
+        {"_id": 0}
+    ).sort("created_at", -1).to_list(100)
+    
+    received = await db.private_messages.find(
+        {"receiver_id": user.user_id},
+        {"_id": 0}
+    ).sort("created_at", -1).to_list(100)
+    
+    # Combine and get unique conversations
+    all_messages = sent + received
+    conversations = {}
+    
+    for msg in all_messages:
+        other_id = msg["receiver_id"] if msg["sender_id"] == user.user_id else msg["sender_id"]
+        if other_id not in conversations:
+            other_user = await db.users.find_one({"user_id": other_id}, {"_id": 0, "password_hash": 0})
+            conversations[other_id] = {
+                "user_id": other_id,
+                "user_name": other_user["name"] if other_user else "Utente",
+                "last_message": msg,
+                "unread_count": 0
+            }
+        if msg["receiver_id"] == user.user_id and not msg["is_read"]:
+            conversations[other_id]["unread_count"] += 1
+    
+    return list(conversations.values())
+
+@api_router.get("/messages/{other_user_id}")
+async def get_conversation(other_user_id: str, user: User = Depends(require_auth)):
+    """Get messages with a specific user"""
+    messages = await db.private_messages.find(
+        {
+            "$or": [
+                {"sender_id": user.user_id, "receiver_id": other_user_id},
+                {"sender_id": other_user_id, "receiver_id": user.user_id}
+            ]
+        },
+        {"_id": 0}
+    ).sort("created_at", 1).to_list(100)
+    
+    # Mark as read
+    await db.private_messages.update_many(
+        {"sender_id": other_user_id, "receiver_id": user.user_id, "is_read": False},
+        {"$set": {"is_read": True}}
+    )
+    
+    return messages
+
+# ==================== NOTIFICATIONS ====================
+
+@api_router.get("/notifications")
+async def get_notifications(user: User = Depends(require_auth), limit: int = 50):
+    """Get user notifications"""
+    notifications = await db.notifications.find(
+        {"user_id": user.user_id},
+        {"_id": 0}
+    ).sort("created_at", -1).limit(limit).to_list(limit)
+    return notifications
+
+@api_router.get("/notifications/unread-count")
+async def get_unread_count(user: User = Depends(require_auth)):
+    """Get unread notifications count"""
+    count = await db.notifications.count_documents({
+        "user_id": user.user_id,
+        "is_read": False
+    })
+    return {"count": count}
+
+@api_router.post("/notifications/{notification_id}/read")
+async def mark_notification_read(notification_id: str, user: User = Depends(require_auth)):
+    """Mark notification as read"""
+    await db.notifications.update_one(
+        {"notification_id": notification_id, "user_id": user.user_id},
+        {"$set": {"is_read": True}}
+    )
+    return {"success": True}
+
+@api_router.post("/notifications/read-all")
+async def mark_all_read(user: User = Depends(require_auth)):
+    """Mark all notifications as read"""
+    await db.notifications.update_many(
+        {"user_id": user.user_id},
+        {"$set": {"is_read": True}}
+    )
+    return {"success": True}
+
 # ==================== HEALTH CHECK ====================
 
 @api_router.get("/")
