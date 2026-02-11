@@ -204,8 +204,9 @@ export default function BibleScreen() {
 
     return (
       <FlatList
+        key="chapters-list"
         data={chapters}
-        keyExtractor={(item) => item.toString()}
+        keyExtractor={(item) => `chapter-${item}`}
         numColumns={5}
         columnWrapperStyle={styles.chapterRow}
         contentContainerStyle={styles.listContent}
