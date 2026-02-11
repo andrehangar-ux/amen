@@ -122,11 +122,71 @@ export default function BibleScreen() {
       setVerses(data.verses || []);
       setView('reading');
       await api.updateReadingProgress().catch(() => {});
+      // Load study data
+      loadStudyData(book, chapter);
     } catch (error) {
       console.log('Error loading chapter:', error);
       setVerses([]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const loadStudyData = async (book: string, chapter: number) => {
+    setLoadingStudy(true);
+    try {
+      const data = await api.getStudyData(book, chapter);
+      setStudyData(data);
+    } catch (error) {
+      console.log('Error loading study data:', error);
+      setStudyData(null);
+    } finally {
+      setLoadingStudy(false);
+    }
+  };
+
+  const handleVersePress = (verse: Verse) => {
+    setSelectedVerse(verse);
+    setShowStudyTools(true);
+  };
+
+  const saveNote = async () => {
+    if (!selectedBook || !selectedChapter || !noteText.trim()) return;
+    
+    try {
+      await api.createStudyNote(
+        selectedBook.name,
+        selectedChapter,
+        selectedVerse?.verse || null,
+        noteText,
+        null,
+        []
+      );
+      Alert.alert('Salvato!', 'Nota aggiunta con successo');
+      setNoteText('');
+      setShowNoteModal(false);
+      // Reload study data
+      loadStudyData(selectedBook.name, selectedChapter);
+    } catch (error) {
+      Alert.alert('Errore', 'Impossibile salvare la nota');
+    }
+  };
+
+  const askAIAboutVerse = async () => {
+    if (!selectedVerse || !selectedBook) return;
+    
+    setLoadingAI(true);
+    try {
+      const response = await api.aiExplainVerse(
+        `${selectedBook.name} ${selectedChapter}:${selectedVerse.verse}`,
+        selectedVerse.text,
+        aiQuestion || 'Spiega questo versetto'
+      );
+      setAiAnswer(response.explanation);
+    } catch (error) {
+      Alert.alert('Errore', 'Impossibile ottenere la spiegazione');
+    } finally {
+      setLoadingAI(false);
     }
   };
 
