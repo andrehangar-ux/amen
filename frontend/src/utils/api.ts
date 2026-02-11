@@ -44,11 +44,21 @@ export const api = {
   getChapter: (book: string, chapter: number, lang = 'it') => 
     api.fetch(`/api/bible/chapter/${encodeURIComponent(book)}/${chapter}?lang=${lang}`),
   getDailyVerse: (lang = 'it') => api.fetch(`/api/bible/daily-verse?lang=${lang}`),
+  getStudyNotes: (book: string, chapter: number, verse: number) =>
+    api.fetch(`/api/bible/study/${encodeURIComponent(book)}/${chapter}/${verse}`),
   translateVerse: (text: string, sourceLang: string, targetLang: string) =>
     api.fetch('/api/bible/translate-verse', {
       method: 'POST',
       body: JSON.stringify({ text, source_lang: sourceLang, target_lang: targetLang }),
     }),
+
+  // Feelings - Come mi sento
+  analyzeFeeling: (text: string, language = 'it') =>
+    api.fetch('/api/feelings/analyze', {
+      method: 'POST',
+      body: JSON.stringify({ text, language }),
+    }),
+  getFeelingsHistory: () => api.fetch('/api/feelings/history'),
 
   // AI
   sendMessage: (message: string, mood?: string, language?: string) => 
@@ -87,6 +97,57 @@ export const api = {
   // Progress
   getProgress: () => api.fetch('/api/progress'),
   updateReadingProgress: () => api.fetch('/api/progress/reading', { method: 'POST' }),
+
+  // Groups
+  getGroupTopics: () => api.fetch('/api/groups/topics'),
+  createGroup: (data: { name: string; description: string; topic: string; is_public?: boolean; language?: string }) =>
+    api.fetch('/api/groups', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  getGroups: (topic?: string, lang?: string) => {
+    let url = '/api/groups';
+    const params = [];
+    if (topic) params.push(`topic=${topic}`);
+    if (lang) params.push(`lang=${lang}`);
+    if (params.length) url += `?${params.join('&')}`;
+    return api.fetch(url);
+  },
+  getMyGroups: () => api.fetch('/api/groups/my'),
+  getGroup: (groupId: string) => api.fetch(`/api/groups/${groupId}`),
+  joinGroup: (groupId: string) => api.fetch(`/api/groups/${groupId}/join`, { method: 'POST' }),
+  leaveGroup: (groupId: string) => api.fetch(`/api/groups/${groupId}/leave`, { method: 'POST' }),
+  
+  // Group Posts
+  createGroupPost: (groupId: string, content: string, postType = 'text', bibleReference?: string) =>
+    api.fetch(`/api/groups/${groupId}/posts`, {
+      method: 'POST',
+      body: JSON.stringify({ content, post_type: postType, bible_reference: bibleReference }),
+    }),
+  getGroupPosts: (groupId: string) => api.fetch(`/api/groups/${groupId}/posts`),
+  likePost: (groupId: string, postId: string) => 
+    api.fetch(`/api/groups/${groupId}/posts/${postId}/like`, { method: 'POST' }),
+  addComment: (groupId: string, postId: string, content: string) =>
+    api.fetch(`/api/groups/${groupId}/posts/${postId}/comment`, {
+      method: 'POST',
+      body: JSON.stringify({ content }),
+    }),
+
+  // Private Messages
+  sendPrivateMessage: (receiverId: string, content: string) =>
+    api.fetch('/api/messages', {
+      method: 'POST',
+      body: JSON.stringify({ receiver_id: receiverId, content }),
+    }),
+  getConversations: () => api.fetch('/api/messages'),
+  getConversation: (otherUserId: string) => api.fetch(`/api/messages/${otherUserId}`),
+
+  // Notifications
+  getNotifications: () => api.fetch('/api/notifications'),
+  getUnreadCount: () => api.fetch('/api/notifications/unread-count'),
+  markNotificationRead: (notificationId: string) =>
+    api.fetch(`/api/notifications/${notificationId}/read`, { method: 'POST' }),
+  markAllNotificationsRead: () => api.fetch('/api/notifications/read-all', { method: 'POST' }),
 
   // Community
   getCommunityMessages: (lang = 'it') => api.fetch(`/api/community/messages?lang=${lang}`),
