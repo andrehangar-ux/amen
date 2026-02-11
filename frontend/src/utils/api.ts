@@ -169,7 +169,36 @@ export const api = {
   getDonations: () => api.fetch('/api/donations'),
 
   // Radios
-  getRadios: (lang?: string) => api.fetch(`/api/radios${lang ? `?lang=${lang}` : ''}`),
+  getRadios: (lang?: string, region?: string) => {
+    let url = '/api/radios';
+    const params = [];
+    if (lang) params.push(`lang=${lang}`);
+    if (region) params.push(`region=${region}`);
+    if (params.length) url += `?${params.join('&')}`;
+    return api.fetch(url);
+  },
+
+  // Worship Content
+  getWorshipContent: (lang?: string) => api.fetch(`/api/worship${lang ? `?lang=${lang}` : ''}`),
+
+  // Bible Study Tools
+  getStudyData: (book: string, chapter: number, verse?: number) => {
+    let url = `/api/bible/study/${encodeURIComponent(book)}/${chapter}`;
+    if (verse) url += `?verse=${verse}`;
+    return api.fetch(url);
+  },
+  createStudyNote: (book: string, chapter: number, verse: number | null, note: string, highlightColor: string | null, tags: string[]) =>
+    api.fetch('/api/bible/study/notes', {
+      method: 'POST',
+      body: JSON.stringify({ book, chapter, verse, note, highlight_color: highlightColor, tags }),
+    }),
+  getStudyNotes: () => api.fetch('/api/bible/study/notes'),
+  deleteStudyNote: (noteId: string) => api.fetch(`/api/bible/study/notes/${noteId}`, { method: 'DELETE' }),
+  aiExplainVerse: (verseRef: string, verseText: string, question?: string) =>
+    api.fetch('/api/bible/study/ai-explain', {
+      method: 'POST',
+      body: JSON.stringify({ verse_ref: verseRef, verse_text: verseText, question }),
+    }),
 
   // Settings
   updateSettings: (settings: any) =>
