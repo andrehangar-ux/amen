@@ -888,6 +888,59 @@ async def get_bible_books(lang: str = "it"):
     """Get list of Bible books in specified language"""
     return BIBLE_BOOKS_MULTILANG.get(lang, BIBLE_BOOKS_MULTILANG["it"])
 
+# Helper function to fetch Bible text from laparola.net
+async def fetch_from_laparola(book: str, chapter: int, version: str = "Nuova+Diodati") -> list:
+    """Fetch Bible chapter from laparola.net"""
+    try:
+        # Map Italian book names to URL-friendly format
+        book_url = book.lower().replace(" ", "+")
+        url = f"https://www.laparola.net/testo.php?riferimento={book_url}+{chapter}&versioni[]={version}"
+        
+        async with httpx.AsyncClient(timeout=15.0) as client:
+            response = await client.get(url)
+            if response.status_code != 200:
+                return []
+            
+            soup = BeautifulSoup(response.text, 'html.parser')
+            
+            # Find the chapter content
+            verses = []
+            
+            # The verses are in the main content area with bold verse numbers
+            content = soup.find('div', class_='testo') or soup.find('body')
+            if not content:
+                return []
+            
+            # Get all text and parse verse numbers
+            text_content = str(content)
+            
+            # Pattern to match verses: **1** text **2** text etc.
+            verse_pattern = r'\*\*(\d+)\*\*\s*([^*]+?)(?=\*\*\d+\*\*|$)'
+            matches = re.findall(verse_pattern, text_content, re.DOTALL)
+            
+            if not matches:
+                # Try alternative pattern for HTML bold tags
+                verse_pattern = r'<b>(\d+)</b>\s*([^<]+?)(?=<b>\d+</b>|<h|</div|$)'
+                matches = re.findall(verse_pattern, text_content, re.DOTALL)
+            
+            for match in matches:
+                verse_num = int(match[0])
+                verse_text = match[1].strip()
+                # Clean up the text
+                verse_text = re.sub(r'<[^>]+>', '', verse_text)  # Remove HTML tags
+                verse_text = re.sub(r'_([^_]+)_', r'\1', verse_text)  # Remove markdown italics
+                verse_text = verse_text.strip()
+                if verse_text and len(verse_text) > 5:
+                    verses.append({"verse": verse_num, "text": verse_text})
+            
+            # Sort by verse number
+            verses.sort(key=lambda x: x["verse"])
+            return verses
+            
+    except Exception as e:
+        logger.error(f"Error fetching from laparola.net: {e}")
+        return []
+
 @api_router.get("/bible/chapter/{book}/{chapter}")
 async def get_chapter(book: str, chapter: int, lang: str = "it"):
     """Get verses for a chapter in specified language"""
@@ -905,6 +958,23 @@ async def get_chapter(book: str, chapter: int, lang: str = "it"):
     
     if verses:
         return {"book": book, "chapter": chapter, "verses": verses, "language": lang}
+    
+    # Check if we have it cached in MongoDB
+    cached = await db.bible_cache.find_one({"book": book, "chapter": chapter, "language": lang})
+    if cached and cached.get("verses"):
+        return {"book": book, "chapter": chapter, "verses": cached["verses"], "language": lang}
+    
+    # Try to fetch from laparola.net for Italian
+    if lang == "it":
+        fetched_verses = await fetch_from_laparola(book, chapter)
+        if fetched_verses and len(fetched_verses) > 3:
+            # Cache in MongoDB for future use
+            await db.bible_cache.update_one(
+                {"book": book, "chapter": chapter, "language": lang},
+                {"$set": {"verses": fetched_verses, "source": "laparola.net", "cached_at": datetime.now(timezone.utc)}},
+                upsert=True
+            )
+            return {"book": book, "chapter": chapter, "verses": fetched_verses, "language": lang}
     
     # Check if we have it in sample verses (for other languages)
     verses_dict = SAMPLE_VERSES_MULTILANG.get(lang, SAMPLE_VERSES_MULTILANG.get("it", {}))
