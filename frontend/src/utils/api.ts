@@ -177,4 +177,86 @@ export const api = {
       method: 'PUT',
       body: JSON.stringify(settings),
     }),
+
+  // Donations Config
+  getDonationConfig: () => api.fetch('/api/donations/config'),
+
+  // Quiz
+  getQuizTopics: () => api.fetch('/api/quiz/topics'),
+  getQuiz: (topic: string) => api.fetch(`/api/quiz/${topic}`),
+  submitQuiz: (topic: string, answers: Record<string, number>) =>
+    api.fetch('/api/quiz/submit', {
+      method: 'POST',
+      body: JSON.stringify({ topic, answers }),
+    }),
+  getQuizHistory: () => api.fetch('/api/quiz/history'),
+
+  // Dictionary
+  getDictionaryTerms: () => api.fetch('/api/dictionary'),
+  getDictionaryTerm: (termId: string) => api.fetch(`/api/dictionary/${termId}`),
+  searchDictionary: (query: string) => api.fetch(`/api/dictionary/search/${encodeURIComponent(query)}`),
+  aiDictionaryStudy: (termId: string, question: string) =>
+    api.fetch('/api/dictionary/ai-study', {
+      method: 'POST',
+      body: JSON.stringify({ term_id: termId, question }),
+    }),
+
+  // Study - Open Questions
+  askQuestion: (question: string, topic?: string, language = 'it') =>
+    api.fetch('/api/study/ask', {
+      method: 'POST',
+      body: JSON.stringify({ question, topic, language }),
+    }),
+  getStudyHistory: () => api.fetch('/api/study/history'),
+
+  // Forum
+  getForumCategories: () => api.fetch('/api/forum/categories'),
+  createForumPost: (title: string, content: string, category: string, tags: string[] = []) =>
+    api.fetch('/api/forum/posts', {
+      method: 'POST',
+      body: JSON.stringify({ title, content, category, tags }),
+    }),
+  getForumPosts: (category?: string, sort = 'recent') => {
+    let url = '/api/forum/posts';
+    const params = [];
+    if (category) params.push(`category=${category}`);
+    if (sort) params.push(`sort=${sort}`);
+    if (params.length) url += `?${params.join('&')}`;
+    return api.fetch(url);
+  },
+  getForumPost: (postId: string) => api.fetch(`/api/forum/posts/${postId}`),
+  voteForumPost: (postId: string) => api.fetch(`/api/forum/posts/${postId}/vote`, { method: 'POST' }),
+  replyForumPost: (postId: string, content: string) =>
+    api.fetch(`/api/forum/posts/${postId}/reply`, {
+      method: 'POST',
+      body: JSON.stringify({ content }),
+    }),
+  getAIMentorReply: (postId: string) => api.fetch(`/api/forum/posts/${postId}/ai-mentor`, { method: 'POST' }),
+
+  // Maps
+  getMaps: () => api.fetch('/api/maps'),
+  getMap: (mapId: string) => api.fetch(`/api/maps/${mapId}`),
+  getLocationDetails: (mapId: string, locationName: string) =>
+    api.fetch(`/api/maps/${mapId}/location/${encodeURIComponent(locationName)}`),
+
+  // Live Events
+  createEvent: (data: { title: string; description: string; event_type: string; scheduled_at: string; duration_minutes?: number; bible_book?: string; bible_chapter?: number }) =>
+    api.fetch('/api/events', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  getEvents: (status?: string) => api.fetch(`/api/events${status ? `?status=${status}` : ''}`),
+  getEvent: (eventId: string) => api.fetch(`/api/events/${eventId}`),
+  joinEvent: (eventId: string) => api.fetch(`/api/events/${eventId}/join`, { method: 'POST' }),
+  startEvent: (eventId: string) => api.fetch(`/api/events/${eventId}/start`, { method: 'POST' }),
+  endEvent: (eventId: string) => api.fetch(`/api/events/${eventId}/end`, { method: 'POST' }),
+
+  // FAQ & Support
+  getFaq: (category?: string) => api.fetch(`/api/faq${category ? `?category=${category}` : ''}`),
+  getFaqCategories: () => api.fetch('/api/faq/categories'),
+  contactSupport: (message: string) =>
+    api.fetch('/api/support/contact', {
+      method: 'POST',
+      body: JSON.stringify({ message }),
+    }),
 };
