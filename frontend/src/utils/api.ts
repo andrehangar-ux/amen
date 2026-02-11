@@ -28,30 +28,46 @@ export const api = {
     return response.json();
   },
 
+  // Languages
+  getLanguages: () => api.fetch('/api/languages'),
+
+  // Translation
+  translate: (text: string, sourceLang: string, targetLang: string) =>
+    api.fetch('/api/translate', {
+      method: 'POST',
+      body: JSON.stringify({ text, source_lang: sourceLang, target_lang: targetLang }),
+    }),
+
   // Bible
   getBibleBooks: (lang = 'it') => api.fetch(`/api/bible/books?lang=${lang}`),
-  getChapter: (book: string, chapter: number) => api.fetch(`/api/bible/chapter/${book}/${chapter}`),
-  getDailyVerse: () => api.fetch('/api/bible/daily-verse'),
+  getChapter: (book: string, chapter: number, lang = 'it') => 
+    api.fetch(`/api/bible/chapter/${book}/${chapter}?lang=${lang}`),
+  getDailyVerse: (lang = 'it') => api.fetch(`/api/bible/daily-verse?lang=${lang}`),
+  translateVerse: (text: string, sourceLang: string, targetLang: string) =>
+    api.fetch('/api/bible/translate-verse', {
+      method: 'POST',
+      body: JSON.stringify({ text, source_lang: sourceLang, target_lang: targetLang }),
+    }),
 
   // AI
-  sendMessage: (message: string, mood?: string) => 
+  sendMessage: (message: string, mood?: string, language?: string) => 
     api.fetch('/api/ai/chat', {
       method: 'POST',
-      body: JSON.stringify({ message, mood }),
+      body: JSON.stringify({ message, mood, language }),
     }),
   getChatHistory: () => api.fetch('/api/ai/chat-history'),
   clearChatHistory: () => api.fetch('/api/ai/chat-history', { method: 'DELETE' }),
-  moodCheckin: (mood: string) => 
+  moodCheckin: (mood: string, language?: string) => 
     api.fetch('/api/ai/mood-checkin', {
       method: 'POST',
-      body: JSON.stringify({ mood }),
+      body: JSON.stringify({ mood, language }),
     }),
 
   // Journal
-  createJournalEntry: (content: string, mood: string) =>
+  createJournalEntry: (content: string, mood: string, language?: string) =>
     api.fetch('/api/journal', {
       method: 'POST',
-      body: JSON.stringify({ content, mood }),
+      body: JSON.stringify({ content, mood, language }),
     }),
   getJournalEntries: () => api.fetch('/api/journal'),
   deleteJournalEntry: (entryId: string) => 
@@ -71,6 +87,17 @@ export const api = {
   getProgress: () => api.fetch('/api/progress'),
   updateReadingProgress: () => api.fetch('/api/progress/reading', { method: 'POST' }),
 
+  // Community
+  getCommunityMessages: (lang = 'it') => api.fetch(`/api/community/messages?lang=${lang}`),
+  createCommunityMessage: (content: string, language: string, messageType = 'text') =>
+    api.fetch('/api/community/messages', {
+      method: 'POST',
+      body: JSON.stringify({ content, language, message_type: messageType }),
+    }),
+  likeCommunityMessage: (messageId: string) =>
+    api.fetch(`/api/community/messages/${messageId}/like`, { method: 'POST' }),
+  getCommunityUsers: () => api.fetch('/api/community/users'),
+
   // Donations
   createDonation: (amount: number, method: string, message?: string) =>
     api.fetch('/api/donations', {
@@ -80,7 +107,7 @@ export const api = {
   getDonations: () => api.fetch('/api/donations'),
 
   // Radios
-  getRadios: () => api.fetch('/api/radios'),
+  getRadios: (lang?: string) => api.fetch(`/api/radios${lang ? `?lang=${lang}` : ''}`),
 
   // Settings
   updateSettings: (settings: any) =>
