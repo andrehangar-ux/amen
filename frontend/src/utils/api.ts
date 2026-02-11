@@ -39,9 +39,10 @@ export const api = {
     }),
 
   // Bible
+  getBibleEditions: (lang?: string) => api.fetch(`/api/bible/editions${lang ? `?lang=${lang}` : ''}`),
   getBibleBooks: (lang = 'it') => api.fetch(`/api/bible/books?lang=${lang}`),
   getChapter: (book: string, chapter: number, lang = 'it') => 
-    api.fetch(`/api/bible/chapter/${book}/${chapter}?lang=${lang}`),
+    api.fetch(`/api/bible/chapter/${encodeURIComponent(book)}/${chapter}?lang=${lang}`),
   getDailyVerse: (lang = 'it') => api.fetch(`/api/bible/daily-verse?lang=${lang}`),
   translateVerse: (text: string, sourceLang: string, targetLang: string) =>
     api.fetch('/api/bible/translate-verse', {
