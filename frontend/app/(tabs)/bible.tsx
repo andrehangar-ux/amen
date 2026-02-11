@@ -315,15 +315,308 @@ export default function BibleScreen() {
     );
   };
 
-  const renderReading = () => (
-    <ScrollView contentContainerStyle={styles.readingContent}>
-      {verses.map((verse) => (
-        <View key={verse.verse} style={styles.verseContainer}>
-          <Text style={styles.verseNumber}>{verse.verse}</Text>
-          <Text style={styles.verseText}>{verse.text}</Text>
+  const renderReading = () => {
+    const verseKey = selectedBook && selectedChapter ? `${selectedBook.name}:${selectedChapter}` : '';
+    const crossRefs = studyData?.cross_references || {};
+    const dictLinks = studyData?.dictionary_links || {};
+    
+    return (
+      <ScrollView contentContainerStyle={styles.readingContent}>
+        {/* Study Context Banner */}
+        {studyData?.study_context && (
+          <TouchableOpacity 
+            style={styles.studyContextBanner}
+            onPress={() => setShowStudyTools(true)}
+          >
+            <Ionicons name="school" size={20} color={COLORS.primary} />
+            <Text style={styles.studyContextText}>Contesto di studio disponibile</Text>
+            <Ionicons name="chevron-forward" size={20} color={COLORS.primary} />
+          </TouchableOpacity>
+        )}
+
+        {/* Verses */}
+        {verses.map((verse) => {
+          const fullVerseKey = `${verseKey}:${verse.verse}`;
+          const hasRefs = crossRefs[fullVerseKey];
+          const hasDict = dictLinks[fullVerseKey];
+          const hasStudyData = hasRefs || hasDict;
+          
+          return (
+            <TouchableOpacity 
+              key={verse.verse} 
+              style={[styles.verseContainer, hasStudyData && styles.verseWithStudy]}
+              onPress={() => handleVersePress(verse)}
+              activeOpacity={0.7}
+            >
+              <Text style={styles.verseNumber}>{verse.verse}</Text>
+              <View style={styles.verseContent}>
+                <Text style={styles.verseText}>{verse.text}</Text>
+                {hasStudyData && (
+                  <View style={styles.verseIndicators}>
+                    {hasRefs && (
+                      <View style={styles.indicator}>
+                        <Ionicons name="link" size={14} color={COLORS.primary} />
+                        <Text style={styles.indicatorText}>{hasRefs.length}</Text>
+                      </View>
+                    )}
+                    {hasDict && (
+                      <View style={styles.indicator}>
+                        <Ionicons name="language" size={14} color={COLORS.accent} />
+                      </View>
+                    )}
+                  </View>
+                )}
+              </View>
+            </TouchableOpacity>
+          );
+        })}
+
+        {/* User Notes Section */}
+        {studyData?.user_notes && studyData.user_notes.length > 0 && (
+          <View style={styles.notesSection}>
+            <Text style={styles.notesSectionTitle}>I tuoi appunti</Text>
+            {studyData.user_notes.map((note: any, idx: number) => (
+              <View key={idx} style={styles.noteCard}>
+                {note.verse && <Text style={styles.noteVerse}>v. {note.verse}</Text>}
+                <Text style={styles.noteText}>{note.note}</Text>
+              </View>
+            ))}
+          </View>
+        )}
+
+        {/* Add Note Button */}
+        <TouchableOpacity 
+          style={styles.addNoteButton}
+          onPress={() => { setSelectedVerse(null); setShowNoteModal(true); }}
+        >
+          <Ionicons name="add-circle" size={20} color={COLORS.primary} />
+          <Text style={styles.addNoteText}>Aggiungi nota al capitolo</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    );
+  };
+
+  // Study Tools Modal
+  const renderStudyToolsModal = () => {
+    if (!selectedBook || !selectedChapter) return null;
+    
+    const verseKey = selectedVerse 
+      ? `${selectedBook.name}:${selectedChapter}:${selectedVerse.verse}`
+      : `${selectedBook.name}:${selectedChapter}`;
+    const crossRefs = studyData?.cross_references?.[verseKey] || [];
+    const dictTerms = studyData?.dictionary_links?.[verseKey] || [];
+    const context = studyData?.study_context;
+
+    return (
+      <Modal
+        visible={showStudyTools}
+        animationType="slide"
+        transparent
+        onRequestClose={() => setShowStudyTools(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.studyModal}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>
+                {selectedVerse 
+                  ? `Studio: ${selectedBook.name} ${selectedChapter}:${selectedVerse.verse}`
+                  : `Studio: ${selectedBook.name} ${selectedChapter}`
+                }
+              </Text>
+              <TouchableOpacity onPress={() => setShowStudyTools(false)}>
+                <Ionicons name="close" size={24} color={COLORS.text} />
+              </TouchableOpacity>
+            </View>
+
+            <ScrollView style={styles.studyContent}>
+              {selectedVerse && (
+                <View style={styles.selectedVerseBox}>
+                  <Text style={styles.selectedVerseText}>{selectedVerse.text}</Text>
+                </View>
+              )}
+
+              {/* Action Buttons */}
+              <View style={styles.studyActions}>
+                <TouchableOpacity 
+                  style={styles.studyActionBtn}
+                  onPress={() => { setShowStudyTools(false); setShowNoteModal(true); }}
+                >
+                  <Ionicons name="create" size={22} color={COLORS.primary} />
+                  <Text style={styles.studyActionText}>Nota</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  style={styles.studyActionBtn}
+                  onPress={() => { setShowStudyTools(false); setShowAIModal(true); }}
+                >
+                  <Ionicons name="bulb" size={22} color={COLORS.accent} />
+                  <Text style={styles.studyActionText}>AI Spiega</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  style={styles.studyActionBtn}
+                  onPress={() => router.push('/dictionary')}
+                >
+                  <Ionicons name="book" size={22} color="#9B59B6" />
+                  <Text style={styles.studyActionText}>Dizionario</Text>
+                </TouchableOpacity>
+              </View>
+
+              {/* Cross References */}
+              {crossRefs.length > 0 && (
+                <View style={styles.studySection}>
+                  <Text style={styles.studySectionTitle}>
+                    <Ionicons name="link" size={16} color={COLORS.primary} /> Riferimenti Incrociati
+                  </Text>
+                  {crossRefs.map((ref: any, idx: number) => (
+                    <View key={idx} style={styles.crossRefCard}>
+                      <Text style={styles.crossRefRef}>{ref.ref}</Text>
+                      <Text style={styles.crossRefText}>{ref.text}</Text>
+                    </View>
+                  ))}
+                </View>
+              )}
+
+              {/* Dictionary Links */}
+              {dictTerms.length > 0 && (
+                <View style={styles.studySection}>
+                  <Text style={styles.studySectionTitle}>
+                    <Ionicons name="language" size={16} color={COLORS.accent} /> Termini nel Dizionario
+                  </Text>
+                  <View style={styles.dictTermsRow}>
+                    {dictTerms.map((term: string, idx: number) => (
+                      <TouchableOpacity 
+                        key={idx} 
+                        style={styles.dictTermChip}
+                        onPress={() => router.push('/dictionary')}
+                      >
+                        <Text style={styles.dictTermText}>{term}</Text>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                </View>
+              )}
+
+              {/* Historical Context */}
+              {context && (
+                <View style={styles.studySection}>
+                  <Text style={styles.studySectionTitle}>
+                    <Ionicons name="time" size={16} color="#E67E22" /> Contesto Storico
+                  </Text>
+                  <Text style={styles.contextText}>{context.historical_context}</Text>
+                  
+                  <Text style={styles.studySubtitle}>Struttura Letteraria</Text>
+                  <Text style={styles.contextText}>{context.literary_structure}</Text>
+                  
+                  <Text style={styles.studySubtitle}>Temi Chiave</Text>
+                  <View style={styles.themesRow}>
+                    {context.key_themes.map((theme: string, idx: number) => (
+                      <View key={idx} style={styles.themeChip}>
+                        <Text style={styles.themeText}>{theme}</Text>
+                      </View>
+                    ))}
+                  </View>
+                  
+                  <Text style={styles.studySubtitle}>Applicazione</Text>
+                  <Text style={styles.contextText}>{context.application}</Text>
+                </View>
+              )}
+            </ScrollView>
+          </View>
         </View>
-      ))}
-    </ScrollView>
+      </Modal>
+    );
+  };
+
+  // Note Modal
+  const renderNoteModal = () => (
+    <Modal
+      visible={showNoteModal}
+      animationType="slide"
+      transparent
+      onRequestClose={() => setShowNoteModal(false)}
+    >
+      <View style={styles.modalOverlay}>
+        <View style={styles.noteModal}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>
+              {selectedVerse 
+                ? `Nota: v.${selectedVerse.verse}`
+                : 'Nota al Capitolo'
+              }
+            </Text>
+            <TouchableOpacity onPress={() => setShowNoteModal(false)}>
+              <Ionicons name="close" size={24} color={COLORS.text} />
+            </TouchableOpacity>
+          </View>
+          
+          <TextInput
+            style={styles.noteInput}
+            placeholder="Scrivi i tuoi appunti..."
+            placeholderTextColor={COLORS.textMuted}
+            multiline
+            value={noteText}
+            onChangeText={setNoteText}
+          />
+          
+          <TouchableOpacity style={styles.saveNoteBtn} onPress={saveNote}>
+            <Text style={styles.saveNoteBtnText}>Salva Nota</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </Modal>
+  );
+
+  // AI Explain Modal
+  const renderAIModal = () => (
+    <Modal
+      visible={showAIModal}
+      animationType="slide"
+      transparent
+      onRequestClose={() => { setShowAIModal(false); setAiAnswer(''); }}
+    >
+      <View style={styles.modalOverlay}>
+        <View style={styles.aiModal}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>AI Spiegazione</Text>
+            <TouchableOpacity onPress={() => { setShowAIModal(false); setAiAnswer(''); }}>
+              <Ionicons name="close" size={24} color={COLORS.text} />
+            </TouchableOpacity>
+          </View>
+          
+          {selectedVerse && (
+            <View style={styles.aiVerseBox}>
+              <Text style={styles.aiVerseRef}>{selectedBook?.name} {selectedChapter}:{selectedVerse.verse}</Text>
+              <Text style={styles.aiVerseText}>{selectedVerse.text}</Text>
+            </View>
+          )}
+          
+          <TextInput
+            style={styles.aiQuestionInput}
+            placeholder="Fai una domanda specifica (opzionale)..."
+            placeholderTextColor={COLORS.textMuted}
+            value={aiQuestion}
+            onChangeText={setAiQuestion}
+          />
+          
+          <TouchableOpacity 
+            style={[styles.aiAskBtn, loadingAI && styles.btnDisabled]} 
+            onPress={askAIAboutVerse}
+            disabled={loadingAI}
+          >
+            {loadingAI ? (
+              <ActivityIndicator color="#fff" />
+            ) : (
+              <Text style={styles.aiAskBtnText}>Chiedi all'AI</Text>
+            )}
+          </TouchableOpacity>
+          
+          {aiAnswer && (
+            <ScrollView style={styles.aiAnswerScroll}>
+              <Text style={styles.aiAnswerText}>{aiAnswer}</Text>
+            </ScrollView>
+          )}
+        </View>
+      </View>
+    </Modal>
   );
 
   // Edition Selector Modal
