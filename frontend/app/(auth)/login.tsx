@@ -96,7 +96,7 @@ export default function LoginScreen() {
             <View style={styles.logoContainer}>
               <Ionicons name="book" size={48} color={COLORS.primary} />
             </View>
-            <Text style={styles.title}>Cibo Spirituale</Text>
+            <Text style={styles.title}>Amen!</Text>
             <Text style={styles.subtitle}>Il tuo compagno spirituale quotidiano</Text>
           </View>
 

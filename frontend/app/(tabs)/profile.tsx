@@ -158,7 +158,7 @@ export default function ProfileScreen() {
             <MenuItem
               icon="heart"
               title="Fai una Donazione"
-              subtitle="Supporta Cibo Spirituale"
+              subtitle="Supporta Amen!"
               onPress={() => router.push('/donate')}
               color={COLORS.error}
             />
@@ -192,7 +192,7 @@ export default function ProfileScreen() {
           </View>
         </View>
 
-        <Text style={styles.version}>Cibo Spirituale v1.0.0</Text>
+        <Text style={styles.version}>Amen! v1.0.0</Text>
       </ScrollView>
     </SafeAreaView>
   );
