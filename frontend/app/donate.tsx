@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,253 +7,267 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
-  ActivityIndicator,
   Linking,
+  ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import * as Clipboard from 'expo-clipboard';
 import { api } from '../src/utils/api';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../src/utils/theme';
 
-const DONATION_AMOUNTS = [5, 10, 20, 50, 100];
+interface DonationConfig {
+  paypal_email: string;
+  paypal_link: string;
+  iban: string;
+  intestatario: string;
+  banca: string;
+}
 
 export default function DonateScreen() {
-  const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
-  const [customAmount, setCustomAmount] = useState('');
+  const [config, setConfig] = useState<DonationConfig | null>(null);
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
+  const [amount, setAmount] = useState('');
   const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
-  const getAmount = () => {
-    if (customAmount) return parseFloat(customAmount);
-    return selectedAmount || 0;
-  };
+  useEffect(() => {
+    loadConfig();
+  }, []);
 
-  const handleDonate = async () => {
-    const amount = getAmount();
-    if (!amount || amount <= 0) {
-      Alert.alert('Errore', 'Seleziona o inserisci un importo');
-      return;
-    }
-    if (!selectedMethod) {
-      Alert.alert('Errore', 'Seleziona un metodo di pagamento');
-      return;
-    }
-
-    setLoading(true);
+  const loadConfig = async () => {
     try {
-      const donation = await api.createDonation(amount, selectedMethod, message || undefined);
-      setResult(donation);
-    } catch (error: any) {
-      Alert.alert('Errore', error.message);
+      const data = await api.getDonationConfig();
+      setConfig(data);
+    } catch (error) {
+      console.error('Error loading config:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const handlePayPalRedirect = () => {
-    if (result?.paypal_link) {
-      Linking.openURL(result.paypal_link);
+  const copyToClipboard = async (text: string, label: string) => {
+    await Clipboard.setStringAsync(text);
+    Alert.alert('Copiato!', `${label} copiato negli appunti`);
+  };
+
+  const handlePayPal = () => {
+    if (config?.paypal_link) {
+      Linking.openURL(config.paypal_link);
     }
   };
 
-  if (result) {
+  const handleSubmitDonation = async () => {
+    if (!amount || !selectedMethod) {
+      Alert.alert('Errore', 'Inserisci un importo e seleziona un metodo');
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const donation = await api.createDonation(
+        parseFloat(amount),
+        selectedMethod,
+        message || undefined
+      );
+
+      if (selectedMethod === 'paypal') {
+        handlePayPal();
+      }
+
+      Alert.alert(
+        'Grazie!',
+        selectedMethod === 'bonifico'
+          ? 'Completa il bonifico con i dati forniti. Dio ti benedica!'
+          : 'La tua generosità sostiene il ministero. Dio ti benedica!'
+      );
+
+      setAmount('');
+      setMessage('');
+      setSelectedMethod(null);
+    } catch (error) {
+      Alert.alert('Errore', 'Impossibile registrare la donazione');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (loading) {
     return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-            <Ionicons name="arrow-back" size={24} color={COLORS.text} />
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Donazione</Text>
-          <View style={{ width: 40 }} />
-        </View>
-
-        <View style={styles.resultContainer}>
-          <View style={styles.resultIcon}>
-            <Ionicons 
-              name={result.status === 'completed' ? 'checkmark-circle' : 'time'} 
-              size={64} 
-              color={result.status === 'completed' ? COLORS.success : COLORS.accent} 
-            />
-          </View>
-          <Text style={styles.resultTitle}>
-            {result.status === 'completed' ? 'Grazie!' : 'Donazione in attesa'}
-          </Text>
-          <Text style={styles.resultAmount}>€{result.amount.toFixed(2)}</Text>
-          
-          {result.method === 'paypal' && (
-            <TouchableOpacity style={styles.paypalButton} onPress={handlePayPalRedirect}>
-              <Ionicons name="logo-paypal" size={24} color="#003087" />
-              <Text style={styles.paypalButtonText}>Completa con PayPal</Text>
-            </TouchableOpacity>
-          )}
-
-          {result.method === 'bonifico' && result.bank_details && (
-            <View style={styles.bankDetails}>
-              <Text style={styles.bankTitle}>Dettagli Bancari</Text>
-              <View style={styles.bankRow}>
-                <Text style={styles.bankLabel}>IBAN:</Text>
-                <Text style={styles.bankValue}>{result.bank_details.iban}</Text>
-              </View>
-              <View style={styles.bankRow}>
-                <Text style={styles.bankLabel}>Intestatario:</Text>
-                <Text style={styles.bankValue}>{result.bank_details.intestatario}</Text>
-              </View>
-              <View style={styles.bankRow}>
-                <Text style={styles.bankLabel}>Causale:</Text>
-                <Text style={styles.bankValue}>{result.bank_details.causale}</Text>
-              </View>
-            </View>
-          )}
-
-          {result.method === 'mock' && (
-            <Text style={styles.mockNote}>Questa è una donazione di prova (MOCK)</Text>
-          )}
-
-          <TouchableOpacity
-            style={styles.doneButton}
-            onPress={() => router.back()}
-          >
-            <Text style={styles.doneButtonText}>Torna all'App</Text>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={COLORS.primary} />
+      </View>
     );
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={24} color={COLORS.text} />
+        <TouchableOpacity onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Fai una Donazione</Text>
-        <View style={{ width: 40 }} />
+        <Text style={styles.title}>Sostieni il Ministero</Text>
+        <View style={{ width: 28 }} />
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* Intro */}
-        <View style={styles.introCard}>
+        <View style={styles.heroCard}>
           <Ionicons name="heart" size={40} color={COLORS.error} />
-          <Text style={styles.introTitle}>Supporta il Ministero</Text>
-          <Text style={styles.introText}>
-            La tua donazione aiuta a mantenere Cibo Spirituale gratuito e accessibile a tutti.
+          <Text style={styles.heroTitle}>Offerta Libera</Text>
+          <Text style={styles.heroText}>
+            La tua generosità permette di mantenere Cibo Spirituale gratuito e di
+            sviluppare nuove funzionalità per la crescita spirituale di tutti.
           </Text>
         </View>
 
-        {/* Amount Selection */}
         <Text style={styles.sectionTitle}>Seleziona Importo</Text>
-        <View style={styles.amountsContainer}>
-          {DONATION_AMOUNTS.map((amount) => (
+        <View style={styles.amountButtons}>
+          {['5', '10', '20', '50', '100'].map((val) => (
             <TouchableOpacity
-              key={amount}
+              key={val}
               style={[
                 styles.amountButton,
-                selectedAmount === amount && styles.amountButtonSelected,
+                amount === val && styles.amountButtonSelected,
               ]}
-              onPress={() => {
-                setSelectedAmount(amount);
-                setCustomAmount('');
-              }}
+              onPress={() => setAmount(val)}
             >
               <Text
                 style={[
-                  styles.amountText,
-                  selectedAmount === amount && styles.amountTextSelected,
+                  styles.amountButtonText,
+                  amount === val && styles.amountButtonTextSelected,
                 ]}
               >
-                €{amount}
+                €{val}
               </Text>
             </TouchableOpacity>
           ))}
         </View>
 
-        <View style={styles.customAmountContainer}>
-          <Text style={styles.customLabel}>O inserisci un importo personalizzato:</Text>
-          <View style={styles.customInputContainer}>
-            <Text style={styles.currencySymbol}>€</Text>
-            <TextInput
-              style={styles.customInput}
-              placeholder="0.00"
-              placeholderTextColor={COLORS.textMuted}
-              value={customAmount}
-              onChangeText={(text) => {
-                setCustomAmount(text);
-                setSelectedAmount(null);
-              }}
-              keyboardType="decimal-pad"
-            />
-          </View>
-        </View>
-
-        {/* Payment Method */}
-        <Text style={styles.sectionTitle}>Metodo di Pagamento</Text>
-        <View style={styles.methodsContainer}>
-          <TouchableOpacity
-            style={[
-              styles.methodButton,
-              selectedMethod === 'paypal' && styles.methodButtonSelected,
-            ]}
-            onPress={() => setSelectedMethod('paypal')}
-          >
-            <Ionicons name="logo-paypal" size={24} color="#003087" />
-            <Text style={styles.methodText}>PayPal</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[
-              styles.methodButton,
-              selectedMethod === 'bonifico' && styles.methodButtonSelected,
-            ]}
-            onPress={() => setSelectedMethod('bonifico')}
-          >
-            <Ionicons name="card-outline" size={24} color={COLORS.primary} />
-            <Text style={styles.methodText}>Bonifico</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[
-              styles.methodButton,
-              selectedMethod === 'mock' && styles.methodButtonSelected,
-            ]}
-            onPress={() => setSelectedMethod('mock')}
-          >
-            <Ionicons name="flash-outline" size={24} color={COLORS.accent} />
-            <Text style={styles.methodText}>Test (Mock)</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Message */}
-        <Text style={styles.sectionTitle}>Messaggio (opzionale)</Text>
         <TextInput
-          style={styles.messageInput}
-          placeholder="Aggiungi un messaggio alla tua donazione..."
+          style={styles.input}
+          placeholder="Oppure inserisci un importo"
           placeholderTextColor={COLORS.textMuted}
-          value={message}
-          onChangeText={setMessage}
-          multiline
-          numberOfLines={3}
+          keyboardType="numeric"
+          value={amount}
+          onChangeText={setAmount}
         />
 
-        {/* Submit Button */}
+        <Text style={styles.sectionTitle}>Metodo di Pagamento</Text>
+
         <TouchableOpacity
-          style={[styles.donateButton, loading && styles.donateButtonDisabled]}
-          onPress={handleDonate}
-          disabled={loading}
+          style={[
+            styles.methodCard,
+            selectedMethod === 'paypal' && styles.methodCardSelected,
+          ]}
+          onPress={() => setSelectedMethod('paypal')}
         >
-          {loading ? (
-            <ActivityIndicator color="#fff" />
-          ) : (
-            <>
-              <Ionicons name="heart" size={20} color="#fff" />
-              <Text style={styles.donateButtonText}>
-                Dona €{getAmount() > 0 ? getAmount().toFixed(2) : '0.00'}
-              </Text>
-            </>
+          <View style={[styles.methodIcon, { backgroundColor: '#0070BA15' }]}>
+            <Ionicons name="logo-paypal" size={28} color="#0070BA" />
+          </View>
+          <View style={styles.methodContent}>
+            <Text style={styles.methodTitle}>PayPal</Text>
+            <Text style={styles.methodSubtitle}>{config?.paypal_email}</Text>
+          </View>
+          {selectedMethod === 'paypal' && (
+            <Ionicons name="checkmark-circle" size={24} color={COLORS.primary} />
           )}
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[
+            styles.methodCard,
+            selectedMethod === 'bonifico' && styles.methodCardSelected,
+          ]}
+          onPress={() => setSelectedMethod('bonifico')}
+        >
+          <View style={[styles.methodIcon, { backgroundColor: COLORS.primary + '15' }]}>
+            <Ionicons name="business" size={28} color={COLORS.primary} />
+          </View>
+          <View style={styles.methodContent}>
+            <Text style={styles.methodTitle}>Bonifico Bancario</Text>
+            <Text style={styles.methodSubtitle}>{config?.banca}</Text>
+          </View>
+          {selectedMethod === 'bonifico' && (
+            <Ionicons name="checkmark-circle" size={24} color={COLORS.primary} />
+          )}
+        </TouchableOpacity>
+
+        {selectedMethod === 'bonifico' && config && (
+          <View style={styles.bankDetails}>
+            <Text style={styles.bankLabel}>Dati Bancari:</Text>
+
+            <View style={styles.bankRow}>
+              <View style={styles.bankInfo}>
+                <Text style={styles.bankFieldLabel}>IBAN</Text>
+                <Text style={styles.bankFieldValue}>{config.iban}</Text>
+              </View>
+              <TouchableOpacity
+                style={styles.copyButton}
+                onPress={() => copyToClipboard(config.iban, 'IBAN')}
+              >
+                <Ionicons name="copy" size={20} color={COLORS.primary} />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.bankRow}>
+              <View style={styles.bankInfo}>
+                <Text style={styles.bankFieldLabel}>Intestatario</Text>
+                <Text style={styles.bankFieldValue}>{config.intestatario}</Text>
+              </View>
+              <TouchableOpacity
+                style={styles.copyButton}
+                onPress={() => copyToClipboard(config.intestatario, 'Intestatario')}
+              >
+                <Ionicons name="copy" size={20} color={COLORS.primary} />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.bankRow}>
+              <View style={styles.bankInfo}>
+                <Text style={styles.bankFieldLabel}>Banca</Text>
+                <Text style={styles.bankFieldValue}>{config.banca}</Text>
+              </View>
+            </View>
+
+            <Text style={styles.causaleText}>
+              Causale: Offerta libera Cibo Spirituale
+            </Text>
+          </View>
+        )}
+
+        <TextInput
+          style={[styles.input, styles.messageInput]}
+          placeholder="Messaggio (opzionale)"
+          placeholderTextColor={COLORS.textMuted}
+          multiline
+          numberOfLines={3}
+          value={message}
+          onChangeText={setMessage}
+        />
+
+        <TouchableOpacity
+          style={[
+            styles.submitButton,
+            (!amount || !selectedMethod || submitting) && styles.submitButtonDisabled,
+          ]}
+          onPress={handleSubmitDonation}
+          disabled={!amount || !selectedMethod || submitting}
+        >
+          {submitting ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={styles.submitButtonText}>
+              {selectedMethod === 'paypal' ? 'Vai a PayPal' : 'Registra Donazione'}
+            </Text>
+          )}
+        </TouchableOpacity>
+
+        <Text style={styles.bibleVerse}>
+          "Ciascuno dia come ha deliberato nel suo cuore, non di malavoglia né per
+          forza, perché Dio ama un donatore allegro." - 2 Corinzi 9:7
+        </Text>
       </ScrollView>
     </SafeAreaView>
   );
@@ -264,28 +278,29 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.background,
+  },
   header: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: SPACING.md,
-    paddingVertical: SPACING.sm,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.border,
+    alignItems: 'center',
+    padding: SPACING.md,
+    backgroundColor: COLORS.card,
   },
-  backButton: {
-    padding: SPACING.sm,
-  },
-  headerTitle: {
-    fontSize: 18,
+  title: {
+    fontSize: 20,
     fontWeight: '700',
     color: COLORS.text,
   },
   scrollContent: {
     padding: SPACING.md,
-    paddingBottom: SPACING.xxl,
+    paddingBottom: 100,
   },
-  introCard: {
+  heroCard: {
     backgroundColor: COLORS.card,
     borderRadius: BORDER_RADIUS.lg,
     padding: SPACING.lg,
@@ -293,17 +308,17 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.lg,
     ...SHADOWS.small,
   },
-  introTitle: {
-    fontSize: 20,
+  heroTitle: {
+    fontSize: 22,
     fontWeight: '700',
     color: COLORS.text,
     marginTop: SPACING.md,
-    marginBottom: SPACING.sm,
   },
-  introText: {
-    fontSize: 14,
+  heroText: {
+    fontSize: 15,
     color: COLORS.textLight,
     textAlign: 'center',
+    marginTop: SPACING.sm,
     lineHeight: 22,
   },
   sectionTitle: {
@@ -311,195 +326,143 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: COLORS.text,
     marginBottom: SPACING.md,
-    marginTop: SPACING.md,
   },
-  amountsContainer: {
+  amountButtons: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: SPACING.sm,
+    marginBottom: SPACING.md,
   },
   amountButton: {
+    paddingVertical: SPACING.sm,
     paddingHorizontal: SPACING.lg,
-    paddingVertical: SPACING.md,
-    borderRadius: BORDER_RADIUS.md,
+    borderRadius: BORDER_RADIUS.full,
     backgroundColor: COLORS.card,
     borderWidth: 2,
     borderColor: COLORS.border,
   },
   amountButtonSelected: {
+    backgroundColor: COLORS.primary,
     borderColor: COLORS.primary,
-    backgroundColor: COLORS.primary + '10',
   },
-  amountText: {
+  amountButtonText: {
     fontSize: 16,
     fontWeight: '600',
     color: COLORS.text,
   },
-  amountTextSelected: {
-    color: COLORS.primary,
+  amountButtonTextSelected: {
+    color: '#fff',
   },
-  customAmountContainer: {
-    marginTop: SPACING.md,
-  },
-  customLabel: {
-    fontSize: 14,
-    color: COLORS.textLight,
-    marginBottom: SPACING.sm,
-  },
-  customInputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  input: {
     backgroundColor: COLORS.card,
-    borderRadius: BORDER_RADIUS.md,
-    paddingHorizontal: SPACING.md,
-    borderWidth: 1,
-    borderColor: COLORS.border,
-  },
-  currencySymbol: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: COLORS.textLight,
-    marginRight: SPACING.sm,
-  },
-  customInput: {
-    flex: 1,
-    fontSize: 18,
-    color: COLORS.text,
-    paddingVertical: SPACING.md,
-  },
-  methodsContainer: {
-    flexDirection: 'row',
-    gap: SPACING.sm,
-  },
-  methodButton: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
+    borderRadius: BORDER_RADIUS.lg,
     padding: SPACING.md,
-    borderRadius: BORDER_RADIUS.md,
-    backgroundColor: COLORS.card,
-    borderWidth: 2,
-    borderColor: COLORS.border,
-    gap: SPACING.xs,
-  },
-  methodButtonSelected: {
-    borderColor: COLORS.primary,
-    backgroundColor: COLORS.primary + '10',
-  },
-  methodText: {
-    fontSize: 13,
-    fontWeight: '500',
+    fontSize: 16,
     color: COLORS.text,
+    marginBottom: SPACING.lg,
   },
   messageInput: {
-    backgroundColor: COLORS.card,
-    borderRadius: BORDER_RADIUS.md,
-    padding: SPACING.md,
-    fontSize: 15,
-    color: COLORS.text,
-    borderWidth: 1,
-    borderColor: COLORS.border,
-    minHeight: 80,
+    height: 80,
     textAlignVertical: 'top',
   },
-  donateButton: {
+  methodCard: {
     flexDirection: 'row',
-    backgroundColor: COLORS.primary,
-    borderRadius: BORDER_RADIUS.md,
+    alignItems: 'center',
+    backgroundColor: COLORS.card,
+    borderRadius: BORDER_RADIUS.lg,
     padding: SPACING.md,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: SPACING.xl,
-    gap: SPACING.sm,
-  },
-  donateButtonDisabled: {
-    opacity: 0.7,
-  },
-  donateButtonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  resultContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: SPACING.xl,
-  },
-  resultIcon: {
-    marginBottom: SPACING.md,
-  },
-  resultTitle: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: COLORS.text,
     marginBottom: SPACING.sm,
+    borderWidth: 2,
+    borderColor: COLORS.border,
   },
-  resultAmount: {
-    fontSize: 36,
-    fontWeight: '700',
-    color: COLORS.primary,
-    marginBottom: SPACING.lg,
+  methodCardSelected: {
+    borderColor: COLORS.primary,
+    backgroundColor: COLORS.primary + '08',
   },
-  paypalButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFC439',
-    paddingHorizontal: SPACING.xl,
-    paddingVertical: SPACING.md,
+  methodIcon: {
+    width: 50,
+    height: 50,
     borderRadius: BORDER_RADIUS.md,
-    gap: SPACING.sm,
-    marginBottom: SPACING.lg,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: SPACING.md,
   },
-  paypalButtonText: {
+  methodContent: {
+    flex: 1,
+  },
+  methodTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#003087',
+    color: COLORS.text,
+  },
+  methodSubtitle: {
+    fontSize: 13,
+    color: COLORS.textLight,
+    marginTop: 2,
   },
   bankDetails: {
     backgroundColor: COLORS.card,
     borderRadius: BORDER_RADIUS.lg,
-    padding: SPACING.lg,
-    width: '100%',
-    ...SHADOWS.small,
+    padding: SPACING.md,
+    marginBottom: SPACING.lg,
+    borderWidth: 1,
+    borderColor: COLORS.primary + '30',
   },
-  bankTitle: {
-    fontSize: 16,
+  bankLabel: {
+    fontSize: 14,
     fontWeight: '600',
-    color: COLORS.text,
+    color: COLORS.primary,
     marginBottom: SPACING.md,
   },
   bankRow: {
     flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: SPACING.sm,
   },
-  bankLabel: {
-    fontSize: 14,
-    color: COLORS.textLight,
-    width: 100,
-  },
-  bankValue: {
+  bankInfo: {
     flex: 1,
+  },
+  bankFieldLabel: {
+    fontSize: 12,
+    color: COLORS.textMuted,
+  },
+  bankFieldValue: {
     fontSize: 14,
-    color: COLORS.text,
     fontWeight: '500',
+    color: COLORS.text,
+    marginTop: 2,
   },
-  mockNote: {
-    fontSize: 14,
-    color: COLORS.accent,
+  copyButton: {
+    padding: SPACING.sm,
+  },
+  causaleText: {
+    fontSize: 13,
     fontStyle: 'italic',
-    marginBottom: SPACING.lg,
+    color: COLORS.textLight,
+    marginTop: SPACING.sm,
   },
-  doneButton: {
+  submitButton: {
     backgroundColor: COLORS.primary,
-    paddingHorizontal: SPACING.xl,
-    paddingVertical: SPACING.md,
-    borderRadius: BORDER_RADIUS.md,
-    marginTop: SPACING.lg,
+    borderRadius: BORDER_RADIUS.lg,
+    padding: SPACING.md,
+    alignItems: 'center',
+    marginTop: SPACING.md,
   },
-  doneButtonText: {
+  submitButtonDisabled: {
+    opacity: 0.5,
+  },
+  submitButtonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: '600',
+  },
+  bibleVerse: {
+    fontSize: 14,
+    fontStyle: 'italic',
+    color: COLORS.textLight,
+    textAlign: 'center',
+    marginTop: SPACING.xl,
+    paddingHorizontal: SPACING.md,
+    lineHeight: 22,
   },
 });
