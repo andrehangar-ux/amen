@@ -774,6 +774,9 @@ export default function BibleScreen() {
       {/* Modals */}
       {renderEditionSelector()}
       {renderLanguageModal()}
+      {renderStudyToolsModal()}
+      {renderNoteModal()}
+      {renderAIModal()}
     </SafeAreaView>
   );
 }
