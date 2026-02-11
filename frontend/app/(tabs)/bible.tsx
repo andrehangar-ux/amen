@@ -8,10 +8,13 @@ import {
   FlatList,
   ActivityIndicator,
   Modal,
+  TextInput,
+  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
+import { router } from 'expo-router';
 import { api } from '../../src/utils/api';
 import { useLanguageStore } from '../../src/store/languageStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
@@ -34,6 +37,23 @@ interface BibleEdition {
   description: string;
 }
 
+interface CrossRef {
+  ref: string;
+  text: string;
+}
+
+interface StudyData {
+  cross_references: Record<string, CrossRef[]>;
+  dictionary_links: Record<string, string[]>;
+  study_context: {
+    historical_context: string;
+    literary_structure: string;
+    key_themes: string[];
+    application: string;
+  } | null;
+  user_notes: any[];
+}
+
 export default function BibleScreen() {
   const { currentLanguage, languages, setLanguage } = useLanguageStore();
   const [books, setBooks] = useState<Book[]>([]);
@@ -50,6 +70,18 @@ export default function BibleScreen() {
   const [selectedEdition, setSelectedEdition] = useState<string>('nuova_diodati');
   const [showEditionSelector, setShowEditionSelector] = useState(false);
   const [showLanguageModal, setShowLanguageModal] = useState(false);
+
+  // Study Tools State
+  const [showStudyTools, setShowStudyTools] = useState(false);
+  const [studyData, setStudyData] = useState<StudyData | null>(null);
+  const [loadingStudy, setLoadingStudy] = useState(false);
+  const [selectedVerse, setSelectedVerse] = useState<Verse | null>(null);
+  const [showNoteModal, setShowNoteModal] = useState(false);
+  const [noteText, setNoteText] = useState('');
+  const [showAIModal, setShowAIModal] = useState(false);
+  const [aiQuestion, setAiQuestion] = useState('');
+  const [aiAnswer, setAiAnswer] = useState('');
+  const [loadingAI, setLoadingAI] = useState(false);
 
   // Load editions
   useEffect(() => {
