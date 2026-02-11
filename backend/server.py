@@ -7,7 +7,7 @@ import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import List, Optional, Dict
 import uuid
 from datetime import datetime, timezone, timedelta
 import httpx
@@ -34,6 +34,16 @@ api_router = APIRouter(prefix="/api")
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# ==================== SUPPORTED LANGUAGES ====================
+SUPPORTED_LANGUAGES = {
+    "it": {"name": "Italiano", "flag": "🇮🇹", "tts_code": "it-IT"},
+    "es": {"name": "Español", "flag": "🇪🇸", "tts_code": "es-ES"},
+    "en": {"name": "English", "flag": "🇬🇧", "tts_code": "en-US"},
+    "pt": {"name": "Português", "flag": "🇧🇷", "tts_code": "pt-BR"},
+    "fr": {"name": "Français", "flag": "🇫🇷", "tts_code": "fr-FR"},
+    "de": {"name": "Deutsch", "flag": "🇩🇪", "tts_code": "de-DE"},
+}
+
 # ==================== MODELS ====================
 
 class User(BaseModel):
@@ -43,6 +53,9 @@ class User(BaseModel):
     picture: Optional[str] = None
     preferred_bible: str = "nuova_diodati"
     language: str = "it"
+    country: Optional[str] = None
+    bio: Optional[str] = None
+    is_public: bool = False
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class UserSession(BaseModel):
@@ -62,6 +75,8 @@ class RegisterRequest(BaseModel):
     email: str
     password: str
     name: str
+    language: str = "it"
+    country: Optional[str] = None
 
 class LoginRequest(BaseModel):
     email: str
@@ -72,12 +87,14 @@ class JournalEntry(BaseModel):
     user_id: str
     content: str
     mood: str
+    language: str = "it"
     ai_insight: Optional[str] = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class JournalCreate(BaseModel):
     content: str
     mood: str
+    language: str = "it"
 
 class Bookmark(BaseModel):
     bookmark_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -101,13 +118,14 @@ class BookmarkCreate(BaseModel):
 class ChatMessage(BaseModel):
     message_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     user_id: str
-    role: str  # user or assistant
+    role: str
     content: str
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class ChatRequest(BaseModel):
     message: str
     mood: Optional[str] = None
+    language: str = "it"
 
 class MoodCheckIn(BaseModel):
     checkin_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -120,6 +138,7 @@ class MoodCheckIn(BaseModel):
 
 class MoodRequest(BaseModel):
     mood: str
+    language: str = "it"
 
 class Progress(BaseModel):
     user_id: str
@@ -131,16 +150,36 @@ class Progress(BaseModel):
 
 class DonationRequest(BaseModel):
     amount: float
-    method: str  # paypal, bonifico, mock
+    method: str
     message: Optional[str] = None
+
+class TranslateRequest(BaseModel):
+    text: str
+    source_lang: str
+    target_lang: str
+
+class CommunityMessage(BaseModel):
+    message_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    user_name: str
+    user_country: Optional[str] = None
+    content: str
+    original_language: str
+    translations: Dict[str, str] = {}
+    message_type: str = "text"  # text, audio, prayer_request
+    likes: int = 0
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class CommunityMessageCreate(BaseModel):
+    content: str
+    language: str = "it"
+    message_type: str = "text"
 
 # ==================== AUTH HELPERS ====================
 
 async def get_current_user(request: Request) -> Optional[User]:
-    # Check cookie first
     session_token = request.cookies.get("session_token")
     
-    # Fallback to Authorization header
     if not session_token:
         auth_header = request.headers.get("Authorization")
         if auth_header and auth_header.startswith("Bearer "):
@@ -153,7 +192,6 @@ async def get_current_user(request: Request) -> Optional[User]:
     if not session:
         return None
     
-    # Check expiry with timezone awareness
     expires_at = session["expires_at"]
     if expires_at.tzinfo is None:
         expires_at = expires_at.replace(tzinfo=timezone.utc)
@@ -171,20 +209,38 @@ async def require_auth(request: Request) -> User:
         raise HTTPException(status_code=401, detail="Non autenticato")
     return user
 
+# ==================== TRANSLATION HELPER ====================
+
+async def translate_text(text: str, source_lang: str, target_lang: str) -> str:
+    """Translate text using AI"""
+    if source_lang == target_lang:
+        return text
+    
+    try:
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=f"translate_{uuid.uuid4().hex[:8]}",
+            system_message=f"You are a translator. Translate the following text from {SUPPORTED_LANGUAGES.get(source_lang, {}).get('name', source_lang)} to {SUPPORTED_LANGUAGES.get(target_lang, {}).get('name', target_lang)}. Only return the translated text, nothing else."
+        ).with_model("openai", "gpt-4o")
+        
+        response = await chat.send_message(UserMessage(text=text))
+        return response.strip()
+    except Exception as e:
+        logger.error(f"Translation error: {e}")
+        return text
+
 # ==================== AUTH ENDPOINTS ====================
 
 @api_router.post("/auth/google-callback")
 async def google_callback(request: Request, response: Response):
-    """Exchange session_id for user data and create session"""
     body = await request.json()
     session_id = body.get("session_id")
     
     if not session_id:
         raise HTTPException(status_code=400, detail="session_id mancante")
     
-    # Call Emergent Auth API
-    async with httpx.AsyncClient() as client:
-        auth_response = await client.get(
+    async with httpx.AsyncClient() as http_client:
+        auth_response = await http_client.get(
             "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data",
             headers={"X-Session-ID": session_id}
         )
@@ -195,12 +251,9 @@ async def google_callback(request: Request, response: Response):
         user_data = auth_response.json()
     
     session_data = SessionDataResponse(**user_data)
-    
-    # Check if user exists
     existing_user = await db.users.find_one({"email": session_data.email}, {"_id": 0})
     
     if not existing_user:
-        # Create new user
         new_user_id = f"user_{uuid.uuid4().hex[:12]}"
         new_user = {
             "user_id": new_user_id,
@@ -209,6 +262,9 @@ async def google_callback(request: Request, response: Response):
             "picture": session_data.picture,
             "preferred_bible": "nuova_diodati",
             "language": "it",
+            "country": None,
+            "bio": None,
+            "is_public": False,
             "created_at": datetime.now(timezone.utc)
         }
         await db.users.insert_one(new_user)
@@ -216,7 +272,6 @@ async def google_callback(request: Request, response: Response):
     else:
         user_id = existing_user["user_id"]
     
-    # Create session
     expires_at = datetime.now(timezone.utc) + timedelta(days=7)
     await db.user_sessions.insert_one({
         "user_id": user_id,
@@ -225,7 +280,6 @@ async def google_callback(request: Request, response: Response):
         "created_at": datetime.now(timezone.utc)
     })
     
-    # Set cookie
     response.set_cookie(
         key="session_token",
         value=session_data.session_token,
@@ -241,13 +295,10 @@ async def google_callback(request: Request, response: Response):
 
 @api_router.post("/auth/register")
 async def register(data: RegisterRequest, response: Response):
-    """Register with email/password"""
-    # Check if user exists
     existing = await db.users.find_one({"email": data.email}, {"_id": 0})
     if existing:
         raise HTTPException(status_code=400, detail="Email già registrata")
     
-    # Create user
     user_id = f"user_{uuid.uuid4().hex[:12]}"
     import hashlib
     password_hash = hashlib.sha256(data.password.encode()).hexdigest()
@@ -259,12 +310,14 @@ async def register(data: RegisterRequest, response: Response):
         "password_hash": password_hash,
         "picture": None,
         "preferred_bible": "nuova_diodati",
-        "language": "it",
+        "language": data.language,
+        "country": data.country,
+        "bio": None,
+        "is_public": False,
         "created_at": datetime.now(timezone.utc)
     }
     await db.users.insert_one(user)
     
-    # Create session
     session_token = f"session_{uuid.uuid4().hex}"
     expires_at = datetime.now(timezone.utc) + timedelta(days=7)
     await db.user_sessions.insert_one({
@@ -290,7 +343,6 @@ async def register(data: RegisterRequest, response: Response):
 
 @api_router.post("/auth/login")
 async def login(data: LoginRequest, response: Response):
-    """Login with email/password"""
     import hashlib
     password_hash = hashlib.sha256(data.password.encode()).hexdigest()
     
@@ -302,7 +354,6 @@ async def login(data: LoginRequest, response: Response):
     if not user:
         raise HTTPException(status_code=401, detail="Credenziali non valide")
     
-    # Create session
     session_token = f"session_{uuid.uuid4().hex}"
     expires_at = datetime.now(timezone.utc) + timedelta(days=7)
     await db.user_sessions.insert_one({
@@ -327,12 +378,10 @@ async def login(data: LoginRequest, response: Response):
 
 @api_router.get("/auth/me")
 async def get_me(user: User = Depends(require_auth)):
-    """Get current user"""
     return user.model_dump()
 
 @api_router.post("/auth/logout")
 async def logout(request: Request, response: Response):
-    """Logout user"""
     session_token = request.cookies.get("session_token")
     if session_token:
         await db.user_sessions.delete_one({"session_token": session_token})
@@ -340,10 +389,30 @@ async def logout(request: Request, response: Response):
     response.delete_cookie(key="session_token", path="/")
     return {"message": "Disconnesso con successo"}
 
-# ==================== BIBLE ENDPOINTS ====================
+# ==================== LANGUAGES ENDPOINT ====================
 
-# Bible data - Italian Nuova Diodati structure
-BIBLE_BOOKS = {
+@api_router.get("/languages")
+async def get_languages():
+    """Get all supported languages"""
+    return SUPPORTED_LANGUAGES
+
+# ==================== TRANSLATION ENDPOINT ====================
+
+@api_router.post("/translate")
+async def translate(data: TranslateRequest, user: User = Depends(require_auth)):
+    """Translate text between languages"""
+    translated = await translate_text(data.text, data.source_lang, data.target_lang)
+    return {
+        "original": data.text,
+        "translated": translated,
+        "source_lang": data.source_lang,
+        "target_lang": data.target_lang
+    }
+
+# ==================== MULTI-LANGUAGE BIBLE ====================
+
+# Bible books in multiple languages
+BIBLE_BOOKS_MULTILANG = {
     "it": [
         {"name": "Genesi", "chapters": 50, "abbrev": "Gen"},
         {"name": "Esodo", "chapters": 40, "abbrev": "Es"},
@@ -357,33 +426,13 @@ BIBLE_BOOKS = {
         {"name": "2 Samuele", "chapters": 24, "abbrev": "2Sam"},
         {"name": "1 Re", "chapters": 22, "abbrev": "1Re"},
         {"name": "2 Re", "chapters": 25, "abbrev": "2Re"},
-        {"name": "1 Cronache", "chapters": 29, "abbrev": "1Cron"},
-        {"name": "2 Cronache", "chapters": 36, "abbrev": "2Cron"},
-        {"name": "Esdra", "chapters": 10, "abbrev": "Esd"},
-        {"name": "Neemia", "chapters": 13, "abbrev": "Nee"},
-        {"name": "Ester", "chapters": 10, "abbrev": "Est"},
-        {"name": "Giobbe", "chapters": 42, "abbrev": "Giob"},
         {"name": "Salmi", "chapters": 150, "abbrev": "Sal"},
         {"name": "Proverbi", "chapters": 31, "abbrev": "Prov"},
         {"name": "Ecclesiaste", "chapters": 12, "abbrev": "Eccl"},
-        {"name": "Cantico dei Cantici", "chapters": 8, "abbrev": "Cant"},
         {"name": "Isaia", "chapters": 66, "abbrev": "Is"},
         {"name": "Geremia", "chapters": 52, "abbrev": "Ger"},
-        {"name": "Lamentazioni", "chapters": 5, "abbrev": "Lam"},
         {"name": "Ezechiele", "chapters": 48, "abbrev": "Ez"},
         {"name": "Daniele", "chapters": 12, "abbrev": "Dan"},
-        {"name": "Osea", "chapters": 14, "abbrev": "Os"},
-        {"name": "Gioele", "chapters": 3, "abbrev": "Gioe"},
-        {"name": "Amos", "chapters": 9, "abbrev": "Am"},
-        {"name": "Abdia", "chapters": 1, "abbrev": "Abd"},
-        {"name": "Giona", "chapters": 4, "abbrev": "Gion"},
-        {"name": "Michea", "chapters": 7, "abbrev": "Mic"},
-        {"name": "Naum", "chapters": 3, "abbrev": "Nau"},
-        {"name": "Abacuc", "chapters": 3, "abbrev": "Abac"},
-        {"name": "Sofonia", "chapters": 3, "abbrev": "Sof"},
-        {"name": "Aggeo", "chapters": 2, "abbrev": "Agg"},
-        {"name": "Zaccaria", "chapters": 14, "abbrev": "Zacc"},
-        {"name": "Malachia", "chapters": 4, "abbrev": "Mal"},
         {"name": "Matteo", "chapters": 28, "abbrev": "Matt"},
         {"name": "Marco", "chapters": 16, "abbrev": "Mar"},
         {"name": "Luca", "chapters": 24, "abbrev": "Luc"},
@@ -396,134 +445,318 @@ BIBLE_BOOKS = {
         {"name": "Efesini", "chapters": 6, "abbrev": "Ef"},
         {"name": "Filippesi", "chapters": 4, "abbrev": "Fil"},
         {"name": "Colossesi", "chapters": 4, "abbrev": "Col"},
-        {"name": "1 Tessalonicesi", "chapters": 5, "abbrev": "1Tess"},
-        {"name": "2 Tessalonicesi", "chapters": 3, "abbrev": "2Tess"},
-        {"name": "1 Timoteo", "chapters": 6, "abbrev": "1Tim"},
-        {"name": "2 Timoteo", "chapters": 4, "abbrev": "2Tim"},
-        {"name": "Tito", "chapters": 3, "abbrev": "Tito"},
-        {"name": "Filemone", "chapters": 1, "abbrev": "Filem"},
         {"name": "Ebrei", "chapters": 13, "abbrev": "Ebr"},
         {"name": "Giacomo", "chapters": 5, "abbrev": "Giac"},
         {"name": "1 Pietro", "chapters": 5, "abbrev": "1Pt"},
         {"name": "2 Pietro", "chapters": 3, "abbrev": "2Pt"},
         {"name": "1 Giovanni", "chapters": 5, "abbrev": "1Giov"},
-        {"name": "2 Giovanni", "chapters": 1, "abbrev": "2Giov"},
-        {"name": "3 Giovanni", "chapters": 1, "abbrev": "3Giov"},
-        {"name": "Giuda", "chapters": 1, "abbrev": "Giuda"},
         {"name": "Apocalisse", "chapters": 22, "abbrev": "Apoc"},
-    ]
+    ],
+    "es": [
+        {"name": "Génesis", "chapters": 50, "abbrev": "Gén"},
+        {"name": "Éxodo", "chapters": 40, "abbrev": "Éx"},
+        {"name": "Levítico", "chapters": 27, "abbrev": "Lev"},
+        {"name": "Números", "chapters": 36, "abbrev": "Núm"},
+        {"name": "Deuteronomio", "chapters": 34, "abbrev": "Deut"},
+        {"name": "Josué", "chapters": 24, "abbrev": "Jos"},
+        {"name": "Jueces", "chapters": 21, "abbrev": "Jue"},
+        {"name": "Rut", "chapters": 4, "abbrev": "Rut"},
+        {"name": "1 Samuel", "chapters": 31, "abbrev": "1Sam"},
+        {"name": "2 Samuel", "chapters": 24, "abbrev": "2Sam"},
+        {"name": "1 Reyes", "chapters": 22, "abbrev": "1Re"},
+        {"name": "2 Reyes", "chapters": 25, "abbrev": "2Re"},
+        {"name": "Salmos", "chapters": 150, "abbrev": "Sal"},
+        {"name": "Proverbios", "chapters": 31, "abbrev": "Prov"},
+        {"name": "Eclesiastés", "chapters": 12, "abbrev": "Ecl"},
+        {"name": "Isaías", "chapters": 66, "abbrev": "Is"},
+        {"name": "Jeremías", "chapters": 52, "abbrev": "Jer"},
+        {"name": "Ezequiel", "chapters": 48, "abbrev": "Ez"},
+        {"name": "Daniel", "chapters": 12, "abbrev": "Dan"},
+        {"name": "Mateo", "chapters": 28, "abbrev": "Mat"},
+        {"name": "Marcos", "chapters": 16, "abbrev": "Mar"},
+        {"name": "Lucas", "chapters": 24, "abbrev": "Luc"},
+        {"name": "Juan", "chapters": 21, "abbrev": "Jn"},
+        {"name": "Hechos", "chapters": 28, "abbrev": "Hch"},
+        {"name": "Romanos", "chapters": 16, "abbrev": "Rom"},
+        {"name": "1 Corintios", "chapters": 16, "abbrev": "1Cor"},
+        {"name": "2 Corintios", "chapters": 13, "abbrev": "2Cor"},
+        {"name": "Gálatas", "chapters": 6, "abbrev": "Gál"},
+        {"name": "Efesios", "chapters": 6, "abbrev": "Ef"},
+        {"name": "Filipenses", "chapters": 4, "abbrev": "Fil"},
+        {"name": "Colosenses", "chapters": 4, "abbrev": "Col"},
+        {"name": "Hebreos", "chapters": 13, "abbrev": "Heb"},
+        {"name": "Santiago", "chapters": 5, "abbrev": "Stg"},
+        {"name": "1 Pedro", "chapters": 5, "abbrev": "1Pe"},
+        {"name": "2 Pedro", "chapters": 3, "abbrev": "2Pe"},
+        {"name": "1 Juan", "chapters": 5, "abbrev": "1Jn"},
+        {"name": "Apocalipsis", "chapters": 22, "abbrev": "Ap"},
+    ],
+    "en": [
+        {"name": "Genesis", "chapters": 50, "abbrev": "Gen"},
+        {"name": "Exodus", "chapters": 40, "abbrev": "Ex"},
+        {"name": "Leviticus", "chapters": 27, "abbrev": "Lev"},
+        {"name": "Numbers", "chapters": 36, "abbrev": "Num"},
+        {"name": "Deuteronomy", "chapters": 34, "abbrev": "Deut"},
+        {"name": "Joshua", "chapters": 24, "abbrev": "Josh"},
+        {"name": "Judges", "chapters": 21, "abbrev": "Judg"},
+        {"name": "Ruth", "chapters": 4, "abbrev": "Ruth"},
+        {"name": "1 Samuel", "chapters": 31, "abbrev": "1Sam"},
+        {"name": "2 Samuel", "chapters": 24, "abbrev": "2Sam"},
+        {"name": "1 Kings", "chapters": 22, "abbrev": "1Ki"},
+        {"name": "2 Kings", "chapters": 25, "abbrev": "2Ki"},
+        {"name": "Psalms", "chapters": 150, "abbrev": "Ps"},
+        {"name": "Proverbs", "chapters": 31, "abbrev": "Prov"},
+        {"name": "Ecclesiastes", "chapters": 12, "abbrev": "Eccl"},
+        {"name": "Isaiah", "chapters": 66, "abbrev": "Isa"},
+        {"name": "Jeremiah", "chapters": 52, "abbrev": "Jer"},
+        {"name": "Ezekiel", "chapters": 48, "abbrev": "Ezek"},
+        {"name": "Daniel", "chapters": 12, "abbrev": "Dan"},
+        {"name": "Matthew", "chapters": 28, "abbrev": "Matt"},
+        {"name": "Mark", "chapters": 16, "abbrev": "Mark"},
+        {"name": "Luke", "chapters": 24, "abbrev": "Luke"},
+        {"name": "John", "chapters": 21, "abbrev": "John"},
+        {"name": "Acts", "chapters": 28, "abbrev": "Acts"},
+        {"name": "Romans", "chapters": 16, "abbrev": "Rom"},
+        {"name": "1 Corinthians", "chapters": 16, "abbrev": "1Cor"},
+        {"name": "2 Corinthians", "chapters": 13, "abbrev": "2Cor"},
+        {"name": "Galatians", "chapters": 6, "abbrev": "Gal"},
+        {"name": "Ephesians", "chapters": 6, "abbrev": "Eph"},
+        {"name": "Philippians", "chapters": 4, "abbrev": "Phil"},
+        {"name": "Colossians", "chapters": 4, "abbrev": "Col"},
+        {"name": "Hebrews", "chapters": 13, "abbrev": "Heb"},
+        {"name": "James", "chapters": 5, "abbrev": "Jas"},
+        {"name": "1 Peter", "chapters": 5, "abbrev": "1Pet"},
+        {"name": "2 Peter", "chapters": 3, "abbrev": "2Pet"},
+        {"name": "1 John", "chapters": 5, "abbrev": "1John"},
+        {"name": "Revelation", "chapters": 22, "abbrev": "Rev"},
+    ],
+    "pt": [
+        {"name": "Gênesis", "chapters": 50, "abbrev": "Gn"},
+        {"name": "Êxodo", "chapters": 40, "abbrev": "Êx"},
+        {"name": "Levítico", "chapters": 27, "abbrev": "Lv"},
+        {"name": "Números", "chapters": 36, "abbrev": "Nm"},
+        {"name": "Deuteronômio", "chapters": 34, "abbrev": "Dt"},
+        {"name": "Josué", "chapters": 24, "abbrev": "Js"},
+        {"name": "Juízes", "chapters": 21, "abbrev": "Jz"},
+        {"name": "Rute", "chapters": 4, "abbrev": "Rt"},
+        {"name": "1 Samuel", "chapters": 31, "abbrev": "1Sm"},
+        {"name": "2 Samuel", "chapters": 24, "abbrev": "2Sm"},
+        {"name": "1 Reis", "chapters": 22, "abbrev": "1Rs"},
+        {"name": "2 Reis", "chapters": 25, "abbrev": "2Rs"},
+        {"name": "Salmos", "chapters": 150, "abbrev": "Sl"},
+        {"name": "Provérbios", "chapters": 31, "abbrev": "Pv"},
+        {"name": "Eclesiastes", "chapters": 12, "abbrev": "Ec"},
+        {"name": "Isaías", "chapters": 66, "abbrev": "Is"},
+        {"name": "Jeremias", "chapters": 52, "abbrev": "Jr"},
+        {"name": "Ezequiel", "chapters": 48, "abbrev": "Ez"},
+        {"name": "Daniel", "chapters": 12, "abbrev": "Dn"},
+        {"name": "Mateus", "chapters": 28, "abbrev": "Mt"},
+        {"name": "Marcos", "chapters": 16, "abbrev": "Mc"},
+        {"name": "Lucas", "chapters": 24, "abbrev": "Lc"},
+        {"name": "João", "chapters": 21, "abbrev": "Jo"},
+        {"name": "Atos", "chapters": 28, "abbrev": "At"},
+        {"name": "Romanos", "chapters": 16, "abbrev": "Rm"},
+        {"name": "1 Coríntios", "chapters": 16, "abbrev": "1Co"},
+        {"name": "2 Coríntios", "chapters": 13, "abbrev": "2Co"},
+        {"name": "Gálatas", "chapters": 6, "abbrev": "Gl"},
+        {"name": "Efésios", "chapters": 6, "abbrev": "Ef"},
+        {"name": "Filipenses", "chapters": 4, "abbrev": "Fp"},
+        {"name": "Colossenses", "chapters": 4, "abbrev": "Cl"},
+        {"name": "Hebreus", "chapters": 13, "abbrev": "Hb"},
+        {"name": "Tiago", "chapters": 5, "abbrev": "Tg"},
+        {"name": "1 Pedro", "chapters": 5, "abbrev": "1Pe"},
+        {"name": "2 Pedro", "chapters": 3, "abbrev": "2Pe"},
+        {"name": "1 João", "chapters": 5, "abbrev": "1Jo"},
+        {"name": "Apocalipse", "chapters": 22, "abbrev": "Ap"},
+    ],
+    "fr": [
+        {"name": "Genèse", "chapters": 50, "abbrev": "Gn"},
+        {"name": "Exode", "chapters": 40, "abbrev": "Ex"},
+        {"name": "Lévitique", "chapters": 27, "abbrev": "Lv"},
+        {"name": "Nombres", "chapters": 36, "abbrev": "Nb"},
+        {"name": "Deutéronome", "chapters": 34, "abbrev": "Dt"},
+        {"name": "Josué", "chapters": 24, "abbrev": "Jos"},
+        {"name": "Juges", "chapters": 21, "abbrev": "Jg"},
+        {"name": "Ruth", "chapters": 4, "abbrev": "Rt"},
+        {"name": "1 Samuel", "chapters": 31, "abbrev": "1S"},
+        {"name": "2 Samuel", "chapters": 24, "abbrev": "2S"},
+        {"name": "1 Rois", "chapters": 22, "abbrev": "1R"},
+        {"name": "2 Rois", "chapters": 25, "abbrev": "2R"},
+        {"name": "Psaumes", "chapters": 150, "abbrev": "Ps"},
+        {"name": "Proverbes", "chapters": 31, "abbrev": "Pr"},
+        {"name": "Ecclésiaste", "chapters": 12, "abbrev": "Ec"},
+        {"name": "Ésaïe", "chapters": 66, "abbrev": "Es"},
+        {"name": "Jérémie", "chapters": 52, "abbrev": "Jr"},
+        {"name": "Ézéchiel", "chapters": 48, "abbrev": "Ez"},
+        {"name": "Daniel", "chapters": 12, "abbrev": "Dn"},
+        {"name": "Matthieu", "chapters": 28, "abbrev": "Mt"},
+        {"name": "Marc", "chapters": 16, "abbrev": "Mc"},
+        {"name": "Luc", "chapters": 24, "abbrev": "Lc"},
+        {"name": "Jean", "chapters": 21, "abbrev": "Jn"},
+        {"name": "Actes", "chapters": 28, "abbrev": "Ac"},
+        {"name": "Romains", "chapters": 16, "abbrev": "Rm"},
+        {"name": "1 Corinthiens", "chapters": 16, "abbrev": "1Co"},
+        {"name": "2 Corinthiens", "chapters": 13, "abbrev": "2Co"},
+        {"name": "Galates", "chapters": 6, "abbrev": "Ga"},
+        {"name": "Éphésiens", "chapters": 6, "abbrev": "Ep"},
+        {"name": "Philippiens", "chapters": 4, "abbrev": "Ph"},
+        {"name": "Colossiens", "chapters": 4, "abbrev": "Col"},
+        {"name": "Hébreux", "chapters": 13, "abbrev": "He"},
+        {"name": "Jacques", "chapters": 5, "abbrev": "Jc"},
+        {"name": "1 Pierre", "chapters": 5, "abbrev": "1P"},
+        {"name": "2 Pierre", "chapters": 3, "abbrev": "2P"},
+        {"name": "1 Jean", "chapters": 5, "abbrev": "1Jn"},
+        {"name": "Apocalypse", "chapters": 22, "abbrev": "Ap"},
+    ],
 }
 
-# Sample verses for demonstration (in real app, would use Bible API)
-SAMPLE_VERSES = {
-    "Giovanni:3": [
-        {"verse": 1, "text": "Or c'era tra i farisei un uomo di nome Nicodemo, un capo dei Giudei."},
-        {"verse": 2, "text": "Egli venne a Gesù di notte e gli disse: «Maestro, noi sappiamo che tu sei un dottore venuto da Dio, perché nessuno può fare i segni che tu fai, se Dio non è con lui»."},
-        {"verse": 3, "text": "Gesù gli rispose e disse: «In verità, in verità ti dico che se uno non è nato di nuovo, non può vedere il regno di Dio»."},
-        {"verse": 16, "text": "Poiché Dio ha tanto amato il mondo, che ha dato il suo unigenito Figlio, affinché chiunque crede in lui non perisca, ma abbia vita eterna."},
-        {"verse": 17, "text": "Dio infatti non ha mandato il proprio Figlio nel mondo per condannare il mondo, ma affinché il mondo sia salvato per mezzo di lui."},
-    ],
-    "Salmi:23": [
-        {"verse": 1, "text": "L'Eterno è il mio pastore, nulla mi mancherà."},
-        {"verse": 2, "text": "Egli mi fa riposare in verdi pascoli, mi guida lungo le acque tranquille."},
-        {"verse": 3, "text": "Egli ristora la mia anima, mi guida per sentieri di giustizia per amore del suo nome."},
-        {"verse": 4, "text": "Anche se camminassi nella valle dell'ombra della morte, non temerei alcun male, perché tu sei con me; il tuo bastone e la tua verga mi danno conforto."},
-        {"verse": 5, "text": "Tu apparecchi davanti a me una mensa al cospetto dei miei nemici; ungi il mio capo con olio; la mia coppa trabocca."},
-        {"verse": 6, "text": "Certo, bontà e benignità mi accompagneranno tutti i giorni della mia vita; e io abiterò nella casa dell'Eterno per lunghi giorni."},
-    ],
-    "Romani:8": [
-        {"verse": 28, "text": "Or noi sappiamo che tutte le cose cooperano al bene di quelli che amano Dio, i quali sono chiamati secondo il suo proponimento."},
-        {"verse": 31, "text": "Che diremo dunque di queste cose? Se Dio è per noi, chi sarà contro di noi?"},
-        {"verse": 37, "text": "Ma in tutte queste cose noi siamo più che vincitori in virtù di colui che ci ha amati."},
-        {"verse": 38, "text": "Infatti io sono persuaso che né morte né vita, né angeli né principati, né potenze, né cose presenti né cose future,"},
-        {"verse": 39, "text": "né altezze né profondità, né alcun'altra creatura potrà separarci dall'amore di Dio che è in Cristo Gesù, nostro Signore."},
-    ],
-    "Filippesi:4": [
-        {"verse": 4, "text": "Rallegratevi sempre nel Signore; lo ripeto: rallegratevi."},
-        {"verse": 6, "text": "Non angustiatevi di nulla, ma in ogni cosa fate conoscere le vostre richieste a Dio in preghiere e suppliche, accompagnate da ringraziamenti."},
-        {"verse": 7, "text": "E la pace di Dio, che sopravanza ogni intelligenza, custodirà i vostri cuori e i vostri pensieri in Cristo Gesù."},
-        {"verse": 13, "text": "Io posso ogni cosa in Cristo che mi fortifica."},
-    ],
-    "Matteo:11": [
-        {"verse": 28, "text": "Venite a me, voi tutti che siete travagliati e aggravati, e io vi darò riposo."},
-        {"verse": 29, "text": "Prendete su di voi il mio giogo e imparate da me, perché io sono mansueto e umile di cuore; e voi troverete riposo per le anime vostre."},
-        {"verse": 30, "text": "Perché il mio giogo è dolce e il mio carico è leggero»."},
-    ],
-    "Isaia:41": [
-        {"verse": 10, "text": "Non temere, perché io sono con te; non smarrirti, perché io sono il tuo DIO; io ti fortifico, io ti aiuto, io ti sostengo con la destra della mia giustizia."},
-    ],
-    "Geremia:29": [
-        {"verse": 11, "text": "Poiché io conosco i pensieri che ho per voi», dice l'Eterno, «pensieri di pace e non di male, per darvi un futuro e una speranza."},
-    ],
-    "Proverbi:3": [
-        {"verse": 5, "text": "Confida nell'Eterno con tutto il cuore e non appoggiarti sul tuo intendimento."},
-        {"verse": 6, "text": "Riconoscilo in tutte le tue vie, ed egli raddrizzerà i tuoi sentieri."},
-    ]
+# Sample verses in multiple languages
+SAMPLE_VERSES_MULTILANG = {
+    "it": {
+        "Giovanni:3": [
+            {"verse": 16, "text": "Poiché Dio ha tanto amato il mondo, che ha dato il suo unigenito Figlio, affinché chiunque crede in lui non perisca, ma abbia vita eterna."},
+        ],
+        "Salmi:23": [
+            {"verse": 1, "text": "L'Eterno è il mio pastore, nulla mi mancherà."},
+            {"verse": 2, "text": "Egli mi fa riposare in verdi pascoli, mi guida lungo le acque tranquille."},
+            {"verse": 3, "text": "Egli ristora la mia anima, mi guida per sentieri di giustizia per amore del suo nome."},
+            {"verse": 4, "text": "Anche se camminassi nella valle dell'ombra della morte, non temerei alcun male, perché tu sei con me."},
+        ],
+        "Romani:8": [
+            {"verse": 28, "text": "Or noi sappiamo che tutte le cose cooperano al bene di quelli che amano Dio."},
+            {"verse": 31, "text": "Che diremo dunque di queste cose? Se Dio è per noi, chi sarà contro di noi?"},
+        ],
+        "Filippesi:4": [
+            {"verse": 13, "text": "Io posso ogni cosa in Cristo che mi fortifica."},
+        ],
+    },
+    "es": {
+        "Juan:3": [
+            {"verse": 16, "text": "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna."},
+        ],
+        "Salmos:23": [
+            {"verse": 1, "text": "Jehová es mi pastor; nada me faltará."},
+            {"verse": 2, "text": "En lugares de delicados pastos me hará descansar; junto a aguas de reposo me pastoreará."},
+            {"verse": 3, "text": "Confortará mi alma; me guiará por sendas de justicia por amor de su nombre."},
+            {"verse": 4, "text": "Aunque ande en valle de sombra de muerte, no temeré mal alguno, porque tú estarás conmigo."},
+        ],
+        "Romanos:8": [
+            {"verse": 28, "text": "Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien."},
+            {"verse": 31, "text": "¿Qué, pues, diremos a esto? Si Dios es por nosotros, ¿quién contra nosotros?"},
+        ],
+        "Filipenses:4": [
+            {"verse": 13, "text": "Todo lo puedo en Cristo que me fortalece."},
+        ],
+    },
+    "en": {
+        "John:3": [
+            {"verse": 16, "text": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."},
+        ],
+        "Psalms:23": [
+            {"verse": 1, "text": "The Lord is my shepherd; I shall not want."},
+            {"verse": 2, "text": "He maketh me to lie down in green pastures: he leadeth me beside the still waters."},
+            {"verse": 3, "text": "He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake."},
+            {"verse": 4, "text": "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me."},
+        ],
+        "Romans:8": [
+            {"verse": 28, "text": "And we know that all things work together for good to them that love God."},
+            {"verse": 31, "text": "What shall we then say to these things? If God be for us, who can be against us?"},
+        ],
+        "Philippians:4": [
+            {"verse": 13, "text": "I can do all things through Christ which strengtheneth me."},
+        ],
+    },
+    "pt": {
+        "João:3": [
+            {"verse": 16, "text": "Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna."},
+        ],
+        "Salmos:23": [
+            {"verse": 1, "text": "O Senhor é o meu pastor; nada me faltará."},
+            {"verse": 2, "text": "Deitar-me faz em verdes pastos, guia-me mansamente a águas tranquilas."},
+            {"verse": 3, "text": "Refrigera a minha alma; guia-me pelas veredas da justiça, por amor do seu nome."},
+            {"verse": 4, "text": "Ainda que eu andasse pelo vale da sombra da morte, não temeria mal algum, porque tu estás comigo."},
+        ],
+    },
+    "fr": {
+        "Jean:3": [
+            {"verse": 16, "text": "Car Dieu a tant aimé le monde qu'il a donné son Fils unique, afin que quiconque croit en lui ne périsse point, mais qu'il ait la vie éternelle."},
+        ],
+        "Psaumes:23": [
+            {"verse": 1, "text": "L'Éternel est mon berger: je ne manquerai de rien."},
+            {"verse": 2, "text": "Il me fait reposer dans de verts pâturages, il me dirige près des eaux paisibles."},
+            {"verse": 3, "text": "Il restaure mon âme, il me conduit dans les sentiers de la justice, à cause de son nom."},
+            {"verse": 4, "text": "Quand je marche dans la vallée de l'ombre de la mort, je ne crains aucun mal, car tu es avec moi."},
+        ],
+    },
 }
 
-# Daily verses based on mood
-MOOD_VERSES = {
-    "felice": [
-        {"ref": "Salmi 118:24", "text": "Questo è il giorno che l'Eterno ha fatto; rallegriamoci e gioisciamo in esso."},
-        {"ref": "Filippesi 4:4", "text": "Rallegratevi sempre nel Signore; lo ripeto: rallegratevi."},
-    ],
-    "triste": [
-        {"ref": "Salmi 34:18", "text": "L'Eterno è vicino a quelli che hanno il cuore rotto e salva quelli che sono affranti nello spirito."},
-        {"ref": "Matteo 5:4", "text": "Beati coloro che fanno cordoglio, perché saranno consolati."},
-    ],
-    "ansioso": [
-        {"ref": "Filippesi 4:6-7", "text": "Non angustiatevi di nulla, ma in ogni cosa fate conoscere le vostre richieste a Dio... E la pace di Dio custodirà i vostri cuori."},
-        {"ref": "1 Pietro 5:7", "text": "Gettando su di lui ogni vostra ansietà, perché egli ha cura di voi."},
-    ],
-    "arrabbiato": [
-        {"ref": "Efesini 4:26", "text": "Adiratevi e non peccate; il sole non tramonti sopra la vostra ira."},
-        {"ref": "Proverbi 15:1", "text": "Una risposta dolce calma il furore, ma una parola dura eccita l'ira."},
-    ],
-    "grato": [
-        {"ref": "1 Tessalonicesi 5:18", "text": "In ogni cosa rendete grazie, perché questa è la volontà di Dio in Cristo Gesù verso di voi."},
-        {"ref": "Salmi 100:4", "text": "Entrate nelle sue porte con ringraziamento e nei suoi cortili con lode; celebratelo, benedite il suo nome."},
-    ],
-    "confuso": [
-        {"ref": "Proverbi 3:5-6", "text": "Confida nell'Eterno con tutto il cuore e non appoggiarti sul tuo intendimento. Riconoscilo in tutte le tue vie, ed egli raddrizzerà i tuoi sentieri."},
-        {"ref": "Giacomo 1:5", "text": "Ma se qualcuno di voi manca di sapienza, la chieda a Dio... e gli sarà data."},
-    ],
-    "speranzoso": [
-        {"ref": "Geremia 29:11", "text": "Poiché io conosco i pensieri che ho per voi, pensieri di pace e non di male, per darvi un futuro e una speranza."},
-        {"ref": "Romani 15:13", "text": "Or il Dio della speranza vi riempia di ogni gioia e pace nel credere."},
-    ],
-    "stanco": [
-        {"ref": "Matteo 11:28", "text": "Venite a me, voi tutti che siete travagliati e aggravati, e io vi darò riposo."},
-        {"ref": "Isaia 40:31", "text": "Ma quelli che sperano nell'Eterno acquistano nuove forze, si alzano a volo come aquile."},
-    ],
+# Mood verses in multiple languages
+MOOD_VERSES_MULTILANG = {
+    "it": {
+        "felice": [{"ref": "Salmi 118:24", "text": "Questo è il giorno che l'Eterno ha fatto; rallegriamoci e gioisciamo in esso."}],
+        "triste": [{"ref": "Salmi 34:18", "text": "L'Eterno è vicino a quelli che hanno il cuore rotto."}],
+        "ansioso": [{"ref": "Filippesi 4:6-7", "text": "Non angustiatevi di nulla, ma in ogni cosa fate conoscere le vostre richieste a Dio."}],
+        "arrabbiato": [{"ref": "Efesini 4:26", "text": "Adiratevi e non peccate; il sole non tramonti sopra la vostra ira."}],
+        "grato": [{"ref": "1 Tessalonicesi 5:18", "text": "In ogni cosa rendete grazie."}],
+        "confuso": [{"ref": "Proverbi 3:5-6", "text": "Confida nell'Eterno con tutto il cuore e non appoggiarti sul tuo intendimento."}],
+        "speranzoso": [{"ref": "Geremia 29:11", "text": "Poiché io conosco i pensieri che ho per voi, pensieri di pace e non di male."}],
+        "stanco": [{"ref": "Matteo 11:28", "text": "Venite a me, voi tutti che siete travagliati e aggravati, e io vi darò riposo."}],
+    },
+    "es": {
+        "felice": [{"ref": "Salmos 118:24", "text": "Este es el día que hizo Jehová; nos gozaremos y alegraremos en él."}],
+        "triste": [{"ref": "Salmos 34:18", "text": "Cercano está Jehová a los quebrantados de corazón."}],
+        "ansioso": [{"ref": "Filipenses 4:6-7", "text": "Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios."}],
+        "stanco": [{"ref": "Mateo 11:28", "text": "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar."}],
+    },
+    "en": {
+        "felice": [{"ref": "Psalm 118:24", "text": "This is the day which the Lord hath made; we will rejoice and be glad in it."}],
+        "triste": [{"ref": "Psalm 34:18", "text": "The Lord is nigh unto them that are of a broken heart."}],
+        "ansioso": [{"ref": "Philippians 4:6-7", "text": "Be careful for nothing; but in every thing by prayer let your requests be made known unto God."}],
+        "stanco": [{"ref": "Matthew 11:28", "text": "Come unto me, all ye that labour and are heavy laden, and I will give you rest."}],
+    },
+    "pt": {
+        "felice": [{"ref": "Salmos 118:24", "text": "Este é o dia que o Senhor fez; regozijemo-nos e alegremo-nos nele."}],
+        "triste": [{"ref": "Salmos 34:18", "text": "Perto está o Senhor dos que têm o coração quebrantado."}],
+        "stanco": [{"ref": "Mateus 11:28", "text": "Vinde a mim, todos os que estais cansados e oprimidos, e eu vos aliviarei."}],
+    },
+    "fr": {
+        "felice": [{"ref": "Psaume 118:24", "text": "C'est ici la journée que l'Éternel a faite: Qu'elle soit pour nous un sujet d'allégresse et de joie!"}],
+        "triste": [{"ref": "Psaume 34:18", "text": "L'Éternel est près de ceux qui ont le cœur brisé."}],
+        "stanco": [{"ref": "Matthieu 11:28", "text": "Venez à moi, vous tous qui êtes fatigués et chargés, et je vous donnerai du repos."}],
+    },
 }
 
 @api_router.get("/bible/books")
 async def get_bible_books(lang: str = "it"):
-    """Get list of Bible books"""
-    return BIBLE_BOOKS.get(lang, BIBLE_BOOKS["it"])
+    """Get list of Bible books in specified language"""
+    return BIBLE_BOOKS_MULTILANG.get(lang, BIBLE_BOOKS_MULTILANG["it"])
 
 @api_router.get("/bible/chapter/{book}/{chapter}")
-async def get_chapter(book: str, chapter: int):
-    """Get verses for a chapter"""
+async def get_chapter(book: str, chapter: int, lang: str = "it"):
+    """Get verses for a chapter in specified language"""
+    verses_dict = SAMPLE_VERSES_MULTILANG.get(lang, SAMPLE_VERSES_MULTILANG["it"])
     key = f"{book}:{chapter}"
-    if key in SAMPLE_VERSES:
-        return {"book": book, "chapter": chapter, "verses": SAMPLE_VERSES[key]}
     
-    # Generate sample verses for demo
+    if key in verses_dict:
+        return {"book": book, "chapter": chapter, "verses": verses_dict[key], "language": lang}
+    
+    # Generate sample verses
     verses = []
     for i in range(1, min(20, chapter * 2)):
         verses.append({
             "verse": i,
             "text": f"Versetto {i} di {book} capitolo {chapter}. (Contenuto di esempio)"
         })
-    return {"book": book, "chapter": chapter, "verses": verses}
+    return {"book": book, "chapter": chapter, "verses": verses, "language": lang}
 
 @api_router.get("/bible/daily-verse")
-async def get_daily_verse():
-    """Get daily verse"""
+async def get_daily_verse(lang: str = "it"):
+    """Get daily verse in specified language"""
     import random
+    verses_dict = SAMPLE_VERSES_MULTILANG.get(lang, SAMPLE_VERSES_MULTILANG["it"])
+    
     all_verses = []
-    for ref, verses in SAMPLE_VERSES.items():
+    for ref, verses in verses_dict.items():
         book, chap = ref.split(":")
         for v in verses:
             all_verses.append({
@@ -531,29 +764,59 @@ async def get_daily_verse():
                 "text": v["text"]
             })
     
-    # Use date as seed for consistency throughout the day
+    if not all_verses:
+        # Fallback to Italian
+        for ref, verses in SAMPLE_VERSES_MULTILANG["it"].items():
+            book, chap = ref.split(":")
+            for v in verses:
+                all_verses.append({
+                    "reference": f"{book} {chap}:{v['verse']}",
+                    "text": v["text"]
+                })
+    
     today = datetime.now(timezone.utc).strftime("%Y%m%d")
     random.seed(int(today))
     verse = random.choice(all_verses)
+    verse["language"] = lang
     return verse
 
-# ==================== AI ASSISTANT ENDPOINTS ====================
+@api_router.post("/bible/translate-verse")
+async def translate_verse(request: Request, user: User = Depends(require_auth)):
+    """Translate a Bible verse to another language"""
+    body = await request.json()
+    text = body.get("text", "")
+    source_lang = body.get("source_lang", "it")
+    target_lang = body.get("target_lang", "en")
+    
+    translated = await translate_text(text, source_lang, target_lang)
+    return {
+        "original": text,
+        "translated": translated,
+        "source_lang": source_lang,
+        "target_lang": target_lang
+    }
+
+# ==================== AI ENDPOINTS ====================
 
 @api_router.post("/ai/chat")
 async def ai_chat(data: ChatRequest, user: User = Depends(require_auth)):
-    """Chat with AI spiritual assistant"""
+    """Chat with AI spiritual assistant in user's language"""
     try:
         session_id = f"chat_{user.user_id}"
+        lang = data.language or user.language or "it"
+        lang_name = SUPPORTED_LANGUAGES.get(lang, {}).get("name", "Italiano")
         
-        system_message = """Sei un assistente spirituale cristiano di nome "Cibo Spirituale". 
-        Rispondi in italiano con compassione, saggezza biblica e incoraggiamento.
-        Cita versetti biblici quando appropriato.
-        Offri guida spirituale pratica basata sulla Scrittura.
-        Sii empatico e comprensivo verso le emozioni dell'utente.
-        Non giudicare mai, ma guida gentilmente verso la verità biblica."""
+        system_messages = {
+            "it": f"Sei un assistente spirituale cristiano. Rispondi in italiano con compassione e saggezza biblica.",
+            "es": f"Eres un asistente espiritual cristiano. Responde en español con compasión y sabiduría bíblica.",
+            "en": f"You are a Christian spiritual assistant. Respond in English with compassion and biblical wisdom.",
+            "pt": f"Você é um assistente espiritual cristão. Responda em português com compaixão e sabedoria bíblica.",
+            "fr": f"Tu es un assistant spirituel chrétien. Réponds en français avec compassion et sagesse biblique.",
+        }
         
+        system_message = system_messages.get(lang, system_messages["it"])
         if data.mood:
-            system_message += f"\n\nL'utente si sente attualmente: {data.mood}. Tieni conto del suo stato emotivo."
+            system_message += f"\n\nL'utente si sente: {data.mood}."
         
         chat = LlmChat(
             api_key=EMERGENT_LLM_KEY,
@@ -561,15 +824,14 @@ async def ai_chat(data: ChatRequest, user: User = Depends(require_auth)):
             system_message=system_message
         ).with_model("openai", "gpt-4o")
         
-        user_message = UserMessage(text=data.message)
-        response = await chat.send_message(user_message)
+        response = await chat.send_message(UserMessage(text=data.message))
         
-        # Save chat history
         await db.chat_history.insert_one({
             "message_id": str(uuid.uuid4()),
             "user_id": user.user_id,
             "role": "user",
             "content": data.message,
+            "language": lang,
             "created_at": datetime.now(timezone.utc)
         })
         
@@ -578,17 +840,17 @@ async def ai_chat(data: ChatRequest, user: User = Depends(require_auth)):
             "user_id": user.user_id,
             "role": "assistant",
             "content": response,
+            "language": lang,
             "created_at": datetime.now(timezone.utc)
         })
         
-        return {"response": response}
+        return {"response": response, "language": lang}
     except Exception as e:
         logger.error(f"AI chat error: {e}")
         raise HTTPException(status_code=500, detail=f"Errore AI: {str(e)}")
 
 @api_router.get("/ai/chat-history")
 async def get_chat_history(user: User = Depends(require_auth), limit: int = 50):
-    """Get chat history"""
     messages = await db.chat_history.find(
         {"user_id": user.user_id},
         {"_id": 0}
@@ -597,31 +859,39 @@ async def get_chat_history(user: User = Depends(require_auth), limit: int = 50):
 
 @api_router.delete("/ai/chat-history")
 async def clear_chat_history(user: User = Depends(require_auth)):
-    """Clear chat history"""
     await db.chat_history.delete_many({"user_id": user.user_id})
     return {"message": "Cronologia cancellata"}
 
 @api_router.post("/ai/mood-checkin")
 async def mood_checkin(data: MoodRequest, user: User = Depends(require_auth)):
-    """Get AI-generated reflection based on mood"""
+    """Get AI-generated reflection based on mood in user's language"""
     try:
         import random
+        lang = data.language or user.language or "it"
         
+        mood_verses = MOOD_VERSES_MULTILANG.get(lang, MOOD_VERSES_MULTILANG["it"])
         mood = data.mood.lower()
-        mood_data = MOOD_VERSES.get(mood, MOOD_VERSES["speranzoso"])
-        verse = random.choice(mood_data)
+        mood_data = mood_verses.get(mood, mood_verses.get("speranzoso", [{"ref": "Salmi 23:1", "text": "Il Signore è il mio pastore."}]))
+        verse = random.choice(mood_data) if mood_data else {"ref": "Salmi 23:1", "text": "Il Signore è il mio pastore."}
         
-        # Generate personalized reflection with AI
+        # Generate reflection in user's language
+        lang_prompts = {
+            "it": f"L'utente si sente {mood}. Il versetto è: {verse['ref']} - \"{verse['text']}\". Genera una breve riflessione spirituale in italiano.",
+            "es": f"El usuario se siente {mood}. El versículo es: {verse['ref']} - \"{verse['text']}\". Genera una breve reflexión espiritual en español.",
+            "en": f"The user feels {mood}. The verse is: {verse['ref']} - \"{verse['text']}\". Generate a brief spiritual reflection in English.",
+            "pt": f"O usuário está se sentindo {mood}. O versículo é: {verse['ref']} - \"{verse['text']}\". Gere uma breve reflexão espiritual em português.",
+            "fr": f"L'utilisateur se sent {mood}. Le verset est: {verse['ref']} - \"{verse['text']}\". Génère une brève réflexion spirituelle en français.",
+        }
+        
         chat = LlmChat(
             api_key=EMERGENT_LLM_KEY,
             session_id=f"mood_{user.user_id}_{datetime.now().strftime('%Y%m%d')}",
-            system_message="Sei un consolatore spirituale cristiano. Genera una breve riflessione (2-3 frasi) basata sul versetto e sullo stato emotivo dell'utente. Sii incoraggiante e pieno di speranza. Rispondi in italiano."
+            system_message="You are a spiritual counselor. Generate brief, encouraging reflections."
         ).with_model("openai", "gpt-4o")
         
-        prompt = f"L'utente si sente {mood}. Il versetto del giorno è: {verse['ref']} - \"{verse['text']}\". Genera una breve riflessione spirituale personalizzata."
+        prompt = lang_prompts.get(lang, lang_prompts["it"])
         response = await chat.send_message(UserMessage(text=prompt))
         
-        # Save mood checkin
         checkin = {
             "checkin_id": str(uuid.uuid4()),
             "user_id": user.user_id,
@@ -629,6 +899,7 @@ async def mood_checkin(data: MoodRequest, user: User = Depends(require_auth)):
             "verse_reference": verse["ref"],
             "verse_text": verse["text"],
             "reflection": response,
+            "language": lang,
             "created_at": datetime.now(timezone.utc)
         }
         await db.mood_checkins.insert_one(checkin)
@@ -636,31 +907,110 @@ async def mood_checkin(data: MoodRequest, user: User = Depends(require_auth)):
         return {
             "mood": mood,
             "verse": verse,
-            "reflection": response
+            "reflection": response,
+            "language": lang
         }
     except Exception as e:
         logger.error(f"Mood checkin error: {e}")
-        # Fallback without AI
         import random
-        mood_data = MOOD_VERSES.get(data.mood.lower(), MOOD_VERSES["speranzoso"])
-        verse = random.choice(mood_data)
+        mood_data = MOOD_VERSES_MULTILANG.get("it", {}).get(data.mood.lower(), [{"ref": "Salmi 23:1", "text": "Il Signore è il mio pastore."}])
+        verse = random.choice(mood_data) if mood_data else {"ref": "Salmi 23:1", "text": "Il Signore è il mio pastore."}
         return {
             "mood": data.mood,
             "verse": verse,
             "reflection": "Che Dio ti benedica e ti dia pace oggi."
         }
 
+# ==================== COMMUNITY ENDPOINTS ====================
+
+@api_router.post("/community/messages")
+async def create_community_message(data: CommunityMessageCreate, user: User = Depends(require_auth)):
+    """Create a community message"""
+    message = {
+        "message_id": str(uuid.uuid4()),
+        "user_id": user.user_id,
+        "user_name": user.name,
+        "user_country": user.country,
+        "content": data.content,
+        "original_language": data.language,
+        "translations": {},
+        "message_type": data.message_type,
+        "likes": 0,
+        "created_at": datetime.now(timezone.utc)
+    }
+    await db.community_messages.insert_one(message)
+    message.pop("_id", None)
+    return message
+
+@api_router.get("/community/messages")
+async def get_community_messages(
+    lang: str = "it",
+    limit: int = 50,
+    user: User = Depends(require_auth)
+):
+    """Get community messages with translations"""
+    messages = await db.community_messages.find(
+        {},
+        {"_id": 0}
+    ).sort("created_at", -1).limit(limit).to_list(limit)
+    
+    # Translate messages to user's language if needed
+    for msg in messages:
+        if msg["original_language"] != lang:
+            if lang not in msg.get("translations", {}):
+                # Translate and cache
+                translated = await translate_text(msg["content"], msg["original_language"], lang)
+                await db.community_messages.update_one(
+                    {"message_id": msg["message_id"]},
+                    {"$set": {f"translations.{lang}": translated}}
+                )
+                msg["translated_content"] = translated
+            else:
+                msg["translated_content"] = msg["translations"].get(lang, msg["content"])
+        else:
+            msg["translated_content"] = msg["content"]
+    
+    return list(reversed(messages))
+
+@api_router.post("/community/messages/{message_id}/like")
+async def like_message(message_id: str, user: User = Depends(require_auth)):
+    """Like a community message"""
+    result = await db.community_messages.update_one(
+        {"message_id": message_id},
+        {"$inc": {"likes": 1}}
+    )
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Messaggio non trovato")
+    return {"success": True}
+
+@api_router.get("/community/users")
+async def get_community_users(user: User = Depends(require_auth)):
+    """Get public users from community"""
+    users = await db.users.find(
+        {"is_public": True},
+        {"_id": 0, "password_hash": 0, "email": 0}
+    ).limit(50).to_list(50)
+    return users
+
 # ==================== JOURNAL ENDPOINTS ====================
 
 @api_router.post("/journal")
 async def create_journal_entry(data: JournalCreate, user: User = Depends(require_auth)):
-    """Create journal entry with optional AI insight"""
     try:
-        # Generate AI insight
+        lang = data.language or user.language or "it"
+        
+        lang_prompts = {
+            "it": "Sei un consigliere spirituale. Offri una breve riflessione in italiano.",
+            "es": "Eres un consejero espiritual. Ofrece una breve reflexión en español.",
+            "en": "You are a spiritual counselor. Offer a brief reflection in English.",
+            "pt": "Você é um conselheiro espiritual. Ofereça uma breve reflexão em português.",
+            "fr": "Tu es un conseiller spirituel. Offre une brève réflexion en français.",
+        }
+        
         chat = LlmChat(
             api_key=EMERGENT_LLM_KEY,
             session_id=f"journal_{user.user_id}_{datetime.now().strftime('%Y%m%d%H%M')}",
-            system_message="Sei un consigliere spirituale. Basandoti sul diario dell'utente, offri una breve riflessione spirituale (1-2 frasi) con un versetto pertinente. Rispondi in italiano."
+            system_message=lang_prompts.get(lang, lang_prompts["it"])
         ).with_model("openai", "gpt-4o")
         
         prompt = f"L'utente si sente {data.mood} e ha scritto: \"{data.content[:500]}\". Offri una breve riflessione spirituale."
@@ -674,12 +1024,12 @@ async def create_journal_entry(data: JournalCreate, user: User = Depends(require
         "user_id": user.user_id,
         "content": data.content,
         "mood": data.mood,
+        "language": data.language or user.language or "it",
         "ai_insight": ai_insight,
         "created_at": datetime.now(timezone.utc)
     }
     await db.journal_entries.insert_one(entry)
     
-    # Update progress
     await db.progress.update_one(
         {"user_id": user.user_id},
         {"$inc": {"total_journal_entries": 1}},
@@ -691,7 +1041,6 @@ async def create_journal_entry(data: JournalCreate, user: User = Depends(require
 
 @api_router.get("/journal")
 async def get_journal_entries(user: User = Depends(require_auth), limit: int = 50):
-    """Get journal entries"""
     entries = await db.journal_entries.find(
         {"user_id": user.user_id},
         {"_id": 0}
@@ -700,7 +1049,6 @@ async def get_journal_entries(user: User = Depends(require_auth), limit: int = 5
 
 @api_router.delete("/journal/{entry_id}")
 async def delete_journal_entry(entry_id: str, user: User = Depends(require_auth)):
-    """Delete journal entry"""
     result = await db.journal_entries.delete_one({
         "entry_id": entry_id,
         "user_id": user.user_id
@@ -713,7 +1061,6 @@ async def delete_journal_entry(entry_id: str, user: User = Depends(require_auth)
 
 @api_router.post("/bookmarks")
 async def create_bookmark(data: BookmarkCreate, user: User = Depends(require_auth)):
-    """Create bookmark"""
     bookmark = {
         "bookmark_id": str(uuid.uuid4()),
         "user_id": user.user_id,
@@ -726,7 +1073,6 @@ async def create_bookmark(data: BookmarkCreate, user: User = Depends(require_aut
 
 @api_router.get("/bookmarks")
 async def get_bookmarks(user: User = Depends(require_auth)):
-    """Get bookmarks"""
     bookmarks = await db.bookmarks.find(
         {"user_id": user.user_id},
         {"_id": 0}
@@ -735,7 +1081,6 @@ async def get_bookmarks(user: User = Depends(require_auth)):
 
 @api_router.delete("/bookmarks/{bookmark_id}")
 async def delete_bookmark(bookmark_id: str, user: User = Depends(require_auth)):
-    """Delete bookmark"""
     result = await db.bookmarks.delete_one({
         "bookmark_id": bookmark_id,
         "user_id": user.user_id
@@ -748,7 +1093,6 @@ async def delete_bookmark(bookmark_id: str, user: User = Depends(require_auth)):
 
 @api_router.get("/progress")
 async def get_progress(user: User = Depends(require_auth)):
-    """Get user progress"""
     progress = await db.progress.find_one({"user_id": user.user_id}, {"_id": 0})
     if not progress:
         progress = {
@@ -764,7 +1108,6 @@ async def get_progress(user: User = Depends(require_auth)):
 
 @api_router.post("/progress/reading")
 async def update_reading_progress(user: User = Depends(require_auth)):
-    """Update reading progress"""
     today = datetime.now(timezone.utc).date()
     progress = await db.progress.find_one({"user_id": user.user_id}, {"_id": 0})
     
@@ -775,10 +1118,8 @@ async def update_reading_progress(user: User = Depends(require_auth)):
                 last_date = last_date.date()
             
             if last_date == today:
-                # Already read today
                 return progress
             elif (today - last_date).days == 1:
-                # Continue streak
                 await db.progress.update_one(
                     {"user_id": user.user_id},
                     {
@@ -787,7 +1128,6 @@ async def update_reading_progress(user: User = Depends(require_auth)):
                     }
                 )
             else:
-                # Reset streak
                 await db.progress.update_one(
                     {"user_id": user.user_id},
                     {
@@ -796,7 +1136,6 @@ async def update_reading_progress(user: User = Depends(require_auth)):
                     }
                 )
         else:
-            # First reading
             await db.progress.update_one(
                 {"user_id": user.user_id},
                 {
@@ -805,7 +1144,6 @@ async def update_reading_progress(user: User = Depends(require_auth)):
                 }
             )
     else:
-        # Create new progress
         await db.progress.insert_one({
             "user_id": user.user_id,
             "reading_streak": 1,
@@ -821,7 +1159,6 @@ async def update_reading_progress(user: User = Depends(require_auth)):
 
 @api_router.post("/donations")
 async def create_donation(data: DonationRequest, user: User = Depends(require_auth)):
-    """Create donation (MOCK)"""
     donation = {
         "donation_id": str(uuid.uuid4()),
         "user_id": user.user_id,
@@ -847,7 +1184,6 @@ async def create_donation(data: DonationRequest, user: User = Depends(require_au
 
 @api_router.get("/donations")
 async def get_donations(user: User = Depends(require_auth)):
-    """Get user donations"""
     donations = await db.donations.find(
         {"user_id": user.user_id},
         {"_id": 0}
@@ -857,25 +1193,26 @@ async def get_donations(user: User = Depends(require_auth)):
 # ==================== RADIO ENDPOINTS ====================
 
 EVANGELICAL_RADIOS = [
-    {"name": "Radio Evangelo", "url": "https://www.radioevangeloroma.it/", "country": "Italia", "language": "Italiano"},
-    {"name": "Radio Luce", "url": "https://www.radioluce.it/", "country": "Italia", "language": "Italiano"},
-    {"name": "Onda Gospel", "url": "https://www.ondagospel.it/", "country": "Italia", "language": "Italiano"},
-    {"name": "BBN Radio", "url": "https://bbnradio.org/", "country": "USA", "language": "English"},
-    {"name": "Radio Cristiana", "url": "https://www.radiocristiana.com/", "country": "Spagna", "language": "Español"},
+    {"name": "Radio Evangelo", "url": "https://www.radioevangeloroma.it/", "country": "Italia", "language": "it"},
+    {"name": "Radio Luce", "url": "https://www.radioluce.it/", "country": "Italia", "language": "it"},
+    {"name": "BBN Radio", "url": "https://bbnradio.org/", "country": "USA", "language": "en"},
+    {"name": "Radio Cristiana", "url": "https://www.radiocristiana.com/", "country": "España", "language": "es"},
+    {"name": "Rádio Trans Mundial", "url": "https://www.transmundial.com.br/", "country": "Brasil", "language": "pt"},
+    {"name": "Radio Vie", "url": "https://www.radiovie.com/", "country": "France", "language": "fr"},
 ]
 
 @api_router.get("/radios")
-async def get_radios():
-    """Get evangelical radio stations"""
+async def get_radios(lang: str = None):
+    if lang:
+        return [r for r in EVANGELICAL_RADIOS if r["language"] == lang]
     return EVANGELICAL_RADIOS
 
 # ==================== USER SETTINGS ====================
 
 @api_router.put("/users/settings")
 async def update_settings(request: Request, user: User = Depends(require_auth)):
-    """Update user settings"""
     body = await request.json()
-    allowed_fields = ["preferred_bible", "language", "name", "picture"]
+    allowed_fields = ["preferred_bible", "language", "name", "picture", "country", "bio", "is_public"]
     update_data = {k: v for k, v in body.items() if k in allowed_fields}
     
     if update_data:
@@ -891,7 +1228,7 @@ async def update_settings(request: Request, user: User = Depends(require_auth)):
 
 @api_router.get("/")
 async def root():
-    return {"message": "Cibo Spirituale API", "version": "1.0.0"}
+    return {"message": "Cibo Spirituale API", "version": "2.0.0", "features": ["multilang", "community", "translation"]}
 
 @api_router.get("/health")
 async def health():
