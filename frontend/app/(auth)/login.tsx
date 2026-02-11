@@ -48,32 +48,53 @@ export default function LoginScreen() {
   const handleGoogleLogin = async () => {
     setLoading(true);
     try {
+      // Platform-specific redirect URL
       const redirectUrl = Platform.OS === 'web'
-        ? `${API_URL}/`
-        : Linking.createURL('/');
+        ? window.location.origin + '/'  // Web: Use current origin
+        : Linking.createURL('auth-callback');  // Mobile: Use deep link with specific path
 
       const authUrl = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`;
       
+      console.log('Starting Google auth with redirect:', redirectUrl);
+      
       const result = await WebBrowser.openAuthSessionAsync(authUrl, redirectUrl);
       
+      console.log('Auth result:', result.type);
+      
       if (result.type === 'success' && result.url) {
-        // Parse session_id from URL
+        // Parse session_id from URL - check both hash and query
         let sessionId = null;
         const url = result.url;
         
-        // Check hash fragment first
+        console.log('Processing redirect URL:', url);
+        
+        // Check hash fragment first (#session_id=...)
         if (url.includes('#session_id=')) {
           sessionId = url.split('#session_id=')[1]?.split('&')[0];
-        } else if (url.includes('?session_id=')) {
+        } 
+        // Then check query parameter (?session_id=...)
+        else if (url.includes('?session_id=')) {
           sessionId = url.split('?session_id=')[1]?.split('&')[0];
         }
+        // Also check for session_id= without prefix (in case of weird URL parsing)
+        else if (url.includes('session_id=')) {
+          const match = url.match(/session_id=([^&]+)/);
+          if (match) sessionId = match[1];
+        }
+        
+        console.log('Extracted session_id:', sessionId ? 'found' : 'not found');
         
         if (sessionId) {
           await googleLogin(sessionId);
           router.replace('/(tabs)');
+        } else {
+          Alert.alert('Errore', 'Sessione non trovata nella risposta');
         }
+      } else if (result.type === 'cancel') {
+        console.log('User cancelled login');
       }
     } catch (error: any) {
+      console.error('Google login error:', error);
       Alert.alert('Errore', error.message || 'Login Google fallito');
     } finally {
       setLoading(false);
