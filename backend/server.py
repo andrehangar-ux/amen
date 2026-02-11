@@ -1908,6 +1908,993 @@ async def mark_all_read(user: User = Depends(require_auth)):
     )
     return {"success": True}
 
+# ==================== QUIZ BIBLICO ====================
+
+BIBLE_QUIZZES = {
+    "genesi": {
+        "title": "Quiz su Genesi",
+        "description": "Testa la tua conoscenza del libro della Genesi",
+        "questions": [
+            {
+                "id": "gen1",
+                "question": "Cosa creò Dio nel primo giorno?",
+                "options": ["La luce", "Il cielo", "Gli animali", "L'uomo"],
+                "correct": 0,
+                "explanation": "Nel primo giorno Dio disse: «Sia la luce!» E la luce fu. (Genesi 1:3)",
+                "verse_ref": "Genesi 1:3"
+            },
+            {
+                "id": "gen2",
+                "question": "In quale giorno Dio creò l'uomo?",
+                "options": ["Quinto", "Sesto", "Settimo", "Terzo"],
+                "correct": 1,
+                "explanation": "Dio creò l'uomo il sesto giorno, a sua immagine e somiglianza.",
+                "verse_ref": "Genesi 1:26-27"
+            },
+            {
+                "id": "gen3",
+                "question": "Come si chiamava il giardino dove Dio pose l'uomo?",
+                "options": ["Paradiso", "Eden", "Canaan", "Betlemme"],
+                "correct": 1,
+                "explanation": "L'Eterno Dio aveva piantato un giardino in Eden, a oriente.",
+                "verse_ref": "Genesi 2:8"
+            },
+            {
+                "id": "gen4",
+                "question": "Quale albero era proibito ad Adamo ed Eva?",
+                "options": ["Albero della vita", "Albero della conoscenza del bene e del male", "Ulivo", "Fico"],
+                "correct": 1,
+                "explanation": "Ma dell'albero della conoscenza del bene e del male non ne mangiare.",
+                "verse_ref": "Genesi 2:17"
+            },
+            {
+                "id": "gen5",
+                "question": "Quanti giorni impiegò Dio per creare tutto?",
+                "options": ["5 giorni", "6 giorni", "7 giorni", "3 giorni"],
+                "correct": 1,
+                "explanation": "Dio creò in sei giorni e si riposò il settimo.",
+                "verse_ref": "Genesi 2:2"
+            },
+        ]
+    },
+    "salmi": {
+        "title": "Quiz sui Salmi",
+        "description": "Quanto conosci i Salmi?",
+        "questions": [
+            {
+                "id": "sal1",
+                "question": "Chi scrisse la maggior parte dei Salmi?",
+                "options": ["Mosè", "Davide", "Salomone", "Asaf"],
+                "correct": 1,
+                "explanation": "Davide è l'autore della maggior parte dei Salmi.",
+                "verse_ref": "Titoli dei Salmi"
+            },
+            {
+                "id": "sal2",
+                "question": "Completa: 'L'Eterno è il mio...'",
+                "options": ["Re", "Pastore", "Salvatore", "Giudice"],
+                "correct": 1,
+                "explanation": "L'Eterno è il mio pastore, nulla mi mancherà.",
+                "verse_ref": "Salmo 23:1"
+            },
+            {
+                "id": "sal3",
+                "question": "Quanti Salmi ci sono nella Bibbia?",
+                "options": ["100", "120", "150", "200"],
+                "correct": 2,
+                "explanation": "Il libro dei Salmi contiene 150 salmi.",
+                "verse_ref": "Libro dei Salmi"
+            },
+        ]
+    },
+    "vangeli": {
+        "title": "Quiz sui Vangeli",
+        "description": "La vita di Gesù nei Vangeli",
+        "questions": [
+            {
+                "id": "van1",
+                "question": "In quale città nacque Gesù?",
+                "options": ["Nazaret", "Gerusalemme", "Betlemme", "Cafarnao"],
+                "correct": 2,
+                "explanation": "Gesù nacque a Betlemme di Giudea.",
+                "verse_ref": "Matteo 2:1"
+            },
+            {
+                "id": "van2",
+                "question": "Quanti apostoli scelse Gesù?",
+                "options": ["7", "10", "12", "14"],
+                "correct": 2,
+                "explanation": "Gesù scelse dodici apostoli.",
+                "verse_ref": "Matteo 10:1-4"
+            },
+            {
+                "id": "van3",
+                "question": "Cosa disse Gesù: 'Io sono la via, la...'",
+                "options": ["luce e la vita", "verità e la vita", "porta e la vita", "risurrezione"],
+                "correct": 1,
+                "explanation": "Io sono la via, la verità e la vita; nessuno viene al Padre se non per mezzo di me.",
+                "verse_ref": "Giovanni 14:6"
+            },
+            {
+                "id": "van4",
+                "question": "Qual è il versetto più famoso della Bibbia?",
+                "options": ["Genesi 1:1", "Salmo 23:1", "Giovanni 3:16", "Romani 8:28"],
+                "correct": 2,
+                "explanation": "Giovanni 3:16 è considerato il 'Vangelo in miniatura'.",
+                "verse_ref": "Giovanni 3:16"
+            },
+        ]
+    },
+    "beatitudini": {
+        "title": "Le Beatitudini",
+        "description": "Il Sermone sul Monte",
+        "questions": [
+            {
+                "id": "beat1",
+                "question": "Dove Gesù pronunciò le Beatitudini?",
+                "options": ["Nel tempio", "Sul monte", "Al mare", "Nel deserto"],
+                "correct": 1,
+                "explanation": "Vedendo le folle, Gesù salì sul monte.",
+                "verse_ref": "Matteo 5:1"
+            },
+            {
+                "id": "beat2",
+                "question": "'Beati i poveri in spirito, perché di loro è...'",
+                "options": ["la terra", "il regno dei cieli", "la pace", "la gioia"],
+                "correct": 1,
+                "explanation": "Beati i poveri in spirito, perché di loro è il regno dei cieli.",
+                "verse_ref": "Matteo 5:3"
+            },
+        ]
+    }
+}
+
+@api_router.get("/quiz/topics")
+async def get_quiz_topics():
+    """Get available quiz topics"""
+    return [
+        {"id": key, "title": quiz["title"], "description": quiz["description"], "questions_count": len(quiz["questions"])}
+        for key, quiz in BIBLE_QUIZZES.items()
+    ]
+
+@api_router.get("/quiz/{topic}")
+async def get_quiz(topic: str):
+    """Get quiz by topic"""
+    if topic not in BIBLE_QUIZZES:
+        raise HTTPException(status_code=404, detail="Quiz non trovato")
+    return BIBLE_QUIZZES[topic]
+
+class QuizSubmission(BaseModel):
+    topic: str
+    answers: Dict[str, int]  # question_id -> selected_option_index
+
+@api_router.post("/quiz/submit")
+async def submit_quiz(data: QuizSubmission, user: User = Depends(require_auth)):
+    """Submit quiz answers and get AI feedback"""
+    if data.topic not in BIBLE_QUIZZES:
+        raise HTTPException(status_code=404, detail="Quiz non trovato")
+    
+    quiz = BIBLE_QUIZZES[data.topic]
+    correct_count = 0
+    total = len(quiz["questions"])
+    results = []
+    
+    for question in quiz["questions"]:
+        user_answer = data.answers.get(question["id"], -1)
+        is_correct = user_answer == question["correct"]
+        if is_correct:
+            correct_count += 1
+        results.append({
+            "question_id": question["id"],
+            "is_correct": is_correct,
+            "correct_answer": question["correct"],
+            "user_answer": user_answer,
+            "explanation": question["explanation"],
+            "verse_ref": question["verse_ref"]
+        })
+    
+    score = (correct_count / total) * 100 if total > 0 else 0
+    
+    # Generate AI feedback
+    try:
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=f"quiz_{user.user_id}_{data.topic}",
+            system_message="Sei un insegnante biblico. Dai un feedback incoraggiante basato sul punteggio del quiz."
+        ).with_model("openai", "gpt-4o")
+        
+        feedback = await chat.send_message(UserMessage(
+            text=f"L'utente ha completato il quiz '{quiz['title']}' con un punteggio di {score:.0f}% ({correct_count}/{total} risposte corrette). Dai un feedback breve e incoraggiante in italiano."
+        ))
+    except:
+        feedback = f"Hai completato il quiz con {correct_count}/{total} risposte corrette!"
+    
+    # Save result
+    await db.quiz_results.insert_one({
+        "result_id": str(uuid.uuid4()),
+        "user_id": user.user_id,
+        "topic": data.topic,
+        "score": score,
+        "correct_count": correct_count,
+        "total": total,
+        "created_at": datetime.now(timezone.utc)
+    })
+    
+    return {
+        "score": score,
+        "correct_count": correct_count,
+        "total": total,
+        "results": results,
+        "feedback": feedback
+    }
+
+@api_router.get("/quiz/history")
+async def get_quiz_history(user: User = Depends(require_auth)):
+    """Get user's quiz history"""
+    history = await db.quiz_results.find(
+        {"user_id": user.user_id},
+        {"_id": 0}
+    ).sort("created_at", -1).limit(50).to_list(50)
+    return history
+
+# ==================== DIZIONARIO BIBLICO ====================
+
+BIBLICAL_DICTIONARY = {
+    "agape": {
+        "term": "Agàpe (ἀγάπη)",
+        "transliteration": "agapē",
+        "origin": "Greco",
+        "pronunciation": "ah-GAH-pay",
+        "meaning": "Amore incondizionato, amore divino",
+        "root": "Dal greco antico ἀγαπάω (agapáō) - amare",
+        "hebrew_equivalent": "אַהֲבָה (ahavah)",
+        "description": "L'amore agape è il tipo più alto di amore nel Nuovo Testamento. È l'amore sacrificale e incondizionato che Dio ha per l'umanità. Non dipende dai meriti della persona amata, ma dalla natura di chi ama.",
+        "verses": [
+            {"ref": "Giovanni 3:16", "text": "Poiché Dio ha tanto amato (ἠγάπησεν) il mondo..."},
+            {"ref": "1 Corinzi 13:4-7", "text": "L'amore (ἀγάπη) è paziente, è benevolo..."},
+            {"ref": "1 Giovanni 4:8", "text": "Dio è amore (ἀγάπη)"}
+        ],
+        "image_url": "https://images.unsplash.com/photo-1518568403628-df55701ade9e?w=400"
+    },
+    "shalom": {
+        "term": "Shalom (שָׁלוֹם)",
+        "transliteration": "shālôm",
+        "origin": "Ebraico",
+        "pronunciation": "shah-LOHM",
+        "meaning": "Pace, completezza, benessere, prosperità",
+        "root": "Dalla radice ebraica ש-ל-מ (sh-l-m) - essere completo, essere intero",
+        "greek_equivalent": "εἰρήνη (eirēnē)",
+        "description": "Shalom non significa solo assenza di conflitto, ma indica uno stato di completezza, armonia e benessere totale. È la pace che viene dalla presenza di Dio e dalla giusta relazione con Lui e con gli altri.",
+        "verses": [
+            {"ref": "Numeri 6:26", "text": "L'Eterno rivolga verso di te il suo volto e ti dia la pace (שָׁלוֹם)"},
+            {"ref": "Isaia 26:3", "text": "Tu conserverai in perfetta pace (שָׁלוֹם שָׁלוֹם) colui la cui mente è ferma in te"},
+            {"ref": "Giovanni 14:27", "text": "Vi lascio la pace, vi do la mia pace"}
+        ],
+        "image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400"
+    },
+    "logos": {
+        "term": "Logos (λόγος)",
+        "transliteration": "logos",
+        "origin": "Greco",
+        "pronunciation": "LOH-gos",
+        "meaning": "Parola, Verbo, ragione, discorso",
+        "root": "Dal greco λέγω (légō) - dire, parlare",
+        "hebrew_equivalent": "דָּבָר (davar)",
+        "description": "Nel prologo del Vangelo di Giovanni, Logos si riferisce a Cristo come la Parola eterna di Dio, la rivelazione divina incarnata. Il Logos è l'agente della creazione e la piena espressione di Dio.",
+        "verses": [
+            {"ref": "Giovanni 1:1", "text": "Nel principio era la Parola (λόγος) e la Parola era presso Dio, e la Parola era Dio"},
+            {"ref": "Giovanni 1:14", "text": "E la Parola si è fatta carne ed ha abitato fra di noi"},
+            {"ref": "Ebrei 4:12", "text": "La parola di Dio è vivente ed efficace"}
+        ],
+        "image_url": "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=400"
+    },
+    "ruach": {
+        "term": "Ruach (רוּחַ)",
+        "transliteration": "rûaḥ",
+        "origin": "Ebraico",
+        "pronunciation": "ROO-akh",
+        "meaning": "Spirito, vento, respiro",
+        "root": "Dalla radice ebraica ר-ו-ח indicante movimento dell'aria",
+        "greek_equivalent": "πνεῦμα (pneuma)",
+        "description": "Ruach indica lo Spirito di Dio, la forza vitale divina. Può riferirsi allo Spirito Santo, al respiro della vita, o al vento. È la potenza creativa e vivificante di Dio che opera nel mondo.",
+        "verses": [
+            {"ref": "Genesi 1:2", "text": "Lo Spirito (רוּחַ) di Dio aleggiava sulla superficie delle acque"},
+            {"ref": "Genesi 2:7", "text": "Gli soffiò nelle narici un alito (נְשָׁמָה) di vita"},
+            {"ref": "Ezechiele 37:9", "text": "Vieni dai quattro venti, o spirito (רוּחַ), e soffia su questi uccisi"}
+        ],
+        "image_url": "https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=400"
+    },
+    "chesed": {
+        "term": "Chesed (חֶסֶד)",
+        "transliteration": "ḥesed",
+        "origin": "Ebraico",
+        "pronunciation": "KHEH-sed",
+        "meaning": "Amore fedele, benignità, misericordia, grazia",
+        "root": "Dalla radice ebraica ח-ס-ד indicante bontà, amore leale",
+        "greek_equivalent": "ἔλεος (eleos) / χάρις (charis)",
+        "description": "Chesed è l'amore fedele di Dio verso il suo popolo, basato sul patto. È un amore che non abbandona, che perdona, che resta fedele anche quando l'altro fallisce. È uno degli attributi più importanti di Dio nell'Antico Testamento.",
+        "verses": [
+            {"ref": "Salmo 136:1", "text": "Celebrate l'Eterno perché è buono, perché la sua benignità (חֶסֶד) dura in eterno"},
+            {"ref": "Esodo 34:6", "text": "L'Eterno, il Dio misericordioso e pietoso, lento all'ira e grande in benignità (חֶסֶד)"},
+            {"ref": "Osea 6:6", "text": "Poiché io desidero benignità (חֶסֶד) e non sacrificio"}
+        ],
+        "image_url": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400"
+    },
+    "amen": {
+        "term": "Amen (אָמֵן)",
+        "transliteration": "ʾāmēn",
+        "origin": "Ebraico",
+        "pronunciation": "ah-MEN",
+        "meaning": "Così sia, in verità, certamente",
+        "root": "Dalla radice ebraica א-מ-ן (ʾ-m-n) - essere fermo, essere fedele, credere",
+        "greek_equivalent": "ἀμήν (amēn)",
+        "description": "Amen è una parola di affermazione e conferma. Viene usata per ratificare preghiere, benedizioni e dichiarazioni. Gesù la usa spesso all'inizio delle sue affermazioni ('In verità, in verità vi dico').",
+        "verses": [
+            {"ref": "Deuteronomio 27:15", "text": "E tutto il popolo risponderà e dirà: Amen!"},
+            {"ref": "Giovanni 3:3", "text": "In verità, in verità (ἀμὴν ἀμὴν) ti dico..."},
+            {"ref": "Apocalisse 3:14", "text": "Così parla l'Amen, il testimone fedele e verace"}
+        ],
+        "image_url": "https://images.unsplash.com/photo-1445445290350-18a3b86e0b5a?w=400"
+    },
+    "elohim": {
+        "term": "Elohim (אֱלֹהִים)",
+        "transliteration": "ʾĕlōhîm",
+        "origin": "Ebraico",
+        "pronunciation": "eh-loh-HEEM",
+        "meaning": "Dio, dei, potenti",
+        "root": "Forma plurale di אֵל (El) o אֱלוֹהַּ (Eloah)",
+        "greek_equivalent": "θεός (theos)",
+        "description": "Elohim è uno dei nomi più comuni per Dio nell'Antico Testamento. Sebbene sia grammaticalmente plurale, quando si riferisce al Dio d'Israele viene usato con verbi al singolare, suggerendo l'unità nella pluralità (possibile allusione alla Trinità).",
+        "verses": [
+            {"ref": "Genesi 1:1", "text": "Nel principio Dio (אֱלֹהִים) creò i cieli e la terra"},
+            {"ref": "Genesi 1:26", "text": "Poi Dio (אֱלֹהִים) disse: Facciamo l'uomo a nostra immagine"},
+            {"ref": "Deuteronomio 6:4", "text": "Ascolta, Israele: L'Eterno, il nostro Dio (אֱלֹהִים), è l'unico Eterno"}
+        ],
+        "image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400"
+    },
+    "yhwh": {
+        "term": "YHWH (יהוה)",
+        "transliteration": "YHWH / Yahweh",
+        "origin": "Ebraico",
+        "pronunciation": "Yah-WEH (tradizionalmente non pronunciato)",
+        "meaning": "Io sono, Colui che è",
+        "root": "Dalla radice ebraica ה-י-ה (h-y-h) - essere, esistere",
+        "greek_equivalent": "κύριος (kyrios) - Signore",
+        "description": "Il nome proprio di Dio rivelato a Mosè. È il tetragramma sacro, considerato così santo che gli ebrei evitano di pronunciarlo, sostituendolo con 'Adonai' (Signore). Indica l'eternità e l'autoesistenza di Dio.",
+        "verses": [
+            {"ref": "Esodo 3:14", "text": "Dio disse a Mosè: IO SONO COLUI CHE SONO (אֶהְיֶה אֲשֶׁר אֶהְיֶה)"},
+            {"ref": "Esodo 6:3", "text": "Io apparvi ad Abraamo... ma non mi feci conoscere col mio nome di YHWH"},
+            {"ref": "Salmo 83:18", "text": "Il tuo nome solo è l'Eterno (יהוה)"}
+        ],
+        "image_url": "https://images.unsplash.com/photo-1499002238440-d264f99089f8?w=400"
+    }
+}
+
+@api_router.get("/dictionary")
+async def get_dictionary_terms():
+    """Get all dictionary terms"""
+    return [
+        {
+            "id": key,
+            "term": term["term"],
+            "origin": term["origin"],
+            "meaning": term["meaning"]
+        }
+        for key, term in BIBLICAL_DICTIONARY.items()
+    ]
+
+@api_router.get("/dictionary/{term_id}")
+async def get_dictionary_term(term_id: str):
+    """Get full dictionary entry"""
+    if term_id not in BIBLICAL_DICTIONARY:
+        raise HTTPException(status_code=404, detail="Termine non trovato")
+    return BIBLICAL_DICTIONARY[term_id]
+
+@api_router.get("/dictionary/search/{query}")
+async def search_dictionary(query: str):
+    """Search dictionary terms"""
+    query_lower = query.lower()
+    results = []
+    for key, term in BIBLICAL_DICTIONARY.items():
+        if (query_lower in term["term"].lower() or 
+            query_lower in term["meaning"].lower() or
+            query_lower in term.get("description", "").lower()):
+            results.append({
+                "id": key,
+                "term": term["term"],
+                "origin": term["origin"],
+                "meaning": term["meaning"]
+            })
+    return results
+
+class DictionaryStudyRequest(BaseModel):
+    term_id: str
+    question: str
+
+@api_router.post("/dictionary/ai-study")
+async def ai_dictionary_study(data: DictionaryStudyRequest, user: User = Depends(require_auth)):
+    """AI-powered study of biblical terms"""
+    if data.term_id not in BIBLICAL_DICTIONARY:
+        raise HTTPException(status_code=404, detail="Termine non trovato")
+    
+    term = BIBLICAL_DICTIONARY[data.term_id]
+    
+    try:
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=f"dict_study_{user.user_id}_{data.term_id}",
+            system_message=f"""Sei un esperto di lingue bibliche (ebraico e greco). 
+            Stai spiegando il termine: {term['term']}
+            Origine: {term['origin']}
+            Significato: {term['meaning']}
+            Radice: {term['root']}
+            
+            Rispondi in italiano in modo chiaro e accessibile."""
+        ).with_model("openai", "gpt-4o")
+        
+        response = await chat.send_message(UserMessage(text=data.question))
+        return {"answer": response}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Errore AI: {str(e)}")
+
+# ==================== DOMANDE APERTE A TEMA ====================
+
+class OpenQuestionRequest(BaseModel):
+    question: str
+    topic: Optional[str] = None
+    language: str = "it"
+
+@api_router.post("/study/ask")
+async def ask_open_question(data: OpenQuestionRequest, user: User = Depends(require_auth)):
+    """AI-powered open questions about the Bible"""
+    try:
+        system_prompts = {
+            "it": """Sei un esperto teologo e biblista cristiano evangelico. Rispondi alle domande sulla Bibbia in modo:
+- Fedele al testo biblico
+- Chiaro e accessibile
+- Con riferimenti ai versetti pertinenti
+- In italiano
+
+Se la domanda non riguarda la Bibbia o la fede cristiana, gentilmente reindirizza verso temi biblici.""",
+            "es": "Eres un teólogo cristiano experto. Responde en español con referencias bíblicas.",
+            "en": "You are an expert Christian theologian. Respond in English with biblical references."
+        }
+        
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=f"study_ask_{user.user_id}_{uuid.uuid4().hex[:8]}",
+            system_message=system_prompts.get(data.language, system_prompts["it"])
+        ).with_model("openai", "gpt-4o")
+        
+        prompt = data.question
+        if data.topic:
+            prompt = f"[Argomento: {data.topic}] {data.question}"
+        
+        response = await chat.send_message(UserMessage(text=prompt))
+        
+        # Save to history
+        await db.study_questions.insert_one({
+            "question_id": str(uuid.uuid4()),
+            "user_id": user.user_id,
+            "question": data.question,
+            "topic": data.topic,
+            "answer": response,
+            "language": data.language,
+            "created_at": datetime.now(timezone.utc)
+        })
+        
+        return {"answer": response}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Errore: {str(e)}")
+
+@api_router.get("/study/history")
+async def get_study_history(user: User = Depends(require_auth), limit: int = 30):
+    """Get user's study question history"""
+    history = await db.study_questions.find(
+        {"user_id": user.user_id},
+        {"_id": 0}
+    ).sort("created_at", -1).limit(limit).to_list(limit)
+    return history
+
+# ==================== FORUM COLLABORATIVO ====================
+
+class ForumPostCreate(BaseModel):
+    title: str
+    content: str
+    category: str  # discussion, prayer, testimony, question, study
+    tags: List[str] = []
+
+class ForumReplyCreate(BaseModel):
+    content: str
+
+@api_router.get("/forum/categories")
+async def get_forum_categories():
+    """Get forum categories"""
+    return [
+        {"id": "discussion", "name": "Discussione Generale", "icon": "💬", "description": "Conversazioni sulla fede"},
+        {"id": "prayer", "name": "Richieste di Preghiera", "icon": "🙏", "description": "Condividi le tue richieste"},
+        {"id": "testimony", "name": "Testimonianze", "icon": "✨", "description": "Condividi la tua testimonianza"},
+        {"id": "question", "name": "Domande Bibliche", "icon": "❓", "description": "Fai domande sulla Bibbia"},
+        {"id": "study", "name": "Studio Biblico", "icon": "📖", "description": "Approfondimenti e studi"},
+    ]
+
+@api_router.post("/forum/posts")
+async def create_forum_post(data: ForumPostCreate, user: User = Depends(require_auth)):
+    """Create a forum post"""
+    post = {
+        "post_id": str(uuid.uuid4()),
+        "user_id": user.user_id,
+        "user_name": user.name,
+        "title": data.title,
+        "content": data.content,
+        "category": data.category,
+        "tags": data.tags,
+        "votes": 0,
+        "voters": [],
+        "replies_count": 0,
+        "views": 0,
+        "is_pinned": False,
+        "is_approved": True,  # AI mentor can flag for review
+        "created_at": datetime.now(timezone.utc),
+        "updated_at": datetime.now(timezone.utc)
+    }
+    
+    await db.forum_posts.insert_one(post)
+    post.pop("_id", None)
+    return post
+
+@api_router.get("/forum/posts")
+async def get_forum_posts(
+    category: Optional[str] = None,
+    sort: str = "recent",  # recent, popular, unanswered
+    limit: int = 30
+):
+    """Get forum posts"""
+    query = {}
+    if category:
+        query["category"] = category
+    
+    sort_order = [("created_at", -1)]
+    if sort == "popular":
+        sort_order = [("votes", -1), ("created_at", -1)]
+    elif sort == "unanswered":
+        query["replies_count"] = 0
+    
+    posts = await db.forum_posts.find(query, {"_id": 0}).sort(sort_order).limit(limit).to_list(limit)
+    return posts
+
+@api_router.get("/forum/posts/{post_id}")
+async def get_forum_post(post_id: str):
+    """Get single forum post with replies"""
+    post = await db.forum_posts.find_one({"post_id": post_id}, {"_id": 0})
+    if not post:
+        raise HTTPException(status_code=404, detail="Post non trovato")
+    
+    # Increment views
+    await db.forum_posts.update_one({"post_id": post_id}, {"$inc": {"views": 1}})
+    
+    # Get replies
+    replies = await db.forum_replies.find({"post_id": post_id}, {"_id": 0}).sort("created_at", 1).to_list(100)
+    post["replies"] = replies
+    
+    return post
+
+@api_router.post("/forum/posts/{post_id}/vote")
+async def vote_forum_post(post_id: str, user: User = Depends(require_auth)):
+    """Vote on a forum post"""
+    post = await db.forum_posts.find_one({"post_id": post_id})
+    if not post:
+        raise HTTPException(status_code=404, detail="Post non trovato")
+    
+    voters = post.get("voters", [])
+    if user.user_id in voters:
+        # Remove vote
+        await db.forum_posts.update_one(
+            {"post_id": post_id},
+            {"$inc": {"votes": -1}, "$pull": {"voters": user.user_id}}
+        )
+        return {"voted": False, "votes": post["votes"] - 1}
+    else:
+        # Add vote
+        await db.forum_posts.update_one(
+            {"post_id": post_id},
+            {"$inc": {"votes": 1}, "$push": {"voters": user.user_id}}
+        )
+        return {"voted": True, "votes": post["votes"] + 1}
+
+@api_router.post("/forum/posts/{post_id}/reply")
+async def reply_forum_post(post_id: str, data: ForumReplyCreate, user: User = Depends(require_auth)):
+    """Reply to a forum post"""
+    post = await db.forum_posts.find_one({"post_id": post_id})
+    if not post:
+        raise HTTPException(status_code=404, detail="Post non trovato")
+    
+    reply = {
+        "reply_id": str(uuid.uuid4()),
+        "post_id": post_id,
+        "user_id": user.user_id,
+        "user_name": user.name,
+        "content": data.content,
+        "votes": 0,
+        "voters": [],
+        "is_ai_mentor": False,
+        "created_at": datetime.now(timezone.utc)
+    }
+    
+    await db.forum_replies.insert_one(reply)
+    await db.forum_posts.update_one({"post_id": post_id}, {"$inc": {"replies_count": 1}})
+    
+    reply.pop("_id", None)
+    return reply
+
+@api_router.post("/forum/posts/{post_id}/ai-mentor")
+async def get_ai_mentor_reply(post_id: str, user: User = Depends(require_auth)):
+    """Get AI mentor response for a forum post"""
+    post = await db.forum_posts.find_one({"post_id": post_id}, {"_id": 0})
+    if not post:
+        raise HTTPException(status_code=404, detail="Post non trovato")
+    
+    try:
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=f"mentor_{post_id}",
+            system_message="""Sei un mentore spirituale cristiano saggio e compassionevole.
+Il tuo ruolo è:
+- Rispondere con saggezza biblica
+- Essere incoraggiante e amorevole
+- Citare versetti pertinenti
+- Mantenere un tono rispettoso
+- Se il contenuto è inappropriato, gentilmente reindirizza
+
+Rispondi in italiano."""
+        ).with_model("openai", "gpt-4o")
+        
+        prompt = f"Titolo del post: {post['title']}\n\nContenuto: {post['content']}\n\nCategoria: {post['category']}"
+        response = await chat.send_message(UserMessage(text=prompt))
+        
+        # Save AI mentor reply
+        mentor_reply = {
+            "reply_id": str(uuid.uuid4()),
+            "post_id": post_id,
+            "user_id": "ai_mentor",
+            "user_name": "🤖 Mentore AI",
+            "content": response,
+            "votes": 0,
+            "voters": [],
+            "is_ai_mentor": True,
+            "created_at": datetime.now(timezone.utc)
+        }
+        await db.forum_replies.insert_one(mentor_reply)
+        await db.forum_posts.update_one({"post_id": post_id}, {"$inc": {"replies_count": 1}})
+        
+        mentor_reply.pop("_id", None)
+        return mentor_reply
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Errore AI Mentor: {str(e)}")
+
+# ==================== MAPPE BIBLICHE ====================
+
+BIBLICAL_MAPS = {
+    "palestine": {
+        "id": "palestine",
+        "name": "Terra Santa",
+        "description": "La terra promessa ad Abramo e conquistata da Giosuè",
+        "center": {"lat": 31.7683, "lng": 35.2137},
+        "zoom": 8,
+        "locations": [
+            {"name": "Gerusalemme", "lat": 31.7683, "lng": 35.2137, "type": "city", "description": "La città santa, capitale del regno di Davide e luogo della crocifissione di Gesù"},
+            {"name": "Betlemme", "lat": 31.7054, "lng": 35.2024, "type": "city", "description": "Città natale di Gesù e del re Davide"},
+            {"name": "Nazaret", "lat": 32.6996, "lng": 35.3035, "type": "city", "description": "Città dove Gesù crebbe"},
+            {"name": "Mar di Galilea", "lat": 32.8231, "lng": 35.5831, "type": "water", "description": "Lago dove Gesù chiamò i primi discepoli e camminò sulle acque"},
+            {"name": "Gerico", "lat": 31.8711, "lng": 35.4442, "type": "city", "description": "Prima città conquistata da Giosuè"},
+            {"name": "Mar Morto", "lat": 31.5, "lng": 35.5, "type": "water", "description": "Il punto più basso della terra, vicino a Sodoma e Gomorra"},
+            {"name": "Monte degli Ulivi", "lat": 31.778, "lng": 35.245, "type": "mountain", "description": "Luogo dell'ascensione di Gesù"},
+            {"name": "Giordano", "lat": 32.0, "lng": 35.55, "type": "river", "description": "Fiume dove Gesù fu battezzato"},
+        ]
+    },
+    "exodus": {
+        "id": "exodus",
+        "name": "Viaggio dell'Esodo",
+        "description": "Il percorso degli Israeliti dall'Egitto alla Terra Promessa",
+        "center": {"lat": 29.5, "lng": 33.0},
+        "zoom": 6,
+        "locations": [
+            {"name": "Ramses (Egitto)", "lat": 30.79, "lng": 31.83, "type": "city", "description": "Punto di partenza dell'Esodo"},
+            {"name": "Mar Rosso", "lat": 28.0, "lng": 34.0, "type": "water", "description": "Mare diviso da Mosè"},
+            {"name": "Monte Sinai", "lat": 28.5392, "lng": 33.9756, "type": "mountain", "description": "Dove Mosè ricevette i Dieci Comandamenti"},
+            {"name": "Cades-Barnea", "lat": 30.6, "lng": 34.4, "type": "city", "description": "Luogo dove gli Israeliti vagarono per 40 anni"},
+            {"name": "Monte Nebo", "lat": 31.767, "lng": 35.725, "type": "mountain", "description": "Dove Mosè vide la Terra Promessa"},
+        ]
+    },
+    "paul_journeys": {
+        "id": "paul_journeys",
+        "name": "Viaggi Missionari di Paolo",
+        "description": "I tre viaggi missionari dell'apostolo Paolo",
+        "center": {"lat": 38.0, "lng": 30.0},
+        "zoom": 5,
+        "locations": [
+            {"name": "Antiochia", "lat": 36.2, "lng": 36.16, "type": "city", "description": "Base dei viaggi missionari di Paolo"},
+            {"name": "Tarso", "lat": 36.9167, "lng": 34.8833, "type": "city", "description": "Città natale di Paolo"},
+            {"name": "Efeso", "lat": 37.9394, "lng": 27.3417, "type": "city", "description": "Centro del ministero di Paolo in Asia"},
+            {"name": "Corinto", "lat": 37.9061, "lng": 22.8783, "type": "city", "description": "Dove Paolo fondò una chiesa importante"},
+            {"name": "Atene", "lat": 37.9838, "lng": 23.7275, "type": "city", "description": "Dove Paolo predicò all'Areopago"},
+            {"name": "Roma", "lat": 41.9028, "lng": 12.4964, "type": "city", "description": "Destinazione finale di Paolo"},
+            {"name": "Filippi", "lat": 41.0128, "lng": 24.2875, "type": "city", "description": "Prima chiesa in Europa"},
+        ]
+    },
+    "jesus_ministry": {
+        "id": "jesus_ministry",
+        "name": "Ministero di Gesù",
+        "description": "I luoghi principali del ministero terreno di Gesù",
+        "center": {"lat": 32.5, "lng": 35.3},
+        "zoom": 9,
+        "locations": [
+            {"name": "Cafarnao", "lat": 32.8814, "lng": 35.5753, "type": "city", "description": "Centro del ministero di Gesù in Galilea"},
+            {"name": "Cana", "lat": 32.8267, "lng": 35.3433, "type": "city", "description": "Primo miracolo: acqua in vino"},
+            {"name": "Monte delle Beatitudini", "lat": 32.8811, "lng": 35.5553, "type": "mountain", "description": "Sermone sul Monte"},
+            {"name": "Tabga", "lat": 32.8739, "lng": 35.5467, "type": "city", "description": "Moltiplicazione dei pani e pesci"},
+            {"name": "Cesarea di Filippo", "lat": 33.2489, "lng": 35.6931, "type": "city", "description": "Confessione di Pietro"},
+            {"name": "Getsemani", "lat": 31.7794, "lng": 35.2397, "type": "site", "description": "Dove Gesù pregò prima dell'arresto"},
+            {"name": "Golgota", "lat": 31.7789, "lng": 35.2297, "type": "site", "description": "Luogo della crocifissione"},
+        ]
+    }
+}
+
+@api_router.get("/maps")
+async def get_available_maps():
+    """Get list of available biblical maps"""
+    return [
+        {
+            "id": map_data["id"],
+            "name": map_data["name"],
+            "description": map_data["description"],
+            "locations_count": len(map_data["locations"])
+        }
+        for map_data in BIBLICAL_MAPS.values()
+    ]
+
+@api_router.get("/maps/{map_id}")
+async def get_map_data(map_id: str):
+    """Get full map data with locations"""
+    if map_id not in BIBLICAL_MAPS:
+        raise HTTPException(status_code=404, detail="Mappa non trovata")
+    return BIBLICAL_MAPS[map_id]
+
+@api_router.get("/maps/{map_id}/location/{location_name}")
+async def get_location_details(map_id: str, location_name: str):
+    """Get AI-generated details about a biblical location"""
+    if map_id not in BIBLICAL_MAPS:
+        raise HTTPException(status_code=404, detail="Mappa non trovata")
+    
+    location = None
+    for loc in BIBLICAL_MAPS[map_id]["locations"]:
+        if loc["name"].lower() == location_name.lower():
+            location = loc
+            break
+    
+    if not location:
+        raise HTTPException(status_code=404, detail="Luogo non trovato")
+    
+    try:
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=f"map_location_{map_id}_{location_name}",
+            system_message="Sei una guida biblica esperta. Fornisci informazioni storiche e bibliche sui luoghi."
+        ).with_model("openai", "gpt-4o")
+        
+        response = await chat.send_message(UserMessage(
+            text=f"Parlami del luogo biblico '{location['name']}' in modo breve ma informativo. Includi eventi biblici importanti e versetti chiave."
+        ))
+        
+        return {
+            **location,
+            "detailed_description": response
+        }
+    except Exception as e:
+        return {
+            **location,
+            "detailed_description": location["description"]
+        }
+
+# ==================== EVENTI LIVE ====================
+
+class LiveEventCreate(BaseModel):
+    title: str
+    description: str
+    event_type: str  # reading, worship, prayer, study
+    scheduled_at: datetime
+    duration_minutes: int = 60
+    bible_book: Optional[str] = None
+    bible_chapter: Optional[int] = None
+
+@api_router.post("/events")
+async def create_live_event(data: LiveEventCreate, user: User = Depends(require_auth)):
+    """Create a live synchronized event"""
+    event = {
+        "event_id": str(uuid.uuid4()),
+        "creator_id": user.user_id,
+        "creator_name": user.name,
+        "title": data.title,
+        "description": data.description,
+        "event_type": data.event_type,
+        "scheduled_at": data.scheduled_at,
+        "duration_minutes": data.duration_minutes,
+        "bible_book": data.bible_book,
+        "bible_chapter": data.bible_chapter,
+        "participants": [user.user_id],
+        "status": "scheduled",  # scheduled, live, ended
+        "created_at": datetime.now(timezone.utc)
+    }
+    
+    await db.live_events.insert_one(event)
+    event.pop("_id", None)
+    return event
+
+@api_router.get("/events")
+async def get_live_events(status: Optional[str] = None):
+    """Get live events"""
+    query = {}
+    if status:
+        query["status"] = status
+    else:
+        # By default, show upcoming and live events
+        query["status"] = {"$in": ["scheduled", "live"]}
+    
+    events = await db.live_events.find(query, {"_id": 0}).sort("scheduled_at", 1).to_list(50)
+    return events
+
+@api_router.get("/events/{event_id}")
+async def get_event(event_id: str):
+    """Get single event details"""
+    event = await db.live_events.find_one({"event_id": event_id}, {"_id": 0})
+    if not event:
+        raise HTTPException(status_code=404, detail="Evento non trovato")
+    return event
+
+@api_router.post("/events/{event_id}/join")
+async def join_event(event_id: str, user: User = Depends(require_auth)):
+    """Join a live event"""
+    event = await db.live_events.find_one({"event_id": event_id})
+    if not event:
+        raise HTTPException(status_code=404, detail="Evento non trovato")
+    
+    if user.user_id not in event.get("participants", []):
+        await db.live_events.update_one(
+            {"event_id": event_id},
+            {"$push": {"participants": user.user_id}}
+        )
+    
+    return {"success": True, "message": "Iscritto all'evento"}
+
+@api_router.post("/events/{event_id}/start")
+async def start_event(event_id: str, user: User = Depends(require_auth)):
+    """Start a live event (creator only)"""
+    event = await db.live_events.find_one({"event_id": event_id})
+    if not event:
+        raise HTTPException(status_code=404, detail="Evento non trovato")
+    
+    if event["creator_id"] != user.user_id:
+        raise HTTPException(status_code=403, detail="Solo il creatore può avviare l'evento")
+    
+    await db.live_events.update_one(
+        {"event_id": event_id},
+        {"$set": {"status": "live", "started_at": datetime.now(timezone.utc)}}
+    )
+    
+    return {"success": True, "status": "live"}
+
+@api_router.post("/events/{event_id}/end")
+async def end_event(event_id: str, user: User = Depends(require_auth)):
+    """End a live event"""
+    event = await db.live_events.find_one({"event_id": event_id})
+    if not event:
+        raise HTTPException(status_code=404, detail="Evento non trovato")
+    
+    if event["creator_id"] != user.user_id:
+        raise HTTPException(status_code=403, detail="Solo il creatore può terminare l'evento")
+    
+    await db.live_events.update_one(
+        {"event_id": event_id},
+        {"$set": {"status": "ended", "ended_at": datetime.now(timezone.utc)}}
+    )
+    
+    return {"success": True, "status": "ended"}
+
+# ==================== FAQ E AIUTO ====================
+
+FAQ_DATA = [
+    {
+        "id": "faq1",
+        "category": "generale",
+        "question": "Cos'è Cibo Spirituale?",
+        "answer": "Cibo Spirituale è un'app cristiana evangelica per la crescita spirituale. Include lettura della Bibbia (Nuova Diodati e Reina Valera), assistente AI spirituale, diario personale, quiz biblici, dizionario dei termini antichi, e una comunità di credenti."
+    },
+    {
+        "id": "faq2",
+        "category": "bibbia",
+        "question": "Quali traduzioni bibliche sono disponibili?",
+        "answer": "L'app include la Nuova Diodati (italiano) e Reina Valera 1960 (spagnolo). Altre traduzioni saranno aggiunte in futuro."
+    },
+    {
+        "id": "faq3",
+        "category": "account",
+        "question": "Come posso cancellare il mio account?",
+        "answer": "Puoi richiedere la cancellazione del tuo account contattandoci a andrehangar@live.it. I tuoi dati saranno rimossi entro 30 giorni."
+    },
+    {
+        "id": "faq4",
+        "category": "donazioni",
+        "question": "Come posso sostenere l'app?",
+        "answer": "Puoi fare una donazione tramite PayPal (andrehangar@live.it) o bonifico bancario. Le donazioni aiutano a mantenere l'app gratuita e ad aggiungere nuove funzionalità."
+    },
+    {
+        "id": "faq5",
+        "category": "community",
+        "question": "Come funziona il forum?",
+        "answer": "Il forum permette di discutere, condividere testimonianze, fare domande bibliche e richiedere preghiere. Un mentore AI modera le discussioni per mantenere un ambiente rispettoso."
+    },
+    {
+        "id": "faq6",
+        "category": "studio",
+        "question": "Cosa sono i quiz biblici?",
+        "answer": "I quiz biblici sono test interattivi per verificare e approfondire la tua conoscenza della Bibbia. Ogni risposta include spiegazioni e riferimenti ai versetti."
+    },
+    {
+        "id": "faq7",
+        "category": "studio",
+        "question": "Come funziona il dizionario biblico?",
+        "answer": "Il dizionario spiega i termini originali ebraici e greci con le loro radici semantiche, pronuncia, significato e versetti di riferimento."
+    },
+    {
+        "id": "faq8",
+        "category": "eventi",
+        "question": "Cosa sono gli eventi live?",
+        "answer": "Gli eventi live permettono di partecipare a letture bibliche sincronizzate, momenti di lode e preghiera comunitaria con altri utenti dell'app."
+    }
+]
+
+@api_router.get("/faq")
+async def get_faq(category: Optional[str] = None):
+    """Get FAQ items"""
+    if category:
+        return [f for f in FAQ_DATA if f["category"] == category]
+    return FAQ_DATA
+
+@api_router.get("/faq/categories")
+async def get_faq_categories():
+    """Get FAQ categories"""
+    categories = set(f["category"] for f in FAQ_DATA)
+    category_names = {
+        "generale": "Generale",
+        "bibbia": "Bibbia",
+        "account": "Account",
+        "donazioni": "Donazioni",
+        "community": "Community",
+        "studio": "Studio",
+        "eventi": "Eventi"
+    }
+    return [{"id": c, "name": category_names.get(c, c.title())} for c in categories]
+
+@api_router.post("/support/contact")
+async def contact_support(request: Request, user: User = Depends(require_auth)):
+    """Send support message"""
+    body = await request.json()
+    message = body.get("message", "")
+    
+    support_ticket = {
+        "ticket_id": str(uuid.uuid4()),
+        "user_id": user.user_id,
+        "user_email": user.email,
+        "user_name": user.name,
+        "message": message,
+        "status": "open",
+        "created_at": datetime.now(timezone.utc)
+    }
+    
+    await db.support_tickets.insert_one(support_ticket)
+    
+    return {"success": True, "message": "Messaggio inviato! Ti risponderemo presto.", "ticket_id": support_ticket["ticket_id"]}
+
 # ==================== HEALTH CHECK ====================
 
 @api_router.get("/")
