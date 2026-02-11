@@ -933,6 +933,197 @@ async def get_chapter(book: str, chapter: int, lang: str = "it"):
     
     return {"book": book, "chapter": chapter, "verses": verses, "language": lang}
 
+# ==================== BIBLE STUDY TOOLS ====================
+
+# Cross-references - Versetti correlati
+CROSS_REFERENCES = {
+    "Genesi:1:1": [
+        {"ref": "Giovanni 1:1-3", "text": "Nel principio era la Parola..."},
+        {"ref": "Colossesi 1:16", "text": "Poiché in lui sono state create tutte le cose"},
+        {"ref": "Ebrei 11:3", "text": "Per fede comprendiamo che l'universo è stato formato dalla parola di Dio"},
+        {"ref": "Salmi 33:6", "text": "I cieli furono fatti dalla parola dell'Eterno"},
+    ],
+    "Genesi:1:26": [
+        {"ref": "Genesi 5:1", "text": "Nel giorno che Dio creò l'uomo, lo fece a somiglianza di Dio"},
+        {"ref": "1 Corinzi 11:7", "text": "L'uomo è immagine e gloria di Dio"},
+        {"ref": "Colossesi 3:10", "text": "Rivestiti del nuovo uomo che si va rinnovando"},
+    ],
+    "Salmi:23:1": [
+        {"ref": "Giovanni 10:11", "text": "Io sono il buon pastore; il buon pastore dà la sua vita per le pecore"},
+        {"ref": "Ezechiele 34:11-12", "text": "Io stesso cercherò le mie pecore"},
+        {"ref": "Isaia 40:11", "text": "Come un pastore, egli pascerà il suo gregge"},
+    ],
+    "Giovanni:3:16": [
+        {"ref": "Romani 5:8", "text": "Ma Dio dimostra il suo amore verso di noi"},
+        {"ref": "1 Giovanni 4:9-10", "text": "In questo si è manifestato l'amore di Dio"},
+        {"ref": "Giovanni 1:14", "text": "E la Parola si è fatta carne"},
+    ],
+    "Giovanni:14:6": [
+        {"ref": "Atti 4:12", "text": "Non c'è salvezza in nessun altro"},
+        {"ref": "1 Timoteo 2:5", "text": "C'è un solo mediatore fra Dio e gli uomini"},
+        {"ref": "Ebrei 10:19-20", "text": "Una via nuova e vivente"},
+    ],
+    "Romani:8:28": [
+        {"ref": "Geremia 29:11", "text": "Io so i pensieri che ho per voi"},
+        {"ref": "Efesini 1:11", "text": "Secondo il proponimento di colui che opera tutte le cose"},
+        {"ref": "Genesi 50:20", "text": "Voi avete pensato del male contro di me; ma Dio ha pensato di farlo servire al bene"},
+    ],
+    "Filippesi:4:13": [
+        {"ref": "2 Corinzi 12:9", "text": "La mia grazia ti basta"},
+        {"ref": "Giovanni 15:5", "text": "Senza di me non potete far nulla"},
+        {"ref": "Isaia 40:31", "text": "Quelli che sperano nell'Eterno acquistano nuove forze"},
+    ],
+}
+
+# Termini chiave collegati al dizionario
+VERSE_DICTIONARY_LINKS = {
+    "Genesi:1:1": ["elohim"],
+    "Genesi:1:2": ["ruach"],
+    "Genesi:2:7": ["ruach"],
+    "Salmi:23:1": ["yhwh", "shalom"],
+    "Giovanni:1:1": ["logos"],
+    "Giovanni:3:16": ["agape"],
+    "Romani:8:28": ["agape"],
+    "1 Corinzi:13:4": ["agape"],
+    "Salmi:136:1": ["chesed"],
+    "Numeri:6:26": ["shalom"],
+}
+
+# Studio contestuale - Contesto storico e note
+STUDY_CONTEXT = {
+    "Genesi:1": {
+        "historical_context": "Il racconto della creazione in Genesi presenta una visione teologica dell'origine dell'universo, distinta dai miti cosmogonici delle culture circostanti (Babilonese, Egiziana). Scritto probabilmente durante o dopo l'esilio babilonese.",
+        "literary_structure": "Struttura settenaria con formula ripetitiva: 'Dio disse... e fu così... Dio vide che era buono'. I sei giorni mostrano un parallelismo: giorni 1-3 (separazione), giorni 4-6 (riempimento).",
+        "key_themes": ["Sovranità di Dio", "Bontà della creazione", "Dignità dell'uomo", "Riposo sabbatico"],
+        "application": "La creazione testimonia la potenza e la sapienza di Dio. L'uomo, creato a immagine di Dio, ha responsabilità di cura verso il creato."
+    },
+    "Salmi:23": {
+        "historical_context": "Salmo attribuito a Davide, probabilmente composto riflettendo sulla sua esperienza come pastore di pecore a Betlemme prima di diventare re. Uno dei salmi più amati nella storia della Chiesa.",
+        "literary_structure": "Due metafore principali: il pastore (vv. 1-4) e l'ospite (vv. 5-6). Cambio dal 'lui' al 'tu' indica intimità crescente con Dio.",
+        "key_themes": ["Provvidenza divina", "Guida spirituale", "Protezione nella prova", "Comunione con Dio"],
+        "application": "Il Signore provvede a tutti i nostri bisogni. Anche nelle difficoltà ('valle dell'ombra'), possiamo confidare nella Sua presenza."
+    },
+    "Giovanni:3": {
+        "historical_context": "Dialogo notturno tra Gesù e Nicodemo, un fariseo membro del Sinedrio. Ambientato probabilmente a Gerusalemme durante la Pasqua (Giovanni 2:23).",
+        "literary_structure": "Dialogo che procede per incomprensioni: Nicodemo interpreta letteralmente, Gesù parla spiritualmente. Culmina nella dichiarazione teologica di 3:16.",
+        "key_themes": ["Nuova nascita", "Fede in Cristo", "Amore di Dio", "Vita eterna vs condanna"],
+        "application": "La salvezza richiede una trasformazione radicale (nuova nascita) operata dallo Spirito Santo. Giovanni 3:16 riassume l'intero vangelo."
+    },
+    "Romani:8": {
+        "historical_context": "Lettera scritta da Paolo da Corinto (ca. 57 d.C.) alla chiesa di Roma che non aveva fondato. Capitolo 8 rappresenta il culmine della sezione dottrinale.",
+        "literary_structure": "Struttura: vita nello Spirito (1-17), sofferenza presente vs gloria futura (18-30), inno di trionfo (31-39).",
+        "key_themes": ["Nessuna condanna", "Vita nello Spirito", "Adozione filiale", "Perseveranza dei santi", "Amore inseparabile di Dio"],
+        "application": "Chi è in Cristo non è più sotto condanna. Lo Spirito ci guida, intercede per noi, e nulla può separarci dall'amore di Dio."
+    },
+}
+
+class StudyNoteCreate(BaseModel):
+    book: str
+    chapter: int
+    verse: Optional[int] = None
+    note: str
+    highlight_color: Optional[str] = None
+    tags: List[str] = []
+
+@api_router.get("/bible/study/{book}/{chapter}")
+async def get_study_data(book: str, chapter: int, verse: Optional[int] = None, user: User = Depends(require_auth)):
+    """Get study tools for a chapter/verse"""
+    chapter_key = f"{book}:{chapter}"
+    
+    # Get cross-references
+    cross_refs = {}
+    for key, refs in CROSS_REFERENCES.items():
+        if key.startswith(chapter_key):
+            cross_refs[key] = refs
+    
+    # Get dictionary links
+    dict_links = {}
+    for key, terms in VERSE_DICTIONARY_LINKS.items():
+        if key.startswith(chapter_key):
+            dict_links[key] = terms
+    
+    # Get study context
+    context = STUDY_CONTEXT.get(chapter_key, None)
+    
+    # Get user's personal notes
+    user_notes = await db.study_notes.find(
+        {"user_id": user.user_id, "book": book, "chapter": chapter},
+        {"_id": 0}
+    ).to_list(100)
+    
+    return {
+        "book": book,
+        "chapter": chapter,
+        "cross_references": cross_refs,
+        "dictionary_links": dict_links,
+        "study_context": context,
+        "user_notes": user_notes
+    }
+
+@api_router.post("/bible/study/notes")
+async def create_study_note(data: StudyNoteCreate, user: User = Depends(require_auth)):
+    """Create a personal study note"""
+    note = {
+        "note_id": str(uuid.uuid4()),
+        "user_id": user.user_id,
+        "book": data.book,
+        "chapter": data.chapter,
+        "verse": data.verse,
+        "note": data.note,
+        "highlight_color": data.highlight_color,
+        "tags": data.tags,
+        "created_at": datetime.now(timezone.utc),
+        "updated_at": datetime.now(timezone.utc)
+    }
+    
+    await db.study_notes.insert_one(note)
+    note.pop("_id", None)
+    return note
+
+@api_router.get("/bible/study/notes")
+async def get_all_study_notes(user: User = Depends(require_auth)):
+    """Get all user's study notes"""
+    notes = await db.study_notes.find(
+        {"user_id": user.user_id},
+        {"_id": 0}
+    ).sort("created_at", -1).to_list(500)
+    return notes
+
+@api_router.delete("/bible/study/notes/{note_id}")
+async def delete_study_note(note_id: str, user: User = Depends(require_auth)):
+    """Delete a study note"""
+    result = await db.study_notes.delete_one({"note_id": note_id, "user_id": user.user_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Nota non trovata")
+    return {"success": True}
+
+@api_router.post("/bible/study/ai-explain")
+async def ai_explain_verse(request: Request, user: User = Depends(require_auth)):
+    """AI explanation of a verse"""
+    body = await request.json()
+    verse_ref = body.get("verse_ref", "")
+    verse_text = body.get("verse_text", "")
+    question = body.get("question", "Spiega questo versetto")
+    
+    try:
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=f"study_{user.user_id}_{uuid.uuid4().hex[:8]}",
+            system_message="""Sei un teologo e biblista cristiano evangelico esperto. Spiega i versetti biblici in modo:
+- Fedele al testo originale (ebraico/greco quando rilevante)
+- Contestualizzato storicamente e culturalmente
+- Applicabile alla vita quotidiana
+- Con riferimenti ad altri versetti correlati
+Rispondi in italiano in modo chiaro e accessibile."""
+        ).with_model("openai", "gpt-4o")
+        
+        prompt = f"Versetto: {verse_ref}\nTesto: {verse_text}\n\nDomanda: {question}"
+        response = await chat.send_message(UserMessage(text=prompt))
+        
+        return {"explanation": response}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Errore AI: {str(e)}")
+
 @api_router.get("/bible/daily-verse")
 async def get_daily_verse(lang: str = "it"):
     """Get daily verse in specified language"""
