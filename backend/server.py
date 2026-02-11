@@ -899,45 +899,56 @@ async def fetch_from_laparola(book: str, chapter: int, version: str = "Nuova+Dio
         async with httpx.AsyncClient(timeout=15.0) as client:
             response = await client.get(url)
             if response.status_code != 200:
+                logger.error(f"laparola.net returned status {response.status_code}")
                 return []
             
-            soup = BeautifulSoup(response.text, 'html.parser')
+            html_content = response.text
             
-            # Find the chapter content
+            # Find the brano div content
+            brano_match = re.search(r'<div id="brano">(.*?)</div><!-- RESULT LIST END -->', html_content, re.DOTALL)
+            if not brano_match:
+                logger.warning("Could not find brano div in laparola.net response")
+                return []
+            
+            brano_content = brano_match.group(1)
+            
+            # Extract verses using <strong>number</strong> pattern
+            # Pattern: <strong>1</strong>&nbsp;text until next <strong> or end
+            verse_pattern = r'<strong>(\d+)</strong>&nbsp;(.*?)(?=<strong>\d+</strong>|<br\s*/?>|</p>|$)'
+            matches = re.findall(verse_pattern, brano_content, re.DOTALL)
+            
             verses = []
-            
-            # The verses are in the main content area with bold verse numbers
-            content = soup.find('div', class_='testo') or soup.find('body')
-            if not content:
-                return []
-            
-            # Get all text and parse verse numbers
-            text_content = str(content)
-            
-            # Pattern to match verses: **1** text **2** text etc.
-            verse_pattern = r'\*\*(\d+)\*\*\s*([^*]+?)(?=\*\*\d+\*\*|$)'
-            matches = re.findall(verse_pattern, text_content, re.DOTALL)
-            
-            if not matches:
-                # Try alternative pattern for HTML bold tags
-                verse_pattern = r'<b>(\d+)</b>\s*([^<]+?)(?=<b>\d+</b>|<h|</div|$)'
-                matches = re.findall(verse_pattern, text_content, re.DOTALL)
-            
             for match in matches:
                 verse_num = int(match[0])
                 verse_text = match[1].strip()
-                # Clean up the text
+                
+                # Clean up HTML entities and tags
                 verse_text = re.sub(r'<[^>]+>', '', verse_text)  # Remove HTML tags
-                verse_text = re.sub(r'_([^_]+)_', r'\1', verse_text)  # Remove markdown italics
-                verse_text = verse_text.strip()
-                if verse_text and len(verse_text) > 5:
+                verse_text = verse_text.replace('&nbsp;', ' ')
+                verse_text = verse_text.replace('&laquo;', '«')
+                verse_text = verse_text.replace('&raquo;', '»')
+                verse_text = verse_text.replace('&egrave;', 'è')
+                verse_text = verse_text.replace('&eacute;', 'é')
+                verse_text = verse_text.replace('&igrave;', 'ì')
+                verse_text = verse_text.replace('&ograve;', 'ò')
+                verse_text = verse_text.replace('&ugrave;', 'ù')
+                verse_text = verse_text.replace('&agrave;', 'à')
+                verse_text = verse_text.replace('&Egrave;', 'È')
+                verse_text = verse_text.replace('&#39;', "'")
+                verse_text = re.sub(r'&[a-z]+;', '', verse_text)  # Remove remaining entities
+                verse_text = ' '.join(verse_text.split())  # Normalize whitespace
+                
+                if verse_text and len(verse_text) > 3:
                     verses.append({"verse": verse_num, "text": verse_text})
             
-            # Sort by verse number
+            # Sort by verse number and return
             verses.sort(key=lambda x: x["verse"])
+            logger.info(f"Fetched {len(verses)} verses from laparola.net for {book} {chapter}")
             return verses
             
     except Exception as e:
+        logger.error(f"Error fetching from laparola.net: {e}")
+        return []
         logger.error(f"Error fetching from laparola.net: {e}")
         return []
 
