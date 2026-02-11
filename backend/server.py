@@ -889,19 +889,48 @@ async def get_bible_books(lang: str = "it"):
 @api_router.get("/bible/chapter/{book}/{chapter}")
 async def get_chapter(book: str, chapter: int, lang: str = "it"):
     """Get verses for a chapter in specified language"""
-    verses_dict = SAMPLE_VERSES_MULTILANG.get(lang, SAMPLE_VERSES_MULTILANG["it"])
     key = f"{book}:{chapter}"
     
-    if key in verses_dict:
-        return {"book": book, "chapter": chapter, "verses": verses_dict[key], "language": lang}
+    # First try the real Bible data (Nuova Diodati or Reina Valera)
+    if lang == "it":
+        verses = NUOVA_DIODATI.get(key, [])
+    elif lang == "es":
+        verses = REINA_VALERA_1960.get(key, [])
+    else:
+        # For other languages, try sample verses or Italian as fallback
+        verses_dict = SAMPLE_VERSES_MULTILANG.get(lang, SAMPLE_VERSES_MULTILANG.get("it", {}))
+        verses = verses_dict.get(key, [])
     
-    # Generate sample verses
+    if verses:
+        return {"book": book, "chapter": chapter, "verses": verses, "language": lang}
+    
+    # Check if we have it in sample verses (for other languages)
+    verses_dict = SAMPLE_VERSES_MULTILANG.get(lang, SAMPLE_VERSES_MULTILANG.get("it", {}))
+    sample_key = f"{book}:{chapter}"
+    if sample_key in verses_dict:
+        return {"book": book, "chapter": chapter, "verses": verses_dict[sample_key], "language": lang}
+    
+    # Generate informative placeholder for chapters not yet in database
     verses = []
-    for i in range(1, min(20, chapter * 2)):
-        verses.append({
-            "verse": i,
-            "text": f"Versetto {i} di {book} capitolo {chapter}. (Contenuto di esempio)"
-        })
+    if lang == "it":
+        for i in range(1, 15):
+            verses.append({
+                "verse": i,
+                "text": f"[Nuova Diodati] {book} {chapter}:{i} - Questo capitolo sarà presto disponibile con il testo completo. Nel frattempo, consulta i capitoli principali come Genesi 1-3, Salmi 23, 91, Giovanni 1, 3, 14, Romani 8, Filippesi 4."
+            })
+    elif lang == "es":
+        for i in range(1, 15):
+            verses.append({
+                "verse": i,
+                "text": f"[Reina Valera 1960] {book} {chapter}:{i} - Este capítulo estará disponible pronto con el texto completo. Mientras tanto, consulta los capítulos principales como Génesis 1, Salmos 23, 91, Juan 3, 14, Romanos 8, Filipenses 4."
+            })
+    else:
+        for i in range(1, 15):
+            verses.append({
+                "verse": i,
+                "text": f"{book} {chapter}:{i} - This chapter will be available soon."
+            })
+    
     return {"book": book, "chapter": chapter, "verses": verses, "language": lang}
 
 @api_router.get("/bible/daily-verse")
