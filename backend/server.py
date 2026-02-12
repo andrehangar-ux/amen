@@ -1409,18 +1409,67 @@ async def ai_explain_verse(request: Request, user: User = Depends(require_auth))
     body = await request.json()
     verse_ref = body.get("verse_ref", "")
     verse_text = body.get("verse_text", "")
-    question = body.get("question", "Spiega questo versetto")
+    question = body.get("question")
+    language = body.get("language", "it")
+    
+    # System prompts for each language
+    system_prompts = {
+        "it": """Sei un teologo e biblista cristiano evangelico esperto. Spiega i versetti biblici in modo:
+- Fedele al testo originale (ebraico/greco quando rilevante)
+- Contestualizzato storicamente e culturalmente
+- Applicabile alla vita quotidiana
+- Con riferimenti ad altri versetti correlati
+Rispondi in ITALIANO in modo chiaro e accessibile.""",
+        "es": """Eres un teólogo y biblista cristiano evangélico experto. Explica los versículos bíblicos de manera:
+- Fiel al texto original (hebreo/griego cuando sea relevante)
+- Contextualizado histórica y culturalmente
+- Aplicable a la vida cotidiana
+- Con referencias a otros versículos relacionados
+Responde en ESPAÑOL de manera clara y accesible.""",
+        "en": """You are an expert evangelical Christian theologian and biblical scholar. Explain Bible verses:
+- Faithful to the original text (Hebrew/Greek when relevant)
+- Historically and culturally contextualized
+- Applicable to daily life
+- With references to other related verses
+Answer in ENGLISH clearly and accessibly.""",
+        "de": """Du bist ein erfahrener evangelikaler christlicher Theologe und Bibelwissenschaftler. Erkläre Bibelverse:
+- Treu zum Originaltext (Hebräisch/Griechisch wenn relevant)
+- Historisch und kulturell kontextualisiert
+- Anwendbar auf das tägliche Leben
+- Mit Verweisen auf andere verwandte Verse
+Antworte auf DEUTSCH klar und verständlich.""",
+        "fr": """Tu es un théologien et bibliste chrétien évangélique expert. Explique les versets bibliques de manière:
+- Fidèle au texte original (hébreu/grec si pertinent)
+- Contextualisé historiquement et culturellement
+- Applicable à la vie quotidienne
+- Avec des références à d'autres versets connexes
+Réponds en FRANÇAIS de manière claire et accessible.""",
+        "pt": """Você é um teólogo e estudioso bíblico cristão evangélico experiente. Explique os versículos bíblicos:
+- Fiel ao texto original (hebraico/grego quando relevante)
+- Contextualizado histórica e culturalmente
+- Aplicável à vida cotidiana
+- Com referências a outros versículos relacionados
+Responda em PORTUGUÊS de forma clara e acessível."""
+    }
+    
+    # Default questions for each language
+    default_questions = {
+        "it": "Spiega questo versetto",
+        "es": "Explica este versículo",
+        "en": "Explain this verse",
+        "de": "Erkläre diesen Vers",
+        "fr": "Explique ce verset",
+        "pt": "Explique este versículo"
+    }
+    
+    if not question:
+        question = default_questions.get(language, default_questions["it"])
     
     try:
         chat = LlmChat(
             api_key=EMERGENT_LLM_KEY,
             session_id=f"study_{user.user_id}_{uuid.uuid4().hex[:8]}",
-            system_message="""Sei un teologo e biblista cristiano evangelico esperto. Spiega i versetti biblici in modo:
-- Fedele al testo originale (ebraico/greco quando rilevante)
-- Contestualizzato storicamente e culturalmente
-- Applicabile alla vita quotidiana
-- Con riferimenti ad altri versetti correlati
-Rispondi in italiano in modo chiaro e accessibile."""
+            system_message=system_prompts.get(language, system_prompts["it"])
         ).with_model("openai", "gpt-4o")
         
         prompt = f"Versetto: {verse_ref}\nTesto: {verse_text}\n\nDomanda: {question}"
