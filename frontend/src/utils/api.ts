@@ -99,6 +99,9 @@ export const api = {
   getProgress: () => api.fetch('/api/progress'),
   updateReadingProgress: () => api.fetch('/api/progress/reading', { method: 'POST' }),
 
+  // Account Management
+  deleteAccount: () => api.fetch('/api/auth/delete-account', { method: 'DELETE' }),
+
   // Groups
   getGroupTopics: () => api.fetch('/api/groups/topics'),
   createGroup: (data: { name: string; description: string; topic: string; is_public?: boolean; language?: string }) =>
