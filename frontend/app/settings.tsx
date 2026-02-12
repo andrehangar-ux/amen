@@ -373,14 +373,24 @@ Questi termini sono regolati dalla legge italiana.`,
 
           <TouchableOpacity 
             style={styles.legalItem}
-            onPress={() => Alert.alert(
-              'Consensi GDPR',
-              'Gestisci i tuoi consensi per il trattamento dei dati secondo il GDPR.',
-              [
-                { text: 'Revoca Tutti i Consensi', style: 'destructive', onPress: () => Alert.alert('Consensi revocati', 'I tuoi consensi sono stati revocati. Alcune funzionalità potrebbero non funzionare.') },
-                { text: 'Mantieni Consensi', style: 'cancel' }
-              ]
-            )}
+            onPress={() => {
+              if (Platform.OS === 'web') {
+                const confirmed = window.confirm('Gestione Consensi GDPR\n\nVuoi revocare tutti i consensi per il trattamento dei dati? Alcune funzionalità potrebbero non funzionare.');
+                if (confirmed) {
+                  window.alert('Consensi revocati\n\nI tuoi consensi sono stati revocati.');
+                }
+              } else {
+                Alert.alert(
+                  'Consensi GDPR',
+                  'Gestisci i tuoi consensi per il trattamento dei dati secondo il GDPR.',
+                  [
+                    { text: 'Revoca Tutti i Consensi', style: 'destructive', onPress: () => Alert.alert('Consensi revocati', 'I tuoi consensi sono stati revocati. Alcune funzionalità potrebbero non funzionare.') },
+                    { text: 'Mantieni Consensi', style: 'cancel' }
+                  ]
+                );
+              }
+            }}
+            data-testid="gdpr-consent-button"
           >
             <Ionicons name="checkbox" size={22} color="#27AE60" />
             <Text style={styles.legalText}>Gestione Consensi GDPR</Text>
