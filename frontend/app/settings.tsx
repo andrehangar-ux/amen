@@ -340,7 +340,7 @@ Utilizzando questa app, accetti questa informativa.`
 
           <TouchableOpacity 
             style={styles.legalItem}
-            onPress={() => Alert.alert(
+            onPress={() => showInfoAlert(
               'Termini di Servizio',
               `TERMINI DI SERVIZIO - Amen! App
 
@@ -371,9 +371,9 @@ L'app è fornita "così com'è". Non garantiamo l'accuratezza dei contenuti AI.
 Ci riserviamo il diritto di modificare questi termini in qualsiasi momento.
 
 7. LEGGE APPLICABILE
-Questi termini sono regolati dalla legge italiana.`,
-              [{ text: 'Ho Capito', style: 'default' }]
+Questi termini sono regolati dalla legge italiana.`
             )}
+            data-testid="terms-of-service-button"
           >
             <Ionicons name="document-text" size={22} color={COLORS.accent} />
             <Text style={styles.legalText}>Termini di Servizio</Text>
