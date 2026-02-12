@@ -48,54 +48,67 @@ export default function LoginScreen() {
   const handleGoogleLogin = async () => {
     setLoading(true);
     try {
-      // Platform-specific redirect URL
+      // Per Expo Go, usiamo un redirect URL web che poi gestiremo
+      // Il redirect torna all'app tramite il tunnel
+      const appUrl = 'https://amen-ozzf.ngrok.io';
       const redirectUrl = Platform.OS === 'web'
-        ? window.location.origin + '/'  // Web: Use current origin
-        : Linking.createURL('auth-callback');  // Mobile: Use deep link with specific path
+        ? window.location.origin + '/auth-callback'
+        : `${appUrl}/auth-callback`;
 
       const authUrl = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`;
       
       console.log('Starting Google auth with redirect:', redirectUrl);
+      console.log('Auth URL:', authUrl);
       
       const result = await WebBrowser.openAuthSessionAsync(authUrl, redirectUrl);
       
-      console.log('Auth result:', result.type);
+      console.log('Auth result type:', result.type);
       
       if (result.type === 'success' && result.url) {
-        // Parse session_id from URL - check both hash and query
+        console.log('Full redirect URL:', result.url);
+        
+        // Parse session_id from URL - check multiple formats
         let sessionId = null;
         const url = result.url;
         
-        console.log('Processing redirect URL:', url);
+        // Try different parsing methods
+        const patterns = [
+          /#session_id=([^&]+)/,
+          /\?session_id=([^&]+)/,
+          /session_id=([^&]+)/
+        ];
         
-        // Check hash fragment first (#session_id=...)
-        if (url.includes('#session_id=')) {
-          sessionId = url.split('#session_id=')[1]?.split('&')[0];
-        } 
-        // Then check query parameter (?session_id=...)
-        else if (url.includes('?session_id=')) {
-          sessionId = url.split('?session_id=')[1]?.split('&')[0];
-        }
-        // Also check for session_id= without prefix (in case of weird URL parsing)
-        else if (url.includes('session_id=')) {
-          const match = url.match(/session_id=([^&]+)/);
-          if (match) sessionId = match[1];
+        for (const pattern of patterns) {
+          const match = url.match(pattern);
+          if (match) {
+            sessionId = match[1];
+            console.log('Found session_id with pattern:', pattern);
+            break;
+          }
         }
         
-        console.log('Extracted session_id:', sessionId ? 'found' : 'not found');
+        console.log('Session ID found:', sessionId ? 'yes' : 'no');
         
         if (sessionId) {
-          await googleLogin(sessionId);
-          router.replace('/(tabs)');
+          try {
+            await googleLogin(sessionId);
+            router.replace('/(tabs)');
+          } catch (loginError: any) {
+            console.error('Google login API error:', loginError);
+            Alert.alert('Errore', loginError.message || 'Errore durante il login con Google');
+          }
         } else {
-          Alert.alert('Errore', 'Sessione non trovata nella risposta');
+          console.error('No session_id in URL:', url);
+          Alert.alert('Errore', 'Sessione Google non trovata. Riprova.');
         }
       } else if (result.type === 'cancel') {
-        console.log('User cancelled login');
+        console.log('User cancelled Google login');
+      } else if (result.type === 'dismiss') {
+        console.log('Auth session dismissed');
       }
     } catch (error: any) {
       console.error('Google login error:', error);
-      Alert.alert('Errore', error.message || 'Login Google fallito');
+      Alert.alert('Errore', error.message || 'Login Google fallito. Verifica la connessione.');
     } finally {
       setLoading(false);
     }
