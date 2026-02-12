@@ -516,7 +516,7 @@ export default function BibleScreen() {
         <View style={styles.readingToolbar}>
           <TouchableOpacity 
             style={styles.toolbarButton}
-            onPress={() => setShowEditionModal(true)}
+            onPress={() => setShowEditionSelector(true)}
           >
             <Ionicons name="swap-horizontal" size={20} color={COLORS.accent} />
             <Text style={styles.toolbarButtonText}>Edizioni</Text>
