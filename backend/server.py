@@ -1133,29 +1133,30 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
     
     if lang in github_files:
         try:
+            logger.info(f"Fetching {lang} from GitHub...")
             # Check cache first
             cache_key = f"github_bible_{lang}"
             cached = await db.bible_full_cache.find_one({"cache_key": cache_key})
             
             bible_data = None
             if cached and cached.get("data"):
+                logger.info(f"Using cached data for {lang}")
                 bible_data = cached["data"]
             else:
                 # Fetch from GitHub
-                async with httpx.AsyncClient(timeout=30.0) as client:
+                logger.info(f"Downloading from GitHub: {github_files[lang]}")
+                async with httpx.AsyncClient(timeout=60.0) as client:
                     response = await client.get(github_files[lang])
+                    logger.info(f"GitHub response status: {response.status_code}")
                     if response.status_code == 200:
                         # Handle BOM in JSON files
                         content = response.text
                         if content.startswith('\ufeff'):
                             content = content[1:]
                         bible_data = json.loads(content)
-                        # Cache for future use
-                        await db.bible_full_cache.update_one(
-                            {"cache_key": cache_key},
-                            {"$set": {"data": bible_data, "cached_at": datetime.now(timezone.utc)}},
-                            upsert=True
-                        )
+                        logger.info(f"Loaded {len(bible_data)} books from GitHub")
+                        # Cache for future use (don't cache full Bible, too large)
+                        # Instead, cache individual chapters
             
             if bible_data:
                 book_abbrev = book_abbrevs.get(book, book.lower()[:2])
