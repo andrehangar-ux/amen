@@ -335,7 +335,8 @@ export default function QuizScreen() {
             <TouchableOpacity
               style={[styles.submitButton, submitting && styles.buttonDisabled]}
               onPress={submitQuiz}
-              disabled={submitting || Object.keys(answers).length !== questions.length}
+              disabled={submitting}
+              data-testid="quiz-submit-button"
             >
               {submitting ? (
                 <ActivityIndicator color="#fff" />
