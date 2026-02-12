@@ -211,41 +211,41 @@ export default function HomeScreen() {
 
         {/* Esplora Features */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Esplora</Text>
+          <Text style={styles.sectionTitle}>{t('explore')}</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.exploreScroll}>
             <TouchableOpacity style={styles.exploreCard} onPress={() => router.push('/quiz')}>
               <View style={[styles.exploreIcon, { backgroundColor: '#FF6B6B20' }]}>
                 <Ionicons name="help-circle" size={26} color="#FF6B6B" />
               </View>
-              <Text style={styles.exploreTitle}>Quiz Biblici</Text>
+              <Text style={styles.exploreTitle}>{t('quizzes')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.exploreCard} onPress={() => router.push('/dictionary')}>
               <View style={[styles.exploreIcon, { backgroundColor: '#4ECDC420' }]}>
                 <Ionicons name="language" size={26} color="#4ECDC4" />
               </View>
-              <Text style={styles.exploreTitle}>Dizionario</Text>
+              <Text style={styles.exploreTitle}>{t('dictionary')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.exploreCard} onPress={() => router.push('/forum')}>
               <View style={[styles.exploreIcon, { backgroundColor: '#9B59B620' }]}>
                 <Ionicons name="chatbubbles" size={26} color="#9B59B6" />
               </View>
-              <Text style={styles.exploreTitle}>Forum</Text>
+              <Text style={styles.exploreTitle}>{t('forum')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.exploreCard} onPress={() => router.push('/maps')}>
               <View style={[styles.exploreIcon, { backgroundColor: '#3498DB20' }]}>
                 <Ionicons name="map" size={26} color="#3498DB" />
               </View>
-              <Text style={styles.exploreTitle}>Mappe</Text>
+              <Text style={styles.exploreTitle}>{t('maps')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.exploreCard} onPress={() => router.push('/events')}>
               <View style={[styles.exploreIcon, { backgroundColor: '#E91E6320' }]}>
                 <Ionicons name="videocam" size={26} color="#E91E63" />
               </View>
-              <Text style={styles.exploreTitle}>Eventi Live</Text>
+              <Text style={styles.exploreTitle}>{t('liveEvents')}</Text>
             </TouchableOpacity>
           </ScrollView>
         </View>
