@@ -1054,6 +1054,33 @@ const styles = StyleSheet.create({
     padding: SPACING.lg,
     paddingBottom: 120,
   },
+  readingContainer: {
+    flex: 1,
+  },
+  readingToolbar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.md,
+    backgroundColor: COLORS.card,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.border,
+  },
+  toolbarButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: SPACING.xs,
+    paddingHorizontal: SPACING.sm,
+    backgroundColor: COLORS.background,
+    borderRadius: BORDER_RADIUS.md,
+    gap: 4,
+  },
+  toolbarButtonText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: COLORS.text,
+  },
   verseContainer: {
     flexDirection: 'row',
     marginBottom: SPACING.md,
