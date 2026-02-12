@@ -10,6 +10,7 @@ import {
   Modal,
   TextInput,
   Alert,
+  Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -19,6 +20,35 @@ import { router } from 'expo-router';
 import { api } from '../../src/utils/api';
 import { useLanguageStore } from '../../src/store/languageStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
+
+// Cross-platform TTS helper
+const speakText = (text: string, langCode: string, onEnd: () => void) => {
+  if (Platform.OS === 'web' && typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    // Use Web Speech API on web
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = langCode;
+    utterance.rate = 0.9;
+    utterance.onend = onEnd;
+    utterance.onerror = onEnd;
+    window.speechSynthesis.speak(utterance);
+  } else {
+    // Use expo-speech on native
+    Speech.speak(text, {
+      language: langCode,
+      onDone: onEnd,
+      onStopped: onEnd,
+    });
+  }
+};
+
+const stopSpeaking = () => {
+  if (Platform.OS === 'web' && typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  } else {
+    Speech.stop();
+  }
+};
 
 interface Book {
   name: string;
