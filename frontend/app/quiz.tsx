@@ -637,4 +637,132 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
+  // Category Selector Styles
+  categorySelector: {
+    flexDirection: 'row',
+    marginBottom: SPACING.lg,
+    gap: SPACING.sm,
+  },
+  categoryBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.md,
+    backgroundColor: COLORS.card,
+    borderRadius: BORDER_RADIUS.lg,
+    borderWidth: 2,
+    borderColor: COLORS.border,
+    gap: SPACING.xs,
+  },
+  categoryBtnActive: {
+    backgroundColor: COLORS.primary,
+    borderColor: COLORS.primary,
+  },
+  categoryBtnText: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: COLORS.text,
+  },
+  categoryBtnTextActive: {
+    color: '#fff',
+  },
+  emptyContainer: {
+    alignItems: 'center',
+    paddingVertical: SPACING.xl * 2,
+  },
+  emptyText: {
+    fontSize: 16,
+    color: COLORS.textMuted,
+    marginTop: SPACING.md,
+    textAlign: 'center',
+  },
+  // Corrections Styles
+  showCorrectionsBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: SPACING.md,
+    marginTop: SPACING.lg,
+    gap: SPACING.xs,
+  },
+  showCorrectionsBtnText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: COLORS.error,
+  },
+  correctionsContainer: {
+    marginTop: SPACING.md,
+    width: '100%',
+  },
+  correctionCard: {
+    backgroundColor: COLORS.card,
+    borderRadius: BORDER_RADIUS.lg,
+    padding: SPACING.md,
+    marginBottom: SPACING.md,
+    borderLeftWidth: 4,
+    borderLeftColor: COLORS.error,
+  },
+  correctionQuestion: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: COLORS.text,
+    marginBottom: SPACING.md,
+    lineHeight: 22,
+  },
+  answerRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: SPACING.sm,
+    flexWrap: 'wrap',
+  },
+  wrongAnswerLabel: {
+    fontSize: 13,
+    color: COLORS.error,
+    fontWeight: '600',
+    marginLeft: SPACING.xs,
+  },
+  wrongAnswerText: {
+    fontSize: 13,
+    color: COLORS.error,
+    flex: 1,
+  },
+  correctAnswerLabel: {
+    fontSize: 13,
+    color: COLORS.success,
+    fontWeight: '600',
+    marginLeft: SPACING.xs,
+  },
+  correctAnswerText: {
+    fontSize: 13,
+    color: COLORS.success,
+    flex: 1,
+  },
+  explanationBox: {
+    backgroundColor: COLORS.primary + '10',
+    borderRadius: BORDER_RADIUS.md,
+    padding: SPACING.sm,
+    marginTop: SPACING.sm,
+  },
+  explanationLabel: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: COLORS.primary,
+    marginBottom: 4,
+  },
+  explanationText: {
+    fontSize: 13,
+    color: COLORS.text,
+    lineHeight: 20,
+  },
+  verseRef: {
+    fontSize: 12,
+    color: COLORS.textMuted,
+    marginTop: SPACING.sm,
+    fontStyle: 'italic',
+  },
+  success: {
+    color: '#27AE60',
+  },
 });
