@@ -69,7 +69,7 @@ export default function HomeScreen() {
       const result = await api.moodCheckin(mood, currentLanguage);
       setMoodCheckinResult(result);
     } catch (error: any) {
-      Alert.alert('Errore', error.message);
+      Alert.alert(t('error'), error.message);
     }
   };
 
