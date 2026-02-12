@@ -50,6 +50,7 @@ interface QuizResult {
 }
 
 export default function QuizScreen() {
+  const { currentLanguage } = useLanguageStore();
   const [topics, setTopics] = useState<QuizTopic[]>([]);
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -58,10 +59,23 @@ export default function QuizScreen() {
   const [result, setResult] = useState<QuizResult | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [showCorrections, setShowCorrections] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<'base' | 'avanzato'>('base');
+
+  // Translations for UI
+  const translations: Record<string, Record<string, string>> = {
+    it: { title: 'Quiz Biblici', subtitle: 'Testa la tua conoscenza della Bibbia', questions: 'domande', back: 'Torna ai Quiz', submit: 'Invia Quiz', showErrors: 'Mostra Correzioni', hideErrors: 'Nascondi Correzioni', correct: 'Corretta', wrong: 'Sbagliata', yourAnswer: 'Tua risposta', correctAnswer: 'Risposta corretta', explanation: 'Spiegazione', verse: 'Versetto', base: 'Quiz Base', advanced: 'Studio Avanzato' },
+    es: { title: 'Cuestionarios Bíblicos', subtitle: 'Pon a prueba tu conocimiento de la Biblia', questions: 'preguntas', back: 'Volver', submit: 'Enviar', showErrors: 'Ver Correcciones', hideErrors: 'Ocultar', correct: 'Correcta', wrong: 'Incorrecta', yourAnswer: 'Tu respuesta', correctAnswer: 'Respuesta correcta', explanation: 'Explicación', verse: 'Versículo', base: 'Quiz Base', advanced: 'Estudio Avanzado' },
+    en: { title: 'Bible Quizzes', subtitle: 'Test your knowledge of the Bible', questions: 'questions', back: 'Back to Quizzes', submit: 'Submit', showErrors: 'Show Corrections', hideErrors: 'Hide Corrections', correct: 'Correct', wrong: 'Wrong', yourAnswer: 'Your answer', correctAnswer: 'Correct answer', explanation: 'Explanation', verse: 'Verse', base: 'Base Quiz', advanced: 'Advanced Study' },
+    de: { title: 'Bibel-Quiz', subtitle: 'Teste dein Bibelwissen', questions: 'Fragen', back: 'Zurück', submit: 'Absenden', showErrors: 'Korrekturen anzeigen', hideErrors: 'Ausblenden', correct: 'Richtig', wrong: 'Falsch', yourAnswer: 'Deine Antwort', correctAnswer: 'Richtige Antwort', explanation: 'Erklärung', verse: 'Vers', base: 'Basis Quiz', advanced: 'Fortgeschrittenes Studium' },
+    fr: { title: 'Quiz Bibliques', subtitle: 'Testez vos connaissances de la Bible', questions: 'questions', back: 'Retour', submit: 'Soumettre', showErrors: 'Voir Corrections', hideErrors: 'Masquer', correct: 'Correct', wrong: 'Incorrect', yourAnswer: 'Votre réponse', correctAnswer: 'Bonne réponse', explanation: 'Explication', verse: 'Verset', base: 'Quiz de Base', advanced: 'Étude Avancée' },
+    pt: { title: 'Quiz Bíblicos', subtitle: 'Teste seu conhecimento da Bíblia', questions: 'perguntas', back: 'Voltar', submit: 'Enviar', showErrors: 'Ver Correções', hideErrors: 'Ocultar', correct: 'Correta', wrong: 'Errada', yourAnswer: 'Sua resposta', correctAnswer: 'Resposta correta', explanation: 'Explicação', verse: 'Versículo', base: 'Quiz Base', advanced: 'Estudo Avançado' },
+  };
+  const t = (key: string) => translations[currentLanguage]?.[key] || translations['it'][key] || key;
 
   useEffect(() => {
     loadTopics();
-  }, []);
+  }, [currentLanguage]);
 
   const loadTopics = async () => {
     try {
@@ -83,6 +97,7 @@ export default function QuizScreen() {
       setCurrentQuestion(0);
       setAnswers({});
       setResult(null);
+      setShowCorrections(false);
     } catch (error) {
       Alert.alert('Errore', 'Impossibile caricare il quiz');
     } finally {
