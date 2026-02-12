@@ -321,17 +321,13 @@ export default function BibleScreen() {
 
   const handleSpeak = () => {
     if (isSpeaking) {
-      Speech.stop();
+      stopSpeaking();
       setIsSpeaking(false);
     } else {
       const fullText = verses.map(v => v.text).join(' ');
       const ttsCode = languages[currentLanguage]?.tts_code || 'it-IT';
       
-      Speech.speak(fullText, {
-        language: ttsCode,
-        onDone: () => setIsSpeaking(false),
-        onStopped: () => setIsSpeaking(false),
-      });
+      speakText(fullText, ttsCode, () => setIsSpeaking(false));
       setIsSpeaking(true);
     }
   };
