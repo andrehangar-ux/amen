@@ -82,6 +82,12 @@ export default function BibleScreen() {
   const [aiQuestion, setAiQuestion] = useState('');
   const [aiAnswer, setAiAnswer] = useState('');
   const [loadingAI, setLoadingAI] = useState(false);
+  
+  // Interactive Features State
+  const [highlightedVerses, setHighlightedVerses] = useState<Set<number>>(new Set());
+  const [bookmarkedVerses, setBookmarkedVerses] = useState<Set<string>>(new Set());
+  const [fontSize, setFontSize] = useState(16);
+  const [showFontSettings, setShowFontSettings] = useState(false);
 
   // Load editions
   useEffect(() => {
