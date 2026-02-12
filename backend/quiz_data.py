@@ -469,6 +469,113 @@ MULTILINGUAL_QUIZZES = {
                 {"id": "psa5", "question": "Which is the longest Psalm in the Bible?", "options": ["Psalm 23", "Psalm 91", "Psalm 119", "Psalm 150"], "correct": 2, "explanation": "Psalm 119 with its 176 verses is the longest.", "verse_ref": "Psalm 119"},
             ]
         },
+        "exodus": {
+            "title": "Exodus Quiz",
+            "description": "The liberation from Egypt",
+            "questions": [
+                {"id": "exo1", "question": "Who was placed in a basket on the Nile?", "options": ["Aaron", "Moses", "Joseph", "Pharaoh"], "correct": 1, "explanation": "Moses was placed in a basket by his mother.", "verse_ref": "Exodus 2:3"},
+                {"id": "exo2", "question": "How many plagues struck Egypt?", "options": ["5", "7", "10", "12"], "correct": 2, "explanation": "God sent ten plagues on Egypt.", "verse_ref": "Exodus 7-11"},
+                {"id": "exo3", "question": "What was the last plague?", "options": ["Frogs", "Darkness", "Death of the firstborn", "Locusts"], "correct": 2, "explanation": "The tenth plague was the death of the firstborn.", "verse_ref": "Exodus 12:29"},
+                {"id": "exo4", "question": "Which sea parted for Israel?", "options": ["Dead Sea", "Red Sea", "Mediterranean Sea", "Jordan River"], "correct": 1, "explanation": "The waters of the Red Sea parted.", "verse_ref": "Exodus 14:21"},
+                {"id": "exo5", "question": "On which mountain did Moses receive the Ten Commandments?", "options": ["Mount Ararat", "Mount Sinai", "Mount Carmel", "Mount of Olives"], "correct": 1, "explanation": "God gave the Law to Moses on Mount Sinai.", "verse_ref": "Exodus 19-20"},
+                {"id": "exo6", "question": "What did the people make while Moses was on the mountain?", "options": ["Prayed", "Made a golden calf", "Fought", "Slept"], "correct": 1, "explanation": "The people made a golden calf.", "verse_ref": "Exodus 32:4"},
+                {"id": "exo7", "question": "What did the people eat in the desert?", "options": ["Bread and wine", "Manna and quail", "Fruit", "Meat and milk"], "correct": 1, "explanation": "God gave manna from heaven and quail.", "verse_ref": "Exodus 16"},
+                {"id": "exo8", "question": "How many years did Israel wander in the desert?", "options": ["20", "30", "40", "50"], "correct": 2, "explanation": "Israel wandered 40 years in the desert.", "verse_ref": "Numbers 14:33"},
+            ]
+        },
+        "acts": {
+            "title": "Acts of the Apostles Quiz",
+            "description": "The history of the early Church",
+            "questions": [
+                {"id": "act1", "question": "Who wrote the book of Acts?", "options": ["Peter", "Paul", "Luke", "John"], "correct": 2, "explanation": "Luke wrote both the Gospel and Acts.", "verse_ref": "Acts 1:1"},
+                {"id": "act2", "question": "When did the Holy Spirit descend on the disciples?", "options": ["Easter", "Pentecost", "Christmas", "Passover"], "correct": 1, "explanation": "The Holy Spirit descended on the day of Pentecost.", "verse_ref": "Acts 2:1-4"},
+                {"id": "act3", "question": "Who was the first Christian martyr?", "options": ["Peter", "Paul", "Stephen", "James"], "correct": 2, "explanation": "Stephen was stoned for his faith.", "verse_ref": "Acts 7:59-60"},
+                {"id": "act4", "question": "What was Saul's name after his conversion?", "options": ["Peter", "Paul", "John", "Barnabas"], "correct": 1, "explanation": "Saul became Paul after his encounter with Christ.", "verse_ref": "Acts 13:9"},
+                {"id": "act5", "question": "On the road to which city was Saul converted?", "options": ["Jerusalem", "Damascus", "Rome", "Antioch"], "correct": 1, "explanation": "On the road to Damascus, Saul met the Lord.", "verse_ref": "Acts 9:1-6"},
+                {"id": "act6", "question": "Where were disciples first called 'Christians'?", "options": ["Jerusalem", "Rome", "Antioch", "Ephesus"], "correct": 2, "explanation": "In Antioch the disciples were first called Christians.", "verse_ref": "Acts 11:26"},
+            ]
+        },
+        "prophets": {
+            "title": "Prophets Quiz",
+            "description": "The great prophets of the Old Testament",
+            "questions": [
+                {"id": "pro1", "question": "Who was taken to heaven on a chariot of fire?", "options": ["Moses", "Elijah", "Elisha", "Isaiah"], "correct": 1, "explanation": "Elijah went up to heaven in a whirlwind on a chariot of fire.", "verse_ref": "2 Kings 2:11"},
+                {"id": "pro2", "question": "Which prophet was thrown into the lions' den?", "options": ["Jeremiah", "Ezekiel", "Daniel", "Isaiah"], "correct": 2, "explanation": "Daniel was thrown into the lions' den.", "verse_ref": "Daniel 6:16"},
+                {"id": "pro3", "question": "Who was swallowed by a great fish?", "options": ["Jonah", "Nahum", "Habakkuk", "Amos"], "correct": 0, "explanation": "Jonah was swallowed by a great fish.", "verse_ref": "Jonah 1:17"},
+                {"id": "pro4", "question": "Who prophesied the birth of Jesus in Bethlehem?", "options": ["Isaiah", "Micah", "Jeremiah", "Hosea"], "correct": 1, "explanation": "But you, Bethlehem Ephrathah... out of you will come a ruler.", "verse_ref": "Micah 5:2"},
+                {"id": "pro5", "question": "Which prophet had the vision of the valley of dry bones?", "options": ["Isaiah", "Jeremiah", "Ezekiel", "Daniel"], "correct": 2, "explanation": "Ezekiel had the vision of the valley of dry bones.", "verse_ref": "Ezekiel 37"},
+                {"id": "pro6", "question": "How many days did Jonah spend in the belly of the fish?", "options": ["One day", "Two days", "Three days", "Seven days"], "correct": 2, "explanation": "Jonah was in the belly of the fish three days and three nights.", "verse_ref": "Jonah 1:17"},
+            ]
+        },
+        "revelation": {
+            "title": "Revelation Quiz",
+            "description": "The book of Revelation",
+            "questions": [
+                {"id": "rev1", "question": "Who wrote Revelation?", "options": ["Peter", "Paul", "John", "Luke"], "correct": 2, "explanation": "The apostle John wrote Revelation.", "verse_ref": "Revelation 1:1"},
+                {"id": "rev2", "question": "Where was John when he wrote Revelation?", "options": ["Rome", "Jerusalem", "Island of Patmos", "Ephesus"], "correct": 2, "explanation": "John was exiled on the island of Patmos.", "verse_ref": "Revelation 1:9"},
+                {"id": "rev3", "question": "To how many churches were the letters of Revelation sent?", "options": ["5", "7", "10", "12"], "correct": 1, "explanation": "The letters were sent to seven churches in Asia.", "verse_ref": "Revelation 1:4"},
+                {"id": "rev4", "question": "What number is associated with the beast in Revelation?", "options": ["333", "555", "666", "777"], "correct": 2, "explanation": "The number of the beast is 666.", "verse_ref": "Revelation 13:18"},
+                {"id": "rev5", "question": "Who is the Lamb in Revelation?", "options": ["John", "An angel", "Jesus Christ", "Michael"], "correct": 2, "explanation": "The Lamb represents Jesus Christ.", "verse_ref": "Revelation 5:6"},
+                {"id": "rev6", "question": "What color is the first horseman's horse?", "options": ["Red", "Black", "White", "Yellow"], "correct": 2, "explanation": "The first horse is white.", "verse_ref": "Revelation 6:2"},
+            ]
+        },
+        "characters": {
+            "title": "Biblical Characters",
+            "description": "Do you know the great characters of the Bible?",
+            "questions": [
+                {"id": "cha1", "question": "Who received the Ten Commandments?", "options": ["Abraham", "David", "Moses", "Joshua"], "correct": 2, "explanation": "Moses received the Ten Commandments on Mount Sinai.", "verse_ref": "Exodus 20"},
+                {"id": "cha2", "question": "Who defeated Goliath?", "options": ["Samson", "David", "Saul", "Jonathan"], "correct": 1, "explanation": "David defeated the giant Goliath with a sling.", "verse_ref": "1 Samuel 17"},
+                {"id": "cha3", "question": "Who built the first temple in Jerusalem?", "options": ["David", "Solomon", "Nehemiah", "Herod"], "correct": 1, "explanation": "Solomon built the first temple.", "verse_ref": "1 Kings 6"},
+                {"id": "cha4", "question": "Who was sold by his brothers and became governor of Egypt?", "options": ["Moses", "Joseph", "Benjamin", "Judah"], "correct": 1, "explanation": "Joseph was sold as a slave and became governor.", "verse_ref": "Genesis 37-41"},
+                {"id": "cha5", "question": "Who was the first king of Israel?", "options": ["David", "Solomon", "Saul", "Samuel"], "correct": 2, "explanation": "Saul was anointed by Samuel as the first king.", "verse_ref": "1 Samuel 10:1"},
+                {"id": "cha6", "question": "Which queen saved the Jewish people in Persia?", "options": ["Deborah", "Ruth", "Esther", "Sarah"], "correct": 2, "explanation": "Queen Esther saved the Jews from destruction.", "verse_ref": "Esther 7-8"},
+            ]
+        },
+        "miracles": {
+            "title": "The Miracles of Jesus",
+            "description": "Do you know the miracles of Jesus?",
+            "questions": [
+                {"id": "mir1", "question": "How many loaves did Jesus use to feed 5000 people?", "options": ["3", "5", "7", "10"], "correct": 1, "explanation": "Jesus used five loaves and two fish.", "verse_ref": "Matthew 14:17-21"},
+                {"id": "mir2", "question": "Who did Jesus raise after four days in the tomb?", "options": ["Jairus", "Lazarus", "Peter", "John"], "correct": 1, "explanation": "Jesus raised Lazarus in Bethany.", "verse_ref": "John 11:43-44"},
+                {"id": "mir3", "question": "Which disciple walked on water with Jesus?", "options": ["John", "James", "Peter", "Andrew"], "correct": 2, "explanation": "Peter walked on water toward Jesus.", "verse_ref": "Matthew 14:29"},
+                {"id": "mir4", "question": "How many lepers did Jesus heal, of which only one returned to thank him?", "options": ["5", "7", "10", "12"], "correct": 2, "explanation": "Ten lepers were healed, but only one returned.", "verse_ref": "Luke 17:12-17"},
+                {"id": "mir5", "question": "Which storm did Jesus calm?", "options": ["Sandstorm", "Storm on the Sea of Galilee", "Earthquake", "Flood"], "correct": 1, "explanation": "Jesus calmed the storm on the Sea of Galilee.", "verse_ref": "Mark 4:39"},
+            ]
+        },
+        "beatitudes": {
+            "title": "The Beatitudes",
+            "description": "The Sermon on the Mount",
+            "questions": [
+                {"id": "bea1", "question": "Who does the kingdom of heaven belong to?", "options": ["The rich", "The powerful", "The poor in spirit", "The wise"], "correct": 2, "explanation": "Blessed are the poor in spirit, for theirs is the kingdom of heaven.", "verse_ref": "Matthew 5:3"},
+                {"id": "bea2", "question": "Who will be comforted?", "options": ["Those who laugh", "Those who mourn", "The rich", "The powerful"], "correct": 1, "explanation": "Blessed are those who mourn, for they will be comforted.", "verse_ref": "Matthew 5:4"},
+                {"id": "bea3", "question": "What will the meek inherit?", "options": ["Gold", "Power", "The earth", "Glory"], "correct": 2, "explanation": "Blessed are the meek, for they will inherit the earth.", "verse_ref": "Matthew 5:5"},
+                {"id": "bea4", "question": "Who will see God?", "options": ["The strong", "The rich", "The pure in heart", "The powerful"], "correct": 2, "explanation": "Blessed are the pure in heart, for they will see God.", "verse_ref": "Matthew 5:8"},
+                {"id": "bea5", "question": "What will the peacemakers be called?", "options": ["Servants", "Sons of God", "Prophets", "Kings"], "correct": 1, "explanation": "Blessed are the peacemakers, for they will be called sons of God.", "verse_ref": "Matthew 5:9"},
+                {"id": "bea6", "question": "How many beatitudes are there?", "options": ["5", "7", "8", "10"], "correct": 2, "explanation": "There are eight beatitudes.", "verse_ref": "Matthew 5:3-10"},
+            ]
+        },
+        "commandments": {
+            "title": "The Ten Commandments",
+            "description": "Do you know God's commandments?",
+            "questions": [
+                {"id": "com1", "question": "What is the first commandment?", "options": ["Do not kill", "You shall have no other gods", "Honor your father and mother", "Do not steal"], "correct": 1, "explanation": "You shall have no other gods before me.", "verse_ref": "Exodus 20:3"},
+                {"id": "com2", "question": "Which commandment protects marriage?", "options": ["Do not kill", "Do not commit adultery", "Do not steal", "Do not lie"], "correct": 1, "explanation": "You shall not commit adultery.", "verse_ref": "Exodus 20:14"},
+                {"id": "com3", "question": "Which day should be kept holy?", "options": ["The first", "The seventh", "The last", "Every day"], "correct": 1, "explanation": "Remember the Sabbath day, to keep it holy.", "verse_ref": "Exodus 20:8"},
+                {"id": "com4", "question": "Which commandment concerns parents?", "options": ["Do not kill", "Do not steal", "Honor your father and mother", "Do not lie"], "correct": 2, "explanation": "Honor your father and your mother.", "verse_ref": "Exodus 20:12"},
+                {"id": "com5", "question": "What were the commandments written on?", "options": ["Papyrus", "Stone tablets", "Parchment", "Wood"], "correct": 1, "explanation": "The commandments were written on two stone tablets.", "verse_ref": "Exodus 31:18"},
+            ]
+        },
+        "parables": {
+            "title": "The Parables of Jesus",
+            "description": "Do you know the parables?",
+            "questions": [
+                {"id": "par1", "question": "In the parable of the sower, what does the seed represent?", "options": ["Money", "The Word of God", "Work", "Love"], "correct": 1, "explanation": "The seed is the Word of God.", "verse_ref": "Luke 8:11"},
+                {"id": "par2", "question": "Who helped the wounded man in the parable of the Good Samaritan?", "options": ["A priest", "A Levite", "A Samaritan", "A Pharisee"], "correct": 2, "explanation": "Only the Samaritan stopped to help.", "verse_ref": "Luke 10:33"},
+                {"id": "par3", "question": "How many sheep did the shepherd have who lost one?", "options": ["50", "80", "100", "150"], "correct": 2, "explanation": "He had one hundred sheep and looked for the lost one.", "verse_ref": "Luke 15:4"},
+                {"id": "par4", "question": "What did the prodigal son do with his inheritance?", "options": ["Invested it", "Gave it to the poor", "Squandered it", "Hid it"], "correct": 2, "explanation": "The younger son squandered everything in a dissolute life.", "verse_ref": "Luke 15:13"},
+                {"id": "par5", "question": "How many talents did the servant who doubled them receive?", "options": ["1", "2", "5", "10"], "correct": 2, "explanation": "He received five talents and earned five more.", "verse_ref": "Matthew 25:20"},
+            ]
+        },
     },
     "de": {
         "genesis": {
