@@ -383,41 +383,76 @@ export default function BibleScreen() {
     const dictLinks = studyData?.dictionary_links || {};
     
     return (
-      <ScrollView contentContainerStyle={styles.readingContent}>
-        {/* Study Context Banner */}
-        {studyData?.study_context && (
+      <View style={styles.readingContainer}>
+        {/* Reading Toolbar - Always visible */}
+        <View style={styles.readingToolbar}>
           <TouchableOpacity 
-            style={styles.studyContextBanner}
-            onPress={() => setShowStudyTools(true)}
+            style={styles.toolbarButton}
+            onPress={() => setShowLanguageModal(true)}
           >
-            <Ionicons name="school" size={20} color={COLORS.primary} />
-            <Text style={styles.studyContextText}>Contesto di studio disponibile</Text>
-            <Ionicons name="chevron-forward" size={20} color={COLORS.primary} />
+            <Ionicons name="language" size={20} color={COLORS.primary} />
+            <Text style={styles.toolbarButtonText}>
+              {currentLanguage === 'it' ? '🇮🇹 IT' : currentLanguage === 'es' ? '🇪🇸 ES' : currentLanguage.toUpperCase()}
+            </Text>
           </TouchableOpacity>
-        )}
-
-        {/* Verses */}
-        {verses.map((verse) => {
-          const fullVerseKey = `${verseKey}:${verse.verse}`;
-          const hasRefs = crossRefs[fullVerseKey];
-          const hasDict = dictLinks[fullVerseKey];
-          const hasStudyData = hasRefs || hasDict;
-          const isHighlighted = highlightedVerses.has(verse.verse);
-          const isBookmarked = bookmarkedVerses.has(fullVerseKey);
           
-          return (
+          <TouchableOpacity 
+            style={styles.toolbarButton}
+            onPress={() => setShowEditionModal(true)}
+          >
+            <Ionicons name="book" size={20} color={COLORS.accent} />
+            <Text style={styles.toolbarButtonText}>
+              {currentLanguage === 'it' ? 'Nuova Diodati' : 'Reina Valera'}
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.toolbarButton}
+            onPress={() => {
+              const newSize = fontSize >= 24 ? 14 : fontSize + 2;
+              setFontSize(newSize);
+            }}
+          >
+            <Ionicons name="text" size={20} color={COLORS.textLight} />
+            <Text style={styles.toolbarButtonText}>{fontSize}</Text>
+          </TouchableOpacity>
+        </View>
+
+        <ScrollView contentContainerStyle={styles.readingContent}>
+          {/* Study Context Banner */}
+          {studyData?.study_context && (
             <TouchableOpacity 
-              key={verse.verse} 
-              style={[
-                styles.verseContainer, 
-                hasStudyData && styles.verseWithStudy,
-                isHighlighted && styles.verseHighlighted
-              ]}
-              onPress={() => handleVersePress(verse)}
-              activeOpacity={0.7}
+              style={styles.studyContextBanner}
+              onPress={() => setShowStudyTools(true)}
             >
-              <View style={styles.verseNumberContainer}>
-                <Text style={styles.verseNumber}>{verse.verse}</Text>
+              <Ionicons name="school" size={20} color={COLORS.primary} />
+              <Text style={styles.studyContextText}>Contesto di studio disponibile</Text>
+              <Ionicons name="chevron-forward" size={20} color={COLORS.primary} />
+            </TouchableOpacity>
+          )}
+
+          {/* Verses */}
+          {verses.map((verse) => {
+            const fullVerseKey = `${verseKey}:${verse.verse}`;
+            const hasRefs = crossRefs[fullVerseKey];
+            const hasDict = dictLinks[fullVerseKey];
+            const hasStudyData = hasRefs || hasDict;
+            const isHighlighted = highlightedVerses.has(verse.verse);
+            const isBookmarked = bookmarkedVerses.has(fullVerseKey);
+            
+            return (
+              <TouchableOpacity 
+                key={verse.verse} 
+                style={[
+                  styles.verseContainer, 
+                  hasStudyData && styles.verseWithStudy,
+                  isHighlighted && styles.verseHighlighted
+                ]}
+                onPress={() => handleVersePress(verse)}
+                activeOpacity={0.7}
+              >
+                <View style={styles.verseNumberContainer}>
+                  <Text style={styles.verseNumber}>{verse.verse}</Text>
                 {isBookmarked && (
                   <Ionicons name="bookmark" size={12} color="#E74C3C" style={styles.bookmarkIcon} />
                 )}
