@@ -1795,14 +1795,36 @@ async def get_worship_content(lang: Optional[str] = None):
     return WORSHIP_CONTENT
 
 @api_router.get("/radios")
-async def get_radios(lang: Optional[str] = None, region: Optional[str] = None):
-    """Get evangelical radio stations filtered by language or region"""
+async def get_radios(lang: Optional[str] = None, region: Optional[str] = None, continent: Optional[str] = None):
+    """Get evangelical radio stations filtered by language, region, or continent"""
     radios = EVANGELICAL_RADIOS
     if lang:
         radios = [r for r in radios if r["language"] == lang]
     if region:
         radios = [r for r in radios if r.get("region") == region]
+    if continent:
+        radios = [r for r in radios if r.get("continent") == continent]
     return radios
+
+@api_router.get("/radios/continents")
+async def get_radio_continents():
+    """Get list of continents with radio count"""
+    continents = {}
+    for radio in EVANGELICAL_RADIOS:
+        cont = radio.get("continent", "Other")
+        if cont not in continents:
+            continents[cont] = {"name": cont, "count": 0, "countries": set()}
+        continents[cont]["count"] += 1
+        continents[cont]["countries"].add(radio.get("country", ""))
+    
+    result = []
+    for name, data in continents.items():
+        result.append({
+            "name": name,
+            "count": data["count"],
+            "countries": list(data["countries"])
+        })
+    return sorted(result, key=lambda x: x["count"], reverse=True)
 
 # ==================== USER SETTINGS ====================
 
