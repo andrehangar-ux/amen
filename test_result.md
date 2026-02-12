@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the Bible reader API for the Amen! app. Test Bible books endpoint and specific chapter endpoints for Genesis 1, Genesis 4, Exodus 20, and Psalm 23 in Italian."
+user_problem_statement: "Test the Bible reader API for the Amen! app with multi-language support. Test: 1) Bible chapters in multiple languages (IT, ES, EN, DE, FR, PT), 2) Registration endpoint, 3) AI study tools endpoint."
 
 backend:
   - task: "Bible Books API Endpoint"
