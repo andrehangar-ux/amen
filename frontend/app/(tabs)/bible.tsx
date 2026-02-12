@@ -369,10 +369,25 @@ export default function BibleScreen() {
       
       // Reload current chapter if reading with the NEW language
       if (selectedBook && selectedChapter && view === 'reading') {
-        const chapterData = await api.getChapter(selectedBook.name, selectedChapter, lang);
-        setVerses(chapterData.verses || []);
-        // Reload study data too
-        loadStudyData(selectedBook.name, selectedChapter);
+        // Find the equivalent book in the new language using abbreviation
+        const currentAbbrev = selectedBook.abbrev;
+        const newBook = booksData?.find((b: Book) => b.abbrev === currentAbbrev);
+        
+        if (newBook) {
+          // Update selectedBook with the new language book
+          setSelectedBook(newBook);
+          
+          // Load chapter with the new book name in the target language
+          const chapterData = await api.getChapter(newBook.name, selectedChapter, lang);
+          setVerses(chapterData.verses || []);
+          // Reload study data too
+          loadStudyData(newBook.name, selectedChapter);
+        } else {
+          // Fallback: try with original name
+          const chapterData = await api.getChapter(selectedBook.name, selectedChapter, lang);
+          setVerses(chapterData.verses || []);
+          loadStudyData(selectedBook.name, selectedChapter);
+        }
       }
     } catch (error) {
       console.log('Error changing language:', error);
