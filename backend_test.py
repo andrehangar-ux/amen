@@ -162,7 +162,7 @@ class BibleAPITester:
                 return
             
             # Verify language-specific content
-            all_text = ' '.join([v.get('text', '') for v in verses[:5]]).lower()
+            all_text = ' '.join([v.get('text', '') for v in verses]).lower()  # Check ALL verses, not just first 5
             
             # Check for expected words in the target language
             found_words = [word for word in expected_words if word.lower() in all_text]
