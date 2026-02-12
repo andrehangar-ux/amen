@@ -308,23 +308,42 @@ export default function BibleScreen() {
   };
 
   const handleEditionSelect = async (editionKey: string) => {
-    setSelectedEdition(editionKey);
     const edition = editions[editionKey];
-    if (edition) {
-      const newLang = edition.language;
+    if (!edition) return;
+    
+    const newLang = edition.language;
+    
+    // Don't do anything if same edition selected
+    if (editionKey === selectedEdition && newLang === currentLanguage) {
       setShowEditionSelector(false);
-      
+      return;
+    }
+    
+    setSelectedEdition(editionKey);
+    setShowEditionSelector(false);
+    
+    // Show loading state
+    setLoading(true);
+    
+    try {
       // Set language first
       await setLanguage(newLang);
       
-      // Then reload with the new language explicitly passed
+      // Reload books with the new language
       const booksData = await api.getBibleBooks(newLang);
       setBooks(booksData || []);
       
       // Reload current chapter if reading
       if (selectedBook && selectedChapter && view === 'reading') {
-        loadChapter(selectedBook.name, selectedChapter, newLang);
+        const chapterData = await api.getChapter(selectedBook.name, selectedChapter, newLang);
+        setVerses(chapterData.verses || []);
+        loadStudyData(selectedBook.name, selectedChapter);
       }
+    } catch (error) {
+      console.log('Error changing edition:', error);
+      Alert.alert('Errore', 'Impossibile cambiare edizione. Riprova.');
+    } finally {
+      setLoading(false);
     }
   };
 
