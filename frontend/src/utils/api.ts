@@ -215,8 +215,8 @@ export const api = {
   getDonationConfig: () => api.fetch('/api/donations/config'),
 
   // Quiz
-  getQuizTopics: () => api.fetch('/api/quiz/topics'),
-  getQuiz: (topic: string) => api.fetch(`/api/quiz/${topic}`),
+  getQuizTopics: (lang = 'it') => api.fetch(`/api/quiz/topics?lang=${lang}`),
+  getQuiz: (topic: string, lang = 'it') => api.fetch(`/api/quiz/${topic}?lang=${lang}`),
   submitQuiz: (topic: string, answers: Record<string, number>) =>
     api.fetch('/api/quiz/submit', {
       method: 'POST',
@@ -225,9 +225,9 @@ export const api = {
   getQuizHistory: () => api.fetch('/api/quiz/history'),
 
   // Dictionary
-  getDictionaryTerms: () => api.fetch('/api/dictionary'),
-  getDictionaryTerm: (termId: string) => api.fetch(`/api/dictionary/${termId}`),
-  searchDictionary: (query: string) => api.fetch(`/api/dictionary/search/${encodeURIComponent(query)}`),
+  getDictionaryTerms: (lang = 'it') => api.fetch(`/api/dictionary?lang=${lang}`),
+  getDictionaryTerm: (termId: string, lang = 'it') => api.fetch(`/api/dictionary/${termId}?lang=${lang}`),
+  searchDictionary: (query: string, lang = 'it') => api.fetch(`/api/dictionary/search/${encodeURIComponent(query)}?lang=${lang}`),
   aiDictionaryStudy: (termId: string, question: string) =>
     api.fetch('/api/dictionary/ai-study', {
       method: 'POST',
