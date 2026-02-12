@@ -1019,19 +1019,19 @@ async def get_chapter(book: str, chapter: int, lang: str = "it"):
         for i in range(1, 15):
             verses.append({
                 "verse": i,
-                "text": f"[Nuova Diodati] {book} {chapter}:{i} - Questo capitolo sarà presto disponibile con il testo completo. Nel frattempo, consulta i capitoli principali come Genesi 1-3, Salmi 23, 91, Giovanni 1, 3, 14, Romani 8, Filippesi 4."
+                "text": f"Questo capitolo sarà presto disponibile. Nel frattempo, consulta i capitoli principali come Genesi 1-3, Salmi 23, 91, Giovanni 1, 3, 14, Romani 8."
             })
     elif lang == "es":
         for i in range(1, 15):
             verses.append({
                 "verse": i,
-                "text": f"[Reina Valera 1960] {book} {chapter}:{i} - Este capítulo estará disponible pronto con el texto completo. Mientras tanto, consulta los capítulos principales como Génesis 1, Salmos 23, 91, Juan 3, 14, Romanos 8, Filipenses 4."
+                "text": f"Este capítulo estará disponible pronto. Mientras tanto, consulta los capítulos principales como Génesis 1, Salmos 23, 91, Juan 3, 14, Romanos 8."
             })
     else:
         for i in range(1, 15):
             verses.append({
                 "verse": i,
-                "text": f"{book} {chapter}:{i} - This chapter will be available soon."
+                "text": f"This chapter will be available soon."
             })
     
     return {"book": book, "chapter": chapter, "verses": verses, "language": lang}
