@@ -377,33 +377,75 @@ export default function BibleScreen() {
     );
   };
 
+  // Get current Bible edition name based on language
+  const getCurrentEditionName = () => {
+    const editionNames: { [key: string]: string } = {
+      'it': 'Nuova Diodati',
+      'es': 'Reina Valera 1960',
+      'en': 'King James Version',
+      'de': 'Luther Bibel',
+      'fr': 'Louis Segond',
+      'pt': 'Almeida Revista'
+    };
+    return editionNames[currentLanguage] || 'Bibbia';
+  };
+
   const renderReading = () => {
     const verseKey = selectedBook && selectedChapter ? `${selectedBook.name}:${selectedChapter}` : '';
     const crossRefs = studyData?.cross_references || {};
     const dictLinks = studyData?.dictionary_links || {};
     
+    const languageFlags: { [key: string]: string } = {
+      'it': '🇮🇹',
+      'es': '🇪🇸', 
+      'en': '🇬🇧',
+      'de': '🇩🇪',
+      'fr': '🇫🇷',
+      'pt': '🇧🇷'
+    };
+    
+    const availableLanguages = ['it', 'es', 'en', 'de', 'fr', 'pt'];
+    
     return (
       <View style={styles.readingContainer}>
-        {/* Reading Toolbar - Always visible */}
+        {/* Current Edition Banner */}
+        <View style={styles.editionBanner}>
+          <Ionicons name="book-outline" size={16} color={COLORS.primary} />
+          <Text style={styles.editionBannerText}>
+            {getCurrentEditionName()} • {selectedBook?.name} {selectedChapter}
+          </Text>
+        </View>
+
+        {/* Language Quick Switch Bar */}
+        <View style={styles.languageBar}>
+          {availableLanguages.map((lang) => (
+            <TouchableOpacity
+              key={lang}
+              style={[
+                styles.langButton,
+                currentLanguage === lang && styles.langButtonActive
+              ]}
+              onPress={() => handleLanguageSelect(lang)}
+            >
+              <Text style={styles.langButtonFlag}>{languageFlags[lang]}</Text>
+              <Text style={[
+                styles.langButtonText,
+                currentLanguage === lang && styles.langButtonTextActive
+              ]}>
+                {lang.toUpperCase()}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        {/* Reading Toolbar */}
         <View style={styles.readingToolbar}>
-          <TouchableOpacity 
-            style={styles.toolbarButton}
-            onPress={() => setShowLanguageModal(true)}
-          >
-            <Ionicons name="language" size={20} color={COLORS.primary} />
-            <Text style={styles.toolbarButtonText}>
-              {currentLanguage === 'it' ? '🇮🇹 IT' : currentLanguage === 'es' ? '🇪🇸 ES' : currentLanguage.toUpperCase()}
-            </Text>
-          </TouchableOpacity>
-          
           <TouchableOpacity 
             style={styles.toolbarButton}
             onPress={() => setShowEditionModal(true)}
           >
-            <Ionicons name="book" size={20} color={COLORS.accent} />
-            <Text style={styles.toolbarButtonText}>
-              {currentLanguage === 'it' ? 'Nuova Diodati' : 'Reina Valera'}
-            </Text>
+            <Ionicons name="swap-horizontal" size={20} color={COLORS.accent} />
+            <Text style={styles.toolbarButtonText}>Edizioni</Text>
           </TouchableOpacity>
 
           <TouchableOpacity 
@@ -414,7 +456,15 @@ export default function BibleScreen() {
             }}
           >
             <Ionicons name="text" size={20} color={COLORS.textLight} />
-            <Text style={styles.toolbarButtonText}>{fontSize}</Text>
+            <Text style={styles.toolbarButtonText}>A{fontSize}</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.toolbarButton}
+            onPress={() => setShowTutorial(true)}
+          >
+            <Ionicons name="help-circle" size={20} color="#9B59B6" />
+            <Text style={styles.toolbarButtonText}>Aiuto</Text>
           </TouchableOpacity>
         </View>
 
