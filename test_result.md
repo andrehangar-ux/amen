@@ -218,17 +218,16 @@ frontend:
 
 metadata:
   created_by: "testing_agent"
-  version: "1.0"
-  test_sequence: 1
+  version: "2.0"
+  test_sequence: 2
   run_ui: false
 
 test_plan:
   current_focus:
-    - "Bible Books API Endpoint"
-    - "Genesis Chapter 1 API"
-    - "Genesis Chapter 4 API (External Fetch)"
-    - "Exodus Chapter 20 API (Ten Commandments)"
-    - "Psalm 23 API (Local Database)"
+    - "Multi-Language Bible Content (CRITICAL)"
+    - "User Registration API"
+    - "User Login API"
+    - "AI Study Tools API"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
