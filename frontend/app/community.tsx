@@ -397,6 +397,7 @@ const styles = StyleSheet.create({
   messageActions: {
     flexDirection: 'row',
     marginTop: SPACING.sm,
+    justifyContent: 'space-between',
   },
   likeButton: {
     flexDirection: 'row',
@@ -406,6 +407,22 @@ const styles = StyleSheet.create({
   likeCount: {
     fontSize: 13,
     color: COLORS.textLight,
+  },
+  translateButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: SPACING.xs,
+    paddingHorizontal: SPACING.sm,
+    backgroundColor: COLORS.primary + '15',
+    borderRadius: BORDER_RADIUS.sm,
+    marginTop: SPACING.sm,
+    alignSelf: 'flex-start',
+    gap: SPACING.xs,
+  },
+  translateText: {
+    fontSize: 12,
+    color: COLORS.primary,
+    fontWeight: '500',
   },
   inputContainer: {
     flexDirection: 'row',
