@@ -213,7 +213,7 @@ export default function QuizScreen() {
                         <Ionicons name="close-circle" size={18} color={COLORS.error} />
                         <Text style={styles.wrongAnswerLabel}>{t('yourAnswer')}: </Text>
                         <Text style={styles.wrongAnswerText}>
-                          {r.user_answer >= 0 ? question.options[r.user_answer] : '(nessuna)'}
+                          {r.user_answer >= 0 ? question.options[r.user_answer] : t('noAnswer')}
                         </Text>
                       </View>
                       
