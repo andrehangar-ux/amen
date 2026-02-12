@@ -88,6 +88,8 @@ export default function BibleScreen() {
   const [bookmarkedVerses, setBookmarkedVerses] = useState<Set<string>>(new Set());
   const [fontSize, setFontSize] = useState(16);
   const [showFontSettings, setShowFontSettings] = useState(false);
+  const [showTutorial, setShowTutorial] = useState(false);
+  const [showEditionModal, setShowEditionModal] = useState(false);
 
   // Load editions
   useEffect(() => {
