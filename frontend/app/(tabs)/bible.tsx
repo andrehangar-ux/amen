@@ -715,9 +715,16 @@ export default function BibleScreen() {
                 </TouchableOpacity>
                 <TouchableOpacity 
                   style={styles.studyActionBtn}
-                  onPress={() => {
+                  onPress={async () => {
                     const url = `https://www.laparola.net/testo.php?riferimento=${encodeURIComponent(selectedBook?.name + ' ' + selectedChapter)}`;
-                    import('expo-linking').then(Linking => Linking.openURL(url));
+                    try {
+                      await WebBrowser.openBrowserAsync(url, {
+                        presentationStyle: WebBrowser.WebBrowserPresentationStyle.PAGE_SHEET,
+                        controlsColor: COLORS.primary,
+                      });
+                    } catch (error) {
+                      Alert.alert('Errore', 'Impossibile aprire LaParola');
+                    }
                   }}
                 >
                   <Ionicons name="open" size={22} color="#1ABC9C" />
