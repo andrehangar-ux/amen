@@ -3373,25 +3373,113 @@ BIBLICAL_DICTIONARY = {
     }
 }
 
+# Translations for dictionary UI labels and term metadata
+DICT_TRANSLATIONS = {
+    "it": {"origin_hebrew": "Ebraico", "origin_greek": "Greco", "transliteration": "Traslitterazione", "pronunciation": "Pronuncia", "meaning_label": "Significato", "root_label": "Radice", "equivalents": "Equivalenti", "description": "Descrizione", "verses_label": "Versetti di Riferimento", "ask_ai": "Chiedi all'AI", "search_placeholder": "Cerca termine...", "subtitle": "Esplora i termini originali ebraici e greci della Bibbia"},
+    "en": {"origin_hebrew": "Hebrew", "origin_greek": "Greek", "transliteration": "Transliteration", "pronunciation": "Pronunciation", "meaning_label": "Meaning", "root_label": "Root", "equivalents": "Equivalents", "description": "Description", "verses_label": "Reference Verses", "ask_ai": "Ask AI", "search_placeholder": "Search term...", "subtitle": "Explore the original Hebrew and Greek terms of the Bible"},
+    "es": {"origin_hebrew": "Hebreo", "origin_greek": "Griego", "transliteration": "Transliteración", "pronunciation": "Pronunciación", "meaning_label": "Significado", "root_label": "Raíz", "equivalents": "Equivalentes", "description": "Descripción", "verses_label": "Versículos de Referencia", "ask_ai": "Preguntar a la IA", "search_placeholder": "Buscar término...", "subtitle": "Explora los términos originales hebreos y griegos de la Biblia"},
+    "de": {"origin_hebrew": "Hebräisch", "origin_greek": "Griechisch", "transliteration": "Transliteration", "pronunciation": "Aussprache", "meaning_label": "Bedeutung", "root_label": "Wurzel", "equivalents": "Äquivalente", "description": "Beschreibung", "verses_label": "Referenzverse", "ask_ai": "KI fragen", "search_placeholder": "Begriff suchen...", "subtitle": "Erkunde die ursprünglichen hebräischen und griechischen Begriffe der Bibel"},
+    "fr": {"origin_hebrew": "Hébreu", "origin_greek": "Grec", "transliteration": "Translittération", "pronunciation": "Prononciation", "meaning_label": "Signification", "root_label": "Racine", "equivalents": "Équivalents", "description": "Description", "verses_label": "Versets de Référence", "ask_ai": "Demander à l'IA", "search_placeholder": "Rechercher un terme...", "subtitle": "Explorez les termes hébreux et grecs originaux de la Bible"},
+    "pt": {"origin_hebrew": "Hebraico", "origin_greek": "Grego", "transliteration": "Transliteração", "pronunciation": "Pronúncia", "meaning_label": "Significado", "root_label": "Raiz", "equivalents": "Equivalentes", "description": "Descrição", "verses_label": "Versículos de Referência", "ask_ai": "Perguntar à IA", "search_placeholder": "Buscar termo...", "subtitle": "Explore os termos originais hebraicos e gregos da Bíblia"},
+}
+
+# Translated meanings for dictionary terms
+DICT_TERM_TRANSLATIONS = {
+    "agape": {
+        "en": {"meaning": "Unconditional love, divine love", "description": "Agape is the highest form of love in Christian theology. Unlike eros (romantic love) or philia (friendship), agape is a selfless, unconditional love. It is the love of God for humanity and the love Christians are called to show one another. In the New Testament, agape defines the very nature of God: 'God is love' (1 John 4:8)."},
+        "es": {"meaning": "Amor incondicional, amor divino", "description": "Ágape es la forma más alta de amor en la teología cristiana. A diferencia de eros (amor romántico) o philia (amistad), ágape es un amor desinteresado e incondicional. Es el amor de Dios por la humanidad y el amor que los cristianos están llamados a mostrar. En el Nuevo Testamento, ágape define la naturaleza misma de Dios: 'Dios es amor' (1 Juan 4:8)."},
+        "de": {"meaning": "Bedingungslose Liebe, göttliche Liebe", "description": "Agape ist die höchste Form der Liebe in der christlichen Theologie. Im Unterschied zu Eros (romantische Liebe) oder Philia (Freundschaft) ist Agape eine selbstlose, bedingungslose Liebe. Sie ist die Liebe Gottes zur Menschheit und die Liebe, zu der Christen aufgerufen sind. Im Neuen Testament definiert Agape das Wesen Gottes: 'Gott ist Liebe' (1. Johannes 4:8)."},
+        "fr": {"meaning": "Amour inconditionnel, amour divin", "description": "L'agapè est la forme la plus élevée d'amour dans la théologie chrétienne. Contrairement à éros (amour romantique) ou philia (amitié), l'agapè est un amour désintéressé et inconditionnel. C'est l'amour de Dieu pour l'humanité et l'amour que les chrétiens sont appelés à manifester. Dans le Nouveau Testament, agapè définit la nature même de Dieu : 'Dieu est amour' (1 Jean 4:8)."},
+        "pt": {"meaning": "Amor incondicional, amor divino", "description": "Ágape é a forma mais elevada de amor na teologia cristã. Diferente de eros (amor romântico) ou philia (amizade), ágape é um amor abnegado e incondicional. É o amor de Deus pela humanidade e o amor que os cristãos são chamados a demonstrar. No Novo Testamento, ágape define a própria natureza de Deus: 'Deus é amor' (1 João 4:8)."},
+    },
+    "shalom": {
+        "en": {"meaning": "Peace, completeness, welfare, prosperity", "description": "Shalom is much more than just 'peace' or the absence of conflict. It encompasses completeness, wholeness, harmony, well-being, and prosperity. In the Bible, shalom represents God's ideal state for creation and human relationships. It is used as both greeting and blessing."},
+        "es": {"meaning": "Paz, completitud, bienestar, prosperidad", "description": "Shalom es mucho más que simplemente 'paz' o ausencia de conflicto. Abarca completitud, totalidad, armonía, bienestar y prosperidad. En la Biblia, shalom representa el estado ideal de Dios para la creación y las relaciones humanas. Se usa tanto como saludo como bendición."},
+        "de": {"meaning": "Frieden, Ganzheit, Wohlergehen, Wohlstand", "description": "Schalom ist viel mehr als nur 'Frieden' oder die Abwesenheit von Konflikten. Es umfasst Vollständigkeit, Ganzheit, Harmonie, Wohlergehen und Wohlstand. In der Bibel repräsentiert Schalom Gottes idealen Zustand für die Schöpfung und menschliche Beziehungen. Es wird als Gruß und Segen verwendet."},
+        "fr": {"meaning": "Paix, plénitude, bien-être, prospérité", "description": "Shalom est bien plus que simplement 'paix' ou l'absence de conflit. Il englobe la plénitude, l'intégralité, l'harmonie, le bien-être et la prospérité. Dans la Bible, shalom représente l'état idéal de Dieu pour la création et les relations humaines. Il est utilisé comme salutation et bénédiction."},
+        "pt": {"meaning": "Paz, plenitude, bem-estar, prosperidade", "description": "Shalom é muito mais do que simplesmente 'paz' ou ausência de conflito. Abrange plenitude, totalidade, harmonia, bem-estar e prosperidade. Na Bíblia, shalom representa o estado ideal de Deus para a criação e as relações humanas. É usado tanto como saudação quanto como bênção."},
+    },
+    "logos": {
+        "en": {"meaning": "Word, Verb, reason, discourse", "description": "In Greek philosophy, Logos was the rational principle governing the cosmos. The apostle John revolutionized this concept by identifying the Logos with Jesus Christ: 'In the beginning was the Word' (John 1:1). The Logos is the self-expression of God, His creative power, and His revelation to humanity."},
+        "es": {"meaning": "Palabra, Verbo, razón, discurso", "description": "En la filosofía griega, Logos era el principio racional que gobernaba el cosmos. El apóstol Juan revolucionó este concepto al identificar el Logos con Jesucristo: 'En el principio era el Verbo' (Juan 1:1). El Logos es la autoexpresión de Dios, su poder creativo y su revelación a la humanidad."},
+        "de": {"meaning": "Wort, Vernunft, Rede", "description": "In der griechischen Philosophie war Logos das rationale Prinzip, das den Kosmos regiert. Der Apostel Johannes revolutionierte dieses Konzept, indem er den Logos mit Jesus Christus identifizierte: 'Im Anfang war das Wort' (Johannes 1:1). Der Logos ist Gottes Selbstausdruck, seine schöpferische Kraft und seine Offenbarung an die Menschheit."},
+        "fr": {"meaning": "Parole, Verbe, raison, discours", "description": "Dans la philosophie grecque, le Logos était le principe rationnel gouvernant le cosmos. L'apôtre Jean a révolutionné ce concept en identifiant le Logos avec Jésus-Christ : 'Au commencement était la Parole' (Jean 1:1). Le Logos est l'auto-expression de Dieu, sa puissance créatrice et sa révélation à l'humanité."},
+        "pt": {"meaning": "Palavra, Verbo, razão, discurso", "description": "Na filosofia grega, Logos era o princípio racional que governava o cosmos. O apóstolo João revolucionou este conceito ao identificar o Logos com Jesus Cristo: 'No princípio era o Verbo' (João 1:1). O Logos é a auto-expressão de Deus, seu poder criativo e sua revelação à humanidade."},
+    },
+    "pneuma": {
+        "en": {"meaning": "Spirit, breath, wind", "description": "Pneuma indicates the Spirit of God, the Holy Spirit. In the New Testament it is used over 370 times. Pneuma is the living and active presence of God in the world. Jesus promises the Spirit as 'Comforter' (Parakletos) who will guide believers in all truth."},
+        "es": {"meaning": "Espíritu, aliento, viento", "description": "Pneuma indica el Espíritu de Dios, el Espíritu Santo. En el Nuevo Testamento se usa más de 370 veces. Pneuma es la presencia viva y activa de Dios en el mundo. Jesús promete el Espíritu como 'Consolador' (Parakletos) que guiará a los creyentes a toda verdad."},
+        "de": {"meaning": "Geist, Atem, Wind", "description": "Pneuma bezeichnet den Geist Gottes, den Heiligen Geist. Im Neuen Testament wird es über 370 Mal verwendet. Pneuma ist die lebendige und aktive Gegenwart Gottes in der Welt. Jesus verspricht den Geist als 'Tröster' (Parakletos), der die Gläubigen in alle Wahrheit leiten wird."},
+        "fr": {"meaning": "Esprit, souffle, vent", "description": "Pneuma désigne l'Esprit de Dieu, le Saint-Esprit. Dans le Nouveau Testament, il est utilisé plus de 370 fois. Pneuma est la présence vivante et active de Dieu dans le monde. Jésus promet l'Esprit comme 'Consolateur' (Parakletos) qui guidera les croyants dans toute la vérité."},
+        "pt": {"meaning": "Espírito, sopro, vento", "description": "Pneuma indica o Espírito de Deus, o Espírito Santo. No Novo Testamento é usado mais de 370 vezes. Pneuma é a presença viva e ativa de Deus no mundo. Jesus promete o Espírito como 'Consolador' (Parakletos) que guiará os crentes em toda a verdade."},
+    },
+    "chesed": {
+        "en": {"meaning": "Faithful love, kindness, mercy, grace", "description": "Chesed is God's faithful love for His people, based on the covenant. It is a love that never abandons, that forgives, that remains faithful even when the other fails. It is one of the most important attributes of God in the Old Testament."},
+        "es": {"meaning": "Amor fiel, bondad, misericordia, gracia", "description": "Chesed es el amor fiel de Dios hacia su pueblo, basado en el pacto. Es un amor que no abandona, que perdona, que permanece fiel incluso cuando el otro falla. Es uno de los atributos más importantes de Dios en el Antiguo Testamento."},
+        "de": {"meaning": "Treue Liebe, Güte, Barmherzigkeit, Gnade", "description": "Chesed ist Gottes treue Liebe zu seinem Volk, basierend auf dem Bund. Es ist eine Liebe, die nicht aufgibt, die vergibt, die treu bleibt, auch wenn der andere versagt. Es ist eines der wichtigsten Attribute Gottes im Alten Testament."},
+        "fr": {"meaning": "Amour fidèle, bonté, miséricorde, grâce", "description": "Chesed est l'amour fidèle de Dieu envers son peuple, fondé sur l'alliance. C'est un amour qui n'abandonne pas, qui pardonne, qui reste fidèle même quand l'autre échoue. C'est l'un des attributs les plus importants de Dieu dans l'Ancien Testament."},
+        "pt": {"meaning": "Amor fiel, bondade, misericórdia, graça", "description": "Chesed é o amor fiel de Deus ao seu povo, baseado na aliança. É um amor que não abandona, que perdoa, que permanece fiel mesmo quando o outro falha. É um dos atributos mais importantes de Deus no Antigo Testamento."},
+    },
+    "amen": {
+        "en": {"meaning": "So be it, truly, certainly", "description": "Amen is a word of affirmation and confirmation. It is used to ratify prayers, blessings, and declarations. Jesus often uses it at the beginning of His statements ('Truly, truly I say to you')."},
+        "es": {"meaning": "Así sea, en verdad, ciertamente", "description": "Amén es una palabra de afirmación y confirmación. Se usa para ratificar oraciones, bendiciones y declaraciones. Jesús la usa frecuentemente al inicio de sus afirmaciones ('De cierto, de cierto os digo')."},
+        "de": {"meaning": "So sei es, wahrlich, gewiss", "description": "Amen ist ein Wort der Bestätigung und Bekräftigung. Es wird verwendet, um Gebete, Segnungen und Erklärungen zu bestätigen. Jesus verwendet es oft am Anfang seiner Aussagen ('Wahrlich, wahrlich, ich sage euch')."},
+        "fr": {"meaning": "Ainsi soit-il, en vérité, certainement", "description": "Amen est un mot d'affirmation et de confirmation. Il est utilisé pour ratifier les prières, bénédictions et déclarations. Jésus l'utilise souvent au début de ses affirmations ('En vérité, en vérité, je vous le dis')."},
+        "pt": {"meaning": "Assim seja, em verdade, certamente", "description": "Amém é uma palavra de afirmação e confirmação. É usada para ratificar orações, bênçãos e declarações. Jesus a usa frequentemente no início de suas afirmações ('Em verdade, em verdade vos digo')."},
+    },
+    "elohim": {
+        "en": {"meaning": "God, gods, mighty ones", "description": "Elohim is one of the most common names for God in the Old Testament. Although grammatically plural, when referring to the God of Israel it is used with singular verbs, suggesting unity in plurality (a possible allusion to the Trinity)."},
+        "es": {"meaning": "Dios, dioses, poderosos", "description": "Elohim es uno de los nombres más comunes para Dios en el Antiguo Testamento. Aunque es gramaticalmente plural, cuando se refiere al Dios de Israel se usa con verbos en singular, sugiriendo unidad en la pluralidad (posible alusión a la Trinidad)."},
+        "de": {"meaning": "Gott, Götter, Mächtige", "description": "Elohim ist einer der häufigsten Namen für Gott im Alten Testament. Obwohl grammatisch Plural, wird es in Bezug auf den Gott Israels mit Verben im Singular verwendet, was Einheit in der Vielfalt nahelegt (möglicher Hinweis auf die Dreieinigkeit)."},
+        "fr": {"meaning": "Dieu, dieux, puissants", "description": "Elohim est l'un des noms les plus courants pour Dieu dans l'Ancien Testament. Bien que grammaticalement pluriel, lorsqu'il fait référence au Dieu d'Israël, il est utilisé avec des verbes au singulier, suggérant l'unité dans la pluralité (possible allusion à la Trinité)."},
+        "pt": {"meaning": "Deus, deuses, poderosos", "description": "Elohim é um dos nomes mais comuns para Deus no Antigo Testamento. Embora gramaticalmente plural, quando se refere ao Deus de Israel é usado com verbos no singular, sugerindo unidade na pluralidade (possível alusão à Trindade)."},
+    },
+    "yhwh": {
+        "en": {"meaning": "I Am, The One Who Is", "description": "The proper name of God revealed to Moses. It is the sacred tetragrammaton, considered so holy that Jews avoid pronouncing it, replacing it with 'Adonai' (Lord). It indicates God's eternity and self-existence."},
+        "es": {"meaning": "Yo Soy, El que Es", "description": "El nombre propio de Dios revelado a Moisés. Es el tetragramatón sagrado, considerado tan santo que los judíos evitan pronunciarlo, sustituyéndolo por 'Adonai' (Señor). Indica la eternidad y autoexistencia de Dios."},
+        "de": {"meaning": "Ich Bin, Der der Ist", "description": "Der Eigenname Gottes, der Mose offenbart wurde. Es ist das heilige Tetragrammaton, das als so heilig gilt, dass Juden es vermeiden auszusprechen und es durch 'Adonai' (Herr) ersetzen. Es zeigt Gottes Ewigkeit und Selbstexistenz an."},
+        "fr": {"meaning": "Je Suis, Celui qui Est", "description": "Le nom propre de Dieu révélé à Moïse. C'est le tétragramme sacré, considéré si saint que les Juifs évitent de le prononcer, le remplaçant par 'Adonaï' (Seigneur). Il indique l'éternité et l'auto-existence de Dieu."},
+        "pt": {"meaning": "Eu Sou, Aquele que É", "description": "O nome próprio de Deus revelado a Moisés. É o tetragrama sagrado, considerado tão santo que os judeus evitam pronunciá-lo, substituindo-o por 'Adonai' (Senhor). Indica a eternidade e auto-existência de Deus."},
+    },
+}
+
+def translate_dict_term(term_data: dict, term_id: str, lang: str) -> dict:
+    """Return dictionary term with translated fields"""
+    if lang == "it" or lang not in DICT_TRANSLATIONS:
+        return term_data
+    translations = DICT_TERM_TRANSLATIONS.get(term_id, {}).get(lang, {})
+    labels = DICT_TRANSLATIONS.get(lang, DICT_TRANSLATIONS["it"])
+    result = {**term_data}
+    if translations.get("meaning"):
+        result["meaning"] = translations["meaning"]
+    if translations.get("description"):
+        result["description"] = translations["description"]
+    origin = term_data.get("origin", "")
+    if origin == "Ebraico":
+        result["origin"] = labels["origin_hebrew"]
+    elif origin == "Greco":
+        result["origin"] = labels["origin_greek"]
+    return result
+
 @api_router.get("/dictionary")
-async def get_dictionary_terms():
-    """Get all dictionary terms"""
+async def get_dictionary_terms(lang: str = "it"):
+    """Get all dictionary terms with optional translation"""
     return [
         {
             "id": key,
             "term": term["term"],
-            "origin": term["origin"],
-            "meaning": term["meaning"]
+            "origin": DICT_TRANSLATIONS.get(lang, DICT_TRANSLATIONS["it"])["origin_hebrew"] if term["origin"] == "Ebraico" else DICT_TRANSLATIONS.get(lang, DICT_TRANSLATIONS["it"])["origin_greek"],
+            "meaning": DICT_TERM_TRANSLATIONS.get(key, {}).get(lang, {}).get("meaning", term["meaning"]),
         }
         for key, term in BIBLICAL_DICTIONARY.items()
     ]
 
 @api_router.get("/dictionary/{term_id}")
-async def get_dictionary_term(term_id: str):
-    """Get full dictionary entry"""
+async def get_dictionary_term(term_id: str, lang: str = "it"):
+    """Get full dictionary entry with optional translation"""
     if term_id not in BIBLICAL_DICTIONARY:
-        raise HTTPException(status_code=404, detail="Termine non trovato")
-    return BIBLICAL_DICTIONARY[term_id]
+        raise HTTPException(status_code=404, detail="Term not found")
+    return translate_dict_term(BIBLICAL_DICTIONARY[term_id], term_id, lang)
 
 @api_router.get("/dictionary/search/{query}")
 async def search_dictionary(query: str):
