@@ -42,7 +42,325 @@ class BibleAPITester:
         status = "✅ PASS" if success else "❌ FAIL"
         print(f"{status} {test_name}: {details}")
         
-    def test_bible_books_italian(self):
+    def test_multi_language_bible_content(self):
+        """Test CRITICAL requirement: Multi-language Bible content in different languages"""
+        
+        # Test cases: book/chapter combinations with expected language-specific content
+        test_cases = [
+            {
+                "book": "Genesi", "chapter": 1, "lang": "it", 
+                "expected_words": ["principio", "dio", "creò", "cieli", "terra"],
+                "description": "Genesis 1 in Italian"
+            },
+            {
+                "book": "Genesi", "chapter": 1, "lang": "es", 
+                "expected_words": ["principio", "dios", "creó", "cielos", "tierra"],
+                "description": "Genesis 1 in Spanish"
+            },
+            {
+                "book": "Genesi", "chapter": 1, "lang": "en", 
+                "expected_words": ["beginning", "god", "created", "heaven", "earth"],
+                "description": "Genesis 1 in English"
+            },
+            {
+                "book": "Genesi", "chapter": 1, "lang": "de", 
+                "expected_words": ["anfang", "gott", "schuf", "himmel", "erde"],
+                "description": "Genesis 1 in German"
+            },
+            {
+                "book": "Genesi", "chapter": 1, "lang": "fr", 
+                "expected_words": ["commencement", "dieu", "créa", "cieux", "terre"],
+                "description": "Genesis 1 in French"
+            },
+            {
+                "book": "Genesi", "chapter": 1, "lang": "pt", 
+                "expected_words": ["princípio", "deus", "criou", "céu", "terra"],
+                "description": "Genesis 1 in Portuguese"
+            },
+            {
+                "book": "Salmi", "chapter": 23, "lang": "it", 
+                "expected_words": ["eterno", "pastore", "nulla", "mancherà"],
+                "description": "Psalm 23 in Italian"
+            },
+            {
+                "book": "Salmi", "chapter": 23, "lang": "es", 
+                "expected_words": ["jehová", "pastor", "nada", "faltará"],
+                "description": "Psalm 23 in Spanish"
+            },
+            {
+                "book": "Giovanni", "chapter": 3, "lang": "it", 
+                "expected_words": ["dio", "amato", "mondo", "figlio", "vita", "eterna"],
+                "description": "John 3 in Italian"
+            },
+            {
+                "book": "Giovanni", "chapter": 3, "lang": "fr", 
+                "expected_words": ["dieu", "aimé", "monde", "fils", "vie", "éternelle"],
+                "description": "John 3 in French"
+            }
+        ]
+        
+        for test_case in test_cases:
+            self._test_single_language_chapter(test_case)
+    
+    def _test_single_language_chapter(self, test_case):
+        """Test a single book/chapter in a specific language"""
+        book = test_case["book"]
+        chapter = test_case["chapter"]
+        lang = test_case["lang"]
+        expected_words = test_case["expected_words"]
+        description = test_case["description"]
+        
+        try:
+            response = self.session.get(
+                f"{API_BASE}/bible/chapter/{book}/{chapter}?lang={lang}", 
+                timeout=15
+            )
+            
+            if response.status_code != 200:
+                self.log_result(description, False, 
+                              f"Status code {response.status_code}, expected 200")
+                return
+                
+            data = response.json()
+            
+            # Verify response structure
+            required_fields = ['book', 'chapter', 'verses', 'language']
+            missing_fields = [field for field in required_fields if field not in data]
+            
+            if missing_fields:
+                self.log_result(description, False, 
+                              f"Missing fields: {missing_fields}")
+                return
+            
+            # Verify language matches
+            if data.get('language') != lang:
+                self.log_result(description, False, 
+                              f"Wrong language in response: {data.get('language')}, expected {lang}")
+                return
+                
+            # Verify verses exist
+            verses = data['verses']
+            if not isinstance(verses, list) or len(verses) == 0:
+                self.log_result(description, False, "Empty or invalid verses array")
+                return
+            
+            # Check if it's placeholder text (should be real content in target language)
+            first_verse_text = verses[0].get('text', '').lower()
+            
+            # Check for placeholder indicators
+            placeholder_indicators = [
+                'sarà presto disponibile', 'estará disponible pronto', 
+                'will be available soon', 'wird bald verfügbar sein',
+                'sera bientôt disponible', 'estará disponível em breve',
+                'questo capitolo', 'este capítulo', 'this chapter', 'dieses kapitel',
+                'ce chapitre'
+            ]
+            
+            if any(indicator in first_verse_text for indicator in placeholder_indicators):
+                self.log_result(description, False, 
+                              f"Got placeholder text instead of real Bible content: {first_verse_text[:100]}")
+                return
+            
+            # Verify language-specific content
+            all_text = ' '.join([v.get('text', '') for v in verses[:5]]).lower()
+            
+            # Check for expected words in the target language
+            found_words = [word for word in expected_words if word.lower() in all_text]
+            
+            if len(found_words) < 2:  # At least 2 expected words should be found
+                self.log_result(description, False, 
+                              f"Content doesn't appear to be in {lang}. Expected words: {expected_words}, Found: {found_words}. Text sample: {all_text[:200]}")
+                return
+            
+            # Check that it's not English fallback (for non-English languages)
+            if lang != "en":
+                english_indicators = ["god", "lord", "jesus", "christ", "heaven", "earth", "beginning", "created"]
+                english_found = [word for word in english_indicators if word in all_text]
+                
+                # If we find too many English words, it might be English fallback
+                if len(english_found) > 2 and len(found_words) < len(english_found):
+                    self.log_result(description, False, 
+                                  f"Appears to be English fallback instead of {lang}. English words found: {english_found}")
+                    return
+            
+            self.log_result(description, True, 
+                          f"✅ Real {lang.upper()} content found! Words: {found_words[:3]}... ({len(verses)} verses)")
+            
+        except requests.exceptions.RequestException as e:
+            self.log_result(description, False, f"Request error: {str(e)}")
+        except Exception as e:
+            self.log_result(description, False, f"Unexpected error: {str(e)}")
+    
+    def test_user_registration(self):
+        """Test POST /api/auth/register - Should create user and return session token"""
+        try:
+            # Use unique email to avoid conflicts
+            unique_email = f"test_{int(time.time())}@cibospirituale.it"
+            
+            payload = {
+                "email": unique_email,
+                "password": TEST_PASSWORD,
+                "name": TEST_NAME,
+                "language": "it"
+            }
+            
+            response = self.session.post(f"{API_BASE}/auth/register", 
+                                       json=payload, timeout=10)
+            
+            if response.status_code != 200:
+                self.log_result("User Registration", False, 
+                              f"Status code {response.status_code}, expected 200. Response: {response.text}")
+                return
+                
+            data = response.json()
+            
+            # Verify response structure
+            required_fields = ['user', 'session_token']
+            missing_fields = [field for field in required_fields if field not in data]
+            
+            if missing_fields:
+                self.log_result("User Registration", False, 
+                              f"Missing fields: {missing_fields}")
+                return
+            
+            # Verify user data
+            user = data['user']
+            if user.get('email') != unique_email or user.get('name') != TEST_NAME:
+                self.log_result("User Registration", False, 
+                              f"User data mismatch. Expected email: {unique_email}, got: {user.get('email')}")
+                return
+            
+            # Verify session token
+            session_token = data['session_token']
+            if not session_token or len(session_token) < 10:
+                self.log_result("User Registration", False, 
+                              f"Invalid session token: {session_token}")
+                return
+            
+            # Store token for later tests
+            self.auth_token = session_token
+            
+            self.log_result("User Registration", True, 
+                          f"User created successfully with email: {unique_email}")
+            
+        except requests.exceptions.RequestException as e:
+            self.log_result("User Registration", False, f"Request error: {str(e)}")
+        except Exception as e:
+            self.log_result("User Registration", False, f"Unexpected error: {str(e)}")
+    
+    def test_user_login(self):
+        """Test POST /api/auth/login - Should return session token for existing user"""
+        try:
+            payload = {
+                "email": TEST_EMAIL,
+                "password": TEST_PASSWORD
+            }
+            
+            response = self.session.post(f"{API_BASE}/auth/login", 
+                                       json=payload, timeout=10)
+            
+            if response.status_code != 200:
+                self.log_result("User Login", False, 
+                              f"Status code {response.status_code}, expected 200. Response: {response.text}")
+                return
+                
+            data = response.json()
+            
+            # Verify response structure
+            required_fields = ['user', 'session_token']
+            missing_fields = [field for field in required_fields if field not in data]
+            
+            if missing_fields:
+                self.log_result("User Login", False, 
+                              f"Missing fields: {missing_fields}")
+                return
+            
+            # Verify user data
+            user = data['user']
+            if user.get('email') != TEST_EMAIL:
+                self.log_result("User Login", False, 
+                              f"User email mismatch. Expected: {TEST_EMAIL}, got: {user.get('email')}")
+                return
+            
+            # Verify session token
+            session_token = data['session_token']
+            if not session_token or len(session_token) < 10:
+                self.log_result("User Login", False, 
+                              f"Invalid session token: {session_token}")
+                return
+            
+            # Store token for AI study tools test
+            if not self.auth_token:  # Use this token if we don't have one from registration
+                self.auth_token = session_token
+            
+            self.log_result("User Login", True, 
+                          f"Login successful for user: {TEST_EMAIL}")
+            
+        except requests.exceptions.RequestException as e:
+            self.log_result("User Login", False, f"Request error: {str(e)}")
+        except Exception as e:
+            self.log_result("User Login", False, f"Unexpected error: {str(e)}")
+    
+    def test_ai_study_tools(self):
+        """Test POST /api/bible/study/ai-explain - Should return AI explanation with Bearer token"""
+        if not self.auth_token:
+            self.log_result("AI Study Tools", False, 
+                          "No auth token available. Registration or login must succeed first.")
+            return
+            
+        try:
+            # Set Authorization header
+            headers = {
+                'Authorization': f'Bearer {self.auth_token}',
+                'Content-Type': 'application/json'
+            }
+            
+            payload = {
+                "verse_ref": "Giovanni 3:16",
+                "verse_text": "Poiché Dio ha tanto amato il mondo, che ha dato il suo unigenito Figlio, affinché chiunque crede in lui non perisca, ma abbia vita eterna.",
+                "question": "Cosa significa questo versetto per un cristiano?"
+            }
+            
+            response = self.session.post(f"{API_BASE}/bible/study/ai-explain", 
+                                       json=payload, headers=headers, timeout=30)
+            
+            if response.status_code == 401:
+                self.log_result("AI Study Tools", False, 
+                              "Authentication failed. Token might be invalid.")
+                return
+                
+            if response.status_code != 200:
+                self.log_result("AI Study Tools", False, 
+                              f"Status code {response.status_code}, expected 200. Response: {response.text}")
+                return
+                
+            data = response.json()
+            
+            # Verify response has explanation
+            if 'explanation' not in data:
+                self.log_result("AI Study Tools", False, 
+                              f"Missing 'explanation' field in response: {data}")
+                return
+            
+            explanation = data['explanation']
+            if not explanation or len(explanation) < 50:
+                self.log_result("AI Study Tools", False, 
+                              f"AI explanation too short or empty: {explanation}")
+                return
+            
+            # Check if explanation looks like AI-generated content
+            if 'questo versetto' not in explanation.lower() and 'giovanni' not in explanation.lower():
+                self.log_result("AI Study Tools", False, 
+                              f"AI explanation doesn't seem relevant to the verse: {explanation[:200]}")
+                return
+            
+            self.log_result("AI Study Tools", True, 
+                          f"AI explanation generated successfully ({len(explanation)} chars)")
+            
+        except requests.exceptions.RequestException as e:
+            self.log_result("AI Study Tools", False, f"Request error: {str(e)}")
+        except Exception as e:
+            self.log_result("AI Study Tools", False, f"Unexpected error: {str(e)}")
         """Test GET /api/bible/books?lang=it - Should return list of Bible books in Italian"""
         try:
             response = self.session.get(f"{API_BASE}/bible/books?lang=it", timeout=10)
