@@ -38,6 +38,7 @@ interface FullTerm {
 }
 
 export default function DictionaryScreen() {
+  const { currentLanguage } = useLanguageStore();
   const [terms, setTerms] = useState<DictionaryTerm[]>([]);
   const [selectedTerm, setSelectedTerm] = useState<FullTerm | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -47,9 +48,19 @@ export default function DictionaryScreen() {
   const [aiAnswer, setAiAnswer] = useState('');
   const [askingAi, setAskingAi] = useState(false);
 
+  const translations: Record<string, Record<string, string>> = {
+    it: { title: 'Dizionario Biblico', subtitle: 'Esplora i termini originali ebraici e greci della Bibbia', search: 'Cerca termine...', transliteration: 'Traslitterazione', pronunciation: 'Pronuncia', meaning: 'Significato', root: 'Radice', equivalents: 'Equivalenti', description: 'Descrizione', verses: 'Versetti di Riferimento', askAi: 'Chiedi all\'AI', askPlaceholder: 'Fai una domanda su questo termine...', ask: 'Chiedi' },
+    en: { title: 'Biblical Dictionary', subtitle: 'Explore the original Hebrew and Greek terms of the Bible', search: 'Search term...', transliteration: 'Transliteration', pronunciation: 'Pronunciation', meaning: 'Meaning', root: 'Root', equivalents: 'Equivalents', description: 'Description', verses: 'Reference Verses', askAi: 'Ask AI', askPlaceholder: 'Ask a question about this term...', ask: 'Ask' },
+    es: { title: 'Diccionario Bíblico', subtitle: 'Explora los términos originales hebreos y griegos de la Biblia', search: 'Buscar término...', transliteration: 'Transliteración', pronunciation: 'Pronunciación', meaning: 'Significado', root: 'Raíz', equivalents: 'Equivalentes', description: 'Descripción', verses: 'Versículos de Referencia', askAi: 'Preguntar a la IA', askPlaceholder: 'Haz una pregunta sobre este término...', ask: 'Preguntar' },
+    de: { title: 'Biblisches Wörterbuch', subtitle: 'Erkunde die ursprünglichen hebräischen und griechischen Begriffe der Bibel', search: 'Begriff suchen...', transliteration: 'Transliteration', pronunciation: 'Aussprache', meaning: 'Bedeutung', root: 'Wurzel', equivalents: 'Äquivalente', description: 'Beschreibung', verses: 'Referenzverse', askAi: 'KI fragen', askPlaceholder: 'Stelle eine Frage zu diesem Begriff...', ask: 'Fragen' },
+    fr: { title: 'Dictionnaire Biblique', subtitle: 'Explorez les termes hébreux et grecs originaux de la Bible', search: 'Rechercher un terme...', transliteration: 'Translittération', pronunciation: 'Prononciation', meaning: 'Signification', root: 'Racine', equivalents: 'Équivalents', description: 'Description', verses: 'Versets de Référence', askAi: 'Demander à l\'IA', askPlaceholder: 'Posez une question sur ce terme...', ask: 'Demander' },
+    pt: { title: 'Dicionário Bíblico', subtitle: 'Explore os termos originais hebraicos e gregos da Bíblia', search: 'Buscar termo...', transliteration: 'Transliteração', pronunciation: 'Pronúncia', meaning: 'Significado', root: 'Raiz', equivalents: 'Equivalentes', description: 'Descrição', verses: 'Versículos de Referência', askAi: 'Perguntar à IA', askPlaceholder: 'Faça uma pergunta sobre este termo...', ask: 'Perguntar' },
+  };
+  const t = (key: string) => translations[currentLanguage]?.[key] || translations['it'][key] || key;
+
   useEffect(() => {
     loadTerms();
-  }, []);
+  }, [currentLanguage]);
 
   const loadTerms = async () => {
     try {
