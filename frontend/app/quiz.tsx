@@ -79,7 +79,7 @@ export default function QuizScreen() {
 
   const loadTopics = async () => {
     try {
-      const data = await api.getQuizTopics();
+      const data = await api.getQuizTopics(currentLanguage);
       setTopics(data);
     } catch (error) {
       console.error('Error loading topics:', error);
@@ -91,7 +91,7 @@ export default function QuizScreen() {
   const startQuiz = async (topicId: string) => {
     setLoading(true);
     try {
-      const quiz = await api.getQuiz(topicId);
+      const quiz = await api.getQuiz(topicId, currentLanguage);
       setSelectedTopic(topicId);
       setQuestions(quiz.questions);
       setCurrentQuestion(0);
