@@ -21,7 +21,9 @@ import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../src/utils/theme';
 // Cross-platform confirm dialog
 const showConfirm = (title: string, message: string, onConfirm: () => void) => {
   if (Platform.OS === 'web') {
-    if (window.confirm(`${title}\n\n${message}`)) {
+    // On web, use a simple confirm
+    const confirmed = window.confirm(`${title}\n\n${message}`);
+    if (confirmed) {
       onConfirm();
     }
   } else {
