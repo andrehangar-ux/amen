@@ -295,7 +295,7 @@ export default function SettingsScreen() {
         <View style={styles.card}>
           <TouchableOpacity 
             style={styles.legalItem}
-            onPress={() => Alert.alert(
+            onPress={() => showInfoAlert(
               'Informativa sulla Privacy',
               `INFORMATIVA SULLA PRIVACY - Amen! App
 
@@ -329,9 +329,9 @@ Hai diritto a:
 6. CONTATTI
 Per domande sulla privacy: privacy@amen-app.com
 
-Utilizzando questa app, accetti questa informativa.`,
-              [{ text: 'Ho Capito', style: 'default' }]
+Utilizzando questa app, accetti questa informativa.`
             )}
+            data-testid="privacy-policy-button"
           >
             <Ionicons name="shield-checkmark" size={22} color={COLORS.primary} />
             <Text style={styles.legalText}>Informativa sulla Privacy</Text>
