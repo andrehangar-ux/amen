@@ -535,4 +535,22 @@ const styles = StyleSheet.create({
     color: COLORS.text,
     marginLeft: SPACING.md,
   },
+  logoutSection: {
+    marginTop: SPACING.xl,
+    marginBottom: SPACING.xl * 2,
+  },
+  logoutButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.error,
+    padding: SPACING.md,
+    borderRadius: BORDER_RADIUS.lg,
+    gap: SPACING.sm,
+  },
+  logoutText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
 });
