@@ -969,8 +969,189 @@ async def fetch_from_laparola(book: str, chapter: int, version: str = "Nuova+Dio
     except Exception as e:
         logger.error(f"Error fetching from laparola.net: {e}")
         return []
-        logger.error(f"Error fetching from laparola.net: {e}")
+
+# Mapping nomi libri per diverse lingue/API
+BOOK_NAME_MAPPING = {
+    "Genesi": {"en": "Genesis", "es": "Génesis", "de": "Genesis", "fr": "Genèse", "pt": "Gênesis"},
+    "Esodo": {"en": "Exodus", "es": "Éxodo", "de": "Exodus", "fr": "Exode", "pt": "Êxodo"},
+    "Levitico": {"en": "Leviticus", "es": "Levítico", "de": "Levitikus", "fr": "Lévitique", "pt": "Levítico"},
+    "Numeri": {"en": "Numbers", "es": "Números", "de": "Numeri", "fr": "Nombres", "pt": "Números"},
+    "Deuteronomio": {"en": "Deuteronomy", "es": "Deuteronomio", "de": "Deuteronomium", "fr": "Deutéronome", "pt": "Deuteronômio"},
+    "Giosuè": {"en": "Joshua", "es": "Josué", "de": "Josua", "fr": "Josué", "pt": "Josué"},
+    "Giudici": {"en": "Judges", "es": "Jueces", "de": "Richter", "fr": "Juges", "pt": "Juízes"},
+    "Rut": {"en": "Ruth", "es": "Rut", "de": "Ruth", "fr": "Ruth", "pt": "Rute"},
+    "1 Samuele": {"en": "1 Samuel", "es": "1 Samuel", "de": "1 Samuel", "fr": "1 Samuel", "pt": "1 Samuel"},
+    "2 Samuele": {"en": "2 Samuel", "es": "2 Samuel", "de": "2 Samuel", "fr": "2 Samuel", "pt": "2 Samuel"},
+    "1 Re": {"en": "1 Kings", "es": "1 Reyes", "de": "1 Könige", "fr": "1 Rois", "pt": "1 Reis"},
+    "2 Re": {"en": "2 Kings", "es": "2 Reyes", "de": "2 Könige", "fr": "2 Rois", "pt": "2 Reis"},
+    "1 Cronache": {"en": "1 Chronicles", "es": "1 Crónicas", "de": "1 Chronik", "fr": "1 Chroniques", "pt": "1 Crônicas"},
+    "2 Cronache": {"en": "2 Chronicles", "es": "2 Crónicas", "de": "2 Chronik", "fr": "2 Chroniques", "pt": "2 Crônicas"},
+    "Esdra": {"en": "Ezra", "es": "Esdras", "de": "Esra", "fr": "Esdras", "pt": "Esdras"},
+    "Neemia": {"en": "Nehemiah", "es": "Nehemías", "de": "Nehemia", "fr": "Néhémie", "pt": "Neemias"},
+    "Ester": {"en": "Esther", "es": "Ester", "de": "Esther", "fr": "Esther", "pt": "Ester"},
+    "Giobbe": {"en": "Job", "es": "Job", "de": "Hiob", "fr": "Job", "pt": "Jó"},
+    "Salmi": {"en": "Psalms", "es": "Salmos", "de": "Psalmen", "fr": "Psaumes", "pt": "Salmos"},
+    "Proverbi": {"en": "Proverbs", "es": "Proverbios", "de": "Sprüche", "fr": "Proverbes", "pt": "Provérbios"},
+    "Ecclesiaste": {"en": "Ecclesiastes", "es": "Eclesiastés", "de": "Prediger", "fr": "Ecclésiaste", "pt": "Eclesiastes"},
+    "Cantico dei Cantici": {"en": "Song of Solomon", "es": "Cantares", "de": "Hohelied", "fr": "Cantique", "pt": "Cânticos"},
+    "Isaia": {"en": "Isaiah", "es": "Isaías", "de": "Jesaja", "fr": "Ésaïe", "pt": "Isaías"},
+    "Geremia": {"en": "Jeremiah", "es": "Jeremías", "de": "Jeremia", "fr": "Jérémie", "pt": "Jeremias"},
+    "Lamentazioni": {"en": "Lamentations", "es": "Lamentaciones", "de": "Klagelieder", "fr": "Lamentations", "pt": "Lamentações"},
+    "Ezechiele": {"en": "Ezekiel", "es": "Ezequiel", "de": "Hesekiel", "fr": "Ézéchiel", "pt": "Ezequiel"},
+    "Daniele": {"en": "Daniel", "es": "Daniel", "de": "Daniel", "fr": "Daniel", "pt": "Daniel"},
+    "Osea": {"en": "Hosea", "es": "Oseas", "de": "Hosea", "fr": "Osée", "pt": "Oséias"},
+    "Gioele": {"en": "Joel", "es": "Joel", "de": "Joel", "fr": "Joël", "pt": "Joel"},
+    "Amos": {"en": "Amos", "es": "Amós", "de": "Amos", "fr": "Amos", "pt": "Amós"},
+    "Abdia": {"en": "Obadiah", "es": "Abdías", "de": "Obadja", "fr": "Abdias", "pt": "Obadias"},
+    "Giona": {"en": "Jonah", "es": "Jonás", "de": "Jona", "fr": "Jonas", "pt": "Jonas"},
+    "Michea": {"en": "Micah", "es": "Miqueas", "de": "Micha", "fr": "Michée", "pt": "Miquéias"},
+    "Naum": {"en": "Nahum", "es": "Nahúm", "de": "Nahum", "fr": "Nahum", "pt": "Naum"},
+    "Abacuc": {"en": "Habakkuk", "es": "Habacuc", "de": "Habakuk", "fr": "Habacuc", "pt": "Habacuque"},
+    "Sofonia": {"en": "Zephaniah", "es": "Sofonías", "de": "Zefanja", "fr": "Sophonie", "pt": "Sofonias"},
+    "Aggeo": {"en": "Haggai", "es": "Hageo", "de": "Haggai", "fr": "Aggée", "pt": "Ageu"},
+    "Zaccaria": {"en": "Zechariah", "es": "Zacarías", "de": "Sacharja", "fr": "Zacharie", "pt": "Zacarias"},
+    "Malachia": {"en": "Malachi", "es": "Malaquías", "de": "Maleachi", "fr": "Malachie", "pt": "Malaquias"},
+    "Matteo": {"en": "Matthew", "es": "Mateo", "de": "Matthäus", "fr": "Matthieu", "pt": "Mateus"},
+    "Marco": {"en": "Mark", "es": "Marcos", "de": "Markus", "fr": "Marc", "pt": "Marcos"},
+    "Luca": {"en": "Luke", "es": "Lucas", "de": "Lukas", "fr": "Luc", "pt": "Lucas"},
+    "Giovanni": {"en": "John", "es": "Juan", "de": "Johannes", "fr": "Jean", "pt": "João"},
+    "Atti": {"en": "Acts", "es": "Hechos", "de": "Apostelgeschichte", "fr": "Actes", "pt": "Atos"},
+    "Romani": {"en": "Romans", "es": "Romanos", "de": "Römer", "fr": "Romains", "pt": "Romanos"},
+    "1 Corinzi": {"en": "1 Corinthians", "es": "1 Corintios", "de": "1 Korinther", "fr": "1 Corinthiens", "pt": "1 Coríntios"},
+    "2 Corinzi": {"en": "2 Corinthians", "es": "2 Corintios", "de": "2 Korinther", "fr": "2 Corinthiens", "pt": "2 Coríntios"},
+    "Galati": {"en": "Galatians", "es": "Gálatas", "de": "Galater", "fr": "Galates", "pt": "Gálatas"},
+    "Efesini": {"en": "Ephesians", "es": "Efesios", "de": "Epheser", "fr": "Éphésiens", "pt": "Efésios"},
+    "Filippesi": {"en": "Philippians", "es": "Filipenses", "de": "Philipper", "fr": "Philippiens", "pt": "Filipenses"},
+    "Colossesi": {"en": "Colossians", "es": "Colosenses", "de": "Kolosser", "fr": "Colossiens", "pt": "Colossenses"},
+    "1 Tessalonicesi": {"en": "1 Thessalonians", "es": "1 Tesalonicenses", "de": "1 Thessalonicher", "fr": "1 Thessaloniciens", "pt": "1 Tessalonicenses"},
+    "2 Tessalonicesi": {"en": "2 Thessalonians", "es": "2 Tesalonicenses", "de": "2 Thessalonicher", "fr": "2 Thessaloniciens", "pt": "2 Tessalonicenses"},
+    "1 Timoteo": {"en": "1 Timothy", "es": "1 Timoteo", "de": "1 Timotheus", "fr": "1 Timothée", "pt": "1 Timóteo"},
+    "2 Timoteo": {"en": "2 Timothy", "es": "2 Timoteo", "de": "2 Timotheus", "fr": "2 Timothée", "pt": "2 Timóteo"},
+    "Tito": {"en": "Titus", "es": "Tito", "de": "Titus", "fr": "Tite", "pt": "Tito"},
+    "Filemone": {"en": "Philemon", "es": "Filemón", "de": "Philemon", "fr": "Philémon", "pt": "Filemom"},
+    "Ebrei": {"en": "Hebrews", "es": "Hebreos", "de": "Hebräer", "fr": "Hébreux", "pt": "Hebreus"},
+    "Giacomo": {"en": "James", "es": "Santiago", "de": "Jakobus", "fr": "Jacques", "pt": "Tiago"},
+    "1 Pietro": {"en": "1 Peter", "es": "1 Pedro", "de": "1 Petrus", "fr": "1 Pierre", "pt": "1 Pedro"},
+    "2 Pietro": {"en": "2 Peter", "es": "2 Pedro", "de": "2 Petrus", "fr": "2 Pierre", "pt": "2 Pedro"},
+    "1 Giovanni": {"en": "1 John", "es": "1 Juan", "de": "1 Johannes", "fr": "1 Jean", "pt": "1 João"},
+    "2 Giovanni": {"en": "2 John", "es": "2 Juan", "de": "2 Johannes", "fr": "2 Jean", "pt": "2 João"},
+    "3 Giovanni": {"en": "3 John", "es": "3 Juan", "de": "3 Johannes", "fr": "3 Jean", "pt": "3 João"},
+    "Giuda": {"en": "Jude", "es": "Judas", "de": "Judas", "fr": "Jude", "pt": "Judas"},
+    "Apocalisse": {"en": "Revelation", "es": "Apocalipsis", "de": "Offenbarung", "fr": "Apocalypse", "pt": "Apocalipse"},
+}
+
+def get_book_name_for_lang(italian_name: str, lang: str) -> str:
+    """Get book name in target language from Italian name"""
+    if lang == "it":
+        return italian_name
+    mapping = BOOK_NAME_MAPPING.get(italian_name, {})
+    return mapping.get(lang, italian_name)
+
+async def fetch_from_bible_api(book: str, chapter: int, lang: str = "en") -> list:
+    """Fetch Bible chapter from bible-api.com (supports English and other languages)"""
+    try:
+        # Map Italian book name to English for API
+        book_en = get_book_name_for_lang(book, "en")
+        
+        # bible-api.com translations
+        translations = {
+            "en": "kjv",  # King James Version
+            "es": "rvr1960",  # Reina Valera would need different API
+            "de": "luther",  # Luther Bible would need different API
+            "fr": "lsg",  # Louis Segond would need different API
+            "pt": "almeida"  # Almeida would need different API
+        }
+        
+        # For now, use WEB (World English Bible) which is freely available
+        translation = "web" if lang == "en" else "kjv"
+        
+        url = f"https://bible-api.com/{book_en}+{chapter}?translation={translation}"
+        
+        async with httpx.AsyncClient(timeout=15.0) as client:
+            response = await client.get(url)
+            if response.status_code != 200:
+                logger.error(f"bible-api.com returned status {response.status_code}")
+                return []
+            
+            data = response.json()
+            verses = []
+            
+            for v in data.get("verses", []):
+                verse_text = v.get("text", "").strip()
+                verse_text = verse_text.replace("\n", " ").strip()
+                if verse_text:
+                    verses.append({
+                        "verse": v.get("verse", 0),
+                        "text": verse_text
+                    })
+            
+            logger.info(f"Fetched {len(verses)} verses from bible-api.com for {book} {chapter} ({lang})")
+            return verses
+            
+    except Exception as e:
+        logger.error(f"Error fetching from bible-api.com: {e}")
         return []
+
+async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> list:
+    """Fetch Bible chapter in any language using appropriate API"""
+    
+    # Try laparola.net for Italian
+    if lang == "it":
+        verses = await fetch_from_laparola(book, chapter)
+        if verses and len(verses) > 3:
+            return verses
+    
+    # Try bible-api.com for English
+    if lang == "en":
+        verses = await fetch_from_bible_api(book, chapter, "en")
+        if verses and len(verses) > 3:
+            return verses
+    
+    # For Spanish, try laparola.net with Reina Valera
+    if lang == "es":
+        try:
+            book_es = get_book_name_for_lang(book, "es")
+            url = f"https://www.laparola.net/testo.php?riferimento={book_es.lower().replace(' ', '+')}+{chapter}&versioni[]=Reina+Valera"
+            
+            async with httpx.AsyncClient(timeout=15.0) as client:
+                response = await client.get(url)
+                if response.status_code == 200:
+                    html_content = response.text
+                    brano_match = re.search(r'<div id="brano">(.*?)</div><!-- RESULT LIST END -->', html_content, re.DOTALL)
+                    if brano_match:
+                        brano_content = brano_match.group(1)
+                        verse_pattern = r'<strong>(\d+)</strong>&nbsp;(.*?)(?=<strong>\d+</strong>|<br\s*/?>|</p>|$)'
+                        matches = re.findall(verse_pattern, brano_content, re.DOTALL)
+                        
+                        verses = []
+                        for match in matches:
+                            verse_num = int(match[0])
+                            verse_text = re.sub(r'<[^>]+>', '', match[1]).strip()
+                            verse_text = ' '.join(verse_text.split())
+                            if verse_text and len(verse_text) > 3:
+                                verses.append({"verse": verse_num, "text": verse_text})
+                        
+                        if verses:
+                            verses.sort(key=lambda x: x["verse"])
+                            logger.info(f"Fetched {len(verses)} verses from laparola.net for {book} {chapter} (es)")
+                            return verses
+        except Exception as e:
+            logger.error(f"Error fetching Spanish from laparola.net: {e}")
+    
+    # For German, French, Portuguese - use English as fallback with translation note
+    # (These would need proper Bible APIs for authentic translations)
+    if lang in ["de", "fr", "pt"]:
+        # Try English first, then add translation note
+        verses = await fetch_from_bible_api(book, chapter, "en")
+        if verses:
+            # Add note that this is English version
+            lang_names = {"de": "tedesco", "fr": "francese", "pt": "portoghese"}
+            for v in verses:
+                v["text"] = f"[English] {v['text']}"
+            logger.info(f"Using English fallback for {lang} - {book} {chapter}")
+            return verses
+    
+    return []
 
 @api_router.get("/bible/chapter/{book}/{chapter}")
 async def get_chapter(book: str, chapter: int, lang: str = "it"):
