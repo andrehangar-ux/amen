@@ -1401,24 +1401,82 @@ async def mood_checkin(data: MoodRequest, user: User = Depends(require_auth)):
 
 # ==================== COMMUNITY ENDPOINTS ====================
 
+# Bad words filter for moderation
+BAD_WORDS = {
+    "it": ["cazzo", "minchia", "stronzo", "merda", "vaffanculo", "puttana", "coglione", "idiota", "deficiente"],
+    "es": ["mierda", "puta", "joder", "coño", "cabrón", "pendejo", "idiota"],
+    "en": ["fuck", "shit", "ass", "bitch", "damn", "bastard", "idiot"],
+    "generic": ["nazi", "hitler", "satan", "666"]
+}
+
+def check_content_moderation(content: str, lang: str = "it") -> tuple:
+    """Check content for offensive words. Returns (is_clean, filtered_content, warnings)"""
+    content_lower = content.lower()
+    warnings = []
+    
+    # Check all language bad words
+    for lang_code, words in BAD_WORDS.items():
+        for word in words:
+            if word in content_lower:
+                warnings.append(f"Parola non appropriata rilevata")
+                # Replace with asterisks
+                content = re.sub(re.escape(word), '*' * len(word), content, flags=re.IGNORECASE)
+    
+    is_clean = len(warnings) == 0
+    return is_clean, content, warnings
+
 @api_router.post("/community/messages")
 async def create_community_message(data: CommunityMessageCreate, user: User = Depends(require_auth)):
-    """Create a community message"""
+    """Create a community message with content moderation"""
+    # Content moderation
+    is_clean, filtered_content, warnings = check_content_moderation(data.content, data.language)
+    
+    if warnings:
+        logger.warning(f"Content moderation triggered for user {user.user_id}: {warnings}")
+    
     message = {
         "message_id": str(uuid.uuid4()),
         "user_id": user.user_id,
         "user_name": user.name,
         "user_country": user.country,
-        "content": data.content,
+        "content": filtered_content,  # Use filtered content
         "original_language": data.language,
         "translations": {},
         "message_type": data.message_type,
         "likes": 0,
+        "moderated": not is_clean,
         "created_at": datetime.now(timezone.utc)
     }
     await db.community_messages.insert_one(message)
     message.pop("_id", None)
+    
+    if warnings:
+        message["moderation_warning"] = "Il tuo messaggio è stato moderato automaticamente"
+    
     return message
+
+@api_router.post("/community/messages/{message_id}/translate")
+async def translate_message(message_id: str, target_lang: str = "it"):
+    """Translate a specific message to target language"""
+    message = await db.community_messages.find_one({"message_id": message_id}, {"_id": 0})
+    if not message:
+        raise HTTPException(status_code=404, detail="Messaggio non trovato")
+    
+    if message["original_language"] == target_lang:
+        return {"translated_text": message["content"], "is_original": True}
+    
+    # Check cache first
+    if target_lang in message.get("translations", {}):
+        return {"translated_text": message["translations"][target_lang], "is_original": False}
+    
+    # Translate and cache
+    translated = await translate_text(message["content"], message["original_language"], target_lang)
+    await db.community_messages.update_one(
+        {"message_id": message_id},
+        {"$set": {f"translations.{target_lang}": translated}}
+    )
+    
+    return {"translated_text": translated, "is_original": False}
 
 @api_router.get("/community/messages")
 async def get_community_messages(
