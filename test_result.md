@@ -105,6 +105,54 @@
 user_problem_statement: "Test the Bible reader API for the Amen! app with multi-language support. Test: 1) Bible chapters in multiple languages (IT, ES, EN, DE, FR, PT), 2) Registration endpoint, 3) AI study tools endpoint."
 
 backend:
+  - task: "Multi-Language Bible Content (CRITICAL)"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ COMPREHENSIVE MULTI-LANGUAGE TESTING COMPLETED (11/11 tests passed - 100% success rate). Tested Genesis 1, Psalm 23, and John 3 in 6 languages (IT, ES, EN, DE, FR, PT). All languages return REAL Bible content in target language, not English fallback. Italian: 'Nel principio Dio creò', Spanish: 'En el principio Dios creó', English: 'In the beginning God created', German: 'Am Anfang schuf Gott', French: 'Au commencement Dieu créa', Portuguese: 'No princípio criou Deus'. External GitHub Bible JSON APIs working correctly for all languages."
+
+  - task: "User Registration API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ POST /api/auth/register creates new user successfully. Returns proper user object and session_token. Tested with email, password, name, language fields. User data stored correctly in MongoDB. Session token generated and valid for authentication."
+
+  - task: "User Login API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ POST /api/auth/login authenticates existing user successfully. Returns user object and session_token for valid credentials (testbible@cibospirituale.it). Password hashing and verification working correctly. Session management functional."
+
+  - task: "AI Study Tools API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ POST /api/bible/study/ai-explain generates AI explanations successfully with Bearer token authentication. Tested with Giovanni 3:16 verse and Italian question. Returns comprehensive AI explanation (3130+ characters) relevant to the verse. LLM integration with gpt-4o working correctly. Authentication required and enforced."
+
   - task: "Bible Books API Endpoint"
     implemented: true
     working: true
