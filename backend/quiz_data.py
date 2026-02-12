@@ -214,6 +214,8 @@ MULTILINGUAL_QUIZZES = {
                 {"id": "gen6", "question": "¿Quién mató a Abel?", "options": ["Adán", "Caín", "Set", "Enoc"], "correct": 1, "explanation": "Caín se levantó contra su hermano Abel y lo mató.", "verse_ref": "Génesis 4:8"},
                 {"id": "gen7", "question": "¿Cuántos días llovió durante el diluvio?", "options": ["20 días", "30 días", "40 días", "50 días"], "correct": 2, "explanation": "La lluvia cayó sobre la tierra cuarenta días y cuarenta noches.", "verse_ref": "Génesis 7:12"},
                 {"id": "gen8", "question": "¿Cuántos animales de cada especie entraron en el arca?", "options": ["Uno", "Dos", "Tres", "Siete"], "correct": 1, "explanation": "De cada especie entraron dos animales, macho y hembra.", "verse_ref": "Génesis 7:9"},
+                {"id": "gen9", "question": "¿Dónde se posó el arca después del diluvio?", "options": ["Monte Sinaí", "Monte Ararat", "Monte Carmelo", "Monte de los Olivos"], "correct": 1, "explanation": "El arca reposó sobre los montes de Ararat.", "verse_ref": "Génesis 8:4"},
+                {"id": "gen10", "question": "¿Quién fue el padre de Abraham?", "options": ["Taré", "Nacor", "Harán", "Sem"], "correct": 0, "explanation": "Taré engendró a Abraham, Nacor y Harán.", "verse_ref": "Génesis 11:26"},
             ]
         },
         "evangelios": {
@@ -228,6 +230,8 @@ MULTILINGUAL_QUIZZES = {
                 {"id": "eva6", "question": "¿Cuántos días ayunó Jesús en el desierto?", "options": ["7 días", "20 días", "40 días", "50 días"], "correct": 2, "explanation": "Jesús fue llevado al desierto y ayunó cuarenta días.", "verse_ref": "Mateo 4:2"},
                 {"id": "eva7", "question": "¿Cuál fue el primer milagro de Jesús?", "options": ["Sanar a un ciego", "Convertir agua en vino", "Multiplicar los panes", "Caminar sobre el agua"], "correct": 1, "explanation": "En las bodas de Caná, Jesús convirtió el agua en vino.", "verse_ref": "Juan 2:1-11"},
                 {"id": "eva8", "question": "¿Quién traicionó a Jesús?", "options": ["Pedro", "Tomás", "Judas Iscariote", "Juan"], "correct": 2, "explanation": "Judas Iscariote traicionó a Jesús por treinta monedas de plata.", "verse_ref": "Mateo 26:14-16"},
+                {"id": "eva9", "question": "¿Cuántas veces negó Pedro a Jesús?", "options": ["Una vez", "Dos veces", "Tres veces", "Nunca"], "correct": 2, "explanation": "Antes que el gallo cante, me negarás tres veces.", "verse_ref": "Mateo 26:34"},
+                {"id": "eva10", "question": "¿Después de cuántos días resucitó Jesús?", "options": ["El mismo día", "Después de un día", "Después de tres días", "Después de siete días"], "correct": 2, "explanation": "Jesús resucitó al tercer día.", "verse_ref": "Mateo 16:21"},
             ]
         },
         "salmos": {
@@ -239,6 +243,19 @@ MULTILINGUAL_QUIZZES = {
                 {"id": "sal3", "question": "¿Cuántos Salmos hay en la Biblia?", "options": ["100", "120", "150", "200"], "correct": 2, "explanation": "El libro de los Salmos contiene 150 salmos.", "verse_ref": "Libro de Salmos"},
                 {"id": "sal4", "question": "¿Qué Salmo comienza con 'Los cielos cuentan la gloria de Dios'?", "options": ["Salmo 1", "Salmo 19", "Salmo 23", "Salmo 100"], "correct": 1, "explanation": "El Salmo 19 celebra la revelación de Dios en la naturaleza.", "verse_ref": "Salmo 19:1"},
                 {"id": "sal5", "question": "¿Cuál es el Salmo más largo de la Biblia?", "options": ["Salmo 23", "Salmo 91", "Salmo 119", "Salmo 150"], "correct": 2, "explanation": "El Salmo 119 con sus 176 versículos es el más largo.", "verse_ref": "Salmo 119"},
+                {"id": "sal6", "question": "¿Qué Salmo es conocido como 'Salmo de protección'?", "options": ["Salmo 23", "Salmo 91", "Salmo 51", "Salmo 150"], "correct": 1, "explanation": "El Salmo 91 habla de la protección divina.", "verse_ref": "Salmo 91"},
+                {"id": "sal7", "question": "¿Qué Salmo es un salmo de arrepentimiento de David?", "options": ["Salmo 23", "Salmo 51", "Salmo 100", "Salmo 150"], "correct": 1, "explanation": "El Salmo 51 fue escrito después del pecado con Betsabé.", "verse_ref": "Salmo 51"},
+            ]
+        },
+        "parabolas": {
+            "title": "Las Parábolas de Jesús",
+            "description": "¿Conoces las parábolas evangélicas?",
+            "questions": [
+                {"id": "par1", "question": "En la parábola del sembrador, ¿qué representa la semilla?", "options": ["El dinero", "La Palabra de Dios", "El trabajo", "El amor"], "correct": 1, "explanation": "La semilla es la Palabra de Dios.", "verse_ref": "Lucas 8:11"},
+                {"id": "par2", "question": "¿Quién ayudó al herido en la parábola del buen samaritano?", "options": ["Un sacerdote", "Un levita", "Un samaritano", "Un fariseo"], "correct": 2, "explanation": "Solo el samaritano se detuvo a ayudar.", "verse_ref": "Lucas 10:33"},
+                {"id": "par3", "question": "¿Cuántas ovejas tenía el pastor que perdió una?", "options": ["50", "80", "100", "150"], "correct": 2, "explanation": "Tenía cien ovejas y buscó la perdida.", "verse_ref": "Lucas 15:4"},
+                {"id": "par4", "question": "¿Qué hizo el hijo pródigo con la herencia?", "options": ["La invirtió", "La dio a los pobres", "La malgastó", "La escondió"], "correct": 2, "explanation": "El hijo menor malgastó todo en una vida disoluta.", "verse_ref": "Lucas 15:13"},
+                {"id": "par5", "question": "¿Cuántos talentos recibió el siervo que los duplicó?", "options": ["1", "2", "5", "10"], "correct": 2, "explanation": "Recibió cinco talentos y ganó otros cinco.", "verse_ref": "Mateo 25:20"},
             ]
         },
     },
