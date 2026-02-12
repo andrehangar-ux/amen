@@ -296,8 +296,4 @@ export const api = {
   // Global Search
   globalSearch: (query: string) =>
     api.fetch(`/api/search?q=${encodeURIComponent(query)}`),
-
-  // Maps
-  getMaps: () => api.fetch('/api/maps'),
-  getMapData: (mapId: string) => api.fetch(`/api/maps/${mapId}`),
 };
