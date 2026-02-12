@@ -21,17 +21,42 @@ import { api } from '../../src/utils/api';
 import { useLanguageStore } from '../../src/store/languageStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
 
-// Cross-platform TTS helper
+// Cross-platform TTS helper with voice selection
 const speakText = (text: string, langCode: string, onEnd: () => void) => {
   if (Platform.OS === 'web' && typeof window !== 'undefined' && 'speechSynthesis' in window) {
     // Use Web Speech API on web
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
+    
+    // Try to find the best voice for the language
+    const voices = window.speechSynthesis.getVoices();
+    const langPrefix = langCode.split('-')[0]; // e.g., 'it' from 'it-IT'
+    
+    // First try exact match, then prefix match
+    let voice = voices.find(v => v.lang === langCode);
+    if (!voice) {
+      voice = voices.find(v => v.lang.startsWith(langPrefix));
+    }
+    if (voice) {
+      utterance.voice = voice;
+    }
+    
     utterance.lang = langCode;
     utterance.rate = 0.9;
     utterance.onend = onEnd;
-    utterance.onerror = onEnd;
-    window.speechSynthesis.speak(utterance);
+    utterance.onerror = (e) => {
+      console.error('TTS Error:', e);
+      onEnd();
+    };
+    
+    // Chrome requires voices to be loaded first
+    if (voices.length === 0) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.speak(utterance);
+      };
+    } else {
+      window.speechSynthesis.speak(utterance);
+    }
   } else {
     // Use expo-speech on native
     Speech.speak(text, {
