@@ -329,7 +329,7 @@ export default function QuizScreen() {
               {submitting ? (
                 <ActivityIndicator color="#fff" />
               ) : (
-                <Text style={styles.submitButtonText}>Invia Quiz</Text>
+                <Text style={styles.submitButtonText}>{t('submit')}</Text>
               )}
             </TouchableOpacity>
           ) : (
