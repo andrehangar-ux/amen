@@ -473,6 +473,27 @@ async def logout(request: Request, response: Response):
     response.delete_cookie(key="session_token", path="/")
     return {"message": "Disconnesso con successo"}
 
+@api_router.delete("/auth/delete-account")
+async def delete_account(user: User = Depends(require_auth)):
+    """Delete user account and all associated data (GDPR compliance)"""
+    try:
+        user_id = user.user_id
+        
+        # Delete all user data from various collections
+        await db.users.delete_one({"user_id": user_id})
+        await db.user_sessions.delete_many({"user_id": user_id})
+        await db.journal_entries.delete_many({"user_id": user_id})
+        await db.community_messages.delete_many({"user_id": user_id})
+        await db.user_notes.delete_many({"user_id": user_id})
+        await db.reading_progress.delete_many({"user_id": user_id})
+        
+        logger.info(f"Account deleted for user: {user_id}")
+        
+        return {"message": "Account e tutti i dati eliminati con successo"}
+    except Exception as e:
+        logger.error(f"Error deleting account: {e}")
+        raise HTTPException(status_code=500, detail="Errore durante l'eliminazione dell'account")
+
 # ==================== BIBLE EDITIONS ====================
 
 BIBLE_EDITIONS = {
