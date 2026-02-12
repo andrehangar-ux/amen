@@ -2,16 +2,23 @@
 """
 Backend API Test Suite for Amen! Bible Reader App
 Tests the Bible API endpoints as specified in the review request.
+Focuses on multi-language Bible content, authentication, and AI study tools.
 """
 
 import requests
 import json
 import sys
+import time
 from typing import Dict, Any, List
 
 # Backend URL - using localhost since external URL has routing issues
 BACKEND_URL = "http://localhost:8001"
 API_BASE = f"{BACKEND_URL}/api"
+
+# Test credentials
+TEST_EMAIL = "testbible@cibospirituale.it"
+TEST_PASSWORD = "Test123!"
+TEST_NAME = "Bible Test User"
 
 class BibleAPITester:
     def __init__(self):
