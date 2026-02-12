@@ -1093,25 +1093,74 @@ async def fetch_from_bible_api(book: str, chapter: int, lang: str = "en") -> lis
         return []
 
 async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> list:
-    """Fetch Bible chapter in any language using appropriate API"""
+    """Fetch Bible chapter in any language using multiple free APIs"""
     
-    # Try laparola.net for Italian
+    # Try laparola.net for Italian first (best for Nuova Diodati)
     if lang == "it":
         verses = await fetch_from_laparola(book, chapter)
         if verses and len(verses) > 3:
             return verses
     
-    # For English, Spanish, and other languages - use bible-api.com
-    # It supports: web (World English Bible), kjv, bbe, darby, ylt, asv, webbe
+    # Map language to API translation codes
+    translation_codes = {
+        "en": "KJV",      # King James Version
+        "es": "RVR",      # Reina Valera Revisada
+        "de": "LUTH1545", # Luther 1545
+        "fr": "LSG",      # Louis Segond
+        "pt": "ARC",      # Almeida Revista e Corrigida
+    }
+    
+    book_en = get_book_name_for_lang(book, "en")
+    translation = translation_codes.get(lang, "KJV")
+    
+    # Try bolls.life API first (has many translations)
     try:
-        book_en = get_book_name_for_lang(book, "en")
+        # bolls.life uses book IDs, we need to map
+        book_ids = {
+            "Genesis": 1, "Exodus": 2, "Leviticus": 3, "Numbers": 4, "Deuteronomy": 5,
+            "Joshua": 6, "Judges": 7, "Ruth": 8, "1 Samuel": 9, "2 Samuel": 10,
+            "1 Kings": 11, "2 Kings": 12, "1 Chronicles": 13, "2 Chronicles": 14,
+            "Ezra": 15, "Nehemiah": 16, "Esther": 17, "Job": 18, "Psalms": 19,
+            "Proverbs": 20, "Ecclesiastes": 21, "Song of Solomon": 22, "Isaiah": 23,
+            "Jeremiah": 24, "Lamentations": 25, "Ezekiel": 26, "Daniel": 27,
+            "Hosea": 28, "Joel": 29, "Amos": 30, "Obadiah": 31, "Jonah": 32,
+            "Micah": 33, "Nahum": 34, "Habakkuk": 35, "Zephaniah": 36, "Haggai": 37,
+            "Zechariah": 38, "Malachi": 39, "Matthew": 40, "Mark": 41, "Luke": 42,
+            "John": 43, "Acts": 44, "Romans": 45, "1 Corinthians": 46, "2 Corinthians": 47,
+            "Galatians": 48, "Ephesians": 49, "Philippians": 50, "Colossians": 51,
+            "1 Thessalonians": 52, "2 Thessalonians": 53, "1 Timothy": 54, "2 Timothy": 55,
+            "Titus": 56, "Philemon": 57, "Hebrews": 58, "James": 59, "1 Peter": 60,
+            "2 Peter": 61, "1 John": 62, "2 John": 63, "3 John": 64, "Jude": 65, "Revelation": 66
+        }
         
-        # Choose translation based on language
-        # Note: bible-api.com mainly supports English translations
-        # For Spanish we'll use English WEB as it's clearer
-        translation = "web"  # World English Bible - clear modern English
-        
-        url = f"https://bible-api.com/{book_en}+{chapter}?translation={translation}"
+        book_id = book_ids.get(book_en)
+        if book_id:
+            url = f"https://bolls.life/get-chapter/{translation}/{book_id}/{chapter}/"
+            
+            async with httpx.AsyncClient(timeout=15.0) as client:
+                response = await client.get(url)
+                if response.status_code == 200:
+                    data = response.json()
+                    verses = []
+                    
+                    for v in data:
+                        verse_text = v.get("text", "").strip()
+                        verse_num = v.get("verse", 0)
+                        if verse_text and verse_num > 0:
+                            # Clean up the text
+                            verse_text = re.sub(r'\s+', ' ', verse_text).strip()
+                            verses.append({"verse": verse_num, "text": verse_text})
+                    
+                    if verses and len(verses) > 3:
+                        verses.sort(key=lambda x: x["verse"])
+                        logger.info(f"Fetched {len(verses)} verses from bolls.life for {book} {chapter} ({lang}/{translation})")
+                        return verses
+    except Exception as e:
+        logger.error(f"Error fetching from bolls.life: {e}")
+    
+    # Fallback to bible-api.com (English only but reliable)
+    try:
+        url = f"https://bible-api.com/{book_en}+{chapter}?translation=web"
         
         async with httpx.AsyncClient(timeout=15.0) as client:
             response = await client.get(url)
@@ -1122,12 +1171,6 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
                 for v in data.get("verses", []):
                     verse_text = v.get("text", "").strip()
                     verse_text = verse_text.replace("\n", " ").strip()
-                    
-                    # For non-English languages, add a note that it's English translation
-                    if lang != "en" and verse_text:
-                        # Keep text as is - it's better than no text
-                        pass
-                    
                     if verse_text:
                         verses.append({
                             "verse": v.get("verse", 0),
@@ -1135,7 +1178,7 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
                         })
                 
                 if verses:
-                    logger.info(f"Fetched {len(verses)} verses from bible-api.com for {book} {chapter} ({lang})")
+                    logger.info(f"Fetched {len(verses)} verses from bible-api.com for {book} {chapter}")
                     return verses
     except Exception as e:
         logger.error(f"Error fetching from bible-api.com: {e}")
