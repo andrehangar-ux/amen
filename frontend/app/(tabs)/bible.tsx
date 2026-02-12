@@ -237,7 +237,8 @@ export default function BibleScreen() {
       const response = await api.aiExplainVerse(
         `${selectedBook.name} ${selectedChapter}:${selectedVerse.verse}`,
         selectedVerse.text,
-        aiQuestion || 'Spiega questo versetto'
+        aiQuestion || undefined,
+        currentLanguage  // Pass current language to API
       );
       setAiAnswer(response.explanation);
     } catch (error) {
