@@ -109,7 +109,7 @@ export default function QuizScreen() {
       setResult(null);
       setShowCorrections(false);
     } catch (error) {
-      Alert.alert(t('error'), t('loadError'));
+      showAlert(t('error'), t('loadError'));
     } finally {
       setLoading(false);
     }
