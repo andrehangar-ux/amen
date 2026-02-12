@@ -140,7 +140,13 @@ export default function QuizScreen() {
     setCurrentQuestion(0);
     setAnswers({});
     setResult(null);
+    setShowCorrections(false);
   };
+
+  // Filter topics by category (base vs advanced)
+  const baseTopics = topics.filter(t => t.id !== 'studio_avanzato');
+  const advancedTopics = topics.filter(t => t.id === 'studio_avanzato');
+  const filteredTopics = selectedCategory === 'base' ? baseTopics : advancedTopics;
 
   if (loading) {
     return (
@@ -150,8 +156,10 @@ export default function QuizScreen() {
     );
   }
 
-  // Show result
+  // Show result with detailed corrections
   if (result) {
+    const wrongAnswers = result.results.filter(r => !r.is_correct);
+    
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -165,14 +173,79 @@ export default function QuizScreen() {
             </View>
             <Text style={styles.resultScore}>{result.score.toFixed(0)}%</Text>
             <Text style={styles.resultText}>
-              {result.correct_count} su {result.total} risposte corrette
+              {result.correct_count} / {result.total} {t('correct')}
             </Text>
             <View style={styles.feedbackCard}>
               <Text style={styles.feedbackText}>{result.feedback}</Text>
             </View>
             
+            {/* Corrections Section */}
+            {wrongAnswers.length > 0 && (
+              <TouchableOpacity 
+                style={styles.showCorrectionsBtn}
+                onPress={() => setShowCorrections(!showCorrections)}
+              >
+                <Ionicons 
+                  name={showCorrections ? "chevron-up" : "chevron-down"} 
+                  size={20} 
+                  color={COLORS.error} 
+                />
+                <Text style={styles.showCorrectionsBtnText}>
+                  {showCorrections ? t('hideErrors') : `${t('showErrors')} (${wrongAnswers.length})`}
+                </Text>
+              </TouchableOpacity>
+            )}
+            
+            {showCorrections && wrongAnswers.length > 0 && (
+              <View style={styles.correctionsContainer}>
+                {wrongAnswers.map((r, idx) => {
+                  const question = questions.find(q => q.id === r.question_id);
+                  if (!question) return null;
+                  
+                  return (
+                    <View key={idx} style={styles.correctionCard}>
+                      <Text style={styles.correctionQuestion}>
+                        {idx + 1}. {question.question}
+                      </Text>
+                      
+                      {/* User's wrong answer */}
+                      <View style={styles.answerRow}>
+                        <Ionicons name="close-circle" size={18} color={COLORS.error} />
+                        <Text style={styles.wrongAnswerLabel}>{t('yourAnswer')}: </Text>
+                        <Text style={styles.wrongAnswerText}>
+                          {r.user_answer >= 0 ? question.options[r.user_answer] : '(nessuna)'}
+                        </Text>
+                      </View>
+                      
+                      {/* Correct answer */}
+                      <View style={styles.answerRow}>
+                        <Ionicons name="checkmark-circle" size={18} color={COLORS.success} />
+                        <Text style={styles.correctAnswerLabel}>{t('correctAnswer')}: </Text>
+                        <Text style={styles.correctAnswerText}>
+                          {question.options[r.correct_answer]}
+                        </Text>
+                      </View>
+                      
+                      {/* Explanation */}
+                      {r.explanation && (
+                        <View style={styles.explanationBox}>
+                          <Text style={styles.explanationLabel}>💡 {t('explanation')}:</Text>
+                          <Text style={styles.explanationText}>{r.explanation}</Text>
+                        </View>
+                      )}
+                      
+                      {/* Verse reference */}
+                      {r.verse_ref && (
+                        <Text style={styles.verseRef}>📖 {r.verse_ref}</Text>
+                      )}
+                    </View>
+                  );
+                })}
+              </View>
+            )}
+            
             <TouchableOpacity style={styles.primaryButton} onPress={resetQuiz}>
-              <Text style={styles.primaryButtonText}>Torna ai Quiz</Text>
+              <Text style={styles.primaryButtonText}>{t('back')}</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
