@@ -90,7 +90,6 @@ export default function BibleScreen() {
   const [fontSize, setFontSize] = useState(16);
   const [showFontSettings, setShowFontSettings] = useState(false);
   const [showTutorial, setShowTutorial] = useState(false);
-  const [showEditionModal, setShowEditionModal] = useState(false);
 
   // Load editions
   useEffect(() => {
