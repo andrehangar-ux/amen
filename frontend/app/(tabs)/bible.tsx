@@ -198,10 +198,25 @@ export default function BibleScreen() {
     }
   };
 
-  // Open Wikipedia for biblical terms
-  const openWikipedia = (term: string) => {
-    const url = `https://it.wikipedia.org/wiki/${encodeURIComponent(term)}`;
-    import('expo-linking').then(Linking => Linking.openURL(url));
+  // Open Wikipedia for biblical terms (uses in-app browser for better UX)
+  const openWikipedia = async (term: string) => {
+    // Use language-specific Wikipedia
+    const wikiLangs: { [key: string]: string } = {
+      'it': 'it', 'es': 'es', 'en': 'en', 'de': 'de', 'fr': 'fr', 'pt': 'pt'
+    };
+    const wikiLang = wikiLangs[currentLanguage] || 'it';
+    const url = `https://${wikiLang}.wikipedia.org/wiki/${encodeURIComponent(term)}`;
+    
+    try {
+      // Use WebBrowser for in-app experience - user can easily return
+      await WebBrowser.openBrowserAsync(url, {
+        presentationStyle: WebBrowser.WebBrowserPresentationStyle.PAGE_SHEET,
+        controlsColor: COLORS.primary,
+      });
+    } catch (error) {
+      console.log('Error opening Wikipedia:', error);
+      Alert.alert('Errore', 'Impossibile aprire Wikipedia');
+    }
   };
 
   // Open Maps for biblical locations
