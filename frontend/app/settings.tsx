@@ -83,54 +83,48 @@ export default function SettingsScreen() {
   };
 
   const handleLogout = () => {
-    Alert.alert(
+    showConfirm(
       'Disconnetti',
       'Vuoi uscire dal tuo account?',
-      [
-        { text: 'Annulla', style: 'cancel' },
-        {
-          text: 'Esci',
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              await logout();
-              setUser(null);
-              setSessionToken(null);
-              router.replace('/(auth)/login');
-            } catch (error) {
-              console.error('Logout error:', error);
-              setUser(null);
-              setSessionToken(null);
-              router.replace('/(auth)/login');
-            }
-          },
-        },
-      ]
+      async () => {
+        try {
+          await logout();
+          setUser(null);
+          setSessionToken(null);
+          router.replace('/(auth)/login');
+        } catch (error) {
+          console.error('Logout error:', error);
+          setUser(null);
+          setSessionToken(null);
+          router.replace('/(auth)/login');
+        }
+      }
     );
   };
 
   const handleDeleteAccount = () => {
-    Alert.alert(
+    showConfirm(
       'Elimina Account',
       'Sei sicuro di voler eliminare il tuo account? Questa azione è irreversibile e tutti i tuoi dati verranno cancellati permanentemente.',
-      [
-        { text: 'Annulla', style: 'cancel' },
-        { 
-          text: 'Elimina Account', 
-          style: 'destructive', 
-          onPress: async () => {
-            try {
-              await api.deleteAccount();
-              Alert.alert('Account Eliminato', 'Il tuo account è stato eliminato con successo.');
-              setUser(null);
-              setSessionToken(null);
-              router.replace('/(auth)/login');
-            } catch (error) {
-              Alert.alert('Errore', 'Impossibile eliminare l\'account. Riprova più tardi.');
-            }
+      async () => {
+        try {
+          await api.deleteAccount();
+          if (Platform.OS === 'web') {
+            window.alert('Account eliminato con successo');
+          } else {
+            Alert.alert('Account Eliminato', 'Il tuo account è stato eliminato con successo.');
+          }
+          setUser(null);
+          setSessionToken(null);
+          router.replace('/(auth)/login');
+        } catch (error) {
+          if (Platform.OS === 'web') {
+            window.alert('Errore: Impossibile eliminare l\'account. Riprova più tardi.');
+          } else {
+            Alert.alert('Errore', 'Impossibile eliminare l\'account. Riprova più tardi.');
           }
         }
-      ]
+      }
     );
   };
 
