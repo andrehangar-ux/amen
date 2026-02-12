@@ -93,7 +93,7 @@ export default function HomeScreen() {
         <View style={styles.header}>
           <View>
             <Text style={styles.greeting}>{getGreeting()},</Text>
-            <Text style={styles.userName}>{user?.name || 'Fratello'}</Text>
+            <Text style={styles.userName}>{user?.name || t('brother')}</Text>
           </View>
           <View style={styles.headerActions}>
             <TouchableOpacity
