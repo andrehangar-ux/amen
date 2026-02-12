@@ -497,7 +497,7 @@ export default function BibleScreen() {
                 </View>
               )}
 
-              {/* Action Buttons */}
+              {/* Action Buttons - Prima Riga */}
               <View style={styles.studyActions}>
                 <TouchableOpacity 
                   style={styles.studyActionBtn}
@@ -519,6 +519,75 @@ export default function BibleScreen() {
                 >
                   <Ionicons name="book" size={22} color="#9B59B6" />
                   <Text style={styles.studyActionText}>Dizionario</Text>
+                </TouchableOpacity>
+              </View>
+
+              {/* Action Buttons - Seconda Riga (Nuovi Tool) */}
+              <View style={styles.studyActions}>
+                {selectedVerse && (
+                  <>
+                    <TouchableOpacity 
+                      style={[styles.studyActionBtn, highlightedVerses.has(selectedVerse.verse) && styles.studyActionActive]}
+                      onPress={() => { toggleHighlight(selectedVerse.verse); }}
+                    >
+                      <Ionicons 
+                        name={highlightedVerses.has(selectedVerse.verse) ? "color-fill" : "color-fill-outline"} 
+                        size={22} 
+                        color="#F1C40F" 
+                      />
+                      <Text style={styles.studyActionText}>Evidenzia</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                      style={styles.studyActionBtn}
+                      onPress={() => { shareVerse(selectedVerse); setShowStudyTools(false); }}
+                    >
+                      <Ionicons name="share-social" size={22} color="#2ECC71" />
+                      <Text style={styles.studyActionText}>Condividi</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                      style={[styles.studyActionBtn, bookmarkedVerses.has(`${selectedBook?.name}:${selectedChapter}:${selectedVerse.verse}`) && styles.studyActionActive]}
+                      onPress={() => { 
+                        if (selectedBook && selectedChapter) {
+                          toggleBookmark(`${selectedBook.name}:${selectedChapter}:${selectedVerse.verse}`);
+                        }
+                      }}
+                    >
+                      <Ionicons 
+                        name={bookmarkedVerses.has(`${selectedBook?.name}:${selectedChapter}:${selectedVerse.verse}`) ? "bookmark" : "bookmark-outline"} 
+                        size={22} 
+                        color="#E74C3C" 
+                      />
+                      <Text style={styles.studyActionText}>Segnalibro</Text>
+                    </TouchableOpacity>
+                  </>
+                )}
+              </View>
+
+              {/* Action Buttons - Terza Riga (Link Esterni) */}
+              <View style={styles.studyActions}>
+                <TouchableOpacity 
+                  style={styles.studyActionBtn}
+                  onPress={() => router.push('/maps')}
+                >
+                  <Ionicons name="map" size={22} color="#3498DB" />
+                  <Text style={styles.studyActionText}>Mappe</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  style={styles.studyActionBtn}
+                  onPress={() => openWikipedia(selectedBook?.name || 'Bibbia')}
+                >
+                  <Ionicons name="globe" size={22} color="#95A5A6" />
+                  <Text style={styles.studyActionText}>Wikipedia</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  style={styles.studyActionBtn}
+                  onPress={() => {
+                    const url = `https://www.laparola.net/testo.php?riferimento=${encodeURIComponent(selectedBook?.name + ' ' + selectedChapter)}`;
+                    import('expo-linking').then(Linking => Linking.openURL(url));
+                  }}
+                >
+                  <Ionicons name="open" size={22} color="#1ABC9C" />
+                  <Text style={styles.studyActionText}>LaParola</Text>
                 </TouchableOpacity>
               </View>
 
