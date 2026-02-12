@@ -501,6 +501,7 @@ export default function BibleScreen() {
           <Text style={styles.addNoteText}>Aggiungi nota al capitolo</Text>
         </TouchableOpacity>
       </ScrollView>
+      </View>
     );
   };
 
