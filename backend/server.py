@@ -3049,10 +3049,12 @@ class QuizSubmission(BaseModel):
 @api_router.post("/quiz/submit")
 async def submit_quiz(data: QuizSubmission, user: User = Depends(require_auth)):
     """Submit quiz answers and get AI feedback"""
-    if data.topic not in BIBLE_QUIZZES:
+    lang = getattr(data, 'language', 'it') or 'it'
+    quiz = get_quiz_for_language(data.topic, lang)
+    
+    if not quiz:
         raise HTTPException(status_code=404, detail="Quiz non trovato")
     
-    quiz = BIBLE_QUIZZES[data.topic]
     correct_count = 0
     total = len(quiz["questions"])
     results = []
@@ -3073,19 +3075,37 @@ async def submit_quiz(data: QuizSubmission, user: User = Depends(require_auth)):
     
     score = (correct_count / total) * 100 if total > 0 else 0
     
+    # Language-specific feedback prompts
+    feedback_prompts = {
+        "it": f"L'utente ha completato il quiz '{quiz['title']}' con un punteggio di {score:.0f}% ({correct_count}/{total} risposte corrette). Dai un feedback breve e incoraggiante in italiano.",
+        "es": f"El usuario completó el quiz '{quiz['title']}' con una puntuación del {score:.0f}% ({correct_count}/{total} respuestas correctas). Da un feedback breve y alentador en español.",
+        "en": f"The user completed the quiz '{quiz['title']}' with a score of {score:.0f}% ({correct_count}/{total} correct answers). Give brief and encouraging feedback in English.",
+        "de": f"Der Benutzer hat das Quiz '{quiz['title']}' mit {score:.0f}% ({correct_count}/{total} richtige Antworten) abgeschlossen. Gib kurzes, ermutigendes Feedback auf Deutsch.",
+        "fr": f"L'utilisateur a terminé le quiz '{quiz['title']}' avec un score de {score:.0f}% ({correct_count}/{total} bonnes réponses). Donne un feedback bref et encourageant en français.",
+        "pt": f"O usuário completou o quiz '{quiz['title']}' com pontuação de {score:.0f}% ({correct_count}/{total} respostas corretas). Dê um feedback breve e encorajador em português."
+    }
+    
     # Generate AI feedback
     try:
         chat = LlmChat(
             api_key=EMERGENT_LLM_KEY,
             session_id=f"quiz_{user.user_id}_{data.topic}",
-            system_message="Sei un insegnante biblico. Dai un feedback incoraggiante basato sul punteggio del quiz."
+            system_message="You are a Bible teacher. Give encouraging feedback based on quiz scores."
         ).with_model("openai", "gpt-4o")
         
         feedback = await chat.send_message(UserMessage(
-            text=f"L'utente ha completato il quiz '{quiz['title']}' con un punteggio di {score:.0f}% ({correct_count}/{total} risposte corrette). Dai un feedback breve e incoraggiante in italiano."
+            text=feedback_prompts.get(lang, feedback_prompts["it"])
         ))
     except:
-        feedback = f"Hai completato il quiz con {correct_count}/{total} risposte corrette!"
+        default_feedback = {
+            "it": f"Hai completato il quiz con {correct_count}/{total} risposte corrette!",
+            "es": f"¡Completaste el quiz con {correct_count}/{total} respuestas correctas!",
+            "en": f"You completed the quiz with {correct_count}/{total} correct answers!",
+            "de": f"Du hast das Quiz mit {correct_count}/{total} richtigen Antworten abgeschlossen!",
+            "fr": f"Vous avez terminé le quiz avec {correct_count}/{total} bonnes réponses !",
+            "pt": f"Você completou o quiz com {correct_count}/{total} respostas corretas!"
+        }
+        feedback = default_feedback.get(lang, default_feedback["it"])
     
     # Save result
     await db.quiz_results.insert_one({
@@ -3095,6 +3115,7 @@ async def submit_quiz(data: QuizSubmission, user: User = Depends(require_auth)):
         "score": score,
         "correct_count": correct_count,
         "total": total,
+        "language": lang,
         "created_at": datetime.now(timezone.utc)
     })
     
