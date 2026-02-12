@@ -59,8 +59,17 @@ export default function ProfileScreen() {
           text: 'Esci',
           style: 'destructive',
           onPress: async () => {
-            await logout();
-            router.replace('/(auth)/login');
+            try {
+              await logout();
+              // Force navigation to login
+              setTimeout(() => {
+                router.replace('/(auth)/login');
+              }, 100);
+            } catch (error) {
+              console.error('Logout error:', error);
+              // Force logout anyway
+              router.replace('/(auth)/login');
+            }
           },
         },
       ]
