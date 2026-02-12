@@ -126,7 +126,7 @@ export default function DictionaryScreen() {
           <TouchableOpacity onPress={() => setSelectedTerm(null)}>
             <Ionicons name="arrow-back" size={28} color={COLORS.text} />
           </TouchableOpacity>
-          <Text style={styles.title}>Dizionario</Text>
+          <Text style={styles.title}>{t('title')}</Text>
           <View style={{ width: 28 }} />
         </View>
 
@@ -148,21 +148,21 @@ export default function DictionaryScreen() {
 
               <View style={styles.infoCard}>
                 <View style={styles.infoRow}>
-                  <Text style={styles.infoLabel}>Traslitterazione</Text>
+                  <Text style={styles.infoLabel}>{t('transliteration')}</Text>
                   <Text style={styles.infoValue}>{selectedTerm.transliteration}</Text>
                 </View>
                 <View style={styles.infoRow}>
-                  <Text style={styles.infoLabel}>Pronuncia</Text>
+                  <Text style={styles.infoLabel}>{t('pronunciation')}</Text>
                   <Text style={styles.infoValue}>{selectedTerm.pronunciation}</Text>
                 </View>
                 <View style={styles.infoRow}>
-                  <Text style={styles.infoLabel}>Significato</Text>
+                  <Text style={styles.infoLabel}>{t('meaning')}</Text>
                   <Text style={styles.infoValue}>{selectedTerm.meaning}</Text>
                 </View>
               </View>
 
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Radice</Text>
+                <Text style={styles.sectionTitle}>{t('root')}</Text>
                 <Text style={styles.sectionText}>{selectedTerm.root}</Text>
               </View>
 
