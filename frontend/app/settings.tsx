@@ -208,6 +208,141 @@ export default function SettingsScreen() {
           <Text style={styles.infoText}>Email: {user?.email}</Text>
           <Text style={styles.infoText}>Versione app: 1.0.0</Text>
         </View>
+
+        {/* Privacy & Legal Section */}
+        <Text style={styles.sectionTitle}>Privacy e Legale</Text>
+        <View style={styles.card}>
+          <TouchableOpacity 
+            style={styles.legalItem}
+            onPress={() => Alert.alert(
+              'Informativa sulla Privacy',
+              `INFORMATIVA SULLA PRIVACY - Amen! App
+
+Ultimo aggiornamento: Febbraio 2026
+
+1. DATI RACCOLTI
+Raccogliamo solo i dati necessari per il funzionamento dell'app:
+- Email e nome (per la registrazione)
+- Note e appunti biblici (per il tuo studio personale)
+- Preferenze di lettura (lingua, edizione biblica)
+
+2. USO DEI DATI
+I tuoi dati vengono utilizzati esclusivamente per:
+- Fornirti un'esperienza personalizzata
+- Sincronizzare i tuoi progressi di lettura
+- Permetterti di interagire nella community
+
+3. CONDIVISIONE DATI
+NON vendiamo né condividiamo i tuoi dati personali con terze parti a scopo commerciale.
+
+4. SICUREZZA
+Utilizziamo protocolli sicuri (HTTPS) e crittografia per proteggere i tuoi dati.
+
+5. I TUOI DIRITTI (GDPR)
+Hai diritto a:
+- Accedere ai tuoi dati
+- Rettificare i tuoi dati
+- Cancellare il tuo account
+- Esportare i tuoi dati
+
+6. CONTATTI
+Per domande sulla privacy: privacy@amen-app.com
+
+Utilizzando questa app, accetti questa informativa.`,
+              [{ text: 'Ho Capito', style: 'default' }]
+            )}
+          >
+            <Ionicons name="shield-checkmark" size={22} color={COLORS.primary} />
+            <Text style={styles.legalText}>Informativa sulla Privacy</Text>
+            <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.legalItem}
+            onPress={() => Alert.alert(
+              'Termini di Servizio',
+              `TERMINI DI SERVIZIO - Amen! App
+
+1. ACCETTAZIONE
+Utilizzando Amen!, accetti questi termini di servizio.
+
+2. DESCRIZIONE DEL SERVIZIO
+Amen! è un'app per lo studio della Bibbia che include:
+- Lettura della Bibbia (Nuova Diodati, Reina Valera)
+- Strumenti di studio
+- Community di credenti
+- Assistente AI per domande bibliche
+
+3. CONDOTTA DELL'UTENTE
+Ti impegni a:
+- Non pubblicare contenuti offensivi o illegali
+- Rispettare gli altri utenti
+- Non utilizzare l'app per spam o attività commerciali
+
+4. CONTENUTI
+I testi biblici sono di pubblico dominio.
+I contenuti generati dall'AI sono forniti solo a scopo informativo.
+
+5. LIMITAZIONE DI RESPONSABILITÀ
+L'app è fornita "così com'è". Non garantiamo l'accuratezza dei contenuti AI.
+
+6. MODIFICHE
+Ci riserviamo il diritto di modificare questi termini in qualsiasi momento.
+
+7. LEGGE APPLICABILE
+Questi termini sono regolati dalla legge italiana.`,
+              [{ text: 'Ho Capito', style: 'default' }]
+            )}
+          >
+            <Ionicons name="document-text" size={22} color={COLORS.accent} />
+            <Text style={styles.legalText}>Termini di Servizio</Text>
+            <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.legalItem}
+            onPress={() => Alert.alert(
+              'Consensi GDPR',
+              'Gestisci i tuoi consensi per il trattamento dei dati secondo il GDPR.',
+              [
+                { text: 'Revoca Tutti i Consensi', style: 'destructive', onPress: () => Alert.alert('Consensi revocati', 'I tuoi consensi sono stati revocati. Alcune funzionalità potrebbero non funzionare.') },
+                { text: 'Mantieni Consensi', style: 'cancel' }
+              ]
+            )}
+          >
+            <Ionicons name="checkbox" size={22} color="#27AE60" />
+            <Text style={styles.legalText}>Gestione Consensi GDPR</Text>
+            <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={[styles.legalItem, { borderBottomWidth: 0 }]}
+            onPress={() => Alert.alert(
+              'Elimina Account',
+              'Sei sicuro di voler eliminare il tuo account? Questa azione è irreversibile e tutti i tuoi dati verranno cancellati permanentemente.',
+              [
+                { text: 'Annulla', style: 'cancel' },
+                { 
+                  text: 'Elimina Account', 
+                  style: 'destructive', 
+                  onPress: async () => {
+                    try {
+                      await api.deleteAccount();
+                      Alert.alert('Account Eliminato', 'Il tuo account è stato eliminato con successo.');
+                      router.replace('/(auth)/login');
+                    } catch (error) {
+                      Alert.alert('Errore', 'Impossibile eliminare l\'account. Riprova più tardi.');
+                    }
+                  }
+                }
+              ]
+            )}
+          >
+            <Ionicons name="trash" size={22} color="#E74C3C" />
+            <Text style={[styles.legalText, { color: '#E74C3C' }]}>Elimina Account</Text>
+            <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
