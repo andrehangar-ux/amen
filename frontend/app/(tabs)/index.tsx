@@ -74,7 +74,7 @@ export default function HomeScreen() {
   const handleSpeak = () => {
     if (dailyVerse) {
       const ttsCode = languages[currentLanguage]?.tts_code || 'it-IT';
-      Speech.speak(dailyVerse.text, { language: ttsCode });
+      speakText(dailyVerse.text, ttsCode);
     }
   };
 
