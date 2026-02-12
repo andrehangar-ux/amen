@@ -1989,7 +1989,7 @@ async def delete_bookmark(bookmark_id: str, user: User = Depends(require_auth)):
 async def get_progress(user: User = Depends(require_auth)):
     progress = await db.progress.find_one({"user_id": user.user_id}, {"_id": 0})
     if not progress:
-        progress = {
+        new_progress = {
             "user_id": user.user_id,
             "reading_streak": 0,
             "total_chapters_read": 0,
@@ -1997,9 +1997,9 @@ async def get_progress(user: User = Depends(require_auth)):
             "last_reading_date": None,
             "achievements": []
         }
-        await db.progress.insert_one(progress)
-        # Remove _id added by MongoDB after insert
-        progress.pop("_id", None)
+        await db.progress.insert_one(new_progress)
+        # Return copy without _id
+        progress = {k: v for k, v in new_progress.items() if k != "_id"}
     return progress
 
 @api_router.post("/progress/reading")
