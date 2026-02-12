@@ -172,7 +172,7 @@ export default function HomeScreen() {
                 <Ionicons name="people" size={24} color="#74B9FF" />
               </View>
               <Text style={styles.quickActionTitle}>{t('community')}</Text>
-              <Text style={styles.quickActionSubtitle}>Mondiale</Text>
+              <Text style={styles.quickActionSubtitle}>{t('worldwide')}</Text>
             </TouchableOpacity>
           </View>
         </View>
