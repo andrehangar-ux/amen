@@ -402,17 +402,28 @@ export default function BibleScreen() {
           const hasRefs = crossRefs[fullVerseKey];
           const hasDict = dictLinks[fullVerseKey];
           const hasStudyData = hasRefs || hasDict;
+          const isHighlighted = highlightedVerses.has(verse.verse);
+          const isBookmarked = bookmarkedVerses.has(fullVerseKey);
           
           return (
             <TouchableOpacity 
               key={verse.verse} 
-              style={[styles.verseContainer, hasStudyData && styles.verseWithStudy]}
+              style={[
+                styles.verseContainer, 
+                hasStudyData && styles.verseWithStudy,
+                isHighlighted && styles.verseHighlighted
+              ]}
               onPress={() => handleVersePress(verse)}
               activeOpacity={0.7}
             >
-              <Text style={styles.verseNumber}>{verse.verse}</Text>
+              <View style={styles.verseNumberContainer}>
+                <Text style={styles.verseNumber}>{verse.verse}</Text>
+                {isBookmarked && (
+                  <Ionicons name="bookmark" size={12} color="#E74C3C" style={styles.bookmarkIcon} />
+                )}
+              </View>
               <View style={styles.verseContent}>
-                <Text style={styles.verseText}>{verse.text}</Text>
+                <Text style={[styles.verseText, { fontSize }]}>{verse.text}</Text>
                 {hasStudyData && (
                   <View style={styles.verseIndicators}>
                     {hasRefs && (
