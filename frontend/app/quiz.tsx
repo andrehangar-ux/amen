@@ -12,6 +12,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { api } from '../src/utils/api';
+import { useLanguageStore } from '../src/store/languageStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../src/utils/theme';
 
 interface QuizTopic {
@@ -19,6 +20,7 @@ interface QuizTopic {
   title: string;
   description: string;
   questions_count: number;
+  difficulty?: string;
 }
 
 interface Question {
@@ -30,11 +32,20 @@ interface Question {
   verse_ref: string;
 }
 
+interface QuestionResult {
+  question_id: string;
+  is_correct: boolean;
+  correct_answer: number;
+  user_answer: number;
+  explanation: string;
+  verse_ref: string;
+}
+
 interface QuizResult {
   score: number;
   correct_count: number;
   total: number;
-  results: any[];
+  results: QuestionResult[];
   feedback: string;
 }
 
