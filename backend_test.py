@@ -741,15 +741,23 @@ class BibleAPITester:
         return passed == total
 
 def main():
-    """Main test runner"""
+    """Main test runner for Amen! Bible App comprehensive testing"""
+    print("🙏 Amen! Bible App - Comprehensive Backend API Testing")
+    print("Testing multi-language Bible content, authentication, and AI study tools")
+    print("=" * 80)
+    
     tester = BibleAPITester()
     success = tester.run_all_tests()
     
     if success:
-        print("\n🎉 All tests passed! Bible API is working correctly.")
+        print("\n🎉 All tests passed! Amen! Bible API is working correctly.")
+        print("✅ Multi-language Bible content working")
+        print("✅ Authentication system working") 
+        print("✅ AI study tools working")
         sys.exit(0)
     else:
         print("\n💥 Some tests failed. Check the details above.")
+        print("⚠️  Focus on multi-language Bible content - this is CRITICAL!")
         sys.exit(1)
 
 if __name__ == "__main__":
