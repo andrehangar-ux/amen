@@ -4,8 +4,21 @@ import { TouchableOpacity, StyleSheet, View, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { COLORS, SHADOWS } from '../../src/utils/theme';
+import { useLanguageStore } from '../../src/store/languageStore';
+
+const TAB_LABELS: Record<string, Record<string, string>> = {
+  it: { home: 'Home', bible: 'Bibbia', journal: 'Diario', profile: 'Profilo' },
+  en: { home: 'Home', bible: 'Bible', journal: 'Journal', profile: 'Profile' },
+  es: { home: 'Inicio', bible: 'Biblia', journal: 'Diario', profile: 'Perfil' },
+  de: { home: 'Start', bible: 'Bibel', journal: 'Tagebuch', profile: 'Profil' },
+  fr: { home: 'Accueil', bible: 'Bible', journal: 'Journal', profile: 'Profil' },
+  pt: { home: 'Início', bible: 'Bíblia', journal: 'Diário', profile: 'Perfil' },
+};
 
 export default function TabLayout() {
+  const { currentLanguage } = useLanguageStore();
+  const labels = TAB_LABELS[currentLanguage] || TAB_LABELS['it'];
+  
   return (
     <View style={styles.container}>
       <Tabs
@@ -20,7 +33,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="index"
           options={{
-            title: 'Home',
+            title: labels.home,
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="home" size={size} color={color} />
             ),
@@ -29,7 +42,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="bible"
           options={{
-            title: 'Bibbia',
+            title: labels.bible,
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="book" size={size} color={color} />
             ),
@@ -38,7 +51,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="journal"
           options={{
-            title: 'Diario',
+            title: labels.journal,
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="create" size={size} color={color} />
             ),
@@ -47,7 +60,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="profile"
           options={{
-            title: 'Profilo',
+            title: labels.profile,
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="person" size={size} color={color} />
             ),
