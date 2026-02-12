@@ -1105,6 +1105,7 @@ export default function BibleScreen() {
       {renderStudyToolsModal()}
       {renderNoteModal()}
       {renderAIModal()}
+      {renderTutorialModal()}
     </SafeAreaView>
   );
 }
