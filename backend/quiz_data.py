@@ -140,6 +140,66 @@ MULTILINGUAL_QUIZZES = {
                 {"id": "mir8", "question": "Chi ricevette la vista al pozzo di Siloe?", "options": ["Bartimeo", "L'uomo nato cieco", "Il centurione", "Zaccheo"], "correct": 1, "explanation": "Gesù guarì l'uomo nato cieco al pozzo di Siloe.", "verse_ref": "Giovanni 9:1-7"},
             ]
         },
+        "esodo": {
+            "title": "Quiz sull'Esodo",
+            "description": "La liberazione dall'Egitto",
+            "questions": [
+                {"id": "eso1", "question": "Chi fu messo in un cesto sul Nilo?", "options": ["Aronne", "Mosè", "Giuseppe", "Faraone"], "correct": 1, "explanation": "Mosè fu messo in un cesto dalla madre per salvarlo.", "verse_ref": "Esodo 2:3"},
+                {"id": "eso2", "question": "Come si chiamava la moglie di Mosè?", "options": ["Sefora", "Miriam", "Rachele", "Lea"], "correct": 0, "explanation": "Mosè sposò Sefora, figlia di Ietro.", "verse_ref": "Esodo 2:21"},
+                {"id": "eso3", "question": "In cosa si trasformò il bastone di Mosè?", "options": ["Fuoco", "Serpente", "Acqua", "Pane"], "correct": 1, "explanation": "Il bastone divenne un serpente come segno per Faraone.", "verse_ref": "Esodo 7:10"},
+                {"id": "eso4", "question": "Quante piaghe colpirono l'Egitto?", "options": ["5", "7", "10", "12"], "correct": 2, "explanation": "Dio mandò dieci piaghe sull'Egitto.", "verse_ref": "Esodo 7-11"},
+                {"id": "eso5", "question": "Qual era l'ultima piaga?", "options": ["Rane", "Tenebre", "Morte dei primogeniti", "Locuste"], "correct": 2, "explanation": "La decima piaga fu la morte dei primogeniti.", "verse_ref": "Esodo 12:29"},
+                {"id": "eso6", "question": "Quale mare si aprì per Israele?", "options": ["Mar Morto", "Mar Rosso", "Mar Mediterraneo", "Fiume Giordano"], "correct": 1, "explanation": "Le acque del Mar Rosso si divisero per far passare Israele.", "verse_ref": "Esodo 14:21"},
+                {"id": "eso7", "question": "Su quale monte Mosè ricevette i Dieci Comandamenti?", "options": ["Monte Ararat", "Monte Sinai", "Monte Carmelo", "Monte degli Ulivi"], "correct": 1, "explanation": "Dio diede la Legge a Mosè sul monte Sinai.", "verse_ref": "Esodo 19-20"},
+                {"id": "eso8", "question": "Cosa fece il popolo mentre Mosè era sul monte?", "options": ["Pregò", "Fece un vitello d'oro", "Combatté", "Dormì"], "correct": 1, "explanation": "Il popolo costruì un vitello d'oro per adorarlo.", "verse_ref": "Esodo 32:4"},
+                {"id": "eso9", "question": "Cosa mangiò il popolo nel deserto?", "options": ["Pane e vino", "Manna e quaglie", "Frutta e verdura", "Carne e latte"], "correct": 1, "explanation": "Dio diede manna dal cielo e quaglie.", "verse_ref": "Esodo 16"},
+                {"id": "eso10", "question": "Quanti anni Israele vagò nel deserto?", "options": ["20", "30", "40", "50"], "correct": 2, "explanation": "Israele vagò 40 anni nel deserto.", "verse_ref": "Numeri 14:33"},
+            ]
+        },
+        "dieci_comandamenti": {
+            "title": "I Dieci Comandamenti",
+            "description": "Conosci i comandamenti di Dio?",
+            "questions": [
+                {"id": "com1", "question": "Qual è il primo comandamento?", "options": ["Non uccidere", "Non avrai altri dèi", "Onora tuo padre e tua madre", "Non rubare"], "correct": 1, "explanation": "Non avrai altri dèi all'infuori di me.", "verse_ref": "Esodo 20:3"},
+                {"id": "com2", "question": "Quale comandamento protegge il matrimonio?", "options": ["Non uccidere", "Non commettere adulterio", "Non rubare", "Non mentire"], "correct": 1, "explanation": "Non commettere adulterio.", "verse_ref": "Esodo 20:14"},
+                {"id": "com3", "question": "Quale giorno bisogna santificare?", "options": ["Il primo", "Il settimo", "L'ultimo", "Ogni giorno"], "correct": 1, "explanation": "Ricordati del giorno del sabato per santificarlo.", "verse_ref": "Esodo 20:8"},
+                {"id": "com4", "question": "Quale comandamento riguarda i genitori?", "options": ["Non uccidere", "Non rubare", "Onora tuo padre e tua madre", "Non mentire"], "correct": 2, "explanation": "Onora tuo padre e tua madre.", "verse_ref": "Esodo 20:12"},
+                {"id": "com5", "question": "Quanti comandamenti riguardano il rapporto con Dio?", "options": ["2", "3", "4", "5"], "correct": 2, "explanation": "I primi quattro comandamenti riguardano Dio.", "verse_ref": "Esodo 20:1-11"},
+                {"id": "com6", "question": "Su cosa erano scritti i comandamenti?", "options": ["Papiro", "Tavole di pietra", "Pergamena", "Legno"], "correct": 1, "explanation": "I comandamenti erano scritti su due tavole di pietra.", "verse_ref": "Esodo 31:18"},
+                {"id": "com7", "question": "Chi ruppe le prime tavole?", "options": ["Aronne", "Mosè", "Giosuè", "Caleb"], "correct": 1, "explanation": "Mosè ruppe le tavole vedendo il vitello d'oro.", "verse_ref": "Esodo 32:19"},
+                {"id": "com8", "question": "Quale comandamento proibisce la falsa testimonianza?", "options": ["Sesto", "Settimo", "Ottavo", "Nono"], "correct": 3, "explanation": "Non attestare il falso contro il tuo prossimo.", "verse_ref": "Esodo 20:16"},
+            ]
+        },
+        "parabole": {
+            "title": "Le Parabole di Gesù",
+            "description": "Conosci le parabole evangeliche?",
+            "questions": [
+                {"id": "par1", "question": "Nella parabola del seminatore, cosa rappresenta il seme?", "options": ["Il denaro", "La Parola di Dio", "Il lavoro", "L'amore"], "correct": 1, "explanation": "Il seme è la Parola di Dio.", "verse_ref": "Luca 8:11"},
+                {"id": "par2", "question": "Chi aiutò il ferito nella parabola del buon samaritano?", "options": ["Un sacerdote", "Un levita", "Un samaritano", "Un fariseo"], "correct": 2, "explanation": "Solo il samaritano si fermò ad aiutare.", "verse_ref": "Luca 10:33"},
+                {"id": "par3", "question": "Quante pecore aveva il pastore che ne perse una?", "options": ["50", "80", "100", "150"], "correct": 2, "explanation": "Aveva cento pecore e cercò quella perduta.", "verse_ref": "Luca 15:4"},
+                {"id": "par4", "question": "Cosa fece il figlio prodigo con l'eredità?", "options": ["La investì", "La diede ai poveri", "La sperperò", "La nascose"], "correct": 2, "explanation": "Il figlio minore sperperò tutto in una vita dissoluta.", "verse_ref": "Luca 15:13"},
+                {"id": "par5", "question": "Cosa chiese il servo malvagio al re?", "options": ["Più lavoro", "Più denaro", "Pazienza", "Libertà"], "correct": 2, "explanation": "Chiese pazienza per pagare il debito.", "verse_ref": "Matteo 18:26"},
+                {"id": "par6", "question": "Le vergini stolte cosa dimenticarono?", "options": ["Le lampade", "L'olio", "Le vesti", "I sandali"], "correct": 1, "explanation": "Non portarono olio per le lampade.", "verse_ref": "Matteo 25:3"},
+                {"id": "par7", "question": "Quanti talenti ricevette il servo che li raddoppiò?", "options": ["1", "2", "5", "10"], "correct": 2, "explanation": "Ricevette cinque talenti e ne guadagnò altri cinque.", "verse_ref": "Matteo 25:20"},
+                {"id": "par8", "question": "Cosa rappresenta il lievito nella parabola?", "options": ["Il peccato", "Il Regno dei cieli", "La ricchezza", "La tristezza"], "correct": 1, "explanation": "Il lievito rappresenta il Regno dei cieli che cresce.", "verse_ref": "Matteo 13:33"},
+                {"id": "par9", "question": "Nella parabola del tesoro nascosto, cosa fece l'uomo?", "options": ["Lo rubò", "Lo ignorò", "Vendette tutto per comprare il campo", "Lo diede al re"], "correct": 2, "explanation": "Vendette tutto per avere il tesoro.", "verse_ref": "Matteo 13:44"},
+                {"id": "par10", "question": "Chi non fu invitato alla festa nella parabola?", "options": ["I ricchi", "I poveri", "Quelli che rifiutarono", "I bambini"], "correct": 2, "explanation": "Chi rifiutò l'invito fu escluso.", "verse_ref": "Luca 14:24"},
+            ]
+        },
+        "beatitudini": {
+            "title": "Le Beatitudini",
+            "description": "Il Sermone sul Monte",
+            "questions": [
+                {"id": "bea1", "question": "Di chi è il regno dei cieli?", "options": ["Dei ricchi", "Dei potenti", "Dei poveri in spirito", "Dei sapienti"], "correct": 2, "explanation": "Beati i poveri in spirito, perché di loro è il regno dei cieli.", "verse_ref": "Matteo 5:3"},
+                {"id": "bea2", "question": "Chi sarà consolato?", "options": ["Chi ride", "Chi è afflitto", "Chi è ricco", "Chi è potente"], "correct": 1, "explanation": "Beati gli afflitti, perché saranno consolati.", "verse_ref": "Matteo 5:4"},
+                {"id": "bea3", "question": "Cosa erediteranno i mansueti?", "options": ["Oro", "Potere", "La terra", "La gloria"], "correct": 2, "explanation": "Beati i mansueti, perché erediteranno la terra.", "verse_ref": "Matteo 5:5"},
+                {"id": "bea4", "question": "Chi sarà saziato?", "options": ["Chi ha fame e sete di giustizia", "Chi è ricco", "Chi è forte", "Chi comanda"], "correct": 0, "explanation": "Beati quelli che hanno fame e sete di giustizia.", "verse_ref": "Matteo 5:6"},
+                {"id": "bea5", "question": "Chi otterrà misericordia?", "options": ["I potenti", "I misericordiosi", "I ricchi", "I saggi"], "correct": 1, "explanation": "Beati i misericordiosi, perché otterranno misericordia.", "verse_ref": "Matteo 5:7"},
+                {"id": "bea6", "question": "Chi vedrà Dio?", "options": ["I forti", "I ricchi", "I puri di cuore", "I potenti"], "correct": 2, "explanation": "Beati i puri di cuore, perché vedranno Dio.", "verse_ref": "Matteo 5:8"},
+                {"id": "bea7", "question": "Come saranno chiamati gli operatori di pace?", "options": ["Servi", "Figli di Dio", "Profeti", "Re"], "correct": 1, "explanation": "Beati gli operatori di pace, perché saranno chiamati figli di Dio.", "verse_ref": "Matteo 5:9"},
+                {"id": "bea8", "question": "Quante sono le beatitudini?", "options": ["5", "7", "8", "10"], "correct": 2, "explanation": "Le beatitudini sono otto.", "verse_ref": "Matteo 5:3-10"},
+            ]
+        },
     },
     "es": {
         "genesis": {
