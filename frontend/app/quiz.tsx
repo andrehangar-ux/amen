@@ -137,8 +137,9 @@ export default function QuizScreen() {
     try {
       const data = await api.submitQuiz(selectedTopic, answers);
       setResult(data);
-    } catch (error) {
-      Alert.alert(t('error'), t('submitError'));
+    } catch (error: any) {
+      console.error('Quiz submit error:', error);
+      showAlert(t('error'), error?.message || t('submitError'));
     } finally {
       setSubmitting(false);
     }
