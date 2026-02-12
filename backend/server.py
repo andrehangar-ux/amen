@@ -1101,65 +1101,80 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
         if verses and len(verses) > 3:
             return verses
     
-    # Map language to API translation codes
-    translation_codes = {
-        "en": "KJV",      # King James Version
-        "es": "RVR",      # Reina Valera Revisada
-        "de": "LUTH1545", # Luther 1545
-        "fr": "LSG",      # Louis Segond
-        "pt": "ARC",      # Almeida Revista e Corrigida
+    # GitHub Bible JSON files - most reliable source
+    # Map language to GitHub file
+    github_files = {
+        "es": "https://raw.githubusercontent.com/thiagobodruk/bible/master/json/es_rvr.json",
+        "en": "https://raw.githubusercontent.com/thiagobodruk/bible/master/json/en_kjv.json", 
+        "de": "https://raw.githubusercontent.com/thiagobodruk/bible/master/json/de_schlachter.json",
+        "fr": "https://raw.githubusercontent.com/thiagobodruk/bible/master/json/fr_apee.json",
+        "pt": "https://raw.githubusercontent.com/thiagobodruk/bible/master/json/pt_acf.json",
     }
     
-    book_en = get_book_name_for_lang(book, "en")
-    translation = translation_codes.get(lang, "KJV")
+    # Map Italian book names to abbreviations
+    book_abbrevs = {
+        "Genesi": "gn", "Esodo": "ex", "Levitico": "lv", "Numeri": "nm", "Deuteronomio": "dt",
+        "Giosuè": "js", "Giudici": "jud", "Rut": "rt", "1 Samuele": "1sm", "2 Samuele": "2sm",
+        "1 Re": "1kgs", "2 Re": "2kgs", "1 Cronache": "1ch", "2 Cronache": "2ch",
+        "Esdra": "ezr", "Neemia": "ne", "Ester": "et", "Giobbe": "job", "Salmi": "ps",
+        "Proverbi": "prv", "Ecclesiaste": "ec", "Cantico dei Cantici": "so", "Isaia": "is",
+        "Geremia": "jr", "Lamentazioni": "lm", "Ezechiele": "ez", "Daniele": "dn",
+        "Osea": "ho", "Gioele": "jl", "Amos": "am", "Abdia": "ob", "Giona": "jn",
+        "Michea": "mi", "Naum": "na", "Abacuc": "hk", "Sofonia": "zp", "Aggeo": "hg",
+        "Zaccaria": "zc", "Malachia": "ml", "Matteo": "mt", "Marco": "mk", "Luca": "lk",
+        "Giovanni": "jo", "Atti": "act", "Romani": "rm", "1 Corinzi": "1co", "2 Corinzi": "2co",
+        "Galati": "gl", "Efesini": "eph", "Filippesi": "ph", "Colossesi": "cl",
+        "1 Tessalonicesi": "1ts", "2 Tessalonicesi": "2ts", "1 Timoteo": "1tm", "2 Timoteo": "2tm",
+        "Tito": "tt", "Filemone": "phm", "Ebrei": "hb", "Giacomo": "jm", "1 Pietro": "1pe",
+        "2 Pietro": "2pe", "1 Giovanni": "1jo", "2 Giovanni": "2jo", "3 Giovanni": "3jo",
+        "Giuda": "jd", "Apocalisse": "re"
+    }
     
-    # Try bolls.life API first (has many translations)
-    try:
-        # bolls.life uses book IDs, we need to map
-        book_ids = {
-            "Genesis": 1, "Exodus": 2, "Leviticus": 3, "Numbers": 4, "Deuteronomy": 5,
-            "Joshua": 6, "Judges": 7, "Ruth": 8, "1 Samuel": 9, "2 Samuel": 10,
-            "1 Kings": 11, "2 Kings": 12, "1 Chronicles": 13, "2 Chronicles": 14,
-            "Ezra": 15, "Nehemiah": 16, "Esther": 17, "Job": 18, "Psalms": 19,
-            "Proverbs": 20, "Ecclesiastes": 21, "Song of Solomon": 22, "Isaiah": 23,
-            "Jeremiah": 24, "Lamentations": 25, "Ezekiel": 26, "Daniel": 27,
-            "Hosea": 28, "Joel": 29, "Amos": 30, "Obadiah": 31, "Jonah": 32,
-            "Micah": 33, "Nahum": 34, "Habakkuk": 35, "Zephaniah": 36, "Haggai": 37,
-            "Zechariah": 38, "Malachi": 39, "Matthew": 40, "Mark": 41, "Luke": 42,
-            "John": 43, "Acts": 44, "Romans": 45, "1 Corinthians": 46, "2 Corinthians": 47,
-            "Galatians": 48, "Ephesians": 49, "Philippians": 50, "Colossians": 51,
-            "1 Thessalonians": 52, "2 Thessalonians": 53, "1 Timothy": 54, "2 Timothy": 55,
-            "Titus": 56, "Philemon": 57, "Hebrews": 58, "James": 59, "1 Peter": 60,
-            "2 Peter": 61, "1 John": 62, "2 John": 63, "3 John": 64, "Jude": 65, "Revelation": 66
-        }
-        
-        book_id = book_ids.get(book_en)
-        if book_id:
-            url = f"https://bolls.life/get-chapter/{translation}/{book_id}/{chapter}/"
+    if lang in github_files:
+        try:
+            # Check cache first
+            cache_key = f"github_bible_{lang}"
+            cached = await db.bible_full_cache.find_one({"cache_key": cache_key})
             
-            async with httpx.AsyncClient(timeout=15.0) as client:
-                response = await client.get(url)
-                if response.status_code == 200:
-                    data = response.json()
-                    verses = []
-                    
-                    for v in data:
-                        verse_text = v.get("text", "").strip()
-                        verse_num = v.get("verse", 0)
-                        if verse_text and verse_num > 0:
-                            # Clean up the text
-                            verse_text = re.sub(r'\s+', ' ', verse_text).strip()
-                            verses.append({"verse": verse_num, "text": verse_text})
-                    
-                    if verses and len(verses) > 3:
-                        verses.sort(key=lambda x: x["verse"])
-                        logger.info(f"Fetched {len(verses)} verses from bolls.life for {book} {chapter} ({lang}/{translation})")
-                        return verses
-    except Exception as e:
-        logger.error(f"Error fetching from bolls.life: {e}")
+            bible_data = None
+            if cached and cached.get("data"):
+                bible_data = cached["data"]
+            else:
+                # Fetch from GitHub
+                async with httpx.AsyncClient(timeout=30.0) as client:
+                    response = await client.get(github_files[lang])
+                    if response.status_code == 200:
+                        bible_data = response.json()
+                        # Cache for future use
+                        await db.bible_full_cache.update_one(
+                            {"cache_key": cache_key},
+                            {"$set": {"data": bible_data, "cached_at": datetime.now(timezone.utc)}},
+                            upsert=True
+                        )
+            
+            if bible_data:
+                book_abbrev = book_abbrevs.get(book, book.lower()[:2])
+                
+                for b in bible_data:
+                    if b.get("abbrev") == book_abbrev:
+                        chapters = b.get("chapters", [])
+                        if chapter <= len(chapters):
+                            chapter_verses = chapters[chapter - 1]
+                            verses = []
+                            for i, text in enumerate(chapter_verses):
+                                if text:
+                                    verses.append({"verse": i + 1, "text": text.strip()})
+                            
+                            if verses:
+                                logger.info(f"Fetched {len(verses)} verses from GitHub for {book} {chapter} ({lang})")
+                                return verses
+                        break
+        except Exception as e:
+            logger.error(f"Error fetching from GitHub: {e}")
     
-    # Fallback to bible-api.com (English only but reliable)
+    # Fallback to bible-api.com (English)
     try:
+        book_en = get_book_name_for_lang(book, "en")
         url = f"https://bible-api.com/{book_en}+{chapter}?translation=web"
         
         async with httpx.AsyncClient(timeout=15.0) as client:
