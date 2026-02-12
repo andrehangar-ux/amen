@@ -345,37 +345,78 @@ export default function QuizScreen() {
     );
   }
 
-  // Show topics
+  // Show topics with category selector
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
-        <Text style={styles.title}>Quiz Biblici</Text>
+        <Text style={styles.title}>{t('title')}</Text>
         <View style={{ width: 28 }} />
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text style={styles.subtitle}>Testa la tua conoscenza della Bibbia</Text>
+        <Text style={styles.subtitle}>{t('subtitle')}</Text>
 
-        {topics.map(topic => (
-          <TouchableOpacity
-            key={topic.id}
-            style={styles.topicCard}
-            onPress={() => startQuiz(topic.id)}
+        {/* Category Selector */}
+        <View style={styles.categorySelector}>
+          <TouchableOpacity 
+            style={[styles.categoryBtn, selectedCategory === 'base' && styles.categoryBtnActive]}
+            onPress={() => setSelectedCategory('base')}
           >
-            <View style={styles.topicIcon}>
-              <Ionicons name="help-circle" size={30} color={COLORS.primary} />
-            </View>
-            <View style={styles.topicContent}>
-              <Text style={styles.topicTitle}>{topic.title}</Text>
-              <Text style={styles.topicDescription}>{topic.description}</Text>
-              <Text style={styles.topicMeta}>{topic.questions_count} domande</Text>
-            </View>
-            <Ionicons name="chevron-forward" size={24} color={COLORS.textMuted} />
+            <Ionicons name="book" size={20} color={selectedCategory === 'base' ? '#fff' : COLORS.primary} />
+            <Text style={[styles.categoryBtnText, selectedCategory === 'base' && styles.categoryBtnTextActive]}>
+              {t('base')} ({baseTopics.length})
+            </Text>
           </TouchableOpacity>
-        ))}
+          
+          <TouchableOpacity 
+            style={[styles.categoryBtn, selectedCategory === 'avanzato' && styles.categoryBtnActive]}
+            onPress={() => setSelectedCategory('avanzato')}
+          >
+            <Ionicons name="school" size={20} color={selectedCategory === 'avanzato' ? '#fff' : COLORS.accent} />
+            <Text style={[styles.categoryBtnText, selectedCategory === 'avanzato' && styles.categoryBtnTextActive]}>
+              {t('advanced')} ({advancedTopics.length})
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {filteredTopics.length === 0 ? (
+          <View style={styles.emptyContainer}>
+            <Ionicons name="help-circle-outline" size={48} color={COLORS.textMuted} />
+            <Text style={styles.emptyText}>
+              {selectedCategory === 'avanzato' 
+                ? 'Quiz avanzati disponibili prossimamente' 
+                : 'Nessun quiz disponibile'}
+            </Text>
+          </View>
+        ) : (
+          filteredTopics.map(topic => (
+            <TouchableOpacity
+              key={topic.id}
+              style={styles.topicCard}
+              onPress={() => startQuiz(topic.id)}
+            >
+              <View style={[
+                styles.topicIcon,
+                selectedCategory === 'avanzato' && { backgroundColor: COLORS.accent + '15' }
+              ]}>
+                <Ionicons 
+                  name={selectedCategory === 'avanzato' ? "school" : "help-circle"} 
+                  size={30} 
+                  color={selectedCategory === 'avanzato' ? COLORS.accent : COLORS.primary} 
+                />
+              </View>
+              <View style={styles.topicContent}>
+                <Text style={styles.topicTitle}>{topic.title}</Text>
+                <Text style={styles.topicDescription}>{topic.description}</Text>
+                <Text style={styles.topicMeta}>{topic.questions_count} {t('questions')}</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={24} color={COLORS.textMuted} />
+            </TouchableOpacity>
+          ))
+        )}
       </ScrollView>
     </SafeAreaView>
   );
