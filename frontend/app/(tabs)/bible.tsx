@@ -307,7 +307,7 @@ export default function BibleScreen() {
   };
 
   const handleBack = () => {
-    Speech.stop();
+    stopSpeaking();
     setIsSpeaking(false);
     
     if (view === 'reading') {
