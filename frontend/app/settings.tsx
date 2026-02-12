@@ -24,6 +24,9 @@ const showInfoAlert = (title: string, message: string) => {
     window.alert(`${title}\n\n${message}`);
   } else {
     Alert.alert(title, message, [{ text: 'Ho Capito', style: 'default' }]);
+
+// Cross-platform confirm dialog
+const showConfirm = (title: string, message: string, onConfirm: () => void) => {
   }
 };
   if (Platform.OS === 'web') {
