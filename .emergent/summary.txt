@@ -1,209 +1,238 @@
 <analysis>
-
 <original_problem_statement>
-The user wants to build a comprehensive Christian mobile application, initially called Cibo Spirituale and now renamed Amen!. The app is a Progressive Web App (PWA) designed to be a personal spiritual companion.
+The user wants to build a comprehensive Christian mobile PWA named Amen!.
 
-**Product Requirements (from PRD & conversations):**
--   **App Name**: Amen!
--   **Logo**: A white dove theme, easily recognizable.
--   **Core Features**:
-    -   **Interactive Bible Reader (P0)**: Must support Nuova Diodati and Reina Valera 1960. The reader should be fully functional with real, complete biblical texts.
-    -   **Advanced Study Tools (P1)**: While reading, users should have tools for cross-references, links to a biblical dictionary for word meanings, and personal notes.
-    -   **AI Personal Assistant (P1)**: Mood-based guidance (How I feel input) providing personalized AI-generated Bible verses.
-    -   **Community & Social (P1)**:
-        -   Thematic, collaborative forums (like Facebook groups) where users can post, interact, and vote on posts. An AI mentor should supervise these groups.
-        -   Support for multimedia content (lode, video links) in the community sections.
-        -   Multi-language support for a global user base (South America, Europe, USA, Africa).
-    -   **Daily Journal (P1)**: A private space for users to write reflections.
-    -   **Evangelical Radio (P2)**: A list of evangelical radio stations, including international ones (Latin America, etc.) with multimedia capabilities.
-    -   **Donations (P1)**: Support for PayPal () and Bank Transfer (IBAN , Bank: Revolut).
-    -   **Learning Tools (P1)**:
-        -   AI-powered biblical quizzes.
-        -   A biblical dictionary with semantic roots and small images.
-        -   A tool for open-ended questions on biblical themes.
-    -   **Interactive Maps (P2)**: Biblical maps (3D desired) to explore locations.
-    -   **Live Events (P2)**: A feature for synchronized live reading or worship events.
--   **Authentication (P0)**: Google Social Login and standard Email/Password (JWT).
--   **Admin Panel (P1)**: A backend/panel for administrators to control app content (themes, verse of the day, community moderation).
--   **Distribution**: User wants to be able to generate an APK file to test the app personally and distribute it to other testers without using the app stores.
+**Initial Core Problems:**
+1.  The multi-language Bible reader was fundamentally broken, returning incorrect or no text for most languages.
+2.  The manual user registration flow was reported as non-functional.
+3.  The AI-powered study tools were not working.
+
+**Subsequent User Requests (New Features & Bugs):**
+The user has provided multiple extensive lists of issues and new features after the initial fixes. The key requests are:
+-   **Core Functionality Bugs:**
+    -   The language/edition selector in the Bible reader requires two clicks to apply the change.
+    -   All study tools (AI explanation, Dictionary, Highlighting, Bookmarking) are not working correctly or at all.
+    -   The settings page, including logout and delete account buttons, is not functional.
+    -   Donation buttons (PayPal, Bank Transfer) are inactive.
+    -   The back function does not work after opening a Wikipedia link from the study tools.
+    -   The logout button on the profile page does not work.
+-   **Feature Enhancements:**
+    -   All tools (AI, Dictionary) and UI elements (book names, icons) must be translated into the user's selected language.
+    -   Significantly expand the number of Bible Quizzes to over 200, with questions available in all supported languages. The user has provided a specific list of advanced questions.
+    -   Significantly expand the list of Evangelical Radio stations, focusing on Italy, South America, and the Caribbean.
+    -   Implement an interactive Biblical Maps feature.
+    -   Implement a global in-app search engine for notes, bookmarks, and users.
+    -   Add a favorites feature for radio stations.
+    -   Add an inline translation tool for messages in the community section.
+    -   Create a UI customization menu for the user (themes, widgets).
+    -   Create a proper app logo (Amen! with a white dove).
+-   **UI/UX Changes:**
+    -   Separate the Radio list from the user profile into its own dedicated tab/screen.
 
 </original_problem_statement>
 
 **User's preferred language**: Italian. The next agent MUST respond in Italian only.
 
 **what currently exists?**
-A feature-rich application that has undergone significant development. The backend in  has been expanded to include placeholder or initial implementations for almost all requested features: quizzes, a dictionary, forums, maps, live events, donations, and an admin panel. The frontend has corresponding (mostly functional) UI pages for these features. The app has been rebranded to Amen! with a new icon and splash screen.
-
-However, a **critical regression** has occurred: the core Bible reading functionality is broken. While many new features have been added and appear to work on the surface, the primary purpose of the app is currently non-functional.
+A full-stack Expo (React Native) and FastAPI application. The backend has been significantly improved in this session.
+-   **Backend ()**: The critical multi-language Bible content fetching logic has been fixed and now correctly serves Italian, Spanish, English, German, French, and Portuguese. The backend endpoints for user registration and AI-powered verse explanation have also been confirmed to be working. The number of quizzes and radio stations has been vastly expanded, with quiz data moved to a dedicated  file. New endpoints for global search () and multi-language AI explanations have been added.
+-   **Frontend**: Major structural changes were made. A new dedicated Radio tab and screen () were created, and the main navigation () was updated. The Profile screen () was refactored to remove the radio list. A placeholder screen for global search () was created. Code was added to  to attempt to fix a double-click bug for language selection and to pass the current language to AI tools. A Translate button was added to . Buttons in  and  were wired up, but their end-to-end functionality is unconfirmed.
 
 **Last working item**:
--   **Last item agent was working**: Fixing a regression in the Bible reader. After implementing Study Tools (cross-references, dictionary links), the ability to navigate from the chapter selection screen to the actual verse reading screen was broken. The user confirmed this by stating that Bible texts are missing and a placeholder message (testo sarà a breve disponibile) is shown.
--   **Status**: IN PROGRESS
--   **Agent Testing Done**: Y (but misinterpreted) - The agent's last screenshot tests (Messages 216-217) showed the app homepage and the Bible book list but failed to show the chapter reading screen, indicating a navigation failure. The agent incorrectly declared success.
--   **Which testing method agent to use?**: Frontend testing agent to meticulously test the Bible reading flow: .
--   **User Testing Done**: Y - The user reported the issue in Message 266.
+-   **Last item agent was working**: Adding a large list of user-provided, advanced-level quiz questions to the backend. The agent created a new category studio_avanzato in  and successfully inserted all the new questions.
+-   **Status**: FINISHED
+-   **Agent Testing Done**: Y (Agent verified the questions were added and checked the total question count).
+-   **Which testing method agent to use?**: Manual testing by user. The next agent should inform the user that the new quiz questions have been added and are available.
+-   **User Testing Done**: N
 
 **All Pending/In progress Issue list**:
--   Issue 1: Critical - Bible Reader is Non-Functional (REGRESSION) (P0)
--   Issue 2: High - Google Login is Broken (P1)
--   Issue 3: Medium - Incomplete Bible Content (P1)
--   Issue 4: Low - Bank Name in Donations is Incorrect (P2)
+-   Issue 1: Language/Edition change requires 2 clicks (P0)
+-   Issue 2: Study tools are broken or not verse-specific (P1)
+-   Issue 3: Account Settings, Logout, and Delete Account buttons are non-functional (P1)
+-   Issue 4: Donation buttons (PayPal/Bank Transfer) are inactive (P1)
+-   Issue 5: Cannot navigate back from Wikipedia view (P2)
+-   Issue 6: Multi-language Dictionary is not implemented (P2)
 
 **Issues Detail**:
--   **Issue 1: Critical - Bible Reader is Non-Functional (REGRESSION) (P0)**
-    -   **Description**: The user cannot read Bible chapters. After selecting a book and then a chapter, the app does not navigate to the verse reading view. The user reported this (Message 266), and the agent's own tests (Message 206, 216) confirm the failure, although the agent misinterpreted the result. This is a regression that occurred after adding the Study Tools feature to .
-    -   **Attempted fixes**: The agent last worked on  to add modals and click handlers for study tools. This complex change broke the existing  handler for chapters.
+-   **Issue 1: Language/Edition change requires 2 clicks (P0)**
+    -   **Description**: The user has to click the language/edition selector twice for the Bible text to update. This is a major UX friction point.
+    -   **Attempted fixes**: The agent modified  in  to pass the new language directly to the  and  functions, hoping to bypass a stale state issue with the Zustand store. The fix has not been verified by the user.
     -   **Next debug checklist**:
-        1.  Inspect .
-        2.  Focus on the  function and the  that wraps each chapter number.
-        3.  Verify that the  function is being called correctly and that the state  is being set as expected.
-        4.  Check the browser console logs for errors during the transition from chapter list to reading view.
-        5.  Temporarily comment out the newly added Study Tools logic to see if the core navigation is restored. If so, re-introduce the study tools logic carefully, ensuring it doesn't interfere with the chapter selection .
-    -   **Why fix this issue and what will be achieved with the fix?**: This is the app's most critical feature. The app is unusable without a working Bible reader. This MUST be fixed before any other work is done.
+        1.  Ask the user to test if the 2-click issue is resolved on Expo Go.
+        2.  If it persists, add extensive  statements inside ,  hooks, and  in  to trace the state updates and function calls precisely.
+        3.  Check the network tab in the browser preview's developer tools to see if the API call for the new chapter is being made on the first or second click.
+    -   **Why fix this issue and what will be achieved with the fix?**: This is a core interaction in the main screen of the app. Fixing it will significantly improve usability and reduce user frustration.
     -   **Status**: IN PROGRESS
     -   **Is recurring issue?**: Y
-    -   **Should Test frontend/backend/both after fix?**: Frontend. Use the screenshot tool to provide visual proof that a user can navigate to and read Genesis 1.
-    -   **Blocked on other issue**: None. This is the blocker.
+    -   **Should Test frontend/backend/both after fix?**: Frontend.
+    -   **Blocked on other issue**: None.
 
--   **Issue 2: High - Google Login is Broken (P1)**
-    -   **Description**: The user reported that Google login is not working (Message 157). The agent investigated the code in , , and  but did not implement a fix.
-    -   **Attempted fixes**: None. The agent only viewed the relevant files.
+-   **Issue 2: Study tools are broken or not verse-specific (P1)**
+    -   **Description**: The user reports that the study tools (AI Explain, Dictionary, Highlight, Bookmark) do not work at all. They also requested that the tools should be related to the *specific verse clicked*.
+    -   **Attempted fixes**: The agent fixed the backend  endpoint and updated the frontend to pass the current language. However, the overall frontend logic in  that triggers these tools when a verse is selected is likely broken.
     -   **Next debug checklist**:
-        1.  Review the Google OAuth implementation, which seems to use an Emergent Auth endpoint.
-        2.  Check for necessary environment variables or configurations for OAuth.
-        3.  Examine the frontend logic in  that handles the Google login button press and the callback.
-        4.  Test the  endpoint on the backend to see how it processes the callback from the auth provider.
-    -   **Why fix this issue and what will be achieved with the fix?**: This is a primary authentication method requested by the user.
+        1.  In , review the  function. Ensure it correctly sets the  state.
+        2.  Review the functions called by the tool buttons (e.g., , , ). Add  to verify they are being called with the correct verse data.
+        3.  Check for JavaScript errors in the Expo Go console when a tool button is pressed.
+        4.  Verify the API calls for AI explain and dictionary are being constructed and sent correctly.
+    -   **Why fix this issue and what will be achieved with the fix?**: The study tools are a key feature of the app. Making them functional is a high priority.
+    -   **Status**: IN PROGRESS
+    -   **Is recurring issue?**: Y
+    -   **Should Test frontend/backend/both after fix?**: Both.
+    -   **Blocked on other issue**: None.
+
+-   **Issue 3: Account Settings, Logout, and Delete Account buttons are non-functional (P1)**
+    -   **Description**: The user states that the buttons in the settings page for privacy, notifications, logout, and deleting the account are not working.
+    -   **Attempted fixes**: The agent added a  function call to a new Esci (Logout) button in  and wired up the  and privacy modal toggles. The backend endpoint for deletion was confirmed to exist. The end-to-end flow is untested.
+    -   **Next debug checklist**:
+        1.  Manually test the Esci (Logout) button on the settings page and verify the user is returned to the login screen and the auth token is cleared.
+        2.  Manually test the Elimina Account button and the confirmation modal flow. Check the network request and backend logs.
+        3.  Review the  and  functions in  for any logic errors.
+    -   **Why fix this issue and what will be achieved with the fix?**: These are essential account management and legal compliance features.
+    -   **Status**: IN PROGRESS
+    -   **Is recurring issue?**: Y
+    -   **Should Test frontend/backend/both after fix?**: Frontend.
+    -   **Blocked on other issue**: None.
+
+-   **Issue 4: Donation buttons (PayPal/Bank Transfer) are inactive (P1)**
+    -   **Description**: The user reports the donation buttons do not work.
+    -   **Attempted fixes**: The agent reviewed , confirmed the PayPal link in the config is present, and added better error handling using . The core  functionality has not been verified on a device.
+    -   **Next debug checklist**:
+        1.  Test the Vai a PayPal button on an actual device using Expo Go to see if it correctly opens the browser or PayPal app.
+        2.  Add  right before the  call to ensure it is being executed with the correct URL.
+        3.  Check for any errors in the Expo Go console when the button is pressed.
+    -   **Why fix this issue and what will be achieved with the fix?**: Enables a potential revenue stream for the app owner.
+    -   **Status**: IN PROGRESS
+    -   **Is recurring issue?**: Y
+    -   **Should Test frontend/backend/both after fix?**: Frontend.
+    -   **Blocked on other issue**: None.
+
+-   **Issue 5: Cannot navigate back from Wikipedia view (P2)**
+    -   **Description**: When a user clicks a tool that opens an external Wikipedia link, they cannot return to the app screen.
+    -   **Attempted fixes**: None. This issue has not been addressed.
+    -   **Next debug checklist**:
+        1.  The app likely opens Wikipedia using , which leaves the app. The proper way to handle this for a better UX is to use an in-app browser like .
+        2.  Modify the  function in  to use  instead of .
+    -   **Why fix this issue and what will be achieved with the fix?**: Improves user experience by keeping the user within the app's context instead of forcing them out.
+    -   **Status**: NOT STARTED
+    -   **Is recurring issue?**: Y
+    -   **Should Test frontend/backend/both after fix?**: Frontend.
+    -   **Blocked on other issue**: Blocked by Issue 2: Study tools are broken. The tool must work first.
+
+-   **Issue 6: Multi-language Dictionary is not implemented (P2)**
+    -   **Description**: The user wants the Biblical Dictionary to be available in multiple languages.
+    -   **Attempted fixes**: None. The backend implementation for the dictionary is likely a simple stub.
+    -   **Next debug checklist**:
+        1.  Investigate the  file for the dictionary data and endpoint.
+        2.  Find sources for biblical dictionary data in the required languages (ES, EN, DE, FR, PT).
+        3.  Update the backend to store and serve this multilingual data.
+        4.  Update the frontend to request the dictionary entry in the user's current language.
+    -   **Why fix this issue and what will be achieved with the fix?**: Fulfills a user feature request and enhances the study tools.
     -   **Status**: NOT STARTED
     -   **Is recurring issue?**: N
     -   **Should Test frontend/backend/both after fix?**: Both.
-    -   **Blocked on other issue**: Issue 1 (Bible Reader).
-
--   **Issue 3: Medium - Incomplete Bible Content (P1)**
-    -   **Description**: The backend only contains text for a few sample chapters (Gen 1-3, Ps 23, Jn 3). All other chapters will show a coming soon message, as the user noted. The data is hardcoded in .
-    -   **Attempted fixes**: The agent populated  with initial sample data.
-    -   **Next debug checklist**:
-        1.  Find a reliable source (API or JSON files) for the complete Nuova Diodati and Reina Valera 1960 Bible editions.
-        2.  Develop a script or method to parse and load this data into the structure expected by  or a database.
-        3.  Refactor the  endpoint to read from this complete data source instead of the hardcoded sample dictionary.
-    -   **Why fix this issue and what will be achieved with the fix?**: To make the Bible reader a complete and useful tool.
-    -   **Status**: NOT STARTED
-    -   **Is recurring issue?**: N
-    -   **Should Test frontend/backend/both after fix?**: Backend.
-    -   **Blocked on other issue**: Issue 1 (Bible Reader).
-
--   **Issue 4: Low - Bank Name in Donations is Incorrect (P2)**
-    -   **Description**: User specified Revolut as the bank (Message 150). The agent changed the bank name in  (Message 152) but the frontend screenshot of the Donations page (Message 136) still shows Banca Sella.
-    -   **Next debug checklist**: The backend endpoint for donations likely hardcodes Banca Sella. The frontend is likely displaying static text. The donation information should come from an API endpoint and be rendered dynamically.
-    -   **Status**: NOT STARTED
-    -   **Is recurring issue?**: N
-    -   **Should Test frontend/backend/both after fix?**: Frontend.
-    -   **Blocked on other issue**: Issue 1 (Bible Reader).
+    -   **Blocked on other issue**: Blocked by Issue 2: Study tools are broken.
 
 **In progress Task List**:
--   There are no other tasks in progress. The sole focus is on fixing the critical Bible reader bug.
+The pending issues cover all in-progress work.
 
 **Upcoming and Future Tasks**
--   **P1 - Complete Core Features**:
-    -   **Full Bible Content**: Implement the complete text for Nuova Diodati and Reina Valera 1960. (Blocked by Issue 1)
-    -   **Google Login**: Fix the broken Google authentication flow. (Blocked by Issue 1)
-    -   **Admin Panel**: Build the backend and frontend for an admin panel to manage app content (verse of the day, etc.).
-    -   **Community 2.0**: Add voting to forums, implement AI mentor, and add multimedia support (video/audio links).
--   **P2 - Expand and Refine**:
-    -   **Live Events**: Implement a real backend solution (e.g., WebSockets) for synchronized events.
-    -   **Full Multilanguage**: Ensure all new features (quizzes, dictionary, etc.) are fully translatable and supported by the multi-language framework.
-    -   **3D Maps**: Investigate and implement a 3D map solution.
+-   **P1 - Implement Global Search UI**: The backend endpoint () and frontend file () exist. The task is to build the UI with an input field, result sections (for users, notes, bookmarks), and navigation to the results.
+-   **P1 - Implement Biblical Maps UI**: The backend data and endpoint exist, and a frontend file () exists. The task is to build an interactive UI to display the maps and locations, possibly using .
+-   **P2 - Implement UI/UX Customization**: Create a new settings screen or section allowing users to change themes (light/dark), font sizes, or other visual aspects. This has not been started.
+-   **P2 - Implement Radio Favorites**: Add functionality to mark radio stations as favorites. This will require backend changes (new user-specific collection or field) and frontend UI changes in .
+-   **P2 - Implement Full Internationalization (i18n)**: Translate static UI text, including Bible book names and icon labels, based on the selected language. This requires an i18n library (like ) and translation files.
 
 **Completed work in this session**
--   **Critical Bug Fix**: Fixed the initial broken Bible reader by replacing mock backend data with real (but partial) Bible verses and fixing a  rendering bug on the frontend.
--   **Massive Feature Implementation (Initial Versions)**:
-    -   Created backend endpoints and frontend UI for: Biblical Quizzes, Biblical Dictionary, Donation Page (with user's PayPal/IBAN), Community Forum (stub), Biblical Maps, FAQ/Help Page, and a comprehensive Settings Page.
--   **Rebranding**:
-    -   Changed the app name from Cibo Spirituale to Amen!.
-    -   Updated  with the new name.
-    -   Created and applied a new app icon and splash screen.
--   **APK Generation Guide**:
-    -   Created  and  to explain the process of building and distributing the app for testing.
--   **Bible Study Tools**:
-    -   Added a backend endpoint and frontend UI stubs for in-line study tools (cross-references, dictionary links, notes). **This change introduced the critical regression.**
+-   **CRITICAL Backend Fix**: Resolved the multi-language Bible content fetching bug by identifying and clearing a cache in the wrong MongoDB database (). The app now correctly serves 6 languages.
+-   **Backend API Fixes**: Verified and fixed the backend endpoints for manual user registration () and AI verse explanation ().
+-   **Content Expansion**:
+    -   **Quizzes**: Massively expanded the number of quizzes to over 200, moved them to a dedicated  file, added multi-language support, and included a large set of advanced questions from the user.
+    -   **Radios**: Significantly increased the number of evangelical radio stations to 73, with a focus on user-requested regions.
+-   **Frontend Refactoring**:
+    -   Created a new dedicated Radio tab and screen, separating it from the Profile page as requested.
+    -   Created placeholder screens and API functions for Global Search and Biblical Maps.
+-   **Feature Implementation (Partial)**:
+    -   Added a Translate button to community messages.
+    -   Added a Logout button and wired up the Delete Account functionality in the Settings screen.
+    -   Attempted a fix for the 2-click language selection bug in the Bible reader.
 
 **Code Architecture**
 
 
 **Key Technical Concepts**
--   **Frontend**: React Native, Expo, Expo Router, TypeScript, Zustand.
--   **Backend**: FastAPI, Python, MongoDB ().
--   **Architecture**: Monorepo-style structure. The backend  file has become extremely large and would benefit from being split into multiple routers.
+-   **Backend**: FastAPI, MongoDB (Motor driver), Pydantic
+-   **Frontend**: React Native, Expo, Expo Router, TypeScript, Zustand
+-   **Key Techniques**: Asynchronous API calls, state management with Zustand, file-based routing, in-app web browsing ( should be used), internationalization.
 
 **key DB schema**
-(Based on agent's implementation)
--   , , , ... (from previous state)
--   : {quiz_id, title, questions: [{...}]}
--   : {term, language, definition}
--   : {ref, links: [{...}]}
--   : {note_id, user_id, ref, content}
--   : (No schema, hardcoded in )
--   : (No schema, hardcoded in )
--   : (No schema, hardcoded in )
+-   : This was the source of the main bug. It caches chapter content from external APIs.
+-   : Stores user information.
+-   , : These will be used by the new global search feature.
+-   : Stores user quiz results.
 
 **All files of reference**
--   : **This file is broken and needs immediate attention.** It contains the logic for the Bible reader, which has a navigation regression.
--   : A massive, monolithic file containing nearly all backend logic. It has been heavily modified.
--   : Contains the hardcoded, partial Bible text. This is the source for the Incomplete Bible Content issue.
--   : The file to investigate for the broken Google Login.
--   : The guide created for the user on how to build an APK.
+-   : Contains most business logic.
+-   : New source of truth for all quiz questions.
+-   : **Highest priority for debugging.** Contains the broken study tools and the language selection bug.
+-   : Needs to be tested to confirm account management features work end-to-end.
+-   , : Skeletons for upcoming features.
 
-**Areas that need refactoring**
--    is critically oversized. It should be broken down into a modular structure with FastAPI's  for each feature area (auth, bible, community, etc.) to improve maintainability.
+**Areas that need refactoring**:
+-   The  file is extremely large and complex (over 1000 lines). It manages state for the reader, book/chapter selection, language, and all study tools. It should be broken down into smaller, more manageable components and custom hooks to improve maintainability.
+-   The internationalization of static strings (like Genesi, Profilo, etc.) is not handled systematically. An i18n library should be introduced.
 
 **Critical Info for New Agent**
--   **ABSOLUTE FIRST PRIORITY: FIX THE BIBLE READER.** The user cannot read the bible. This is a critical regression. Your first task is to fix the navigation in  so that clicking a chapter number opens the verse reading screen. Do not work on anything else until this is solved and verified.
--   **ADDRESS USER FEEDBACK IN ORDER**: After fixing the reader, address the other issues the user has explicitly reported: broken Google Login and missing Bible content.
--   **COMMUNICATE IN ITALIAN**: The user is a native Italian speaker. All your responses must be in Italian.
--   **VERIFY BEFORE DECLARING SUCCESS**: The previous agent declared success after tests that clearly showed a failure. Be diligent in checking test outputs and screenshots to ensure features are truly working before moving on.
--   **MANAGE SCOPE**: The user requests many features at once. Focus on fixing the existing broken features first, then implement and test one new feature at a time to avoid further regressions.
+-   **The backend is now mostly stable.** The biggest initial problems have been solved. Your focus must now shift almost entirely to the **frontend**.
+-   **Believe the user's bug reports.** The user has repeatedly stated that features like settings, logout, and study tools are broken on their device. Do not assume they work just because the code looks plausible. You must test the end-to-end flow.
+-   **Your top priorities are fixing the user-facing bugs in **:
+    1.  The 2-click language change issue.
+    2.  The completely broken study tools (AI, Dictionary, Highlight, etc.).
+-   After fixing the critical bugs, work through the other pending issues and then start implementing the new UI for Search and Maps.
+-   **Continue communicating in Italian.**
 
 **documents created in this job**
--   
--   
--   
--    (and its PNG derivatives)
+- /app/backend/quiz_data.py
+- /app/frontend/app/radio.tsx
+- /app/frontend/app/search.tsx
 
 **Last 10 User Messages and any pending HUMAN messages**
-1.  **User (Message 266)**: Reports that the Bible reader is broken; texts are missing, and it says text will be available shortly. (PENDING - This is the top priority issue).
-2.  **User (Message 260)**: Asks for clarification on distributing the app to Android and Apple testers. (Agent responded by creating a guide).
-3.  **User (Message 259)**:  (APK to be tested by other Android and Apple users). (Agent responded).
-4.  **User (Message 254)**: Asks to create an APK for testing on Apple and Android without the stores. (Agent responded).
-5.  **User (Message 221)**: Requests app name change to Amen!, a white dove logo, and instructions for creating an APK. (Agent completed this).
-6.  **User (Message 157)**: Reports that Google Login is broken and requests Bible study tools (cross-references, dictionary links, notes). (Agent attempted study tools, which broke the Bible reader, and did not fix Google Login).
-7.  **User (Message 150)**: A large request to fix errors, add multimedia to community/radio, expand language support, change bank to Revolut, add an admin panel, and save the project. (Partially implemented).
-8.  **User (Message 66)**: Provides PayPal and IBAN details for donations. (Agent implemented).
-9.  **User (Message 63)**: A massive feature request list including quizzes, dictionary, forums, maps, live events, and more. (Agent implemented initial versions of most of these).
-10. **User (Message 5)**:  (proceed... if there are problems use only Nuova Diodati or Reina Valera 1960 translated. also apply the latest changes). (Agent proceeded).
+1.  **User (Latest)**: Provided a long, specific list of advanced-level quiz questions to be added to the app. (Completed)
+2.  **User**: Provided a 6-point list of issues: implement maps, create search engine, fix 2-click language bug, add more quizzes/radios, fix inactive settings buttons. (In Progress)
+3.  **User**: Provided a 6-point list of issues: make privacy/logout/delete work, add 100-200 quizzes, fix inactive donation buttons, make study tools verse-specific, add UI customization, create a logo. (In Progress)
+4.  **Agent**: Summarized a large batch of fixes and asked the user to test.
+5.  **User**: Provided a 12-point list of issues and feature requests, including multi-language tools, fixing the 2-click bug, broken study tools/settings/logout/donations, and separating the radio section. (This was the first major list that shifted focus to the frontend).
+6.  **Agent**: Confirmed the initial 3 critical backend issues were resolved and asked user for next steps.
+7.  **User**: continua (continue).
+8.  **User**: procedi e sistema (proceed and fix it).
+9.  **Agent**: Initial plan confirmation sent to user.
+10. **(Summary from previous fork)**: Detailed the initial state of the project with the broken Bible content being the top priority.
 
 **Project Health Check:**
--   **Broken**: The core feature (Bible reader) is non-functional due to a regression.
+-   **Broken**: The core Bible reader's interactive features (study tools) and language selection are reported as broken by the user. Key account management features (logout, delete) and donations are also reported as non-functional. The user experience is poor due to these bugs.
+-   **Mocked**: No features are explicitly mocked.
 
 **3rd Party Integrations**
--   **OpenAI GPT-4o**: Used for AI features. Assumed to be using Emergent LLM Key.
--   **Google Authentication**: Integrated but currently broken.
--   **PayPal**: User's email is configured.
--   **Bank Transfer**: User's IBAN is configured.
+-   **OpenAI GPT-4o**: Used for AI features (). Uses Emergent LLM Key. Backend endpoint is working.
+-   **Google Authentication**: Integrated, but its status is unknown as the user's focus has been on manual registration.
+-   **laparola.net, bible-api.com, etc.**: Various APIs and sources used for fetching Bible text. This is now working correctly.
+-   **localtunnel**: No longer mentioned, suggesting the dev environment might be more stable, but should be watched.
+-   **Expo Web Browser**: Should be used for opening external links like Wikipedia to improve UX.
 
 **Testing status**
--   **Testing agent used after significant changes**: YES (screenshot tool).
+-   **Testing agent used after significant changes**: YES, backend was tested and passed.
 -   **Troubleshoot agent used after agent stuck in loop**: NO.
--   **Test files created**: None.
--   **Known regressions**: The Bible reader navigation from chapter list to verse view is broken.
+-   **Test files created**: Several python scripts were created in  for debugging (e.g., , , ). They can be removed or kept for future debugging.
+-   **Known regressions**: User registration and login have been reported as broken multiple times. While the backend is fixed, the frontend flow remains a recurring point of failure.
 
 **Credentials to test flow:**
 -   User: 
 -   Password: 
 
 **What agent forgot to execute**
--   The agent failed to properly test and verify its changes, leading to a critical regression in the Bible reader. It missed that its own tests were failing.
--   The agent did not fix the Google Login issue reported by the user.
--   The agent did not add the complete Bible texts, leaving the core feature incomplete.
--   The agent claimed to create a white dove logo, but the screenshot shows a different bible icon logo was implemented on the login screen.
+-   The agent did not address the user's report that the back button doesn't work after opening a Wikipedia link.
+-   The agent did not implement the favorites feature for the radio.
+-   The agent did not implement the translation of UI elements (book names, icons).
+-   The agent did not implement the multi-language dictionary beyond the AI-explain tool.
 
 </analysis>
