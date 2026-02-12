@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Alert,
+  Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -14,6 +15,15 @@ import { router } from 'expo-router';
 import { api } from '../src/utils/api';
 import { useLanguageStore } from '../src/store/languageStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../src/utils/theme';
+
+// Cross-platform alert helper
+const showAlert = (title: string, message: string) => {
+  if (Platform.OS === 'web') {
+    window.alert(`${title}\n\n${message}`);
+  } else {
+    Alert.alert(title, message);
+  }
+};
 
 interface QuizTopic {
   id: string;
