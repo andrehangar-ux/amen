@@ -48,18 +48,21 @@ export default function LoginScreen() {
   const handleGoogleLogin = async () => {
     setLoading(true);
     try {
-      // Per Expo Go, usiamo un redirect URL web che poi gestiremo
-      // Il redirect torna all'app tramite il tunnel
+      // Costruisci l'URL di redirect
       const appUrl = 'https://amen-ozzf.ngrok.io';
-      const redirectUrl = Platform.OS === 'web'
-        ? window.location.origin + '/auth-callback'
-        : `${appUrl}/auth-callback`;
-
+      const redirectUrl = `${appUrl}/auth-callback`;
       const authUrl = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`;
       
       console.log('Starting Google auth with redirect:', redirectUrl);
       console.log('Auth URL:', authUrl);
       
+      if (Platform.OS === 'web') {
+        // Per il web, facciamo un redirect diretto
+        window.location.href = authUrl;
+        return;
+      }
+      
+      // Per mobile (Expo Go), usiamo WebBrowser
       const result = await WebBrowser.openAuthSessionAsync(authUrl, redirectUrl);
       
       console.log('Auth result type:', result.type);
@@ -67,11 +70,10 @@ export default function LoginScreen() {
       if (result.type === 'success' && result.url) {
         console.log('Full redirect URL:', result.url);
         
-        // Parse session_id from URL - check multiple formats
+        // Parse session_id from URL
         let sessionId = null;
         const url = result.url;
         
-        // Try different parsing methods
         const patterns = [
           /#session_id=([^&]+)/,
           /\?session_id=([^&]+)/,
@@ -87,8 +89,6 @@ export default function LoginScreen() {
           }
         }
         
-        console.log('Session ID found:', sessionId ? 'yes' : 'no');
-        
         if (sessionId) {
           try {
             await googleLogin(sessionId);
@@ -103,8 +103,6 @@ export default function LoginScreen() {
         }
       } else if (result.type === 'cancel') {
         console.log('User cancelled Google login');
-      } else if (result.type === 'dismiss') {
-        console.log('Auth session dismissed');
       }
     } catch (error: any) {
       console.error('Google login error:', error);
