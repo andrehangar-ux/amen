@@ -387,8 +387,8 @@ export default function QuizScreen() {
             <Ionicons name="help-circle-outline" size={48} color={COLORS.textMuted} />
             <Text style={styles.emptyText}>
               {selectedCategory === 'avanzato' 
-                ? 'Quiz avanzati disponibili prossimamente' 
-                : 'Nessun quiz disponibile'}
+                ? t('advancedComingSoon')
+                : t('noQuizzes')}
             </Text>
           </View>
         ) : (
