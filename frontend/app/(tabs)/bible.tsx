@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   View,
   Text,
@@ -14,6 +14,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
+import * as WebBrowser from 'expo-web-browser';
 import { router } from 'expo-router';
 import { api } from '../../src/utils/api';
 import { useLanguageStore } from '../../src/store/languageStore';
