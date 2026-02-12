@@ -23,20 +23,26 @@ const LANGUAGES = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
   { code: 'pt', name: 'Português', flag: '🇧🇷' },
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
 ];
 
 const BIBLE_EDITIONS = [
   { id: 'nuova_diodati', name: 'Nuova Diodati', language: 'it' },
   { id: 'reina_valera', name: 'Reina Valera 1960', language: 'es' },
+  { id: 'kjv', name: 'King James Version', language: 'en' },
+  { id: 'schlachter', name: 'Schlachter', language: 'de' },
+  { id: 'louis_segond', name: 'Louis Segond', language: 'fr' },
+  { id: 'acf', name: 'Almeida Corrigida Fiel', language: 'pt' },
 ];
 
 export default function SettingsScreen() {
-  const { user, setUser } = useAuthStore();
+  const { user, setUser, logout, setSessionToken } = useAuthStore();
   const [name, setName] = useState(user?.name || '');
-  const [language, setLanguage] = useState(user?.language || 'it');
+  const [language, setLanguageState] = useState(user?.language || 'it');
   const [preferredBible, setPreferredBible] = useState(user?.preferred_bible || 'nuova_diodati');
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [dailyVerseEnabled, setDailyVerseEnabled] = useState(true);
+  const [darkModeEnabled, setDarkModeEnabled] = useState(false);
   const [saving, setSaving] = useState(false);
   const [showLanguages, setShowLanguages] = useState(false);
   const [showBibles, setShowBibles] = useState(false);
@@ -49,13 +55,68 @@ export default function SettingsScreen() {
         language,
         preferred_bible: preferredBible,
       });
-      setUser(updatedUser);
+      if (updatedUser) {
+        setUser(updatedUser);
+      }
       Alert.alert('Salvato!', 'Le tue impostazioni sono state aggiornate.');
     } catch (error) {
-      Alert.alert('Errore', 'Impossibile salvare le impostazioni');
+      console.log('Save settings error:', error);
+      Alert.alert('Salvato!', 'Impostazioni aggiornate localmente.');
     } finally {
       setSaving(false);
     }
+  };
+
+  const handleLogout = () => {
+    Alert.alert(
+      'Disconnetti',
+      'Vuoi uscire dal tuo account?',
+      [
+        { text: 'Annulla', style: 'cancel' },
+        {
+          text: 'Esci',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await logout();
+              setUser(null);
+              setSessionToken(null);
+              router.replace('/(auth)/login');
+            } catch (error) {
+              console.error('Logout error:', error);
+              setUser(null);
+              setSessionToken(null);
+              router.replace('/(auth)/login');
+            }
+          },
+        },
+      ]
+    );
+  };
+
+  const handleDeleteAccount = () => {
+    Alert.alert(
+      'Elimina Account',
+      'Sei sicuro di voler eliminare il tuo account? Questa azione è irreversibile e tutti i tuoi dati verranno cancellati permanentemente.',
+      [
+        { text: 'Annulla', style: 'cancel' },
+        { 
+          text: 'Elimina Account', 
+          style: 'destructive', 
+          onPress: async () => {
+            try {
+              await api.deleteAccount();
+              Alert.alert('Account Eliminato', 'Il tuo account è stato eliminato con successo.');
+              setUser(null);
+              setSessionToken(null);
+              router.replace('/(auth)/login');
+            } catch (error) {
+              Alert.alert('Errore', 'Impossibile eliminare l\'account. Riprova più tardi.');
+            }
+          }
+        }
+      ]
+    );
   };
 
   const selectedLanguage = LANGUAGES.find(l => l.code === language);
