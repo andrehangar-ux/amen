@@ -52,32 +52,25 @@ export default function ProfileScreen() {
   };
 
   const handleLogout = () => {
-    Alert.alert(
+    showConfirm(
       'Disconnetti',
       'Vuoi uscire dal tuo account?',
-      [
-        { text: 'Annulla', style: 'cancel' },
-        {
-          text: 'Esci',
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              await logout();
-              // Clear auth state explicitly
-              setUser(null);
-              setSessionToken(null);
-              // Force navigation to login
-              router.replace('/(auth)/login');
-            } catch (error) {
-              console.error('Logout error:', error);
-              // Force logout anyway
-              setUser(null);
-              setSessionToken(null);
-              router.replace('/(auth)/login');
-            }
-          },
-        },
-      ]
+      async () => {
+        try {
+          await logout();
+          // Clear auth state explicitly
+          setUser(null);
+          setSessionToken(null);
+          // Force navigation to login
+          router.replace('/(auth)/login');
+        } catch (error) {
+          console.error('Logout error:', error);
+          // Force logout anyway
+          setUser(null);
+          setSessionToken(null);
+          router.replace('/(auth)/login');
+        }
+      }
     );
   };
 
