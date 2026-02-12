@@ -123,10 +123,11 @@ export default function BibleScreen() {
     }
   }, [currentLanguage]);
 
-  const loadChapter = async (book: string, chapter: number) => {
+  const loadChapter = async (book: string, chapter: number, lang?: string) => {
+    const languageToUse = lang || currentLanguage;
     setLoading(true);
     try {
-      const data = await api.getChapter(book, chapter, currentLanguage);
+      const data = await api.getChapter(book, chapter, languageToUse);
       setVerses(data.verses || []);
       setView('reading');
       await api.updateReadingProgress().catch(() => {});
