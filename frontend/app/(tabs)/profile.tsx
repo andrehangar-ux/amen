@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Alert,
   ActivityIndicator,
-  Linking,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,16 +15,8 @@ import { useAuthStore } from '../../src/store/authStore';
 import { api } from '../../src/utils/api';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
 
-interface Radio {
-  name: string;
-  url: string;
-  country: string;
-  language: string;
-}
-
 export default function ProfileScreen() {
-  const { user, logout } = useAuthStore();
-  const [radios, setRadios] = useState<Radio[]>([]);
+  const { user, logout, setUser, setSessionToken } = useAuthStore();
   const [progress, setProgress] = useState<any>(null);
   const [loading, setLoading] = useState(false);
 
@@ -36,11 +27,7 @@ export default function ProfileScreen() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [radioData, progressData] = await Promise.all([
-        api.getRadios(),
-        api.getProgress(),
-      ]);
-      setRadios(radioData);
+      const progressData = await api.getProgress();
       setProgress(progressData);
     } catch (error) {
       console.log('Error loading data:', error);
