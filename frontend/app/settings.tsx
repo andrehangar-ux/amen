@@ -378,30 +378,22 @@ Questi termini sono regolati dalla legge italiana.`,
 
           <TouchableOpacity 
             style={[styles.legalItem, { borderBottomWidth: 0 }]}
-            onPress={() => Alert.alert(
-              'Elimina Account',
-              'Sei sicuro di voler eliminare il tuo account? Questa azione è irreversibile e tutti i tuoi dati verranno cancellati permanentemente.',
-              [
-                { text: 'Annulla', style: 'cancel' },
-                { 
-                  text: 'Elimina Account', 
-                  style: 'destructive', 
-                  onPress: async () => {
-                    try {
-                      await api.deleteAccount();
-                      Alert.alert('Account Eliminato', 'Il tuo account è stato eliminato con successo.');
-                      router.replace('/(auth)/login');
-                    } catch (error) {
-                      Alert.alert('Errore', 'Impossibile eliminare l\'account. Riprova più tardi.');
-                    }
-                  }
-                }
-              ]
-            )}
+            onPress={handleDeleteAccount}
           >
             <Ionicons name="trash" size={22} color="#E74C3C" />
             <Text style={[styles.legalText, { color: '#E74C3C' }]}>Elimina Account</Text>
             <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+          </TouchableOpacity>
+        </View>
+
+        {/* Logout Section */}
+        <View style={styles.logoutSection}>
+          <TouchableOpacity 
+            style={styles.logoutButton}
+            onPress={handleLogout}
+          >
+            <Ionicons name="log-out" size={22} color="#fff" />
+            <Text style={styles.logoutText}>Esci dall'Account</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
