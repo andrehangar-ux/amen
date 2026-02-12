@@ -11,30 +11,31 @@ App cristiana PWA "Amen!" con lettore biblico multilingua, quiz, dizionario bibl
 - **Bible APIs**: laparola.net (IT), GitHub Bible JSON (EN/ES/DE/FR/PT), bible-api.com (fallback)
 
 ## Lingue Supportate
-it, en, es, de, fr, pt (6 lingue)
+it, en, es, de, fr, pt (6 lingue con TTS: it-IT, en-US, es-ES, de-DE, fr-FR, pt-BR)
 
 ## Cosa è stato implementato
 
-### Sessione Corrente (Feb 2026) - Fork 3
-- [x] **FIX: Pulsanti Esci e Elimina Account** - Sostituito `Alert.alert` con `window.confirm` per supporto cross-platform (web + mobile)
-- [x] **FIX: Quiz tradotti in tutte le lingue** - Aggiunte 8-10 categorie quiz per ogni lingua:
-  - IT: 14 quiz (completo)
-  - ES: 12 quiz (+8 nuovi: Éxodo, Hechos, Profetas, Apocalipsis, Personajes, Milagros, Beatitudes, Mandamientos)
-  - EN: 12 quiz (+9 nuovi: Exodus, Acts, Prophets, Revelation, Characters, Miracles, Beatitudes, Commandments, Parables)
-  - DE: 10 quiz (+8 nuovi: Psalmen, Exodus, Apostelgeschichte, Propheten, Offenbarung, Personen, Wunder, Seligpreisungen)
-  - FR: 10 quiz (+8 nuovi: Psaumes, Exode, Actes, Prophètes, Apocalypse, Personnages, Miracles, Béatitudes)
-  - PT: 10 quiz (+8 nuovi: Salmos, Êxodo, Atos, Profetas, Apocalipse, Personagens, Milagres, Bem-aventuranças)
-- [x] **FIX: Errore ObjectId /api/progress** - Corretto bug serializzazione MongoDB
+### Sessione Corrente (Feb 2026) - Fork 4
+- [x] **FIX: Text-to-Speech multilingua** - Aggiunto supporto cross-platform:
+  - Web: usa Web Speech API nativa (`window.speechSynthesis`)
+  - Native: usa expo-speech
+  - Modificati: `bible.tsx`, `index.tsx`, `feelings.tsx`
+  - Tutte le lingue supportate con codici TTS corretti
+- [x] **FIX: Registrazione utenti** - Sostituito `Alert.alert` con `showAlert` helper che usa `window.alert` su web
+- [x] Test: 9/9 test auth passati (register, login, logout, delete-account)
 
-### Sessione Precedente (Feb 2026) - Fork 2
-- [x] P0 - Completata internazionalizzazione (i18n) per Quiz e Home
-- [x] Aggiunte 30+ chiavi traduzione in `languageStore.ts`
-- [x] Tradotta sezione "Esplora" nella Home
+### Sessione Precedente - Fork 3
+- [x] FIX: Pulsanti Esci/Elimina Account con `window.confirm` su web
+- [x] FIX: Quiz tradotti in tutte le lingue (IT: 14, ES: 12, EN: 12, DE: 10, FR: 10, PT: 10)
+- [x] FIX: Errore ObjectId `/api/progress`
+
+### Sessione Fork 2
+- [x] Internazionalizzazione Quiz e Home
+- [x] 30+ chiavi traduzione in languageStore
 
 ### Sessione Fork 1
-- [x] P0 - Fix critico cambio lingua Bibbia
+- [x] Fix critico cambio lingua Bibbia
 - [x] Backend dizionario multilingua
-- [x] Test: 49/49 test passati
 
 ### Sessioni Precedenti
 - [x] Auth JWT (login/register)
@@ -57,17 +58,16 @@ it, en, es, de, fr, pt (6 lingue)
 - [ ] Implementare UI Ricerca Globale
 - [ ] Implementare UI Mappe Bibliche
 - [ ] Creare logo app ("Amen!" con colomba bianca)
-- [ ] Menu personalizzazione UI (temi, font)
 
 ## File Chiave
 - `/app/backend/server.py` - API principale
 - `/app/backend/quiz_data.py` - Quiz multilingua (750+ domande in 6 lingue)
-- `/app/frontend/app/(tabs)/profile.tsx` - Pulsante Esci con showConfirm
-- `/app/frontend/app/settings.tsx` - Pulsanti Privacy/Delete con showConfirm
-- `/app/frontend/src/store/languageStore.ts` - Store lingua con 50+ chiavi
+- `/app/frontend/app/(tabs)/bible.tsx` - Lettore biblico con TTS cross-platform
+- `/app/frontend/app/(auth)/register.tsx` - Form registrazione con showAlert cross-platform
+- `/app/frontend/src/store/languageStore.ts` - Store lingua con tts_code per ogni lingua
 
 ## Credenziali Test
 - User: testbible@cibospirituale.it / Test123!
 
 ## Test Reports
-- /app/test_reports/iteration_3.json - Backend 18/18 passed, Quiz 10-14 per lingua
+- /app/test_reports/iteration_4.json - Backend 9/9 auth tests passed, TTS verified
