@@ -2453,7 +2453,7 @@ BIBLE_QUIZZES = {
                 "question": "Dove Gesù pronunciò le Beatitudini?",
                 "options": ["Nel tempio", "Sul monte", "Al mare", "Nel deserto"],
                 "correct": 1,
-                "explanation": "Vedendo le folle, Gesù salì sul monte.",
+                "explanation": "Vedendo le folle, Gesù salì sul monte. Il 'Sermone sul Monte' è uno dei discorsi più importanti di Gesù.",
                 "verse_ref": "Matteo 5:1"
             },
             {
@@ -2461,8 +2461,214 @@ BIBLE_QUIZZES = {
                 "question": "'Beati i poveri in spirito, perché di loro è...'",
                 "options": ["la terra", "il regno dei cieli", "la pace", "la gioia"],
                 "correct": 1,
-                "explanation": "Beati i poveri in spirito, perché di loro è il regno dei cieli.",
+                "explanation": "Beati i poveri in spirito, perché di loro è il regno dei cieli. I poveri in spirito sono coloro che riconoscono la loro dipendenza da Dio.",
                 "verse_ref": "Matteo 5:3"
+            },
+            {
+                "id": "beat3",
+                "question": "Quante sono le Beatitudini?",
+                "options": ["5", "7", "8", "10"],
+                "correct": 2,
+                "explanation": "Le Beatitudini sono 8, e rappresentano le caratteristiche del vero discepolo di Cristo.",
+                "verse_ref": "Matteo 5:3-12"
+            },
+        ]
+    },
+    "miracoli": {
+        "title": "I Miracoli di Gesù",
+        "description": "Le opere potenti del Signore",
+        "questions": [
+            {
+                "id": "mir1",
+                "question": "Quale fu il primo miracolo di Gesù?",
+                "options": ["Guarire un lebbroso", "Camminare sull'acqua", "Trasformare l'acqua in vino", "Moltiplicare i pani"],
+                "correct": 2,
+                "explanation": "Alle nozze di Cana, Gesù trasformò l'acqua in vino. Fu il primo dei suoi segni.",
+                "verse_ref": "Giovanni 2:1-11"
+            },
+            {
+                "id": "mir2",
+                "question": "Quanti pani e pesci usò Gesù per sfamare 5000 persone?",
+                "options": ["5 pani e 2 pesci", "7 pani e 3 pesci", "3 pani e 5 pesci", "2 pani e 7 pesci"],
+                "correct": 0,
+                "explanation": "Un ragazzo aveva cinque pani d'orzo e due pesci. Gesù li moltiplicò per sfamare la folla.",
+                "verse_ref": "Giovanni 6:9-11"
+            },
+            {
+                "id": "mir3",
+                "question": "Chi era Lazzaro?",
+                "options": ["Un apostolo", "Un fariseo", "L'amico che Gesù risuscitò", "Il padre di Giovanni"],
+                "correct": 2,
+                "explanation": "Lazzaro era il fratello di Marta e Maria. Gesù lo risuscitò dopo quattro giorni dalla morte.",
+                "verse_ref": "Giovanni 11:1-44"
+            },
+            {
+                "id": "mir4",
+                "question": "Quanti lebbrosi guarì Gesù, ma solo uno tornò a ringraziarlo?",
+                "options": ["5", "7", "10", "12"],
+                "correct": 2,
+                "explanation": "Gesù guarì dieci lebbrosi, ma solo uno (un samaritano) tornò a ringraziarlo.",
+                "verse_ref": "Luca 17:11-19"
+            },
+            {
+                "id": "mir5",
+                "question": "Chi camminò sull'acqua insieme a Gesù?",
+                "options": ["Giovanni", "Pietro", "Giacomo", "Andrea"],
+                "correct": 1,
+                "explanation": "Pietro chiese a Gesù di poter andare verso di lui sull'acqua, ma poi iniziò ad affondare per la sua poca fede.",
+                "verse_ref": "Matteo 14:28-31"
+            },
+        ]
+    },
+    "parabole": {
+        "title": "Le Parabole di Gesù",
+        "description": "Gli insegnamenti attraverso le storie",
+        "questions": [
+            {
+                "id": "par1",
+                "question": "Nella parabola del seminatore, cosa rappresenta il seme?",
+                "options": ["I discepoli", "La Parola di Dio", "La fede", "Le opere buone"],
+                "correct": 1,
+                "explanation": "Il seme è la parola di Dio. I diversi terreni rappresentano i diversi modi in cui le persone ricevono la Parola.",
+                "verse_ref": "Luca 8:11"
+            },
+            {
+                "id": "par2",
+                "question": "Nella parabola del figliol prodigo, cosa chiese il figlio minore?",
+                "options": ["Una terra", "La sua parte di eredità", "Un lavoro", "Una sposa"],
+                "correct": 1,
+                "explanation": "Il figlio minore chiese la sua parte di eredità, la sperperò e poi tornò pentito dal padre che lo accolse con gioia.",
+                "verse_ref": "Luca 15:11-32"
+            },
+            {
+                "id": "par3",
+                "question": "Chi aiutò l'uomo ferito nella parabola del buon Samaritano?",
+                "options": ["Un levita", "Un sacerdote", "Un samaritano", "Un fariseo"],
+                "correct": 2,
+                "explanation": "Mentre il sacerdote e il levita passarono oltre, un samaritano (disprezzato dagli ebrei) si fermò ad aiutare.",
+                "verse_ref": "Luca 10:30-37"
+            },
+            {
+                "id": "par4",
+                "question": "Quante vergini c'erano nella parabola delle dieci vergini?",
+                "options": ["5 sagge e 5 stolte", "3 sagge e 7 stolte", "7 sagge e 3 stolte", "4 sagge e 6 stolte"],
+                "correct": 0,
+                "explanation": "Cinque vergini erano sagge (preparate con olio) e cinque stolte (senza olio). La parabola insegna l'importanza di essere sempre pronti.",
+                "verse_ref": "Matteo 25:1-13"
+            },
+        ]
+    },
+    "profeti": {
+        "title": "I Profeti dell'Antico Testamento",
+        "description": "I messaggeri di Dio",
+        "questions": [
+            {
+                "id": "pro1",
+                "question": "Quale profeta fu inghiottito da un grande pesce?",
+                "options": ["Elia", "Eliseo", "Giona", "Daniele"],
+                "correct": 2,
+                "explanation": "Giona cercò di fuggire dalla chiamata di Dio e fu inghiottito da un grande pesce per tre giorni.",
+                "verse_ref": "Giona 1:17"
+            },
+            {
+                "id": "pro2",
+                "question": "Chi fu portato in cielo su un carro di fuoco?",
+                "options": ["Mosè", "Elia", "Enoc", "Eliseo"],
+                "correct": 1,
+                "explanation": "Elia fu rapito in cielo in un turbine, con un carro e cavalli di fuoco, sotto gli occhi di Eliseo.",
+                "verse_ref": "2 Re 2:11"
+            },
+            {
+                "id": "pro3",
+                "question": "Quale profeta ebbe la visione delle ossa secche?",
+                "options": ["Isaia", "Geremia", "Ezechiele", "Daniele"],
+                "correct": 2,
+                "explanation": "Ezechiele ebbe la visione della valle delle ossa secche che tornarono in vita, simbolo della restaurazione di Israele.",
+                "verse_ref": "Ezechiele 37:1-14"
+            },
+            {
+                "id": "pro4",
+                "question": "Chi interpretò i sogni del re Nabucodonosor?",
+                "options": ["Giuseppe", "Daniele", "Elia", "Samuele"],
+                "correct": 1,
+                "explanation": "Daniele, con l'aiuto di Dio, interpretò i sogni del re babilonese Nabucodonosor.",
+                "verse_ref": "Daniele 2:1-49"
+            },
+            {
+                "id": "pro5",
+                "question": "Quale profeta annunciò che il Messia sarebbe nato a Betlemme?",
+                "options": ["Isaia", "Michea", "Osea", "Amos"],
+                "correct": 1,
+                "explanation": "Michea profetizzò che da Betlemme sarebbe uscito colui che doveva essere dominatore in Israele.",
+                "verse_ref": "Michea 5:1"
+            },
+        ]
+    },
+    "apostoli": {
+        "title": "Gli Apostoli e la Chiesa Primitiva",
+        "description": "I primi seguaci di Cristo",
+        "questions": [
+            {
+                "id": "apo1",
+                "question": "Chi era l'apostolo dei Gentili?",
+                "options": ["Pietro", "Giovanni", "Paolo", "Giacomo"],
+                "correct": 2,
+                "explanation": "Paolo (prima chiamato Saulo) ricevette la chiamata speciale di predicare ai Gentili (non ebrei).",
+                "verse_ref": "Atti 9:15"
+            },
+            {
+                "id": "apo2",
+                "question": "Chi tradì Gesù per trenta denari?",
+                "options": ["Pietro", "Giuda Iscariota", "Tommaso", "Matteo"],
+                "correct": 1,
+                "explanation": "Giuda Iscariota tradì Gesù consegnandolo ai capi dei sacerdoti per trenta monete d'argento.",
+                "verse_ref": "Matteo 26:14-16"
+            },
+            {
+                "id": "apo3",
+                "question": "Quale apostolo dubitò della risurrezione di Gesù?",
+                "options": ["Pietro", "Giovanni", "Tommaso", "Andrea"],
+                "correct": 2,
+                "explanation": "Tommaso disse che non avrebbe creduto finché non avesse visto e toccato le ferite di Gesù.",
+                "verse_ref": "Giovanni 20:24-29"
+            },
+            {
+                "id": "apo4",
+                "question": "Chi fu scelto per sostituire Giuda tra gli apostoli?",
+                "options": ["Paolo", "Barnaba", "Mattia", "Timoteo"],
+                "correct": 2,
+                "explanation": "Dopo l'Ascensione, gli apostoli tirarono a sorte e Mattia fu scelto per completare il numero dei Dodici.",
+                "verse_ref": "Atti 1:23-26"
+            },
+        ]
+    },
+    "dieci_comandamenti": {
+        "title": "I Dieci Comandamenti",
+        "description": "La Legge di Dio",
+        "questions": [
+            {
+                "id": "cmd1",
+                "question": "Dove Dio diede i Dieci Comandamenti a Mosè?",
+                "options": ["Monte Carmelo", "Monte Sinai", "Monte Sion", "Monte degli Ulivi"],
+                "correct": 1,
+                "explanation": "Dio diede i Dieci Comandamenti a Mosè sul Monte Sinai, scritti su tavole di pietra.",
+                "verse_ref": "Esodo 20:1-17"
+            },
+            {
+                "id": "cmd2",
+                "question": "Qual è il primo comandamento?",
+                "options": ["Non uccidere", "Non rubare", "Non avrai altri dèi davanti a me", "Onora tuo padre e tua madre"],
+                "correct": 2,
+                "explanation": "Il primo comandamento stabilisce che Dio è l'unico vero Dio da adorare.",
+                "verse_ref": "Esodo 20:3"
+            },
+            {
+                "id": "cmd3",
+                "question": "Quale comandamento riguarda il giorno di riposo?",
+                "options": ["Il terzo", "Il quarto", "Il quinto", "Il sesto"],
+                "correct": 1,
+                "explanation": "Il quarto comandamento dice: 'Ricordati del giorno del riposo per santificarlo'.",
+                "verse_ref": "Esodo 20:8-11"
             },
         ]
     }
