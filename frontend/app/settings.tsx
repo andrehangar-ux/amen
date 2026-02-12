@@ -388,6 +388,7 @@ Questi termini sono regolati dalla legge italiana.`,
           <TouchableOpacity 
             style={[styles.legalItem, { borderBottomWidth: 0 }]}
             onPress={handleDeleteAccount}
+            data-testid="delete-account-button"
           >
             <Ionicons name="trash" size={22} color="#E74C3C" />
             <Text style={[styles.legalText, { color: '#E74C3C' }]}>Elimina Account</Text>
@@ -400,6 +401,7 @@ Questi termini sono regolati dalla legge italiana.`,
           <TouchableOpacity 
             style={styles.logoutButton}
             onPress={handleLogout}
+            data-testid="logout-button"
           >
             <Ionicons name="log-out" size={22} color="#fff" />
             <Text style={styles.logoutText}>Esci dall'Account</Text>

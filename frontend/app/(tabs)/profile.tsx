@@ -193,6 +193,7 @@ export default function ProfileScreen() {
               subtitle="Disconnetti il tuo account"
               onPress={handleLogout}
               color={COLORS.error}
+              data-testid="profile-logout-button"
             />
           </View>
         </View>
