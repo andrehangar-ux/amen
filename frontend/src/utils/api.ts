@@ -198,10 +198,10 @@ export const api = {
     }),
   getStudyNotes: () => api.fetch('/api/bible/study/notes'),
   deleteStudyNote: (noteId: string) => api.fetch(`/api/bible/study/notes/${noteId}`, { method: 'DELETE' }),
-  aiExplainVerse: (verseRef: string, verseText: string, question?: string) =>
+  aiExplainVerse: (verseRef: string, verseText: string, question?: string, language?: string) =>
     api.fetch('/api/bible/study/ai-explain', {
       method: 'POST',
-      body: JSON.stringify({ verse_ref: verseRef, verse_text: verseText, question }),
+      body: JSON.stringify({ verse_ref: verseRef, verse_text: verseText, question, language }),
     }),
 
   // Settings
