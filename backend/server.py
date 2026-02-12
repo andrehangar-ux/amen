@@ -1225,7 +1225,8 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
     
     # Fallback to bible-api.com (English)
     try:
-        book_en = get_book_name_for_lang(book, "en")
+        it_name = get_italian_book_name(book)
+        book_en = get_book_name_for_lang(it_name, "en")
         url = f"https://bible-api.com/{book_en}+{chapter}?translation=web"
         
         async with httpx.AsyncClient(timeout=15.0) as client:
