@@ -53,9 +53,18 @@ export default function DonateScreen() {
     Alert.alert('Copiato!', `${label} copiato negli appunti`);
   };
 
-  const handlePayPal = () => {
+  const handlePayPal = async () => {
     if (config?.paypal_link) {
-      Linking.openURL(config.paypal_link);
+      const canOpen = await Linking.canOpenURL(config.paypal_link);
+      if (canOpen) {
+        await Linking.openURL(config.paypal_link);
+      } else {
+        // Fallback: copy link
+        await Clipboard.setStringAsync(config.paypal_link);
+        Alert.alert('Link PayPal', `Link copiato: ${config.paypal_link}\n\nApri il browser e incolla il link.`);
+      }
+    } else {
+      Alert.alert('Errore', 'Link PayPal non disponibile');
     }
   };
 
@@ -67,14 +76,16 @@ export default function DonateScreen() {
 
     setSubmitting(true);
     try {
-      const donation = await api.createDonation(
+      // First register the donation
+      await api.createDonation(
         parseFloat(amount),
         selectedMethod,
         message || undefined
       );
 
+      // Then open PayPal if selected
       if (selectedMethod === 'paypal') {
-        handlePayPal();
+        await handlePayPal();
       }
 
       Alert.alert(
@@ -88,7 +99,12 @@ export default function DonateScreen() {
       setMessage('');
       setSelectedMethod(null);
     } catch (error) {
-      Alert.alert('Errore', 'Impossibile registrare la donazione');
+      console.log('Donation error:', error);
+      // Even if registration fails, try to open PayPal
+      if (selectedMethod === 'paypal') {
+        await handlePayPal();
+      }
+      Alert.alert('Info', 'Procedi con la donazione. Grazie!');
     } finally {
       setSubmitting(false);
     }
