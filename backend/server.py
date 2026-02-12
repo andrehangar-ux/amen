@@ -1140,16 +1140,37 @@ def get_book_index_from_any_lang(book_name: str) -> int:
                 return idx
     return -1
 
-# GitHub Bible abbreviations ordered by standard book index (same order as BIBLE_BOOKS_MULTILANG)
-GITHUB_BOOK_ABBREVS = [
-    "gn", "ex", "lv", "nm", "dt", "js", "jud", "rt", "1sm", "2sm",
-    "1kgs", "2kgs", "1ch", "2ch", "ezr", "ne", "et", "job", "ps",
-    "prv", "ec", "so", "is", "jr", "lm", "ez", "dn",
-    "ho", "jl", "am", "ob", "jn", "mi", "na", "hk", "zp", "hg",
-    "zc", "ml", "mt", "mk", "lk", "jo", "act", "rm", "1co", "2co",
-    "gl", "eph", "ph", "cl", "1ts", "2ts", "1tm", "2tm",
-    "tt", "phm", "hb", "jm", "1pe", "2pe", "1jo", "2jo", "3jo", "jd", "re"
-]
+def get_italian_book_name(book_name: str) -> str:
+    """Convert any language book name to its Italian equivalent"""
+    # If it's already an Italian name, return as-is
+    it_books = BIBLE_BOOKS_MULTILANG["it"]
+    for b in it_books:
+        if b["name"] == book_name:
+            return book_name
+    # Find the book index from any language and return Italian name at that index
+    idx = get_book_index_from_any_lang(book_name)
+    if 0 <= idx < len(it_books):
+        return it_books[idx]["name"]
+    return book_name
+
+# Map Italian book names to GitHub Bible abbreviations
+BOOK_ABBREVS_IT = {
+    "Genesi": "gn", "Esodo": "ex", "Levitico": "lv", "Numeri": "nm", "Deuteronomio": "dt",
+    "Giosuè": "js", "Giudici": "jud", "Rut": "rt", "1 Samuele": "1sm", "2 Samuele": "2sm",
+    "1 Re": "1kgs", "2 Re": "2kgs", "1 Cronache": "1ch", "2 Cronache": "2ch",
+    "Esdra": "ezr", "Neemia": "ne", "Ester": "et", "Giobbe": "job", "Salmi": "ps",
+    "Proverbi": "prv", "Ecclesiaste": "ec", "Cantico dei Cantici": "so", "Isaia": "is",
+    "Geremia": "jr", "Lamentazioni": "lm", "Ezechiele": "ez", "Daniele": "dn",
+    "Osea": "ho", "Gioele": "jl", "Amos": "am", "Abdia": "ob", "Giona": "jn",
+    "Michea": "mi", "Naum": "na", "Abacuc": "hk", "Sofonia": "zp", "Aggeo": "hg",
+    "Zaccaria": "zc", "Malachia": "ml", "Matteo": "mt", "Marco": "mk", "Luca": "lk",
+    "Giovanni": "jo", "Atti": "act", "Romani": "rm", "1 Corinzi": "1co", "2 Corinzi": "2co",
+    "Galati": "gl", "Efesini": "eph", "Filippesi": "ph", "Colossesi": "cl",
+    "1 Tessalonicesi": "1ts", "2 Tessalonicesi": "2ts", "1 Timoteo": "1tm", "2 Timoteo": "2tm",
+    "Tito": "tt", "Filemone": "phm", "Ebrei": "hb", "Giacomo": "jm", "1 Pietro": "1pe",
+    "2 Pietro": "2pe", "1 Giovanni": "1jo", "2 Giovanni": "2jo", "3 Giovanni": "3jo",
+    "Giuda": "jd", "Apocalisse": "re"
+}
 
 async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> list:
     """Fetch Bible chapter in any language using multiple free APIs"""
@@ -1171,9 +1192,9 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
     
     if lang in github_files:
         try:
-            # Find the book's position index from any language name
-            book_idx = get_book_index_from_any_lang(book)
-            book_abbrev = GITHUB_BOOK_ABBREVS[book_idx] if 0 <= book_idx < len(GITHUB_BOOK_ABBREVS) else book.lower()[:2]
+            # Convert any language book name to Italian, then get GitHub abbreviation
+            it_name = get_italian_book_name(book)
+            book_abbrev = BOOK_ABBREVS_IT.get(it_name, book.lower()[:2])
             
             async with httpx.AsyncClient(timeout=60.0) as client:
                 response = await client.get(github_files[lang])
