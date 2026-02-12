@@ -37,17 +37,17 @@ export default function RegisterScreen() {
 
   const handleRegister = async () => {
     if (!name || !email || !password) {
-      Alert.alert('Errore', 'Compila tutti i campi');
+      showAlert('Errore', 'Compila tutti i campi');
       return;
     }
 
     if (password !== confirmPassword) {
-      Alert.alert('Errore', 'Le password non corrispondono');
+      showAlert('Errore', 'Le password non corrispondono');
       return;
     }
 
     if (password.length < 6) {
-      Alert.alert('Errore', 'La password deve avere almeno 6 caratteri');
+      showAlert('Errore', 'La password deve avere almeno 6 caratteri');
       return;
     }
 
@@ -56,7 +56,7 @@ export default function RegisterScreen() {
       await register(email, password, name);
       router.replace('/(tabs)');
     } catch (error: any) {
-      Alert.alert('Errore', error.message || 'Registrazione fallita');
+      showAlert('Errore', error.message || 'Registrazione fallita');
     } finally {
       setLoading(false);
     }
