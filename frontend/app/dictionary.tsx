@@ -64,7 +64,7 @@ export default function DictionaryScreen() {
 
   const loadTerms = async () => {
     try {
-      const data = await api.getDictionaryTerms();
+      const data = await api.getDictionaryTerms(currentLanguage);
       setTerms(data);
     } catch (error) {
       console.error('Error loading dictionary:', error);
@@ -77,7 +77,7 @@ export default function DictionaryScreen() {
     setLoadingTerm(true);
     setAiAnswer('');
     try {
-      const data = await api.getDictionaryTerm(termId);
+      const data = await api.getDictionaryTerm(termId, currentLanguage);
       setSelectedTerm(data);
     } catch (error) {
       console.error('Error loading term:', error);
