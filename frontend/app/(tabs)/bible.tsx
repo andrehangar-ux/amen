@@ -1036,6 +1036,25 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     color: COLORS.text,
   },
+  verseHighlighted: {
+    backgroundColor: 'rgba(241, 196, 15, 0.2)',
+    borderRadius: BORDER_RADIUS.sm,
+    paddingHorizontal: SPACING.xs,
+    marginHorizontal: -SPACING.xs,
+  },
+  verseNumberContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginRight: SPACING.sm,
+    minWidth: 30,
+  },
+  bookmarkIcon: {
+    marginLeft: 2,
+    marginTop: 2,
+  },
+  studyActionActive: {
+    backgroundColor: COLORS.primaryLight || 'rgba(52, 152, 219, 0.15)',
+  },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
