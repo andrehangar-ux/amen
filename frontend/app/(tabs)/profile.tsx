@@ -48,23 +48,22 @@ export default function ProfileScreen() {
           onPress: async () => {
             try {
               await logout();
+              // Clear auth state explicitly
+              setUser(null);
+              setSessionToken(null);
               // Force navigation to login
-              setTimeout(() => {
-                router.replace('/(auth)/login');
-              }, 100);
+              router.replace('/(auth)/login');
             } catch (error) {
               console.error('Logout error:', error);
               // Force logout anyway
+              setUser(null);
+              setSessionToken(null);
               router.replace('/(auth)/login');
             }
           },
         },
       ]
     );
-  };
-
-  const openRadio = (url: string) => {
-    Linking.openURL(url);
   };
 
   const MenuItem = ({ icon, title, subtitle, onPress, color = COLORS.text }: any) => (
@@ -122,29 +121,31 @@ export default function ProfileScreen() {
           </View>
         )}
 
-        {/* Menu Sections */}
+        {/* App Features */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Radio Evangeliche</Text>
+          <Text style={styles.sectionTitle}>Funzionalità</Text>
           <View style={styles.menuCard}>
-            {radios.map((radio, index) => (
-              <TouchableOpacity
-                key={radio.name}
-                style={[
-                  styles.radioItem,
-                  index < radios.length - 1 && styles.radioItemBorder,
-                ]}
-                onPress={() => openRadio(radio.url)}
-              >
-                <View style={styles.radioIcon}>
-                  <Ionicons name="radio" size={20} color={COLORS.primary} />
-                </View>
-                <View style={styles.radioContent}>
-                  <Text style={styles.radioName}>{radio.name}</Text>
-                  <Text style={styles.radioMeta}>{radio.country} • {radio.language}</Text>
-                </View>
-                <Ionicons name="open-outline" size={18} color={COLORS.textMuted} />
-              </TouchableOpacity>
-            ))}
+            <MenuItem
+              icon="radio"
+              title="Radio Evangeliche"
+              subtitle="Ascolta radio da tutto il mondo"
+              onPress={() => router.push('/radio')}
+              color={COLORS.primary}
+            />
+            <MenuItem
+              icon="people"
+              title="Community"
+              subtitle="Forum e condivisione"
+              onPress={() => router.push('/community')}
+              color={COLORS.secondary}
+            />
+            <MenuItem
+              icon="school"
+              title="Quiz Biblici"
+              subtitle="Metti alla prova le tue conoscenze"
+              onPress={() => router.push('/quiz')}
+              color="#4CAF50"
+            />
           </View>
         </View>
 
@@ -167,7 +168,7 @@ export default function ProfileScreen() {
             <MenuItem
               icon="settings"
               title="Impostazioni"
-              subtitle="Preferenze, notifiche"
+              subtitle="Preferenze, lingua, notifiche"
               onPress={() => router.push('/settings')}
               color={COLORS.textLight}
             />
