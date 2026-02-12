@@ -469,4 +469,17 @@ const styles = StyleSheet.create({
     color: COLORS.textLight,
     marginBottom: SPACING.xs,
   },
+  legalItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: SPACING.md,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.border,
+  },
+  legalText: {
+    flex: 1,
+    fontSize: 16,
+    color: COLORS.text,
+    marginLeft: SPACING.md,
+  },
 });
