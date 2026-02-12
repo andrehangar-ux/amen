@@ -99,7 +99,7 @@ export default function QuizScreen() {
       setResult(null);
       setShowCorrections(false);
     } catch (error) {
-      Alert.alert('Errore', 'Impossibile caricare il quiz');
+      Alert.alert(t('error'), t('loadError'));
     } finally {
       setLoading(false);
     }
