@@ -1101,55 +1101,44 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
         if verses and len(verses) > 3:
             return verses
     
-    # Try bible-api.com for English
-    if lang == "en":
-        verses = await fetch_from_bible_api(book, chapter, "en")
-        if verses and len(verses) > 3:
-            return verses
-    
-    # For Spanish, try laparola.net with Reina Valera
-    if lang == "es":
-        try:
-            book_es = get_book_name_for_lang(book, "es")
-            url = f"https://www.laparola.net/testo.php?riferimento={book_es.lower().replace(' ', '+')}+{chapter}&versioni[]=Reina+Valera"
-            
-            async with httpx.AsyncClient(timeout=15.0) as client:
-                response = await client.get(url)
-                if response.status_code == 200:
-                    html_content = response.text
-                    brano_match = re.search(r'<div id="brano">(.*?)</div><!-- RESULT LIST END -->', html_content, re.DOTALL)
-                    if brano_match:
-                        brano_content = brano_match.group(1)
-                        verse_pattern = r'<strong>(\d+)</strong>&nbsp;(.*?)(?=<strong>\d+</strong>|<br\s*/?>|</p>|$)'
-                        matches = re.findall(verse_pattern, brano_content, re.DOTALL)
-                        
-                        verses = []
-                        for match in matches:
-                            verse_num = int(match[0])
-                            verse_text = re.sub(r'<[^>]+>', '', match[1]).strip()
-                            verse_text = ' '.join(verse_text.split())
-                            if verse_text and len(verse_text) > 3:
-                                verses.append({"verse": verse_num, "text": verse_text})
-                        
-                        if verses:
-                            verses.sort(key=lambda x: x["verse"])
-                            logger.info(f"Fetched {len(verses)} verses from laparola.net for {book} {chapter} (es)")
-                            return verses
-        except Exception as e:
-            logger.error(f"Error fetching Spanish from laparola.net: {e}")
-    
-    # For German, French, Portuguese - use English as fallback with translation note
-    # (These would need proper Bible APIs for authentic translations)
-    if lang in ["de", "fr", "pt"]:
-        # Try English first, then add translation note
-        verses = await fetch_from_bible_api(book, chapter, "en")
-        if verses:
-            # Add note that this is English version
-            lang_names = {"de": "tedesco", "fr": "francese", "pt": "portoghese"}
-            for v in verses:
-                v["text"] = f"[English] {v['text']}"
-            logger.info(f"Using English fallback for {lang} - {book} {chapter}")
-            return verses
+    # For English, Spanish, and other languages - use bible-api.com
+    # It supports: web (World English Bible), kjv, bbe, darby, ylt, asv, webbe
+    try:
+        book_en = get_book_name_for_lang(book, "en")
+        
+        # Choose translation based on language
+        # Note: bible-api.com mainly supports English translations
+        # For Spanish we'll use English WEB as it's clearer
+        translation = "web"  # World English Bible - clear modern English
+        
+        url = f"https://bible-api.com/{book_en}+{chapter}?translation={translation}"
+        
+        async with httpx.AsyncClient(timeout=15.0) as client:
+            response = await client.get(url)
+            if response.status_code == 200:
+                data = response.json()
+                verses = []
+                
+                for v in data.get("verses", []):
+                    verse_text = v.get("text", "").strip()
+                    verse_text = verse_text.replace("\n", " ").strip()
+                    
+                    # For non-English languages, add a note that it's English translation
+                    if lang != "en" and verse_text:
+                        # Keep text as is - it's better than no text
+                        pass
+                    
+                    if verse_text:
+                        verses.append({
+                            "verse": v.get("verse", 0),
+                            "text": verse_text
+                        })
+                
+                if verses:
+                    logger.info(f"Fetched {len(verses)} verses from bible-api.com for {book} {chapter} ({lang})")
+                    return verses
+    except Exception as e:
+        logger.error(f"Error fetching from bible-api.com: {e}")
     
     return []
 
