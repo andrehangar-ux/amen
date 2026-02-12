@@ -156,6 +156,55 @@ export default function BibleScreen() {
     setShowStudyTools(true);
   };
 
+  // Toggle highlight for a verse
+  const toggleHighlight = (verseNum: number) => {
+    setHighlightedVerses(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(verseNum)) {
+        newSet.delete(verseNum);
+      } else {
+        newSet.add(verseNum);
+      }
+      return newSet;
+    });
+  };
+
+  // Toggle bookmark for a verse
+  const toggleBookmark = (verseRef: string) => {
+    setBookmarkedVerses(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(verseRef)) {
+        newSet.delete(verseRef);
+      } else {
+        newSet.add(verseRef);
+      }
+      return newSet;
+    });
+  };
+
+  // Share verse
+  const shareVerse = async (verse: Verse) => {
+    if (!selectedBook || !selectedChapter) return;
+    const text = `"${verse.text}"\n\n- ${selectedBook.name} ${selectedChapter}:${verse.verse}`;
+    try {
+      const { Share } = await import('react-native');
+      await Share.share({ message: text, title: 'Versetto dalla Bibbia' });
+    } catch (error) {
+      Alert.alert('Errore', 'Impossibile condividere');
+    }
+  };
+
+  // Open Wikipedia for biblical terms
+  const openWikipedia = (term: string) => {
+    const url = `https://it.wikipedia.org/wiki/${encodeURIComponent(term)}`;
+    import('expo-linking').then(Linking => Linking.openURL(url));
+  };
+
+  // Open Maps for biblical locations
+  const openMaps = () => {
+    router.push('/maps');
+  };
+
   const saveNote = async () => {
     if (!selectedBook || !selectedChapter || !noteText.trim()) return;
     
