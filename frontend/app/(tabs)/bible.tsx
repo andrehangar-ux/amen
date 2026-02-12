@@ -244,6 +244,13 @@ export default function BibleScreen() {
   const handleLanguageSelect = async (lang: string) => {
     await setLanguage(lang);
     setShowLanguageModal(false);
+    
+    // Ricarica il capitolo corrente con la nuova lingua
+    if (selectedBook && selectedChapter && view === 'reading') {
+      loadChapter(selectedBook.name, selectedChapter);
+    }
+    // Ricarica anche la lista libri
+    loadBooks();
   };
 
   const currentEdition = editions[selectedEdition];
