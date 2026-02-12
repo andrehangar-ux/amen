@@ -329,19 +329,38 @@ export default function BibleScreen() {
   };
 
   const handleLanguageSelect = async (lang: string) => {
+    // Don't do anything if same language selected
+    if (lang === currentLanguage) {
+      setShowLanguageModal(false);
+      return;
+    }
+    
     // Close modal first for immediate feedback
     setShowLanguageModal(false);
     
-    // Set language
-    await setLanguage(lang);
+    // Show loading state
+    setLoading(true);
     
-    // Reload books with new language
-    const booksData = await api.getBibleBooks(lang);
-    setBooks(booksData || []);
-    
-    // Reload current chapter if reading
-    if (selectedBook && selectedChapter && view === 'reading') {
-      loadChapter(selectedBook.name, selectedChapter, lang);
+    try {
+      // Set language in store
+      await setLanguage(lang);
+      
+      // Reload books with new language
+      const booksData = await api.getBibleBooks(lang);
+      setBooks(booksData || []);
+      
+      // Reload current chapter if reading with the NEW language
+      if (selectedBook && selectedChapter && view === 'reading') {
+        const chapterData = await api.getChapter(selectedBook.name, selectedChapter, lang);
+        setVerses(chapterData.verses || []);
+        // Reload study data too
+        loadStudyData(selectedBook.name, selectedChapter);
+      }
+    } catch (error) {
+      console.log('Error changing language:', error);
+      Alert.alert('Errore', 'Impossibile cambiare lingua. Riprova.');
+    } finally {
+      setLoading(false);
     }
   };
 
