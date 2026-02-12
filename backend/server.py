@@ -2040,20 +2040,37 @@ async def get_donations(user: User = Depends(require_auth)):
 # ==================== RADIO ENDPOINTS ====================
 
 EVANGELICAL_RADIOS = [
-    # EUROPA - ITALIA
+    # EUROPA - ITALIA (15 radio)
     {"name": "Radio Evangelo Roma", "url": "https://www.radioevangeloroma.it/", "stream_url": "https://stream.radioevangeloroma.it/stream", "country": "Italia", "language": "it", "region": "Europa", "continent": "Europa"},
     {"name": "Radio Luce", "url": "https://www.radioluce.it/", "stream_url": "https://www.radioluce.it/player", "country": "Italia", "language": "it", "region": "Europa", "continent": "Europa"},
     {"name": "RTB Network", "url": "https://www.rtbnetwork.it/", "stream_url": "https://stream.rtbnetwork.it/", "country": "Italia", "language": "it", "region": "Europa", "continent": "Europa"},
     {"name": "Radio RCR", "url": "https://www.rcr.it/", "stream_url": "https://www.rcr.it/diretta", "country": "Italia", "language": "it", "region": "Europa", "continent": "Europa"},
+    {"name": "Radio Parole di Vita", "url": "https://www.paroledivita.org/", "stream_url": "https://www.paroledivita.org/radio", "country": "Italia", "language": "it", "region": "Europa", "continent": "Europa"},
+    {"name": "Radio Voce della Speranza", "url": "https://www.radiovocedellasperanza.it/", "stream_url": "https://www.radiovocedellasperanza.it/", "country": "Italia", "language": "it", "region": "Europa", "continent": "Europa"},
+    {"name": "Radio Speranza Italia", "url": "https://radiosperanza.it/", "stream_url": "https://radiosperanza.it/streaming", "country": "Italia", "language": "it", "region": "Europa", "continent": "Europa"},
+    {"name": "Radio Cristiana Evangelica", "url": "https://radiocristianaevangelica.it/", "stream_url": "https://radiocristianaevangelica.it/", "country": "Italia", "language": "it", "region": "Europa", "continent": "Europa"},
+    {"name": "Radio Grazia", "url": "https://www.radiograzia.it/", "stream_url": "https://www.radiograzia.it/live", "country": "Italia", "language": "it", "region": "Europa", "continent": "Europa"},
+    {"name": "Radio Buon Messaggio", "url": "https://www.radiobuonmessaggio.it/", "stream_url": "https://www.radiobuonmessaggio.it/", "country": "Italia", "language": "it", "region": "Europa", "continent": "Europa"},
+    {"name": "Radio Pace Milano", "url": "https://www.radiopace.net/", "stream_url": "https://www.radiopace.net/ascolta", "country": "Italia", "language": "it", "region": "Europa", "continent": "Europa"},
+    {"name": "Radio Berea Italia", "url": "https://www.radioberea.it/", "stream_url": "https://www.radioberea.it/live", "country": "Italia", "language": "it", "region": "Europa", "continent": "Europa"},
+    {"name": "Radio Missione Francescana", "url": "https://www.radiomissionefrancescana.it/", "stream_url": "https://www.radiomissionefrancescana.it/", "country": "Italia", "language": "it", "region": "Europa", "continent": "Europa"},
+    {"name": "Radio Punto Italia", "url": "https://radiopunto.it/", "stream_url": "https://radiopunto.it/streaming", "country": "Italia", "language": "it", "region": "Europa", "continent": "Europa"},
+    {"name": "Radio Studio Aperto", "url": "https://www.radiostudioaperto.it/", "stream_url": "https://www.radiostudioaperto.it/", "country": "Italia", "language": "it", "region": "Europa", "continent": "Europa"},
+    
     # EUROPA - SPAGNA
     {"name": "Radio Unción", "url": "https://www.radiouncion.com/", "stream_url": "https://www.radiouncion.com/", "country": "España", "language": "es", "region": "Europa", "continent": "Europa"},
     {"name": "Onda Luz Radio", "url": "https://ondaluzradio.es/", "stream_url": "https://ondaluzradio.es/", "country": "España", "language": "es", "region": "Europa", "continent": "Europa"},
+    {"name": "Radio Oasis España", "url": "https://www.radiooasis.es/", "stream_url": "https://www.radiooasis.es/envivo", "country": "España", "language": "es", "region": "Europa", "continent": "Europa"},
+    {"name": "Radio Vida España", "url": "https://www.radiovidaespana.com/", "stream_url": "https://www.radiovidaespana.com/", "country": "España", "language": "es", "region": "Europa", "continent": "Europa"},
+    
     # EUROPA - FRANCIA
     {"name": "Radio Vie", "url": "https://www.radiovie.com/", "stream_url": "https://www.radiovie.com/ecouter", "country": "France", "language": "fr", "region": "Europa", "continent": "Europa"},
     {"name": "Phare FM", "url": "https://www.pharefm.com/", "stream_url": "https://www.pharefm.com/", "country": "France", "language": "fr", "region": "Europa", "continent": "Europa"},
+    
     # EUROPA - UK
     {"name": "Premier Christian Radio", "url": "https://premierchristianradio.com/", "stream_url": "https://premierchristianradio.com/Listen", "country": "UK", "language": "en", "region": "Europa", "continent": "Europa"},
     {"name": "UCB Radio", "url": "https://www.ucb.co.uk/", "stream_url": "https://www.ucb.co.uk/listen", "country": "UK", "language": "en", "region": "Europa", "continent": "Europa"},
+    
     # EUROPA - GERMANIA
     {"name": "ERF Radio", "url": "https://www.erf.de/", "stream_url": "https://www.erf.de/radio", "country": "Deutschland", "language": "de", "region": "Europa", "continent": "Europa"},
     
@@ -2068,6 +2085,7 @@ EVANGELICAL_RADIOS = [
     {"name": "Radio Nuevo Tiempo Argentina", "url": "https://nuevotiempo.org/radio/", "stream_url": "https://nuevotiempo.org/radio/", "country": "Argentina", "language": "es", "region": "Sudamerica", "continent": "SudAmerica"},
     {"name": "Radio Cristiana Argentina", "url": "https://radiocristianaargentina.com/", "stream_url": "https://radiocristianaargentina.com/", "country": "Argentina", "language": "es", "region": "Sudamerica", "continent": "SudAmerica"},
     {"name": "Radio Fe Buenos Aires", "url": "https://www.radiofe.com.ar/", "stream_url": "https://www.radiofe.com.ar/", "country": "Argentina", "language": "es", "region": "Sudamerica", "continent": "SudAmerica"},
+    {"name": "Radio Mitre Cristiana", "url": "https://radiomitre.cienradios.com/", "stream_url": "https://radiomitre.cienradios.com/", "country": "Argentina", "language": "es", "region": "Sudamerica", "continent": "SudAmerica"},
     
     # SUD AMERICA - PERÚ
     {"name": "Radio Bethel Peru", "url": "https://radiobethel.pe/", "stream_url": "https://radiobethel.pe/en-vivo", "country": "Perú", "language": "es", "region": "Sudamerica", "continent": "SudAmerica"},
@@ -2084,15 +2102,38 @@ EVANGELICAL_RADIOS = [
     {"name": "Radio Nuevo Tiempo Chile", "url": "https://nuevotiempo.org/chile/", "stream_url": "https://nuevotiempo.org/chile/radio", "country": "Chile", "language": "es", "region": "Sudamerica", "continent": "SudAmerica"},
     
     # SUD AMERICA - ECUADOR
-    {"name": "HCJB La Voz de los Andes", "url": "https://hcjb.org.ec/", "stream_url": "https://hcjb.org.ec/escuchar", "country": "Ecuador", "language": "es", "region": "Sudamerica", "continent": "SudAmerica"},
-    {"name": "Radio Católica Ecuador", "url": "https://radiocatolica.ec/", "stream_url": "https://radiocatolica.ec/", "country": "Ecuador", "language": "es", "region": "Sudamerica", "continent": "SudAmerica"},
+    {"name": "HCJB La Voz de los Andes Ecuador", "url": "https://hcjb.org.ec/", "stream_url": "https://hcjb.org.ec/escuchar", "country": "Ecuador", "language": "es", "region": "Sudamerica", "continent": "SudAmerica"},
     
     # SUD AMERICA - VENEZUELA
     {"name": "Radio Fe y Alegría Venezuela", "url": "https://www.radiofeyalegria.org/", "stream_url": "https://www.radiofeyalegria.org/", "country": "Venezuela", "language": "es", "region": "Sudamerica", "continent": "SudAmerica"},
+    {"name": "Radio Caracas Cristiana", "url": "https://www.radiocaracascristiana.com/", "stream_url": "https://www.radiocaracascristiana.com/", "country": "Venezuela", "language": "es", "region": "Sudamerica", "continent": "SudAmerica"},
     
     # SUD AMERICA - MÉXICO
     {"name": "Radio Vida México", "url": "https://radiovidamexico.com/", "stream_url": "https://radiovidamexico.com/", "country": "México", "language": "es", "region": "Sudamerica", "continent": "SudAmerica"},
     {"name": "Radio Nuevo Tiempo México", "url": "https://nuevotiempo.org/mexico/", "stream_url": "https://nuevotiempo.org/mexico/radio", "country": "México", "language": "es", "region": "Sudamerica", "continent": "SudAmerica"},
+    {"name": "Radio Impacto Monterrey", "url": "https://radioimpacto.mx/", "stream_url": "https://radioimpacto.mx/envivo", "country": "México", "language": "es", "region": "Sudamerica", "continent": "SudAmerica"},
+    
+    # CARIBE - PUERTO RICO
+    {"name": "Radio Paz Puerto Rico", "url": "https://radiopaz.com/", "stream_url": "https://radiopaz.com/en-vivo", "country": "Puerto Rico", "language": "es", "region": "Caribe", "continent": "Caribe"},
+    {"name": "Radio Vida Puerto Rico", "url": "https://radiovidapr.com/", "stream_url": "https://radiovidapr.com/", "country": "Puerto Rico", "language": "es", "region": "Caribe", "continent": "Caribe"},
+    {"name": "WIVV Radio", "url": "https://wivv.com/", "stream_url": "https://wivv.com/stream", "country": "Puerto Rico", "language": "es", "region": "Caribe", "continent": "Caribe"},
+    
+    # CARIBE - REPÚBLICA DOMINICANA
+    {"name": "Radio Visión Cristiana RD", "url": "https://visioncristianard.com/", "stream_url": "https://visioncristianard.com/radio", "country": "Rep. Dominicana", "language": "es", "region": "Caribe", "continent": "Caribe"},
+    {"name": "Radio Amanecer Dominicana", "url": "https://radioamanecer.com/", "stream_url": "https://radioamanecer.com/", "country": "Rep. Dominicana", "language": "es", "region": "Caribe", "continent": "Caribe"},
+    {"name": "Radio Paz Dominicana", "url": "https://radiopazrd.com/", "stream_url": "https://radiopazrd.com/live", "country": "Rep. Dominicana", "language": "es", "region": "Caribe", "continent": "Caribe"},
+    
+    # CARIBE - CUBA
+    {"name": "Radio Martí Cristiana", "url": "https://www.radiotelevisionmarti.com/", "stream_url": "https://www.radiotelevisionmarti.com/", "country": "Cuba", "language": "es", "region": "Caribe", "continent": "Caribe"},
+    {"name": "Radio Esperanza Cuba", "url": "https://radioesperanzacuba.com/", "stream_url": "https://radioesperanzacuba.com/", "country": "Cuba", "language": "es", "region": "Caribe", "continent": "Caribe"},
+    
+    # CARIBE - JAMAICA
+    {"name": "Love FM Jamaica", "url": "https://lovefm.com/", "stream_url": "https://lovefm.com/listen", "country": "Jamaica", "language": "en", "region": "Caribe", "continent": "Caribe"},
+    {"name": "Gospel JA FM", "url": "https://gospeljafm.com/", "stream_url": "https://gospeljafm.com/", "country": "Jamaica", "language": "en", "region": "Caribe", "continent": "Caribe"},
+    
+    # CARIBE - HAITI
+    {"name": "Radio Lumière Haiti", "url": "https://radiolumiere.org/", "stream_url": "https://radiolumiere.org/ecoute", "country": "Haiti", "language": "fr", "region": "Caribe", "continent": "Caribe"},
+    {"name": "Radio 4VEH", "url": "https://4veh.org/", "stream_url": "https://4veh.org/live", "country": "Haiti", "language": "fr", "region": "Caribe", "continent": "Caribe"},
     
     # SUD AMERICA - BRASIL
     {"name": "Radio Vida Brasil", "url": "https://radiovida.com.br/", "stream_url": "https://radiovida.com.br/ao-vivo", "country": "Brasil", "language": "pt", "region": "Sudamerica", "continent": "SudAmerica"},
