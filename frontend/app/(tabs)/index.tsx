@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   RefreshControl,
   Alert,
+  Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -19,6 +20,19 @@ import { DailyVerseCard } from '../../src/components/DailyVerseCard';
 import { MoodSelector } from '../../src/components/MoodSelector';
 import { LanguageSelector } from '../../src/components/LanguageSelector';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
+
+// Cross-platform TTS helper
+const speakText = (text: string, langCode: string) => {
+  if (Platform.OS === 'web' && typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = langCode;
+    utterance.rate = 0.9;
+    window.speechSynthesis.speak(utterance);
+  } else {
+    Speech.speak(text, { language: langCode });
+  }
+};
 
 export default function HomeScreen() {
   const { user } = useAuthStore();
