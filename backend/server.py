@@ -1144,7 +1144,11 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
                 async with httpx.AsyncClient(timeout=30.0) as client:
                     response = await client.get(github_files[lang])
                     if response.status_code == 200:
-                        bible_data = response.json()
+                        # Handle BOM in JSON files
+                        content = response.text
+                        if content.startswith('\ufeff'):
+                            content = content[1:]
+                        bible_data = json.loads(content)
                         # Cache for future use
                         await db.bible_full_cache.update_one(
                             {"cache_key": cache_key},
