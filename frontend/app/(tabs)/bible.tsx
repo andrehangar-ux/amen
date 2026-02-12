@@ -293,21 +293,29 @@ export default function BibleScreen() {
     setSelectedEdition(editionKey);
     const edition = editions[editionKey];
     if (edition) {
-      setLanguage(edition.language);
+      // Update language and immediately reload content
+      setLanguage(edition.language).then(() => {
+        loadBooks();
+        if (selectedBook && selectedChapter && view === 'reading') {
+          loadChapter(selectedBook.name, selectedChapter);
+        }
+      });
     }
     setShowEditionSelector(false);
   };
 
   const handleLanguageSelect = async (lang: string) => {
-    await setLanguage(lang);
+    // Set language and close modal first for immediate feedback
     setShowLanguageModal(false);
+    await setLanguage(lang);
+    
+    // Reload content with new language
+    await loadBooks();
     
     // Ricarica il capitolo corrente con la nuova lingua
     if (selectedBook && selectedChapter && view === 'reading') {
       loadChapter(selectedBook.name, selectedChapter);
     }
-    // Ricarica anche la lista libri
-    loadBooks();
   };
 
   const currentEdition = editions[selectedEdition];
