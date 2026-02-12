@@ -90,16 +90,16 @@ export default function FeelingsScreen() {
     if (!response) return;
     
     if (isSpeaking) {
-      Speech.stop();
+      stopSpeakingHelper();
       setIsSpeaking(false);
     } else {
       const ttsCode = languages[currentLanguage]?.tts_code || 'it-IT';
-      Speech.speak(response, {
-        language: ttsCode,
-        onDone: () => setIsSpeaking(false),
-        onStopped: () => setIsSpeaking(false),
-      });
-      setIsSpeaking(true);
+      speakTextWithCallback(
+        response, 
+        ttsCode, 
+        () => setIsSpeaking(true),
+        () => setIsSpeaking(false)
+      );
     }
   };
 
