@@ -18,6 +18,34 @@ import { api } from '../src/utils/api';
 import { useLanguageStore } from '../src/store/languageStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../src/utils/theme';
 
+// Cross-platform TTS helpers
+const speakTextWithCallback = (text: string, langCode: string, onStart: () => void, onEnd: () => void) => {
+  onStart();
+  if (Platform.OS === 'web' && typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = langCode;
+    utterance.rate = 0.9;
+    utterance.onend = onEnd;
+    utterance.onerror = onEnd;
+    window.speechSynthesis.speak(utterance);
+  } else {
+    Speech.speak(text, {
+      language: langCode,
+      onDone: onEnd,
+      onStopped: onEnd,
+    });
+  }
+};
+
+const stopSpeakingHelper = () => {
+  if (Platform.OS === 'web' && typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  } else {
+    Speech.stop();
+  }
+};
+
 export default function FeelingsScreen() {
   const { currentLanguage, languages } = useLanguageStore();
   const [text, setText] = useState('');
