@@ -70,6 +70,7 @@ export default function BibleScreen() {
   const [editions, setEditions] = useState<Record<string, BibleEdition>>({});
   const [selectedEdition, setSelectedEdition] = useState<string>('nuova_diodati');
   const [showEditionSelector, setShowEditionSelector] = useState(false);
+  const [showLanguageModal, setShowLanguageModal] = useState(false);
 
   // Study Tools State
   const [showStudyTools, setShowStudyTools] = useState(false);
