@@ -1164,56 +1164,42 @@ async def get_chapter(book: str, chapter: int, lang: str = "it"):
     elif lang == "es":
         verses = REINA_VALERA_1960.get(key, [])
     else:
-        # For other languages, try sample verses or Italian as fallback
-        verses_dict = SAMPLE_VERSES_MULTILANG.get(lang, SAMPLE_VERSES_MULTILANG.get("it", {}))
-        verses = verses_dict.get(key, [])
+        verses = []
     
     if verses:
         return {"book": book, "chapter": chapter, "verses": verses, "language": lang}
     
     # Check if we have it cached in MongoDB
     cached = await db.bible_cache.find_one({"book": book, "chapter": chapter, "language": lang})
-    if cached and cached.get("verses"):
+    if cached and cached.get("verses") and len(cached.get("verses", [])) > 3:
         return {"book": book, "chapter": chapter, "verses": cached["verses"], "language": lang}
     
-    # Try to fetch from laparola.net for Italian
-    if lang == "it":
-        fetched_verses = await fetch_from_laparola(book, chapter)
-        if fetched_verses and len(fetched_verses) > 3:
-            # Cache in MongoDB for future use
-            await db.bible_cache.update_one(
-                {"book": book, "chapter": chapter, "language": lang},
-                {"$set": {"verses": fetched_verses, "source": "laparola.net", "cached_at": datetime.now(timezone.utc)}},
-                upsert=True
-            )
-            return {"book": book, "chapter": chapter, "verses": fetched_verses, "language": lang}
+    # Fetch from external APIs
+    fetched_verses = await fetch_bible_chapter_any_lang(book, chapter, lang)
     
-    # Check if we have it in sample verses (for other languages)
-    verses_dict = SAMPLE_VERSES_MULTILANG.get(lang, SAMPLE_VERSES_MULTILANG.get("it", {}))
-    sample_key = f"{book}:{chapter}"
-    if sample_key in verses_dict:
-        return {"book": book, "chapter": chapter, "verses": verses_dict[sample_key], "language": lang}
+    if fetched_verses and len(fetched_verses) > 3:
+        # Cache in MongoDB for future use
+        await db.bible_cache.update_one(
+            {"book": book, "chapter": chapter, "language": lang},
+            {"$set": {"verses": fetched_verses, "source": "external_api", "cached_at": datetime.now(timezone.utc)}},
+            upsert=True
+        )
+        return {"book": book, "chapter": chapter, "verses": fetched_verses, "language": lang}
     
-    # Generate informative placeholder for chapters not yet in database
+    # Return placeholder if nothing found
     verses = []
-    if lang == "it":
-        for i in range(1, 15):
-            verses.append({
-                "verse": i,
-                "text": f"Questo capitolo sarà presto disponibile. Nel frattempo, consulta i capitoli principali come Genesi 1-3, Salmi 23, 91, Giovanni 1, 3, 14, Romani 8."
-            })
-    elif lang == "es":
-        for i in range(1, 15):
-            verses.append({
-                "verse": i,
-                "text": f"Este capítulo estará disponible pronto. Mientras tanto, consulta los capítulos principales como Génesis 1, Salmos 23, 91, Juan 3, 14, Romanos 8."
-            })
-    else:
-        for i in range(1, 15):
-            verses.append({
-                "verse": i,
-                "text": f"This chapter will be available soon."
-            })
+    placeholders = {
+        "it": "Questo capitolo sarà presto disponibile.",
+        "es": "Este capítulo estará disponible pronto.",
+        "en": "This chapter will be available soon.",
+        "de": "Dieses Kapitel wird bald verfügbar sein.",
+        "fr": "Ce chapitre sera bientôt disponible.",
+        "pt": "Este capítulo estará disponível em breve."
+    }
+    placeholder_text = placeholders.get(lang, placeholders["en"])
+    
+    for i in range(1, 10):
+        verses.append({"verse": i, "text": placeholder_text})
     
     return {"book": book, "chapter": chapter, "verses": verses, "language": lang}
 
