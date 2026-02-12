@@ -696,6 +696,81 @@ MULTILINGUAL_QUIZZES = {
                 {"id": "eva2", "question": "Combien d'apôtres Jésus a-t-il choisis?", "options": ["7", "10", "12", "14"], "correct": 2, "explanation": "Jésus a choisi douze apôtres.", "verse_ref": "Matthieu 10:1-4"},
             ]
         },
+        "psaumes": {
+            "title": "Quiz des Psaumes",
+            "description": "Connaissez-vous les Psaumes?",
+            "questions": [
+                {"id": "psa1", "question": "Qui a écrit la plupart des Psaumes?", "options": ["Moïse", "David", "Salomon", "Asaph"], "correct": 1, "explanation": "David est l'auteur de la plupart des Psaumes.", "verse_ref": "Titres des Psaumes"},
+                {"id": "psa2", "question": "Complétez: 'L'Éternel est mon...'", "options": ["Roi", "Berger", "Sauveur", "Juge"], "correct": 1, "explanation": "L'Éternel est mon berger, je ne manquerai de rien.", "verse_ref": "Psaume 23:1"},
+                {"id": "psa3", "question": "Combien de Psaumes y a-t-il dans la Bible?", "options": ["100", "120", "150", "200"], "correct": 2, "explanation": "Le livre des Psaumes contient 150 psaumes.", "verse_ref": "Livre des Psaumes"},
+            ]
+        },
+        "exode": {
+            "title": "Quiz de l'Exode",
+            "description": "La libération d'Égypte",
+            "questions": [
+                {"id": "exo1", "question": "Qui a été placé dans un panier sur le Nil?", "options": ["Aaron", "Moïse", "Joseph", "Pharaon"], "correct": 1, "explanation": "Moïse a été placé dans un panier par sa mère.", "verse_ref": "Exode 2:3"},
+                {"id": "exo2", "question": "Combien de plaies ont frappé l'Égypte?", "options": ["5", "7", "10", "12"], "correct": 2, "explanation": "Dieu a envoyé dix plaies sur l'Égypte.", "verse_ref": "Exode 7-11"},
+                {"id": "exo3", "question": "Quelle était la dernière plaie?", "options": ["Grenouilles", "Ténèbres", "Mort des premiers-nés", "Sauterelles"], "correct": 2, "explanation": "La dixième plaie était la mort des premiers-nés.", "verse_ref": "Exode 12:29"},
+                {"id": "exo4", "question": "Quelle mer s'est ouverte pour Israël?", "options": ["Mer Morte", "Mer Rouge", "Méditerranée", "Jourdain"], "correct": 1, "explanation": "Les eaux de la Mer Rouge se sont divisées.", "verse_ref": "Exode 14:21"},
+                {"id": "exo5", "question": "Sur quelle montagne Moïse a-t-il reçu les Dix Commandements?", "options": ["Mont Ararat", "Mont Sinaï", "Mont Carmel", "Mont des Oliviers"], "correct": 1, "explanation": "Dieu a donné la Loi à Moïse sur le mont Sinaï.", "verse_ref": "Exode 19-20"},
+            ]
+        },
+        "actes": {
+            "title": "Quiz des Actes des Apôtres",
+            "description": "L'histoire de l'Église primitive",
+            "questions": [
+                {"id": "act1", "question": "Qui a écrit les Actes des Apôtres?", "options": ["Pierre", "Paul", "Luc", "Jean"], "correct": 2, "explanation": "Luc a écrit l'Évangile et les Actes.", "verse_ref": "Actes 1:1"},
+                {"id": "act2", "question": "Quand le Saint-Esprit est-il descendu sur les disciples?", "options": ["Pâques", "Pentecôte", "Noël", "Pâque juive"], "correct": 1, "explanation": "Le Saint-Esprit est descendu le jour de la Pentecôte.", "verse_ref": "Actes 2:1-4"},
+                {"id": "act3", "question": "Qui fut le premier martyr chrétien?", "options": ["Pierre", "Paul", "Étienne", "Jacques"], "correct": 2, "explanation": "Étienne fut lapidé pour sa foi.", "verse_ref": "Actes 7:59-60"},
+                {"id": "act4", "question": "Comment s'appelait Saul après sa conversion?", "options": ["Pierre", "Paul", "Jean", "Barnabas"], "correct": 1, "explanation": "Saul devint Paul après sa rencontre avec Christ.", "verse_ref": "Actes 13:9"},
+            ]
+        },
+        "prophetes": {
+            "title": "Quiz des Prophètes",
+            "description": "Les grands prophètes de l'Ancien Testament",
+            "questions": [
+                {"id": "pro1", "question": "Qui fut enlevé au ciel sur un char de feu?", "options": ["Moïse", "Élie", "Élisée", "Ésaïe"], "correct": 1, "explanation": "Élie monta au ciel dans un tourbillon sur un char de feu.", "verse_ref": "2 Rois 2:11"},
+                {"id": "pro2", "question": "Quel prophète fut jeté dans la fosse aux lions?", "options": ["Jérémie", "Ézéchiel", "Daniel", "Ésaïe"], "correct": 2, "explanation": "Daniel fut jeté dans la fosse aux lions.", "verse_ref": "Daniel 6:16"},
+                {"id": "pro3", "question": "Qui fut avalé par un grand poisson?", "options": ["Jonas", "Nahum", "Habacuc", "Amos"], "correct": 0, "explanation": "Jonas fut avalé par un grand poisson.", "verse_ref": "Jonas 1:17"},
+            ]
+        },
+        "apocalypse": {
+            "title": "Quiz de l'Apocalypse",
+            "description": "Le livre de la Révélation",
+            "questions": [
+                {"id": "apo1", "question": "Qui a écrit l'Apocalypse?", "options": ["Pierre", "Paul", "Jean", "Luc"], "correct": 2, "explanation": "L'apôtre Jean a écrit l'Apocalypse.", "verse_ref": "Apocalypse 1:1"},
+                {"id": "apo2", "question": "Où était Jean quand il a écrit l'Apocalypse?", "options": ["Rome", "Jérusalem", "Île de Patmos", "Éphèse"], "correct": 2, "explanation": "Jean était exilé sur l'île de Patmos.", "verse_ref": "Apocalypse 1:9"},
+                {"id": "apo3", "question": "À combien d'Églises les lettres de l'Apocalypse furent-elles envoyées?", "options": ["5", "7", "10", "12"], "correct": 1, "explanation": "Les lettres furent envoyées à sept Églises d'Asie.", "verse_ref": "Apocalypse 1:4"},
+            ]
+        },
+        "personnages": {
+            "title": "Personnages Bibliques",
+            "description": "Connaissez-vous les grands personnages de la Bible?",
+            "questions": [
+                {"id": "per1", "question": "Qui a reçu les Dix Commandements?", "options": ["Abraham", "David", "Moïse", "Josué"], "correct": 2, "explanation": "Moïse a reçu les Dix Commandements sur le mont Sinaï.", "verse_ref": "Exode 20"},
+                {"id": "per2", "question": "Qui a vaincu Goliath?", "options": ["Samson", "David", "Saül", "Jonathan"], "correct": 1, "explanation": "David a vaincu le géant Goliath avec une fronde.", "verse_ref": "1 Samuel 17"},
+                {"id": "per3", "question": "Qui a construit le premier temple de Jérusalem?", "options": ["David", "Salomon", "Néhémie", "Hérode"], "correct": 1, "explanation": "Salomon a construit le premier temple.", "verse_ref": "1 Rois 6"},
+            ]
+        },
+        "miracles": {
+            "title": "Les Miracles de Jésus",
+            "description": "Connaissez-vous les miracles de Jésus?",
+            "questions": [
+                {"id": "mir1", "question": "Combien de pains Jésus a-t-il utilisés pour nourrir 5000 personnes?", "options": ["3", "5", "7", "10"], "correct": 1, "explanation": "Jésus a utilisé cinq pains et deux poissons.", "verse_ref": "Matthieu 14:17-21"},
+                {"id": "mir2", "question": "Qui Jésus a-t-il ressuscité après quatre jours?", "options": ["Jaïrus", "Lazare", "Pierre", "Jean"], "correct": 1, "explanation": "Jésus a ressuscité Lazare à Béthanie.", "verse_ref": "Jean 11:43-44"},
+                {"id": "mir3", "question": "Quel disciple a marché sur l'eau avec Jésus?", "options": ["Jean", "Jacques", "Pierre", "André"], "correct": 2, "explanation": "Pierre a marché sur l'eau vers Jésus.", "verse_ref": "Matthieu 14:29"},
+            ]
+        },
+        "beatitudes": {
+            "title": "Les Béatitudes",
+            "description": "Le Sermon sur la Montagne",
+            "questions": [
+                {"id": "bea1", "question": "À qui appartient le royaume des cieux?", "options": ["Aux riches", "Aux puissants", "Aux pauvres en esprit", "Aux sages"], "correct": 2, "explanation": "Heureux les pauvres en esprit, car le royaume des cieux est à eux.", "verse_ref": "Matthieu 5:3"},
+                {"id": "bea2", "question": "Qui sera consolé?", "options": ["Celui qui rit", "Celui qui est dans l'affliction", "Le riche", "Le puissant"], "correct": 1, "explanation": "Heureux ceux qui sont dans l'affliction, car ils seront consolés.", "verse_ref": "Matthieu 5:4"},
+                {"id": "bea3", "question": "Qu'hériteront les doux?", "options": ["L'or", "Le pouvoir", "La terre", "La gloire"], "correct": 2, "explanation": "Heureux les doux, car ils hériteront la terre.", "verse_ref": "Matthieu 5:5"},
+            ]
+        },
     },
     "pt": {
         "genesis": {
