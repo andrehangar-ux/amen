@@ -597,6 +597,86 @@ MULTILINGUAL_QUIZZES = {
                 {"id": "eva3", "question": "Was sagte Jesus: 'Ich bin der Weg, die...'?", "options": ["Licht und das Leben", "Wahrheit und das Leben", "Tür und das Leben", "Auferstehung"], "correct": 1, "explanation": "Ich bin der Weg, die Wahrheit und das Leben.", "verse_ref": "Johannes 14:6"},
             ]
         },
+        "psalmen": {
+            "title": "Psalmen Quiz",
+            "description": "Wie gut kennst du die Psalmen?",
+            "questions": [
+                {"id": "psa1", "question": "Wer schrieb die meisten Psalmen?", "options": ["Mose", "David", "Salomo", "Asaph"], "correct": 1, "explanation": "David ist der Autor der meisten Psalmen.", "verse_ref": "Psalmtitel"},
+                {"id": "psa2", "question": "Ergänze: 'Der Herr ist mein...'", "options": ["König", "Hirte", "Retter", "Richter"], "correct": 1, "explanation": "Der Herr ist mein Hirte, mir wird nichts mangeln.", "verse_ref": "Psalm 23:1"},
+                {"id": "psa3", "question": "Wie viele Psalmen gibt es in der Bibel?", "options": ["100", "120", "150", "200"], "correct": 2, "explanation": "Das Buch der Psalmen enthält 150 Psalmen.", "verse_ref": "Buch der Psalmen"},
+            ]
+        },
+        "exodus": {
+            "title": "Exodus Quiz",
+            "description": "Die Befreiung aus Ägypten",
+            "questions": [
+                {"id": "exo1", "question": "Wer wurde in einem Korb auf dem Nil ausgesetzt?", "options": ["Aaron", "Mose", "Josef", "Pharao"], "correct": 1, "explanation": "Mose wurde von seiner Mutter in einen Korb gelegt.", "verse_ref": "Exodus 2:3"},
+                {"id": "exo2", "question": "Wie viele Plagen trafen Ägypten?", "options": ["5", "7", "10", "12"], "correct": 2, "explanation": "Gott sandte zehn Plagen über Ägypten.", "verse_ref": "Exodus 7-11"},
+                {"id": "exo3", "question": "Was war die letzte Plage?", "options": ["Frösche", "Finsternis", "Tod der Erstgeborenen", "Heuschrecken"], "correct": 2, "explanation": "Die zehnte Plage war der Tod der Erstgeborenen.", "verse_ref": "Exodus 12:29"},
+                {"id": "exo4", "question": "Welches Meer teilte sich für Israel?", "options": ["Totes Meer", "Rotes Meer", "Mittelmeer", "Jordanfluss"], "correct": 1, "explanation": "Die Wasser des Roten Meeres teilten sich.", "verse_ref": "Exodus 14:21"},
+                {"id": "exo5", "question": "Auf welchem Berg empfing Mose die Zehn Gebote?", "options": ["Berg Ararat", "Berg Sinai", "Berg Karmel", "Ölberg"], "correct": 1, "explanation": "Gott gab Mose das Gesetz auf dem Berg Sinai.", "verse_ref": "Exodus 19-20"},
+            ]
+        },
+        "apostelgeschichte": {
+            "title": "Apostelgeschichte Quiz",
+            "description": "Die Geschichte der frühen Kirche",
+            "questions": [
+                {"id": "apg1", "question": "Wer schrieb die Apostelgeschichte?", "options": ["Petrus", "Paulus", "Lukas", "Johannes"], "correct": 2, "explanation": "Lukas schrieb sowohl das Evangelium als auch die Apostelgeschichte.", "verse_ref": "Apostelgeschichte 1:1"},
+                {"id": "apg2", "question": "Wann kam der Heilige Geist auf die Jünger?", "options": ["Ostern", "Pfingsten", "Weihnachten", "Passah"], "correct": 1, "explanation": "Der Heilige Geist kam am Pfingsttag herab.", "verse_ref": "Apostelgeschichte 2:1-4"},
+                {"id": "apg3", "question": "Wer war der erste christliche Märtyrer?", "options": ["Petrus", "Paulus", "Stephanus", "Jakobus"], "correct": 2, "explanation": "Stephanus wurde wegen seines Glaubens gesteinigt.", "verse_ref": "Apostelgeschichte 7:59-60"},
+                {"id": "apg4", "question": "Wie hieß Saulus nach seiner Bekehrung?", "options": ["Petrus", "Paulus", "Johannes", "Barnabas"], "correct": 1, "explanation": "Saulus wurde nach seiner Begegnung mit Christus Paulus genannt.", "verse_ref": "Apostelgeschichte 13:9"},
+                {"id": "apg5", "question": "Auf dem Weg zu welcher Stadt bekehrte sich Saulus?", "options": ["Jerusalem", "Damaskus", "Rom", "Antiochia"], "correct": 1, "explanation": "Auf dem Weg nach Damaskus begegnete Saulus dem Herrn.", "verse_ref": "Apostelgeschichte 9:1-6"},
+            ]
+        },
+        "propheten": {
+            "title": "Propheten Quiz",
+            "description": "Die großen Propheten des Alten Testaments",
+            "questions": [
+                {"id": "pro1", "question": "Wer wurde auf einem feurigen Wagen in den Himmel aufgenommen?", "options": ["Mose", "Elia", "Elisa", "Jesaja"], "correct": 1, "explanation": "Elia fuhr im Sturmwind auf einem feurigen Wagen gen Himmel.", "verse_ref": "2 Könige 2:11"},
+                {"id": "pro2", "question": "Welcher Prophet wurde in die Löwengrube geworfen?", "options": ["Jeremia", "Hesekiel", "Daniel", "Jesaja"], "correct": 2, "explanation": "Daniel wurde in die Löwengrube geworfen.", "verse_ref": "Daniel 6:16"},
+                {"id": "pro3", "question": "Wer wurde von einem großen Fisch verschlungen?", "options": ["Jona", "Nahum", "Habakuk", "Amos"], "correct": 0, "explanation": "Jona wurde von einem großen Fisch verschlungen.", "verse_ref": "Jona 1:17"},
+                {"id": "pro4", "question": "Wer prophezeite die Geburt Jesu in Bethlehem?", "options": ["Jesaja", "Micha", "Jeremia", "Hosea"], "correct": 1, "explanation": "Und du, Bethlehem Efrata... aus dir soll mir der kommen, der Herrscher sein wird.", "verse_ref": "Micha 5:2"},
+            ]
+        },
+        "offenbarung": {
+            "title": "Offenbarung Quiz",
+            "description": "Das Buch der Offenbarung",
+            "questions": [
+                {"id": "off1", "question": "Wer schrieb die Offenbarung?", "options": ["Petrus", "Paulus", "Johannes", "Lukas"], "correct": 2, "explanation": "Der Apostel Johannes schrieb die Offenbarung.", "verse_ref": "Offenbarung 1:1"},
+                {"id": "off2", "question": "Wo war Johannes, als er die Offenbarung schrieb?", "options": ["Rom", "Jerusalem", "Insel Patmos", "Ephesus"], "correct": 2, "explanation": "Johannes war auf die Insel Patmos verbannt.", "verse_ref": "Offenbarung 1:9"},
+                {"id": "off3", "question": "An wie viele Gemeinden wurden die Briefe der Offenbarung gesandt?", "options": ["5", "7", "10", "12"], "correct": 1, "explanation": "Die Briefe wurden an sieben Gemeinden in Asien gesandt.", "verse_ref": "Offenbarung 1:4"},
+                {"id": "off4", "question": "Welche Zahl ist mit dem Tier in der Offenbarung verbunden?", "options": ["333", "555", "666", "777"], "correct": 2, "explanation": "Die Zahl des Tieres ist 666.", "verse_ref": "Offenbarung 13:18"},
+            ]
+        },
+        "personen": {
+            "title": "Biblische Personen",
+            "description": "Kennst du die großen Personen der Bibel?",
+            "questions": [
+                {"id": "per1", "question": "Wer empfing die Zehn Gebote?", "options": ["Abraham", "David", "Mose", "Josua"], "correct": 2, "explanation": "Mose empfing die Zehn Gebote auf dem Berg Sinai.", "verse_ref": "Exodus 20"},
+                {"id": "per2", "question": "Wer besiegte Goliath?", "options": ["Simson", "David", "Saul", "Jonathan"], "correct": 1, "explanation": "David besiegte den Riesen Goliath mit einer Schleuder.", "verse_ref": "1 Samuel 17"},
+                {"id": "per3", "question": "Wer baute den ersten Tempel in Jerusalem?", "options": ["David", "Salomo", "Nehemia", "Herodes"], "correct": 1, "explanation": "Salomo baute den ersten Tempel.", "verse_ref": "1 Könige 6"},
+                {"id": "per4", "question": "Wer wurde von seinen Brüdern verkauft und wurde Statthalter von Ägypten?", "options": ["Mose", "Josef", "Benjamin", "Juda"], "correct": 1, "explanation": "Josef wurde als Sklave verkauft und wurde Statthalter.", "verse_ref": "Genesis 37-41"},
+            ]
+        },
+        "wunder": {
+            "title": "Die Wunder Jesu",
+            "description": "Kennst du die Wunder Jesu?",
+            "questions": [
+                {"id": "wun1", "question": "Wie viele Brote verwendete Jesus, um 5000 Menschen zu speisen?", "options": ["3", "5", "7", "10"], "correct": 1, "explanation": "Jesus verwendete fünf Brote und zwei Fische.", "verse_ref": "Matthäus 14:17-21"},
+                {"id": "wun2", "question": "Wen erweckte Jesus nach vier Tagen im Grab?", "options": ["Jairus", "Lazarus", "Petrus", "Johannes"], "correct": 1, "explanation": "Jesus erweckte Lazarus in Bethanien.", "verse_ref": "Johannes 11:43-44"},
+                {"id": "wun3", "question": "Welcher Jünger ging mit Jesus auf dem Wasser?", "options": ["Johannes", "Jakobus", "Petrus", "Andreas"], "correct": 2, "explanation": "Petrus ging auf dem Wasser zu Jesus.", "verse_ref": "Matthäus 14:29"},
+            ]
+        },
+        "seligpreisungen": {
+            "title": "Die Seligpreisungen",
+            "description": "Die Bergpredigt",
+            "questions": [
+                {"id": "sel1", "question": "Wem gehört das Himmelreich?", "options": ["Den Reichen", "Den Mächtigen", "Den geistlich Armen", "Den Weisen"], "correct": 2, "explanation": "Selig sind, die da geistlich arm sind; denn ihrer ist das Himmelreich.", "verse_ref": "Matthäus 5:3"},
+                {"id": "sel2", "question": "Wer wird getröstet werden?", "options": ["Wer lacht", "Wer Leid trägt", "Der Reiche", "Der Mächtige"], "correct": 1, "explanation": "Selig sind, die da Leid tragen; denn sie sollen getröstet werden.", "verse_ref": "Matthäus 5:4"},
+                {"id": "sel3", "question": "Was werden die Sanftmütigen erben?", "options": ["Gold", "Macht", "Das Erdreich", "Ehre"], "correct": 2, "explanation": "Selig sind die Sanftmütigen; denn sie werden das Erdreich besitzen.", "verse_ref": "Matthäus 5:5"},
+                {"id": "sel4", "question": "Wer wird Gott schauen?", "options": ["Die Starken", "Die Reichen", "Die reines Herzens sind", "Die Mächtigen"], "correct": 2, "explanation": "Selig sind, die reines Herzens sind; denn sie werden Gott schauen.", "verse_ref": "Matthäus 5:8"},
+            ]
+        },
     },
     "fr": {
         "genese": {
