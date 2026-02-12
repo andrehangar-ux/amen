@@ -48,13 +48,15 @@ export default function LoginScreen() {
   const handleGoogleLogin = async () => {
     setLoading(true);
     try {
-      // Costruisci l'URL di redirect
-      const appUrl = 'https://amen-ozzf.ngrok.io';
+      // Costruisci l'URL di redirect dinamicamente
+      const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL || '';
+      const appUrl = Platform.OS === 'web' 
+        ? window.location.origin 
+        : backendUrl || 'https://amen-app.com';
       const redirectUrl = `${appUrl}/auth-callback`;
       const authUrl = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`;
       
       console.log('Starting Google auth with redirect:', redirectUrl);
-      console.log('Auth URL:', authUrl);
       
       if (Platform.OS === 'web') {
         // Per il web, facciamo un redirect diretto
