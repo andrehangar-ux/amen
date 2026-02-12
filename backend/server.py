@@ -1478,6 +1478,49 @@ async def translate_message(message_id: str, target_lang: str = "it"):
     
     return {"translated_text": translated, "is_original": False}
 
+# ==================== ONLINE USERS TRACKING ====================
+
+@api_router.post("/users/heartbeat")
+async def user_heartbeat(user: User = Depends(require_auth)):
+    """Update user's online status"""
+    await db.user_presence.update_one(
+        {"user_id": user.user_id},
+        {
+            "$set": {
+                "user_id": user.user_id,
+                "user_name": user.name,
+                "last_seen": datetime.now(timezone.utc),
+                "is_online": True
+            }
+        },
+        upsert=True
+    )
+    return {"status": "ok"}
+
+@api_router.get("/users/online")
+async def get_online_users(user: User = Depends(require_auth)):
+    """Get list of currently online users (active in last 5 minutes)"""
+    cutoff_time = datetime.now(timezone.utc) - timedelta(minutes=5)
+    
+    online_users = await db.user_presence.find(
+        {"last_seen": {"$gte": cutoff_time}},
+        {"_id": 0, "user_id": 1, "user_name": 1, "last_seen": 1}
+    ).to_list(100)
+    
+    return {
+        "online_count": len(online_users),
+        "users": online_users
+    }
+
+@api_router.post("/users/offline")
+async def user_offline(user: User = Depends(require_auth)):
+    """Mark user as offline"""
+    await db.user_presence.update_one(
+        {"user_id": user.user_id},
+        {"$set": {"is_online": False, "last_seen": datetime.now(timezone.utc)}}
+    )
+    return {"status": "offline"}
+
 @api_router.get("/community/messages")
 async def get_community_messages(
     lang: str = "it",
