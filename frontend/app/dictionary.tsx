@@ -168,7 +168,7 @@ export default function DictionaryScreen() {
 
               {(selectedTerm.hebrew_equivalent || selectedTerm.greek_equivalent) && (
                 <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>Equivalenti</Text>
+                  <Text style={styles.sectionTitle}>{t('equivalents')}</Text>
                   {selectedTerm.hebrew_equivalent && (
                     <Text style={styles.sectionText}>📜 Ebraico: {selectedTerm.hebrew_equivalent}</Text>
                   )}
@@ -179,12 +179,12 @@ export default function DictionaryScreen() {
               )}
 
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Descrizione</Text>
+                <Text style={styles.sectionTitle}>{t('description')}</Text>
                 <Text style={styles.descriptionText}>{selectedTerm.description}</Text>
               </View>
 
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Versetti di Riferimento</Text>
+                <Text style={styles.sectionTitle}>{t('verses')}</Text>
                 {selectedTerm.verses.map((verse, index) => (
                   <View key={index} style={styles.verseCard}>
                     <Text style={styles.verseRef}>{verse.ref}</Text>
@@ -194,10 +194,10 @@ export default function DictionaryScreen() {
               </View>
 
               <View style={styles.aiSection}>
-                <Text style={styles.sectionTitle}>🤖 Chiedi all'AI</Text>
+                <Text style={styles.sectionTitle}>{t('askAi')}</Text>
                 <TextInput
                   style={styles.aiInput}
-                  placeholder="Fai una domanda su questo termine..."
+                  placeholder={t('askPlaceholder')}
                   placeholderTextColor={COLORS.textMuted}
                   value={aiQuestion}
                   onChangeText={setAiQuestion}
@@ -210,7 +210,7 @@ export default function DictionaryScreen() {
                   {askingAi ? (
                     <ActivityIndicator color="#fff" size="small" />
                   ) : (
-                    <Text style={styles.aiButtonText}>Chiedi</Text>
+                    <Text style={styles.aiButtonText}>{t('ask')}</Text>
                   )}
                 </TouchableOpacity>
 
@@ -234,7 +234,7 @@ export default function DictionaryScreen() {
         <TouchableOpacity onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
-        <Text style={styles.title}>Dizionario Biblico</Text>
+        <Text style={styles.title}>{t('title')}</Text>
         <View style={{ width: 28 }} />
       </View>
 
@@ -242,7 +242,7 @@ export default function DictionaryScreen() {
         <Ionicons name="search" size={20} color={COLORS.textMuted} />
         <TextInput
           style={styles.searchInput}
-          placeholder="Cerca termine..."
+          placeholder={t('search')}
           placeholderTextColor={COLORS.textMuted}
           value={searchQuery}
           onChangeText={setSearchQuery}
@@ -256,7 +256,7 @@ export default function DictionaryScreen() {
 
       <ScrollView contentContainerStyle={styles.termsContainer}>
         <Text style={styles.subtitle}>
-          Esplora i termini originali ebraici e greci della Bibbia
+          {t('subtitle')}
         </Text>
 
         {filteredTerms.map((term) => (
