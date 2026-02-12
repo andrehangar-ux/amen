@@ -677,22 +677,31 @@ class BibleAPITester:
             self.log_result("Psalm 23", False, f"Unexpected error: {str(e)}")
     
     def run_all_tests(self):
-        """Run all Bible API tests"""
-        print("🔍 Starting Bible API Tests for Amen! App")
+        """Run all Bible API tests as specified in the review request"""
+        print("🔍 Starting Comprehensive Bible API Tests for Amen! App")
         print(f"📡 Testing backend at: {BACKEND_URL}")
-        print("=" * 60)
+        print("=" * 80)
         
-        # Test each endpoint
-        self.test_bible_books_italian()
-        self.test_genesis_chapter_1()
-        self.test_genesis_chapter_4()
-        self.test_exodus_chapter_20()
-        self.test_psalm_23()
+        # 1. CRITICAL: Multi-language Bible Content Tests
+        print("\n🌍 CRITICAL: Testing Multi-Language Bible Content")
+        print("-" * 50)
+        self.test_multi_language_bible_content()
+        
+        # 2. Authentication Tests
+        print("\n🔐 Testing Authentication Endpoints")
+        print("-" * 50)
+        self.test_user_registration()
+        self.test_user_login()
+        
+        # 3. AI Study Tools Tests
+        print("\n🤖 Testing AI Study Tools")
+        print("-" * 50)
+        self.test_ai_study_tools()
         
         # Summary
-        print("\n" + "=" * 60)
-        print("📊 TEST SUMMARY")
-        print("=" * 60)
+        print("\n" + "=" * 80)
+        print("📊 COMPREHENSIVE TEST SUMMARY")
+        print("=" * 80)
         
         passed = sum(1 for r in self.results if r['success'])
         total = len(self.results)
@@ -702,16 +711,32 @@ class BibleAPITester:
         print(f"Failed: {total - passed}")
         print(f"Success Rate: {(passed/total)*100:.1f}%")
         
+        # Group results by category
+        multi_lang_tests = [r for r in self.results if any(lang in r['test'] for lang in ['Italian', 'Spanish', 'English', 'German', 'French', 'Portuguese'])]
+        auth_tests = [r for r in self.results if 'Registration' in r['test'] or 'Login' in r['test']]
+        ai_tests = [r for r in self.results if 'AI Study' in r['test']]
+        
+        print(f"\n🌍 Multi-Language Tests: {sum(1 for r in multi_lang_tests if r['success'])}/{len(multi_lang_tests)} passed")
+        print(f"🔐 Authentication Tests: {sum(1 for r in auth_tests if r['success'])}/{len(auth_tests)} passed")
+        print(f"🤖 AI Study Tools Tests: {sum(1 for r in ai_tests if r['success'])}/{len(ai_tests)} passed")
+        
         if total - passed > 0:
-            print("\n❌ FAILED TESTS:")
+            print(f"\n❌ FAILED TESTS ({total - passed}):")
             for result in self.results:
                 if not result['success']:
                     print(f"  • {result['test']}: {result['details']}")
         
-        print("\n✅ PASSED TESTS:")
+        print(f"\n✅ PASSED TESTS ({passed}):")
         for result in self.results:
             if result['success']:
                 print(f"  • {result['test']}: {result['details']}")
+        
+        # Special focus on critical multi-language requirement
+        multi_lang_passed = sum(1 for r in multi_lang_tests if r['success'])
+        if multi_lang_passed < len(multi_lang_tests):
+            print(f"\n⚠️  CRITICAL ISSUE: Multi-language Bible content not fully working!")
+            print(f"   Only {multi_lang_passed}/{len(multi_lang_tests)} language tests passed.")
+            print("   This is the PRIMARY requirement from the review request.")
         
         return passed == total
 
