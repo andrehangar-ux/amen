@@ -3027,20 +3027,20 @@ BIBLE_QUIZZES = {
     }
 }
 
+from quiz_data import MULTILINGUAL_QUIZZES, get_quiz_for_language, get_all_topics_for_language
+
 @api_router.get("/quiz/topics")
-async def get_quiz_topics():
-    """Get available quiz topics"""
-    return [
-        {"id": key, "title": quiz["title"], "description": quiz["description"], "questions_count": len(quiz["questions"])}
-        for key, quiz in BIBLE_QUIZZES.items()
-    ]
+async def get_quiz_topics(lang: str = "it"):
+    """Get available quiz topics in specified language"""
+    return get_all_topics_for_language(lang)
 
 @api_router.get("/quiz/{topic}")
-async def get_quiz(topic: str):
-    """Get quiz by topic"""
-    if topic not in BIBLE_QUIZZES:
+async def get_quiz(topic: str, lang: str = "it"):
+    """Get quiz by topic in specified language"""
+    quiz = get_quiz_for_language(topic, lang)
+    if not quiz:
         raise HTTPException(status_code=404, detail="Quiz non trovato")
-    return BIBLE_QUIZZES[topic]
+    return quiz
 
 class QuizSubmission(BaseModel):
     topic: str
