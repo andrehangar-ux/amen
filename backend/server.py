@@ -3347,6 +3347,123 @@ async def search_dictionary(query: str):
             })
     return results
 
+# ==================== GLOBAL SEARCH ENGINE ====================
+
+@api_router.get("/search")
+async def global_search(q: str, user: User = Depends(require_auth)):
+    """Global search across notes, bookmarks, highlights, users, and content"""
+    query_lower = q.lower()
+    results = {
+        "notes": [],
+        "bookmarks": [],
+        "highlights": [],
+        "users": [],
+        "dictionary": [],
+        "radios": [],
+        "quizzes": []
+    }
+    
+    # Search user's notes
+    notes_cursor = db.study_notes.find({
+        "user_id": user.user_id,
+        "$or": [
+            {"content": {"$regex": q, "$options": "i"}},
+            {"verse_ref": {"$regex": q, "$options": "i"}}
+        ]
+    }).limit(10)
+    async for note in notes_cursor:
+        results["notes"].append({
+            "type": "note",
+            "id": str(note.get("_id", "")),
+            "verse_ref": note.get("verse_ref", ""),
+            "content": note.get("content", "")[:100] + "...",
+            "created_at": note.get("created_at", "").isoformat() if note.get("created_at") else ""
+        })
+    
+    # Search user's bookmarks
+    bookmarks_cursor = db.bookmarks.find({
+        "user_id": user.user_id,
+        "$or": [
+            {"verse_ref": {"$regex": q, "$options": "i"}},
+            {"text": {"$regex": q, "$options": "i"}}
+        ]
+    }).limit(10)
+    async for bm in bookmarks_cursor:
+        results["bookmarks"].append({
+            "type": "bookmark",
+            "id": str(bm.get("_id", "")),
+            "verse_ref": bm.get("verse_ref", ""),
+            "text": bm.get("text", "")[:100] + "..."
+        })
+    
+    # Search user's highlights
+    highlights_cursor = db.highlights.find({
+        "user_id": user.user_id,
+        "$or": [
+            {"verse_ref": {"$regex": q, "$options": "i"}},
+            {"text": {"$regex": q, "$options": "i"}}
+        ]
+    }).limit(10)
+    async for hl in highlights_cursor:
+        results["highlights"].append({
+            "type": "highlight",
+            "id": str(hl.get("_id", "")),
+            "verse_ref": hl.get("verse_ref", ""),
+            "text": hl.get("text", "")[:100] + "...",
+            "color": hl.get("color", "yellow")
+        })
+    
+    # Search users (friends)
+    users_cursor = db.users.find({
+        "$or": [
+            {"name": {"$regex": q, "$options": "i"}},
+            {"email": {"$regex": q, "$options": "i"}}
+        ]
+    }).limit(10)
+    async for u in users_cursor:
+        if u.get("user_id") != user.user_id:  # Exclude self
+            results["users"].append({
+                "type": "user",
+                "id": u.get("user_id", ""),
+                "name": u.get("name", ""),
+                "email": u.get("email", "")[:3] + "***"  # Privacy
+            })
+    
+    # Search dictionary
+    for key, term in BIBLICAL_DICTIONARY.items():
+        if (query_lower in term["term"].lower() or 
+            query_lower in term["meaning"].lower()):
+            results["dictionary"].append({
+                "type": "dictionary",
+                "id": key,
+                "term": term["term"],
+                "meaning": term["meaning"][:50] + "..."
+            })
+            if len(results["dictionary"]) >= 5:
+                break
+    
+    # Search radios
+    for radio in EVANGELICAL_RADIOS:
+        if (query_lower in radio["name"].lower() or 
+            query_lower in radio["country"].lower()):
+            results["radios"].append({
+                "type": "radio",
+                "name": radio["name"],
+                "country": radio["country"],
+                "url": radio["stream_url"]
+            })
+            if len(results["radios"]) >= 5:
+                break
+    
+    # Count total results
+    total = sum(len(v) for v in results.values())
+    
+    return {
+        "query": q,
+        "total_results": total,
+        "results": results
+    }
+
 class DictionaryStudyRequest(BaseModel):
     term_id: str
     question: str
