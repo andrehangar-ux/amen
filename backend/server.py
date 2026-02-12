@@ -1998,6 +1998,8 @@ async def get_progress(user: User = Depends(require_auth)):
             "achievements": []
         }
         await db.progress.insert_one(progress)
+        # Remove _id added by MongoDB after insert
+        progress.pop("_id", None)
     return progress
 
 @api_router.post("/progress/reading")
