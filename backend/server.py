@@ -1096,6 +1096,8 @@ async def fetch_from_bible_api(book: str, chapter: int, lang: str = "en") -> lis
 async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> list:
     """Fetch Bible chapter in any language using multiple free APIs"""
     
+    print(f"[BIBLE] fetch_bible_chapter_any_lang called: book={book}, chapter={chapter}, lang={lang}")
+    
     # Try laparola.net for Italian first (best for Nuova Diodati)
     if lang == "it":
         verses = await fetch_from_laparola(book, chapter)
@@ -1131,15 +1133,17 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
         "Giuda": "jd", "Apocalisse": "re"
     }
     
+    print(f"[BIBLE] lang={lang}, in github_files: {lang in github_files}")
+    
     if lang in github_files:
         try:
-            logger.info(f"Fetching {lang} Bible from GitHub...")
+            print(f"[BIBLE] Fetching {lang} Bible from GitHub...")
             book_abbrev = book_abbrevs.get(book, book.lower()[:2])
-            logger.info(f"Looking for book abbreviation: {book_abbrev}")
+            print(f"[BIBLE] Looking for book abbreviation: {book_abbrev}")
             
             async with httpx.AsyncClient(timeout=60.0) as client:
                 response = await client.get(github_files[lang])
-                logger.info(f"GitHub response: {response.status_code}")
+                print(f"[BIBLE] GitHub response: {response.status_code}")
                 
                 if response.status_code == 200:
                     content = response.text
@@ -1147,11 +1151,12 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
                         content = content[1:]
                     
                     bible_data = json.loads(content)
-                    logger.info(f"Loaded {len(bible_data)} books")
+                    print(f"[BIBLE] Loaded {len(bible_data)} books")
                     
                     for b in bible_data:
                         if b.get("abbrev") == book_abbrev:
                             chapters = b.get("chapters", [])
+                            print(f"[BIBLE] Found book! chapters={len(chapters)}")
                             if chapter <= len(chapters):
                                 chapter_verses = chapters[chapter - 1]
                                 verses = []
@@ -1160,12 +1165,14 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
                                         verses.append({"verse": i + 1, "text": text.strip()})
                                 
                                 if verses:
-                                    logger.info(f"Found {len(verses)} verses for {book} {chapter} ({lang})")
+                                    print(f"[BIBLE] SUCCESS: Found {len(verses)} verses for {book} {chapter} ({lang})")
+                                    print(f"[BIBLE] First verse: {verses[0]['text'][:50]}")
                                     return verses
                             break
         except Exception as e:
-            logger.error(f"Error fetching from GitHub: {e}")
+            print(f"[BIBLE] ERROR fetching from GitHub: {e}")
     
+    print(f"[BIBLE] FALLBACK to bible-api.com (English)")
     # Fallback to bible-api.com (English)
     try:
         book_en = get_book_name_for_lang(book, "en")
@@ -1187,10 +1194,10 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
                         })
                 
                 if verses:
-                    logger.info(f"Fetched {len(verses)} verses from bible-api.com for {book} {chapter}")
+                    print(f"[BIBLE] Fetched {len(verses)} verses from bible-api.com")
                     return verses
     except Exception as e:
-        logger.error(f"Error fetching from bible-api.com: {e}")
+        print(f"[BIBLE] ERROR from bible-api.com: {e}")
     
     return []
 
