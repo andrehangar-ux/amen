@@ -179,7 +179,7 @@ export default function SettingsScreen() {
                     language === lang.code && styles.optionItemSelected,
                   ]}
                   onPress={() => {
-                    setLanguage(lang.code);
+                    setLanguageState(lang.code);
                     setShowLanguages(false);
                   }}
                 >
