@@ -332,6 +332,102 @@ MULTILINGUAL_QUIZZES = {
                 {"id": "par5", "question": "¿Cuántos talentos recibió el siervo que los duplicó?", "options": ["1", "2", "5", "10"], "correct": 2, "explanation": "Recibió cinco talentos y ganó otros cinco.", "verse_ref": "Mateo 25:20"},
             ]
         },
+        "exodo": {
+            "title": "Quiz del Éxodo",
+            "description": "La liberación de Egipto",
+            "questions": [
+                {"id": "exo1", "question": "¿Quién fue puesto en una canasta en el Nilo?", "options": ["Aarón", "Moisés", "José", "Faraón"], "correct": 1, "explanation": "Moisés fue puesto en una canasta por su madre.", "verse_ref": "Éxodo 2:3"},
+                {"id": "exo2", "question": "¿Cuántas plagas azotaron a Egipto?", "options": ["5", "7", "10", "12"], "correct": 2, "explanation": "Dios envió diez plagas sobre Egipto.", "verse_ref": "Éxodo 7-11"},
+                {"id": "exo3", "question": "¿Cuál fue la última plaga?", "options": ["Ranas", "Tinieblas", "Muerte de los primogénitos", "Langostas"], "correct": 2, "explanation": "La décima plaga fue la muerte de los primogénitos.", "verse_ref": "Éxodo 12:29"},
+                {"id": "exo4", "question": "¿Qué mar se abrió para Israel?", "options": ["Mar Muerto", "Mar Rojo", "Mar Mediterráneo", "Río Jordán"], "correct": 1, "explanation": "Las aguas del Mar Rojo se dividieron.", "verse_ref": "Éxodo 14:21"},
+                {"id": "exo5", "question": "¿En qué monte Moisés recibió los Diez Mandamientos?", "options": ["Monte Ararat", "Monte Sinaí", "Monte Carmelo", "Monte de los Olivos"], "correct": 1, "explanation": "Dios dio la Ley a Moisés en el monte Sinaí.", "verse_ref": "Éxodo 19-20"},
+                {"id": "exo6", "question": "¿Qué hizo el pueblo mientras Moisés estaba en el monte?", "options": ["Oró", "Hizo un becerro de oro", "Luchó", "Durmió"], "correct": 1, "explanation": "El pueblo construyó un becerro de oro.", "verse_ref": "Éxodo 32:4"},
+                {"id": "exo7", "question": "¿Qué comió el pueblo en el desierto?", "options": ["Pan y vino", "Maná y codornices", "Frutas", "Carne y leche"], "correct": 1, "explanation": "Dios dio maná del cielo y codornices.", "verse_ref": "Éxodo 16"},
+                {"id": "exo8", "question": "¿Cuántos años vagó Israel en el desierto?", "options": ["20", "30", "40", "50"], "correct": 2, "explanation": "Israel vagó 40 años en el desierto.", "verse_ref": "Números 14:33"},
+            ]
+        },
+        "hechos": {
+            "title": "Quiz de Hechos de los Apóstoles",
+            "description": "La historia de la Iglesia primitiva",
+            "questions": [
+                {"id": "hec1", "question": "¿Quién escribió el libro de los Hechos?", "options": ["Pedro", "Pablo", "Lucas", "Juan"], "correct": 2, "explanation": "Lucas escribió tanto el Evangelio como los Hechos.", "verse_ref": "Hechos 1:1"},
+                {"id": "hec2", "question": "¿Cuándo descendió el Espíritu Santo sobre los discípulos?", "options": ["Pascua", "Pentecostés", "Navidad", "Pascua judía"], "correct": 1, "explanation": "El Espíritu Santo descendió el día de Pentecostés.", "verse_ref": "Hechos 2:1-4"},
+                {"id": "hec3", "question": "¿Quién fue el primer mártir cristiano?", "options": ["Pedro", "Pablo", "Esteban", "Santiago"], "correct": 2, "explanation": "Esteban fue apedreado por su fe.", "verse_ref": "Hechos 7:59-60"},
+                {"id": "hec4", "question": "¿Cómo se llamaba Saulo después de su conversión?", "options": ["Pedro", "Pablo", "Juan", "Bernabé"], "correct": 1, "explanation": "Saulo se convirtió en Pablo después de encontrarse con Cristo.", "verse_ref": "Hechos 13:9"},
+                {"id": "hec5", "question": "¿En camino a qué ciudad se convirtió Saulo?", "options": ["Jerusalén", "Damasco", "Roma", "Antioquía"], "correct": 1, "explanation": "En el camino a Damasco, Saulo encontró al Señor.", "verse_ref": "Hechos 9:1-6"},
+                {"id": "hec6", "question": "¿Dónde fueron llamados 'cristianos' los discípulos por primera vez?", "options": ["Jerusalén", "Roma", "Antioquía", "Éfeso"], "correct": 2, "explanation": "En Antioquía los discípulos fueron llamados cristianos.", "verse_ref": "Hechos 11:26"},
+            ]
+        },
+        "profetas": {
+            "title": "Quiz de los Profetas",
+            "description": "Los grandes profetas del Antiguo Testamento",
+            "questions": [
+                {"id": "pro1", "question": "¿Quién fue llevado al cielo en un carro de fuego?", "options": ["Moisés", "Elías", "Eliseo", "Isaías"], "correct": 1, "explanation": "Elías subió al cielo en un torbellino en un carro de fuego.", "verse_ref": "2 Reyes 2:11"},
+                {"id": "pro2", "question": "¿Qué profeta fue arrojado al foso de los leones?", "options": ["Jeremías", "Ezequiel", "Daniel", "Isaías"], "correct": 2, "explanation": "Daniel fue arrojado al foso de los leones.", "verse_ref": "Daniel 6:16"},
+                {"id": "pro3", "question": "¿Quién fue tragado por un gran pez?", "options": ["Jonás", "Nahúm", "Habacuc", "Amós"], "correct": 0, "explanation": "Jonás fue tragado por un gran pez.", "verse_ref": "Jonás 1:17"},
+                {"id": "pro4", "question": "¿Quién profetizó el nacimiento de Jesús en Belén?", "options": ["Isaías", "Miqueas", "Jeremías", "Oseas"], "correct": 1, "explanation": "Y tú, Belén Efrata... de ti me saldrá el que será dominador.", "verse_ref": "Miqueas 5:2"},
+                {"id": "pro5", "question": "¿Qué profeta tuvo la visión del valle de los huesos secos?", "options": ["Isaías", "Jeremías", "Ezequiel", "Daniel"], "correct": 2, "explanation": "Ezequiel tuvo la visión del valle de los huesos secos.", "verse_ref": "Ezequiel 37"},
+                {"id": "pro6", "question": "¿Cuántos días pasó Jonás en el vientre del pez?", "options": ["Un día", "Dos días", "Tres días", "Siete días"], "correct": 2, "explanation": "Jonás estuvo en el vientre del pez tres días y tres noches.", "verse_ref": "Jonás 1:17"},
+            ]
+        },
+        "apocalipsis": {
+            "title": "Quiz del Apocalipsis",
+            "description": "El libro de la Revelación",
+            "questions": [
+                {"id": "apo1", "question": "¿Quién escribió el Apocalipsis?", "options": ["Pedro", "Pablo", "Juan", "Lucas"], "correct": 2, "explanation": "El apóstol Juan escribió el Apocalipsis.", "verse_ref": "Apocalipsis 1:1"},
+                {"id": "apo2", "question": "¿Dónde estaba Juan cuando escribió el Apocalipsis?", "options": ["Roma", "Jerusalén", "Isla de Patmos", "Éfeso"], "correct": 2, "explanation": "Juan estaba exiliado en la isla de Patmos.", "verse_ref": "Apocalipsis 1:9"},
+                {"id": "apo3", "question": "¿A cuántas iglesias fueron enviadas las cartas del Apocalipsis?", "options": ["5", "7", "10", "12"], "correct": 1, "explanation": "Las cartas fueron enviadas a siete iglesias de Asia.", "verse_ref": "Apocalipsis 1:4"},
+                {"id": "apo4", "question": "¿Qué número está asociado con la bestia en el Apocalipsis?", "options": ["333", "555", "666", "777"], "correct": 2, "explanation": "El número de la bestia es 666.", "verse_ref": "Apocalipsis 13:18"},
+                {"id": "apo5", "question": "¿Quién es el Cordero en el Apocalipsis?", "options": ["Juan", "Un ángel", "Jesucristo", "Miguel"], "correct": 2, "explanation": "El Cordero representa a Jesucristo.", "verse_ref": "Apocalipsis 5:6"},
+                {"id": "apo6", "question": "¿De qué color es el caballo del primer jinete?", "options": ["Rojo", "Negro", "Blanco", "Amarillo"], "correct": 2, "explanation": "El primer caballo es blanco.", "verse_ref": "Apocalipsis 6:2"},
+            ]
+        },
+        "personajes": {
+            "title": "Personajes Bíblicos",
+            "description": "¿Conoces a los grandes personajes de la Biblia?",
+            "questions": [
+                {"id": "per1", "question": "¿Quién recibió los Diez Mandamientos?", "options": ["Abraham", "David", "Moisés", "Josué"], "correct": 2, "explanation": "Moisés recibió los Diez Mandamientos en el monte Sinaí.", "verse_ref": "Éxodo 20"},
+                {"id": "per2", "question": "¿Quién derrotó a Goliat?", "options": ["Sansón", "David", "Saúl", "Jonatán"], "correct": 1, "explanation": "David derrotó al gigante Goliat con una honda.", "verse_ref": "1 Samuel 17"},
+                {"id": "per3", "question": "¿Quién construyó el primer templo de Jerusalén?", "options": ["David", "Salomón", "Nehemías", "Herodes"], "correct": 1, "explanation": "Salomón construyó el primer templo.", "verse_ref": "1 Reyes 6"},
+                {"id": "per4", "question": "¿Quién fue vendido por sus hermanos y llegó a ser gobernador de Egipto?", "options": ["Moisés", "José", "Benjamín", "Judá"], "correct": 1, "explanation": "José fue vendido como esclavo y se convirtió en gobernador.", "verse_ref": "Génesis 37-41"},
+                {"id": "per5", "question": "¿Quién fue el primer rey de Israel?", "options": ["David", "Salomón", "Saúl", "Samuel"], "correct": 2, "explanation": "Saúl fue ungido por Samuel como primer rey.", "verse_ref": "1 Samuel 10:1"},
+                {"id": "per6", "question": "¿Qué reina salvó al pueblo judío en Persia?", "options": ["Débora", "Rut", "Ester", "Sara"], "correct": 2, "explanation": "La reina Ester salvó a los judíos de la destrucción.", "verse_ref": "Ester 7-8"},
+            ]
+        },
+        "milagros": {
+            "title": "Los Milagros de Jesús",
+            "description": "¿Conoces los milagros de Jesús?",
+            "questions": [
+                {"id": "mir1", "question": "¿Cuántos panes usó Jesús para alimentar a 5000 personas?", "options": ["3", "5", "7", "10"], "correct": 1, "explanation": "Jesús usó cinco panes y dos peces.", "verse_ref": "Mateo 14:17-21"},
+                {"id": "mir2", "question": "¿A quién resucitó Jesús después de cuatro días?", "options": ["Jairo", "Lázaro", "Pedro", "Juan"], "correct": 1, "explanation": "Jesús resucitó a Lázaro en Betania.", "verse_ref": "Juan 11:43-44"},
+                {"id": "mir3", "question": "¿Qué discípulo caminó sobre el agua con Jesús?", "options": ["Juan", "Santiago", "Pedro", "Andrés"], "correct": 2, "explanation": "Pedro caminó sobre el agua hacia Jesús.", "verse_ref": "Mateo 14:29"},
+                {"id": "mir4", "question": "¿Cuántos leprosos sanó Jesús de los cuales solo uno volvió a agradecer?", "options": ["5", "7", "10", "12"], "correct": 2, "explanation": "Diez leprosos fueron sanados, pero solo uno volvió.", "verse_ref": "Lucas 17:12-17"},
+                {"id": "mir5", "question": "¿Qué tempestad calmó Jesús?", "options": ["Tormenta de arena", "Tempestad en el mar de Galilea", "Terremoto", "Diluvio"], "correct": 1, "explanation": "Jesús calmó la tempestad en el mar de Galilea.", "verse_ref": "Marcos 4:39"},
+            ]
+        },
+        "beatitudes": {
+            "title": "Las Bienaventuranzas",
+            "description": "El Sermón del Monte",
+            "questions": [
+                {"id": "bea1", "question": "¿De quién es el reino de los cielos?", "options": ["De los ricos", "De los poderosos", "De los pobres en espíritu", "De los sabios"], "correct": 2, "explanation": "Bienaventurados los pobres en espíritu, porque de ellos es el reino de los cielos.", "verse_ref": "Mateo 5:3"},
+                {"id": "bea2", "question": "¿Quién será consolado?", "options": ["El que ríe", "El que llora", "El rico", "El poderoso"], "correct": 1, "explanation": "Bienaventurados los que lloran, porque serán consolados.", "verse_ref": "Mateo 5:4"},
+                {"id": "bea3", "question": "¿Qué heredarán los mansos?", "options": ["Oro", "Poder", "La tierra", "Gloria"], "correct": 2, "explanation": "Bienaventurados los mansos, porque heredarán la tierra.", "verse_ref": "Mateo 5:5"},
+                {"id": "bea4", "question": "¿Quién verá a Dios?", "options": ["Los fuertes", "Los ricos", "Los puros de corazón", "Los poderosos"], "correct": 2, "explanation": "Bienaventurados los puros de corazón, porque verán a Dios.", "verse_ref": "Mateo 5:8"},
+                {"id": "bea5", "question": "¿Cómo serán llamados los pacificadores?", "options": ["Siervos", "Hijos de Dios", "Profetas", "Reyes"], "correct": 1, "explanation": "Bienaventurados los pacificadores, porque serán llamados hijos de Dios.", "verse_ref": "Mateo 5:9"},
+                {"id": "bea6", "question": "¿Cuántas son las bienaventuranzas?", "options": ["5", "7", "8", "10"], "correct": 2, "explanation": "Las bienaventuranzas son ocho.", "verse_ref": "Mateo 5:3-10"},
+            ]
+        },
+        "mandamientos": {
+            "title": "Los Diez Mandamientos",
+            "description": "¿Conoces los mandamientos de Dios?",
+            "questions": [
+                {"id": "man1", "question": "¿Cuál es el primer mandamiento?", "options": ["No matarás", "No tendrás otros dioses", "Honra a tu padre y madre", "No robarás"], "correct": 1, "explanation": "No tendrás otros dioses delante de mí.", "verse_ref": "Éxodo 20:3"},
+                {"id": "man2", "question": "¿Qué mandamiento protege el matrimonio?", "options": ["No matarás", "No cometerás adulterio", "No robarás", "No mentirás"], "correct": 1, "explanation": "No cometerás adulterio.", "verse_ref": "Éxodo 20:14"},
+                {"id": "man3", "question": "¿Qué día hay que santificar?", "options": ["El primero", "El séptimo", "El último", "Cada día"], "correct": 1, "explanation": "Acuérdate del día de reposo para santificarlo.", "verse_ref": "Éxodo 20:8"},
+                {"id": "man4", "question": "¿Qué mandamiento se refiere a los padres?", "options": ["No matarás", "No robarás", "Honra a tu padre y madre", "No mentirás"], "correct": 2, "explanation": "Honra a tu padre y a tu madre.", "verse_ref": "Éxodo 20:12"},
+                {"id": "man5", "question": "¿En qué estaban escritos los mandamientos?", "options": ["Papiro", "Tablas de piedra", "Pergamino", "Madera"], "correct": 1, "explanation": "Los mandamientos estaban escritos en dos tablas de piedra.", "verse_ref": "Éxodo 31:18"},
+            ]
+        },
     },
     "en": {
         "genesis": {
