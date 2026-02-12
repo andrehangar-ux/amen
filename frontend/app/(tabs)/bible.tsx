@@ -291,32 +291,41 @@ export default function BibleScreen() {
     }
   };
 
-  const handleEditionSelect = (editionKey: string) => {
+  const handleEditionSelect = async (editionKey: string) => {
     setSelectedEdition(editionKey);
     const edition = editions[editionKey];
     if (edition) {
-      // Update language and immediately reload content
-      setLanguage(edition.language).then(() => {
-        loadBooks();
-        if (selectedBook && selectedChapter && view === 'reading') {
-          loadChapter(selectedBook.name, selectedChapter);
-        }
-      });
+      const newLang = edition.language;
+      setShowEditionSelector(false);
+      
+      // Set language first
+      await setLanguage(newLang);
+      
+      // Then reload with the new language explicitly passed
+      const booksData = await api.getBibleBooks(newLang);
+      setBooks(booksData || []);
+      
+      // Reload current chapter if reading
+      if (selectedBook && selectedChapter && view === 'reading') {
+        loadChapter(selectedBook.name, selectedChapter, newLang);
+      }
     }
-    setShowEditionSelector(false);
   };
 
   const handleLanguageSelect = async (lang: string) => {
-    // Set language and close modal first for immediate feedback
+    // Close modal first for immediate feedback
     setShowLanguageModal(false);
+    
+    // Set language
     await setLanguage(lang);
     
-    // Reload content with new language
-    await loadBooks();
+    // Reload books with new language
+    const booksData = await api.getBibleBooks(lang);
+    setBooks(booksData || []);
     
-    // Ricarica il capitolo corrente con la nuova lingua
+    // Reload current chapter if reading
     if (selectedBook && selectedChapter && view === 'reading') {
-      loadChapter(selectedBook.name, selectedChapter);
+      loadChapter(selectedBook.name, selectedChapter, lang);
     }
   };
 
