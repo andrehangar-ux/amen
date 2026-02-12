@@ -292,4 +292,12 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ message }),
     }),
+
+  // Global Search
+  globalSearch: (query: string) =>
+    api.fetch(`/api/search?q=${encodeURIComponent(query)}`),
+
+  // Maps
+  getMaps: () => api.fetch('/api/maps'),
+  getMapData: (mapId: string) => api.fetch(`/api/maps/${mapId}`),
 };
