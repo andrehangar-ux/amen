@@ -18,8 +18,14 @@ import { useAuthStore } from '../src/store/authStore';
 import { api } from '../src/utils/api';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../src/utils/theme';
 
-// Cross-platform confirm dialog
-const showConfirm = (title: string, message: string, onConfirm: () => void) => {
+// Helper to show long text alerts
+const showInfoAlert = (title: string, message: string) => {
+  if (Platform.OS === 'web') {
+    window.alert(`${title}\n\n${message}`);
+  } else {
+    Alert.alert(title, message, [{ text: 'Ho Capito', style: 'default' }]);
+  }
+};
   if (Platform.OS === 'web') {
     // On web, use a simple confirm
     const confirmed = window.confirm(`${title}\n\n${message}`);
