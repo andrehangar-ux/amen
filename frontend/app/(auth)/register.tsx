@@ -17,6 +17,15 @@ import { Ionicons } from '@expo/vector-icons';
 import { useAuthStore } from '../../src/store/authStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
 
+// Cross-platform alert
+const showAlert = (title: string, message: string) => {
+  if (Platform.OS === 'web') {
+    window.alert(`${title}\n\n${message}`);
+  } else {
+    Alert.alert(title, message);
+  }
+};
+
 export default function RegisterScreen() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
