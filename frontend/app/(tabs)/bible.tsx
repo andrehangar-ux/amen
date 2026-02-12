@@ -306,103 +306,76 @@ export default function BibleScreen() {
     }
   };
 
+  // Find the equivalent book in a new language's book list using index position
+  const findBookInNewLanguage = (currentBook: Book, oldBooks: Book[], newBooks: Book[]): Book | null => {
+    const currentIndex = oldBooks.findIndex(b => b.name === currentBook.name);
+    if (currentIndex >= 0 && currentIndex < newBooks.length) {
+      return newBooks[currentIndex];
+    }
+    return null;
+  };
+
   const handleEditionSelect = async (editionKey: string) => {
     const edition = editions[editionKey];
     if (!edition) return;
     
     const newLang = edition.language;
     
-    // Don't do anything if same edition selected
     if (editionKey === selectedEdition && newLang === currentLanguage) {
       setShowEditionSelector(false);
       return;
     }
     
+    const oldBooks = [...books];
     setSelectedEdition(editionKey);
     setShowEditionSelector(false);
-    
-    // Show loading state
     setLoading(true);
     
     try {
-      // Set language first
       await setLanguage(newLang);
+      const booksData: Book[] = await api.getBibleBooks(newLang) || [];
+      setBooks(booksData);
       
-      // Reload books with the new language
-      const booksData = await api.getBibleBooks(newLang);
-      setBooks(booksData || []);
-      
-      // Reload current chapter if reading
       if (selectedBook && selectedChapter && view === 'reading') {
-        // Find the equivalent book in the new language using abbreviation
-        const currentAbbrev = selectedBook.abbrev;
-        const newBook = booksData?.find((b: Book) => b.abbrev === currentAbbrev);
-        
-        if (newBook) {
-          setSelectedBook(newBook);
-          const chapterData = await api.getChapter(newBook.name, selectedChapter, newLang);
-          setVerses(chapterData.verses || []);
-          loadStudyData(newBook.name, selectedChapter);
-        } else {
-          const chapterData = await api.getChapter(selectedBook.name, selectedChapter, newLang);
-          setVerses(chapterData.verses || []);
-          loadStudyData(selectedBook.name, selectedChapter);
-        }
+        const newBook = findBookInNewLanguage(selectedBook, oldBooks, booksData);
+        const bookToUse = newBook || selectedBook;
+        if (newBook) setSelectedBook(newBook);
+        const chapterData = await api.getChapter(bookToUse.name, selectedChapter, newLang);
+        setVerses(chapterData.verses || []);
+        loadStudyData(bookToUse.name, selectedChapter);
       }
     } catch (error) {
       console.log('Error changing edition:', error);
-      Alert.alert('Errore', 'Impossibile cambiare edizione. Riprova.');
     } finally {
       setLoading(false);
     }
   };
 
   const handleLanguageSelect = async (lang: string) => {
-    // Don't do anything if same language selected
     if (lang === currentLanguage) {
       setShowLanguageModal(false);
       return;
     }
     
-    // Close modal first for immediate feedback
     setShowLanguageModal(false);
-    
-    // Show loading state
+    const oldBooks = [...books];
     setLoading(true);
     
     try {
-      // Set language in store
       await setLanguage(lang);
+      const booksData: Book[] = await api.getBibleBooks(lang) || [];
+      setBooks(booksData);
       
-      // Reload books with new language
-      const booksData = await api.getBibleBooks(lang);
-      setBooks(booksData || []);
-      
-      // Reload current chapter if reading with the NEW language
       if (selectedBook && selectedChapter && view === 'reading') {
-        // Find the equivalent book in the new language using abbreviation
-        const currentAbbrev = selectedBook.abbrev;
-        const newBook = booksData?.find((b: Book) => b.abbrev === currentAbbrev);
-        
-        if (newBook) {
-          // Update selectedBook with the new language book
-          setSelectedBook(newBook);
-          
-          // Load chapter with the new book name in the target language
-          const chapterData = await api.getChapter(newBook.name, selectedChapter, lang);
-          setVerses(chapterData.verses || []);
-          // Reload study data too
-          loadStudyData(newBook.name, selectedChapter);
-        } else {
-          // Fallback: try with original name
-          const chapterData = await api.getChapter(selectedBook.name, selectedChapter, lang);
-          setVerses(chapterData.verses || []);
-          loadStudyData(selectedBook.name, selectedChapter);
-        }
+        const newBook = findBookInNewLanguage(selectedBook, oldBooks, booksData);
+        const bookToUse = newBook || selectedBook;
+        if (newBook) setSelectedBook(newBook);
+        const chapterData = await api.getChapter(bookToUse.name, selectedChapter, lang);
+        setVerses(chapterData.verses || []);
+        loadStudyData(bookToUse.name, selectedChapter);
       }
     } catch (error) {
       console.log('Error changing language:', error);
-      Alert.alert('Errore', 'Impossibile cambiare lingua. Riprova.');
     } finally {
       setLoading(false);
     }
