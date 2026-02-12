@@ -790,6 +790,81 @@ MULTILINGUAL_QUIZZES = {
                 {"id": "eva2", "question": "Quantos apóstolos Jesus escolheu?", "options": ["7", "10", "12", "14"], "correct": 2, "explanation": "Jesus escolheu doze apóstolos.", "verse_ref": "Mateus 10:1-4"},
             ]
         },
+        "salmos": {
+            "title": "Quiz dos Salmos",
+            "description": "Quanto você conhece os Salmos?",
+            "questions": [
+                {"id": "sal1", "question": "Quem escreveu a maioria dos Salmos?", "options": ["Moisés", "Davi", "Salomão", "Asafe"], "correct": 1, "explanation": "Davi é o autor da maioria dos Salmos.", "verse_ref": "Títulos dos Salmos"},
+                {"id": "sal2", "question": "Complete: 'O Senhor é o meu...'", "options": ["Rei", "Pastor", "Salvador", "Juiz"], "correct": 1, "explanation": "O Senhor é o meu pastor, nada me faltará.", "verse_ref": "Salmo 23:1"},
+                {"id": "sal3", "question": "Quantos Salmos existem na Bíblia?", "options": ["100", "120", "150", "200"], "correct": 2, "explanation": "O livro dos Salmos contém 150 salmos.", "verse_ref": "Livro dos Salmos"},
+            ]
+        },
+        "exodo": {
+            "title": "Quiz do Êxodo",
+            "description": "A libertação do Egito",
+            "questions": [
+                {"id": "exo1", "question": "Quem foi colocado em um cesto no Nilo?", "options": ["Arão", "Moisés", "José", "Faraó"], "correct": 1, "explanation": "Moisés foi colocado em um cesto por sua mãe.", "verse_ref": "Êxodo 2:3"},
+                {"id": "exo2", "question": "Quantas pragas atingiram o Egito?", "options": ["5", "7", "10", "12"], "correct": 2, "explanation": "Deus enviou dez pragas sobre o Egito.", "verse_ref": "Êxodo 7-11"},
+                {"id": "exo3", "question": "Qual foi a última praga?", "options": ["Rãs", "Trevas", "Morte dos primogênitos", "Gafanhotos"], "correct": 2, "explanation": "A décima praga foi a morte dos primogênitos.", "verse_ref": "Êxodo 12:29"},
+                {"id": "exo4", "question": "Qual mar se abriu para Israel?", "options": ["Mar Morto", "Mar Vermelho", "Mar Mediterrâneo", "Rio Jordão"], "correct": 1, "explanation": "As águas do Mar Vermelho se dividiram.", "verse_ref": "Êxodo 14:21"},
+                {"id": "exo5", "question": "Em qual monte Moisés recebeu os Dez Mandamentos?", "options": ["Monte Ararate", "Monte Sinai", "Monte Carmelo", "Monte das Oliveiras"], "correct": 1, "explanation": "Deus deu a Lei a Moisés no monte Sinai.", "verse_ref": "Êxodo 19-20"},
+            ]
+        },
+        "atos": {
+            "title": "Quiz de Atos dos Apóstolos",
+            "description": "A história da Igreja primitiva",
+            "questions": [
+                {"id": "ato1", "question": "Quem escreveu o livro de Atos?", "options": ["Pedro", "Paulo", "Lucas", "João"], "correct": 2, "explanation": "Lucas escreveu tanto o Evangelho quanto Atos.", "verse_ref": "Atos 1:1"},
+                {"id": "ato2", "question": "Quando o Espírito Santo desceu sobre os discípulos?", "options": ["Páscoa", "Pentecostes", "Natal", "Páscoa judaica"], "correct": 1, "explanation": "O Espírito Santo desceu no dia de Pentecostes.", "verse_ref": "Atos 2:1-4"},
+                {"id": "ato3", "question": "Quem foi o primeiro mártir cristão?", "options": ["Pedro", "Paulo", "Estêvão", "Tiago"], "correct": 2, "explanation": "Estêvão foi apedrejado por sua fé.", "verse_ref": "Atos 7:59-60"},
+                {"id": "ato4", "question": "Como Saulo passou a se chamar após sua conversão?", "options": ["Pedro", "Paulo", "João", "Barnabé"], "correct": 1, "explanation": "Saulo tornou-se Paulo após seu encontro com Cristo.", "verse_ref": "Atos 13:9"},
+            ]
+        },
+        "profetas": {
+            "title": "Quiz dos Profetas",
+            "description": "Os grandes profetas do Antigo Testamento",
+            "questions": [
+                {"id": "pro1", "question": "Quem foi levado ao céu em uma carruagem de fogo?", "options": ["Moisés", "Elias", "Eliseu", "Isaías"], "correct": 1, "explanation": "Elias subiu ao céu em um redemoinho numa carruagem de fogo.", "verse_ref": "2 Reis 2:11"},
+                {"id": "pro2", "question": "Qual profeta foi lançado na cova dos leões?", "options": ["Jeremias", "Ezequiel", "Daniel", "Isaías"], "correct": 2, "explanation": "Daniel foi lançado na cova dos leões.", "verse_ref": "Daniel 6:16"},
+                {"id": "pro3", "question": "Quem foi engolido por um grande peixe?", "options": ["Jonas", "Naum", "Habacuque", "Amós"], "correct": 0, "explanation": "Jonas foi engolido por um grande peixe.", "verse_ref": "Jonas 1:17"},
+            ]
+        },
+        "apocalipse": {
+            "title": "Quiz do Apocalipse",
+            "description": "O livro da Revelação",
+            "questions": [
+                {"id": "apo1", "question": "Quem escreveu o Apocalipse?", "options": ["Pedro", "Paulo", "João", "Lucas"], "correct": 2, "explanation": "O apóstolo João escreveu o Apocalipse.", "verse_ref": "Apocalipse 1:1"},
+                {"id": "apo2", "question": "Onde estava João quando escreveu o Apocalipse?", "options": ["Roma", "Jerusalém", "Ilha de Patmos", "Éfeso"], "correct": 2, "explanation": "João estava exilado na ilha de Patmos.", "verse_ref": "Apocalipse 1:9"},
+                {"id": "apo3", "question": "Para quantas igrejas foram enviadas as cartas do Apocalipse?", "options": ["5", "7", "10", "12"], "correct": 1, "explanation": "As cartas foram enviadas para sete igrejas da Ásia.", "verse_ref": "Apocalipse 1:4"},
+            ]
+        },
+        "personagens": {
+            "title": "Personagens Bíblicos",
+            "description": "Você conhece os grandes personagens da Bíblia?",
+            "questions": [
+                {"id": "per1", "question": "Quem recebeu os Dez Mandamentos?", "options": ["Abraão", "Davi", "Moisés", "Josué"], "correct": 2, "explanation": "Moisés recebeu os Dez Mandamentos no monte Sinai.", "verse_ref": "Êxodo 20"},
+                {"id": "per2", "question": "Quem derrotou Golias?", "options": ["Sansão", "Davi", "Saul", "Jônatas"], "correct": 1, "explanation": "Davi derrotou o gigante Golias com uma funda.", "verse_ref": "1 Samuel 17"},
+                {"id": "per3", "question": "Quem construiu o primeiro templo de Jerusalém?", "options": ["Davi", "Salomão", "Neemias", "Herodes"], "correct": 1, "explanation": "Salomão construiu o primeiro templo.", "verse_ref": "1 Reis 6"},
+            ]
+        },
+        "milagres": {
+            "title": "Os Milagres de Jesus",
+            "description": "Você conhece os milagres de Jesus?",
+            "questions": [
+                {"id": "mir1", "question": "Quantos pães Jesus usou para alimentar 5000 pessoas?", "options": ["3", "5", "7", "10"], "correct": 1, "explanation": "Jesus usou cinco pães e dois peixes.", "verse_ref": "Mateus 14:17-21"},
+                {"id": "mir2", "question": "Quem Jesus ressuscitou depois de quatro dias no túmulo?", "options": ["Jairo", "Lázaro", "Pedro", "João"], "correct": 1, "explanation": "Jesus ressuscitou Lázaro em Betânia.", "verse_ref": "João 11:43-44"},
+                {"id": "mir3", "question": "Qual discípulo andou sobre as águas com Jesus?", "options": ["João", "Tiago", "Pedro", "André"], "correct": 2, "explanation": "Pedro andou sobre as águas em direção a Jesus.", "verse_ref": "Mateus 14:29"},
+            ]
+        },
+        "bemaventurancas": {
+            "title": "As Bem-aventuranças",
+            "description": "O Sermão da Montanha",
+            "questions": [
+                {"id": "bem1", "question": "De quem é o reino dos céus?", "options": ["Dos ricos", "Dos poderosos", "Dos pobres de espírito", "Dos sábios"], "correct": 2, "explanation": "Bem-aventurados os pobres de espírito, porque deles é o reino dos céus.", "verse_ref": "Mateus 5:3"},
+                {"id": "bem2", "question": "Quem será consolado?", "options": ["Quem ri", "Quem chora", "O rico", "O poderoso"], "correct": 1, "explanation": "Bem-aventurados os que choram, porque serão consolados.", "verse_ref": "Mateus 5:4"},
+                {"id": "bem3", "question": "O que os mansos herdarão?", "options": ["Ouro", "Poder", "A terra", "Glória"], "correct": 2, "explanation": "Bem-aventurados os mansos, porque herdarão a terra.", "verse_ref": "Mateus 5:5"},
+            ]
+        },
     },
 }
 
