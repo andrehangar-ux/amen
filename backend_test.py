@@ -28,6 +28,7 @@ class BibleAPITester:
             'User-Agent': 'Amen-Bible-Tester/1.0'
         })
         self.results = []
+        self.auth_token = None
         
     def log_result(self, test_name: str, success: bool, details: str, response_data: Dict = None):
         """Log test result"""
