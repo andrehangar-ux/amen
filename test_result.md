@@ -214,7 +214,41 @@ backend:
           comment: "✅ GET /api/bible/chapter/Salmi/23?lang=it returns exactly 6 verses from local database. First verse correctly shows famous Psalm 23:1: 'L'Eterno è il mio pastore, nulla mi mancherà.' Local database content working perfectly."
 
 frontend:
-  # No frontend testing performed as per instructions
+  - task: "Language Selection (Double-Click Bug Fix)"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/app/(tabs)/bible.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Improved handleLanguageSelect and handleEditionSelect functions to immediately reload chapter content with new language. Added loading state during language change. Directly calls API with new language instead of relying on state update."
+
+  - task: "Wikipedia/LaParola In-App Browser"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/app/(tabs)/bible.tsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Changed from expo-linking to expo-web-browser (WebBrowser.openBrowserAsync). This opens links in a modal browser that users can easily dismiss to return to the app. Wikipedia now opens in user's selected language."
+
+  - task: "Settings/Logout/Delete Account"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/app/settings.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Code already implemented in settings.tsx. handleLogout clears AsyncStorage and redirects to login. handleDeleteAccount shows confirmation and calls API. Needs user testing to verify full flow."
 
 metadata:
   created_by: "testing_agent"
