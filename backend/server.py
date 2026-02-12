@@ -1133,48 +1133,36 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
     
     if lang in github_files:
         try:
-            logger.info(f"Fetching {lang} from GitHub...")
-            # Check cache first
-            cache_key = f"github_bible_{lang}"
-            cached = await db.bible_full_cache.find_one({"cache_key": cache_key})
+            logger.info(f"Fetching {lang} Bible from GitHub...")
+            book_abbrev = book_abbrevs.get(book, book.lower()[:2])
+            logger.info(f"Looking for book abbreviation: {book_abbrev}")
             
-            bible_data = None
-            if cached and cached.get("data"):
-                logger.info(f"Using cached data for {lang}")
-                bible_data = cached["data"]
-            else:
-                # Fetch from GitHub
-                logger.info(f"Downloading from GitHub: {github_files[lang]}")
-                async with httpx.AsyncClient(timeout=60.0) as client:
-                    response = await client.get(github_files[lang])
-                    logger.info(f"GitHub response status: {response.status_code}")
-                    if response.status_code == 200:
-                        # Handle BOM in JSON files
-                        content = response.text
-                        if content.startswith('\ufeff'):
-                            content = content[1:]
-                        bible_data = json.loads(content)
-                        logger.info(f"Loaded {len(bible_data)} books from GitHub")
-                        # Cache for future use (don't cache full Bible, too large)
-                        # Instead, cache individual chapters
-            
-            if bible_data:
-                book_abbrev = book_abbrevs.get(book, book.lower()[:2])
+            async with httpx.AsyncClient(timeout=60.0) as client:
+                response = await client.get(github_files[lang])
+                logger.info(f"GitHub response: {response.status_code}")
                 
-                for b in bible_data:
-                    if b.get("abbrev") == book_abbrev:
-                        chapters = b.get("chapters", [])
-                        if chapter <= len(chapters):
-                            chapter_verses = chapters[chapter - 1]
-                            verses = []
-                            for i, text in enumerate(chapter_verses):
-                                if text:
-                                    verses.append({"verse": i + 1, "text": text.strip()})
-                            
-                            if verses:
-                                logger.info(f"Fetched {len(verses)} verses from GitHub for {book} {chapter} ({lang})")
-                                return verses
-                        break
+                if response.status_code == 200:
+                    content = response.text
+                    if content.startswith('\ufeff'):
+                        content = content[1:]
+                    
+                    bible_data = json.loads(content)
+                    logger.info(f"Loaded {len(bible_data)} books")
+                    
+                    for b in bible_data:
+                        if b.get("abbrev") == book_abbrev:
+                            chapters = b.get("chapters", [])
+                            if chapter <= len(chapters):
+                                chapter_verses = chapters[chapter - 1]
+                                verses = []
+                                for i, text in enumerate(chapter_verses):
+                                    if text:
+                                        verses.append({"verse": i + 1, "text": text.strip()})
+                                
+                                if verses:
+                                    logger.info(f"Found {len(verses)} verses for {book} {chapter} ({lang})")
+                                    return verses
+                            break
         except Exception as e:
             logger.error(f"Error fetching from GitHub: {e}")
     
