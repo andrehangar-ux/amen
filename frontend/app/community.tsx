@@ -87,13 +87,37 @@ export default function CommunityScreen() {
     }
   };
 
+  const [translating, setTranslating] = useState<string | null>(null);
+  const [translations, setTranslations] = useState<Record<string, string>>({});
+
+  const translateMessage = async (message: CommunityMessage) => {
+    if (translations[message.message_id] || message.original_language === currentLanguage) return;
+    
+    setTranslating(message.message_id);
+    try {
+      const response = await api.translate(message.content, message.original_language, currentLanguage);
+      setTranslations(prev => ({
+        ...prev,
+        [message.message_id]: response.translated_text
+      }));
+    } catch (error) {
+      console.log('Translation error:', error);
+    } finally {
+      setTranslating(null);
+    }
+  };
+
   const getFlag = (lang: string) => {
     return languages[lang]?.flag || '🌐';
   };
 
   const renderMessage = ({ item }: { item: CommunityMessage }) => {
     const isOwn = item.user_id === user?.user_id;
-    const showTranslation = item.original_language !== currentLanguage && item.translated_content;
+    const hasTranslation = translations[item.message_id] || item.translated_content;
+    const showTranslation = hasTranslation && item.original_language !== currentLanguage;
+    const translatedText = translations[item.message_id] || item.translated_content;
+    const isTranslating = translating === item.message_id;
+    const needsTranslation = item.original_language !== currentLanguage && !hasTranslation;
 
     return (
       <View style={[styles.messageCard, isOwn && styles.ownMessage]}>
@@ -121,7 +145,7 @@ export default function CommunityScreen() {
         </View>
 
         <Text style={styles.messageContent}>
-          {showTranslation ? item.translated_content : item.content}
+          {showTranslation ? translatedText : item.content}
         </Text>
 
         {showTranslation && (
@@ -129,6 +153,24 @@ export default function CommunityScreen() {
             <Text style={styles.originalLabel}>Originale ({getFlag(item.original_language)}):</Text>
             <Text style={styles.originalText}>{item.content}</Text>
           </View>
+        )}
+
+        {/* Translation Button */}
+        {needsTranslation && (
+          <TouchableOpacity 
+            style={styles.translateButton}
+            onPress={() => translateMessage(item)}
+            disabled={isTranslating}
+          >
+            {isTranslating ? (
+              <ActivityIndicator size="small" color={COLORS.primary} />
+            ) : (
+              <>
+                <Ionicons name="language" size={14} color={COLORS.primary} />
+                <Text style={styles.translateText}>Traduci</Text>
+              </>
+            )}
+          </TouchableOpacity>
         )}
 
         <View style={styles.messageActions}>
