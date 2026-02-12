@@ -1205,37 +1205,27 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
 async def get_chapter(book: str, chapter: int, lang: str = "it"):
     """Get verses for a chapter in specified language"""
     key = f"{book}:{chapter}"
-    logger.warning(f"[GET_CHAPTER] book={book}, chapter={chapter}, lang={lang}, key={key}")
     
     # First try the real Bible data (Nuova Diodati or Reina Valera)
     if lang == "it":
         verses = NUOVA_DIODATI.get(key, [])
-        logger.warning(f"[GET_CHAPTER] IT - NUOVA_DIODATI found: {len(verses)} verses")
     elif lang == "es":
         verses = REINA_VALERA_1960.get(key, [])
-        logger.warning(f"[GET_CHAPTER] ES - REINA_VALERA found: {len(verses)} verses")
     else:
         verses = []
-        logger.warning(f"[GET_CHAPTER] Other lang - no hardcoded data")
     
     if verses:
-        logger.warning(f"[GET_CHAPTER] Returning hardcoded data: {len(verses)} verses")
         return {"book": book, "chapter": chapter, "verses": verses, "language": lang}
     
     # Check if we have it cached in MongoDB
-    logger.warning(f"[GET_CHAPTER] Checking MongoDB cache...")
     cached = await db.bible_cache.find_one({"book": book, "chapter": chapter, "language": lang})
     if cached and cached.get("verses") and len(cached.get("verses", [])) > 3:
-        logger.warning(f"[GET_CHAPTER] Found in cache: {len(cached.get('verses', []))} verses")
         return {"book": book, "chapter": chapter, "verses": cached["verses"], "language": lang}
     
     # Fetch from external APIs
-    logger.warning(f"[GET_CHAPTER] Fetching from external API...")
     fetched_verses = await fetch_bible_chapter_any_lang(book, chapter, lang)
-    logger.warning(f"[GET_CHAPTER] External API returned: {len(fetched_verses) if fetched_verses else 0} verses")
     
     if fetched_verses and len(fetched_verses) > 3:
-        logger.warning(f"[GET_CHAPTER] First verse: {fetched_verses[0].get('text', '')[:50]}")
         # Cache in MongoDB for future use
         await db.bible_cache.update_one(
             {"book": book, "chapter": chapter, "language": lang},
@@ -1245,7 +1235,6 @@ async def get_chapter(book: str, chapter: int, lang: str = "it"):
         return {"book": book, "chapter": chapter, "verses": fetched_verses, "language": lang}
     
     # Return placeholder if nothing found
-    logger.warning(f"[GET_CHAPTER] Returning placeholder")
     verses = []
     placeholders = {
         "it": "Questo capitolo sarà presto disponibile.",
