@@ -334,9 +334,20 @@ export default function BibleScreen() {
       
       // Reload current chapter if reading
       if (selectedBook && selectedChapter && view === 'reading') {
-        const chapterData = await api.getChapter(selectedBook.name, selectedChapter, newLang);
-        setVerses(chapterData.verses || []);
-        loadStudyData(selectedBook.name, selectedChapter);
+        // Find the equivalent book in the new language using abbreviation
+        const currentAbbrev = selectedBook.abbrev;
+        const newBook = booksData?.find((b: Book) => b.abbrev === currentAbbrev);
+        
+        if (newBook) {
+          setSelectedBook(newBook);
+          const chapterData = await api.getChapter(newBook.name, selectedChapter, newLang);
+          setVerses(chapterData.verses || []);
+          loadStudyData(newBook.name, selectedChapter);
+        } else {
+          const chapterData = await api.getChapter(selectedBook.name, selectedChapter, newLang);
+          setVerses(chapterData.verses || []);
+          loadStudyData(selectedBook.name, selectedChapter);
+        }
       }
     } catch (error) {
       console.log('Error changing edition:', error);
