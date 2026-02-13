@@ -247,9 +247,9 @@ export default function BibleScreen() {
     const text = `"${verse.text}"\n\n- ${selectedBook.name} ${selectedChapter}:${verse.verse}`;
     try {
       const { Share } = await import('react-native');
-      await Share.share({ message: text, title: 'Versetto dalla Bibbia' });
+      await Share.share({ message: text, title: t('verseFromBible') });
     } catch (error) {
-      Alert.alert('Errore', 'Impossibile condividere');
+      Alert.alert(t('error'), t('unableToShare'));
     }
   };
 
@@ -270,7 +270,7 @@ export default function BibleScreen() {
       });
     } catch (error) {
       console.log('Error opening Wikipedia:', error);
-      Alert.alert('Errore', 'Impossibile aprire Wikipedia');
+      Alert.alert(t('error'), t('unableToOpenWikipedia'));
     }
   };
 
@@ -291,13 +291,13 @@ export default function BibleScreen() {
         null,
         []
       );
-      Alert.alert('Salvato!', 'Nota aggiunta con successo');
+      Alert.alert(t('saved'), t('noteSavedSuccess'));
       setNoteText('');
       setShowNoteModal(false);
       // Reload study data
       loadStudyData(selectedBook.name, selectedChapter);
     } catch (error) {
-      Alert.alert('Errore', 'Impossibile salvare la nota');
+      Alert.alert(t('error'), t('unableToSaveNote'));
     }
   };
 
@@ -314,7 +314,7 @@ export default function BibleScreen() {
       );
       setAiAnswer(response.explanation);
     } catch (error) {
-      Alert.alert('Errore', 'Impossibile ottenere la spiegazione');
+      Alert.alert(t('error'), t('unableToGetExplanation'));
     } finally {
       setLoadingAI(false);
     }
@@ -440,7 +440,7 @@ export default function BibleScreen() {
       return (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color={COLORS.primary} />
-          <Text style={styles.loadingText}>Caricamento libri...</Text>
+          <Text style={styles.loadingText}>{t('loadingBooks')}</Text>
         </View>
       );
     }
@@ -449,9 +449,9 @@ export default function BibleScreen() {
       return (
         <View style={styles.emptyContainer}>
           <Ionicons name="book-outline" size={64} color={COLORS.textMuted} />
-          <Text style={styles.emptyText}>Nessun libro disponibile</Text>
+          <Text style={styles.emptyText}>{t('noBooksAvailable')}</Text>
           <TouchableOpacity style={styles.retryButton} onPress={loadBooks}>
-            <Text style={styles.retryText}>Riprova</Text>
+            <Text style={styles.retryText}>{t('retry')}</Text>
           </TouchableOpacity>
         </View>
       );
@@ -471,7 +471,7 @@ export default function BibleScreen() {
             onPress={() => handleBookSelect(item)}
           >
             <Text style={styles.bookName} numberOfLines={2}>{item.name}</Text>
-            <Text style={styles.bookChapters}>{item.chapters} capitoli</Text>
+            <Text style={styles.bookChapters}>{item.chapters} {t('chapters')}</Text>
           </TouchableOpacity>
         )}
       />
