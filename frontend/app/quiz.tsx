@@ -135,7 +135,7 @@ export default function QuizScreen() {
     if (!selectedTopic) return;
     setSubmitting(true);
     try {
-      const data = await api.submitQuiz(selectedTopic, answers);
+      const data = await api.submitQuiz(selectedTopic, answers, currentLanguage);
       setResult(data);
     } catch (error: any) {
       console.error('Quiz submit error:', error);
