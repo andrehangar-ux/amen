@@ -3348,12 +3348,116 @@ async def get_dictionary_terms(lang: str = "it"):
         for key, term in BIBLICAL_DICTIONARY.items()
     ]
 
+async def ai_translate_dict_term(term_data: dict, term_id: str, target_lang: str) -> dict:
+    """Use AI to translate dictionary term and cache the result"""
+    lang_names = {
+        "en": "English",
+        "es": "Spanish",
+        "de": "German",
+        "fr": "French",
+        "pt": "Portuguese"
+    }
+    
+    if target_lang not in lang_names:
+        return term_data
+    
+    # Check if we already have cached translation in MongoDB
+    cached = await db.dictionary_translations.find_one({
+        "term_id": term_id,
+        "language": target_lang
+    }, {"_id": 0})
+    
+    if cached:
+        result = {**term_data}
+        result["meaning"] = cached.get("meaning", term_data["meaning"])
+        result["description"] = cached.get("description", term_data["description"])
+        labels = DICT_TRANSLATIONS.get(target_lang, DICT_TRANSLATIONS["it"])
+        if term_data.get("origin") == "Ebraico":
+            result["origin"] = labels["origin_hebrew"]
+        elif term_data.get("origin") == "Greco":
+            result["origin"] = labels["origin_greek"]
+        elif term_data.get("origin") == "Aramaico":
+            result["origin"] = labels.get("origin_aramaic", "Aramaic")
+        return result
+    
+    try:
+        lang_name = lang_names[target_lang]
+        prompt = f"""Translate this biblical dictionary entry to {lang_name}.
+Return ONLY a valid JSON object with "meaning" and "description" fields.
+
+Term: {term_data['term']}
+Meaning (Italian): {term_data['meaning']}
+Description (Italian): {term_data['description'][:800]}
+
+Return format: {{"meaning": "translated meaning", "description": "translated description"}}"""
+        
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=f"dict_trans_{term_id}_{target_lang}",
+            system_message="You are a biblical translator. Return only valid JSON."
+        ).with_model("openai", "gpt-4o")
+        
+        response = await chat.send_message(UserMessage(text=prompt))
+        response = response.strip()
+        
+        # Clean response
+        if response.startswith("```"):
+            lines = response.split("\n")
+            response = "\n".join(lines[1:-1] if lines[-1].strip() == "```" else lines[1:])
+        if response.startswith("json"):
+            response = response[4:].strip()
+        
+        translation = json.loads(response)
+        
+        # Cache in MongoDB
+        await db.dictionary_translations.update_one(
+            {"term_id": term_id, "language": target_lang},
+            {"$set": {
+                "term_id": term_id,
+                "language": target_lang,
+                "meaning": translation.get("meaning", ""),
+                "description": translation.get("description", ""),
+                "created_at": datetime.now(timezone.utc)
+            }},
+            upsert=True
+        )
+        
+        result = {**term_data}
+        result["meaning"] = translation.get("meaning", term_data["meaning"])
+        result["description"] = translation.get("description", term_data["description"])
+        
+        labels = DICT_TRANSLATIONS.get(target_lang, DICT_TRANSLATIONS["it"])
+        if term_data.get("origin") == "Ebraico":
+            result["origin"] = labels["origin_hebrew"]
+        elif term_data.get("origin") == "Greco":
+            result["origin"] = labels["origin_greek"]
+        elif term_data.get("origin") == "Aramaico":
+            result["origin"] = labels.get("origin_aramaic", "Aramaic")
+        
+        return result
+        
+    except Exception as e:
+        logger.error(f"AI translation error for {term_id} to {target_lang}: {e}")
+        return translate_dict_term(term_data, term_id, target_lang)
+
 @api_router.get("/dictionary/{term_id}")
 async def get_dictionary_term(term_id: str, lang: str = "it"):
-    """Get full dictionary entry with optional translation"""
+    """Get full dictionary entry with optional translation (uses AI if needed)"""
     if term_id not in BIBLICAL_DICTIONARY:
         raise HTTPException(status_code=404, detail="Term not found")
-    return translate_dict_term(BIBLICAL_DICTIONARY[term_id], term_id, lang)
+    
+    term_data = BIBLICAL_DICTIONARY[term_id]
+    
+    # For Italian, return as-is
+    if lang == "it":
+        return term_data
+    
+    # Check if we have pre-translated version
+    if term_id in DICT_TERM_TRANSLATIONS and lang in DICT_TERM_TRANSLATIONS[term_id]:
+        return translate_dict_term(term_data, term_id, lang)
+    
+    # Use AI translation for terms without pre-translated versions
+    return await ai_translate_dict_term(term_data, term_id, lang)
 
 @api_router.get("/dictionary/search/{query}")
 async def search_dictionary(query: str):
