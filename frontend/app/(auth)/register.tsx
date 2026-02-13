@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,12 +11,14 @@ import {
   ScrollView,
   ActivityIndicator,
   Image,
+  Switch,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuthStore } from '../../src/store/authStore';
 import { useTranslation } from '../../src/store/languageStore';
+import { BiometricService } from '../../src/services/BiometricService';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
 
 // Cross-platform alert
@@ -35,8 +37,19 @@ export default function RegisterScreen() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [enableBiometric, setEnableBiometric] = useState(false);
+  const [biometricAvailable, setBiometricAvailable] = useState(false);
   const { register } = useAuthStore();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    checkBiometricAvailability();
+  }, []);
+
+  const checkBiometricAvailability = async () => {
+    const available = await BiometricService.isAvailable();
+    setBiometricAvailable(available);
+  };
 
   const handleRegister = async () => {
     if (!name || !email || !password) {
@@ -57,6 +70,13 @@ export default function RegisterScreen() {
     setLoading(true);
     try {
       await register(email, password, name);
+      
+      // Save credentials if biometric is enabled
+      if (enableBiometric && biometricAvailable) {
+        await BiometricService.setBiometricEnabled(true);
+        await BiometricService.saveCredentials(email, password);
+      }
+      
       router.replace('/(tabs)');
     } catch (error: any) {
       showAlert(t('error'), error.message || t('registrationFailed'));
