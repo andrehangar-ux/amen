@@ -200,15 +200,20 @@ const styles = StyleSheet.create({
     padding: SPACING.sm,
   },
   logoContainer: {
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 100,
     borderRadius: BORDER_RADIUS.xl,
-    backgroundColor: COLORS.secondary,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: SPACING.md,
     marginTop: SPACING.xl,
     ...SHADOWS.medium,
+    overflow: 'hidden',
+  },
+  logoImage: {
+    width: 100,
+    height: 100,
+    borderRadius: BORDER_RADIUS.xl,
   },
   title: {
     fontSize: 28,
