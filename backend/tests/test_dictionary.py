@@ -307,7 +307,7 @@ class TestQuizSubmit:
         assert len(data) >= 10, f"Expected at least 10 quiz topics, got {len(data)}"
     
     def test_quiz_questions_available(self, api_client):
-        """Test that quiz questions are available for a topic"""
+        """Test that quiz questions are available for a topic (endpoint: /api/quiz/{topic})"""
         # First get topics
         topics_response = api_client.get(f"{BASE_URL}/api/quiz/topics?lang=it")
         assert topics_response.status_code == 200
@@ -315,12 +315,14 @@ class TestQuizSubmit:
         
         if len(topics) > 0:
             topic_id = topics[0]["id"]
-            response = api_client.get(f"{BASE_URL}/api/quiz/questions/{topic_id}?lang=it")
+            # Correct endpoint is /api/quiz/{topic} not /api/quiz/questions/{topic}
+            response = api_client.get(f"{BASE_URL}/api/quiz/{topic_id}?lang=it")
             assert response.status_code == 200
             
             data = response.json()
-            assert isinstance(data, list)
-            assert len(data) > 0
+            assert "questions" in data
+            assert isinstance(data["questions"], list)
+            assert len(data["questions"]) > 0
     
     def test_quiz_submit(self, authenticated_client):
         """Test quiz submission"""
@@ -332,46 +334,56 @@ class TestQuizSubmit:
         if len(topics) > 0:
             topic_id = topics[0]["id"]
             
-            # Get questions
-            questions_response = authenticated_client.get(f"{BASE_URL}/api/quiz/questions/{topic_id}?lang=it")
-            assert questions_response.status_code == 200
-            questions = questions_response.json()
+            # Get quiz (correct endpoint: /api/quiz/{topic})
+            quiz_response = authenticated_client.get(f"{BASE_URL}/api/quiz/{topic_id}?lang=it")
+            assert quiz_response.status_code == 200
+            quiz = quiz_response.json()
             
-            if len(questions) > 0:
+            if "questions" in quiz and len(quiz["questions"]) > 0:
                 # Submit answers (all correct answers)
                 answers = []
-                for q in questions:
+                for q in quiz["questions"]:
                     answers.append({
                         "question_id": q.get("id", "q1"),
-                        "answer": q.get("correct_answer", 0)
+                        "answer": q.get("correct", 0)
                     })
                 
                 submit_response = authenticated_client.post(
                     f"{BASE_URL}/api/quiz/submit",
                     json={
-                        "topic_id": topic_id,
+                        "topic": topic_id,
                         "answers": answers,
                         "language": "it"
                     }
                 )
                 
                 # Should return 200 or 201
-                assert submit_response.status_code in [200, 201, 422], f"Quiz submit failed: {submit_response.text}"
+                assert submit_response.status_code in [200, 201], f"Quiz submit failed: {submit_response.text}"
 
 
 class TestDictionarySearch:
     """Tests for dictionary search functionality"""
     
-    def test_search_dictionary(self, api_client):
-        """Test dictionary search endpoint"""
-        response = api_client.get(f"{BASE_URL}/api/dictionary/search/love")
+    def test_search_dictionary_italian(self, api_client):
+        """Test dictionary search endpoint with Italian term"""
+        response = api_client.get(f"{BASE_URL}/api/dictionary/search/amore")
         assert response.status_code == 200
         
         data = response.json()
         assert isinstance(data, list)
         # Should find 'agape' which means love
         term_ids = [t.get("id") for t in data]
-        assert "agape" in term_ids or len(data) > 0
+        assert "agape" in term_ids, f"Expected 'agape' in results, got: {term_ids}"
+    
+    def test_search_dictionary_term_name(self, api_client):
+        """Test dictionary search by term name"""
+        response = api_client.get(f"{BASE_URL}/api/dictionary/search/shalom")
+        assert response.status_code == 200
+        
+        data = response.json()
+        assert isinstance(data, list)
+        term_ids = [t.get("id") for t in data]
+        assert "shalom" in term_ids, f"Expected 'shalom' in results, got: {term_ids}"
 
 
 class TestDictionaryAIStudy:
