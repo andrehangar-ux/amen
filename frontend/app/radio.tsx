@@ -27,18 +27,20 @@ interface Radio {
   continent: string;
 }
 
-const CONTINENTS = [
-  { id: 'all', name: 'Tutte', icon: 'globe' },
-  { id: 'Europa', name: 'Europa', icon: 'earth' },
-  { id: 'SudAmerica', name: 'Sud America', icon: 'earth' },
-  { id: 'NordAmerica', name: 'Nord America', icon: 'earth' },
-  { id: 'Africa', name: 'Africa', icon: 'earth' },
-  { id: 'Asia', name: 'Asia', icon: 'earth' },
-  { id: 'Oceania', name: 'Oceania', icon: 'earth' },
-];
-
 export default function RadioScreen() {
   const { t } = useTranslation();
+  
+  // Continents with translated names
+  const getContinents = () => [
+    { id: 'all', name: t('all'), icon: 'globe' },
+    { id: 'Europa', name: t('europe'), icon: 'earth' },
+    { id: 'SudAmerica', name: t('southAmerica'), icon: 'earth' },
+    { id: 'NordAmerica', name: t('northAmerica'), icon: 'earth' },
+    { id: 'Africa', name: t('africa'), icon: 'earth' },
+    { id: 'Asia', name: t('asia'), icon: 'earth' },
+    { id: 'Oceania', name: t('oceania'), icon: 'earth' },
+  ];
+  
   const [radios, setRadios] = useState<Radio[]>([]);
   const [filteredRadios, setFilteredRadios] = useState<Radio[]>([]);
   const [loading, setLoading] = useState(true);
@@ -131,7 +133,7 @@ export default function RadioScreen() {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.filterContainer}
       >
-        {CONTINENTS.map((continent) => (
+        {getContinents().map((continent) => (
           <TouchableOpacity
             key={continent.id}
             style={[
