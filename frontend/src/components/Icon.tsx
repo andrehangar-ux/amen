@@ -236,6 +236,12 @@ const iconMap: Record<string, LucideIcon> = {
   'bulb': Sparkles,
   'bulb-outline': Sparkles,
   
+  // Additional
+  'language': Globe,
+  'language-outline': Globe,
+  'videocam': Play,
+  'videocam-outline': Play,
+  
   // Logos - fallback to similar icons
   'logo-google': Globe,
 };
