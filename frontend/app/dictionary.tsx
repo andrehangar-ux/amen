@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -41,25 +41,160 @@ export default function DictionaryScreen() {
   const { currentLanguage } = useLanguageStore();
   const [terms, setTerms] = useState<DictionaryTerm[]>([]);
   const [selectedTerm, setSelectedTerm] = useState<FullTerm | null>(null);
+  const [selectedTermId, setSelectedTermId] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [loadingTerm, setLoadingTerm] = useState(false);
   const [aiQuestion, setAiQuestion] = useState('');
   const [aiAnswer, setAiAnswer] = useState('');
   const [askingAi, setAskingAi] = useState(false);
+  
+  // Favorites and flashcards state
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [favoriteLoading, setFavoriteLoading] = useState(false);
+  const [flashcardLoading, setFlashcardLoading] = useState(false);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
 
   const translations: Record<string, Record<string, string>> = {
-    it: { title: 'Dizionario Biblico', subtitle: 'Esplora i termini originali ebraici e greci della Bibbia', search: 'Cerca termine...', transliteration: 'Traslitterazione', pronunciation: 'Pronuncia', meaning: 'Significato', root: 'Radice', equivalents: 'Equivalenti', description: 'Descrizione', verses: 'Versetti di Riferimento', askAi: 'Chiedi all\'AI', askPlaceholder: 'Fai una domanda su questo termine...', ask: 'Chiedi' },
-    en: { title: 'Biblical Dictionary', subtitle: 'Explore the original Hebrew and Greek terms of the Bible', search: 'Search term...', transliteration: 'Transliteration', pronunciation: 'Pronunciation', meaning: 'Meaning', root: 'Root', equivalents: 'Equivalents', description: 'Description', verses: 'Reference Verses', askAi: 'Ask AI', askPlaceholder: 'Ask a question about this term...', ask: 'Ask' },
-    es: { title: 'Diccionario Bíblico', subtitle: 'Explora los términos originales hebreos y griegos de la Biblia', search: 'Buscar término...', transliteration: 'Transliteración', pronunciation: 'Pronunciación', meaning: 'Significado', root: 'Raíz', equivalents: 'Equivalentes', description: 'Descripción', verses: 'Versículos de Referencia', askAi: 'Preguntar a la IA', askPlaceholder: 'Haz una pregunta sobre este término...', ask: 'Preguntar' },
-    de: { title: 'Biblisches Wörterbuch', subtitle: 'Erkunde die ursprünglichen hebräischen und griechischen Begriffe der Bibel', search: 'Begriff suchen...', transliteration: 'Transliteration', pronunciation: 'Aussprache', meaning: 'Bedeutung', root: 'Wurzel', equivalents: 'Äquivalente', description: 'Beschreibung', verses: 'Referenzverse', askAi: 'KI fragen', askPlaceholder: 'Stelle eine Frage zu diesem Begriff...', ask: 'Fragen' },
-    fr: { title: 'Dictionnaire Biblique', subtitle: 'Explorez les termes hébreux et grecs originaux de la Bible', search: 'Rechercher un terme...', transliteration: 'Translittération', pronunciation: 'Prononciation', meaning: 'Signification', root: 'Racine', equivalents: 'Équivalents', description: 'Description', verses: 'Versets de Référence', askAi: 'Demander à l\'IA', askPlaceholder: 'Posez une question sur ce terme...', ask: 'Demander' },
-    pt: { title: 'Dicionário Bíblico', subtitle: 'Explore os termos originais hebraicos e gregos da Bíblia', search: 'Buscar termo...', transliteration: 'Transliteração', pronunciation: 'Pronúncia', meaning: 'Significado', root: 'Raiz', equivalents: 'Equivalentes', description: 'Descrição', verses: 'Versículos de Referência', askAi: 'Perguntar à IA', askPlaceholder: 'Faça uma pergunta sobre este termo...', ask: 'Perguntar' },
+    it: { 
+      title: 'Dizionario Biblico', 
+      subtitle: 'Esplora i termini originali ebraici e greci della Bibbia', 
+      search: 'Cerca termine...', 
+      transliteration: 'Traslitterazione', 
+      pronunciation: 'Pronuncia', 
+      meaning: 'Significato', 
+      root: 'Radice', 
+      equivalents: 'Equivalenti', 
+      description: 'Descrizione', 
+      verses: 'Versetti di Riferimento', 
+      askAi: 'Chiedi all\'AI', 
+      askPlaceholder: 'Fai una domanda su questo termine...', 
+      ask: 'Chiedi',
+      addFavorite: 'Aggiungi ai Preferiti',
+      removeFavorite: 'Rimuovi dai Preferiti',
+      addFlashcard: 'Crea Flashcard',
+      flashcardCreated: 'Flashcard creata!',
+      favorites: 'Preferiti',
+      all: 'Tutti',
+      goToFlashcards: 'Studia Flashcards'
+    },
+    en: { 
+      title: 'Biblical Dictionary', 
+      subtitle: 'Explore the original Hebrew and Greek terms of the Bible', 
+      search: 'Search term...', 
+      transliteration: 'Transliteration', 
+      pronunciation: 'Pronunciation', 
+      meaning: 'Meaning', 
+      root: 'Root', 
+      equivalents: 'Equivalents', 
+      description: 'Description', 
+      verses: 'Reference Verses', 
+      askAi: 'Ask AI', 
+      askPlaceholder: 'Ask a question about this term...', 
+      ask: 'Ask',
+      addFavorite: 'Add to Favorites',
+      removeFavorite: 'Remove from Favorites',
+      addFlashcard: 'Create Flashcard',
+      flashcardCreated: 'Flashcard created!',
+      favorites: 'Favorites',
+      all: 'All',
+      goToFlashcards: 'Study Flashcards'
+    },
+    es: { 
+      title: 'Diccionario Bíblico', 
+      subtitle: 'Explora los términos originales hebreos y griegos de la Biblia', 
+      search: 'Buscar término...', 
+      transliteration: 'Transliteración', 
+      pronunciation: 'Pronunciación', 
+      meaning: 'Significado', 
+      root: 'Raíz', 
+      equivalents: 'Equivalentes', 
+      description: 'Descripción', 
+      verses: 'Versículos de Referencia', 
+      askAi: 'Preguntar a la IA', 
+      askPlaceholder: 'Haz una pregunta sobre este término...', 
+      ask: 'Preguntar',
+      addFavorite: 'Añadir a Favoritos',
+      removeFavorite: 'Quitar de Favoritos',
+      addFlashcard: 'Crear Flashcard',
+      flashcardCreated: '¡Flashcard creada!',
+      favorites: 'Favoritos',
+      all: 'Todos',
+      goToFlashcards: 'Estudiar Flashcards'
+    },
+    de: { 
+      title: 'Biblisches Wörterbuch', 
+      subtitle: 'Erkunde die ursprünglichen hebräischen und griechischen Begriffe der Bibel', 
+      search: 'Begriff suchen...', 
+      transliteration: 'Transliteration', 
+      pronunciation: 'Aussprache', 
+      meaning: 'Bedeutung', 
+      root: 'Wurzel', 
+      equivalents: 'Äquivalente', 
+      description: 'Beschreibung', 
+      verses: 'Referenzverse', 
+      askAi: 'KI fragen', 
+      askPlaceholder: 'Stelle eine Frage zu diesem Begriff...', 
+      ask: 'Fragen',
+      addFavorite: 'Zu Favoriten hinzufügen',
+      removeFavorite: 'Von Favoriten entfernen',
+      addFlashcard: 'Karteikarte erstellen',
+      flashcardCreated: 'Karteikarte erstellt!',
+      favorites: 'Favoriten',
+      all: 'Alle',
+      goToFlashcards: 'Karteikarten lernen'
+    },
+    fr: { 
+      title: 'Dictionnaire Biblique', 
+      subtitle: 'Explorez les termes hébreux et grecs originaux de la Bible', 
+      search: 'Rechercher un terme...', 
+      transliteration: 'Translittération', 
+      pronunciation: 'Prononciation', 
+      meaning: 'Signification', 
+      root: 'Racine', 
+      equivalents: 'Équivalents', 
+      description: 'Description', 
+      verses: 'Versets de Référence', 
+      askAi: 'Demander à l\'IA', 
+      askPlaceholder: 'Posez une question sur ce terme...', 
+      ask: 'Demander',
+      addFavorite: 'Ajouter aux Favoris',
+      removeFavorite: 'Retirer des Favoris',
+      addFlashcard: 'Créer une Flashcard',
+      flashcardCreated: 'Flashcard créée!',
+      favorites: 'Favoris',
+      all: 'Tous',
+      goToFlashcards: 'Étudier les Flashcards'
+    },
+    pt: { 
+      title: 'Dicionário Bíblico', 
+      subtitle: 'Explore os termos originais hebraicos e gregos da Bíblia', 
+      search: 'Buscar termo...', 
+      transliteration: 'Transliteração', 
+      pronunciation: 'Pronúncia', 
+      meaning: 'Significado', 
+      root: 'Raiz', 
+      equivalents: 'Equivalentes', 
+      description: 'Descrição', 
+      verses: 'Versículos de Referência', 
+      askAi: 'Perguntar à IA', 
+      askPlaceholder: 'Faça uma pergunta sobre este termo...', 
+      ask: 'Perguntar',
+      addFavorite: 'Adicionar aos Favoritos',
+      removeFavorite: 'Remover dos Favoritos',
+      addFlashcard: 'Criar Flashcard',
+      flashcardCreated: 'Flashcard criado!',
+      favorites: 'Favoritos',
+      all: 'Todos',
+      goToFlashcards: 'Estudar Flashcards'
+    },
   };
   const t = (key: string) => translations[currentLanguage]?.[key] || translations['it'][key] || key;
 
   useEffect(() => {
     loadTerms();
+    loadFavoriteIds();
   }, [currentLanguage]);
 
   const loadTerms = async () => {
@@ -73,16 +208,71 @@ export default function DictionaryScreen() {
     }
   };
 
+  const loadFavoriteIds = async () => {
+    try {
+      const favorites = await api.getDictionaryFavorites(currentLanguage);
+      const ids = new Set(favorites.map((f: any) => f.term_id));
+      setFavoriteIds(ids);
+    } catch (error) {
+      console.error('Error loading favorites:', error);
+    }
+  };
+
   const loadTerm = async (termId: string) => {
     setLoadingTerm(true);
     setAiAnswer('');
+    setSelectedTermId(termId);
     try {
       const data = await api.getDictionaryTerm(termId, currentLanguage);
       setSelectedTerm(data);
+      
+      // Check if favorite
+      const favCheck = await api.checkDictionaryFavorite(termId);
+      setIsFavorite(favCheck.is_favorite);
     } catch (error) {
       console.error('Error loading term:', error);
     } finally {
       setLoadingTerm(false);
+    }
+  };
+
+  const toggleFavorite = async () => {
+    if (!selectedTermId) return;
+    setFavoriteLoading(true);
+    try {
+      if (isFavorite) {
+        await api.removeDictionaryFavorite(selectedTermId);
+        setIsFavorite(false);
+        setFavoriteIds(prev => {
+          const next = new Set(prev);
+          next.delete(selectedTermId);
+          return next;
+        });
+      } else {
+        await api.addDictionaryFavorite(selectedTermId);
+        setIsFavorite(true);
+        setFavoriteIds(prev => new Set(prev).add(selectedTermId));
+      }
+    } catch (error) {
+      console.error('Error toggling favorite:', error);
+    } finally {
+      setFavoriteLoading(false);
+    }
+  };
+
+  const createFlashcard = async () => {
+    if (!selectedTermId) return;
+    setFlashcardLoading(true);
+    try {
+      await api.createFlashcard(selectedTermId);
+      // Show success feedback
+      if (typeof window !== 'undefined') {
+        window.alert(t('flashcardCreated'));
+      }
+    } catch (error) {
+      console.error('Error creating flashcard:', error);
+    } finally {
+      setFlashcardLoading(false);
     }
   };
 
@@ -91,10 +281,7 @@ export default function DictionaryScreen() {
     
     setAskingAi(true);
     try {
-      const result = await api.aiDictionaryStudy(
-        terms.find(t => t.term === selectedTerm.term)?.id || '',
-        aiQuestion
-      );
+      const result = await api.aiDictionaryStudy(selectedTermId, aiQuestion);
       setAiAnswer(result.answer);
     } catch (error) {
       console.error('Error asking AI:', error);
@@ -109,6 +296,10 @@ export default function DictionaryScreen() {
         t.meaning.toLowerCase().includes(searchQuery.toLowerCase())
       )
     : terms;
+
+  const displayedTerms = showFavoritesOnly 
+    ? filteredTerms.filter(t => favoriteIds.has(t.id))
+    : filteredTerms;
 
   if (loading) {
     return (
@@ -127,7 +318,17 @@ export default function DictionaryScreen() {
             <Ionicons name="arrow-back" size={28} color={COLORS.text} />
           </TouchableOpacity>
           <Text style={styles.title}>{t('title')}</Text>
-          <View style={{ width: 28 }} />
+          <TouchableOpacity onPress={toggleFavorite} disabled={favoriteLoading}>
+            {favoriteLoading ? (
+              <ActivityIndicator size="small" color={COLORS.primary} />
+            ) : (
+              <Ionicons 
+                name={isFavorite ? "heart" : "heart-outline"} 
+                size={28} 
+                color={isFavorite ? COLORS.error : COLORS.text} 
+              />
+            )}
+          </TouchableOpacity>
         </View>
 
         <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -145,6 +346,39 @@ export default function DictionaryScreen() {
               {selectedTerm.image_url && (
                 <Image source={{ uri: selectedTerm.image_url }} style={styles.termImage} />
               )}
+
+              {/* Action Buttons */}
+              <View style={styles.actionButtons}>
+                <TouchableOpacity 
+                  style={[styles.actionButton, isFavorite && styles.actionButtonActive]}
+                  onPress={toggleFavorite}
+                  disabled={favoriteLoading}
+                >
+                  <Ionicons 
+                    name={isFavorite ? "heart" : "heart-outline"} 
+                    size={20} 
+                    color={isFavorite ? "#fff" : COLORS.primary} 
+                  />
+                  <Text style={[styles.actionButtonText, isFavorite && styles.actionButtonTextActive]}>
+                    {isFavorite ? t('removeFavorite') : t('addFavorite')}
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                  style={styles.actionButton}
+                  onPress={createFlashcard}
+                  disabled={flashcardLoading}
+                >
+                  {flashcardLoading ? (
+                    <ActivityIndicator size="small" color={COLORS.primary} />
+                  ) : (
+                    <>
+                      <Ionicons name="card-outline" size={20} color={COLORS.primary} />
+                      <Text style={styles.actionButtonText}>{t('addFlashcard')}</Text>
+                    </>
+                  )}
+                </TouchableOpacity>
+              </View>
 
               <View style={styles.infoCard}>
                 <View style={styles.infoRow}>
@@ -235,7 +469,9 @@ export default function DictionaryScreen() {
           <Ionicons name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.title}>{t('title')}</Text>
-        <View style={{ width: 28 }} />
+        <TouchableOpacity onPress={() => router.push('/flashcards')}>
+          <Ionicons name="card" size={28} color={COLORS.primary} />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.searchContainer}>
@@ -254,30 +490,69 @@ export default function DictionaryScreen() {
         ) : null}
       </View>
 
+      {/* Filter Tabs */}
+      <View style={styles.filterTabs}>
+        <TouchableOpacity 
+          style={[styles.filterTab, !showFavoritesOnly && styles.filterTabActive]}
+          onPress={() => setShowFavoritesOnly(false)}
+        >
+          <Text style={[styles.filterTabText, !showFavoritesOnly && styles.filterTabTextActive]}>
+            {t('all')} ({terms.length})
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          style={[styles.filterTab, showFavoritesOnly && styles.filterTabActive]}
+          onPress={() => setShowFavoritesOnly(true)}
+        >
+          <Ionicons 
+            name="heart" 
+            size={16} 
+            color={showFavoritesOnly ? '#fff' : COLORS.primary} 
+            style={{ marginRight: 4 }}
+          />
+          <Text style={[styles.filterTabText, showFavoritesOnly && styles.filterTabTextActive]}>
+            {t('favorites')} ({favoriteIds.size})
+          </Text>
+        </TouchableOpacity>
+      </View>
+
       <ScrollView contentContainerStyle={styles.termsContainer}>
         <Text style={styles.subtitle}>
           {t('subtitle')}
         </Text>
 
-        {filteredTerms.map((term) => (
-          <TouchableOpacity
-            key={term.id}
-            style={styles.termCard}
-            onPress={() => loadTerm(term.id)}
-          >
-            <View style={styles.termCardIcon}>
-              <Text style={styles.termCardLetter}>
-                {term.origin === 'Ebraico' ? 'א' : 'α'}
-              </Text>
-            </View>
-            <View style={styles.termCardContent}>
-              <Text style={styles.termCardTitle}>{term.term}</Text>
-              <Text style={styles.termCardMeaning} numberOfLines={1}>{term.meaning}</Text>
-              <Text style={styles.termCardOrigin}>{term.origin}</Text>
-            </View>
-            <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
-          </TouchableOpacity>
-        ))}
+        {displayedTerms.length === 0 ? (
+          <View style={styles.emptyState}>
+            <Ionicons name="heart-outline" size={48} color={COLORS.textMuted} />
+            <Text style={styles.emptyText}>
+              {showFavoritesOnly ? 'Nessun preferito salvato' : 'Nessun risultato'}
+            </Text>
+          </View>
+        ) : (
+          displayedTerms.map((term) => (
+            <TouchableOpacity
+              key={term.id}
+              style={styles.termCard}
+              onPress={() => loadTerm(term.id)}
+            >
+              <View style={styles.termCardIcon}>
+                <Text style={styles.termCardLetter}>
+                  {term.origin.includes('Ebraico') || term.origin.includes('Hebrew') ? 'א' : 
+                   term.origin.includes('Aramaico') || term.origin.includes('Aramaic') ? 'א' : 'α'}
+                </Text>
+              </View>
+              <View style={styles.termCardContent}>
+                <Text style={styles.termCardTitle}>{term.term}</Text>
+                <Text style={styles.termCardMeaning} numberOfLines={1}>{term.meaning}</Text>
+                <Text style={styles.termCardOrigin}>{term.origin}</Text>
+              </View>
+              {favoriteIds.has(term.id) && (
+                <Ionicons name="heart" size={16} color={COLORS.error} style={{ marginRight: 8 }} />
+              )}
+              <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+            </TouchableOpacity>
+          ))
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -311,6 +586,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLORS.card,
     margin: SPACING.md,
+    marginBottom: 0,
     paddingHorizontal: SPACING.md,
     borderRadius: BORDER_RADIUS.lg,
   },
@@ -321,6 +597,30 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.md,
     marginLeft: SPACING.sm,
   },
+  filterTabs: {
+    flexDirection: 'row',
+    margin: SPACING.md,
+    gap: SPACING.sm,
+  },
+  filterTab: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.md,
+    borderRadius: BORDER_RADIUS.full,
+    backgroundColor: COLORS.card,
+  },
+  filterTabActive: {
+    backgroundColor: COLORS.primary,
+  },
+  filterTabText: {
+    fontSize: 14,
+    color: COLORS.text,
+  },
+  filterTabTextActive: {
+    color: '#fff',
+    fontWeight: '600',
+  },
   subtitle: {
     fontSize: 14,
     color: COLORS.textLight,
@@ -329,6 +629,7 @@ const styles = StyleSheet.create({
   },
   termsContainer: {
     padding: SPACING.md,
+    paddingTop: 0,
     paddingBottom: 100,
   },
   termCard: {
@@ -403,6 +704,35 @@ const styles = StyleSheet.create({
     height: 180,
     borderRadius: BORDER_RADIUS.lg,
     marginBottom: SPACING.lg,
+  },
+  actionButtons: {
+    flexDirection: 'row',
+    gap: SPACING.sm,
+    marginBottom: SPACING.lg,
+  },
+  actionButton: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: SPACING.xs,
+    paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.md,
+    borderRadius: BORDER_RADIUS.md,
+    backgroundColor: COLORS.card,
+    borderWidth: 1,
+    borderColor: COLORS.primary,
+  },
+  actionButtonActive: {
+    backgroundColor: COLORS.primary,
+  },
+  actionButtonText: {
+    fontSize: 13,
+    color: COLORS.primary,
+    fontWeight: '500',
+  },
+  actionButtonTextActive: {
+    color: '#fff',
   },
   infoCard: {
     backgroundColor: COLORS.card,
@@ -506,5 +836,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: COLORS.text,
     lineHeight: 22,
+  },
+  emptyState: {
+    alignItems: 'center',
+    paddingVertical: SPACING.xl * 2,
+  },
+  emptyText: {
+    marginTop: SPACING.md,
+    fontSize: 16,
+    color: COLORS.textMuted,
   },
 });
