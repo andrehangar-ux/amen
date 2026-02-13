@@ -198,7 +198,7 @@ export default function HomeScreen() {
             <View style={styles.progressCard}>
               <View style={styles.progressItem}>
                 <View style={styles.progressIconContainer}>
-                  <Ionicons name="flame" size={24} color={COLORS.error} />
+                  <Icon name="flame" size={24} color={COLORS.error} />
                 </View>
                 <Text style={styles.progressValue}>{progress.reading_streak || 0}</Text>
                 <Text style={styles.progressLabel}>{t('daysInRow')}</Text>
@@ -206,7 +206,7 @@ export default function HomeScreen() {
               <View style={styles.progressDivider} />
               <View style={styles.progressItem}>
                 <View style={styles.progressIconContainer}>
-                  <Ionicons name="book" size={24} color={COLORS.primary} />
+                  <Icon name="book" size={24} color={COLORS.primary} />
                 </View>
                 <Text style={styles.progressValue}>{progress.total_chapters_read || 0}</Text>
                 <Text style={styles.progressLabel}>{t('chaptersRead')}</Text>
@@ -214,7 +214,7 @@ export default function HomeScreen() {
               <View style={styles.progressDivider} />
               <View style={styles.progressItem}>
                 <View style={styles.progressIconContainer}>
-                  <Ionicons name="create" size={24} color={COLORS.accent} />
+                  <Icon name="create" size={24} color={COLORS.accent} />
                 </View>
                 <Text style={styles.progressValue}>{progress.total_journal_entries || 0}</Text>
                 <Text style={styles.progressLabel}>{t('journalEntries')}</Text>
@@ -229,35 +229,35 @@ export default function HomeScreen() {
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.exploreScroll}>
             <TouchableOpacity style={styles.exploreCard} onPress={() => router.push('/quiz')}>
               <View style={[styles.exploreIcon, { backgroundColor: '#FF6B6B20' }]}>
-                <Ionicons name="help-circle" size={26} color="#FF6B6B" />
+                <Icon name="help-circle" size={26} color="#FF6B6B" />
               </View>
               <Text style={styles.exploreTitle}>{t('quizzes')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.exploreCard} onPress={() => router.push('/dictionary')}>
               <View style={[styles.exploreIcon, { backgroundColor: '#4ECDC420' }]}>
-                <Ionicons name="language" size={26} color="#4ECDC4" />
+                <Icon name="language" size={26} color="#4ECDC4" />
               </View>
               <Text style={styles.exploreTitle}>{t('dictionary')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.exploreCard} onPress={() => router.push('/forum')}>
               <View style={[styles.exploreIcon, { backgroundColor: '#9B59B620' }]}>
-                <Ionicons name="chatbubbles" size={26} color="#9B59B6" />
+                <Icon name="chatbubbles" size={26} color="#9B59B6" />
               </View>
               <Text style={styles.exploreTitle}>{t('forum')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.exploreCard} onPress={() => router.push('/maps')}>
               <View style={[styles.exploreIcon, { backgroundColor: '#3498DB20' }]}>
-                <Ionicons name="map" size={26} color="#3498DB" />
+                <Icon name="map" size={26} color="#3498DB" />
               </View>
               <Text style={styles.exploreTitle}>{t('maps')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.exploreCard} onPress={() => router.push('/events')}>
               <View style={[styles.exploreIcon, { backgroundColor: '#E91E6320' }]}>
-                <Ionicons name="videocam" size={26} color="#E91E63" />
+                <Icon name="videocam" size={26} color="#E91E63" />
               </View>
               <Text style={styles.exploreTitle}>{t('liveEvents')}</Text>
             </TouchableOpacity>
