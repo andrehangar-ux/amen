@@ -3338,15 +3338,45 @@ def translate_dict_term(term_data: dict, term_id: str, lang: str) -> dict:
 @api_router.get("/dictionary")
 async def get_dictionary_terms(lang: str = "it"):
     """Get all dictionary terms with optional translation"""
-    return [
-        {
+    labels = DICT_TRANSLATIONS.get(lang, DICT_TRANSLATIONS["it"])
+    
+    async def get_origin_label(origin: str) -> str:
+        if origin == "Ebraico":
+            return labels["origin_hebrew"]
+        elif origin == "Greco":
+            return labels["origin_greek"]
+        elif origin == "Aramaico":
+            return labels.get("origin_aramaic", "Aramaic")
+        elif origin == "Ebraico/Aramaico":
+            return f"{labels['origin_hebrew']}/{labels.get('origin_aramaic', 'Aramaic')}"
+        return origin
+    
+    async def get_meaning(key: str, term: dict) -> str:
+        # Check pre-translated versions first
+        if key in DICT_TERM_TRANSLATIONS and lang in DICT_TERM_TRANSLATIONS[key]:
+            return DICT_TERM_TRANSLATIONS[key][lang].get("meaning", term["meaning"])
+        
+        # Check MongoDB cache for AI translations
+        cached = await db.dictionary_translations.find_one({
+            "term_id": key,
+            "language": lang
+        }, {"_id": 0})
+        if cached and cached.get("meaning"):
+            return cached["meaning"]
+        
+        return term["meaning"]
+    
+    results = []
+    for key, term in BIBLICAL_DICTIONARY.items():
+        meaning = await get_meaning(key, term) if lang != "it" else term["meaning"]
+        results.append({
             "id": key,
             "term": term["term"],
-            "origin": DICT_TRANSLATIONS.get(lang, DICT_TRANSLATIONS["it"])["origin_hebrew"] if term["origin"] == "Ebraico" else DICT_TRANSLATIONS.get(lang, DICT_TRANSLATIONS["it"])["origin_greek"],
-            "meaning": DICT_TERM_TRANSLATIONS.get(key, {}).get(lang, {}).get("meaning", term["meaning"]),
-        }
-        for key, term in BIBLICAL_DICTIONARY.items()
-    ]
+            "origin": await get_origin_label(term["origin"]),
+            "meaning": meaning,
+        })
+    
+    return results
 
 async def ai_translate_dict_term(term_data: dict, term_id: str, target_lang: str) -> dict:
     """Use AI to translate dictionary term and cache the result"""
