@@ -139,7 +139,7 @@ export default function CommunityScreen() {
           {item.message_type === 'prayer_request' && (
             <View style={styles.prayerBadge}>
               <Ionicons name="hand-left" size={12} color={COLORS.accent} />
-              <Text style={styles.prayerText}>Preghiera</Text>
+              <Text style={styles.prayerText}>{t('prayer')}</Text>
             </View>
           )}
         </View>
@@ -150,7 +150,7 @@ export default function CommunityScreen() {
 
         {showTranslation && (
           <View style={styles.originalContainer}>
-            <Text style={styles.originalLabel}>Originale ({getFlag(item.original_language)}):</Text>
+            <Text style={styles.originalLabel}>{t('original')} ({getFlag(item.original_language)}):</Text>
             <Text style={styles.originalText}>{item.content}</Text>
           </View>
         )}
@@ -167,7 +167,7 @@ export default function CommunityScreen() {
             ) : (
               <>
                 <Ionicons name="language" size={14} color={COLORS.primary} />
-                <Text style={styles.translateText}>Traduci</Text>
+                <Text style={styles.translateText}>{t('translate')}</Text>
               </>
             )}
           </TouchableOpacity>
@@ -195,7 +195,7 @@ export default function CommunityScreen() {
         </TouchableOpacity>
         <View style={styles.headerContent}>
           <Text style={styles.headerTitle}>{t('community')}</Text>
-          <Text style={styles.headerSubtitle}>Connettiti con fratelli nel mondo</Text>
+          <Text style={styles.headerSubtitle}>{t('connectWithBrothers')}</Text>
         </View>
         <View style={styles.languageBadge}>
           <Text style={styles.languageFlag}>{languages[currentLanguage]?.flag}</Text>
@@ -224,8 +224,8 @@ export default function CommunityScreen() {
             ListEmptyComponent={
               <View style={styles.emptyContainer}>
                 <Ionicons name="people-outline" size={64} color={COLORS.textMuted} />
-                <Text style={styles.emptyText}>Nessun messaggio</Text>
-                <Text style={styles.emptySubtext}>Sii il primo a condividere!</Text>
+                <Text style={styles.emptyText}>{t('noMessagesYet')}</Text>
+                <Text style={styles.emptySubtext}>{t('beFirstToShare')}</Text>
               </View>
             }
           />
@@ -235,7 +235,7 @@ export default function CommunityScreen() {
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
-            placeholder="Condividi un pensiero, una preghiera..."
+            placeholder={t('shareThought')}
             placeholderTextColor={COLORS.textMuted}
             value={newMessage}
             onChangeText={setNewMessage}
