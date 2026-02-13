@@ -37,6 +37,7 @@ interface ForumPost {
 }
 
 export default function ForumScreen() {
+  const { t } = useTranslation();
   const [categories, setCategories] = useState<ForumCategory[]>([]);
   const [posts, setPosts] = useState<ForumPost[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -90,13 +91,13 @@ export default function ForumScreen() {
         p.post_id === postId ? { ...p, votes: result.votes } : p
       ));
     } catch (error) {
-      Alert.alert('Errore', 'Impossibile votare');
+      Alert.alert(t('error'), t('unableToVote'));
     }
   };
 
   const submitNewPost = async () => {
     if (!newTitle.trim() || !newContent.trim() || !newCategory) {
-      Alert.alert('Errore', 'Compila tutti i campi');
+      Alert.alert(t('error'), t('fillAllFields'));
       return;
     }
 
@@ -108,9 +109,9 @@ export default function ForumScreen() {
       setNewTitle('');
       setNewContent('');
       setNewCategory('');
-      Alert.alert('Pubblicato!', 'Il tuo post è stato creato');
+      Alert.alert(t('published'), t('postCreated'));
     } catch (error) {
-      Alert.alert('Errore', 'Impossibile creare il post');
+      Alert.alert(t('error'), t('unableToCreatePost'));
     } finally {
       setSubmitting(false);
     }
@@ -140,7 +141,7 @@ export default function ForumScreen() {
         <TouchableOpacity onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
-        <Text style={styles.title}>Forum Comunitario</Text>
+        <Text style={styles.title}>{t('communityForum')}</Text>
         <TouchableOpacity onPress={() => setShowNewPost(true)}>
           <Ionicons name="add-circle" size={28} color={COLORS.primary} />
         </TouchableOpacity>
@@ -153,7 +154,7 @@ export default function ForumScreen() {
           onPress={() => handleCategorySelect(null)}
         >
           <Text style={[styles.categoryChipText, !selectedCategory && styles.categoryChipTextSelected]}>
-            Tutti
+            {t('all')}
           </Text>
         </TouchableOpacity>
         {categories.map(cat => (
@@ -206,8 +207,8 @@ export default function ForumScreen() {
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
             <Ionicons name="chatbubbles-outline" size={60} color={COLORS.textMuted} />
-            <Text style={styles.emptyText}>Nessun post ancora</Text>
-            <Text style={styles.emptySubtext}>Sii il primo a pubblicare!</Text>
+            <Text style={styles.emptyText}>{t('noPostsYet')}</Text>
+            <Text style={styles.emptySubtext}>{t('beFirstToPost')}</Text>
           </View>
         }
       />
@@ -217,14 +218,14 @@ export default function ForumScreen() {
         <View style={styles.modalOverlay}>
           <View style={styles.modal}>
             <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Nuovo Post</Text>
+              <Text style={styles.modalTitle}>{t('newPost')}</Text>
               <TouchableOpacity onPress={() => setShowNewPost(false)}>
                 <Ionicons name="close" size={28} color={COLORS.text} />
               </TouchableOpacity>
             </View>
 
             <ScrollView style={styles.modalContent}>
-              <Text style={styles.fieldLabel}>Categoria</Text>
+              <Text style={styles.fieldLabel}>{t('category')}</Text>
               <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categorySelect}>
                 {categories.map(cat => (
                   <TouchableOpacity
@@ -240,19 +241,19 @@ export default function ForumScreen() {
                 ))}
               </ScrollView>
 
-              <Text style={styles.fieldLabel}>Titolo</Text>
+              <Text style={styles.fieldLabel}>{t('title')}</Text>
               <TextInput
                 style={styles.input}
-                placeholder="Titolo del post..."
+                placeholder={t('postTitlePlaceholder')}
                 placeholderTextColor={COLORS.textMuted}
                 value={newTitle}
                 onChangeText={setNewTitle}
               />
 
-              <Text style={styles.fieldLabel}>Contenuto</Text>
+              <Text style={styles.fieldLabel}>{t('content')}</Text>
               <TextInput
                 style={[styles.input, styles.contentInput]}
-                placeholder="Scrivi il tuo messaggio..."
+                placeholder={t('writeYourMessage')}
                 placeholderTextColor={COLORS.textMuted}
                 multiline
                 numberOfLines={6}
@@ -268,7 +269,7 @@ export default function ForumScreen() {
                 {submitting ? (
                   <ActivityIndicator color="#fff" />
                 ) : (
-                  <Text style={styles.submitButtonText}>Pubblica</Text>
+                  <Text style={styles.submitButtonText}>{t('publish')}</Text>
                 )}
               </TouchableOpacity>
             </ScrollView>
