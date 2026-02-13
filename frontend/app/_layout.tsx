@@ -1,18 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useAuthStore } from '../src/store/authStore';
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, ActivityIndicator, StyleSheet, Platform } from 'react-native';
 import { COLORS } from '../src/utils/theme';
+import * as SplashScreen from 'expo-splash-screen';
+import { useFonts } from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
+
+// Prevent splash screen from auto-hiding
+SplashScreen.preventAutoHideAsync().catch(() => {});
 
 export default function RootLayout() {
-  const { checkAuth, isLoading } = useAuthStore();
+  const { checkAuth, isLoading: authLoading } = useAuthStore();
+
+  // Load Ionicons font for web platform
+  const [fontsLoaded] = useFonts({
+    ...Ionicons.font,
+  });
 
   useEffect(() => {
     checkAuth();
   }, []);
 
-  if (isLoading) {
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded && !authLoading) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, authLoading]);
+
+  useEffect(() => {
+    onLayoutRootView();
+  }, [onLayoutRootView]);
+
+  if (!fontsLoaded || authLoading) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={COLORS.primary} />
