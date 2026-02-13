@@ -217,10 +217,10 @@ export const api = {
   // Quiz
   getQuizTopics: (lang = 'it') => api.fetch(`/api/quiz/topics?lang=${lang}`),
   getQuiz: (topic: string, lang = 'it') => api.fetch(`/api/quiz/${topic}?lang=${lang}`),
-  submitQuiz: (topic: string, answers: Record<string, number>) =>
+  submitQuiz: (topic: string, answers: Record<string, number>, language = 'it') =>
     api.fetch('/api/quiz/submit', {
       method: 'POST',
-      body: JSON.stringify({ topic, answers }),
+      body: JSON.stringify({ topic, answers, language }),
     }),
   getQuizHistory: () => api.fetch('/api/quiz/history'),
 
