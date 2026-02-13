@@ -340,13 +340,10 @@ class TestQuizSubmit:
             quiz = quiz_response.json()
             
             if "questions" in quiz and len(quiz["questions"]) > 0:
-                # Submit answers (all correct answers)
-                answers = []
+                # Submit answers as Dict[str, int] - question_id -> selected_option_index
+                answers = {}
                 for q in quiz["questions"]:
-                    answers.append({
-                        "question_id": q.get("id", "q1"),
-                        "answer": q.get("correct", 0)
-                    })
+                    answers[q.get("id", "q1")] = q.get("correct", 0)
                 
                 submit_response = authenticated_client.post(
                     f"{BASE_URL}/api/quiz/submit",
@@ -359,6 +356,11 @@ class TestQuizSubmit:
                 
                 # Should return 200 or 201
                 assert submit_response.status_code in [200, 201], f"Quiz submit failed: {submit_response.text}"
+                
+                # Verify response structure
+                data = submit_response.json()
+                assert "score" in data
+                assert "correct_count" in data or "results" in data
 
 
 class TestDictionarySearch:
