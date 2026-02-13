@@ -842,4 +842,90 @@ const styles = StyleSheet.create({
   success: {
     color: '#27AE60',
   },
+  // New Result Screen Styles
+  resultHeader: {
+    alignItems: 'center',
+    marginBottom: SPACING.lg,
+  },
+  resultEmoji: {
+    fontSize: 60,
+    marginBottom: SPACING.sm,
+  },
+  resultMessage: {
+    fontSize: 18,
+    color: COLORS.textLight,
+    marginTop: SPACING.xs,
+    fontWeight: '500',
+  },
+  resultStatsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: SPACING.lg,
+    backgroundColor: COLORS.card,
+    borderRadius: BORDER_RADIUS.lg,
+    padding: SPACING.md,
+    ...SHADOWS.small,
+  },
+  resultStat: {
+    alignItems: 'center',
+    paddingHorizontal: SPACING.lg,
+  },
+  resultStatNumber: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: COLORS.text,
+    marginTop: SPACING.xs,
+  },
+  resultStatLabel: {
+    fontSize: 12,
+    color: COLORS.textMuted,
+    marginTop: 2,
+  },
+  resultStatDivider: {
+    width: 1,
+    height: 40,
+    backgroundColor: COLORS.border,
+  },
+  showAllBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: SPACING.md,
+    marginTop: SPACING.lg,
+    backgroundColor: COLORS.primary + '10',
+    borderRadius: BORDER_RADIUS.lg,
+    marginHorizontal: SPACING.md,
+    gap: SPACING.xs,
+  },
+  showAllBtnText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: COLORS.primary,
+  },
+  answerSection: {
+    marginTop: SPACING.md,
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: SPACING.sm,
+    gap: SPACING.xs,
+  },
+  sectionHeaderText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: COLORS.text,
+  },
+  wrongCard: {
+    borderLeftColor: COLORS.error,
+  },
+  correctCard: {
+    borderLeftColor: COLORS.success,
+  },
+  explanationBoxSuccess: {
+    backgroundColor: COLORS.success + '10',
+    borderRadius: BORDER_RADIUS.md,
+    padding: SPACING.sm,
+    marginTop: SPACING.sm,
+  },
 });
