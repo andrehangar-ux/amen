@@ -234,6 +234,34 @@ export const api = {
       body: JSON.stringify({ term_id: termId, question }),
     }),
 
+  // Dictionary Favorites
+  getDictionaryFavorites: (lang = 'it') => api.fetch(`/api/dictionary/favorites?lang=${lang}`),
+  addDictionaryFavorite: (termId: string) =>
+    api.fetch('/api/dictionary/favorites', {
+      method: 'POST',
+      body: JSON.stringify({ term_id: termId }),
+    }),
+  removeDictionaryFavorite: (termId: string) =>
+    api.fetch(`/api/dictionary/favorites/${termId}`, { method: 'DELETE' }),
+  checkDictionaryFavorite: (termId: string) =>
+    api.fetch(`/api/dictionary/favorites/check/${termId}`),
+
+  // Dictionary Flashcards
+  getFlashcards: (lang = 'it') => api.fetch(`/api/dictionary/flashcards?lang=${lang}`),
+  getDueFlashcards: (lang = 'it') => api.fetch(`/api/dictionary/flashcards/due?lang=${lang}`),
+  createFlashcard: (termId: string, note?: string) =>
+    api.fetch('/api/dictionary/flashcards', {
+      method: 'POST',
+      body: JSON.stringify({ term_id: termId, note }),
+    }),
+  reviewFlashcard: (flashcardId: string, quality: number) =>
+    api.fetch(`/api/dictionary/flashcards/${flashcardId}/review?quality=${quality}`, {
+      method: 'PUT',
+    }),
+  deleteFlashcard: (flashcardId: string) =>
+    api.fetch(`/api/dictionary/flashcards/${flashcardId}`, { method: 'DELETE' }),
+  getFlashcardStats: () => api.fetch('/api/dictionary/flashcards/stats'),
+
   // Study - Open Questions
   askQuestion: (question: string, topic?: string, language = 'it') =>
     api.fetch('/api/study/ask', {
