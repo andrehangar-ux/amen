@@ -19,26 +19,6 @@ export default function Root({ children }: PropsWithChildren) {
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Amen!" />
         <meta name="description" content="La tua app spirituale cristiana quotidiana" />
-        
-        {/* Load Ionicons font for web */}
-        <link 
-          href="https://unpkg.com/ionicons@7.2.1/dist/ionicons/ionicons.esm.js" 
-          rel="modulepreload" 
-        />
-        <script 
-          type="module" 
-          src="https://unpkg.com/ionicons@7.2.1/dist/ionicons/ionicons.esm.js"
-        />
-        
-        {/* Preload icon fonts */}
-        <style dangerouslySetInnerHTML={{ __html: `
-          @font-face {
-            font-family: 'Ionicons';
-            src: url('https://unpkg.com/ionicons@7.2.1/dist/ionicons/svg/') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-          }
-        `}} />
 
         <ScrollViewStyleReset />
 
