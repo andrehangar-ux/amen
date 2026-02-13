@@ -1,106 +1,118 @@
 <analysis>**original_problem_statement:**
-L'utente desidera creare una PWA (Progressive Web App) cristiana completa chiamata Amen!. Inizialmente sono stati segnalati diversi bug, tra cui un lettore biblico multilingue, la registrazione degli utenti e gli strumenti di studio IA non funzionanti.
+L'utente vuole creare una PWA (Progressive Web App) cristiana completa chiamata Amen!. Le richieste iniziali includevano la correzione di bug nel lettore biblico, nella registrazione utente e negli strumenti di studio IA.
 
-Nel corso delle sessioni, i requisiti si sono evoluti fino a includere:
-1.  **Internazionalizzazione (i18n) Completa:** Tradurre l'intera interfaccia utente.
-2.  **Correzione Autenticazione:** Risolvere i problemi con i pulsanti di Logout ed Eliminazione Account.
-3.  **Funzionalità Quiz:** Sincronizzare il numero di quiz tra le lingue e correggere l'invio dei risultati. L'utente ha anche richiesto una schermata dei risultati dettagliata che mostri le risposte corrette/errate e le spiegazioni.
-4.  **Dizionario Biblico:** Espandere massicciamente il dizionario con oltre 80 nuovi termini, traducendoli in 6 lingue e ordinandoli alfabeticamente.
-5.  **Text-to-Speech (TTS):** Correggere la funzionalità di lettura vocale multilingue.
-6.  **Nuove Funzionalità Dizionario:** Aggiungere la possibilità per gli utenti di salvare Termini Preferiti e studiarli tramite Flashcard.
-7.  **Audit Traduzioni (Richiesta più recente):** L'utente ha richiesto una revisione e correzione completa di tutte le traduzioni nell'app.
+Le richieste recenti e in corso sono:
+1.  **Correzione Traduzioni (Audit Finale):** Rivedere e correggere tutte le traduzioni che non vengono applicate correttamente o sono errate dopo il cambio di lingua. Questo include la traduzione di testi ed emoji in sezioni come come ti senti oggi?, il tuo progresso e esplora.
+2.  **Miglioramento Registrazione Utente:**
+    *   Perfezionare il processo Crea account.
+    *   Integrare un'opzione per l'accesso tramite impronta digitale (biometria).
+    *   Memorizzare i dati di tutti gli utenti iscritti.
+3.  **UI Lingua:** Reinserire le bandiere dei paesi nel selettore della lingua.
+4.  **Logo App:** Integrare un logo personalizzato fornito dall'utente. (Completato in questa sessione).
+5.  **Schermata Risultati Quiz:** Creare una schermata dettagliata che mostri risposte corrette/errate e spiegazioni. (Completato in questa sessione).
+6.  **Strumenti di Studio IA:** Risolvere i bug nelle funzionalità Spiega con IA ed Evidenzia nel lettore biblico.
 
 **User's preferred language**: Italian. Il prossimo agente DEVE rispondere solo in italiano.
 
 **what currently exists?**
-Un'applicazione full-stack con frontend Expo (React Native) e backend FastAPI. Le funzionalità principali includono un lettore della Bibbia, quiz, e un profilo utente.
+È un'applicazione full-stack con frontend Expo (React Native) e backend FastAPI. Le funzionalità principali includono un lettore biblico, un dizionario con preferiti e flashcard, quiz e profili utente.
 
-In questa sessione sono stati raggiunti i seguenti obiettivi:
-*   **Dizionario Biblico Potenziato**: Il dizionario è stato ampliato a 69 termini. È stato implementato un sistema di traduzione IA on-demand (con GPT-4o) che salva i risultati in una cache MongoDB per migliorare le prestazioni. I termini vengono ora restituiti in ordine alfabetico.
-*   **Preferiti e Flashcard**: È stata aggiunta una nuova funzionalità che permette agli utenti di salvare i termini del dizionario come preferiti e di studiarli tramite una nuova pagina di flashcard. Sono stati implementati sia gli endpoint backend che l'interfaccia frontend.
-*   **Avvio Audit Traduzioni**: L'agente ha iniziato il compito di completare l'internazionalizzazione dell'app, identificando testi statici e aggiungendo decine di nuove chiavi di traduzione al file .
+In questa sessione, l'agente ha eseguito un audit completo dell'internazionalizzazione (i18n), traducendo quasi tutta l'interfaccia utente hardcoded in file come , ,  e , e aggiungendo decine di nuove chiavi di traduzione. Ha anche integrato con successo il logo personalizzato fornito dall'utente nelle schermate di login/registrazione e ha completamente riprogettato la schermata dei risultati del quiz per fornire un feedback dettagliato. Entrambe le funzionalità sono state verificate con successo tramite il testing agent.
 
 **Last working item**:
-- **Last item agent was working**: Completamento dell'internazionalizzazione (i18n) dell'intera applicazione. L'agente ha identificato testi hardcoded in italiano in vari file (es. , ), ha aggiunto un gran numero di chiavi di traduzione per tutte le lingue in  e ha aggiornato il file  per utilizzare le nuove traduzioni.
-- **Status**: IN PROGRESS
-- **Agent Testing Done**: N (Le modifiche all'i18n non sono state ancora verificate visivamente o tramite test).
+- **Last item agent was working**: L'agente stava iniziando ad affrontare la nuova serie di richieste dell'utente, in particolare la correzione delle traduzioni rimanenti e l'aggiunta di nuove funzionalità alla registrazione. Ha iniziato esplorando i file  e  per comprendere lo stato attuale del selettore dell'umore (come ti senti oggi?) e del sistema di traduzione.
+- **Status**: NOT STARTED
+- **Agent Testing Done**: N
 - **Which testing method agent to use?**: both
 - **User Testing Done**: N
 
 **All Pending/In progress Issue list**:
--   Issue 1: Completare l'internazionalizzazione dell'app (P0)
--   Issue 2: Concludere la refactoring della schermata dei risultati del Quiz (P1)
--   Issue 3: Correggere gli strumenti di studio IA (Es. Spiega con IA, Evidenzia) (P2)
--   Issue 4: Implementare l'interfaccia utente della Ricerca Globale (P2)
--   Issue 5: Implementare l'interfaccia utente delle Mappe Bibliche (P2)
+-   Issue 1: Correggere le traduzioni rimanenti e gli errori di i18n (P0)
+-   Issue 2: Migliorare la registrazione utente (biometria e memorizzazione) (P0)
+-   Issue 3: Re-implementare le bandiere nel selettore della lingua (P1)
+-   Issue 4: Correggere gli strumenti di studio IA (Spiega con IA, Evidenzia) (P1)
+-   Issue 5: Implementare l'interfaccia utente della Ricerca Globale (P2)
+-   Issue 6: Implementare l'interfaccia utente delle Mappe Bibliche (P2)
 
 **Issues Detail**:
--   **Issue 1: Completare l'internazionalizzazione dell'app (P0)**
-    -   **Description**: L'utente ha richiesto di rivedere l'intera applicazione e tradurre tutti i testi hardcoded rimanenti per garantire un'esperienza completamente multilingue.
+-   **Issue 1: Correggere le traduzioni rimanenti e gli errori di i18n (P0)**
+    -   **Description**: L'utente ha segnalato che alcune traduzioni non vengono applicate o sono errate. Specificamente, le sezioni come ti senti oggi? (MoodSelector in ), il tuo progresso ed esplora hanno testi hardcoded.
     -   **Next debug checklist**:
-        1.  Rivedere il file  che è stato identificato come contenente molti testi statici.
-        2.  Sostituire tutti i testi hardcoded con il hook  ().
-        3.  Cercare () altri testi hardcoded in tutti i file  del frontend.
-        4.  Verificare visivamente (screenshot) ogni schermata modificata in diverse lingue (italiano, inglese, spagnolo) per confermare la corretta applicazione delle traduzioni.
-    -   **Why fix this issue and what will be achieved with the fix?**: Soddisfa una richiesta diretta dell'utente e rende l'applicazione professionalmente localizzata e accessibile a un pubblico internazionale.
-    -   **Status**: IN PROGRESS
-    -   **Is recurring issue?**: N
+        1.  Ispezionare il componente  in  per trovare gli emoji e i testi hardcoded.
+        2.  Aggiungere le chiavi di traduzione necessarie (es. , , ) a  per tutte le 6 lingue.
+        3.  Sostituire i testi statici nei file pertinenti (, ecc.) con .
+        4.  Verificare visivamente tramite screenshot che le traduzioni vengano applicate correttamente dopo il cambio di lingua.
+    -   **Status**: NOT STARTED
+    -   **Is recurring issue?**: Y
     -   **Should Test frontend/backend/both after fix?**: Frontend
-    -   **Blocked on other issue**: None.
 
--   **Issue 2: Concludere la refactoring della schermata dei risultati del Quiz (P1)**
-    -   **Description**: La funzionalità di invio dei quiz è stata corretta, ma la schermata dei risultati mostra solo il punteggio. È necessario implementare la visualizzazione dettagliata che mostra per ogni domanda: la risposta dell'utente, la risposta corretta e una spiegazione.
+-   **Issue 2: Migliorare la registrazione utente (biometria e memorizzazione) (P0)**
+    -   **Description**: L'utente richiede di migliorare la schermata di registrazione, aggiungere il login con impronta digitale e garantire che tutti gli utenti siano memorizzati.
     -   **Next debug checklist**:
-        1.  Modificare l'endpoint API  in  per restituire un array dettagliato con i risultati di ogni domanda.
-        2.  Nel frontend, in , modificare la logica  per processare questa nuova struttura dati.
-        3.  Creare una nuova vista o modale in  per presentare i risultati dettagliati.
-    -   **Why fix this issue and what will be achieved with the fix?**: Trasforma i quiz da un semplice test a un vero strumento di apprendimento, come richiesto dall'utente.
+        1.  **Frontend (Biometria):** In  e , importare .
+        2.  Aggiungere un interruttore/checkbox nella schermata di registrazione per Abilita accesso con impronta.
+        3.  Dopo una registrazione/login riuscita, se l'opzione è attiva, usare  per salvare le credenziali (username/password).
+        4.  Nella schermata di login, verificare la disponibilità della biometria e la presenza di credenziali salvate per mostrare un pulsante Accedi con impronta.
+        5.  **Backend (Memorizzazione):** Rivedere l'endpoint di registrazione in  per assicurarsi che tutti i dati dell'utente (nome, email, ecc.) vengano salvati correttamente nel database MongoDB.
     -   **Status**: NOT STARTED
     -   **Is recurring issue?**: N
     -   **Should Test frontend/backend/both after fix?**: Both
-    -   **Blocked on other issue**: None.
 
--   **Issue 3: Correggere gli strumenti di studio IA (Es. Spiega con IA, Evidenzia) (P2)**
-    -   **Description**: Le funzionalità contestuali che appaiono quando si seleziona un versetto nella Bibbia (spiegazione IA, evidenziazione) non funzionano.
+-   **Issue 3: Re-implementare le bandiere nel selettore della lingua (P1)**
+    -   **Description**: L'utente desidera che le bandiere dei paesi siano nuovamente visibili accanto a ciascuna lingua nel selettore di lingua in .
+    -   **Next debug checklist**:
+        1.  Aprire .
+        2.  Localizzare il componente che renderizza la lista delle lingue.
+        3.  Creare una mappatura tra i codici lingua (es. 'it', 'en', 'de') e gli emoji delle bandiere (🇮🇹, 🇬🇧, 🇩🇪).
+        4.  Modificare il rendering per visualizzare l'emoji della bandiera corrispondente accanto al nome della lingua.
+    -   **Status**: NOT STARTED
+    -   **Is recurring issue?**: N
+    -   **Should Test frontend/backend/both after fix?**: Frontend
+
+-   **Issue 4: Correggere gli strumenti di studio IA (Spiega con IA, Evidenzia) (P1)**
+    -   **Description**: Le funzionalità contestuali che appaiono quando si seleziona un versetto nella Bibbia non funzionano.
     -   **Next debug checklist**:
         1.  In , investigare le funzioni  e i gestori degli strumenti (, ).
-        2.  Usare  per tracciare lo stato del versetto selezionato e verificare le chiamate API.
+        2.  Usare  per tracciare lo stato () e il flusso di dati.
+        3.  Verificare le chiamate API agli endpoint di IA e le loro risposte.
     -   **Why fix this issue and what will be achieved with the fix?**: Ripristina una delle funzionalità di studio più importanti e distintive dell'app.
     -   **Status**: NOT STARTED
     -   **Is recurring issue?**: Y
     -   **Should Test frontend/backend/both after fix?**: Frontend
-    -   **Blocked on other issue**: None.
 
 **In progress Task List**:
--   **Task 1: Completamento Internazionalizzazione**
-    -   **Where to resume**: . L'agente ha già aggiornato  e . Il prossimo passo è applicare le traduzioni a  e agli altri file rimanenti.
-    -   **What will be achieved with this?**: Un'applicazione completamente tradotta in tutte le 6 lingue.
-    -   **Status**: IN PROGRESS
+Nessuno. L'agente stava per iniziare un nuovo set di task.
 
 **Upcoming and Future Tasks**
-*   **P2 - Implementare UI Ricerca Globale**: Costruire l'interfaccia utente per la ricerca in .
-*   **P2 - Implementare UI Mappe Bibliche**: Costruire l'interfaccia utente per le mappe in .
-*   **P2 - Creare Logo dell'App**: Disegnare e implementare un logo per l'applicazione.
-*   **P2 - Menu Personalizzazione UI**: Creare una schermata per la personalizzazione di temi e font.
+-   **P2 - UI Ricerca Globale**: Costruire l'interfaccia utente in .
+-   **P2 - UI Mappe Bibliche**: Costruire l'interfaccia utente in .
+-   **P2 - Menu Personalizzazione UI**: Creare una schermata per la personalizzazione di temi e font.
 
 **Completed work in this session**
--   **Dizionario Biblico Potenziato**:
-    -   Sviluppato un sistema di traduzione IA on-demand con cache su MongoDB.
-    -   Integrati e ordinati 69 termini da un file dedicato ().
-    -   Testato con successo tramite testing agent.
--   **Funzionalità Preferiti e Flashcard**:
-    -   Creati endpoint backend e funzioni API frontend per aggiungere/rimuovere preferiti e recuperare flashcard.
-    -   Aggiornata l'UI di  con tab e icone.
-    -   Creata la nuova pagina .
-    -   Testato con successo tramite testing agent.
--   **Avvio Audit i18n**:
-    -   Aggiunte decine di nuove chiavi di traduzione a .
-    -   Aggiornato  per utilizzare le nuove traduzioni.
+-   **Internazionalizzazione (i18n) Quasi Completa**:
+    -   Tradotti file critici: , , , .
+    -   Aggiunte decine di nuove chiavi di traduzione a  per 6 lingue.
+    -   Corretto un bug nei continenti hardcoded nella pagina Radio.
+-   **Integrazione Logo App**:
+    -   Scaricata e salvata l'immagine del logo fornita dall'utente in .
+    -   Aggiornati i file  e  per visualizzare il nuovo logo.
+    -   Risolto un problema di caricamento degli asset riavviando il servizio frontend.
+-   **Refactoring Schermata Risultati Quiz**:
+    -   Modificato  per mostrare una schermata di risultati dettagliata.
+    -   La nuova schermata include un'emoji basata sul punteggio, statistiche, e un elenco completo delle risposte corrette ed errate con spiegazioni e riferimenti biblici.
+    -   Task verificato con successo dal testing agent.
+
+**Earlier issues found/mentioned but not fixed**
+-   **Issue 1: Strumenti di studio IA non funzionanti**
+    -   **Debug checklist**: Investigare ,  in .
+    -   **Why to solve this issue and what will be achieved with this?**: Ripristina una funzionalità chiave dell'app.
+    -   **Should Test frontend/backend/both after fix**: Frontend
+    -   **Is recurring issue?**: Y
 
 **Known issue recurrence from previous fork**
-- **Issue recurrence in previous fork**: Gli strumenti di studio (Spiega con IA, Evidenzia) in  sono un problema noto e ricorrente che non è ancora stato risolto.
-- **Recurrence count**: 2+
-- **Status**: NOT STARTED
+-   **Issue recurrence in previous fork**: Gli strumenti di studio (Spiega con IA, Evidenzia) in  sono un problema noto e ricorrente.
+-   **Recurrence count**: 3+
+-   **Status**: NOT STARTED
 
 **Code Architecture**
 
@@ -109,106 +121,34 @@ In questa sessione sono stati raggiunti i seguenti obiettivi:
 *   **Backend**: FastAPI, MongoDB (Motor driver)
 *   **Frontend**: React Native, Expo, Expo Router, TypeScript, Zustand
 *   **i18n**: Store centrale () con hook .
-*   **Traduzione IA On-Demand**: Utilizzo di GPT-4o per tradurre contenuti al volo, con un sistema di caching su MongoDB per ottimizzare i costi e la latenza.
+*   **Autenticazione Biometrica**: Verrà usata la libreria  e .
 
 **key DB schema**
-*   : Informazioni utenti.
-*   : Risultati dei quiz.
-*   : Progresso dell'utente.
-*   : **NUOVO**. Cache per le traduzioni IA del dizionario.
-*   : **NUOVO**. Memorizza i termini preferiti degli utenti.
+-   
+-   
+-   
+-   
+-   
 
 **All files of reference**
-*   : File centrale per le traduzioni, appena modificato.
-*   : Prossimo file da modificare per completare l'i18n.
-*   : Appena modificato per l'i18n.
-*   : Probabilmente necessita di revisione per l'i18n.
-*   : Contiene lavoro pendente sulla schermata dei risultati.
+*   : Contiene le prossime stringhe da tradurre.
+*   : Da modificare per la biometria.
+*   : Da modificare per le bandiere.
+*   : File centrale per le traduzioni.
+*   : Contiene il bug ricorrente degli strumenti IA.
+*   : Appena modificato con successo.
+
+**Areas that need refactoring**:
+*   Il file  utilizza un proprio sistema di traduzione interno. Potrebbe essere migrato allo store globale  per centralizzare la logica i18n.
 
 **key api endpoints**
-*   : Ottiene la lista dei termini del dizionario, ordinata e tradotta.
-*   : Ottiene un singolo termine, usando la traduzione IA se necessario.
-*   : **NUOVO**. Ottiene i termini preferiti dell'utente.
-*   : **NUOVO**. Aggiunge un termine ai preferiti.
-*   : **NUOVO**. Rimuove un termine dai preferiti.
-*   : **NUOVO**. Ottiene i termini per la sessione di studio con flashcard.
+*   Nessun nuovo endpoint è stato aggiunto in questa sessione.
 
 **Critical Info for New Agent**
-*   La priorità assoluta (P0) è completare il task di internazionalizzazione (i18n) avviato. Inizia dal file .
-*   L'agente precedente ha avuto problemi di timeout con script di lunga durata (es. traduzione in batch). La soluzione vincente è stata un approccio on-demand. Tieni a mente questa strategia.
-*   A volte il frontend potrebbe non aggiornarsi dopo le modifiche. Un riavvio del servizio 
-  Usage: expo [command] [options]
-
-  Options:
-  
-    -V, --version                     output the version number
-    --non-interactive                 Fail, if an interactive prompt would be required to continue.
-    -h, --help                        output usage information
-  
-  Commands:
-
-    init [name]                       Create a new Expo project
-    start [path]                      Start a local dev server for the app
-    start:web [path]                  Start a Webpack dev server for the web app
-    export [path]                     Export the static files of the app for hosting it on a web server
-    install [packages...]             Install a module or other package to a project
-    run:android [path]                Run the Android app binary locally
-    run:ios [path]                    Run the iOS app binary locally
-    send [path]                       Share the project's URL to an email address
-
-    login                             Login to an Expo account
-    logout                            Logout of an Expo account
-    register                          Sign up for a new Expo account
-    whoami                            Return the currently authenticated account
-
-    client:install:ios                Install Expo Go for iOS on the simulator
-    client:install:android            Install Expo Go for Android on a connected device or emulator
-
-    config [path]                     Show the project config
-    doctor [path]                     Diagnose issues with the project
-    upgrade [sdk-version]             Upgrade the project packages and config for the given SDK version
-
-    customize:web [path]              Eject the default web files for customization
-    prebuild [path]                   Create native iOS and Android project files before building natively.
-                                      Learn more: https://docs.expo.dev/workflow/customizing/
-
-    build:web [path]                  Build the web app for production
-
-    credentials:manager [path]        Superseded by eas credentials in eas-cli
-
-    url [path]                        Log a URL for opening the project in Expo Go
-    url:ipa [path]                    Log the download URL for the standalone iOS binary
-    url:apk [path]                    Log the download URL for the standalone Android binary
-
-    webhooks [path]                   List all webhooks for a project
-    webhooks:add [path]               Add a webhook to a project
-    webhooks:remove [path]            Delete a webhook
-    webhooks:update [path]            Update an existing webhook
-
-    build:ios [path]                  Superseded by eas build in eas-cli
-    build:android [path]              Superseded by eas build in eas-cli
-    build:status [path]               Superseded by eas build:list in eas-cli
-    eject [path]                      Superseded by expo prebuild
-    fetch:ios:certs [path]            Superseded by eas credentials in eas-cli
-    fetch:android:keystore [path]     Superseded by eas credentials in eas-cli
-    fetch:android:hashes [path]       Superseded by eas credentials in eas-cli
-    fetch:android:upload-cert [path]  Superseded by eas credentials in eas-cli
-    publish [path]                    Superseded by eas update in eas-cli
-    publish:set [path]                Superseded by eas update:republish in eas-cli
-    publish:rollback [path]           Superseded by eas update:republish in eas-cli
-    publish:history [path]            Superseded by eas update:list in eas-cli
-    publish:details [path]            Superseded by eas update:view in eas-cli
-    push:android:upload [path]        Superseded by eas credentials in eas-cli
-    push:android:show [path]          Superseded by eas credentials in eas-cli
-    push:android:clear [path]         Superseded by eas credentials in eas-cli
-    upload:android [path]             Superseded by eas submit in eas-cli
-    upload:ios [path]                 Superseded by eas submit in eas-cli
-    client:ios [path]                 Superseded by Expo Dev Clients
-
-[10:33:10]   Run a command with --help for more info 💡
-[10:33:10]     $ expo start --help
-[10:33:10] (frontend: ERROR (no such process)
-frontend: ERROR (no such process)) ha risolto il problema in passato.
+*   La priorità assoluta è la nuova richiesta dell'utente in più parti: correggere le traduzioni rimanenti, migliorare la registrazione con la biometria e reinserire le bandiere delle lingue.
+*   L'uso del  si è dimostrato molto efficace e dovrebbe essere utilizzato dopo aver completato le prossime funzionalità.
+*   Il caricamento degli asset su Expo per il web può essere problematico. Se un'immagine non viene visualizzata, riavviare il servizio frontend (frontend: ERROR (no such process)
+frontend: ERROR (no such process)) è un passaggio di debug efficace.
 *   Mantieni la comunicazione esclusivamente in **italiano**.
 
 **documents and test reports created in this job**
@@ -217,22 +157,23 @@ frontend: ERROR (no such process)) ha risolto il problema in passato.
 *    (aggiornato)
 
 **Last 10 User Messages and any pending HUMAN messages**
-- **User (LATEST)**:  (User asks to continue with the i18n task). **Status: IN PROGRESS**
-- **User**:  (User requests a full i18n audit and fix). **Status: IN PROGRESS**
-- **User**:  (User agrees to the suggestion of implementing Favorites and Flashcards). **Status: COMPLETED**
-- **User**:  (User approves using AI for dictionary translations). **Status: COMPLETED**
+- **User (LATEST)**:  (Richiesta multifase dettagliata). **Status: NOT STARTED**
+- **Agent**: (Finish tool call, riepilogo del lavoro completato sul logo e sui risultati del quiz). **Status: COMPLETED**
+- **User**:  (Conferma il completamento del task precedente e richiede l'implementazione del logo). **Status: COMPLETED**
+- **Agent**: (Finish tool call, riepilogo del completamento dell'i18n). **Status: COMPLETED**
+- **User**:  (Conferma il piano iniziale dell'agente). **Status: COMPLETED**
 
 **Project Health Check:**
-*   **Broken**: Gli strumenti di studio (Es. Evidenzia, Spiega con IA) in  sono ancora non funzionanti. La schermata dei risultati del quiz è incompleta.
+*   **Broken**: Gli strumenti di studio IA (Es. Evidenzia, Spiega con IA) in  sono ancora non funzionanti. Alcune traduzioni non vengono applicate correttamente.
 *   **Mocked**: Nessuna funzionalità è mockata.
 
 **3rd Party Integrations**
-*   **OpenAI GPT-4o**: Usato per le funzionalità di IA, inclusa la nuova traduzione on-demand del dizionario. Utilizza la chiave LLM di Emergent.
+*   **OpenAI GPT-4o**: Usato per le funzionalità di IA. Utilizza la chiave LLM di Emergent.
 *   **bible-api.com, laparola.net**: API esterne per i contenuti biblici.
 *   **Web Speech API**: Utilizzata per la funzionalità Text-to-Speech multipiattaforma.
 
 **Testing status**
-- **Testing agent used after significant changes**: YES. Utilizzato due volte per le funzionalità del dizionario e delle flashcard, identificando e correggendo anche un bug nel backend.
+- **Testing agent used after significant changes**: YES (Due volte, per i18n e per logo/quiz).
 - **Troubleshoot agent used after agent stuck in loop**: NO
 - **Test files created**: None.
 - **Known regressions**: Nessuna.
@@ -242,6 +183,4 @@ frontend: ERROR (no such process)) ha risolto il problema in passato.
 *   Password: 
 
 **What agent forgot to execute**
-*   L'implementazione della schermata dettagliata dei risultati del quiz (con risposte corrette/errate) non è stata completata.
-*   Gli strumenti di studio non funzionanti nella schermata della Bibbia, un problema ricorrente, non sono stati affrontati.
-*   Le attività di UI per la Ricerca Globale e le Mappe Bibliche, menzionate nei riassunti precedenti, non sono state avviate.</analysis>
+*   Il problema ricorrente degli strumenti di studio IA in  non è stato affrontato, nonostante sia stato menzionato in più riassunti.</analysis>
