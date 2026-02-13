@@ -20,6 +20,12 @@ export default function Root({ children }: PropsWithChildren) {
         <meta name="apple-mobile-web-app-title" content="Amen!" />
         <meta name="description" content="La tua app spirituale cristiana quotidiana" />
 
+        {/* Load Ionicons CSS from CDN */}
+        <link 
+          rel="stylesheet" 
+          href="https://unpkg.com/ionicons@7.2.1/dist/css/ionicons.min.css"
+        />
+
         <ScrollViewStyleReset />
 
         {/* Using raw CSS styles as an escape hatch to ensure the background color never flickers in dark-mode. */}
