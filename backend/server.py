@@ -3156,7 +3156,7 @@ class QuizSubmission(BaseModel):
 @api_router.post("/quiz/submit")
 async def submit_quiz(data: QuizSubmission, user: User = Depends(require_auth)):
     """Submit quiz answers and get AI feedback"""
-    lang = getattr(data, 'language', 'it') or 'it'
+    lang = data.language or 'it'
     quiz = get_quiz_for_language(data.topic, lang)
     
     if not quiz:
