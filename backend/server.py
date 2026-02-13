@@ -3474,25 +3474,6 @@ Return format: {{"meaning": "translated meaning", "description": "translated des
         logger.error(f"AI translation error for {term_id} to {target_lang}: {e}")
         return translate_dict_term(term_data, term_id, target_lang)
 
-@api_router.get("/dictionary/{term_id}")
-async def get_dictionary_term(term_id: str, lang: str = "it"):
-    """Get full dictionary entry with optional translation (uses AI if needed)"""
-    if term_id not in BIBLICAL_DICTIONARY:
-        raise HTTPException(status_code=404, detail="Term not found")
-    
-    term_data = BIBLICAL_DICTIONARY[term_id]
-    
-    # For Italian, return as-is
-    if lang == "it":
-        return term_data
-    
-    # Check if we have pre-translated version
-    if term_id in DICT_TERM_TRANSLATIONS and lang in DICT_TERM_TRANSLATIONS[term_id]:
-        return translate_dict_term(term_data, term_id, lang)
-    
-    # Use AI translation for terms without pre-translated versions
-    return await ai_translate_dict_term(term_data, term_id, lang)
-
 @api_router.get("/dictionary/search/{query}")
 async def search_dictionary(query: str):
     """Search dictionary terms"""
