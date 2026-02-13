@@ -277,6 +277,15 @@ export const translations: Record<string, Record<string, string>> = {
     loginFailed: 'Login fallito',
     googleSessionNotFound: 'Sessione Google non trovata. Riprova.',
     googleLoginFailed: 'Login Google fallito. Verifica la connessione.',
+    // Biometric
+    enableBiometric: 'Abilita accesso con impronta',
+    biometricLogin: 'Accedi con impronta',
+    biometricPrompt: 'Conferma la tua identità',
+    biometricSuccess: 'Autenticazione riuscita',
+    biometricFailed: 'Autenticazione biometrica fallita',
+    biometricNotAvailable: 'Autenticazione biometrica non disponibile',
+    rememberCredentials: 'Ricorda credenziali',
+    usePassword: 'Usa password',
   },
   es: {
     welcome: 'Bienvenido',
@@ -499,6 +508,15 @@ export const translations: Record<string, Record<string, string>> = {
     loginFailed: 'Inicio de sesión fallido',
     googleSessionNotFound: 'Sesión de Google no encontrada. Inténtalo de nuevo.',
     googleLoginFailed: 'Login de Google fallido. Verifica la conexión.',
+    // Biometric
+    enableBiometric: 'Habilitar acceso con huella',
+    biometricLogin: 'Acceder con huella',
+    biometricPrompt: 'Confirma tu identidad',
+    biometricSuccess: 'Autenticación exitosa',
+    biometricFailed: 'Autenticación biométrica fallida',
+    biometricNotAvailable: 'Autenticación biométrica no disponible',
+    rememberCredentials: 'Recordar credenciales',
+    usePassword: 'Usar contraseña',
   },
   en: {
     welcome: 'Welcome',
@@ -721,6 +739,15 @@ export const translations: Record<string, Record<string, string>> = {
     loginFailed: 'Login failed',
     googleSessionNotFound: 'Google session not found. Try again.',
     googleLoginFailed: 'Google login failed. Check your connection.',
+    // Biometric
+    enableBiometric: 'Enable fingerprint login',
+    biometricLogin: 'Login with fingerprint',
+    biometricPrompt: 'Confirm your identity',
+    biometricSuccess: 'Authentication successful',
+    biometricFailed: 'Biometric authentication failed',
+    biometricNotAvailable: 'Biometric authentication not available',
+    rememberCredentials: 'Remember credentials',
+    usePassword: 'Use password',
   },
   pt: {
     welcome: 'Bem-vindo',
@@ -943,6 +970,15 @@ export const translations: Record<string, Record<string, string>> = {
     loginFailed: 'Login falhou',
     googleSessionNotFound: 'Sessão do Google não encontrada. Tente novamente.',
     googleLoginFailed: 'Login do Google falhou. Verifique sua conexão.',
+    // Biometric
+    enableBiometric: 'Ativar acesso com impressão digital',
+    biometricLogin: 'Entrar com impressão digital',
+    biometricPrompt: 'Confirme sua identidade',
+    biometricSuccess: 'Autenticação bem-sucedida',
+    biometricFailed: 'Autenticação biométrica falhou',
+    biometricNotAvailable: 'Autenticação biométrica não disponível',
+    rememberCredentials: 'Lembrar credenciais',
+    usePassword: 'Usar senha',
   },
   fr: {
     welcome: 'Bienvenue',
@@ -1165,6 +1201,15 @@ export const translations: Record<string, Record<string, string>> = {
     loginFailed: 'Connexion échouée',
     googleSessionNotFound: 'Session Google non trouvée. Réessayez.',
     googleLoginFailed: 'Connexion Google échouée. Vérifiez votre connexion.',
+    // Biometric
+    enableBiometric: 'Activer la connexion par empreinte',
+    biometricLogin: 'Connexion par empreinte',
+    biometricPrompt: 'Confirmez votre identité',
+    biometricSuccess: 'Authentification réussie',
+    biometricFailed: 'Authentification biométrique échouée',
+    biometricNotAvailable: 'Authentification biométrique non disponible',
+    rememberCredentials: 'Se souvenir des identifiants',
+    usePassword: 'Utiliser le mot de passe',
   },
   de: {
     welcome: 'Willkommen',
@@ -1387,6 +1432,15 @@ export const translations: Record<string, Record<string, string>> = {
     loginFailed: 'Anmeldung fehlgeschlagen',
     googleSessionNotFound: 'Google-Sitzung nicht gefunden. Versuche es erneut.',
     googleLoginFailed: 'Google-Anmeldung fehlgeschlagen. Überprüfe deine Verbindung.',
+    // Biometric
+    enableBiometric: 'Fingerabdruck-Login aktivieren',
+    biometricLogin: 'Mit Fingerabdruck anmelden',
+    biometricPrompt: 'Bestätige deine Identität',
+    biometricSuccess: 'Authentifizierung erfolgreich',
+    biometricFailed: 'Biometrische Authentifizierung fehlgeschlagen',
+    biometricNotAvailable: 'Biometrische Authentifizierung nicht verfügbar',
+    rememberCredentials: 'Anmeldedaten merken',
+    usePassword: 'Passwort verwenden',
   },
 };
 
