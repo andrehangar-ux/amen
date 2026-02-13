@@ -178,6 +178,23 @@ export default function RegisterScreen() {
               />
             </View>
 
+            {/* Biometric Option - only shown on mobile */}
+            {biometricAvailable && (
+              <View style={styles.biometricOption}>
+                <View style={styles.biometricOptionLeft}>
+                  <Ionicons name="finger-print" size={24} color={COLORS.primary} />
+                  <Text style={styles.biometricOptionText}>{t('enableBiometric')}</Text>
+                </View>
+                <Switch
+                  value={enableBiometric}
+                  onValueChange={setEnableBiometric}
+                  trackColor={{ false: COLORS.border, true: COLORS.primary + '50' }}
+                  thumbColor={enableBiometric ? COLORS.primary : COLORS.textMuted}
+                  data-testid="biometric-switch"
+                />
+              </View>
+            )}
+
             <TouchableOpacity
               style={styles.primaryButton}
               onPress={handleRegister}
