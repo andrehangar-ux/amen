@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { COLORS, SPACING, BORDER_RADIUS, MOODS } from '../utils/theme';
+import { useTranslation } from '../store/languageStore';
 
 interface MoodSelectorProps {
   selectedMood: string | null;
@@ -13,6 +14,8 @@ export const MoodSelector: React.FC<MoodSelectorProps> = ({
   onSelect,
   horizontal = false 
 }) => {
+  const { t } = useTranslation();
+
   if (horizontal) {
     return (
       <ScrollView 
@@ -28,13 +31,14 @@ export const MoodSelector: React.FC<MoodSelectorProps> = ({
               selectedMood === mood.key && { backgroundColor: mood.color + '30', borderColor: mood.color },
             ]}
             onPress={() => onSelect(mood.key)}
+            data-testid={`mood-${mood.key}`}
           >
             <Text style={styles.moodEmoji}>{mood.emoji}</Text>
             <Text style={[
               styles.moodLabel,
               selectedMood === mood.key && { color: COLORS.text }
             ]}>
-              {mood.label}
+              {t(mood.labelKey)}
             </Text>
           </TouchableOpacity>
         ))}
@@ -52,13 +56,14 @@ export const MoodSelector: React.FC<MoodSelectorProps> = ({
             selectedMood === mood.key && { backgroundColor: mood.color + '30', borderColor: mood.color },
           ]}
           onPress={() => onSelect(mood.key)}
+          data-testid={`mood-${mood.key}`}
         >
           <Text style={styles.moodEmoji}>{mood.emoji}</Text>
           <Text style={[
             styles.moodLabel,
             selectedMood === mood.key && { color: COLORS.text }
           ]}>
-            {mood.label}
+            {t(mood.labelKey)}
           </Text>
         </TouchableOpacity>
       ))}

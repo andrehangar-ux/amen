@@ -54,12 +54,12 @@ export const SHADOWS = {
 };
 
 export const MOODS = [
-  { key: 'felice', label: 'Felice', emoji: '😊', color: '#FFD93D' },
-  { key: 'triste', label: 'Triste', emoji: '😢', color: '#74B9FF' },
-  { key: 'ansioso', label: 'Ansioso', emoji: '😰', color: '#A29BFE' },
-  { key: 'arrabbiato', label: 'Arrabbiato', emoji: '😤', color: '#FF7675' },
-  { key: 'grato', label: 'Grato', emoji: '🙏', color: '#00B894' },
-  { key: 'confuso', label: 'Confuso', emoji: '😕', color: '#FDCB6E' },
-  { key: 'speranzoso', label: 'Speranzoso', emoji: '✨', color: '#81ECEC' },
-  { key: 'stanco', label: 'Stanco', emoji: '😴', color: '#DFE6E9' },
+  { key: 'happy', labelKey: 'moodHappy', emoji: '😊', color: '#FFD93D' },
+  { key: 'sad', labelKey: 'moodSad', emoji: '😢', color: '#74B9FF' },
+  { key: 'anxious', labelKey: 'moodAnxious', emoji: '😰', color: '#A29BFE' },
+  { key: 'angry', labelKey: 'moodAngry', emoji: '😤', color: '#FF7675' },
+  { key: 'grateful', labelKey: 'moodGrateful', emoji: '🙏', color: '#00B894' },
+  { key: 'confused', labelKey: 'moodConfused', emoji: '😕', color: '#FDCB6E' },
+  { key: 'hopeful', labelKey: 'moodHopeful', emoji: '✨', color: '#81ECEC' },
+  { key: 'tired', labelKey: 'moodTired', emoji: '😴', color: '#DFE6E9' },
 ];

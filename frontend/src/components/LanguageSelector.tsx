@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Modal, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useLanguageStore } from '../store/languageStore';
+import { useLanguageStore, useTranslation } from '../store/languageStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../utils/theme';
 
 interface LanguageSelectorProps {
@@ -11,6 +11,7 @@ interface LanguageSelectorProps {
 
 export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ visible, onClose }) => {
   const { currentLanguage, languages, setLanguage } = useLanguageStore();
+  const { t } = useTranslation();
 
   const handleSelect = async (lang: string) => {
     await setLanguage(lang);
@@ -32,8 +33,8 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ visible, onC
       <View style={styles.overlay}>
         <View style={styles.container}>
           <View style={styles.header}>
-            <Text style={styles.title}>Seleziona Lingua</Text>
-            <TouchableOpacity onPress={onClose}>
+            <Text style={styles.title}>{t('selectLanguage')}</Text>
+            <TouchableOpacity onPress={onClose} data-testid="close-language-selector">
               <Ionicons name="close" size={24} color={COLORS.text} />
             </TouchableOpacity>
           </View>
