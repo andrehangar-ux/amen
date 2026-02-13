@@ -403,4 +403,21 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
   },
+  biometricButton: {
+    flexDirection: 'row',
+    backgroundColor: COLORS.primary + '10',
+    borderRadius: BORDER_RADIUS.md,
+    height: 56,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: COLORS.primary + '30',
+    gap: SPACING.sm,
+    marginTop: SPACING.sm,
+  },
+  biometricButtonText: {
+    color: COLORS.primary,
+    fontSize: 16,
+    fontWeight: '500',
+  },
 });
