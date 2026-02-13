@@ -10,6 +10,7 @@ import {
   Platform,
   ScrollView,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
@@ -82,7 +83,11 @@ export default function RegisterScreen() {
               <Ionicons name="arrow-back" size={24} color={COLORS.text} />
             </TouchableOpacity>
             <View style={styles.logoContainer}>
-              <Ionicons name="person-add" size={40} color={COLORS.primary} />
+              <Image 
+                source={require('../../assets/images/logo.jpg')} 
+                style={styles.logoImage}
+                resizeMode="contain"
+              />
             </View>
             <Text style={styles.title}>Crea Account</Text>
             <Text style={styles.subtitle}>Inizia il tuo viaggio spirituale</Text>
