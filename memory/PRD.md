@@ -55,7 +55,23 @@ it, en, es, de, fr, pt (6 lingue con TTS)
 
 ### Testing
 - **Backend**: 100% test passati
-- **Frontend**: 90%+ test passati
+- **Frontend**: 100% test passati
+- **Strumenti Studio IA**: ✅ Verificati funzionanti
+
+## Problemi Risolti in Questa Sessione
+
+### ✅ Icone Web (RISOLTO)
+- Creato componente `Icon.tsx` con fallback emoji per Expo Web
+- Le icone ora mostrano emoji chiari invece di quadrati vuoti
+
+### ✅ Strumenti Studio IA (VERIFICATO FUNZIONANTE)
+- Testato l'intero flusso: selezione versetto → apertura tools → AI Spiega
+- L'API `/api/bible/study/ai-explain` risponde correttamente
+- Modal AI funziona e genera spiegazioni in tutte le lingue
+
+### ✅ Bandiere Lingua (VERIFICATO PRESENTI)
+- Bandiere presenti nel selettore lingua in settings.tsx
+- 🇮🇹 IT, 🇪🇸 ES, 🇬🇧 EN, 🇧🇷 PT, 🇫🇷 FR, 🇩🇪 DE
 
 ### Sessioni Precedenti
 - Dizionario Biblico (69 termini con traduzione AI on-demand)
