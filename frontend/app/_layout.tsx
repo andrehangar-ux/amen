@@ -6,7 +6,6 @@ import { View, ActivityIndicator, StyleSheet, Platform } from 'react-native';
 import { COLORS } from '../src/utils/theme';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
 
 // Prevent splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync().catch(() => {});
@@ -14,9 +13,9 @@ SplashScreen.preventAutoHideAsync().catch(() => {});
 export default function RootLayout() {
   const { checkAuth, isLoading: authLoading } = useAuthStore();
 
-  // Load Ionicons font for web platform
+  // Load Ionicons font explicitly
   const [fontsLoaded] = useFonts({
-    ...Ionicons.font,
+    'Ionicons': require('../assets/fonts/Ionicons.ttf'),
   });
 
   useEffect(() => {
