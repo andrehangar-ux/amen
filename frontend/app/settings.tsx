@@ -15,30 +15,30 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useAuthStore } from '../src/store/authStore';
+import { useTranslation } from '../src/store/languageStore';
 import { api } from '../src/utils/api';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../src/utils/theme';
 
 // Helper to show long text alerts
-const showInfoAlert = (title: string, message: string) => {
+const showInfoAlert = (title: string, message: string, buttonText: string) => {
   if (Platform.OS === 'web') {
     window.alert(`${title}\n\n${message}`);
   } else {
-    Alert.alert(title, message, [{ text: 'Ho Capito', style: 'default' }]);
+    Alert.alert(title, message, [{ text: buttonText, style: 'default' }]);
   }
 };
 
 // Cross-platform confirm dialog
-const showConfirm = (title: string, message: string, onConfirm: () => void) => {
+const showConfirm = (title: string, message: string, onConfirm: () => void, cancelText: string, confirmText: string) => {
   if (Platform.OS === 'web') {
-    // On web, use a simple confirm
     const confirmed = window.confirm(`${title}\n\n${message}`);
     if (confirmed) {
       onConfirm();
     }
   } else {
     Alert.alert(title, message, [
-      { text: 'Annulla', style: 'cancel' },
-      { text: 'Conferma', style: 'destructive', onPress: onConfirm },
+      { text: cancelText, style: 'cancel' },
+      { text: confirmText, style: 'destructive', onPress: onConfirm },
     ]);
   }
 };
@@ -63,6 +63,7 @@ const BIBLE_EDITIONS = [
 
 export default function SettingsScreen() {
   const { user, setUser, logout, setSessionToken } = useAuthStore();
+  const { t } = useTranslation();
   const [name, setName] = useState(user?.name || '');
   const [language, setLanguageState] = useState(user?.language || 'it');
   const [preferredBible, setPreferredBible] = useState(user?.preferred_bible || 'nuova_diodati');
@@ -84,10 +85,10 @@ export default function SettingsScreen() {
       if (updatedUser) {
         setUser(updatedUser);
       }
-      Alert.alert('Salvato!', 'Le tue impostazioni sono state aggiornate.');
+      Alert.alert(t('saved'), t('settingsUpdated'));
     } catch (error) {
       console.log('Save settings error:', error);
-      Alert.alert('Salvato!', 'Impostazioni aggiornate localmente.');
+      Alert.alert(t('saved'), t('settingsUpdated'));
     } finally {
       setSaving(false);
     }
@@ -95,8 +96,8 @@ export default function SettingsScreen() {
 
   const handleLogout = () => {
     showConfirm(
-      'Disconnetti',
-      'Vuoi uscire dal tuo account?',
+      t('disconnect'),
+      t('disconnectConfirm'),
       async () => {
         try {
           await logout();
@@ -109,33 +110,37 @@ export default function SettingsScreen() {
           setSessionToken(null);
           router.replace('/(auth)/login');
         }
-      }
+      },
+      t('cancel'),
+      t('confirm')
     );
   };
 
   const handleDeleteAccount = () => {
     showConfirm(
-      'Elimina Account',
-      'Sei sicuro di voler eliminare il tuo account? Questa azione è irreversibile e tutti i tuoi dati verranno cancellati permanentemente.',
+      t('deleteAccount'),
+      t('deleteConfirm'),
       async () => {
         try {
           await api.deleteAccount();
           if (Platform.OS === 'web') {
-            window.alert('Account eliminato con successo');
+            window.alert(t('accountDeleted'));
           } else {
-            Alert.alert('Account Eliminato', 'Il tuo account è stato eliminato con successo.');
+            Alert.alert(t('deleteAccount'), t('accountDeleted'));
           }
           setUser(null);
           setSessionToken(null);
           router.replace('/(auth)/login');
         } catch (error) {
           if (Platform.OS === 'web') {
-            window.alert('Errore: Impossibile eliminare l\'account. Riprova più tardi.');
+            window.alert(t('error') + ': ' + t('deleteAccountError'));
           } else {
-            Alert.alert('Errore', 'Impossibile eliminare l\'account. Riprova più tardi.');
+            Alert.alert(t('error'), t('deleteAccountError'));
           }
         }
-      }
+      },
+      t('cancel'),
+      t('confirm')
     );
   };
 
@@ -148,36 +153,36 @@ export default function SettingsScreen() {
         <TouchableOpacity onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
-        <Text style={styles.title}>Impostazioni</Text>
+        <Text style={styles.title}>{t('settings')}</Text>
         <TouchableOpacity onPress={saveSettings} disabled={saving}>
           {saving ? (
             <ActivityIndicator size="small" color={COLORS.primary} />
           ) : (
-            <Text style={styles.saveButton}>Salva</Text>
+            <Text style={styles.saveButton}>{t('save')}</Text>
           )}
         </TouchableOpacity>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text style={styles.sectionTitle}>Profilo</Text>
+        <Text style={styles.sectionTitle}>{t('profile')}</Text>
         <View style={styles.card}>
-          <Text style={styles.fieldLabel}>Nome</Text>
+          <Text style={styles.fieldLabel}>{t('yourName')}</Text>
           <TextInput
             style={styles.input}
             value={name}
             onChangeText={setName}
-            placeholder="Il tuo nome"
+            placeholder={t('yourName')}
             placeholderTextColor={COLORS.textMuted}
           />
         </View>
 
-        <Text style={styles.sectionTitle}>Lingua</Text>
+        <Text style={styles.sectionTitle}>{t('language')}</Text>
         <TouchableOpacity
           style={styles.card}
           onPress={() => setShowLanguages(!showLanguages)}
         >
           <View style={styles.selectRow}>
-            <Text style={styles.selectLabel}>Lingua dell'app</Text>
+            <Text style={styles.selectLabel}>{t('appLanguage')}</Text>
             <View style={styles.selectValue}>
               <Text style={styles.selectFlag}>{selectedLanguage?.flag}</Text>
               <Text style={styles.selectText}>{selectedLanguage?.name}</Text>
@@ -214,13 +219,13 @@ export default function SettingsScreen() {
           )}
         </TouchableOpacity>
 
-        <Text style={styles.sectionTitle}>Bibbia</Text>
+        <Text style={styles.sectionTitle}>{t('bible')}</Text>
         <TouchableOpacity
           style={styles.card}
           onPress={() => setShowBibles(!showBibles)}
         >
           <View style={styles.selectRow}>
-            <Text style={styles.selectLabel}>Edizione preferita</Text>
+            <Text style={styles.selectLabel}>{t('preferredEdition')}</Text>
             <View style={styles.selectValue}>
               <Text style={styles.selectText}>{selectedBible?.name}</Text>
               <Ionicons
@@ -255,12 +260,12 @@ export default function SettingsScreen() {
           )}
         </TouchableOpacity>
 
-        <Text style={styles.sectionTitle}>Notifiche</Text>
+        <Text style={styles.sectionTitle}>{t('notifications')}</Text>
         <View style={styles.card}>
           <View style={styles.switchRow}>
             <View style={styles.switchContent}>
-              <Text style={styles.switchLabel}>Notifiche Push</Text>
-              <Text style={styles.switchDescription}>Ricevi notifiche dalla community</Text>
+              <Text style={styles.switchLabel}>{t('pushNotifications')}</Text>
+              <Text style={styles.switchDescription}>{t('receiveNotifications')}</Text>
             </View>
             <Switch
               value={notificationsEnabled}
@@ -272,8 +277,8 @@ export default function SettingsScreen() {
 
           <View style={[styles.switchRow, { borderTopWidth: 1, borderTopColor: COLORS.border, marginTop: SPACING.md, paddingTop: SPACING.md }]}>
             <View style={styles.switchContent}>
-              <Text style={styles.switchLabel}>Versetto del Giorno</Text>
-              <Text style={styles.switchDescription}>Ricevi un versetto ogni mattina</Text>
+              <Text style={styles.switchLabel}>{t('dailyVerseNotification')}</Text>
+              <Text style={styles.switchDescription}>{t('receiveVerse')}</Text>
             </View>
             <Switch
               value={dailyVerseEnabled}
@@ -284,99 +289,32 @@ export default function SettingsScreen() {
           </View>
         </View>
 
-        <Text style={styles.sectionTitle}>Informazioni</Text>
+        <Text style={styles.sectionTitle}>{t('info')}</Text>
         <View style={styles.card}>
-          <Text style={styles.infoText}>Email: {user?.email}</Text>
-          <Text style={styles.infoText}>Versione app: 1.0.0</Text>
+          <Text style={styles.infoText}>{t('email')}: {user?.email}</Text>
+          <Text style={styles.infoText}>{t('appVersion')}: 1.0.0</Text>
         </View>
 
         {/* Privacy & Legal Section */}
-        <Text style={styles.sectionTitle}>Privacy e Legale</Text>
+        <Text style={styles.sectionTitle}>{t('privacyLegal')}</Text>
         <View style={styles.card}>
           <TouchableOpacity 
             style={styles.legalItem}
-            onPress={() => showInfoAlert(
-              'Informativa sulla Privacy',
-              `INFORMATIVA SULLA PRIVACY - Amen! App
-
-Ultimo aggiornamento: Febbraio 2026
-
-1. DATI RACCOLTI
-Raccogliamo solo i dati necessari per il funzionamento dell'app:
-- Email e nome (per la registrazione)
-- Note e appunti biblici (per il tuo studio personale)
-- Preferenze di lettura (lingua, edizione biblica)
-
-2. USO DEI DATI
-I tuoi dati vengono utilizzati esclusivamente per:
-- Fornirti un'esperienza personalizzata
-- Sincronizzare i tuoi progressi di lettura
-- Permetterti di interagire nella community
-
-3. CONDIVISIONE DATI
-NON vendiamo né condividiamo i tuoi dati personali con terze parti a scopo commerciale.
-
-4. SICUREZZA
-Utilizziamo protocolli sicuri (HTTPS) e crittografia per proteggere i tuoi dati.
-
-5. I TUOI DIRITTI (GDPR)
-Hai diritto a:
-- Accedere ai tuoi dati
-- Rettificare i tuoi dati
-- Cancellare il tuo account
-- Esportare i tuoi dati
-
-6. CONTATTI
-Per domande sulla privacy: privacy@amen-app.com
-
-Utilizzando questa app, accetti questa informativa.`
-            )}
+            onPress={() => showInfoAlert(t('privacyPolicy'), `Privacy Policy - Amen! App`, t('understood'))}
             data-testid="privacy-policy-button"
           >
             <Ionicons name="shield-checkmark" size={22} color={COLORS.primary} />
-            <Text style={styles.legalText}>Informativa sulla Privacy</Text>
+            <Text style={styles.legalText}>{t('privacyPolicy')}</Text>
             <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
           </TouchableOpacity>
 
           <TouchableOpacity 
             style={styles.legalItem}
-            onPress={() => showInfoAlert(
-              'Termini di Servizio',
-              `TERMINI DI SERVIZIO - Amen! App
-
-1. ACCETTAZIONE
-Utilizzando Amen!, accetti questi termini di servizio.
-
-2. DESCRIZIONE DEL SERVIZIO
-Amen! è un'app per lo studio della Bibbia che include:
-- Lettura della Bibbia (Nuova Diodati, Reina Valera)
-- Strumenti di studio
-- Community di credenti
-- Assistente AI per domande bibliche
-
-3. CONDOTTA DELL'UTENTE
-Ti impegni a:
-- Non pubblicare contenuti offensivi o illegali
-- Rispettare gli altri utenti
-- Non utilizzare l'app per spam o attività commerciali
-
-4. CONTENUTI
-I testi biblici sono di pubblico dominio.
-I contenuti generati dall'AI sono forniti solo a scopo informativo.
-
-5. LIMITAZIONE DI RESPONSABILITÀ
-L'app è fornita "così com'è". Non garantiamo l'accuratezza dei contenuti AI.
-
-6. MODIFICHE
-Ci riserviamo il diritto di modificare questi termini in qualsiasi momento.
-
-7. LEGGE APPLICABILE
-Questi termini sono regolati dalla legge italiana.`
-            )}
+            onPress={() => showInfoAlert(t('termsOfService'), `Terms of Service - Amen! App`, t('understood'))}
             data-testid="terms-of-service-button"
           >
             <Ionicons name="document-text" size={22} color={COLORS.accent} />
-            <Text style={styles.legalText}>Termini di Servizio</Text>
+            <Text style={styles.legalText}>{t('termsOfService')}</Text>
             <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
           </TouchableOpacity>
 
@@ -384,25 +322,15 @@ Questi termini sono regolati dalla legge italiana.`
             style={styles.legalItem}
             onPress={() => {
               if (Platform.OS === 'web') {
-                const confirmed = window.confirm('Gestione Consensi GDPR\n\nVuoi revocare tutti i consensi per il trattamento dei dati? Alcune funzionalità potrebbero non funzionare.');
-                if (confirmed) {
-                  window.alert('Consensi revocati\n\nI tuoi consensi sono stati revocati.');
-                }
+                window.confirm(t('gdprConsents'));
               } else {
-                Alert.alert(
-                  'Consensi GDPR',
-                  'Gestisci i tuoi consensi per il trattamento dei dati secondo il GDPR.',
-                  [
-                    { text: 'Revoca Tutti i Consensi', style: 'destructive', onPress: () => Alert.alert('Consensi revocati', 'I tuoi consensi sono stati revocati. Alcune funzionalità potrebbero non funzionare.') },
-                    { text: 'Mantieni Consensi', style: 'cancel' }
-                  ]
-                );
+                Alert.alert(t('gdprConsents'), '');
               }
             }}
             data-testid="gdpr-consent-button"
           >
             <Ionicons name="checkbox" size={22} color="#27AE60" />
-            <Text style={styles.legalText}>Gestione Consensi GDPR</Text>
+            <Text style={styles.legalText}>{t('gdprConsents')}</Text>
             <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
           </TouchableOpacity>
 
@@ -412,7 +340,7 @@ Questi termini sono regolati dalla legge italiana.`
             data-testid="delete-account-button"
           >
             <Ionicons name="trash" size={22} color="#E74C3C" />
-            <Text style={[styles.legalText, { color: '#E74C3C' }]}>Elimina Account</Text>
+            <Text style={[styles.legalText, { color: '#E74C3C' }]}>{t('deleteAccount')}</Text>
             <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
           </TouchableOpacity>
         </View>
@@ -425,7 +353,7 @@ Questi termini sono regolati dalla legge italiana.`
             data-testid="logout-button"
           >
             <Ionicons name="log-out" size={22} color="#fff" />
-            <Text style={styles.logoutText}>Esci dall'Account</Text>
+            <Text style={styles.logoutText}>{t('logoutAccount')}</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
