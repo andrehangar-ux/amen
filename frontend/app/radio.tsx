@@ -38,6 +38,7 @@ const CONTINENTS = [
 ];
 
 export default function RadioScreen() {
+  const { t } = useTranslation();
   const [radios, setRadios] = useState<Radio[]>([]);
   const [filteredRadios, setFilteredRadios] = useState<Radio[]>([]);
   const [loading, setLoading] = useState(true);
@@ -81,7 +82,7 @@ export default function RadioScreen() {
   const openRadio = (radio: Radio) => {
     const url = radio.stream_url || radio.url;
     Linking.openURL(url).catch(() => {
-      Alert.alert('Errore', 'Impossibile aprire il link della radio');
+      Alert.alert(t('error'), t('unableToOpenRadio'));
     });
   };
 
@@ -109,7 +110,7 @@ export default function RadioScreen() {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={COLORS.primary} />
-        <Text style={styles.loadingText}>Caricamento radio...</Text>
+        <Text style={styles.loadingText}>{t('loadingRadios')}</Text>
       </View>
     );
   }
@@ -120,7 +121,7 @@ export default function RadioScreen() {
         <TouchableOpacity onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
-        <Text style={styles.title}>📻 Radio Evangeliche</Text>
+        <Text style={styles.title}>📻 {t('evangelicalRadios')}</Text>
         <View style={{ width: 28 }} />
       </View>
 
@@ -155,7 +156,7 @@ export default function RadioScreen() {
         {/* Favorites Section */}
         {favorites.size > 0 && selectedContinent === 'all' && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>⭐ Preferiti</Text>
+            <Text style={styles.sectionTitle}>⭐ {t('favorites')}</Text>
             {sortedRadios.filter(r => isFavorite(r.name)).map((radio) => (
               <RadioItem
                 key={`fav-${radio.name}`}
@@ -171,7 +172,7 @@ export default function RadioScreen() {
         {/* All Radios */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>
-            {selectedContinent === 'all' ? 'Tutte le Radio' : `Radio ${selectedContinent}`}
+            {selectedContinent === 'all' ? t('allRadios') : `${t('radios')} ${selectedContinent}`}
             {' '}({sortedRadios.length})
           </Text>
           {sortedRadios.map((radio) => (
@@ -188,7 +189,7 @@ export default function RadioScreen() {
         {sortedRadios.length === 0 && (
           <View style={styles.emptyContainer}>
             <Ionicons name="radio-outline" size={64} color={COLORS.textMuted} />
-            <Text style={styles.emptyText}>Nessuna radio trovata</Text>
+            <Text style={styles.emptyText}>{t('noRadiosFound')}</Text>
           </View>
         )}
       </ScrollView>
