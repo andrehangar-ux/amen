@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -19,6 +19,7 @@ import * as WebBrowser from 'expo-web-browser';
 import * as Linking from 'expo-linking';
 import { useAuthStore } from '../../src/store/authStore';
 import { useTranslation } from '../../src/store/languageStore';
+import { BiometricService } from '../../src/services/BiometricService';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
 
 const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL || '';
@@ -28,8 +29,47 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [biometricAvailable, setBiometricAvailable] = useState(false);
+  const [hasSavedCredentials, setHasSavedCredentials] = useState(false);
   const { login, googleLogin } = useAuthStore();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    checkBiometric();
+  }, []);
+
+  const checkBiometric = async () => {
+    const available = await BiometricService.isAvailable();
+    const enabled = await BiometricService.isBiometricEnabled();
+    const hasCredentials = await BiometricService.hasSavedCredentials();
+    
+    setBiometricAvailable(available && enabled);
+    setHasSavedCredentials(hasCredentials);
+    
+    // Auto-trigger biometric login if available and enabled
+    if (available && enabled && hasCredentials) {
+      handleBiometricLogin();
+    }
+  };
+
+  const handleBiometricLogin = async () => {
+    setLoading(true);
+    try {
+      const authenticated = await BiometricService.authenticate(t('biometricPrompt'));
+      
+      if (authenticated) {
+        const credentials = await BiometricService.getCredentials();
+        if (credentials) {
+          await login(credentials.email, credentials.password);
+          router.replace('/(tabs)');
+        }
+      }
+    } catch (error: any) {
+      Alert.alert(t('error'), error.message || t('biometricFailed'));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -40,6 +80,13 @@ export default function LoginScreen() {
     setLoading(true);
     try {
       await login(email, password);
+      
+      // Save credentials if biometric is enabled
+      const biometricEnabled = await BiometricService.isBiometricEnabled();
+      if (biometricEnabled) {
+        await BiometricService.saveCredentials(email, password);
+      }
+      
       router.replace('/(tabs)');
     } catch (error: any) {
       Alert.alert(t('error'), error.message || t('loginFailed'));
