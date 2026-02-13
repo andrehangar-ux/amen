@@ -20,12 +20,31 @@ it, en, es, de, fr, pt (6 lingue con TTS)
 - [x] **69 termini** organizzati alfabeticamente (Ebraico, Greco, Aramaico)
 - [x] **Traduzione AI on-demand** usando GPT-4o per tutte le 6 lingue
 - [x] **Cache MongoDB** delle traduzioni per performance
-- [x] **Etichette origine** tradotte (Hebrew/Hebreo/Hebräisch/Hébreu/Hebraico ecc.)
-- [x] **API endpoints**:
-  - `GET /api/dictionary?lang={lang}` - Lista 69 termini
-  - `GET /api/dictionary/{term_id}?lang={lang}` - Dettaglio termine con traduzione
-  - `GET /api/dictionary/search/{query}` - Ricerca termini
-- [x] **Testing completo**: 28/28 test backend passati, frontend verificato
+- [x] API endpoints dictionary completamente funzionanti
+
+#### ✅ Sistema Preferiti Dizionario (COMPLETATO)
+- [x] `GET /api/dictionary/favorites` - Lista preferiti utente
+- [x] `POST /api/dictionary/favorites` - Aggiungere termine
+- [x] `DELETE /api/dictionary/favorites/{term_id}` - Rimuovere
+- [x] `GET /api/dictionary/favorites/check/{term_id}` - Verificare se preferito
+- [x] Tabs "Tutti (69)" e "Preferiti (N)" nel frontend
+- [x] Icona cuore nei dettagli termine
+
+#### ✅ Sistema Flashcard con Ripetizione Spaziata (COMPLETATO)
+- [x] `GET /api/dictionary/flashcards` - Lista flashcard utente
+- [x] `POST /api/dictionary/flashcards` - Creare flashcard da termine
+- [x] `PUT /api/dictionary/flashcards/{id}/review?quality=N` - Recensire (SM-2)
+- [x] `DELETE /api/dictionary/flashcards/{id}` - Eliminare
+- [x] `GET /api/dictionary/flashcards/stats` - Statistiche studio
+- [x] `GET /api/dictionary/flashcards/due` - Flashcard da rivedere
+- [x] **Pagina dedicata /flashcards** con modalità studio
+- [x] **Algoritmo SM-2** per calcolo intervalli ripetizione
+- [x] **Livelli padronanza 0-5** con colori distintivi
+
+### Testing
+- **Backend**: 30/30 test passati (100%)
+- **Frontend**: UI verificata completamente
+- **Bug fix**: Corretto ordine routes in server.py
 
 ### Sessioni Precedenti
 - Quiz tradotti in tutte le lingue (IT: 14, ES: 12, EN: 12, DE: 10, FR: 10, PT: 10)
@@ -41,9 +60,8 @@ it, en, es, de, fr, pt (6 lingue con TTS)
 |-----|--------|------|
 | Dizionario biblico "povero" | ✅ FIXED | Ora 69 termini con traduzione AI |
 | Quiz results/submit | ✅ FIXED | API funziona |
-| Logout non funziona | ✅ FIXED | Testato con Playwright |
+| Logout non funziona | ✅ FIXED | Testato |
 | TTS altre lingue | ✅ FIXED | Web Speech API |
-| Pulsanti Privacy/Delete | ✅ FIXED | window.alert/confirm su web |
 
 ## Backlog
 
@@ -59,18 +77,21 @@ it, en, es, de, fr, pt (6 lingue con TTS)
 ## File Chiave
 
 ### Backend
-- `/app/backend/server.py` - API principale
+- `/app/backend/server.py` - API principale (incluso favorites/flashcards)
 - `/app/backend/biblical_dictionary.py` - 69 termini del dizionario
 - `/app/backend/quiz_data.py` - Dati quiz multilingue
+- `/app/backend/tests/test_favorites_flashcards.py` - Test automatici
 
 ### Frontend
-- `/app/frontend/app/dictionary.tsx` - UI dizionario
+- `/app/frontend/app/dictionary.tsx` - UI dizionario con preferiti
+- `/app/frontend/app/flashcards.tsx` - Pagina studio flashcards
 - `/app/frontend/app/quiz.tsx` - Quiz con submit
 - `/app/frontend/app/(tabs)/bible.tsx` - Lettore Bibbia con TTS
-- `/app/frontend/app/settings.tsx` - Impostazioni
 
 ## Database Collections
 - `dictionary_translations` - Cache traduzioni AI
+- `dictionary_favorites` - Preferiti utente
+- `dictionary_flashcards` - Flashcard con dati SM-2
 - `bible_cache` - Cache capitoli Bibbia
 - `users` - Utenti
 - `quiz_history` - Storico quiz
@@ -80,6 +101,5 @@ it, en, es, de, fr, pt (6 lingue con TTS)
 
 ## Note Tecniche
 - Traduzione AI usa `emergentintegrations.llm.chat.LlmChat` con modello `gpt-4o`
-- Cache MongoDB evita richieste AI ripetute
-- React Native Web limitato: usa window.confirm invece di Alert.alert
-- TTS dipende dalle voci installate sul browser/sistema
+- Algoritmo SM-2 per flashcard: qualità 0-2 = reset, 3-5 = incremento
+- Intervalli: 1, 2, 4, 8, 16, 32 giorni basati su livello padronanza
