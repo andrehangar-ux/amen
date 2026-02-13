@@ -14,37 +14,44 @@ it, en, es, de, fr, pt (6 lingue con TTS)
 
 ## Cosa è stato implementato
 
-### Sessione Corrente (Feb 2026) - Fork 6
+### Sessione Corrente (Feb 2026) - Fork 7
 
-#### ✅ Dizionario Biblico Espanso (COMPLETATO)
+#### ✅ Internazionalizzazione Completa (i18n) (COMPLETATO)
+- [x] **~200 chiavi di traduzione** per tutte le 6 lingue
+- [x] **bible.tsx** - Pagina lettore Bibbia completamente tradotta
+- [x] **community.tsx** - Pagina community tradotta
+- [x] **forum.tsx** - Pagina forum tradotta
+- [x] **radio.tsx** - Pagina radio tradotta (inclusi continenti)
+- [x] **settings.tsx** - Pagina impostazioni tradotta
+- [x] Sistema centralizzato in `/app/frontend/src/store/languageStore.ts`
+- [x] Hook `useTranslation()` per accesso alle traduzioni
+
+#### Chiavi tradotte per categoria:
+- **Bible screen**: loadingBooks, chapters, editions, help, studyContextAvailable, yourNotes, note, aiExplain, highlight, share, bookmark, crossReferences, historicalContext, etc.
+- **Community/Forum**: prayer, original, connectWithBrothers, communityForum, newPost, category, title, content, publish, etc.
+- **Radio**: evangelicalRadios, allRadios, favorites, continents (europe, southAmerica, northAmerica, africa, asia, oceania)
+- **Messaggi comuni**: noMessagesYet, noPostsYet, noGroupsFound, fillAllFields, unableToVote, etc.
+
+### Sessioni Precedenti
+
+#### ✅ Dizionario Biblico Espanso (Fork 6)
 - [x] **69 termini** organizzati alfabeticamente (Ebraico, Greco, Aramaico)
 - [x] **Traduzione AI on-demand** usando GPT-4o per tutte le 6 lingue
 - [x] **Cache MongoDB** delle traduzioni per performance
-- [x] API endpoints dictionary completamente funzionanti
 
-#### ✅ Sistema Preferiti Dizionario (COMPLETATO)
-- [x] `GET /api/dictionary/favorites` - Lista preferiti utente
-- [x] `POST /api/dictionary/favorites` - Aggiungere termine
-- [x] `DELETE /api/dictionary/favorites/{term_id}` - Rimuovere
-- [x] `GET /api/dictionary/favorites/check/{term_id}` - Verificare se preferito
+#### ✅ Sistema Preferiti Dizionario (Fork 6)
+- [x] API endpoints dictionary preferiti
 - [x] Tabs "Tutti (69)" e "Preferiti (N)" nel frontend
 - [x] Icona cuore nei dettagli termine
 
-#### ✅ Sistema Flashcard con Ripetizione Spaziata (COMPLETATO)
-- [x] `GET /api/dictionary/flashcards` - Lista flashcard utente
-- [x] `POST /api/dictionary/flashcards` - Creare flashcard da termine
-- [x] `PUT /api/dictionary/flashcards/{id}/review?quality=N` - Recensire (SM-2)
-- [x] `DELETE /api/dictionary/flashcards/{id}` - Eliminare
-- [x] `GET /api/dictionary/flashcards/stats` - Statistiche studio
-- [x] `GET /api/dictionary/flashcards/due` - Flashcard da rivedere
-- [x] **Pagina dedicata /flashcards** con modalità studio
-- [x] **Algoritmo SM-2** per calcolo intervalli ripetizione
-- [x] **Livelli padronanza 0-5** con colori distintivi
+#### ✅ Sistema Flashcard con Ripetizione Spaziata (Fork 6)
+- [x] API flashcard complete
+- [x] Pagina dedicata /flashcards
+- [x] Algoritmo SM-2 per ripetizione spaziata
 
 ### Testing
 - **Backend**: 30/30 test passati (100%)
-- **Frontend**: UI verificata completamente
-- **Bug fix**: Corretto ordine routes in server.py
+- **Frontend i18n**: 90%+ test passati
 
 ### Sessioni Precedenti
 - Quiz tradotti in tutte le lingue (IT: 14, ES: 12, EN: 12, DE: 10, FR: 10, PT: 10)
