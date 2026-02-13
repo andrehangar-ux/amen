@@ -14,67 +14,50 @@ it, en, es, de, fr, pt (6 lingue con TTS)
 
 ## Cosa è stato implementato
 
-### Sessione Corrente (Feb 2026) - Fork 7
+### Sessione Corrente (Feb 2026) - Fork 7/8
+
+#### ✅ Logo App Personalizzato (COMPLETATO)
+- [x] **Logo colomba bianca** su sfondo verde oliva con scritta "Amen!"
+- [x] Integrato nella pagina di **login** (120x120px, angoli arrotondati)
+- [x] Integrato nella pagina di **registrazione** (100x100px, angoli arrotondati)
+- [x] File salvato in `/app/frontend/assets/images/logo.jpg`
+
+#### ✅ Schermata Risultati Quiz Migliorata (COMPLETATO)
+- [x] **Emoji dinamica** basata sul punteggio:
+  - 🏆 ≥80% (Ottimo lavoro!)
+  - ⭐ ≥60% (Buon risultato!)
+  - 📚 ≥40% (Continua a studiare!)
+  - 💪 <40% (Continua a studiare!)
+- [x] **Statistiche visive** corrette/errate con icone
+- [x] **Pulsante "Visualizza Tutte le Risposte"** per vedere il dettaglio completo
+- [x] **Sezione Risposte Errate** con:
+  - Domanda
+  - Tua risposta (con icona ❌)
+  - Risposta corretta (con icona ✅)
+  - Spiegazione dettagliata
+  - Riferimento al versetto biblico
+- [x] **Sezione Risposte Corrette** con spiegazioni per approfondimento
+- [x] Traduzioni complete in 6 lingue
 
 #### ✅ Internazionalizzazione Completa (i18n) (COMPLETATO)
-- [x] **~200 chiavi di traduzione** per tutte le 6 lingue
-- [x] **bible.tsx** - Pagina lettore Bibbia completamente tradotta
-- [x] **community.tsx** - Pagina community tradotta
-- [x] **forum.tsx** - Pagina forum tradotta
-- [x] **radio.tsx** - Pagina radio tradotta (inclusi continenti)
-- [x] **settings.tsx** - Pagina impostazioni tradotta
+- [x] **~200+ chiavi di traduzione** per tutte le 6 lingue
+- [x] File aggiornati: bible.tsx, community.tsx, forum.tsx, radio.tsx, settings.tsx, quiz.tsx
 - [x] Sistema centralizzato in `/app/frontend/src/store/languageStore.ts`
-- [x] Hook `useTranslation()` per accesso alle traduzioni
-
-#### Chiavi tradotte per categoria:
-- **Bible screen**: loadingBooks, chapters, editions, help, studyContextAvailable, yourNotes, note, aiExplain, highlight, share, bookmark, crossReferences, historicalContext, etc.
-- **Community/Forum**: prayer, original, connectWithBrothers, communityForum, newPost, category, title, content, publish, etc.
-- **Radio**: evangelicalRadios, allRadios, favorites, continents (europe, southAmerica, northAmerica, africa, asia, oceania)
-- **Messaggi comuni**: noMessagesYet, noPostsYet, noGroupsFound, fillAllFields, unableToVote, etc.
-
-### Sessioni Precedenti
-
-#### ✅ Dizionario Biblico Espanso (Fork 6)
-- [x] **69 termini** organizzati alfabeticamente (Ebraico, Greco, Aramaico)
-- [x] **Traduzione AI on-demand** usando GPT-4o per tutte le 6 lingue
-- [x] **Cache MongoDB** delle traduzioni per performance
-
-#### ✅ Sistema Preferiti Dizionario (Fork 6)
-- [x] API endpoints dictionary preferiti
-- [x] Tabs "Tutti (69)" e "Preferiti (N)" nel frontend
-- [x] Icona cuore nei dettagli termine
-
-#### ✅ Sistema Flashcard con Ripetizione Spaziata (Fork 6)
-- [x] API flashcard complete
-- [x] Pagina dedicata /flashcards
-- [x] Algoritmo SM-2 per ripetizione spaziata
 
 ### Testing
-- **Backend**: 30/30 test passati (100%)
-- **Frontend i18n**: 90%+ test passati
+- **Backend**: 100% test passati
+- **Frontend**: 90%+ test passati (logo e quiz verificati)
 
 ### Sessioni Precedenti
-- Quiz tradotti in tutte le lingue (IT: 14, ES: 12, EN: 12, DE: 10, FR: 10, PT: 10)
-- Registrazione utenti funzionante
-- Internazionalizzazione completa
-- Lettore biblico multilingua
+- Dizionario Biblico (69 termini con traduzione AI on-demand)
+- Sistema Preferiti e Flashcard
+- Quiz tradotti in tutte le lingue
 - TTS multilingua con Web Speech API
-- Pulsanti Logout/Privacy/Delete funzionanti
-
-## Status Bug Segnalati
-
-| Bug | Status | Note |
-|-----|--------|------|
-| Dizionario biblico "povero" | ✅ FIXED | Ora 69 termini con traduzione AI |
-| Quiz results/submit | ✅ FIXED | API funziona |
-| Logout non funziona | ✅ FIXED | Testato |
-| TTS altre lingue | ✅ FIXED | Web Speech API |
 
 ## Backlog
 
 ### P1 - Prossimi
-- [ ] Completare refactoring schermata risultati Quiz (mostrare correzioni dettagliate)
-- [ ] Fix strumenti studio AI in bible.tsx (Spiega con AI, Evidenzia)
+- [ ] Fix strumenti studio AI in bible.tsx (Spiega con AI, Evidenzia) - **Bug ricorrente**
 
 ### P2
 - [ ] UI Ricerca Globale
