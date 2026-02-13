@@ -14,51 +14,72 @@ it, en, es, de, fr, pt (6 lingue con TTS)
 
 ## Cosa è stato implementato
 
-### Sessione Corrente (Feb 2026) - Fork 5
-- [x] **FIX: Quiz submit** - Rimossa validazione stretta che richiedeva TUTTE le risposte
-- [x] **FIX: Pulsanti Settings/Profile** - Tutti usano `showAlert`, `showInfoAlert`, `showConfirm` che funzionano su web
-- [x] **FIX: TTS multilingua** - Aggiunta selezione voce migliore disponibile + caricamento asincrono voci
-- [x] **Testato con Playwright**: 
-  - ✅ Logout funziona (redirect a /login dopo conferma)
-  - ✅ Quiz list carica correttamente
-  - ✅ Quiz domande caricano
-  - ✅ API quiz/submit funziona (testato via curl: Score 20%, 3/15 corrette)
+### Sessione Corrente (Feb 2026) - Fork 6
+
+#### ✅ Dizionario Biblico Espanso (COMPLETATO)
+- [x] **69 termini** organizzati alfabeticamente (Ebraico, Greco, Aramaico)
+- [x] **Traduzione AI on-demand** usando GPT-4o per tutte le 6 lingue
+- [x] **Cache MongoDB** delle traduzioni per performance
+- [x] **Etichette origine** tradotte (Hebrew/Hebreo/Hebräisch/Hébreu/Hebraico ecc.)
+- [x] **API endpoints**:
+  - `GET /api/dictionary?lang={lang}` - Lista 69 termini
+  - `GET /api/dictionary/{term_id}?lang={lang}` - Dettaglio termine con traduzione
+  - `GET /api/dictionary/search/{query}` - Ricerca termini
+- [x] **Testing completo**: 28/28 test backend passati, frontend verificato
 
 ### Sessioni Precedenti
 - Quiz tradotti in tutte le lingue (IT: 14, ES: 12, EN: 12, DE: 10, FR: 10, PT: 10)
 - Registrazione utenti funzionante
 - Internazionalizzazione completa
 - Lettore biblico multilingua
+- TTS multilingua con Web Speech API
+- Pulsanti Logout/Privacy/Delete funzionanti
 
 ## Status Bug Segnalati
 
 | Bug | Status | Note |
 |-----|--------|------|
-| Quiz results/submit non funzionano | ✅ FIXED | API funziona, pulsante submit abilitato |
-| Logout non funziona | ✅ FIXED | Testato con Playwright - redirect a /login |
-| TTS altre lingue | ✅ FIXED | Web Speech API con voice selection |
-| Pulsanti Privacy/Delete/Logout | ✅ FIXED | Usano window.alert/confirm su web |
+| Dizionario biblico "povero" | ✅ FIXED | Ora 69 termini con traduzione AI |
+| Quiz results/submit | ✅ FIXED | API funziona |
+| Logout non funziona | ✅ FIXED | Testato con Playwright |
+| TTS altre lingue | ✅ FIXED | Web Speech API |
+| Pulsanti Privacy/Delete | ✅ FIXED | window.alert/confirm su web |
 
 ## Backlog
 
 ### P1 - Prossimi
-- [ ] Espandere dizionario biblico
-- [ ] Test manuale su dispositivo mobile reale
+- [ ] Completare refactoring schermata risultati Quiz (mostrare correzioni dettagliate)
+- [ ] Fix strumenti studio AI in bible.tsx (Spiega con AI, Evidenzia)
 
 ### P2
-- [ ] Fix strumenti studio AI
-- [ ] UI Ricerca/Mappe
+- [ ] UI Ricerca Globale
+- [ ] UI Mappe Bibliche
+- [ ] Logo applicazione (colomba bianca)
 
-## File Chiave Modificati
-- `/app/frontend/app/quiz.tsx` - Submit senza validazione stretta
-- `/app/frontend/app/settings.tsx` - Tutti i pulsanti con showInfoAlert/showConfirm
-- `/app/frontend/app/(tabs)/profile.tsx` - Logout con showConfirm
-- `/app/frontend/app/(tabs)/bible.tsx` - TTS con voice selection
+## File Chiave
+
+### Backend
+- `/app/backend/server.py` - API principale
+- `/app/backend/biblical_dictionary.py` - 69 termini del dizionario
+- `/app/backend/quiz_data.py` - Dati quiz multilingue
+
+### Frontend
+- `/app/frontend/app/dictionary.tsx` - UI dizionario
+- `/app/frontend/app/quiz.tsx` - Quiz con submit
+- `/app/frontend/app/(tabs)/bible.tsx` - Lettore Bibbia con TTS
+- `/app/frontend/app/settings.tsx` - Impostazioni
+
+## Database Collections
+- `dictionary_translations` - Cache traduzioni AI
+- `bible_cache` - Cache capitoli Bibbia
+- `users` - Utenti
+- `quiz_history` - Storico quiz
 
 ## Credenziali Test
 - User: testbible@cibospirituale.it / Test123!
 
-## Note Importanti
-- React Native Web ha limitazioni con Playwright (dialoghi window.confirm non intercettabili senza handler)
+## Note Tecniche
+- Traduzione AI usa `emergentintegrations.llm.chat.LlmChat` con modello `gpt-4o`
+- Cache MongoDB evita richieste AI ripetute
+- React Native Web limitato: usa window.confirm invece di Alert.alert
 - TTS dipende dalle voci installate sul browser/sistema
-- I test automatizzati richiedono `page.on('dialog', lambda d: d.accept())` per gestire i confirm
