@@ -3151,6 +3151,7 @@ async def get_quiz(topic: str, lang: str = "it"):
 class QuizSubmission(BaseModel):
     topic: str
     answers: Dict[str, int]  # question_id -> selected_option_index
+    language: str = "it"  # Language for quiz lookup
 
 @api_router.post("/quiz/submit")
 async def submit_quiz(data: QuizSubmission, user: User = Depends(require_auth)):
