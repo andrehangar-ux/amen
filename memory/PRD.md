@@ -14,39 +14,48 @@ it, en, es, de, fr, pt (6 lingue con TTS)
 
 ## Cosa è stato implementato
 
-### Sessione Corrente (Feb 2026) - Fork 7/8
+### Sessione Corrente (Feb 2026) - Fork 9
 
-#### ✅ Logo App Personalizzato (COMPLETATO)
+#### ✅ Traduzioni MoodSelector e Sezioni (COMPLETATO)
+- [x] **MoodSelector tradotto** in tutte le 6 lingue
+  - Felice, Triste, Ansioso, Arrabbiato, Grato, Confuso, Speranzoso, Stanco
+- [x] **Sezioni home tradotte**: "Come ti senti oggi?", "Azioni Rapide", "Il Tuo Progresso", "Esplora"
+- [x] **Login/Registrazione tradotti** con tutti i messaggi di errore
+
+#### ✅ Login Biometrico (COMPLETATO)
+- [x] **BiometricService** creato (`/app/frontend/src/services/BiometricService.ts`)
+- [x] Supporto per **impronta digitale** e **riconoscimento facciale**
+- [x] **Salvataggio credenziali sicuro** con `expo-secure-store`
+- [x] **Login automatico** con biometria se abilitato
+- [x] **Traduzioni biometria** in 6 lingue
+
+#### ✅ Registrazione Migliorata (COMPLETATO)
+- [x] **Opzione biometria** nella registrazione (visibile solo su mobile)
+- [x] **Switch** per abilitare/disabilitare accesso con impronta
+- [x] **Tutti gli utenti salvati** nel database MongoDB (21 utenti attualmente)
+
+#### ⚠️ Problema Icone (NOTO)
+- Icone Ionicons mostrano quadrati vuoti su Expo Web
+- Problema noto con caricamento font CDN
+- Funziona correttamente su dispositivi mobili nativi
+
+### Sessioni Precedenti
+
+#### ✅ Logo App Personalizzato (Fork 7/8)
 - [x] **Logo colomba bianca** su sfondo verde oliva con scritta "Amen!"
-- [x] Integrato nella pagina di **login** (120x120px, angoli arrotondati)
-- [x] Integrato nella pagina di **registrazione** (100x100px, angoli arrotondati)
-- [x] File salvato in `/app/frontend/assets/images/logo.jpg`
+- [x] Integrato nelle pagine login/registrazione
 
-#### ✅ Schermata Risultati Quiz Migliorata (COMPLETATO)
-- [x] **Emoji dinamica** basata sul punteggio:
-  - 🏆 ≥80% (Ottimo lavoro!)
-  - ⭐ ≥60% (Buon risultato!)
-  - 📚 ≥40% (Continua a studiare!)
-  - 💪 <40% (Continua a studiare!)
-- [x] **Statistiche visive** corrette/errate con icone
-- [x] **Pulsante "Visualizza Tutte le Risposte"** per vedere il dettaglio completo
-- [x] **Sezione Risposte Errate** con:
-  - Domanda
-  - Tua risposta (con icona ❌)
-  - Risposta corretta (con icona ✅)
-  - Spiegazione dettagliata
-  - Riferimento al versetto biblico
-- [x] **Sezione Risposte Corrette** con spiegazioni per approfondimento
-- [x] Traduzioni complete in 6 lingue
+#### ✅ Schermata Risultati Quiz Migliorata (Fork 7/8)
+- [x] Emoji dinamica basata sul punteggio
+- [x] Statistiche visive corrette/errate
+- [x] Sezione risposte errate con spiegazioni
 
-#### ✅ Internazionalizzazione Completa (i18n) (COMPLETATO)
-- [x] **~200+ chiavi di traduzione** per tutte le 6 lingue
-- [x] File aggiornati: bible.tsx, community.tsx, forum.tsx, radio.tsx, settings.tsx, quiz.tsx
-- [x] Sistema centralizzato in `/app/frontend/src/store/languageStore.ts`
+#### ✅ Internazionalizzazione Completa (Fork 7/8)
+- [x] ~200+ chiavi di traduzione per 6 lingue
 
 ### Testing
 - **Backend**: 100% test passati
-- **Frontend**: 90%+ test passati (logo e quiz verificati)
+- **Frontend**: 90%+ test passati
 
 ### Sessioni Precedenti
 - Dizionario Biblico (69 termini con traduzione AI on-demand)
