@@ -1082,7 +1082,7 @@ export default function BibleScreen() {
           <ScrollView>
             <View style={styles.tutorialHeader}>
               <Ionicons name="help-circle" size={50} color={COLORS.primary} />
-              <Text style={styles.tutorialTitle}>Guida alla Lettura</Text>
+              <Text style={styles.tutorialTitle}>{t('readingGuide')}</Text>
             </View>
 
             <View style={styles.tutorialStep}>
@@ -1090,9 +1090,9 @@ export default function BibleScreen() {
                 <Text style={styles.tutorialStepNumberText}>1</Text>
               </View>
               <View style={styles.tutorialStepContent}>
-                <Text style={styles.tutorialStepTitle}>🌐 Cambia Lingua</Text>
+                <Text style={styles.tutorialStepTitle}>🌐 {t('changeLanguage')}</Text>
                 <Text style={styles.tutorialStepText}>
-                  Tocca le bandiere in alto (🇮🇹 🇪🇸 🇬🇧 🇩🇪 🇫🇷) per cambiare la lingua della Bibbia in qualsiasi momento.
+                  {t('changeLanguageDesc')}
                 </Text>
               </View>
             </View>
@@ -1102,14 +1102,9 @@ export default function BibleScreen() {
                 <Text style={styles.tutorialStepNumberText}>2</Text>
               </View>
               <View style={styles.tutorialStepContent}>
-                <Text style={styles.tutorialStepTitle}>📖 Traduzioni Bibliche</Text>
+                <Text style={styles.tutorialStepTitle}>📖 {t('bibleTranslations')}</Text>
                 <Text style={styles.tutorialStepText}>
-                  Il banner in alto mostra quale traduzione stai leggendo:{'\n'}
-                  • Italiano: Nuova Diodati{'\n'}
-                  • Spagnolo: Reina Valera 1960{'\n'}
-                  • Inglese: King James Version{'\n'}
-                  • Tedesco: Luther Bibel{'\n'}
-                  • Francese: Louis Segond
+                  {t('bibleTranslationsDesc')}
                 </Text>
               </View>
             </View>
@@ -1119,14 +1114,14 @@ export default function BibleScreen() {
                 <Text style={styles.tutorialStepNumberText}>3</Text>
               </View>
               <View style={styles.tutorialStepContent}>
-                <Text style={styles.tutorialStepTitle}>👆 Tocca un Versetto</Text>
+                <Text style={styles.tutorialStepTitle}>👆 {t('tapVerse')}</Text>
                 <Text style={styles.tutorialStepText}>
-                  Tocca qualsiasi versetto per aprire gli strumenti di studio:{'\n'}
-                  • Aggiungi note personali{'\n'}
-                  • Chiedi spiegazione all'AI{'\n'}
-                  • Evidenzia il versetto{'\n'}
-                  • Condividi con amici{'\n'}
-                  • Salva nei segnalibri
+                  {t('tapVerseDesc')}{'\n'}
+                  • {t('personalNotes')}{'\n'}
+                  • {t('explainWithAI')}{'\n'}
+                  • {t('highlightVerse')}{'\n'}
+                  • {t('shareWithFriends')}{'\n'}
+                  • {t('saveToBookmarks')}
                 </Text>
               </View>
             </View>
@@ -1136,9 +1131,9 @@ export default function BibleScreen() {
                 <Text style={styles.tutorialStepNumberText}>4</Text>
               </View>
               <View style={styles.tutorialStepContent}>
-                <Text style={styles.tutorialStepTitle}>🔤 Dimensione Testo</Text>
+                <Text style={styles.tutorialStepTitle}>🔤 {t('textSize')}</Text>
                 <Text style={styles.tutorialStepText}>
-                  Tocca "A16" per aumentare la dimensione del testo. Continua a toccare per tornare alla dimensione minima.
+                  {t('textSizeDesc')}
                 </Text>
               </View>
             </View>
@@ -1148,9 +1143,9 @@ export default function BibleScreen() {
                 <Text style={styles.tutorialStepNumberText}>5</Text>
               </View>
               <View style={styles.tutorialStepContent}>
-                <Text style={styles.tutorialStepTitle}>🔊 Ascolta</Text>
+                <Text style={styles.tutorialStepTitle}>🔊 {t('listen')}</Text>
                 <Text style={styles.tutorialStepText}>
-                  Tocca l'icona dell'altoparlante in alto a destra per ascoltare la lettura del capitolo.
+                  {t('listenDesc')}
                 </Text>
               </View>
             </View>
@@ -1159,7 +1154,7 @@ export default function BibleScreen() {
               style={styles.tutorialCloseBtn}
               onPress={() => setShowTutorial(false)}
             >
-              <Text style={styles.tutorialCloseBtnText}>Ho Capito!</Text>
+              <Text style={styles.tutorialCloseBtnText}>{t('understood')}</Text>
             </TouchableOpacity>
           </ScrollView>
         </View>
@@ -1179,7 +1174,7 @@ export default function BibleScreen() {
         <View style={styles.headerTitleContainer}>
           <Text style={styles.headerTitle}>
             {view === 'books'
-              ? 'La Bibbia'
+              ? t('theBibleHeader')
               : view === 'chapters'
               ? selectedBook?.name
               : `${selectedBook?.name} ${selectedChapter}`}
@@ -1189,7 +1184,7 @@ export default function BibleScreen() {
             onPress={() => setShowEditionSelector(true)}
           >
             <Text style={styles.editionBadgeText}>
-              {currentEdition?.name || 'Seleziona edizione'}
+              {currentEdition?.name || t('selectEdition')}
             </Text>
             <Ionicons name="chevron-down" size={14} color={COLORS.primary} />
           </TouchableOpacity>
