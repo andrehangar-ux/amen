@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { Icon } from '../src/components/Icon';
 import { router } from 'expo-router';
 import { api } from '../src/utils/api';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../src/utils/theme';
@@ -109,7 +109,7 @@ export default function AssistantScreen() {
       <View style={[styles.messageContainer, isUser && styles.userMessageContainer]}>
         {!isUser && (
           <View style={styles.assistantAvatar}>
-            <Ionicons name="sparkles" size={18} color={COLORS.primary} />
+            <Icon name="sparkles" size={18} color={COLORS.primary} />
           </View>
         )}
         <View style={[styles.messageBubble, isUser ? styles.userBubble : styles.assistantBubble]}>
@@ -126,14 +126,14 @@ export default function AssistantScreen() {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity style={styles.closeButton} onPress={() => router.back()}>
-          <Ionicons name="close" size={24} color={COLORS.text} />
+          <Icon name="close" size={24} color={COLORS.text} />
         </TouchableOpacity>
         <View style={styles.headerContent}>
           <Text style={styles.headerTitle}>Assistente Spirituale</Text>
           <Text style={styles.headerSubtitle}>Chiedi guida e conforto</Text>
         </View>
         <TouchableOpacity style={styles.clearButton} onPress={handleClearHistory}>
-          <Ionicons name="trash-outline" size={22} color={COLORS.textLight} />
+          <Icon name="trash-outline" size={22} color={COLORS.textLight} />
         </TouchableOpacity>
       </View>
 
@@ -150,7 +150,7 @@ export default function AssistantScreen() {
         ) : messages.length === 0 ? (
           <View style={styles.emptyContainer}>
             <View style={styles.emptyIcon}>
-              <Ionicons name="chatbubble-ellipses" size={48} color={COLORS.primary} />
+              <Icon name="chatbubble-ellipses" size={48} color={COLORS.primary} />
             </View>
             <Text style={styles.emptyTitle}>Ciao! Sono qui per te</Text>
             <Text style={styles.emptyText}>
@@ -206,7 +206,7 @@ export default function AssistantScreen() {
             onPress={() => handleSend()}
             disabled={!input.trim() || sending}
           >
-            <Ionicons name="send" size={20} color="#fff" />
+            <Icon name="send" size={20} color="#fff" />
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>

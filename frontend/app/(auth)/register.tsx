@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import { Icon } from '../../src/components/Icon';
 import { useAuthStore } from '../../src/store/authStore';
 import { useTranslation } from '../../src/store/languageStore';
 import { BiometricService } from '../../src/services/BiometricService';
@@ -103,7 +103,7 @@ export default function RegisterScreen() {
               onPress={() => router.back()}
               data-testid="register-back-button"
             >
-              <Ionicons name="arrow-back" size={24} color={COLORS.text} />
+              <Icon name="arrow-back" size={24} color={COLORS.text} />
             </TouchableOpacity>
             <View style={styles.logoContainer}>
               <Image 
@@ -119,7 +119,7 @@ export default function RegisterScreen() {
           {/* Form */}
           <View style={styles.form}>
             <View style={styles.inputContainer}>
-              <Ionicons name="person-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
+              <Icon name="person-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder={t('fullName')}
@@ -132,7 +132,7 @@ export default function RegisterScreen() {
             </View>
 
             <View style={styles.inputContainer}>
-              <Ionicons name="mail-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
+              <Icon name="mail-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder={t('email')}
@@ -146,7 +146,7 @@ export default function RegisterScreen() {
             </View>
 
             <View style={styles.inputContainer}>
-              <Ionicons name="lock-closed-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
+              <Icon name="lock-closed-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder="Password"
@@ -157,7 +157,7 @@ export default function RegisterScreen() {
                 data-testid="register-password-input"
               />
               <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                <Ionicons
+                <Icon
                   name={showPassword ? 'eye-off-outline' : 'eye-outline'}
                   size={20}
                   color={COLORS.textLight}
@@ -166,7 +166,7 @@ export default function RegisterScreen() {
             </View>
 
             <View style={styles.inputContainer}>
-              <Ionicons name="shield-checkmark-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
+              <Icon name="shield-checkmark-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder={t('confirmPassword')}
@@ -182,7 +182,7 @@ export default function RegisterScreen() {
             {biometricAvailable && (
               <View style={styles.biometricOption}>
                 <View style={styles.biometricOptionLeft}>
-                  <Ionicons name="finger-print" size={24} color={COLORS.primary} />
+                  <Icon name="finger-print" size={24} color={COLORS.primary} />
                   <Text style={styles.biometricOptionText}>{t('enableBiometric')}</Text>
                 </View>
                 <Switch

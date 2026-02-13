@@ -10,7 +10,7 @@ import {
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { Icon } from '../src/components/Icon';
 import { router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from '../src/utils/api';
@@ -121,7 +121,7 @@ export default function RadioScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={28} color={COLORS.text} />
+          <Icon name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.title}>📻 {t('evangelicalRadios')}</Text>
         <View style={{ width: 28 }} />
@@ -190,7 +190,7 @@ export default function RadioScreen() {
 
         {sortedRadios.length === 0 && (
           <View style={styles.emptyContainer}>
-            <Ionicons name="radio-outline" size={64} color={COLORS.textMuted} />
+            <Icon name="radio-outline" size={64} color={COLORS.textMuted} />
             <Text style={styles.emptyText}>{t('noRadiosFound')}</Text>
           </View>
         )}
@@ -216,7 +216,7 @@ const RadioItem = ({
       onPress={onPress}
     >
       <View style={styles.radioIcon}>
-        <Ionicons name="radio" size={22} color={COLORS.primary} />
+        <Icon name="radio" size={22} color={COLORS.primary} />
       </View>
       <View style={styles.radioInfo}>
         <Text style={styles.radioName}>{radio.name}</Text>
@@ -224,13 +224,13 @@ const RadioItem = ({
           {radio.country} • {radio.language.toUpperCase()}
         </Text>
       </View>
-      <Ionicons name="play-circle" size={28} color={COLORS.primary} />
+      <Icon name="play-circle" size={28} color={COLORS.primary} />
     </TouchableOpacity>
     <TouchableOpacity 
       style={styles.favoriteButton}
       onPress={onToggleFavorite}
     >
-      <Ionicons 
+      <Icon 
         name={isFavorite ? 'heart' : 'heart-outline'} 
         size={24} 
         color={isFavorite ? COLORS.error : COLORS.textMuted} 

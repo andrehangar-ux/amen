@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { Icon } from '../src/components/Icon';
 import { router } from 'expo-router';
 import * as Clipboard from 'expo-clipboard';
 import { api } from '../src/utils/api';
@@ -122,7 +122,7 @@ export default function DonateScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={28} color={COLORS.text} />
+          <Icon name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.title}>Sostieni il Ministero</Text>
         <View style={{ width: 28 }} />
@@ -130,7 +130,7 @@ export default function DonateScreen() {
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.heroCard}>
-          <Ionicons name="heart" size={40} color={COLORS.error} />
+          <Icon name="heart" size={40} color={COLORS.error} />
           <Text style={styles.heroTitle}>Offerta Libera</Text>
           <Text style={styles.heroText}>
             La tua generosità permette di mantenere Amen! gratuito e di
@@ -180,14 +180,14 @@ export default function DonateScreen() {
           onPress={() => setSelectedMethod('paypal')}
         >
           <View style={[styles.methodIcon, { backgroundColor: '#0070BA15' }]}>
-            <Ionicons name="logo-paypal" size={28} color="#0070BA" />
+            <Icon name="logo-paypal" size={28} color="#0070BA" />
           </View>
           <View style={styles.methodContent}>
             <Text style={styles.methodTitle}>PayPal</Text>
             <Text style={styles.methodSubtitle}>{config?.paypal_email}</Text>
           </View>
           {selectedMethod === 'paypal' && (
-            <Ionicons name="checkmark-circle" size={24} color={COLORS.primary} />
+            <Icon name="checkmark-circle" size={24} color={COLORS.primary} />
           )}
         </TouchableOpacity>
 
@@ -199,14 +199,14 @@ export default function DonateScreen() {
           onPress={() => setSelectedMethod('bonifico')}
         >
           <View style={[styles.methodIcon, { backgroundColor: COLORS.primary + '15' }]}>
-            <Ionicons name="business" size={28} color={COLORS.primary} />
+            <Icon name="business" size={28} color={COLORS.primary} />
           </View>
           <View style={styles.methodContent}>
             <Text style={styles.methodTitle}>Bonifico Bancario</Text>
             <Text style={styles.methodSubtitle}>{config?.banca}</Text>
           </View>
           {selectedMethod === 'bonifico' && (
-            <Ionicons name="checkmark-circle" size={24} color={COLORS.primary} />
+            <Icon name="checkmark-circle" size={24} color={COLORS.primary} />
           )}
         </TouchableOpacity>
 
@@ -223,7 +223,7 @@ export default function DonateScreen() {
                 style={styles.copyButton}
                 onPress={() => copyToClipboard(config.iban, 'IBAN')}
               >
-                <Ionicons name="copy" size={20} color={COLORS.primary} />
+                <Icon name="copy" size={20} color={COLORS.primary} />
               </TouchableOpacity>
             </View>
 
@@ -236,7 +236,7 @@ export default function DonateScreen() {
                 style={styles.copyButton}
                 onPress={() => copyToClipboard(config.intestatario, 'Intestatario')}
               >
-                <Ionicons name="copy" size={20} color={COLORS.primary} />
+                <Icon name="copy" size={20} color={COLORS.primary} />
               </TouchableOpacity>
             </View>
 

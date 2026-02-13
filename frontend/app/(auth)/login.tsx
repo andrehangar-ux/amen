@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import { Icon } from '../../src/components/Icon';
 import * as WebBrowser from 'expo-web-browser';
 import * as Linking from 'expo-linking';
 import { useAuthStore } from '../../src/store/authStore';
@@ -190,7 +190,7 @@ export default function LoginScreen() {
           {/* Form */}
           <View style={styles.form}>
             <View style={styles.inputContainer}>
-              <Ionicons name="mail-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
+              <Icon name="mail-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder={t('email')}
@@ -204,7 +204,7 @@ export default function LoginScreen() {
             </View>
 
             <View style={styles.inputContainer}>
-              <Ionicons name="lock-closed-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
+              <Icon name="lock-closed-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder="Password"
@@ -215,7 +215,7 @@ export default function LoginScreen() {
                 data-testid="login-password-input"
               />
               <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                <Ionicons
+                <Icon
                   name={showPassword ? 'eye-off-outline' : 'eye-outline'}
                   size={20}
                   color={COLORS.textLight}
@@ -248,7 +248,7 @@ export default function LoginScreen() {
               disabled={loading}
               data-testid="google-login-button"
             >
-              <Ionicons name="logo-google" size={20} color={COLORS.text} />
+              <Icon name="logo-google" size={20} color={COLORS.text} />
               <Text style={styles.googleButtonText}>{t('continueWithGoogle')}</Text>
             </TouchableOpacity>
 
@@ -260,7 +260,7 @@ export default function LoginScreen() {
                 disabled={loading}
                 data-testid="biometric-login-button"
               >
-                <Ionicons name="finger-print" size={24} color={COLORS.primary} />
+                <Icon name="finger-print" size={24} color={COLORS.primary} />
                 <Text style={styles.biometricButtonText}>{t('biometricLogin')}</Text>
               </TouchableOpacity>
             )}

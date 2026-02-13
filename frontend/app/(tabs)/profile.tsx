@@ -10,7 +10,7 @@ import {
   Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { Icon } from '../../src/components/Icon';
 import { router } from 'expo-router';
 import { useAuthStore } from '../../src/store/authStore';
 import { api } from '../../src/utils/api';
@@ -79,13 +79,13 @@ export default function ProfileScreen() {
   const MenuItem = ({ icon, title, subtitle, onPress, color = COLORS.text }: any) => (
     <TouchableOpacity style={styles.menuItem} onPress={onPress}>
       <View style={[styles.menuIcon, { backgroundColor: color + '15' }]}>
-        <Ionicons name={icon} size={22} color={color} />
+        <Icon name={icon} size={22} color={color} />
       </View>
       <View style={styles.menuContent}>
         <Text style={styles.menuTitle}>{title}</Text>
         {subtitle && <Text style={styles.menuSubtitle}>{subtitle}</Text>}
       </View>
-      <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+      <Icon name="chevron-forward" size={20} color={COLORS.textMuted} />
     </TouchableOpacity>
   );
 

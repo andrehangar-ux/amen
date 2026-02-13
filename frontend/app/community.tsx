@@ -12,7 +12,7 @@ import {
   Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { Icon } from '../src/components/Icon';
 import { router } from 'expo-router';
 import { api } from '../src/utils/api';
 import { useLanguageStore, useTranslation } from '../src/store/languageStore';
@@ -138,7 +138,7 @@ export default function CommunityScreen() {
           </View>
           {item.message_type === 'prayer_request' && (
             <View style={styles.prayerBadge}>
-              <Ionicons name="hand-left" size={12} color={COLORS.accent} />
+              <Icon name="hand-left" size={12} color={COLORS.accent} />
               <Text style={styles.prayerText}>{t('prayer')}</Text>
             </View>
           )}
@@ -166,7 +166,7 @@ export default function CommunityScreen() {
               <ActivityIndicator size="small" color={COLORS.primary} />
             ) : (
               <>
-                <Ionicons name="language" size={14} color={COLORS.primary} />
+                <Icon name="language" size={14} color={COLORS.primary} />
                 <Text style={styles.translateText}>{t('translate')}</Text>
               </>
             )}
@@ -178,7 +178,7 @@ export default function CommunityScreen() {
             style={styles.likeButton}
             onPress={() => handleLike(item.message_id)}
           >
-            <Ionicons name="heart-outline" size={18} color={COLORS.textLight} />
+            <Icon name="heart-outline" size={18} color={COLORS.textLight} />
             <Text style={styles.likeCount}>{item.likes}</Text>
           </TouchableOpacity>
         </View>
@@ -191,7 +191,7 @@ export default function CommunityScreen() {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={24} color={COLORS.text} />
+          <Icon name="arrow-back" size={24} color={COLORS.text} />
         </TouchableOpacity>
         <View style={styles.headerContent}>
           <Text style={styles.headerTitle}>{t('community')}</Text>
@@ -223,7 +223,7 @@ export default function CommunityScreen() {
             }
             ListEmptyComponent={
               <View style={styles.emptyContainer}>
-                <Ionicons name="people-outline" size={64} color={COLORS.textMuted} />
+                <Icon name="people-outline" size={64} color={COLORS.textMuted} />
                 <Text style={styles.emptyText}>{t('noMessagesYet')}</Text>
                 <Text style={styles.emptySubtext}>{t('beFirstToShare')}</Text>
               </View>
@@ -250,7 +250,7 @@ export default function CommunityScreen() {
             {sending ? (
               <ActivityIndicator size="small" color="#fff" />
             ) : (
-              <Ionicons name="send" size={20} color="#fff" />
+              <Icon name="send" size={20} color="#fff" />
             )}
           </TouchableOpacity>
         </View>

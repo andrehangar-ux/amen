@@ -13,7 +13,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { Icon } from '../../src/components/Icon';
 import { api } from '../../src/utils/api';
 import { MoodSelector } from '../../src/components/MoodSelector';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, MOODS } from '../../src/utils/theme';
@@ -119,13 +119,13 @@ export default function JournalScreen() {
           </Text>
         </View>
         <TouchableOpacity onPress={() => handleDelete(item.entry_id)}>
-          <Ionicons name="trash-outline" size={20} color={COLORS.textMuted} />
+          <Icon name="trash-outline" size={20} color={COLORS.textMuted} />
         </TouchableOpacity>
       </View>
       <Text style={styles.entryContent}>{item.content}</Text>
       {item.ai_insight && (
         <View style={styles.aiInsight}>
-          <Ionicons name="sparkles" size={16} color={COLORS.accent} />
+          <Icon name="sparkles" size={16} color={COLORS.accent} />
           <Text style={styles.aiInsightText}>{item.ai_insight}</Text>
         </View>
       )}
@@ -145,7 +145,7 @@ export default function JournalScreen() {
             style={styles.addButton}
             onPress={() => setShowForm(!showForm)}
           >
-            <Ionicons
+            <Icon
               name={showForm ? 'close' : 'add'}
               size={24}
               color="#fff"
@@ -183,7 +183,7 @@ export default function JournalScreen() {
                 <ActivityIndicator color="#fff" />
               ) : (
                 <>
-                  <Ionicons name="save" size={20} color="#fff" />
+                  <Icon name="save" size={20} color="#fff" />
                   <Text style={styles.saveButtonText}>Salva nel Diario</Text>
                 </>
               )}
@@ -208,7 +208,7 @@ export default function JournalScreen() {
             }
             ListEmptyComponent={
               <View style={styles.emptyContainer}>
-                <Ionicons name="book-outline" size={64} color={COLORS.textMuted} />
+                <Icon name="book-outline" size={64} color={COLORS.textMuted} />
                 <Text style={styles.emptyText}>Il tuo diario è vuoto</Text>
                 <Text style={styles.emptySubtext}>Inizia a scrivere i tuoi pensieri</Text>
               </View>

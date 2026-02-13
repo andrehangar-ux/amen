@@ -13,7 +13,7 @@ import {
   Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { Icon } from '../../src/components/Icon';
 import * as Speech from 'expo-speech';
 import * as WebBrowser from 'expo-web-browser';
 import { router } from 'expo-router';
@@ -448,7 +448,7 @@ export default function BibleScreen() {
     if (!books || books.length === 0) {
       return (
         <View style={styles.emptyContainer}>
-          <Ionicons name="book-outline" size={64} color={COLORS.textMuted} />
+          <Icon name="book-outline" size={64} color={COLORS.textMuted} />
           <Text style={styles.emptyText}>{t('noBooksAvailable')}</Text>
           <TouchableOpacity style={styles.retryButton} onPress={loadBooks}>
             <Text style={styles.retryText}>{t('retry')}</Text>
@@ -535,7 +535,7 @@ export default function BibleScreen() {
       <View style={styles.readingContainer}>
         {/* Current Edition Banner */}
         <View style={styles.editionBanner}>
-          <Ionicons name="book-outline" size={16} color={COLORS.primary} />
+          <Icon name="book-outline" size={16} color={COLORS.primary} />
           <Text style={styles.editionBannerText}>
             {getCurrentEditionName()} • {selectedBook?.name} {selectedChapter}
           </Text>
@@ -569,7 +569,7 @@ export default function BibleScreen() {
             style={styles.toolbarButton}
             onPress={() => setShowEditionSelector(true)}
           >
-            <Ionicons name="swap-horizontal" size={20} color={COLORS.accent} />
+            <Icon name="swap-horizontal" size={20} color={COLORS.accent} />
             <Text style={styles.toolbarButtonText}>{t('editions')}</Text>
           </TouchableOpacity>
 
@@ -580,7 +580,7 @@ export default function BibleScreen() {
               setFontSize(newSize);
             }}
           >
-            <Ionicons name="text" size={20} color={COLORS.textLight} />
+            <Icon name="text" size={20} color={COLORS.textLight} />
             <Text style={styles.toolbarButtonText}>A{fontSize}</Text>
           </TouchableOpacity>
 
@@ -588,7 +588,7 @@ export default function BibleScreen() {
             style={styles.toolbarButton}
             onPress={() => setShowTutorial(true)}
           >
-            <Ionicons name="help-circle" size={20} color="#9B59B6" />
+            <Icon name="help-circle" size={20} color="#9B59B6" />
             <Text style={styles.toolbarButtonText}>{t('help')}</Text>
           </TouchableOpacity>
         </View>
@@ -600,9 +600,9 @@ export default function BibleScreen() {
               style={styles.studyContextBanner}
               onPress={() => setShowStudyTools(true)}
             >
-              <Ionicons name="school" size={20} color={COLORS.primary} />
+              <Icon name="school" size={20} color={COLORS.primary} />
               <Text style={styles.studyContextText}>{t('studyContextAvailable')}</Text>
-              <Ionicons name="chevron-forward" size={20} color={COLORS.primary} />
+              <Icon name="chevron-forward" size={20} color={COLORS.primary} />
             </TouchableOpacity>
           )}
 
@@ -629,7 +629,7 @@ export default function BibleScreen() {
                 <View style={styles.verseNumberContainer}>
                   <Text style={styles.verseNumber}>{verse.verse}</Text>
                 {isBookmarked && (
-                  <Ionicons name="bookmark" size={12} color="#E74C3C" style={styles.bookmarkIcon} />
+                  <Icon name="bookmark" size={12} color="#E74C3C" style={styles.bookmarkIcon} />
                 )}
               </View>
               <View style={styles.verseContent}>
@@ -638,13 +638,13 @@ export default function BibleScreen() {
                   <View style={styles.verseIndicators}>
                     {hasRefs && (
                       <View style={styles.indicator}>
-                        <Ionicons name="link" size={14} color={COLORS.primary} />
+                        <Icon name="link" size={14} color={COLORS.primary} />
                         <Text style={styles.indicatorText}>{hasRefs.length}</Text>
                       </View>
                     )}
                     {hasDict && (
                       <View style={styles.indicator}>
-                        <Ionicons name="language" size={14} color={COLORS.accent} />
+                        <Icon name="language" size={14} color={COLORS.accent} />
                       </View>
                     )}
                   </View>
@@ -672,7 +672,7 @@ export default function BibleScreen() {
           style={styles.addNoteButton}
           onPress={() => { setSelectedVerse(null); setShowNoteModal(true); }}
         >
-          <Ionicons name="add-circle" size={20} color={COLORS.primary} />
+          <Icon name="add-circle" size={20} color={COLORS.primary} />
           <Text style={styles.addNoteText}>{t('addChapterNote')}</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -708,7 +708,7 @@ export default function BibleScreen() {
                 }
               </Text>
               <TouchableOpacity onPress={() => setShowStudyTools(false)}>
-                <Ionicons name="close" size={24} color={COLORS.text} />
+                <Icon name="close" size={24} color={COLORS.text} />
               </TouchableOpacity>
             </View>
 
@@ -725,21 +725,21 @@ export default function BibleScreen() {
                   style={styles.studyActionBtn}
                   onPress={() => { setShowStudyTools(false); setShowNoteModal(true); }}
                 >
-                  <Ionicons name="create" size={22} color={COLORS.primary} />
+                  <Icon name="create" size={22} color={COLORS.primary} />
                   <Text style={styles.studyActionText}>{t('note')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                   style={styles.studyActionBtn}
                   onPress={() => { setShowStudyTools(false); setShowAIModal(true); }}
                 >
-                  <Ionicons name="bulb" size={22} color={COLORS.accent} />
+                  <Icon name="bulb" size={22} color={COLORS.accent} />
                   <Text style={styles.studyActionText}>{t('aiExplain')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                   style={styles.studyActionBtn}
                   onPress={() => router.push('/dictionary')}
                 >
-                  <Ionicons name="book" size={22} color="#9B59B6" />
+                  <Icon name="book" size={22} color="#9B59B6" />
                   <Text style={styles.studyActionText}>{t('dictionary')}</Text>
                 </TouchableOpacity>
               </View>
@@ -752,7 +752,7 @@ export default function BibleScreen() {
                       style={[styles.studyActionBtn, highlightedVerses.has(selectedVerse.verse) && styles.studyActionActive]}
                       onPress={() => { toggleHighlight(selectedVerse.verse); }}
                     >
-                      <Ionicons 
+                      <Icon 
                         name={highlightedVerses.has(selectedVerse.verse) ? "color-fill" : "color-fill-outline"} 
                         size={22} 
                         color="#F1C40F" 
@@ -763,7 +763,7 @@ export default function BibleScreen() {
                       style={styles.studyActionBtn}
                       onPress={() => { shareVerse(selectedVerse); setShowStudyTools(false); }}
                     >
-                      <Ionicons name="share-social" size={22} color="#2ECC71" />
+                      <Icon name="share-social" size={22} color="#2ECC71" />
                       <Text style={styles.studyActionText}>{t('share')}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
@@ -774,7 +774,7 @@ export default function BibleScreen() {
                         }
                       }}
                     >
-                      <Ionicons 
+                      <Icon 
                         name={bookmarkedVerses.has(`${selectedBook?.name}:${selectedChapter}:${selectedVerse.verse}`) ? "bookmark" : "bookmark-outline"} 
                         size={22} 
                         color="#E74C3C" 
@@ -791,14 +791,14 @@ export default function BibleScreen() {
                   style={styles.studyActionBtn}
                   onPress={() => router.push('/maps')}
                 >
-                  <Ionicons name="map" size={22} color="#3498DB" />
+                  <Icon name="map" size={22} color="#3498DB" />
                   <Text style={styles.studyActionText}>{t('maps')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                   style={styles.studyActionBtn}
                   onPress={() => openWikipedia(selectedBook?.name || 'Bibbia')}
                 >
-                  <Ionicons name="globe" size={22} color="#95A5A6" />
+                  <Icon name="globe" size={22} color="#95A5A6" />
                   <Text style={styles.studyActionText}>{t('wikipedia')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
@@ -815,7 +815,7 @@ export default function BibleScreen() {
                     }
                   }}
                 >
-                  <Ionicons name="open" size={22} color="#1ABC9C" />
+                  <Icon name="open" size={22} color="#1ABC9C" />
                   <Text style={styles.studyActionText}>{t('laParola')}</Text>
                 </TouchableOpacity>
               </View>
@@ -824,7 +824,7 @@ export default function BibleScreen() {
               {crossRefs.length > 0 && (
                 <View style={styles.studySection}>
                   <Text style={styles.studySectionTitle}>
-                    <Ionicons name="link" size={16} color={COLORS.primary} /> {t('crossReferences')}
+                    <Icon name="link" size={16} color={COLORS.primary} /> {t('crossReferences')}
                   </Text>
                   {crossRefs.map((ref: any, idx: number) => (
                     <View key={idx} style={styles.crossRefCard}>
@@ -839,7 +839,7 @@ export default function BibleScreen() {
               {dictTerms.length > 0 && (
                 <View style={styles.studySection}>
                   <Text style={styles.studySectionTitle}>
-                    <Ionicons name="language" size={16} color={COLORS.accent} /> {t('dictionaryTerms')}
+                    <Icon name="language" size={16} color={COLORS.accent} /> {t('dictionaryTerms')}
                   </Text>
                   <View style={styles.dictTermsRow}>
                     {dictTerms.map((term: string, idx: number) => (
@@ -859,7 +859,7 @@ export default function BibleScreen() {
               {context && (
                 <View style={styles.studySection}>
                   <Text style={styles.studySectionTitle}>
-                    <Ionicons name="time" size={16} color="#E67E22" /> {t('historicalContext')}
+                    <Icon name="time" size={16} color="#E67E22" /> {t('historicalContext')}
                   </Text>
                   <Text style={styles.contextText}>{context.historical_context}</Text>
                   
@@ -904,7 +904,7 @@ export default function BibleScreen() {
               }
             </Text>
             <TouchableOpacity onPress={() => setShowNoteModal(false)}>
-              <Ionicons name="close" size={24} color={COLORS.text} />
+              <Icon name="close" size={24} color={COLORS.text} />
             </TouchableOpacity>
           </View>
           
@@ -938,7 +938,7 @@ export default function BibleScreen() {
           <View style={styles.modalHeader}>
             <Text style={styles.modalTitle}>{t('aiExplanation')}</Text>
             <TouchableOpacity onPress={() => { setShowAIModal(false); setAiAnswer(''); }}>
-              <Ionicons name="close" size={24} color={COLORS.text} />
+              <Icon name="close" size={24} color={COLORS.text} />
             </TouchableOpacity>
           </View>
           
@@ -992,7 +992,7 @@ export default function BibleScreen() {
           <View style={styles.modalHeader}>
             <Text style={styles.modalTitle}>{t('selectBibleEdition')}</Text>
             <TouchableOpacity onPress={() => setShowEditionSelector(false)}>
-              <Ionicons name="close" size={24} color={COLORS.text} />
+              <Icon name="close" size={24} color={COLORS.text} />
             </TouchableOpacity>
           </View>
           
@@ -1019,7 +1019,7 @@ export default function BibleScreen() {
                   </View>
                 </View>
                 {selectedEdition === key && (
-                  <Ionicons name="checkmark-circle" size={24} color={COLORS.primary} />
+                  <Icon name="checkmark-circle" size={24} color={COLORS.primary} />
                 )}
               </TouchableOpacity>
             ))}
@@ -1042,7 +1042,7 @@ export default function BibleScreen() {
           <View style={styles.modalHeader}>
             <Text style={styles.modalTitle}>{t('selectLanguage')}</Text>
             <TouchableOpacity onPress={() => setShowLanguageModal(false)}>
-              <Ionicons name="close" size={24} color={COLORS.text} />
+              <Icon name="close" size={24} color={COLORS.text} />
             </TouchableOpacity>
           </View>
           
@@ -1059,7 +1059,7 @@ export default function BibleScreen() {
                 <Text style={styles.languageFlag}>{lang.flag}</Text>
                 <Text style={styles.languageName}>{lang.name}</Text>
                 {currentLanguage === code && (
-                  <Ionicons name="checkmark-circle" size={24} color={COLORS.primary} />
+                  <Icon name="checkmark-circle" size={24} color={COLORS.primary} />
                 )}
               </TouchableOpacity>
             ))}
@@ -1081,7 +1081,7 @@ export default function BibleScreen() {
         <View style={styles.tutorialModal}>
           <ScrollView>
             <View style={styles.tutorialHeader}>
-              <Ionicons name="help-circle" size={50} color={COLORS.primary} />
+              <Icon name="help-circle" size={50} color={COLORS.primary} />
               <Text style={styles.tutorialTitle}>{t('readingGuide')}</Text>
             </View>
 
@@ -1168,7 +1168,7 @@ export default function BibleScreen() {
       <View style={styles.header}>
         {view !== 'books' && (
           <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-            <Ionicons name="arrow-back" size={24} color={COLORS.text} />
+            <Icon name="arrow-back" size={24} color={COLORS.text} />
           </TouchableOpacity>
         )}
         <View style={styles.headerTitleContainer}>
@@ -1186,14 +1186,14 @@ export default function BibleScreen() {
             <Text style={styles.editionBadgeText}>
               {currentEdition?.name || t('selectEdition')}
             </Text>
-            <Ionicons name="chevron-down" size={14} color={COLORS.primary} />
+            <Icon name="chevron-down" size={14} color={COLORS.primary} />
           </TouchableOpacity>
         </View>
         
         <View style={styles.headerActions}>
           {view === 'reading' && (
             <TouchableOpacity style={styles.headerButton} onPress={handleSpeak}>
-              <Ionicons
+              <Icon
                 name={isSpeaking ? 'stop' : 'volume-high'}
                 size={22}
                 color={COLORS.primary}

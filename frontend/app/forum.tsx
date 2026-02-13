@@ -11,7 +11,7 @@ import {
   FlatList,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { Icon } from '../src/components/Icon';
 import { router } from 'expo-router';
 import { api } from '../src/utils/api';
 import { useTranslation } from '../src/store/languageStore';
@@ -139,11 +139,11 @@ export default function ForumScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={28} color={COLORS.text} />
+          <Icon name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.title}>{t('communityForum')}</Text>
         <TouchableOpacity onPress={() => setShowNewPost(true)}>
-          <Ionicons name="add-circle" size={28} color={COLORS.primary} />
+          <Icon name="add-circle" size={28} color={COLORS.primary} />
         </TouchableOpacity>
       </View>
 
@@ -190,15 +190,15 @@ export default function ForumScreen() {
             <Text style={styles.postContent} numberOfLines={2}>{item.content}</Text>
             <View style={styles.postFooter}>
               <TouchableOpacity style={styles.postAction} onPress={() => handleVote(item.post_id)}>
-                <Ionicons name="heart" size={18} color={COLORS.error} />
+                <Icon name="heart" size={18} color={COLORS.error} />
                 <Text style={styles.postActionText}>{item.votes}</Text>
               </TouchableOpacity>
               <View style={styles.postAction}>
-                <Ionicons name="chatbubble" size={18} color={COLORS.textMuted} />
+                <Icon name="chatbubble" size={18} color={COLORS.textMuted} />
                 <Text style={styles.postActionText}>{item.replies_count}</Text>
               </View>
               <View style={styles.postAction}>
-                <Ionicons name="eye" size={18} color={COLORS.textMuted} />
+                <Icon name="eye" size={18} color={COLORS.textMuted} />
                 <Text style={styles.postActionText}>{item.views}</Text>
               </View>
             </View>
@@ -206,7 +206,7 @@ export default function ForumScreen() {
         )}
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
-            <Ionicons name="chatbubbles-outline" size={60} color={COLORS.textMuted} />
+            <Icon name="chatbubbles-outline" size={60} color={COLORS.textMuted} />
             <Text style={styles.emptyText}>{t('noPostsYet')}</Text>
             <Text style={styles.emptySubtext}>{t('beFirstToPost')}</Text>
           </View>
@@ -220,7 +220,7 @@ export default function ForumScreen() {
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>{t('newPost')}</Text>
               <TouchableOpacity onPress={() => setShowNewPost(false)}>
-                <Ionicons name="close" size={28} color={COLORS.text} />
+                <Icon name="close" size={28} color={COLORS.text} />
               </TouchableOpacity>
             </View>
 

@@ -12,7 +12,7 @@ import {
   Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { Icon } from '../src/components/Icon';
 import { router } from 'expo-router';
 import { useAuthStore } from '../src/store/authStore';
 import { useTranslation } from '../src/store/languageStore';
@@ -151,7 +151,7 @@ export default function SettingsScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={28} color={COLORS.text} />
+          <Icon name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.title}>{t('settings')}</Text>
         <TouchableOpacity onPress={saveSettings} disabled={saving}>
@@ -186,7 +186,7 @@ export default function SettingsScreen() {
             <View style={styles.selectValue}>
               <Text style={styles.selectFlag}>{selectedLanguage?.flag}</Text>
               <Text style={styles.selectText}>{selectedLanguage?.name}</Text>
-              <Ionicons
+              <Icon
                 name={showLanguages ? 'chevron-up' : 'chevron-down'}
                 size={20}
                 color={COLORS.textMuted}
@@ -211,7 +211,7 @@ export default function SettingsScreen() {
                   <Text style={styles.optionFlag}>{lang.flag}</Text>
                   <Text style={styles.optionText}>{lang.name}</Text>
                   {language === lang.code && (
-                    <Ionicons name="checkmark" size={20} color={COLORS.primary} />
+                    <Icon name="checkmark" size={20} color={COLORS.primary} />
                   )}
                 </TouchableOpacity>
               ))}
@@ -228,7 +228,7 @@ export default function SettingsScreen() {
             <Text style={styles.selectLabel}>{t('preferredEdition')}</Text>
             <View style={styles.selectValue}>
               <Text style={styles.selectText}>{selectedBible?.name}</Text>
-              <Ionicons
+              <Icon
                 name={showBibles ? 'chevron-up' : 'chevron-down'}
                 size={20}
                 color={COLORS.textMuted}
@@ -252,7 +252,7 @@ export default function SettingsScreen() {
                 >
                   <Text style={styles.optionText}>{bible.name}</Text>
                   {preferredBible === bible.id && (
-                    <Ionicons name="checkmark" size={20} color={COLORS.primary} />
+                    <Icon name="checkmark" size={20} color={COLORS.primary} />
                   )}
                 </TouchableOpacity>
               ))}
@@ -303,9 +303,9 @@ export default function SettingsScreen() {
             onPress={() => showInfoAlert(t('privacyPolicy'), `Privacy Policy - Amen! App`, t('understood'))}
             data-testid="privacy-policy-button"
           >
-            <Ionicons name="shield-checkmark" size={22} color={COLORS.primary} />
+            <Icon name="shield-checkmark" size={22} color={COLORS.primary} />
             <Text style={styles.legalText}>{t('privacyPolicy')}</Text>
-            <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+            <Icon name="chevron-forward" size={20} color={COLORS.textMuted} />
           </TouchableOpacity>
 
           <TouchableOpacity 
@@ -313,9 +313,9 @@ export default function SettingsScreen() {
             onPress={() => showInfoAlert(t('termsOfService'), `Terms of Service - Amen! App`, t('understood'))}
             data-testid="terms-of-service-button"
           >
-            <Ionicons name="document-text" size={22} color={COLORS.accent} />
+            <Icon name="document-text" size={22} color={COLORS.accent} />
             <Text style={styles.legalText}>{t('termsOfService')}</Text>
-            <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+            <Icon name="chevron-forward" size={20} color={COLORS.textMuted} />
           </TouchableOpacity>
 
           <TouchableOpacity 
@@ -329,9 +329,9 @@ export default function SettingsScreen() {
             }}
             data-testid="gdpr-consent-button"
           >
-            <Ionicons name="checkbox" size={22} color="#27AE60" />
+            <Icon name="checkbox" size={22} color="#27AE60" />
             <Text style={styles.legalText}>{t('gdprConsents')}</Text>
-            <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+            <Icon name="chevron-forward" size={20} color={COLORS.textMuted} />
           </TouchableOpacity>
 
           <TouchableOpacity 
@@ -339,9 +339,9 @@ export default function SettingsScreen() {
             onPress={handleDeleteAccount}
             data-testid="delete-account-button"
           >
-            <Ionicons name="trash" size={22} color="#E74C3C" />
+            <Icon name="trash" size={22} color="#E74C3C" />
             <Text style={[styles.legalText, { color: '#E74C3C' }]}>{t('deleteAccount')}</Text>
-            <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+            <Icon name="chevron-forward" size={20} color={COLORS.textMuted} />
           </TouchableOpacity>
         </View>
 
@@ -352,7 +352,7 @@ export default function SettingsScreen() {
             onPress={handleLogout}
             data-testid="logout-button"
           >
-            <Ionicons name="log-out" size={22} color="#fff" />
+            <Icon name="log-out" size={22} color="#fff" />
             <Text style={styles.logoutText}>{t('logoutAccount')}</Text>
           </TouchableOpacity>
         </View>
