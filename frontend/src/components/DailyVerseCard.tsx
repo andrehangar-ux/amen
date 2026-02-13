@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Icon } from './Icon';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../utils/theme';
 
 interface DailyVerseCardProps {
@@ -22,7 +22,7 @@ export const DailyVerseCard: React.FC<DailyVerseCardProps> = ({
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.badge}>
-          <Ionicons name="sunny" size={16} color={COLORS.accent} />
+          <Icon name="sunny" size={16} color={COLORS.accent} />
           <Text style={styles.badgeText}>Versetto del Giorno</Text>
         </View>
       </View>
@@ -33,17 +33,17 @@ export const DailyVerseCard: React.FC<DailyVerseCardProps> = ({
       <View style={styles.actions}>
         {onSpeak && (
           <TouchableOpacity style={styles.actionButton} onPress={onSpeak}>
-            <Ionicons name="volume-high-outline" size={22} color={COLORS.primary} />
+            <Icon name="volume-high-outline" size={22} color={COLORS.primary} />
           </TouchableOpacity>
         )}
         {onBookmark && (
           <TouchableOpacity style={styles.actionButton} onPress={onBookmark}>
-            <Ionicons name="bookmark-outline" size={22} color={COLORS.primary} />
+            <Icon name="bookmark-outline" size={22} color={COLORS.primary} />
           </TouchableOpacity>
         )}
         {onShare && (
           <TouchableOpacity style={styles.actionButton} onPress={onShare}>
-            <Ionicons name="share-outline" size={22} color={COLORS.primary} />
+            <Icon name="share-outline" size={22} color={COLORS.primary} />
           </TouchableOpacity>
         )}
       </View>

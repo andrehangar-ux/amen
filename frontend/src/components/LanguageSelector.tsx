@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Modal, FlatList } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Icon } from './Icon';
 import { useLanguageStore, useTranslation } from '../store/languageStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../utils/theme';
 
@@ -35,7 +35,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ visible, onC
           <View style={styles.header}>
             <Text style={styles.title}>{t('selectLanguage')}</Text>
             <TouchableOpacity onPress={onClose} data-testid="close-language-selector">
-              <Ionicons name="close" size={24} color={COLORS.text} />
+              <Icon name="close" size={24} color={COLORS.text} />
             </TouchableOpacity>
           </View>
 
@@ -53,7 +53,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ visible, onC
                 <Text style={styles.flag}>{item.flag}</Text>
                 <Text style={styles.languageName}>{item.name}</Text>
                 {currentLanguage === item.code && (
-                  <Ionicons name="checkmark-circle" size={24} color={COLORS.primary} />
+                  <Icon name="checkmark-circle" size={24} color={COLORS.primary} />
                 )}
               </TouchableOpacity>
             )}
