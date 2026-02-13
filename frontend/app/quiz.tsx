@@ -170,88 +170,153 @@ export default function QuizScreen() {
   // Show result with detailed corrections
   if (result) {
     const wrongAnswers = result.results.filter(r => !r.is_correct);
+    const correctAnswers = result.results.filter(r => r.is_correct);
+    const scoreEmoji = result.score >= 80 ? '🏆' : result.score >= 60 ? '⭐' : result.score >= 40 ? '📚' : '💪';
+    const scoreMessage = result.score >= 80 ? t('great') : result.score >= 60 ? t('good') : t('needsWork');
     
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.resultContainer}>
-            <View style={styles.resultIcon}>
-              <Ionicons
-                name={result.score >= 70 ? 'trophy' : result.score >= 50 ? 'ribbon' : 'refresh'}
-                size={60}
-                color={result.score >= 70 ? COLORS.accent : result.score >= 50 ? COLORS.primary : COLORS.textMuted}
-              />
+            {/* Score Header */}
+            <View style={styles.resultHeader}>
+              <Text style={styles.resultEmoji}>{scoreEmoji}</Text>
+              <Text style={styles.resultScore}>{result.score.toFixed(0)}%</Text>
+              <Text style={styles.resultMessage}>{scoreMessage}</Text>
+              <View style={styles.resultStatsRow}>
+                <View style={styles.resultStat}>
+                  <Ionicons name="checkmark-circle" size={24} color={COLORS.success} />
+                  <Text style={styles.resultStatNumber}>{result.correct_count}</Text>
+                  <Text style={styles.resultStatLabel}>{t('correct')}</Text>
+                </View>
+                <View style={styles.resultStatDivider} />
+                <View style={styles.resultStat}>
+                  <Ionicons name="close-circle" size={24} color={COLORS.error} />
+                  <Text style={styles.resultStatNumber}>{result.total - result.correct_count}</Text>
+                  <Text style={styles.resultStatLabel}>{t('wrong')}</Text>
+                </View>
+              </View>
             </View>
-            <Text style={styles.resultScore}>{result.score.toFixed(0)}%</Text>
-            <Text style={styles.resultText}>
-              {result.correct_count} / {result.total} {t('correct')}
-            </Text>
+            
+            {/* Feedback Card */}
             <View style={styles.feedbackCard}>
               <Text style={styles.feedbackText}>{result.feedback}</Text>
             </View>
             
-            {/* Corrections Section */}
-            {wrongAnswers.length > 0 && (
-              <TouchableOpacity 
-                style={styles.showCorrectionsBtn}
-                onPress={() => setShowCorrections(!showCorrections)}
-              >
-                <Ionicons 
-                  name={showCorrections ? "chevron-up" : "chevron-down"} 
-                  size={20} 
-                  color={COLORS.error} 
-                />
-                <Text style={styles.showCorrectionsBtnText}>
-                  {showCorrections ? t('hideErrors') : `${t('showErrors')} (${wrongAnswers.length})`}
-                </Text>
-              </TouchableOpacity>
-            )}
+            {/* Toggle to show all answers */}
+            <TouchableOpacity 
+              style={styles.showAllBtn}
+              onPress={() => setShowCorrections(!showCorrections)}
+            >
+              <Ionicons 
+                name={showCorrections ? "chevron-up" : "list"} 
+                size={20} 
+                color={COLORS.primary} 
+              />
+              <Text style={styles.showAllBtnText}>
+                {showCorrections ? t('hideAllAnswers') : t('viewAllAnswers')}
+              </Text>
+            </TouchableOpacity>
             
-            {showCorrections && wrongAnswers.length > 0 && (
+            {/* All Answers Section */}
+            {showCorrections && (
               <View style={styles.correctionsContainer}>
-                {wrongAnswers.map((r, idx) => {
-                  const question = questions.find(q => q.id === r.question_id);
-                  if (!question) return null;
-                  
-                  return (
-                    <View key={idx} style={styles.correctionCard}>
-                      <Text style={styles.correctionQuestion}>
-                        {idx + 1}. {question.question}
-                      </Text>
-                      
-                      {/* User's wrong answer */}
-                      <View style={styles.answerRow}>
-                        <Ionicons name="close-circle" size={18} color={COLORS.error} />
-                        <Text style={styles.wrongAnswerLabel}>{t('yourAnswer')}: </Text>
-                        <Text style={styles.wrongAnswerText}>
-                          {r.user_answer >= 0 ? question.options[r.user_answer] : t('noAnswer')}
-                        </Text>
-                      </View>
-                      
-                      {/* Correct answer */}
-                      <View style={styles.answerRow}>
-                        <Ionicons name="checkmark-circle" size={18} color={COLORS.success} />
-                        <Text style={styles.correctAnswerLabel}>{t('correctAnswer')}: </Text>
-                        <Text style={styles.correctAnswerText}>
-                          {question.options[r.correct_answer]}
-                        </Text>
-                      </View>
-                      
-                      {/* Explanation */}
-                      {r.explanation && (
-                        <View style={styles.explanationBox}>
-                          <Text style={styles.explanationLabel}>💡 {t('explanation')}:</Text>
-                          <Text style={styles.explanationText}>{r.explanation}</Text>
-                        </View>
-                      )}
-                      
-                      {/* Verse reference */}
-                      {r.verse_ref && (
-                        <Text style={styles.verseRef}>📖 {r.verse_ref}</Text>
-                      )}
+                {/* Wrong Answers First */}
+                {wrongAnswers.length > 0 && (
+                  <View style={styles.answerSection}>
+                    <View style={styles.sectionHeader}>
+                      <Ionicons name="close-circle" size={20} color={COLORS.error} />
+                      <Text style={styles.sectionHeaderText}>{t('wrongAnswers')} ({wrongAnswers.length})</Text>
                     </View>
-                  );
-                })}
+                    {wrongAnswers.map((r, idx) => {
+                      const question = questions.find(q => q.id === r.question_id);
+                      if (!question) return null;
+                      
+                      return (
+                        <View key={`wrong-${idx}`} style={[styles.correctionCard, styles.wrongCard]}>
+                          <Text style={styles.correctionQuestion}>
+                            {question.question}
+                          </Text>
+                          
+                          {/* User's wrong answer */}
+                          <View style={styles.answerRow}>
+                            <Ionicons name="close-circle" size={18} color={COLORS.error} />
+                            <Text style={styles.wrongAnswerLabel}>{t('yourAnswer')}: </Text>
+                            <Text style={styles.wrongAnswerText}>
+                              {r.user_answer >= 0 ? question.options[r.user_answer] : t('noAnswer')}
+                            </Text>
+                          </View>
+                          
+                          {/* Correct answer */}
+                          <View style={styles.answerRow}>
+                            <Ionicons name="checkmark-circle" size={18} color={COLORS.success} />
+                            <Text style={styles.correctAnswerLabel}>{t('correctAnswer')}: </Text>
+                            <Text style={styles.correctAnswerText}>
+                              {question.options[r.correct_answer]}
+                            </Text>
+                          </View>
+                          
+                          {/* Explanation */}
+                          {r.explanation && (
+                            <View style={styles.explanationBox}>
+                              <Text style={styles.explanationLabel}>💡 {t('explanation')}:</Text>
+                              <Text style={styles.explanationText}>{r.explanation}</Text>
+                            </View>
+                          )}
+                          
+                          {/* Verse reference */}
+                          {r.verse_ref && (
+                            <Text style={styles.verseRef}>📖 {r.verse_ref}</Text>
+                          )}
+                        </View>
+                      );
+                    })}
+                  </View>
+                )}
+                
+                {/* Correct Answers */}
+                {correctAnswers.length > 0 && (
+                  <View style={styles.answerSection}>
+                    <View style={styles.sectionHeader}>
+                      <Ionicons name="checkmark-circle" size={20} color={COLORS.success} />
+                      <Text style={styles.sectionHeaderText}>{t('correctAnswers')} ({correctAnswers.length})</Text>
+                    </View>
+                    {correctAnswers.map((r, idx) => {
+                      const question = questions.find(q => q.id === r.question_id);
+                      if (!question) return null;
+                      
+                      return (
+                        <View key={`correct-${idx}`} style={[styles.correctionCard, styles.correctCard]}>
+                          <Text style={styles.correctionQuestion}>
+                            {question.question}
+                          </Text>
+                          
+                          {/* User's correct answer */}
+                          <View style={styles.answerRow}>
+                            <Ionicons name="checkmark-circle" size={18} color={COLORS.success} />
+                            <Text style={styles.correctAnswerLabel}>{t('yourAnswer')}: </Text>
+                            <Text style={styles.correctAnswerText}>
+                              {question.options[r.user_answer]}
+                            </Text>
+                          </View>
+                          
+                          {/* Explanation for learning */}
+                          {r.explanation && (
+                            <View style={styles.explanationBoxSuccess}>
+                              <Text style={styles.explanationLabel}>💡 {t('explanation')}:</Text>
+                              <Text style={styles.explanationText}>{r.explanation}</Text>
+                            </View>
+                          )}
+                          
+                          {/* Verse reference */}
+                          {r.verse_ref && (
+                            <Text style={styles.verseRef}>📖 {r.verse_ref}</Text>
+                          )}
+                        </View>
+                      );
+                    })}
+                  </View>
+                )}
               </View>
             )}
             
