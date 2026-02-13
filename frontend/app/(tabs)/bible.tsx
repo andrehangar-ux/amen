@@ -726,21 +726,21 @@ export default function BibleScreen() {
                   onPress={() => { setShowStudyTools(false); setShowNoteModal(true); }}
                 >
                   <Ionicons name="create" size={22} color={COLORS.primary} />
-                  <Text style={styles.studyActionText}>Nota</Text>
+                  <Text style={styles.studyActionText}>{t('note')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                   style={styles.studyActionBtn}
                   onPress={() => { setShowStudyTools(false); setShowAIModal(true); }}
                 >
                   <Ionicons name="bulb" size={22} color={COLORS.accent} />
-                  <Text style={styles.studyActionText}>AI Spiega</Text>
+                  <Text style={styles.studyActionText}>{t('aiExplain')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                   style={styles.studyActionBtn}
                   onPress={() => router.push('/dictionary')}
                 >
                   <Ionicons name="book" size={22} color="#9B59B6" />
-                  <Text style={styles.studyActionText}>Dizionario</Text>
+                  <Text style={styles.studyActionText}>{t('dictionary')}</Text>
                 </TouchableOpacity>
               </View>
 
@@ -757,14 +757,14 @@ export default function BibleScreen() {
                         size={22} 
                         color="#F1C40F" 
                       />
-                      <Text style={styles.studyActionText}>Evidenzia</Text>
+                      <Text style={styles.studyActionText}>{t('highlight')}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
                       style={styles.studyActionBtn}
                       onPress={() => { shareVerse(selectedVerse); setShowStudyTools(false); }}
                     >
                       <Ionicons name="share-social" size={22} color="#2ECC71" />
-                      <Text style={styles.studyActionText}>Condividi</Text>
+                      <Text style={styles.studyActionText}>{t('share')}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
                       style={[styles.studyActionBtn, bookmarkedVerses.has(`${selectedBook?.name}:${selectedChapter}:${selectedVerse.verse}`) && styles.studyActionActive]}
@@ -779,7 +779,7 @@ export default function BibleScreen() {
                         size={22} 
                         color="#E74C3C" 
                       />
-                      <Text style={styles.studyActionText}>Segnalibro</Text>
+                      <Text style={styles.studyActionText}>{t('bookmark')}</Text>
                     </TouchableOpacity>
                   </>
                 )}
@@ -792,14 +792,14 @@ export default function BibleScreen() {
                   onPress={() => router.push('/maps')}
                 >
                   <Ionicons name="map" size={22} color="#3498DB" />
-                  <Text style={styles.studyActionText}>Mappe</Text>
+                  <Text style={styles.studyActionText}>{t('maps')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                   style={styles.studyActionBtn}
                   onPress={() => openWikipedia(selectedBook?.name || 'Bibbia')}
                 >
                   <Ionicons name="globe" size={22} color="#95A5A6" />
-                  <Text style={styles.studyActionText}>Wikipedia</Text>
+                  <Text style={styles.studyActionText}>{t('wikipedia')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                   style={styles.studyActionBtn}
@@ -811,12 +811,12 @@ export default function BibleScreen() {
                         controlsColor: COLORS.primary,
                       });
                     } catch (error) {
-                      Alert.alert('Errore', 'Impossibile aprire LaParola');
+                      Alert.alert(t('error'), t('unableToOpenLaParola'));
                     }
                   }}
                 >
                   <Ionicons name="open" size={22} color="#1ABC9C" />
-                  <Text style={styles.studyActionText}>LaParola</Text>
+                  <Text style={styles.studyActionText}>{t('laParola')}</Text>
                 </TouchableOpacity>
               </View>
 
