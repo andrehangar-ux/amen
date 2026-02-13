@@ -18,7 +18,7 @@ import * as Speech from 'expo-speech';
 import * as WebBrowser from 'expo-web-browser';
 import { router } from 'expo-router';
 import { api } from '../../src/utils/api';
-import { useLanguageStore } from '../../src/store/languageStore';
+import { useLanguageStore, useTranslation } from '../../src/store/languageStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
 
 // Cross-platform TTS helper with voice selection
@@ -112,6 +112,7 @@ interface StudyData {
 
 export default function BibleScreen() {
   const { currentLanguage, languages, setLanguage } = useLanguageStore();
+  const { t } = useTranslation();
   const [books, setBooks] = useState<Book[]>([]);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
