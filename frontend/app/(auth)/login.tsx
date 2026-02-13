@@ -99,9 +99,17 @@ export default function LoginScreen() {
     setLoading(true);
     try {
       // Build redirect URL using window.location.origin only (required for OAuth)
-      const redirectUrl = typeof window !== 'undefined' && window.location?.origin 
-        ? `${window.location.origin}/auth-callback` 
-        : '/auth-callback';
+      // On native platforms, use Linking to get the app URL
+      let redirectUrl: string;
+      
+      if (Platform.OS === 'web' && typeof window !== 'undefined' && window.location?.origin) {
+        redirectUrl = `${window.location.origin}/auth-callback`;
+      } else {
+        // For native platforms, use the backend URL
+        const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL;
+        redirectUrl = backendUrl ? `${backendUrl}/auth-callback` : '';
+      }
+      
       const authUrl = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`;
       
       console.log('Starting Google auth with redirect:', redirectUrl);
