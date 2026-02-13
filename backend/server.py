@@ -3510,7 +3510,319 @@ async def search_dictionary(query: str):
             })
     return results
 
-# ==================== GLOBAL SEARCH ENGINE ====================
+# ==================== DICTIONARY FAVORITES & FLASHCARDS ====================
+
+class FavoriteTermRequest(BaseModel):
+    term_id: str
+
+class FlashcardCreateRequest(BaseModel):
+    term_id: str
+    note: Optional[str] = None
+
+class FlashcardUpdateRequest(BaseModel):
+    note: Optional[str] = None
+    mastery_level: Optional[int] = None  # 0-5 scale
+    last_reviewed: Optional[datetime] = None
+
+@api_router.get("/dictionary/favorites")
+async def get_favorite_terms(user: User = Depends(require_auth), lang: str = "it"):
+    """Get user's favorite dictionary terms"""
+    favorites_cursor = db.dictionary_favorites.find(
+        {"user_id": user.user_id},
+        {"_id": 0}
+    ).sort("created_at", -1)
+    
+    favorites = []
+    async for fav in favorites_cursor:
+        term_id = fav["term_id"]
+        if term_id in BIBLICAL_DICTIONARY:
+            term = BIBLICAL_DICTIONARY[term_id]
+            meaning = term["meaning"]
+            
+            # Get translated meaning if available
+            if lang != "it":
+                if term_id in DICT_TERM_TRANSLATIONS and lang in DICT_TERM_TRANSLATIONS[term_id]:
+                    meaning = DICT_TERM_TRANSLATIONS[term_id][lang].get("meaning", term["meaning"])
+                else:
+                    cached = await db.dictionary_translations.find_one({
+                        "term_id": term_id, "language": lang
+                    }, {"_id": 0})
+                    if cached and cached.get("meaning"):
+                        meaning = cached["meaning"]
+            
+            favorites.append({
+                "term_id": term_id,
+                "term": term["term"],
+                "meaning": meaning,
+                "origin": term["origin"],
+                "added_at": fav.get("created_at", datetime.now(timezone.utc)).isoformat()
+            })
+    
+    return favorites
+
+@api_router.post("/dictionary/favorites")
+async def add_favorite_term(data: FavoriteTermRequest, user: User = Depends(require_auth)):
+    """Add a term to user's favorites"""
+    if data.term_id not in BIBLICAL_DICTIONARY:
+        raise HTTPException(status_code=404, detail="Term not found")
+    
+    existing = await db.dictionary_favorites.find_one({
+        "user_id": user.user_id,
+        "term_id": data.term_id
+    })
+    
+    if existing:
+        return {"message": "Term already in favorites", "term_id": data.term_id}
+    
+    await db.dictionary_favorites.insert_one({
+        "user_id": user.user_id,
+        "term_id": data.term_id,
+        "created_at": datetime.now(timezone.utc)
+    })
+    
+    return {"message": "Term added to favorites", "term_id": data.term_id}
+
+@api_router.delete("/dictionary/favorites/{term_id}")
+async def remove_favorite_term(term_id: str, user: User = Depends(require_auth)):
+    """Remove a term from user's favorites"""
+    result = await db.dictionary_favorites.delete_one({
+        "user_id": user.user_id,
+        "term_id": term_id
+    })
+    
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Favorite not found")
+    
+    return {"message": "Term removed from favorites", "term_id": term_id}
+
+@api_router.get("/dictionary/favorites/check/{term_id}")
+async def check_favorite(term_id: str, user: User = Depends(require_auth)):
+    """Check if a term is in user's favorites"""
+    exists = await db.dictionary_favorites.find_one({
+        "user_id": user.user_id,
+        "term_id": term_id
+    })
+    return {"is_favorite": exists is not None}
+
+# Flashcards for spaced repetition learning
+@api_router.get("/dictionary/flashcards")
+async def get_flashcards(user: User = Depends(require_auth), lang: str = "it"):
+    """Get user's flashcards for study"""
+    flashcards_cursor = db.dictionary_flashcards.find(
+        {"user_id": user.user_id},
+        {"_id": 0}
+    ).sort("next_review", 1)  # Sort by next review date
+    
+    flashcards = []
+    async for card in flashcards_cursor:
+        term_id = card["term_id"]
+        if term_id in BIBLICAL_DICTIONARY:
+            term = BIBLICAL_DICTIONARY[term_id]
+            meaning = term["meaning"]
+            description = term["description"]
+            
+            # Get translated content if available
+            if lang != "it":
+                if term_id in DICT_TERM_TRANSLATIONS and lang in DICT_TERM_TRANSLATIONS[term_id]:
+                    trans = DICT_TERM_TRANSLATIONS[term_id][lang]
+                    meaning = trans.get("meaning", term["meaning"])
+                    description = trans.get("description", term["description"])
+                else:
+                    cached = await db.dictionary_translations.find_one({
+                        "term_id": term_id, "language": lang
+                    }, {"_id": 0})
+                    if cached:
+                        meaning = cached.get("meaning", meaning)
+                        description = cached.get("description", description)
+            
+            flashcards.append({
+                "flashcard_id": card.get("flashcard_id", ""),
+                "term_id": term_id,
+                "term": term["term"],
+                "meaning": meaning,
+                "description": description[:200] + "..." if len(description) > 200 else description,
+                "origin": term["origin"],
+                "note": card.get("note", ""),
+                "mastery_level": card.get("mastery_level", 0),
+                "last_reviewed": card.get("last_reviewed", "").isoformat() if card.get("last_reviewed") else None,
+                "next_review": card.get("next_review", "").isoformat() if card.get("next_review") else None,
+                "review_count": card.get("review_count", 0),
+                "created_at": card.get("created_at", datetime.now(timezone.utc)).isoformat()
+            })
+    
+    return flashcards
+
+@api_router.get("/dictionary/flashcards/due")
+async def get_due_flashcards(user: User = Depends(require_auth), lang: str = "it"):
+    """Get flashcards due for review"""
+    now = datetime.now(timezone.utc)
+    
+    due_cursor = db.dictionary_flashcards.find({
+        "user_id": user.user_id,
+        "$or": [
+            {"next_review": {"$lte": now}},
+            {"next_review": None}
+        ]
+    }, {"_id": 0}).sort("next_review", 1).limit(20)
+    
+    flashcards = []
+    async for card in due_cursor:
+        term_id = card["term_id"]
+        if term_id in BIBLICAL_DICTIONARY:
+            term = BIBLICAL_DICTIONARY[term_id]
+            meaning = term["meaning"]
+            
+            if lang != "it":
+                if term_id in DICT_TERM_TRANSLATIONS and lang in DICT_TERM_TRANSLATIONS[term_id]:
+                    meaning = DICT_TERM_TRANSLATIONS[term_id][lang].get("meaning", meaning)
+                else:
+                    cached = await db.dictionary_translations.find_one({
+                        "term_id": term_id, "language": lang
+                    }, {"_id": 0})
+                    if cached and cached.get("meaning"):
+                        meaning = cached["meaning"]
+            
+            flashcards.append({
+                "flashcard_id": card.get("flashcard_id", ""),
+                "term_id": term_id,
+                "term": term["term"],
+                "meaning": meaning,
+                "origin": term["origin"],
+                "mastery_level": card.get("mastery_level", 0)
+            })
+    
+    return flashcards
+
+@api_router.post("/dictionary/flashcards")
+async def create_flashcard(data: FlashcardCreateRequest, user: User = Depends(require_auth)):
+    """Create a flashcard from a dictionary term"""
+    if data.term_id not in BIBLICAL_DICTIONARY:
+        raise HTTPException(status_code=404, detail="Term not found")
+    
+    existing = await db.dictionary_flashcards.find_one({
+        "user_id": user.user_id,
+        "term_id": data.term_id
+    })
+    
+    if existing:
+        return {"message": "Flashcard already exists", "flashcard_id": existing.get("flashcard_id", "")}
+    
+    flashcard_id = f"fc_{uuid.uuid4().hex[:12]}"
+    now = datetime.now(timezone.utc)
+    
+    await db.dictionary_flashcards.insert_one({
+        "flashcard_id": flashcard_id,
+        "user_id": user.user_id,
+        "term_id": data.term_id,
+        "note": data.note or "",
+        "mastery_level": 0,
+        "review_count": 0,
+        "last_reviewed": None,
+        "next_review": now,  # Due immediately
+        "created_at": now
+    })
+    
+    return {"message": "Flashcard created", "flashcard_id": flashcard_id}
+
+@api_router.put("/dictionary/flashcards/{flashcard_id}/review")
+async def review_flashcard(flashcard_id: str, quality: int, user: User = Depends(require_auth)):
+    """
+    Review a flashcard using spaced repetition algorithm.
+    Quality: 0-5 scale (0=complete blackout, 5=perfect recall)
+    """
+    if quality < 0 or quality > 5:
+        raise HTTPException(status_code=400, detail="Quality must be between 0 and 5")
+    
+    card = await db.dictionary_flashcards.find_one({
+        "flashcard_id": flashcard_id,
+        "user_id": user.user_id
+    }, {"_id": 0})
+    
+    if not card:
+        raise HTTPException(status_code=404, detail="Flashcard not found")
+    
+    # Simple spaced repetition: increase interval based on quality
+    now = datetime.now(timezone.utc)
+    current_level = card.get("mastery_level", 0)
+    review_count = card.get("review_count", 0) + 1
+    
+    # Calculate new mastery level and next review date
+    if quality >= 3:
+        # Good recall - increase mastery
+        new_level = min(5, current_level + 1)
+        # Interval increases exponentially: 1, 2, 4, 8, 16, 32 days
+        days_until_review = 2 ** new_level
+    else:
+        # Poor recall - decrease mastery
+        new_level = max(0, current_level - 1)
+        # Review again soon
+        days_until_review = 1 if quality == 0 else 2
+    
+    next_review = now + timedelta(days=days_until_review)
+    
+    await db.dictionary_flashcards.update_one(
+        {"flashcard_id": flashcard_id, "user_id": user.user_id},
+        {"$set": {
+            "mastery_level": new_level,
+            "last_reviewed": now,
+            "next_review": next_review,
+            "review_count": review_count
+        }}
+    )
+    
+    return {
+        "message": "Flashcard reviewed",
+        "new_mastery_level": new_level,
+        "next_review": next_review.isoformat(),
+        "days_until_review": days_until_review
+    }
+
+@api_router.delete("/dictionary/flashcards/{flashcard_id}")
+async def delete_flashcard(flashcard_id: str, user: User = Depends(require_auth)):
+    """Delete a flashcard"""
+    result = await db.dictionary_flashcards.delete_one({
+        "flashcard_id": flashcard_id,
+        "user_id": user.user_id
+    })
+    
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Flashcard not found")
+    
+    return {"message": "Flashcard deleted"}
+
+@api_router.get("/dictionary/flashcards/stats")
+async def get_flashcard_stats(user: User = Depends(require_auth)):
+    """Get user's flashcard study statistics"""
+    total = await db.dictionary_flashcards.count_documents({"user_id": user.user_id})
+    
+    now = datetime.now(timezone.utc)
+    due_count = await db.dictionary_flashcards.count_documents({
+        "user_id": user.user_id,
+        "$or": [
+            {"next_review": {"$lte": now}},
+            {"next_review": None}
+        ]
+    })
+    
+    # Count by mastery level
+    mastery_counts = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
+    cursor = db.dictionary_flashcards.find(
+        {"user_id": user.user_id},
+        {"mastery_level": 1, "_id": 0}
+    )
+    async for card in cursor:
+        level = card.get("mastery_level", 0)
+        mastery_counts[level] = mastery_counts.get(level, 0) + 1
+    
+    # Calculate mastered (level 4-5)
+    mastered = mastery_counts.get(4, 0) + mastery_counts.get(5, 0)
+    
+    return {
+        "total_flashcards": total,
+        "due_for_review": due_count,
+        "mastered": mastered,
+        "mastery_distribution": mastery_counts
+    }
 
 @api_router.get("/search")
 async def global_search(q: str, user: User = Depends(require_auth)):
