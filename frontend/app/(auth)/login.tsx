@@ -98,11 +98,10 @@ export default function LoginScreen() {
   const handleGoogleLogin = async () => {
     setLoading(true);
     try {
-      // Costruisci l'URL di redirect dinamicamente
-      const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL || '';
-      const appUrl = Platform.OS === 'web' 
+      // Build redirect URL dynamically using current origin for all platforms
+      const appUrl = typeof window !== 'undefined' && window.location?.origin 
         ? window.location.origin 
-        : backendUrl || 'https://amen-app.com';
+        : process.env.EXPO_PUBLIC_BACKEND_URL || '';
       const redirectUrl = `${appUrl}/auth-callback`;
       const authUrl = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`;
       
