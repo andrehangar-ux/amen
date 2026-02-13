@@ -10,6 +10,7 @@ import {
   Platform,
   ScrollView,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
@@ -128,9 +129,12 @@ export default function LoginScreen() {
           {/* Header */}
           <View style={styles.header}>
             <View style={styles.logoContainer}>
-              <Ionicons name="book" size={48} color={COLORS.primary} />
+              <Image 
+                source={require('../../assets/images/logo.jpg')} 
+                style={styles.logoImage}
+                resizeMode="contain"
+              />
             </View>
-            <Text style={styles.title}>Amen!</Text>
             <Text style={styles.subtitle}>Il tuo compagno spirituale quotidiano</Text>
           </View>
 
