@@ -3337,10 +3337,10 @@ def translate_dict_term(term_data: dict, term_id: str, lang: str) -> dict:
 
 @api_router.get("/dictionary")
 async def get_dictionary_terms(lang: str = "it"):
-    """Get all dictionary terms with optional translation"""
+    """Get all dictionary terms with optional translation, sorted alphabetically"""
     labels = DICT_TRANSLATIONS.get(lang, DICT_TRANSLATIONS["it"])
     
-    async def get_origin_label(origin: str) -> str:
+    def get_origin_label(origin: str) -> str:
         if origin == "Ebraico":
             return labels["origin_hebrew"]
         elif origin == "Greco":
@@ -3351,30 +3351,34 @@ async def get_dictionary_terms(lang: str = "it"):
             return f"{labels['origin_hebrew']}/{labels.get('origin_aramaic', 'Aramaic')}"
         return origin
     
-    async def get_meaning(key: str, term: dict) -> str:
-        # Check pre-translated versions first
-        if key in DICT_TERM_TRANSLATIONS and lang in DICT_TERM_TRANSLATIONS[key]:
-            return DICT_TERM_TRANSLATIONS[key][lang].get("meaning", term["meaning"])
-        
-        # Check MongoDB cache for AI translations
-        cached = await db.dictionary_translations.find_one({
-            "term_id": key,
-            "language": lang
-        }, {"_id": 0})
-        if cached and cached.get("meaning"):
-            return cached["meaning"]
-        
-        return term["meaning"]
-    
     results = []
+    
+    # First, collect all cached translations from MongoDB
+    cached_translations = {}
+    cursor = db.dictionary_translations.find({"language": lang}, {"_id": 0})
+    async for doc in cursor:
+        cached_translations[doc["term_id"]] = doc
+    
     for key, term in BIBLICAL_DICTIONARY.items():
-        meaning = await get_meaning(key, term) if lang != "it" else term["meaning"]
+        meaning = term["meaning"]
+        
+        if lang != "it":
+            # Check pre-translated versions first
+            if key in DICT_TERM_TRANSLATIONS and lang in DICT_TERM_TRANSLATIONS[key]:
+                meaning = DICT_TERM_TRANSLATIONS[key][lang].get("meaning", term["meaning"])
+            # Check MongoDB cache for AI translations
+            elif key in cached_translations and cached_translations[key].get("meaning"):
+                meaning = cached_translations[key]["meaning"]
+        
         results.append({
             "id": key,
             "term": term["term"],
-            "origin": await get_origin_label(term["origin"]),
+            "origin": get_origin_label(term["origin"]),
             "meaning": meaning,
         })
+    
+    # Sort alphabetically by term (ignoring parentheses content)
+    results.sort(key=lambda x: x["term"].split(" (")[0].lower())
     
     return results
 
