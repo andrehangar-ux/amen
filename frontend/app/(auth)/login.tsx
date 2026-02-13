@@ -251,6 +251,19 @@ export default function LoginScreen() {
               <Ionicons name="logo-google" size={20} color={COLORS.text} />
               <Text style={styles.googleButtonText}>{t('continueWithGoogle')}</Text>
             </TouchableOpacity>
+
+            {/* Biometric Login Button */}
+            {biometricAvailable && hasSavedCredentials && (
+              <TouchableOpacity
+                style={styles.biometricButton}
+                onPress={handleBiometricLogin}
+                disabled={loading}
+                data-testid="biometric-login-button"
+              >
+                <Ionicons name="finger-print" size={24} color={COLORS.primary} />
+                <Text style={styles.biometricButtonText}>{t('biometricLogin')}</Text>
+              </TouchableOpacity>
+            )}
           </View>
 
           {/* Footer */}
