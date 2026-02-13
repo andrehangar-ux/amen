@@ -16,6 +16,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuthStore } from '../../src/store/authStore';
+import { useTranslation } from '../../src/store/languageStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
 
 // Cross-platform alert
@@ -35,20 +36,21 @@ export default function RegisterScreen() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { register } = useAuthStore();
+  const { t } = useTranslation();
 
   const handleRegister = async () => {
     if (!name || !email || !password) {
-      showAlert('Errore', 'Compila tutti i campi');
+      showAlert(t('error'), t('fillAllFieldsError'));
       return;
     }
 
     if (password !== confirmPassword) {
-      showAlert('Errore', 'Le password non corrispondono');
+      showAlert(t('error'), t('passwordMismatchError'));
       return;
     }
 
     if (password.length < 6) {
-      showAlert('Errore', 'La password deve avere almeno 6 caratteri');
+      showAlert(t('error'), t('passwordMinLengthError'));
       return;
     }
 
@@ -57,7 +59,7 @@ export default function RegisterScreen() {
       await register(email, password, name);
       router.replace('/(tabs)');
     } catch (error: any) {
-      showAlert('Errore', error.message || 'Registrazione fallita');
+      showAlert(t('error'), error.message || t('registrationFailed'));
     } finally {
       setLoading(false);
     }
@@ -79,6 +81,7 @@ export default function RegisterScreen() {
             <TouchableOpacity
               style={styles.backButton}
               onPress={() => router.back()}
+              data-testid="register-back-button"
             >
               <Ionicons name="arrow-back" size={24} color={COLORS.text} />
             </TouchableOpacity>
@@ -89,8 +92,8 @@ export default function RegisterScreen() {
                 resizeMode="contain"
               />
             </View>
-            <Text style={styles.title}>Crea Account</Text>
-            <Text style={styles.subtitle}>Inizia il tuo viaggio spirituale</Text>
+            <Text style={styles.title}>{t('createAccount')}</Text>
+            <Text style={styles.subtitle}>{t('startSpiritualJourney')}</Text>
           </View>
 
           {/* Form */}
@@ -99,11 +102,12 @@ export default function RegisterScreen() {
               <Ionicons name="person-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
-                placeholder="Nome completo"
+                placeholder={t('fullName')}
                 placeholderTextColor={COLORS.textMuted}
                 value={name}
                 onChangeText={setName}
                 autoCapitalize="words"
+                data-testid="register-name-input"
               />
             </View>
 
@@ -111,12 +115,13 @@ export default function RegisterScreen() {
               <Ionicons name="mail-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
-                placeholder="Email"
+                placeholder={t('email')}
                 placeholderTextColor={COLORS.textMuted}
                 value={email}
                 onChangeText={setEmail}
                 keyboardType="email-address"
                 autoCapitalize="none"
+                data-testid="register-email-input"
               />
             </View>
 
@@ -129,6 +134,7 @@ export default function RegisterScreen() {
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry={!showPassword}
+                data-testid="register-password-input"
               />
               <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                 <Ionicons
@@ -143,11 +149,12 @@ export default function RegisterScreen() {
               <Ionicons name="shield-checkmark-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
-                placeholder="Conferma password"
+                placeholder={t('confirmPassword')}
                 placeholderTextColor={COLORS.textMuted}
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
                 secureTextEntry={!showPassword}
+                data-testid="register-confirm-password-input"
               />
             </View>
 
@@ -155,20 +162,21 @@ export default function RegisterScreen() {
               style={styles.primaryButton}
               onPress={handleRegister}
               disabled={loading}
+              data-testid="register-submit-button"
             >
               {loading ? (
                 <ActivityIndicator color="#fff" />
               ) : (
-                <Text style={styles.primaryButtonText}>Registrati</Text>
+                <Text style={styles.primaryButtonText}>{t('registerButton')}</Text>
               )}
             </TouchableOpacity>
           </View>
 
           {/* Footer */}
           <View style={styles.footer}>
-            <Text style={styles.footerText}>Hai già un account?</Text>
-            <TouchableOpacity onPress={() => router.back()}>
-              <Text style={styles.linkText}>Accedi</Text>
+            <Text style={styles.footerText}>{t('alreadyHaveAccount')}</Text>
+            <TouchableOpacity onPress={() => router.back()} data-testid="login-link">
+              <Text style={styles.linkText}>{t('loginButton')}</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

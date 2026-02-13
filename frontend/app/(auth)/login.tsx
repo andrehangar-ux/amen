@@ -18,6 +18,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
 import * as Linking from 'expo-linking';
 import { useAuthStore } from '../../src/store/authStore';
+import { useTranslation } from '../../src/store/languageStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
 
 const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL || '';
@@ -28,10 +29,11 @@ export default function LoginScreen() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { login, googleLogin } = useAuthStore();
+  const { t } = useTranslation();
 
   const handleLogin = async () => {
     if (!email || !password) {
-      Alert.alert('Errore', 'Inserisci email e password');
+      Alert.alert(t('error'), t('enterEmailPassword'));
       return;
     }
 
@@ -40,7 +42,7 @@ export default function LoginScreen() {
       await login(email, password);
       router.replace('/(tabs)');
     } catch (error: any) {
-      Alert.alert('Errore', error.message || 'Login fallito');
+      Alert.alert(t('error'), error.message || t('loginFailed'));
     } finally {
       setLoading(false);
     }
@@ -98,18 +100,18 @@ export default function LoginScreen() {
             router.replace('/(tabs)');
           } catch (loginError: any) {
             console.error('Google login API error:', loginError);
-            Alert.alert('Errore', loginError.message || 'Errore durante il login con Google');
+            Alert.alert(t('error'), loginError.message || t('googleLoginFailed'));
           }
         } else {
           console.error('No session_id in URL:', url);
-          Alert.alert('Errore', 'Sessione Google non trovata. Riprova.');
+          Alert.alert(t('error'), t('googleSessionNotFound'));
         }
       } else if (result.type === 'cancel') {
         console.log('User cancelled Google login');
       }
     } catch (error: any) {
       console.error('Google login error:', error);
-      Alert.alert('Errore', error.message || 'Login Google fallito. Verifica la connessione.');
+      Alert.alert(t('error'), error.message || t('googleLoginFailed'));
     } finally {
       setLoading(false);
     }
@@ -135,7 +137,7 @@ export default function LoginScreen() {
                 resizeMode="contain"
               />
             </View>
-            <Text style={styles.subtitle}>Il tuo compagno spirituale quotidiano</Text>
+            <Text style={styles.subtitle}>{t('dailySpiritualCompanion')}</Text>
           </View>
 
           {/* Form */}
@@ -144,12 +146,13 @@ export default function LoginScreen() {
               <Ionicons name="mail-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
-                placeholder="Email"
+                placeholder={t('email')}
                 placeholderTextColor={COLORS.textMuted}
                 value={email}
                 onChangeText={setEmail}
                 keyboardType="email-address"
                 autoCapitalize="none"
+                data-testid="login-email-input"
               />
             </View>
 
@@ -162,6 +165,7 @@ export default function LoginScreen() {
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry={!showPassword}
+                data-testid="login-password-input"
               />
               <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                 <Ionicons
@@ -176,17 +180,18 @@ export default function LoginScreen() {
               style={styles.primaryButton}
               onPress={handleLogin}
               disabled={loading}
+              data-testid="login-submit-button"
             >
               {loading ? (
                 <ActivityIndicator color="#fff" />
               ) : (
-                <Text style={styles.primaryButtonText}>Accedi</Text>
+                <Text style={styles.primaryButtonText}>{t('loginButton')}</Text>
               )}
             </TouchableOpacity>
 
             <View style={styles.divider}>
               <View style={styles.dividerLine} />
-              <Text style={styles.dividerText}>oppure</Text>
+              <Text style={styles.dividerText}>{t('orDivider')}</Text>
               <View style={styles.dividerLine} />
             </View>
 
@@ -194,17 +199,18 @@ export default function LoginScreen() {
               style={styles.googleButton}
               onPress={handleGoogleLogin}
               disabled={loading}
+              data-testid="google-login-button"
             >
               <Ionicons name="logo-google" size={20} color={COLORS.text} />
-              <Text style={styles.googleButtonText}>Continua con Google</Text>
+              <Text style={styles.googleButtonText}>{t('continueWithGoogle')}</Text>
             </TouchableOpacity>
           </View>
 
           {/* Footer */}
           <View style={styles.footer}>
-            <Text style={styles.footerText}>Non hai un account?</Text>
-            <TouchableOpacity onPress={() => router.push('/(auth)/register')}>
-              <Text style={styles.linkText}>Registrati</Text>
+            <Text style={styles.footerText}>{t('noAccount')}</Text>
+            <TouchableOpacity onPress={() => router.push('/(auth)/register')} data-testid="register-link">
+              <Text style={styles.linkText}>{t('registerButton')}</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
