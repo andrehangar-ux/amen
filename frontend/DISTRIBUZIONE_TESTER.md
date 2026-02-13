@@ -56,7 +56,7 @@ eas submit -p ios
 
 ### Opzione B: Expo Go (Gratuito, Immediato)
 1. I tester scaricano **"Expo Go"** dall'App Store
-2. Condividi il link dell'app: `https://scriptural-study.preview.emergentagent.com`
+2. Condividi il link dell'app: `https://sacred-reader-10.preview.emergentagent.com`
 3. Aprono il link in Expo Go
 
 ---

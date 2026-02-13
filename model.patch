@@ -70,7 +70,7 @@ index 0000000..414ef65
 +import os
 +import time
 +
-+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://scriptural-study.preview.emergentagent.com')
++BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://sacred-reader-10.preview.emergentagent.com')
 +
 +# Test credentials
 +TEST_EMAIL = "testbible@cibospirituale.it"
@@ -572,7 +572,7 @@ index 1e504ff..284d407 100644
 -+import requests
 -+import os
 -+
--+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://scriptural-study.preview.emergentagent.com')
+-+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://sacred-reader-10.preview.emergentagent.com')
 -+
 -+# Test credentials
 -+TEST_EMAIL = "testbible@cibospirituale.it"
@@ -1020,7 +1020,7 @@ index 1e504ff..284d407 100644
 ---+import os
 ---+import uuid
 ---+
----+BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://scriptural-study.preview.emergentagent.com').rstrip('/')
+---+BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://sacred-reader-10.preview.emergentagent.com').rstrip('/')
 ---+
 ---+class TestUserRegistration:
 ---+    """Test user registration endpoint - main bug fix verification"""
@@ -1293,7 +1293,7 @@ index 1e504ff..284d407 100644
 -----+import requests
 -----+import os
 -----+
------+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://scriptural-study.preview.emergentagent.com')
+-----+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://sacred-reader-10.preview.emergentagent.com')
 -----+
 -----+# Test credentials
 -----+TEST_EMAIL = "testbible@cibospirituale.it"

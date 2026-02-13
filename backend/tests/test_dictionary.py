@@ -6,7 +6,7 @@ import pytest
 import requests
 import os
 
-BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://scriptural-study.preview.emergentagent.com')
+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://sacred-reader-10.preview.emergentagent.com')
 
 # Test credentials
 TEST_EMAIL = "testbible@cibospirituale.it"
