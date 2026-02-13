@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { TouchableOpacity, StyleSheet, View, Platform } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import { Icon } from '../../src/components/Icon';
 import { COLORS, SHADOWS } from '../../src/utils/theme';
 import { useLanguageStore } from '../../src/store/languageStore';
 
@@ -35,7 +35,7 @@ export default function TabLayout() {
           options={{
             title: labels.home,
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="home" size={size} color={color} />
+              <Icon name="home" size={size} color={color} />
             ),
           }}
         />
@@ -44,7 +44,7 @@ export default function TabLayout() {
           options={{
             title: labels.bible,
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="book" size={size} color={color} />
+              <Icon name="book" size={size} color={color} />
             ),
           }}
         />
@@ -53,7 +53,7 @@ export default function TabLayout() {
           options={{
             title: labels.journal,
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="create" size={size} color={color} />
+              <Icon name="create" size={size} color={color} />
             ),
           }}
         />
@@ -62,7 +62,7 @@ export default function TabLayout() {
           options={{
             title: labels.profile,
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="person" size={size} color={color} />
+              <Icon name="person" size={size} color={color} />
             ),
           }}
         />
@@ -74,7 +74,7 @@ export default function TabLayout() {
         onPress={() => router.push('/assistant')}
         activeOpacity={0.8}
       >
-        <Ionicons name="chatbubble-ellipses" size={28} color="#fff" />
+        <Icon name="chatbubbles" size={28} color="#fff" />
       </TouchableOpacity>
     </View>
   );
