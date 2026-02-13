@@ -570,7 +570,7 @@ export default function BibleScreen() {
             onPress={() => setShowEditionSelector(true)}
           >
             <Ionicons name="swap-horizontal" size={20} color={COLORS.accent} />
-            <Text style={styles.toolbarButtonText}>Edizioni</Text>
+            <Text style={styles.toolbarButtonText}>{t('editions')}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity 
@@ -589,7 +589,7 @@ export default function BibleScreen() {
             onPress={() => setShowTutorial(true)}
           >
             <Ionicons name="help-circle" size={20} color="#9B59B6" />
-            <Text style={styles.toolbarButtonText}>Aiuto</Text>
+            <Text style={styles.toolbarButtonText}>{t('help')}</Text>
           </TouchableOpacity>
         </View>
 
@@ -601,7 +601,7 @@ export default function BibleScreen() {
               onPress={() => setShowStudyTools(true)}
             >
               <Ionicons name="school" size={20} color={COLORS.primary} />
-              <Text style={styles.studyContextText}>Contesto di studio disponibile</Text>
+              <Text style={styles.studyContextText}>{t('studyContextAvailable')}</Text>
               <Ionicons name="chevron-forward" size={20} color={COLORS.primary} />
             </TouchableOpacity>
           )}
@@ -657,7 +657,7 @@ export default function BibleScreen() {
         {/* User Notes Section */}
         {studyData?.user_notes && studyData.user_notes.length > 0 && (
           <View style={styles.notesSection}>
-            <Text style={styles.notesSectionTitle}>I tuoi appunti</Text>
+            <Text style={styles.notesSectionTitle}>{t('yourNotes')}</Text>
             {studyData.user_notes.map((note: any, idx: number) => (
               <View key={idx} style={styles.noteCard}>
                 {note.verse && <Text style={styles.noteVerse}>v. {note.verse}</Text>}
@@ -673,7 +673,7 @@ export default function BibleScreen() {
           onPress={() => { setSelectedVerse(null); setShowNoteModal(true); }}
         >
           <Ionicons name="add-circle" size={20} color={COLORS.primary} />
-          <Text style={styles.addNoteText}>Aggiungi nota al capitolo</Text>
+          <Text style={styles.addNoteText}>{t('addChapterNote')}</Text>
         </TouchableOpacity>
       </ScrollView>
       </View>
