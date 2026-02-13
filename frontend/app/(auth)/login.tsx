@@ -231,14 +231,19 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.xxl,
   },
   logoContainer: {
-    width: 100,
-    height: 100,
+    width: 120,
+    height: 120,
     borderRadius: BORDER_RADIUS.xl,
-    backgroundColor: COLORS.secondary,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: SPACING.md,
     ...SHADOWS.medium,
+    overflow: 'hidden',
+  },
+  logoImage: {
+    width: 120,
+    height: 120,
+    borderRadius: BORDER_RADIUS.xl,
   },
   title: {
     fontSize: 32,
