@@ -824,7 +824,7 @@ export default function BibleScreen() {
               {crossRefs.length > 0 && (
                 <View style={styles.studySection}>
                   <Text style={styles.studySectionTitle}>
-                    <Ionicons name="link" size={16} color={COLORS.primary} /> Riferimenti Incrociati
+                    <Ionicons name="link" size={16} color={COLORS.primary} /> {t('crossReferences')}
                   </Text>
                   {crossRefs.map((ref: any, idx: number) => (
                     <View key={idx} style={styles.crossRefCard}>
@@ -839,7 +839,7 @@ export default function BibleScreen() {
               {dictTerms.length > 0 && (
                 <View style={styles.studySection}>
                   <Text style={styles.studySectionTitle}>
-                    <Ionicons name="language" size={16} color={COLORS.accent} /> Termini nel Dizionario
+                    <Ionicons name="language" size={16} color={COLORS.accent} /> {t('dictionaryTerms')}
                   </Text>
                   <View style={styles.dictTermsRow}>
                     {dictTerms.map((term: string, idx: number) => (
@@ -859,14 +859,14 @@ export default function BibleScreen() {
               {context && (
                 <View style={styles.studySection}>
                   <Text style={styles.studySectionTitle}>
-                    <Ionicons name="time" size={16} color="#E67E22" /> Contesto Storico
+                    <Ionicons name="time" size={16} color="#E67E22" /> {t('historicalContext')}
                   </Text>
                   <Text style={styles.contextText}>{context.historical_context}</Text>
                   
-                  <Text style={styles.studySubtitle}>Struttura Letteraria</Text>
+                  <Text style={styles.studySubtitle}>{t('literaryStructure')}</Text>
                   <Text style={styles.contextText}>{context.literary_structure}</Text>
                   
-                  <Text style={styles.studySubtitle}>Temi Chiave</Text>
+                  <Text style={styles.studySubtitle}>{t('keyThemes')}</Text>
                   <View style={styles.themesRow}>
                     {context.key_themes.map((theme: string, idx: number) => (
                       <View key={idx} style={styles.themeChip}>
@@ -875,7 +875,7 @@ export default function BibleScreen() {
                     ))}
                   </View>
                   
-                  <Text style={styles.studySubtitle}>Applicazione</Text>
+                  <Text style={styles.studySubtitle}>{t('application')}</Text>
                   <Text style={styles.contextText}>{context.application}</Text>
                 </View>
               )}
@@ -899,8 +899,8 @@ export default function BibleScreen() {
           <View style={styles.modalHeader}>
             <Text style={styles.modalTitle}>
               {selectedVerse 
-                ? `Nota: v.${selectedVerse.verse}`
-                : 'Nota al Capitolo'
+                ? `${t('note')}: v.${selectedVerse.verse}`
+                : t('noteToChapter')
               }
             </Text>
             <TouchableOpacity onPress={() => setShowNoteModal(false)}>
@@ -910,7 +910,7 @@ export default function BibleScreen() {
           
           <TextInput
             style={styles.noteInput}
-            placeholder="Scrivi i tuoi appunti..."
+            placeholder={t('writeYourNotes')}
             placeholderTextColor={COLORS.textMuted}
             multiline
             value={noteText}
@@ -918,7 +918,7 @@ export default function BibleScreen() {
           />
           
           <TouchableOpacity style={styles.saveNoteBtn} onPress={saveNote}>
-            <Text style={styles.saveNoteBtnText}>Salva Nota</Text>
+            <Text style={styles.saveNoteBtnText}>{t('saveNote')}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -936,7 +936,7 @@ export default function BibleScreen() {
       <View style={styles.modalOverlay}>
         <View style={styles.aiModal}>
           <View style={styles.modalHeader}>
-            <Text style={styles.modalTitle}>AI Spiegazione</Text>
+            <Text style={styles.modalTitle}>{t('aiExplanation')}</Text>
             <TouchableOpacity onPress={() => { setShowAIModal(false); setAiAnswer(''); }}>
               <Ionicons name="close" size={24} color={COLORS.text} />
             </TouchableOpacity>
@@ -951,7 +951,7 @@ export default function BibleScreen() {
           
           <TextInput
             style={styles.aiQuestionInput}
-            placeholder="Fai una domanda specifica (opzionale)..."
+            placeholder={t('askSpecificQuestion')}
             placeholderTextColor={COLORS.textMuted}
             value={aiQuestion}
             onChangeText={setAiQuestion}
@@ -965,7 +965,7 @@ export default function BibleScreen() {
             {loadingAI ? (
               <ActivityIndicator color="#fff" />
             ) : (
-              <Text style={styles.aiAskBtnText}>Chiedi all'AI</Text>
+              <Text style={styles.aiAskBtnText}>{t('askAi')}</Text>
             )}
           </TouchableOpacity>
           
@@ -990,7 +990,7 @@ export default function BibleScreen() {
       <View style={styles.modalOverlay}>
         <View style={styles.modalContainer}>
           <View style={styles.modalHeader}>
-            <Text style={styles.modalTitle}>Seleziona Edizione Biblica</Text>
+            <Text style={styles.modalTitle}>{t('selectBibleEdition')}</Text>
             <TouchableOpacity onPress={() => setShowEditionSelector(false)}>
               <Ionicons name="close" size={24} color={COLORS.text} />
             </TouchableOpacity>
@@ -1040,7 +1040,7 @@ export default function BibleScreen() {
       <View style={styles.modalOverlay}>
         <View style={styles.modalContainer}>
           <View style={styles.modalHeader}>
-            <Text style={styles.modalTitle}>Seleziona Lingua</Text>
+            <Text style={styles.modalTitle}>{t('selectLanguage')}</Text>
             <TouchableOpacity onPress={() => setShowLanguageModal(false)}>
               <Ionicons name="close" size={24} color={COLORS.text} />
             </TouchableOpacity>
