@@ -117,7 +117,7 @@ export default function HomeScreen() {
               <Text style={styles.languageFlag}>{languages[currentLanguage]?.flag || '🇮🇹'}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.notificationButton}>
-              <Ionicons name="notifications-outline" size={24} color={COLORS.text} />
+              <Icon name="notifications-outline" size={24} color={COLORS.text} />
             </TouchableOpacity>
           </View>
         </View>
@@ -161,7 +161,7 @@ export default function HomeScreen() {
               onPress={() => router.push('/(tabs)/bible')}
             >
               <View style={[styles.quickActionIcon, { backgroundColor: COLORS.primary + '20' }]}>
-                <Ionicons name="book" size={24} color={COLORS.primary} />
+                <Icon name="book" size={24} color={COLORS.primary} />
               </View>
               <Text style={styles.quickActionTitle}>{t('read')}</Text>
               <Text style={styles.quickActionSubtitle}>{t('theBible')}</Text>
@@ -172,7 +172,7 @@ export default function HomeScreen() {
               onPress={() => router.push('/(tabs)/journal')}
             >
               <View style={[styles.quickActionIcon, { backgroundColor: COLORS.accent + '20' }]}>
-                <Ionicons name="create" size={24} color={COLORS.accent} />
+                <Icon name="create" size={24} color={COLORS.accent} />
               </View>
               <Text style={styles.quickActionTitle}>{t('write')}</Text>
               <Text style={styles.quickActionSubtitle}>{t('inJournal')}</Text>
@@ -183,7 +183,7 @@ export default function HomeScreen() {
               onPress={() => router.push('/community')}
             >
               <View style={[styles.quickActionIcon, { backgroundColor: '#74B9FF20' }]}>
-                <Ionicons name="people" size={24} color="#74B9FF" />
+                <Icon name="people" size={24} color="#74B9FF" />
               </View>
               <Text style={styles.quickActionTitle}>{t('community')}</Text>
               <Text style={styles.quickActionSubtitle}>{t('worldwide')}</Text>
