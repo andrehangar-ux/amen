@@ -475,28 +475,51 @@ export default function QuizScreen() {
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Text style={styles.subtitle}>{t('subtitle')}</Text>
 
-        {/* Category Selector */}
+        {/* Category Selector - 3 tabs */}
         <View style={styles.categorySelector}>
           <TouchableOpacity 
-            style={[styles.categoryBtn, selectedCategory === 'base' && styles.categoryBtnActive]}
-            onPress={() => setSelectedCategory('base')}
+            style={[styles.categoryBtn, selectedCategory === 'tematici' && styles.categoryBtnActive]}
+            onPress={() => setSelectedCategory('tematici')}
+            data-testid="quiz-thematic-tab"
           >
-            <Ionicons name="book" size={20} color={selectedCategory === 'base' ? '#fff' : COLORS.primary} />
-            <Text style={[styles.categoryBtnText, selectedCategory === 'base' && styles.categoryBtnTextActive]}>
-              {t('base')} ({baseTopics.length})
+            <Ionicons name="albums" size={18} color={selectedCategory === 'tematici' ? '#fff' : COLORS.primary} />
+            <Text style={[styles.categoryBtnText, selectedCategory === 'tematici' && styles.categoryBtnTextActive]}>
+              {t('thematic')}
+            </Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity 
+            style={[styles.categoryBtn, selectedCategory === 'classici' && styles.categoryBtnActive]}
+            onPress={() => setSelectedCategory('classici')}
+            data-testid="quiz-classic-tab"
+          >
+            <Ionicons name="book" size={18} color={selectedCategory === 'classici' ? '#fff' : COLORS.primary} />
+            <Text style={[styles.categoryBtnText, selectedCategory === 'classici' && styles.categoryBtnTextActive]}>
+              {t('base')}
             </Text>
           </TouchableOpacity>
           
           <TouchableOpacity 
             style={[styles.categoryBtn, selectedCategory === 'avanzato' && styles.categoryBtnActive]}
             onPress={() => setSelectedCategory('avanzato')}
+            data-testid="quiz-advanced-tab"
           >
-            <Ionicons name="school" size={20} color={selectedCategory === 'avanzato' ? '#fff' : COLORS.accent} />
+            <Ionicons name="school" size={18} color={selectedCategory === 'avanzato' ? '#fff' : COLORS.accent} />
             <Text style={[styles.categoryBtnText, selectedCategory === 'avanzato' && styles.categoryBtnTextActive]}>
-              {t('advanced')} ({advancedTopics.length})
+              {t('advanced')}
             </Text>
           </TouchableOpacity>
         </View>
+
+        {/* Info banner for thematic quizzes */}
+        {selectedCategory === 'tematici' && categories.length > 0 && (
+          <View style={styles.infoBanner}>
+            <Ionicons name="information-circle" size={20} color={COLORS.primary} />
+            <Text style={styles.infoBannerText}>
+              {t('thematicDesc')} - {categories.reduce((acc, c) => acc + c.questions_count, 0)} {t('questions')}
+            </Text>
+          </View>
+        )}
 
         {filteredTopics.length === 0 ? (
           <View style={styles.emptyContainer}>
@@ -512,7 +535,8 @@ export default function QuizScreen() {
             <TouchableOpacity
               key={topic.id}
               style={styles.topicCard}
-              onPress={() => startQuiz(topic.id)}
+              onPress={() => selectedCategory === 'tematici' ? startCategoryQuiz(topic.id) : startQuiz(topic.id)}
+              data-testid={`quiz-topic-${topic.id}`}
             >
               <View style={[
                 styles.topicIcon,
