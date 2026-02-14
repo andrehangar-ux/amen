@@ -419,4 +419,54 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: SPACING.xl,
   },
+  // Reading History Styles
+  sectionHeaderRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: SPACING.sm,
+    marginLeft: SPACING.xs,
+    paddingRight: SPACING.xs,
+  },
+  emptyHistory: {
+    alignItems: 'center',
+    padding: SPACING.xl,
+  },
+  emptyHistoryText: {
+    fontSize: 14,
+    color: COLORS.textMuted,
+    textAlign: 'center',
+    marginTop: SPACING.md,
+  },
+  historyItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: SPACING.md,
+  },
+  historyItemBorder: {
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.border,
+  },
+  historyIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: BORDER_RADIUS.full,
+    backgroundColor: COLORS.primary + '15',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: SPACING.md,
+  },
+  historyContent: {
+    flex: 1,
+  },
+  historyTitle: {
+    fontSize: 15,
+    fontWeight: '500',
+    color: COLORS.text,
+  },
+  historyMeta: {
+    fontSize: 12,
+    color: COLORS.textLight,
+    marginTop: 2,
+  },
 });
