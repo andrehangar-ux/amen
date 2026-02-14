@@ -50,18 +50,26 @@ export default function HomeScreen() {
   const loadData = useCallback(async () => {
     try {
       // Check consent status first (only once)
+      console.log('[HomeScreen] loadData called, consentCheckedRef:', consentCheckedRef.current);
       if (!consentCheckedRef.current) {
         consentCheckedRef.current = true;
+        console.log('[HomeScreen] Checking consent status...');
         try {
           const consentStatus = await api.getConsentStatus();
+          console.log('[HomeScreen] Consent status received:', consentStatus);
           if (!consentStatus.accepted) {
+            console.log('[HomeScreen] Setting showTermsModal to TRUE');
             setShowTermsModal(true);
+          } else {
+            console.log('[HomeScreen] Consent already accepted, skipping modal');
           }
         } catch (e) {
-          console.log('Consent check error:', e);
+          console.log('[HomeScreen] Consent check error:', e);
           // Show modal on error
           setShowTermsModal(true);
         }
+      } else {
+        console.log('[HomeScreen] Consent already checked, skipping');
       }
       
       const [verse, prog] = await Promise.all([
