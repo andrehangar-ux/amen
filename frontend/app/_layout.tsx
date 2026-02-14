@@ -1,28 +1,59 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useAuthStore } from '../src/store/authStore';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { COLORS } from '../src/utils/theme';
 import * as SplashScreen from 'expo-splash-screen';
+import { TermsModal } from '../src/components/TermsModal';
+import { api } from '../src/utils/api';
 
 // Prevent splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
 export default function RootLayout() {
-  const { checkAuth, isLoading: authLoading } = useAuthStore();
+  const { checkAuth, isLoading: authLoading, isAuthenticated } = useAuthStore();
+  const [showTermsModal, setShowTermsModal] = useState(false);
+  const [checkingTerms, setCheckingTerms] = useState(false);
 
   useEffect(() => {
     checkAuth();
   }, []);
 
+  // Check terms acceptance status when user is authenticated
   useEffect(() => {
-    if (!authLoading) {
+    const checkTermsStatus = async () => {
+      if (isAuthenticated && !authLoading) {
+        setCheckingTerms(true);
+        try {
+          const status = await api.getConsentStatus();
+          if (!status.accepted) {
+            setShowTermsModal(true);
+          }
+        } catch (error) {
+          // If error fetching consent, show modal to be safe
+          console.log('Error checking consent:', error);
+          setShowTermsModal(true);
+        } finally {
+          setCheckingTerms(false);
+        }
+      }
+    };
+
+    checkTermsStatus();
+  }, [isAuthenticated, authLoading]);
+
+  useEffect(() => {
+    if (!authLoading && !checkingTerms) {
       SplashScreen.hideAsync();
     }
-  }, [authLoading]);
+  }, [authLoading, checkingTerms]);
 
-  if (authLoading) {
+  const handleTermsAccept = () => {
+    setShowTermsModal(false);
+  };
+
+  if (authLoading || checkingTerms) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={COLORS.primary} />
@@ -33,6 +64,10 @@ export default function RootLayout() {
   return (
     <>
       <StatusBar style="dark" />
+      <TermsModal 
+        visible={showTermsModal && isAuthenticated} 
+        onAccept={handleTermsAccept} 
+      />
       <Stack
         screenOptions={{
           headerShown: false,
