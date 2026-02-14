@@ -5,47 +5,57 @@ Creare un'app biblica completa con lettura della Bibbia, quiz, diario spirituale
 
 ## Funzionalità Implementate
 
-### Sessione Corrente (Feb 2025) - Iterazione 14
-- **Utenti Online nella Community**: Implementato sistema di tracciamento utenti online con heartbeat ogni 2 minuti. La sezione Community mostra gli utenti attualmente connessi con avatar e indicatore verde
-- **Barra Azioni Rapide Community**: Aggiunta barra con collegamenti rapidi a Bibbia, Quiz, Diario, Gruppi e Dizionario
-- **Notifiche Push Versetto del Giorno**: Implementato servizio notifiche (NotificationService.ts) con toggle nel profilo utente per attivare/disattivare le notifiche giornaliere alle 08:00
+### Sessione Corrente (Feb 2025) - Iterazione 15
+- **TTS Migliorato**: Corretto il Text-to-Speech per la lettura della Bibbia in tutte le 6 lingue (IT, EN, ES, PT, FR, DE). Implementato con Web Speech API + expo-speech fallback, fix per bug Chrome, e selezione automatica della voce corretta
+- **Messaggi Privati dalla Community**: Cliccando sull'avatar di un utente online si apre un modal per la chat privata. Include invio/ricezione messaggi in tempo reale
+- **Utenti Online nella Community**: Sistema di heartbeat ogni 2 min, sezione utenti online con avatar, indicatore verde e icona chat per aprire conversazione privata
 
-### Backend API Nuovi
-- `POST /api/user/heartbeat` - Aggiorna stato online dell'utente
-- `GET /api/community/online-users` - Lista utenti online negli ultimi 5 minuti
+### Sessione Precedente - Iterazione 14
+- Utenti Online nella Community
+- Barra Azioni Rapide Community
+- Notifiche Push Versetto del Giorno
 
-### Sessioni Precedenti
-- **Checkbox Termini e Condizioni**: Aggiunta nella pagina di registrazione con validazione obbligatoria
-- **Pulsante Elimina Account**: Aggiunto nel profilo utente con cancellazione completa da tutte le collection MongoDB (GDPR compliant)
-- **Login Automatico**: Verificato funzionante tramite AsyncStorage e checkAuth()
+### Backend API
+- `POST /api/user/heartbeat` - Aggiorna stato online
+- `GET /api/community/online-users` - Lista utenti online (ultimi 5 min)
+- `POST /api/messages` - Invia messaggio privato
+- `GET /api/messages/{user_id}` - Ottieni conversazione con utente
+- `GET /api/messages` - Lista tutte le conversazioni
+
+### Funzionalità Precedenti (Completate)
+- Checkbox Termini e Condizioni nella registrazione
+- Pulsante Elimina Account nel profilo (GDPR compliant)
+- Login Automatico tramite AsyncStorage
 - Traduzione on-demand delle 1000 domande del quiz
 - Ottimizzazione performance sezione quiz
-- Correzione Text-to-Speech per varie lingue
 - Cronologia lettura nel profilo utente
 - Pagina Privacy e Copyright con T&C completi
-- Internazionalizzazione della pagina profilo
+- Internazionalizzazione completa (6 lingue)
 
 ## Architettura
 
 ```
 /app
 ├── backend/
-│   ├── server.py               # FastAPI, endpoint autenticazione e CRUD
+│   ├── server.py               # FastAPI, endpoints autenticazione e CRUD
 │   ├── quiz_1000_questions.py  # Logica quiz con traduzione
 │   └── translation_service.py  # Servizio traduzione OpenAI
 └── frontend/
     ├── app/
     │   ├── (auth)/register.tsx # Registrazione con checkbox T&C
-    │   ├── (tabs)/profile.tsx  # Profilo con Elimina Account e Notifiche
-    │   ├── community.tsx       # Community con utenti online e azioni rapide
+    │   ├── (tabs)/
+    │   │   ├── bible.tsx       # Lettura Bibbia con TTS migliorato
+    │   │   └── profile.tsx     # Profilo con Elimina Account e Notifiche
+    │   ├── community.tsx       # Community con utenti online e messaggi privati
     │   ├── privacy.tsx         # Pagina T&C e Privacy Policy
     │   └── quiz.tsx            # Sezione quiz ottimizzata
     └── src/
         ├── services/
         │   └── NotificationService.ts # Servizio notifiche push
-        ├── store/authStore.ts  # Gestione autenticazione con login automatico
-        ├── store/languageStore.ts # Traduzioni multilingua (IT, EN, ES, PT, FR, DE)
-        └── utils/api.ts        # API client con sendHeartbeat, getOnlineUsers
+        ├── store/
+        │   ├── authStore.ts    # Gestione autenticazione
+        │   └── languageStore.ts # Traduzioni multilingua
+        └── utils/api.ts        # API client completo
 ```
 
 ## Database (MongoDB)
@@ -53,15 +63,8 @@ Creare un'app biblica completa con lettura della Bibbia, quiz, diario spirituale
 - `reading_history`: Progressi lettura
 - `user_consent_log`: Log consenso privacy
 - `quizzes_1000_translated`: Cache quiz tradotti
-- `online_users`: Tracciamento utenti online (nuovo)
-
-## API Key Endpoints
-- `POST /api/user/heartbeat`: Registra heartbeat utente online
-- `GET /api/community/online-users`: Lista utenti online
-- `DELETE /api/auth/delete-account`: Elimina account e tutti i dati utente
-- `POST /api/consent/log`: Registra consenso
-- `GET /api/consent/status`: Verifica stato consenso
-- `POST/GET /api/reading_history`: Gestione cronologia lettura
+- `online_users`: Tracciamento utenti online
+- `private_messages`: Messaggi privati tra utenti
 
 ## Credenziali Test
 - Email: testbible@cibospirituale.it
@@ -80,5 +83,12 @@ Creare un'app biblica completa con lettura della Bibbia, quiz, diario spirituale
 - expo-notifications per notifiche push
 
 ## Test Report
-- Iterazione 14: 100% backend (13/13 test), 95% frontend
-- File: /app/test_reports/iteration_14.json
+- Iterazione 15: 100% backend (10/10 test), 85% frontend
+- File: /app/test_reports/iteration_15.json
+
+## Note Tecniche TTS
+Il TTS utilizza Web Speech API sul web con:
+- Selezione automatica della voce per lingua (it-IT, en-US, es-ES, pt-BR, fr-FR, de-DE)
+- Fix per bug Chrome (resume periodico, voices loading)
+- Fallback su expo-speech per app native
+- Logging dettagliato per debug (prefisso 'TTS:')
