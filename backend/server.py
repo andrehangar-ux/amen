@@ -3134,11 +3134,27 @@ BIBLE_QUIZZES = {
 }
 
 from quiz_data import MULTILINGUAL_QUIZZES, get_quiz_for_language, get_all_topics_for_language
+from quiz_1000 import get_quiz_1000_topics, get_quiz_1000_by_category
 
 @api_router.get("/quiz/topics")
 async def get_quiz_topics(lang: str = "it"):
     """Get available quiz topics in specified language"""
     return get_all_topics_for_language(lang)
+
+# ==================== QUIZ 1000 - NEW CATEGORY SYSTEM ====================
+
+@api_router.get("/quiz/categories")
+async def get_quiz_categories(lang: str = "it"):
+    """Get all quiz categories (1000 questions organized in 33 themes)"""
+    return get_quiz_1000_topics(lang)
+
+@api_router.get("/quiz/category/{category_id}")
+async def get_quiz_by_category(category_id: str, lang: str = "it"):
+    """Get quiz questions for a specific category"""
+    quiz = get_quiz_1000_by_category(category_id, lang)
+    if not quiz:
+        raise HTTPException(status_code=404, detail="Categoria non trovata")
+    return quiz
 
 @api_router.get("/quiz/{topic}")
 async def get_quiz(topic: str, lang: str = "it"):
