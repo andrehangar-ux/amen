@@ -217,6 +217,8 @@ export const api = {
   // Quiz
   getQuizTopics: (lang = 'it') => api.fetch(`/api/quiz/topics?lang=${lang}`),
   getQuiz: (topic: string, lang = 'it') => api.fetch(`/api/quiz/${topic}?lang=${lang}`),
+  getQuizCategories: (lang = 'it') => api.fetch(`/api/quiz/categories?lang=${lang}`),
+  getQuizByCategory: (categoryId: string, lang = 'it') => api.fetch(`/api/quiz/category/${categoryId}?lang=${lang}`),
   submitQuiz: (topic: string, answers: Record<string, number>, language = 'it') =>
     api.fetch('/api/quiz/submit', {
       method: 'POST',
