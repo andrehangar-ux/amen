@@ -87,6 +87,7 @@ export default function QuizScreen() {
 
   useEffect(() => {
     loadTopics();
+    loadCategories();
   }, [currentLanguage]);
 
   const loadTopics = async () => {
@@ -100,6 +101,15 @@ export default function QuizScreen() {
     }
   };
 
+  const loadCategories = async () => {
+    try {
+      const data = await api.getQuizCategories(currentLanguage);
+      setCategories(data);
+    } catch (error) {
+      console.error('Error loading categories:', error);
+    }
+  };
+
   const startQuiz = async (topicId: string) => {
     setLoading(true);
     try {
@@ -110,6 +120,25 @@ export default function QuizScreen() {
       setAnswers({});
       setResult(null);
       setShowCorrections(false);
+      setIsCategoryQuiz(false);
+    } catch (error) {
+      showAlert(t('error'), t('loadError'));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const startCategoryQuiz = async (categoryId: string) => {
+    setLoading(true);
+    try {
+      const quiz = await api.getQuizByCategory(categoryId, currentLanguage);
+      setSelectedTopic(categoryId);
+      setQuestions(quiz.questions);
+      setCurrentQuestion(0);
+      setAnswers({});
+      setResult(null);
+      setShowCorrections(false);
+      setIsCategoryQuiz(true);
     } catch (error) {
       showAlert(t('error'), t('loadError'));
     } finally {
