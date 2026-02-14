@@ -58,6 +58,7 @@ const translations: Record<string, Record<string, string>> = {
     notificationDisabled: 'Notifica disattivata',
     notificationTime: 'Orario notifica',
   },
+  en: {
     progress: 'Your Progress',
     streak: 'Streak',
     chapters: 'Chapters',
