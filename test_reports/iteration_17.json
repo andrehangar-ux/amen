@@ -1,0 +1,80 @@
+{
+  "summary": "T&C Modal flow testing - PASS. Backend 8/8 tests passed. Frontend modal appears correctly after login when consent is not given. Full flow verified: login -> modal appears -> accept -> navigate to tabs.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "T&C Modal",
+        "issues": ["Modal header is missing the shield icon (FontAwesome5 'shield-alt') in the screenshot - may be loading delay"]
+      }
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_consent_flow.py",
+    "/app/test_reports/pytest/pytest_consent_iteration_17.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "The T&C consent flow is correctly implemented",
+    "Backend endpoints /api/consent/status, /api/consent/accept, /api/consent/withdraw all work correctly",
+    "Frontend checks consent on Home tab load via api.getConsentStatus()",
+    "TermsModal component renders with all required information (GDPR terms, privacy info, accept button)",
+    "After accepting, user can navigate to all tabs (Home, Bibbia, Diario, Profilo)"
+  ],
+  "updated_files": [
+    "/app/frontend/app/(tabs)/index.tsx"
+  ],
+  "success_rate": {
+    "backend": "100% (8/8 tests passed)",
+    "frontend": "100% - T&C modal flow verified"
+  },
+  "test_credentials": {
+    "email": "testbible@cibospirituale.it",
+    "password": "Test123!"
+  },
+  "seed_data_creation": "None - used existing test user",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "T&C consent flow is working. The modal appears correctly after login if user hasn't accepted terms. Endpoints: GET /api/consent/status (returns {accepted: bool}), POST /api/consent/accept?version=X, DELETE /api/consent/withdraw. The consent check is in (tabs)/index.tsx using consentCheckedRef to prevent repeated checks.",
+  "features_verified": {
+    "consent_status_api": {
+      "status": "PASS",
+      "endpoint": "GET /api/consent/status",
+      "details": "Returns {accepted: true/false, version?, accepted_at?}"
+    },
+    "consent_accept_api": {
+      "status": "PASS",
+      "endpoint": "POST /api/consent/accept?version=X",
+      "details": "Returns {success: true, version, document_hash, timestamp}"
+    },
+    "consent_withdraw_api": {
+      "status": "PASS",
+      "endpoint": "DELETE /api/consent/withdraw",
+      "details": "Returns {success: true, message}"
+    },
+    "modal_appears_after_login": {
+      "status": "PASS",
+      "details": "When consent is not given, modal appears showing 'Termini e Condizioni'"
+    },
+    "accept_button_works": {
+      "status": "PASS",
+      "details": "Clicking 'Accetto i Termini e Condizioni' calls API and dismisses modal"
+    },
+    "navigation_after_accept": {
+      "status": "PASS",
+      "details": "After accepting, user can see and navigate to all tabs"
+    }
+  },
+  "api_test_results": {
+    "GET /api/consent/status (no auth)": "401 - Non autenticato",
+    "GET /api/consent/status (auth)": "200 - Returns consent status",
+    "POST /api/consent/accept?version=1.0 (auth)": "200 - Consent recorded",
+    "POST /api/consent/accept (no version)": "422 - Missing required param",
+    "DELETE /api/consent/withdraw (auth)": "200 - Consent revoked"
+  }
+}
