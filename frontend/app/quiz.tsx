@@ -808,6 +808,21 @@ const styles = StyleSheet.create({
   categoryBtnTextActive: {
     color: '#fff',
   },
+  infoBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.primary + '15',
+    borderRadius: BORDER_RADIUS.md,
+    padding: SPACING.sm,
+    marginBottom: SPACING.md,
+    gap: SPACING.xs,
+  },
+  infoBannerText: {
+    flex: 1,
+    fontSize: 13,
+    color: COLORS.primary,
+    fontWeight: '500',
+  },
   emptyContainer: {
     alignItems: 'center',
     paddingVertical: SPACING.xl * 2,
