@@ -1,15 +1,15 @@
-export default {
-  name: "Amen App New",
-  slug: "amen-spiritual-new",
-  version: "1.0.0",
-  sdkVersion: "54.0.0",
-  platforms: ["android", "ios", "web"],
-  extra: {
-    eas: {
-      projectId: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+{
+  "name": "Amen App New",
+  "slug": "amen-spiritual-new",
+  "version": "1.0.0",
+  "sdkVersion": "54.0.0",
+  "platforms": ["android", "ios", "web"],
+  "extra": {
+    "eas": {
+      "projectId": "85c1417c-1351-479a-bbfc-5fef554e3b67"
     }
   },
-  cli: {
-    appVersionSource: "remote"
+  "cli": {
+    "appVersionSource": "remote"
   }
-};
+}
