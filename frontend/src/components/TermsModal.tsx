@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { COLORS } from '../utils/theme';
 import { useLanguageStore } from '../store/languageStore';
-import { useConsentStore } from '../store/consentStore';
+import { api } from '../utils/api';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 // Translations for the modal
