@@ -69,46 +69,43 @@ export default function QuizScreen() {
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [result, setResult] = useState<QuizResult | null>(null);
   const [loading, setLoading] = useState(true);
+  const [loadingQuiz, setLoadingQuiz] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [showCorrections, setShowCorrections] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<'tematici' | 'classici' | 'avanzato'>('tematici');
-  const [isCategoryQuiz, setIsCategoryQuiz] = useState(false); // Track if using new category system
+  const [isCategoryQuiz, setIsCategoryQuiz] = useState(false);
 
   // Translations for UI
   const translations: Record<string, Record<string, string>> = {
-    it: { title: 'Quiz Biblici', subtitle: 'Testa la tua conoscenza della Bibbia', questions: 'domande', back: 'Torna ai Quiz', submit: 'Invia Quiz', showErrors: 'Mostra Correzioni', hideErrors: 'Nascondi Correzioni', correct: 'Corretta', wrong: 'Sbagliata', yourAnswer: 'Tua risposta', correctAnswer: 'Risposta corretta', explanation: 'Spiegazione', verse: 'Versetto', base: 'Quiz Classici', advanced: 'Studio Avanzato', error: 'Errore', loadError: 'Impossibile caricare il quiz', noQuizzes: 'Nessun quiz disponibile', advancedComingSoon: 'Quiz avanzati disponibili prossimamente', noAnswer: '(nessuna)', viewAllAnswers: 'Visualizza Tutte le Risposte', hideAllAnswers: 'Nascondi Risposte', correctAnswers: 'Risposte Corrette', wrongAnswers: 'Risposte Errate', allQuestions: 'Tutte le Domande', great: 'Ottimo lavoro!', good: 'Buon risultato!', needsWork: 'Continua a studiare!', thematic: 'Quiz Tematici', thematicDesc: '1000 domande in 33 categorie' },
-    es: { title: 'Cuestionarios Bíblicos', subtitle: 'Pon a prueba tu conocimiento de la Biblia', questions: 'preguntas', back: 'Volver', submit: 'Enviar', showErrors: 'Ver Correcciones', hideErrors: 'Ocultar', correct: 'Correcta', wrong: 'Incorrecta', yourAnswer: 'Tu respuesta', correctAnswer: 'Respuesta correcta', explanation: 'Explicación', verse: 'Versículo', base: 'Quiz Clásicos', advanced: 'Estudio Avanzado', error: 'Error', loadError: 'No se puede cargar el quiz', noQuizzes: 'No hay quiz disponibles', advancedComingSoon: 'Quiz avanzados próximamente', noAnswer: '(ninguna)', viewAllAnswers: 'Ver Todas las Respuestas', hideAllAnswers: 'Ocultar Respuestas', correctAnswers: 'Respuestas Correctas', wrongAnswers: 'Respuestas Incorrectas', allQuestions: 'Todas las Preguntas', great: '¡Excelente trabajo!', good: '¡Buen resultado!', needsWork: '¡Sigue estudiando!', thematic: 'Quiz Temáticos', thematicDesc: '1000 preguntas en 33 categorías' },
-    en: { title: 'Bible Quizzes', subtitle: 'Test your knowledge of the Bible', questions: 'questions', back: 'Back to Quizzes', submit: 'Submit', showErrors: 'Show Corrections', hideErrors: 'Hide Corrections', correct: 'Correct', wrong: 'Wrong', yourAnswer: 'Your answer', correctAnswer: 'Correct answer', explanation: 'Explanation', verse: 'Verse', base: 'Classic Quizzes', advanced: 'Advanced Study', error: 'Error', loadError: 'Unable to load quiz', noQuizzes: 'No quizzes available', advancedComingSoon: 'Advanced quizzes coming soon', noAnswer: '(none)', viewAllAnswers: 'View All Answers', hideAllAnswers: 'Hide Answers', correctAnswers: 'Correct Answers', wrongAnswers: 'Wrong Answers', allQuestions: 'All Questions', great: 'Great job!', good: 'Good result!', needsWork: 'Keep studying!', thematic: 'Thematic Quizzes', thematicDesc: '1000 questions in 33 categories' },
-    de: { title: 'Bibel-Quiz', subtitle: 'Teste dein Bibelwissen', questions: 'Fragen', back: 'Zurück', submit: 'Absenden', showErrors: 'Korrekturen anzeigen', hideErrors: 'Ausblenden', correct: 'Richtig', wrong: 'Falsch', yourAnswer: 'Deine Antwort', correctAnswer: 'Richtige Antwort', explanation: 'Erklärung', verse: 'Vers', base: 'Klassische Quiz', advanced: 'Fortgeschrittenes Studium', error: 'Fehler', loadError: 'Quiz konnte nicht geladen werden', noQuizzes: 'Keine Quiz verfügbar', advancedComingSoon: 'Erweiterte Quiz bald verfügbar', noAnswer: '(keine)', viewAllAnswers: 'Alle Antworten anzeigen', hideAllAnswers: 'Antworten ausblenden', correctAnswers: 'Richtige Antworten', wrongAnswers: 'Falsche Antworten', allQuestions: 'Alle Fragen', great: 'Großartige Arbeit!', good: 'Gutes Ergebnis!', needsWork: 'Lerne weiter!', thematic: 'Thematische Quiz', thematicDesc: '1000 Fragen in 33 Kategorien' },
-    fr: { title: 'Quiz Bibliques', subtitle: 'Testez vos connaissances de la Bible', questions: 'questions', back: 'Retour', submit: 'Soumettre', showErrors: 'Voir Corrections', hideErrors: 'Masquer', correct: 'Correct', wrong: 'Incorrect', yourAnswer: 'Votre réponse', correctAnswer: 'Bonne réponse', explanation: 'Explication', verse: 'Verset', base: 'Quiz Classiques', advanced: 'Étude Avancée', error: 'Erreur', loadError: 'Impossible de charger le quiz', noQuizzes: 'Aucun quiz disponible', advancedComingSoon: 'Quiz avancés bientôt disponibles', noAnswer: '(aucune)', viewAllAnswers: 'Voir Toutes les Réponses', hideAllAnswers: 'Masquer les Réponses', correctAnswers: 'Réponses Correctes', wrongAnswers: 'Réponses Incorrectes', allQuestions: 'Toutes les Questions', great: 'Excellent travail!', good: 'Bon résultat!', needsWork: 'Continue à étudier!', thematic: 'Quiz Thématiques', thematicDesc: '1000 questions en 33 catégories' },
-    pt: { title: 'Quiz Bíblicos', subtitle: 'Teste seu conhecimento da Bíblia', questions: 'perguntas', back: 'Voltar', submit: 'Enviar', showErrors: 'Ver Correções', hideErrors: 'Ocultar', correct: 'Correta', wrong: 'Errada', yourAnswer: 'Sua resposta', correctAnswer: 'Resposta correta', explanation: 'Explicação', verse: 'Versículo', base: 'Quiz Clássicos', advanced: 'Estudo Avançado', error: 'Erro', loadError: 'Não foi possível carregar o quiz', noQuizzes: 'Nenhum quiz disponível', advancedComingSoon: 'Quiz avançados em breve', noAnswer: '(nenhuma)', viewAllAnswers: 'Ver Todas as Respostas', hideAllAnswers: 'Ocultar Respostas', correctAnswers: 'Respostas Corretas', wrongAnswers: 'Respostas Erradas', allQuestions: 'Todas as Perguntas', great: 'Ótimo trabalho!', good: 'Bom resultado!', needsWork: 'Continue estudando!', thematic: 'Quiz Temáticos', thematicDesc: '1000 perguntas em 33 categorias' },
+    it: { title: 'Quiz Biblici', subtitle: 'Testa la tua conoscenza della Bibbia', questions: 'domande', back: 'Torna ai Quiz', submit: 'Invia Quiz', showErrors: 'Mostra Correzioni', hideErrors: 'Nascondi Correzioni', correct: 'Corretta', wrong: 'Sbagliata', yourAnswer: 'Tua risposta', correctAnswer: 'Risposta corretta', explanation: 'Spiegazione', verse: 'Versetto', base: 'Quiz Classici', advanced: 'Studio Avanzato', error: 'Errore', loadError: 'Impossibile caricare il quiz', noQuizzes: 'Nessun quiz disponibile', advancedComingSoon: 'Quiz avanzati disponibili prossimamente', noAnswer: '(nessuna)', viewAllAnswers: 'Visualizza Tutte le Risposte', hideAllAnswers: 'Nascondi Risposte', correctAnswers: 'Risposte Corrette', wrongAnswers: 'Risposte Errate', allQuestions: 'Tutte le Domande', great: 'Ottimo lavoro!', good: 'Buon risultato!', needsWork: 'Continua a studiare!', thematic: 'Quiz Tematici', thematicDesc: '1000 domande in 33 categorie', loadingQuiz: 'Caricamento quiz...' },
+    es: { title: 'Cuestionarios Bíblicos', subtitle: 'Pon a prueba tu conocimiento de la Biblia', questions: 'preguntas', back: 'Volver', submit: 'Enviar', showErrors: 'Ver Correcciones', hideErrors: 'Ocultar', correct: 'Correcta', wrong: 'Incorrecta', yourAnswer: 'Tu respuesta', correctAnswer: 'Respuesta correcta', explanation: 'Explicación', verse: 'Versículo', base: 'Quiz Clásicos', advanced: 'Estudio Avanzado', error: 'Error', loadError: 'No se puede cargar el quiz', noQuizzes: 'No hay quiz disponibles', advancedComingSoon: 'Quiz avanzados próximamente', noAnswer: '(ninguna)', viewAllAnswers: 'Ver Todas las Respuestas', hideAllAnswers: 'Ocultar Respuestas', correctAnswers: 'Respuestas Correctas', wrongAnswers: 'Respuestas Incorrectas', allQuestions: 'Todas las Preguntas', great: '¡Excelente trabajo!', good: '¡Buen resultado!', needsWork: '¡Sigue estudiando!', thematic: 'Quiz Temáticos', thematicDesc: '1000 preguntas en 33 categorías', loadingQuiz: 'Cargando quiz...' },
+    en: { title: 'Bible Quizzes', subtitle: 'Test your knowledge of the Bible', questions: 'questions', back: 'Back to Quizzes', submit: 'Submit', showErrors: 'Show Corrections', hideErrors: 'Hide Corrections', correct: 'Correct', wrong: 'Wrong', yourAnswer: 'Your answer', correctAnswer: 'Correct answer', explanation: 'Explanation', verse: 'Verse', base: 'Classic Quizzes', advanced: 'Advanced Study', error: 'Error', loadError: 'Unable to load quiz', noQuizzes: 'No quizzes available', advancedComingSoon: 'Advanced quizzes coming soon', noAnswer: '(none)', viewAllAnswers: 'View All Answers', hideAllAnswers: 'Hide Answers', correctAnswers: 'Correct Answers', wrongAnswers: 'Wrong Answers', allQuestions: 'All Questions', great: 'Great job!', good: 'Good result!', needsWork: 'Keep studying!', thematic: 'Thematic Quizzes', thematicDesc: '1000 questions in 33 categories', loadingQuiz: 'Loading quiz...' },
+    de: { title: 'Bibel-Quiz', subtitle: 'Teste dein Bibelwissen', questions: 'Fragen', back: 'Zurück', submit: 'Absenden', showErrors: 'Korrekturen anzeigen', hideErrors: 'Ausblenden', correct: 'Richtig', wrong: 'Falsch', yourAnswer: 'Deine Antwort', correctAnswer: 'Richtige Antwort', explanation: 'Erklärung', verse: 'Vers', base: 'Klassische Quiz', advanced: 'Fortgeschrittenes Studium', error: 'Fehler', loadError: 'Quiz konnte nicht geladen werden', noQuizzes: 'Keine Quiz verfügbar', advancedComingSoon: 'Erweiterte Quiz bald verfügbar', noAnswer: '(keine)', viewAllAnswers: 'Alle Antworten anzeigen', hideAllAnswers: 'Antworten ausblenden', correctAnswers: 'Richtige Antworten', wrongAnswers: 'Falsche Antworten', allQuestions: 'Alle Fragen', great: 'Großartige Arbeit!', good: 'Gutes Ergebnis!', needsWork: 'Lerne weiter!', thematic: 'Thematische Quiz', thematicDesc: '1000 Fragen in 33 Kategorien', loadingQuiz: 'Quiz wird geladen...' },
+    fr: { title: 'Quiz Bibliques', subtitle: 'Testez vos connaissances de la Bible', questions: 'questions', back: 'Retour', submit: 'Soumettre', showErrors: 'Voir Corrections', hideErrors: 'Masquer', correct: 'Correct', wrong: 'Incorrect', yourAnswer: 'Votre réponse', correctAnswer: 'Bonne réponse', explanation: 'Explication', verse: 'Verset', base: 'Quiz Classiques', advanced: 'Étude Avancée', error: 'Erreur', loadError: 'Impossible de charger le quiz', noQuizzes: 'Aucun quiz disponible', advancedComingSoon: 'Quiz avancés bientôt disponibles', noAnswer: '(aucune)', viewAllAnswers: 'Voir Toutes les Réponses', hideAllAnswers: 'Masquer les Réponses', correctAnswers: 'Réponses Correctes', wrongAnswers: 'Réponses Incorrectes', allQuestions: 'Toutes les Questions', great: 'Excellent travail!', good: 'Bon résultat!', needsWork: 'Continue à étudier!', thematic: 'Quiz Thématiques', thematicDesc: '1000 questions en 33 catégories', loadingQuiz: 'Chargement du quiz...' },
+    pt: { title: 'Quiz Bíblicos', subtitle: 'Teste seu conhecimento da Bíblia', questions: 'perguntas', back: 'Voltar', submit: 'Enviar', showErrors: 'Ver Correções', hideErrors: 'Ocultar', correct: 'Correta', wrong: 'Errada', yourAnswer: 'Sua resposta', correctAnswer: 'Resposta correta', explanation: 'Explicação', verse: 'Versículo', base: 'Quiz Clássicos', advanced: 'Estudo Avançado', error: 'Erro', loadError: 'Não foi possível carregar o quiz', noQuizzes: 'Nenhum quiz disponível', advancedComingSoon: 'Quiz avançados em breve', noAnswer: '(nenhuma)', viewAllAnswers: 'Ver Todas as Respostas', hideAllAnswers: 'Ocultar Respostas', correctAnswers: 'Respostas Corretas', wrongAnswers: 'Respostas Erradas', allQuestions: 'Todas as Perguntas', great: 'Ótimo trabalho!', good: 'Bom resultado!', needsWork: 'Continue estudando!', thematic: 'Quiz Temáticos', thematicDesc: '1000 perguntas em 33 categorias', loadingQuiz: 'Carregando quiz...' },
   };
   const t = (key: string) => translations[currentLanguage]?.[key] || translations['it'][key] || key;
 
+  // Load data in parallel for faster loading
   useEffect(() => {
-    loadTopics();
-    loadCategories();
+    const loadAllData = async () => {
+      setLoading(true);
+      try {
+        // Load both in parallel
+        const [topicsData, categoriesData] = await Promise.all([
+          api.getQuizTopics(currentLanguage).catch(() => []),
+          api.getQuizCategories(currentLanguage).catch(() => [])
+        ]);
+        setTopics(topicsData || []);
+        setCategories(categoriesData || []);
+      } catch (error) {
+        console.error('Error loading quiz data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadAllData();
   }, [currentLanguage]);
-
-  const loadTopics = async () => {
-    try {
-      const data = await api.getQuizTopics(currentLanguage);
-      setTopics(data);
-    } catch (error) {
-      console.error('Error loading topics:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const loadCategories = async () => {
-    try {
-      const data = await api.getQuizCategories(currentLanguage);
-      setCategories(data);
-    } catch (error) {
-      console.error('Error loading categories:', error);
-    }
-  };
 
   const startQuiz = async (topicId: string) => {
     setLoading(true);
