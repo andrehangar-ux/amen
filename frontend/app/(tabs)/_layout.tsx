@@ -5,8 +5,8 @@ import { router } from 'expo-router';
 import { Icon } from '../../src/components/Icon';
 import { COLORS, SHADOWS } from '../../src/utils/theme';
 import { useLanguageStore } from '../../src/store/languageStore';
-import { useConsentStore } from '../../src/store/consentStore';
 import { TermsModal } from '../../src/components/TermsModal';
+import { api } from '../../src/utils/api';
 
 const TAB_LABELS: Record<string, Record<string, string>> = {
   it: { home: 'Home', bible: 'Bibbia', journal: 'Diario', profile: 'Profilo' },
@@ -19,26 +19,34 @@ const TAB_LABELS: Record<string, Record<string, string>> = {
 
 export default function TabLayout() {
   const { currentLanguage } = useLanguageStore();
-  const { hasAccepted, isChecking, checkConsent } = useConsentStore();
   const [showTermsModal, setShowTermsModal] = useState(false);
+  const [consentChecked, setConsentChecked] = useState(false);
   const labels = TAB_LABELS[currentLanguage] || TAB_LABELS['it'];
   
   // Check consent when tabs are mounted
   useEffect(() => {
-    const doCheck = async () => {
-      // Only check if we haven't checked yet
-      if (hasAccepted === null) {
-        const accepted = await checkConsent();
-        if (!accepted) {
+    const checkConsentStatus = async () => {
+      if (!consentChecked) {
+        try {
+          console.log('Checking consent status...');
+          const status = await api.getConsentStatus();
+          console.log('Consent status:', status);
+          setConsentChecked(true);
+          if (!status.accepted) {
+            console.log('Showing terms modal');
+            setShowTermsModal(true);
+          }
+        } catch (error) {
+          console.log('Error checking consent:', error);
+          // If error, show modal to be safe
+          setConsentChecked(true);
           setShowTermsModal(true);
         }
-      } else if (hasAccepted === false) {
-        setShowTermsModal(true);
       }
     };
     
-    doCheck();
-  }, [hasAccepted]);
+    checkConsentStatus();
+  }, [consentChecked]);
 
   const handleTermsAccept = () => {
     setShowTermsModal(false);
