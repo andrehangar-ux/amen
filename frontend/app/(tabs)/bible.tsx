@@ -21,46 +21,86 @@ import { api } from '../../src/utils/api';
 import { useLanguageStore, useTranslation } from '../../src/store/languageStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
 
-// Cross-platform TTS helper with voice selection
+// Cross-platform TTS helper with robust voice selection
 const speakText = (text: string, langCode: string, onEnd: () => void) => {
   if (Platform.OS === 'web' && typeof window !== 'undefined' && 'speechSynthesis' in window) {
-    // Use Web Speech API on web
+    // Cancel any ongoing speech
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
     
-    // Try to find the best voice for the language
-    const voices = window.speechSynthesis.getVoices();
-    const langPrefix = langCode.split('-')[0]; // e.g., 'it' from 'it-IT'
-    
-    // First try exact match, then prefix match
-    let voice = voices.find(v => v.lang === langCode);
-    if (!voice) {
-      voice = voices.find(v => v.lang.startsWith(langPrefix));
-    }
-    if (voice) {
-      utterance.voice = voice;
-    }
-    
-    utterance.lang = langCode;
-    utterance.rate = 0.9;
-    utterance.onend = onEnd;
-    utterance.onerror = (e) => {
-      console.error('TTS Error:', e);
-      onEnd();
+    const startSpeaking = () => {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voices = window.speechSynthesis.getVoices();
+      const langPrefix = langCode.split('-')[0]; // e.g., 'it' from 'it-IT'
+      
+      // Priority order for voice selection
+      let voice = null;
+      
+      // 1. Try exact match (e.g., 'it-IT')
+      voice = voices.find(v => v.lang === langCode);
+      
+      // 2. Try prefix match with local variant (e.g., 'it-IT' for 'it')
+      if (!voice) {
+        voice = voices.find(v => v.lang.startsWith(langPrefix + '-'));
+      }
+      
+      // 3. Try exact prefix match (e.g., 'it')
+      if (!voice) {
+        voice = voices.find(v => v.lang === langPrefix);
+      }
+      
+      // 4. Try any voice containing the language prefix
+      if (!voice) {
+        voice = voices.find(v => v.lang.toLowerCase().startsWith(langPrefix.toLowerCase()));
+      }
+      
+      if (voice) {
+        utterance.voice = voice;
+        utterance.lang = voice.lang;
+      } else {
+        // Fallback to requested language code
+        utterance.lang = langCode;
+      }
+      
+      utterance.rate = 0.9;
+      utterance.pitch = 1.0;
+      utterance.volume = 1.0;
+      
+      utterance.onend = onEnd;
+      utterance.onerror = (e) => {
+        console.error('TTS Error:', e);
+        onEnd();
+      };
+      
+      window.speechSynthesis.speak(utterance);
     };
     
     // Chrome requires voices to be loaded first
+    const voices = window.speechSynthesis.getVoices();
     if (voices.length === 0) {
-      window.speechSynthesis.onvoiceschanged = () => {
-        window.speechSynthesis.speak(utterance);
+      // Wait for voices to load
+      const voicesLoaded = () => {
+        window.speechSynthesis.onvoiceschanged = null;
+        startSpeaking();
       };
+      window.speechSynthesis.onvoiceschanged = voicesLoaded;
+      // Fallback timeout in case voices don't load
+      setTimeout(() => {
+        if (window.speechSynthesis.getVoices().length > 0) {
+          startSpeaking();
+        } else {
+          console.warn('No TTS voices available');
+          onEnd();
+        }
+      }, 1000);
     } else {
-      window.speechSynthesis.speak(utterance);
+      startSpeaking();
     }
   } else {
     // Use expo-speech on native
     Speech.speak(text, {
       language: langCode,
+      rate: 0.9,
+      pitch: 1.0,
       onDone: onEnd,
       onStopped: onEnd,
     });
