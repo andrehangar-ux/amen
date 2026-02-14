@@ -2156,7 +2156,15 @@ async def get_reading_stats(user: User = Depends(require_auth)):
     
     # Get recent activity (last 7 days)
     seven_days_ago = datetime.now(timezone.utc) - timedelta(days=7)
-    recent_reads = [h for h in all_history if h.get("last_read") and h["last_read"] >= seven_days_ago]
+    recent_reads = []
+    for h in all_history:
+        last_read = h.get("last_read")
+        if last_read:
+            # Handle both naive and aware datetimes
+            if last_read.tzinfo is None:
+                last_read = last_read.replace(tzinfo=timezone.utc)
+            if last_read >= seven_days_ago:
+                recent_reads.append(h)
     
     # Get unique chapters read list for Bible page indicators
     chapters_read = [{"book": h["book"], "chapter": h["chapter"]} for h in all_history]
