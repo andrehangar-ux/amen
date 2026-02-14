@@ -290,6 +290,11 @@ export const translations: Record<string, Record<string, string>> = {
     iAccept: 'Accetto i',
     termsAndConditions: 'Termini e Condizioni',
     acceptTermsRequired: 'Devi accettare i Termini e le Condizioni per registrarti',
+    readBible: 'Leggi Bibbia',
+    quiz: 'Quiz',
+    groups: 'Gruppi',
+    onlineNow: 'Online ora',
+    onlineUsers: 'Utenti online',
   },
   es: {
     welcome: 'Bienvenido',

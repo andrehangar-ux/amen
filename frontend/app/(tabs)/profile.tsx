@@ -781,4 +781,12 @@ const styles = StyleSheet.create({
   notificationTextContainer: {
     flex: 1,
   },
+  menuIconContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: BORDER_RADIUS.md,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: SPACING.md,
+  },
 });
