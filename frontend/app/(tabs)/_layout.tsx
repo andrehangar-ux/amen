@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tabs } from 'expo-router';
 import { TouchableOpacity, StyleSheet, View, Platform } from 'react-native';
 import { router } from 'expo-router';
 import { Icon } from '../../src/components/Icon';
 import { COLORS, SHADOWS } from '../../src/utils/theme';
 import { useLanguageStore } from '../../src/store/languageStore';
+import { useConsentStore } from '../../src/store/consentStore';
+import { TermsModal } from '../../src/components/TermsModal';
 
 const TAB_LABELS: Record<string, Record<string, string>> = {
   it: { home: 'Home', bible: 'Bibbia', journal: 'Diario', profile: 'Profilo' },
@@ -17,10 +19,39 @@ const TAB_LABELS: Record<string, Record<string, string>> = {
 
 export default function TabLayout() {
   const { currentLanguage } = useLanguageStore();
+  const { hasAccepted, isChecking, checkConsent } = useConsentStore();
+  const [showTermsModal, setShowTermsModal] = useState(false);
   const labels = TAB_LABELS[currentLanguage] || TAB_LABELS['it'];
+  
+  // Check consent when tabs are mounted
+  useEffect(() => {
+    const doCheck = async () => {
+      // Only check if we haven't checked yet
+      if (hasAccepted === null) {
+        const accepted = await checkConsent();
+        if (!accepted) {
+          setShowTermsModal(true);
+        }
+      } else if (hasAccepted === false) {
+        setShowTermsModal(true);
+      }
+    };
+    
+    doCheck();
+  }, [hasAccepted]);
+
+  const handleTermsAccept = () => {
+    setShowTermsModal(false);
+  };
   
   return (
     <View style={styles.container}>
+      {/* Terms Modal */}
+      <TermsModal 
+        visible={showTermsModal} 
+        onAccept={handleTermsAccept} 
+      />
+      
       <Tabs
         screenOptions={{
           headerShown: false,
