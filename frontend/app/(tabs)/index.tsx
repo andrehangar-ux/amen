@@ -20,6 +20,7 @@ import { MoodSelector } from '../../src/components/MoodSelector';
 import { LanguageSelector } from '../../src/components/LanguageSelector';
 import { Icon } from '../../src/components/Icon';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
+import { TermsModal } from '../../src/components/TermsModal';
 
 // Cross-platform TTS helper
 const speakText = (text: string, langCode: string) => {
@@ -43,6 +44,36 @@ export default function HomeScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [moodCheckinResult, setMoodCheckinResult] = useState<any>(null);
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
+  const [termsChecked, setTermsChecked] = useState(false);
+
+  // Check terms acceptance on mount
+  useEffect(() => {
+    const checkTerms = async () => {
+      if (termsChecked) return;
+      
+      try {
+        const status = await api.getConsentStatus();
+        setTermsChecked(true);
+        if (!status.accepted) {
+          setShowTermsModal(true);
+        }
+      } catch (error) {
+        console.log('Error checking consent:', error);
+        // Show modal on error to be safe
+        setTermsChecked(true);
+        setShowTermsModal(true);
+      }
+    };
+    
+    // Small delay to ensure auth is fully complete
+    const timer = setTimeout(checkTerms, 300);
+    return () => clearTimeout(timer);
+  }, [termsChecked]);
+
+  const handleTermsAccept = () => {
+    setShowTermsModal(false);
+  };
 
   const loadData = useCallback(async () => {
     try {
