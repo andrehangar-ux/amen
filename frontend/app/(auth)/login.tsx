@@ -58,26 +58,9 @@ export default function LoginScreen() {
 
   // Check consent and navigate
   const checkConsentAndNavigate = async () => {
-    console.log('[Login] Checking consent status...');
-    try {
-      const status = await api.getConsentStatus();
-      console.log('[Login] Consent status:', status);
-      if (!status.accepted) {
-        console.log('[Login] Showing terms modal');
-        // Show terms modal before navigating
-        setPendingNavigation(true);
-        setShowTermsModal(true);
-      } else {
-        console.log('[Login] User has consent, navigating to tabs');
-        // User has accepted, navigate directly
-        router.replace('/(tabs)');
-      }
-    } catch (error) {
-      console.log('[Login] Error checking consent:', error);
-      // On error, show modal to be safe
-      setPendingNavigation(true);
-      setShowTermsModal(true);
-    }
+    console.log('[Login] Navigating to index for consent check');
+    // Navigate to index, which will handle consent check
+    router.replace('/');
   };
 
   const handleTermsAccept = () => {
