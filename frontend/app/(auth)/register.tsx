@@ -209,11 +209,9 @@ export default function RegisterScreen() {
                 onPress={() => setAcceptedTerms(!acceptedTerms)}
                 data-testid="terms-checkbox"
               >
-                {acceptedTerms ? (
-                  <Icon name="checkbox" size={24} color={COLORS.primary} />
-                ) : (
-                  <Icon name="square-outline" size={24} color={COLORS.textMuted} />
-                )}
+                <Text style={styles.checkboxIcon}>
+                  {acceptedTerms ? '☑️' : '⬜'}
+                </Text>
               </Pressable>
               <View style={styles.termsTextContainer}>
                 <Text style={styles.termsText}>
