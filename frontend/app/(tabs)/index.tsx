@@ -45,11 +45,13 @@ export default function HomeScreen() {
   const [moodCheckinResult, setMoodCheckinResult] = useState<any>(null);
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
+  const consentCheckedRef = useRef(false);
 
   const loadData = useCallback(async () => {
     try {
-      // Check consent status first
-      if (!showTermsModal) {
+      // Check consent status first (only once)
+      if (!consentCheckedRef.current) {
+        consentCheckedRef.current = true;
         try {
           const consentStatus = await api.getConsentStatus();
           if (!consentStatus.accepted) {
@@ -57,6 +59,8 @@ export default function HomeScreen() {
           }
         } catch (e) {
           console.log('Consent check error:', e);
+          // Show modal on error
+          setShowTermsModal(true);
         }
       }
       
@@ -69,7 +73,7 @@ export default function HomeScreen() {
     } catch (error) {
       console.log('Error loading data:', error);
     }
-  }, [currentLanguage, showTermsModal]);
+  }, [currentLanguage]);
 
   const handleTermsAccept = () => {
     setShowTermsModal(false);
