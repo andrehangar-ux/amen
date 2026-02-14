@@ -61,10 +61,38 @@ export default function CommunityScreen() {
     }
   }, [currentLanguage]);
 
+  const loadOnlineUsers = useCallback(async () => {
+    try {
+      const data = await api.getOnlineUsers();
+      setOnlineUsers(data.users || []);
+      setOnlineCount(data.online_count || 0);
+    } catch (error) {
+      console.log('Error loading online users:', error);
+    }
+  }, []);
+
+  const sendHeartbeat = useCallback(async () => {
+    try {
+      await api.sendHeartbeat();
+    } catch (error) {
+      console.log('Heartbeat error:', error);
+    }
+  }, []);
+
   useEffect(() => {
     setLoading(true);
-    loadMessages().finally(() => setLoading(false));
-  }, [loadMessages]);
+    Promise.all([loadMessages(), loadOnlineUsers()]).finally(() => setLoading(false));
+    
+    // Send heartbeat every 2 minutes to track online status
+    sendHeartbeat();
+    const heartbeatInterval = setInterval(sendHeartbeat, 120000);
+    const onlineInterval = setInterval(loadOnlineUsers, 60000);
+    
+    return () => {
+      clearInterval(heartbeatInterval);
+      clearInterval(onlineInterval);
+    };
+  }, [loadMessages, loadOnlineUsers, sendHeartbeat]);
 
   const onRefresh = async () => {
     setRefreshing(true);
