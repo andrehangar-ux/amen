@@ -117,6 +117,7 @@ interface TermsModalProps {
 
 export const TermsModal: React.FC<TermsModalProps> = ({ visible, onAccept }) => {
   const { currentLanguage } = useLanguageStore();
+  const { acceptTerms } = useConsentStore();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
@@ -127,7 +128,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ visible, onAccept }) => 
     setError(null);
     
     try {
-      await api.acceptTerms(TERMS_VERSION);
+      await acceptTerms();
       onAccept();
     } catch (err) {
       setError(t.error);
