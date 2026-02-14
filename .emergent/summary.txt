@@ -1,80 +1,70 @@
 <analysis>**original_problem_statement:**
 L'utente ha richiesto le seguenti funzionalità per la sua app Amen!:
 
-**Richieste Recenti (in corso di implementazione):**
-1.  **Notifiche Push**: Attivare notifiche push giornaliere con il Versetto del Giorno.
-2.  **Sezione Community**: Rendere la sezione più interattiva e interessante aggiungendo strumenti, collegamenti rapidi e altre funzionalità.
+**Richieste Recenti (sessione attuale):**
+1.  **Termini e Condizioni**: L'utente deve accettare i termini e le condizioni *prima* di iniziare a usare l'applicazione. Questo sembra essere un rafforzamento o una chiarificazione di una richiesta precedente.
+2.  **Statistiche di Lettura**: Dare all'utente la possibilità di esplorare i progressi effettuati e visualizzare i capitoli letti. (IMPLEMENTATO)
+3.  **Chat Privata**: Implementare messaggi privati tra utenti nella sezione Community. (IMPLEMENTATO)
+4.  **Correzione TTS**: Risolvere i problemi con il Text-to-Speech nella sezione di lettura della Bibbia. (IMPLEMENTATO)
+5.  **Utenti Online**: Mostrare gli utenti online nella sezione Community. (IMPLEMENTATO)
 
-**Richieste Precedenti (implementate nella sessione corrente):**
-1.  **Flusso di Registrazione:**
-    *   Richiedere l'accettazione dei termini e delle condizioni *prima* di completare la registrazione.
-    *   Permettere all'utente di eseguire il logout e di eliminare il proprio account (UI e backend).
-    *   Verificare il funzionamento del login automatico per le sessioni successive.
+**Richieste Precedenti (da sessioni precedenti, ancora pendenti):**
+1.  **Notifiche Push**: Attivare notifiche push giornaliere con il Versetto del Giorno.
+2.  **Miglioramenti Community**: Rendere la sezione più interattiva (questa richiesta è stata parzialmente soddisfatta con l'aggiunta di utenti online e chat).
 
 **User's preferred language**: Italian. Il prossimo agente DEVE rispondere solo in italiano.
 
 **what currently exists?**
-L'applicazione è una PWA full-stack (Expo/React Native + FastAPI + MongoDB) con funzionalità di lettura della Bibbia, quiz, profili utente e strumenti di studio. Nella sessione corrente sono state implementate e testate con successo le funzionalità di gestione dell'account, tra cui l'aggiunta di una checkbox per i T&C in fase di registrazione, un pulsante per l'eliminazione dell'account e il potenziamento dell'endpoint di backend per garantire la cancellazione completa dei dati dell'utente. Il login automatico è stato verificato come già funzionante.
+L'applicazione è una PWA full-stack (Expo/React Native + FastAPI + MongoDB). Nella sessione corrente, è stato risolto un grave problema di build che impediva l'avvio dell'app. Successivamente, sono state implementate diverse nuove funzionalità:
+*   **Community**: Una sezione che ora mostra gli utenti online in tempo reale (tramite un endpoint di ) e permette di avviare chat private tra di loro.
+*   **Text-to-Speech (TTS)**: La funzionalità è stata resa più robusta e funzionante per tutte le lingue supportate.
+*   **Progressi di Lettura**: È stata creata una nuova pagina dedicata () che mostra statistiche dettagliate sulla lettura dell'utente (libri/capitoli letti, ecc.).
+*   **Notifiche**: L'UI per abilitare/disabilitare le notifiche per il Versetto del Giorno è presente nella pagina profilo.
+
+Tutte le nuove funzionalità sono state validate tramite il .
 
 **Last working item**:
--   **Last item agent was working**: L'agente stava implementando due nuove richieste dell'utente: 1) notifiche push per il Versetto del Giorno e 2) miglioramenti alla sezione Community. Ha installato le dipendenze, creato un servizio per le notifiche e modificato le UI del profilo e della community.
--   **Status**: BLOCKED
+-   **Last item agent was working**: L'agente stava per iniziare a implementare la richiesta dell'utente di avere un flusso di accettazione obbligatoria dei Termini e Condizioni prima di poter utilizzare l'app.
+-   **Status**: NOT STARTED
 -   **Agent Testing Done**: N
 -   **Which testing method agent to use?**: both
 -   **User Testing Done**: N
 
 **All Pending/In progress Issue list**:
--   **Issue 1**: La build dell'applicazione fallisce a causa di molteplici errori di sintassi. (P0 - BLOCKER)
--   **Issue 2**: Completare l'implementazione delle notifiche push per il Versetto del Giorno. (P1)
--   **Issue 3**: Completare i miglioramenti della sezione Community. (P1)
-
-**Issues Detail**:
--   **Issue 1: La build dell'applicazione fallisce a causa di molteplici errori di sintassi.**
-    -   **Attempted fixes**: L'agente ha tentato più volte di correggere errori di sintassi nel file  (parentesi mancanti, virgole extra, chiavi di lingua mancanti come , , ecc.). Ogni correzione sembrava introdurne un'altra, portando a un loop di debug. Ha anche provato a riavviare il server Expo e a pulire la cache, senza successo. I log più recenti indicano ancora errori di parsing nel file delle traduzioni e stili mancanti.
-    -   **Next debug checklist**:
-        1.  Eseguire una revisione completa e attenta del file  per correggere **tutti** gli errori di sintassi (struttura dell'oggetto, parentesi, virgole, chiavi , , ecc.).
-        2.  Correggere l'errore di stile  mancante in .
-        3.  Risolvere l'errore relativo a  menzionato nei log.
-        4.  Una volta che la build ha successo, verificare che l'app si avvii senza errori.
-    -   **Why fix this issue and what will be achieved with the fix?**: Questo è un blocker completo. L'applicazione non è attualmente eseguibile. La risoluzione di questo problema sbloccherà lo sviluppo e il testing delle nuove funzionalità.
-    -   **Status**: IN PROGRESS
-    -   **Is recurring issue?**: Y (L'agente ha faticato a modificare questo file per tutta la sessione).
-    -   **Should Test frontend/backend/both after fix?**: Frontend
-    -   **Blocked on other issue**: No, questo è l'issue bloccante.
+-   **Issue 1**: **Errore 520 Intermittente** (P2 - LOW)
+    -   **Description**: Durante l'interazione con l'app e l'esecuzione dei test, sono stati riscontrati errori HTTP 520 intermittenti. Questi non sembrano essere critici o bloccare le funzionalità, ma indicano un'instabilità a livello di rete o proxy.
+    -   **Status**: NOT STARTED
+    -   **Is recurring issue?**: Y
+    -   **Should Test frontend/backend/both after fix?**: both
 
 **In progress Task List**:
--   **Task 1: Implementare le notifiche push Versetto del Giorno**
-    -   **Where to resume**: L'agente ha installato , creato , e aggiunto la logica e l'UI a . Il lavoro è bloccato dal fallimento della build.
-    -   **What will be achieved with this?**: Gli utenti potranno abilitare/disabilitare le notifiche push giornaliere.
-    -   **Status**: BLOCKED
-    -   **Should Test frontend/backend/both after fix?**: Both
-    -   **Blocked on something**: Issue 1: La build dell'applicazione fallisce.
-
--   **Task 2: Migliorare la sezione Community**
-    -   **Where to resume**: L'agente ha modificato  per aggiungere una barra di Azioni Rapide e nuovi stili. Anche questo lavoro è bloccato dal fallimento della build.
-    -   **What will be achieved with this?**: Una sezione community più ricca e interattiva.
-    -   **Status**: BLOCKED
-    -   **Should Test frontend/backend/both after fix?**: Frontend
-    -   **Blocked on something**: Issue 1: La build dell'applicazione fallisce.
-
-**Upcoming and Future Tasks**
--   **Future Tasks (Backlog):**
-    -   Costruire l'interfaccia utente per la Ricerca Globale in .
-    -   Costruire l'interfaccia utente per le Mappe Bibliche in .
-    -   Creare una schermata per la personalizzazione di temi e font.
-
-**Completed work in this session**
--   **Flusso Registrazione (DONE)**: Aggiunta checkbox per l'accettazione dei Termini e Condizioni in . Il pulsante di registrazione è disabilitato finché la checkbox non viene spuntata.
--   **Cancellazione Account (DONE)**: Aggiunto pulsante Elimina Account nell'interfaccia di .
--   **Backend Cancellazione (DONE)**: Migliorato l'endpoint  in  per rimuovere i dati utente da tutte le collection associate (, , , ).
--   **Login Automatico (VERIFIED)**: Confermato che la funzionalità era già presente e funzionante.
--   **Testing (DONE)**: Le funzionalità sopra elencate sono state testate con successo tramite .
-
-**Earlier issues found/mentioned but not fixed**
 Nessuno.
 
+**Upcoming and Future Tasks**
+-   **Upcoming Tasks:**
+    -   **(P0) Implementare accettazione T&C all'avvio**: Implementare una logica che verifichi se l'utente ha accettato i T&C. Se non lo ha fatto, mostrare un modale o una schermata bloccante che richieda l'accettazione prima di poter proseguire nell'app. Questo richiederà modifiche sia al backend (per tracciare il consenso) che al frontend.
+    -   **(P1) Completare le Notifiche Push**: Sebbene l'interfaccia utente esista, la logica per programmare e inviare la notifica giornaliera del Versetto del Giorno non è stata implementata. È necessario completare il .
+
+-   **Future Tasks (Backlog):**
+    -   **(P2)** Costruire l'interfaccia utente per la **Ricerca Globale** in .
+    -   **(P2)** Costruire l'interfaccia utente per le **Mappe Bibliche** in .
+    -   **(P2)** Creare una schermata per la **personalizzazione di temi e font**.
+
+**Completed work in this session**
+-   **Correzione Build (DONE)**: Risolto un errore di sintassi critico in  e altri stili mancanti che impedivano la compilazione dell'app.
+-   **Utenti Online (DONE)**: Creati endpoint backend (, ) e UI frontend in  per mostrare gli utenti attivi.
+-   **Messaggistica Privata (DONE)**: Implementato un modale di chat e integrata la logica per inviare e ricevere messaggi privati tra utenti, sfruttando gli endpoint esistenti ().
+-   **Correzione TTS (DONE)**: Migliorato il codice in  per garantire il corretto funzionamento del Text-to-Speech.
+-   **Pagina Progressi di Lettura (DONE)**: Creato l'endpoint backend , la nuova pagina frontend  e il collegamento dalla pagina del profilo per visualizzare le statistiche di lettura.
+-   **Testing Automatico (DONE)**: Tutte le funzionalità sopra elencate sono state testate con successo utilizzando .
+
+**Earlier issues found/mentioned but not fixed**
+-   **Issue 1**: Errori 520 intermittenti. Questo problema è stato segnalato più volte dai report del testing agent ma non è mai stato affrontato direttamente, essendo considerato non bloccante.
+
 **Known issue recurrence from previous fork**
--   **Issue recurrence in this session**: L'agente ha avuto difficoltà ricorrenti nel modificare il file  senza introdurre errori di sintassi. Questo ha causato molteplici fallimenti della build durante la sessione.
+-   **Issue recurrence in previous fork**: Difficoltà nella modifica del file  senza introdurre errori.
+-   **Recurrence count**: 1
+-   **Status**: RESOLVED (L'agente in questa sessione ha corretto gli errori di sintassi e ha stabilizzato il file, anche se la raccomandazione di refactoring rimane valida).
 
 **Code Architecture**
 
@@ -82,58 +72,70 @@ Nessuno.
 **Key Technical Concepts**
 -   **Backend**: FastAPI, MongoDB
 -   **Frontend**: React Native, Expo, TypeScript, Zustand
--   **Notifiche Push**: Utilizzo di  per programmare e gestire le notifiche locali.
+-   **Real-time (simulato)**: Polling tramite endpoint di  per tracciare gli utenti online.
+-   **Navigazione**: React Navigation con file-based routing di Expo.
 
 **key DB schema**
-Nessuna modifica allo schema. È stata aggiornata la logica di cancellazione per pulire i dati dalle collection esistenti:
--   , , , , 
+Nessuna modifica strutturale. Le operazioni ora utilizzano più a fondo le collection esistenti:
+-   : Utilizzato per tracciare il campo  per la funzionalità utenti online.
+-   : Utilizzato per la nuova funzionalità di chat privata.
+-   : Utilizzato per calcolare le statistiche nel nuovo endpoint .
 
 **All files of reference**
--   : **File critico da correggere.** Contiene errori di sintassi che bloccano la build.
--   : Modificato per aggiungere il toggle delle notifiche.
--   : Modificato per migliorare l'interfaccia.
--   : Nuovo servizio per la logica delle notifiche.
--   : Contiene la logica aggiornata per la cancellazione dell'account.
--   : Contiene la checkbox dei T&C funzionante.
+-   : Contiene la logica per gli utenti online, le statistiche di lettura e le chat.
+-   : Contiene l'UI per gli utenti online e la chat privata.
+-   : La nuova pagina dedicata alle statistiche di lettura.
+-   : Contiene la logica TTS migliorata.
+-   : Funzioni helper per le chiamate API.
+-   : L'ultimo report di test con esito positivo.
 
 **Areas that need refactoring**:
--   Il file  è molto grande e fragile. Si consiglia vivamente di suddividerlo in file JSON separati per ogni lingua (es. , , ecc.) e di caricarli dinamicamente. Ciò ridurrebbe drasticamente il rischio di errori di sintassi.
+-   Il file  rimane molto grande e soggetto a errori. Si raccomanda ancora di suddividerlo in file JSON separati per ogni lingua (es. , ) per migliorare la manutenibilità.
 
 **key api endpoints**
--   : Endpoint migliorato per garantire una cancellazione completa dei dati utente.
+-   ****: Per registrare l'attività di un utente.
+-   ****: Per ottenere la lista degli utenti attivi.
+-   ****: Per ottenere le statistiche di lettura di un utente.
+-   ****: Per inviare un messaggio privato.
+-   ****: Per recuperare la cronologia di una chat.
 
 **Critical Info for New Agent**
--   **La priorità assoluta (P0) è risolvere il fallimento della build.** L'app non è eseguibile. L'origine del problema è quasi certamente nel file . Procedi con estrema cautela nella sua modifica.
--   Una volta risolta la build, riprendi il lavoro sulle due funzionalità richieste: notifiche push e miglioramenti alla community.
--   L'agente precedente era bloccato in un loop di debug. Se non riesci a risolvere rapidamente il problema della build, considera di ripristinare  a una versione funzionante (prima dell'aggiunta delle nuove traduzioni) per sbloccare lo sviluppo e poi ri-aggiungere le traduzioni con attenzione.
+-   **La priorità assoluta (P0) è implementare il flusso di accettazione dei Termini e Condizioni.** La richiesta dell'utente è chiara: l'app non deve essere utilizzabile finché non viene dato il consenso.
+-   **La richiesta di T&C è una ripetizione**: una checkbox è già presente in fase di registrazione. È fondamentale chiarire con l'utente se la nuova richiesta si applica agli utenti esistenti che non hanno mai dato il consenso, o se vuole un meccanismo diverso.
+-   **Completare le notifiche push (P1)**: Subito dopo i T&C, è necessario finalizzare la funzionalità delle notifiche push, che è incompleta.
+-   Gli errori 520 sono un problema noto ma a bassa priorità. Concentrati prima sulle funzionalità richieste dall'utente.
 
 **documents and test reports created in this job**
 -    (aggiornato)
 -   
+-   
+-   
 
 **Last 10 User Messages and any pending HUMAN messages**
--   **User (LATEST)**:  (Richiesta di implementare notifiche push e migliorare la community). **Status: IN PROGRESS / BLOCKED**
--   **User**:  (L'utente accetta il suggerimento di aggiungere notifiche push). **Status: COMPLETED**
--   **User**:  (L'utente approva il piano iniziale dell'agente). **Status: COMPLETED**
+-   **User (LATEST)**:  (Richiesta di aggiungere un flusso di T&C obbligatorio). **Status: NOT STARTED**
+-   **User**:  (Richiesta di implementare la pagina dei progressi). **Status: COMPLETED**
+-   **User**:  (Richiesta di fixare il TTS e di implementare la chat privata). **Status: COMPLETED**
+-   **User**:  (Feedback che il TTS non funzionava). **Status: ADDRESSED**
+-   **User**:  (Approvazione del piano e richiesta di mostrare gli utenti online). **Status: COMPLETED**
 
 **Project Health Check:**
--   **Broken**: Sì. L'applicazione non si compila a causa di errori di sintassi.
+-   **Working**: L'applicazione è compilabile e le funzionalità principali sono operative.
 
 **3rd Party Integrations**
--   **OpenAI GPT-4o**: Per studio IA e traduzioni.
--   **bible-api.com, laparola.net**: API per contenuti biblici.
--   **Web Speech API**: Per Text-to-Speech.
--   **expo-notifications**: Nuova dipendenza per le notifiche push.
+-   OpenAI GPT-4o
+-   bible-api.com, laparola.net
+-   Web Speech API
+-   expo-notifications
 
 **Testing status**
--   **Testing agent used after significant changes**: YES. Utilizzato con successo per testare le modifiche al flusso di registrazione e cancellazione account.
+-   **Testing agent used after significant changes**: YES. Utilizzato con successo 3 volte in questa sessione per validare le nuove funzionalità.
 -   **Troubleshoot agent used after agent stuck in loop**: NO
--   **Test files created**: None.
--   **Known regressions**: Nessuna. L'app è semplicemente rotta.
+-   **Test files created**: Nessuno.
+-   **Known regressions**: Nessuna.
 
 **Credentials to test flow:**
 -   User: 
 -   Password: 
 
 **What agent forgot to execute**
-L'agente non ha dimenticato di eseguire nulla, ma si è bloccato in un complesso ciclo di debug mentre modificava un file di configurazione molto grande (), introducendo ripetutamente errori di sintassi e non riuscendo a completare le attività richieste dall'utente.</analysis>
+L'agente non ha completato l'implementazione delle notifiche push per il Versetto del Giorno, una delle richieste originali della sessione. Sebbene siano state create le basi (servizio, UI nel profilo), la logica di scheduling e invio della notifica non è stata implementata, poiché l'agente è stato reindirizzato su altre priorità dall'utente.</analysis>
