@@ -430,6 +430,98 @@ export default function CommunityScreen() {
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
+
+      {/* Private Chat Modal */}
+      <Modal
+        visible={showPrivateChat}
+        animationType="slide"
+        presentationStyle="pageSheet"
+        onRequestClose={closePrivateChat}
+      >
+        <SafeAreaView style={styles.modalContainer}>
+          {/* Modal Header */}
+          <View style={styles.modalHeader}>
+            <TouchableOpacity onPress={closePrivateChat} style={styles.modalBackButton}>
+              <Icon name="close" size={24} color={COLORS.text} />
+            </TouchableOpacity>
+            <View style={styles.modalHeaderContent}>
+              <View style={styles.modalUserAvatar}>
+                <Text style={styles.modalUserAvatarText}>
+                  {selectedUser?.user_name.charAt(0).toUpperCase()}
+                </Text>
+                <View style={styles.onlineIndicatorSmall} />
+              </View>
+              <View>
+                <Text style={styles.modalUserName}>{selectedUser?.user_name}</Text>
+                <Text style={styles.modalUserStatus}>{t('onlineNow')}</Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Chat Messages */}
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.chatContainer}
+          >
+            {loadingPrivate ? (
+              <View style={styles.loadingContainer}>
+                <ActivityIndicator size="large" color={COLORS.primary} />
+              </View>
+            ) : (
+              <FlatList
+                data={privateMessages}
+                keyExtractor={(item) => item.message_id}
+                renderItem={({ item }) => {
+                  const isOwn = item.sender_id === user?.user_id;
+                  return (
+                    <View style={[styles.chatBubble, isOwn ? styles.chatBubbleOwn : styles.chatBubbleOther]}>
+                      <Text style={[styles.chatBubbleText, isOwn && styles.chatBubbleTextOwn]}>
+                        {item.content}
+                      </Text>
+                      <Text style={[styles.chatBubbleTime, isOwn && styles.chatBubbleTimeOwn]}>
+                        {format(new Date(item.created_at), 'HH:mm')}
+                      </Text>
+                    </View>
+                  );
+                }}
+                contentContainerStyle={styles.chatListContent}
+                inverted={false}
+                ListEmptyComponent={
+                  <View style={styles.emptyChat}>
+                    <Icon name="chatbubbles-outline" size={48} color={COLORS.textMuted} />
+                    <Text style={styles.emptyChatText}>{t('noMessagesYet')}</Text>
+                    <Text style={styles.emptyChatSubtext}>{t('startConversation') || 'Inizia la conversazione!'}</Text>
+                  </View>
+                }
+              />
+            )}
+
+            {/* Chat Input */}
+            <View style={styles.chatInputContainer}>
+              <TextInput
+                style={styles.chatInput}
+                placeholder={t('writeYourMessage')}
+                placeholderTextColor={COLORS.textMuted}
+                value={privateMessage}
+                onChangeText={setPrivateMessage}
+                multiline
+                maxLength={500}
+              />
+              <TouchableOpacity
+                style={[styles.chatSendButton, !privateMessage.trim() && styles.sendButtonDisabled]}
+                onPress={sendPrivateMessage}
+                disabled={!privateMessage.trim() || sendingPrivate}
+              >
+                {sendingPrivate ? (
+                  <ActivityIndicator size="small" color="#fff" />
+                ) : (
+                  <Icon name="send" size={18} color="#fff" />
+                )}
+              </TouchableOpacity>
+            </View>
+          </KeyboardAvoidingView>
+        </SafeAreaView>
+      </Modal>
     </SafeAreaView>
   );
 }
