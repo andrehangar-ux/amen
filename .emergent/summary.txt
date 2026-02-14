@@ -1,87 +1,66 @@
 <analysis>**original_problem_statement:**
-L'utente vuole creare una PWA (Progressive Web App) cristiana completa chiamata Amen!. Le richieste iniziali includevano la correzione di bug nel lettore biblico, nella registrazione utente e negli strumenti di studio IA.
-
-Le richieste recenti e in corso sono:
-1.  **Correzione Traduzioni (Audit Finale):** Rivedere e correggere tutte le traduzioni che non vengono applicate correttamente o sono errate dopo il cambio di lingua. Questo include la traduzione di testi ed emoji in sezioni come come ti senti oggi?, il tuo progresso e esplora.
-2.  **Miglioramento Registrazione Utente:**
-    *   Perfezionare il processo Crea account.
-    *   Integrare un'opzione per l'accesso tramite impronta digitale (biometria).
-    *   Memorizzare i dati di tutti gli utenti iscritti.
-3.  **UI Lingua:** Reinserire le bandiere dei paesi nel selettore della lingua.
-4.  **Logo App:** Integrare un logo personalizzato fornito dall'utente. (Completato in questa sessione).
-5.  **Schermata Risultati Quiz:** Creare una schermata dettagliata che mostri risposte corrette/errate e spiegazioni. (Completato in questa sessione).
-6.  **Strumenti di Studio IA:** Risolvere i bug nelle funzionalità Spiega con IA ed Evidenzia nel lettore biblico.
+L'utente vuole migliorare la sezione quiz della sua PWA cristiana Amen!. Le richieste specifiche, fornite dopo l'implementazione iniziale delle categorie di quiz, sono:
+1.  **Traduzione Completa:** Applicare le traduzioni (in tutte le lingue supportate dall'app) non solo ai titoli delle categorie ma anche a tutte le 1000 domande e relative risposte.
+2.  **Correzione Icone:** Sistemare tutte le icone nella sezione quiz, sostituendo le implementazioni problematiche con il componente wrapper  che garantisce la visualizzazione su tutte le piattaforme.
+3.  **Statistiche e Correzioni:** Al termine di un quiz, permettere l'invio delle risposte, calcolare le statistiche (punteggio, risposte corrette), e mostrare all'utente le risposte esatte con le relative correzioni.
 
 **User's preferred language**: Italian. Il prossimo agente DEVE rispondere solo in italiano.
 
 **what currently exists?**
-È un'applicazione full-stack con frontend Expo (React Native) e backend FastAPI. Le funzionalità principali includono un lettore biblico, un dizionario con preferiti e flashcard, quiz e profili utente.
-
-In questa sessione, l'agente ha eseguito un audit completo dell'internazionalizzazione (i18n), traducendo quasi tutta l'interfaccia utente hardcoded in file come , ,  e , e aggiungendo decine di nuove chiavi di traduzione. Ha anche integrato con successo il logo personalizzato fornito dall'utente nelle schermate di login/registrazione e ha completamente riprogettato la schermata dei risultati del quiz per fornire un feedback dettagliato. Entrambe le funzionalità sono state verificate con successo tramite il testing agent.
+L'applicazione è una PWA full-stack (Expo/React Native + FastAPI + MongoDB) stabile e funzionale. Nella sessione precedente sono state implementate con successo le categorie di quiz. Un file con 1000 domande è stato analizzato, categorizzato in 33 temi tramite uno script Python, e integrato nell'app. Sono stati creati nuovi endpoint backend per servire le categorie () e i quiz tematici (), e il frontend () è stato aggiornato per visualizzare e giocare a questi nuovi quiz. Questa funzionalità è stata validata con successo dal testing agent. L'endpoint per l'invio delle risposte () è stato corretto per supportare i nuovi quiz tematici.
 
 **Last working item**:
-- **Last item agent was working**: L'agente stava iniziando ad affrontare la nuova serie di richieste dell'utente, in particolare la correzione delle traduzioni rimanenti e l'aggiunta di nuove funzionalità alla registrazione. Ha iniziato esplorando i file  e  per comprendere lo stato attuale del selettore dell'umore (come ti senti oggi?) e del sistema di traduzione.
-- **Status**: NOT STARTED
-- **Agent Testing Done**: N
-- **Which testing method agent to use?**: both
-- **User Testing Done**: N
+-   **Last item agent was working**: Implementazione della traduzione on-demand per le 1000 domande del quiz. L'agente ha scartato l'approccio di traduzione in blocco a causa di timeout e ha implementato una logica nel backend () che traduce una domanda e le sue opzioni solo quando viene richiesta in una lingua diversa dall'italiano, salvando il risultato in una cache (una collection MongoDB) per le richieste future. La funzionalità è stata testata con successo tramite , confermando la traduzione di una domanda da italiano a inglese. L'ultimo passo previsto era una verifica visuale tramite screenshot.
+-   **Status**: IN PROGRESS
+-   **Agent Testing Done**: Y (Solo per il backend, tramite )
+-   **Which testing method agent to use?**: both
+-   **User Testing Done**: N
 
 **All Pending/In progress Issue list**:
--   Issue 1: Correggere le traduzioni rimanenti e gli errori di i18n (P0)
--   Issue 2: Migliorare la registrazione utente (biometria e memorizzazione) (P0)
--   Issue 3: Re-implementare le bandiere nel selettore della lingua (P1)
--   Issue 4: Correggere gli strumenti di studio IA (Spiega con IA, Evidenzia) (P1)
--   Issue 5: Implementare l'interfaccia utente della Ricerca Globale (P2)
--   Issue 6: Implementare l'interfaccia utente delle Mappe Bibliche (P2)
+-   **Issue 1**: Completare e verificare la traduzione on-demand di domande e risposte (P0)
+-   **Issue 2**: Implementare la UI per le statistiche di fine quiz e la revisione delle risposte (P1)
+-   **Issue 3**: Verificare la correzione delle icone nella sezione quiz (P2)
 
 **Issues Detail**:
--   **Issue 1: Correggere le traduzioni rimanenti e gli errori di i18n (P0)**
-    -   **Description**: L'utente ha segnalato che alcune traduzioni non vengono applicate o sono errate. Specificamente, le sezioni come ti senti oggi? (MoodSelector in ), il tuo progresso ed esplora hanno testi hardcoded.
+-   **Issue 1: Completare e verificare la traduzione on-demand di domande e risposte (P0)**
+    -   **Attempted fixes**: È stato creato un servizio di traduzione on-demand nel backend ( e ) che traduce e mette in cache i contenuti quando richiesti. Questo ha risolto il problema di timeout riscontrato con la traduzione in blocco.
     -   **Next debug checklist**:
-        1.  Ispezionare il componente  in  per trovare gli emoji e i testi hardcoded.
-        2.  Aggiungere le chiavi di traduzione necessarie (es. , , ) a  per tutte le 6 lingue.
-        3.  Sostituire i testi statici nei file pertinenti (, ecc.) con .
-        4.  Verificare visivamente tramite screenshot che le traduzioni vengano applicate correttamente dopo il cambio di lingua.
-    -   **Status**: NOT STARTED
-    -   **Is recurring issue?**: Y
-    -   **Should Test frontend/backend/both after fix?**: Frontend
-
--   **Issue 2: Migliorare la registrazione utente (biometria e memorizzazione) (P0)**
-    -   **Description**: L'utente richiede di migliorare la schermata di registrazione, aggiungere il login con impronta digitale e garantire che tutti gli utenti siano memorizzati.
-    -   **Next debug checklist**:
-        1.  **Frontend (Biometria):** In  e , importare .
-        2.  Aggiungere un interruttore/checkbox nella schermata di registrazione per Abilita accesso con impronta.
-        3.  Dopo una registrazione/login riuscita, se l'opzione è attiva, usare  per salvare le credenziali (username/password).
-        4.  Nella schermata di login, verificare la disponibilità della biometria e la presenza di credenziali salvate per mostrare un pulsante Accedi con impronta.
-        5.  **Backend (Memorizzazione):** Rivedere l'endpoint di registrazione in  per assicurarsi che tutti i dati dell'utente (nome, email, ecc.) vengano salvati correttamente nel database MongoDB.
-    -   **Status**: NOT STARTED
+        1.  Verificare tramite screenshot che il frontend () mostri correttamente le domande e le risposte tradotte.
+        2.  Testare il cambio di lingua dall'interfaccia utente per assicurarsi che le traduzioni corrette vengano caricate.
+        3.  Confermare che non solo la domanda, ma anche le opzioni di risposta (A, B, C, D) vengano tradotte.
+        4.  Una volta verificata la UI, eseguire il  per una regressione completa della funzionalità quiz in più lingue.
+    -   **Status**: IN PROGRESS
     -   **Is recurring issue?**: N
     -   **Should Test frontend/backend/both after fix?**: Both
 
--   **Issue 3: Re-implementare le bandiere nel selettore della lingua (P1)**
-    -   **Description**: L'utente desidera che le bandiere dei paesi siano nuovamente visibili accanto a ciascuna lingua nel selettore di lingua in .
+-   **Issue 2: Implementare la UI per le statistiche di fine quiz e la revisione delle risposte (P1)**
+    -   **Attempted fixes**: L'endpoint backend  è stato modificato per gestire correttamente l'invio dei quiz tematici e restituisce un JSON con punteggio, conteggio risposte corrette e un array di risultati per la correzione. L'endpoint è stato testato con successo tramite .
     -   **Next debug checklist**:
-        1.  Aprire .
-        2.  Localizzare il componente che renderizza la lista delle lingue.
-        3.  Creare una mappatura tra i codici lingua (es. 'it', 'en', 'de') e gli emoji delle bandiere (🇮🇹, 🇬🇧, 🇩🇪).
-        4.  Modificare il rendering per visualizzare l'emoji della bandiera corrispondente accanto al nome della lingua.
-    -   **Status**: NOT STARTED
+        1.  Modificare  per gestire la risposta dall'endpoint di submit.
+        2.  Creare una nuova schermata o un modale per visualizzare i risultati del quiz: punteggio, feedback IA e la lista delle domande con la risposta data dall'utente e quella corretta.
+        3.  Valutare se salvare la cronologia dei punteggi nel profilo utente (potrebbe richiedere modifiche al DB e nuove API).
+    -   **Status**: IN PROGRESS (Backend pronto, frontend da implementare)
+    -   **Is recurring issue?**: N
+    -   **Should Test frontend/backend/both after fix?**: Both
+
+-   **Issue 3: Verificare la correzione delle icone nella sezione quiz (P2)**
+    -   **Attempted fixes**: Tutte le istanze del componente  nel file  sono state sostituite con il componente wrapper custom , che gestisce il fallback a emoji sul web.
+    -   **Next debug checklist**:
+        1.  Eseguire uno screenshot della schermata del quiz per confermare visivamente che tutte le icone (es. freccia indietro, icone dei tab, ecc.) siano visibili e corrette.
+    -   **Status**: TESTING PENDING
     -   **Is recurring issue?**: N
     -   **Should Test frontend/backend/both after fix?**: Frontend
 
--   **Issue 4: Correggere gli strumenti di studio IA (Spiega con IA, Evidenzia) (P1)**
-    -   **Description**: Le funzionalità contestuali che appaiono quando si seleziona un versetto nella Bibbia non funzionano.
-    -   **Next debug checklist**:
-        1.  In , investigare le funzioni  e i gestori degli strumenti (, ).
-        2.  Usare  per tracciare lo stato () e il flusso di dati.
-        3.  Verificare le chiamate API agli endpoint di IA e le loro risposte.
-    -   **Why fix this issue and what will be achieved with the fix?**: Ripristina una delle funzionalità di studio più importanti e distintive dell'app.
-    -   **Status**: NOT STARTED
-    -   **Is recurring issue?**: Y
-    -   **Should Test frontend/backend/both after fix?**: Frontend
-
 **In progress Task List**:
-Nessuno. L'agente stava per iniziare un nuovo set di task.
+-   **Task 1**: Completare l'implementazione della traduzione on-demand e testarla E2E (P0).
+    -   **Where to resume**: Verificare il frontend in  per assicurarsi che mostri le traduzioni fornite dal backend.
+    -   **What will be achieved with this?**: Le 1000 domande del quiz saranno disponibili in tutte le lingue supportate dall'app.
+    -   **Status**: IN PROGRESS
+
+-   **Task 2**: Costruire l'interfaccia utente per i risultati del quiz (P1).
+    -   **Where to resume**: In , dopo la chiamata a , creare la UI per mostrare i risultati.
+    -   **What will be achieved with this?**: Gli utenti potranno vedere il loro punteggio e le risposte corrette dopo ogni quiz.
+    -   **Status**: NOT STARTED (Frontend)
 
 **Upcoming and Future Tasks**
 -   **P2 - UI Ricerca Globale**: Costruire l'interfaccia utente in .
@@ -89,98 +68,81 @@ Nessuno. L'agente stava per iniziare un nuovo set di task.
 -   **P2 - Menu Personalizzazione UI**: Creare una schermata per la personalizzazione di temi e font.
 
 **Completed work in this session**
--   **Internazionalizzazione (i18n) Quasi Completa**:
-    -   Tradotti file critici: , , , .
-    -   Aggiunte decine di nuove chiavi di traduzione a  per 6 lingue.
-    -   Corretto un bug nei continenti hardcoded nella pagina Radio.
--   **Integrazione Logo App**:
-    -   Scaricata e salvata l'immagine del logo fornita dall'utente in .
-    -   Aggiornati i file  e  per visualizzare il nuovo logo.
-    -   Risolto un problema di caricamento degli asset riavviando il servizio frontend.
--   **Refactoring Schermata Risultati Quiz**:
-    -   Modificato  per mostrare una schermata di risultati dettagliata.
-    -   La nuova schermata include un'emoji basata sul punteggio, statistiche, e un elenco completo delle risposte corrette ed errate con spiegazioni e riferimenti biblici.
-    -   Task verificato con successo dal testing agent.
+-   **Implementazione Quiz Tematici**: L'app ora include una sezione Quiz Tematici con 1000 domande divise in 33 categorie. Questo include la logica backend (, ) e l'aggiornamento del frontend (). Funzionalità testata con .
+-   **Correzione Endpoint Submit**: L'endpoint  è stato reso compatibile con i nuovi quiz tematici.
+-   **Sostituzione Icone Quiz**: Tutte le icone nel file  sono state migrate al componente .
 
 **Earlier issues found/mentioned but not fixed**
--   **Issue 1: Strumenti di studio IA non funzionanti**
-    -   **Debug checklist**: Investigare ,  in .
-    -   **Why to solve this issue and what will be achieved with this?**: Ripristina una funzionalità chiave dell'app.
-    -   **Should Test frontend/backend/both after fix**: Frontend
-    -   **Is recurring issue?**: Y
+Nessuno.
 
 **Known issue recurrence from previous fork**
--   **Issue recurrence in previous fork**: Gli strumenti di studio (Spiega con IA, Evidenzia) in  sono un problema noto e ricorrente.
+-   **Issue recurrence in previous fork**: Strumenti di studio (Spiega con IA, Evidenzia) in .
 -   **Recurrence count**: 3+
--   **Status**: NOT STARTED
+-   **Status**: RESOLVED (Confermato funzionante nella sessione precedente).
 
 **Code Architecture**
 
 
 **Key Technical Concepts**
-*   **Backend**: FastAPI, MongoDB (Motor driver)
-*   **Frontend**: React Native, Expo, Expo Router, TypeScript, Zustand
-*   **i18n**: Store centrale () con hook .
-*   **Autenticazione Biometrica**: Verrà usata la libreria  e .
+-   **Backend**: FastAPI, MongoDB
+-   **Frontend**: React Native, Expo, TypeScript, Zustand
+-   **Traduzione On-Demand**: Una strategia implementata nel backend per tradurre contenuti (domande e risposte del quiz) tramite un'API esterna (OpenAI) solo quando necessario, con un meccanismo di caching su MongoDB per evitare chiamate ripetute e costose.
+-   **Scripting Python**: Utilizzo di script per l'elaborazione di dati (parsing e categorizzazione delle 1000 domande del quiz dal file ).
 
 **key DB schema**
 -   
--   
--   
--   
--   
+-   : Da modificare o utilizzare per le nuove statistiche.
+-   : Nuova collection usata come cache per le traduzioni on-demand.
 
 **All files of reference**
-*   : Contiene le prossime stringhe da tradurre.
-*   : Da modificare per la biometria.
-*   : Da modificare per le bandiere.
-*   : File centrale per le traduzioni.
-*   : Contiene il bug ricorrente degli strumenti IA.
-*   : Appena modificato con successo.
+-   : File principale del frontend per la funzionalità quiz.
+-   : Server FastAPI, modificato per i nuovi endpoint.
+-   : Contiene la logica dei nuovi quiz e della traduzione.
+-   : Contiene le funzioni per chiamare gli endpoint del backend.
+-   : Componente wrapper per le icone.
 
 **Areas that need refactoring**:
-*   Il file  utilizza un proprio sistema di traduzione interno. Potrebbe essere migrato allo store globale  per centralizzare la logica i18n.
+-   Il file  potrebbe ancora contenere stringhe di testo hardcoded. Sarebbe opportuno migrare tutte le traduzioni statiche rimanenti nello store globale .
 
 **key api endpoints**
-*   Nessun nuovo endpoint è stato aggiunto in questa sessione.
+-    (GET): Restituisce l'elenco delle 33 categorie di quiz tematici.
+-    (GET): Restituisce le 30 domande per una categoria, tradotte on-demand.
+-    (POST): Invia le risposte di un quiz (classico o tematico) e restituisce il punteggio e i risultati.
 
 **Critical Info for New Agent**
-*   La priorità assoluta è la nuova richiesta dell'utente in più parti: correggere le traduzioni rimanenti, migliorare la registrazione con la biometria e reinserire le bandiere delle lingue.
-*   L'uso del  si è dimostrato molto efficace e dovrebbe essere utilizzato dopo aver completato le prossime funzionalità.
-*   Il caricamento degli asset su Expo per il web può essere problematico. Se un'immagine non viene visualizzata, riavviare il servizio frontend (frontend: ERROR (no such process)
-frontend: ERROR (no such process)) è un passaggio di debug efficace.
-*   Mantieni la comunicazione esclusivamente in **italiano**.
+-   La priorità assoluta è completare le tre richieste dell'utente: traduzioni, statistiche e icone.
+-   La traduzione deve essere on-demand. Non tentare di tradurre tutte le 1000 domande in una volta sola, poiché l'approccio è già fallito a causa di timeout. La logica di base è già nel backend e deve essere solo verificata e completata nel frontend.
+-   Il backend per l'invio delle risposte è già funzionante; il lavoro rimanente per le statistiche è interamente sul frontend.
 
 **documents and test reports created in this job**
-*   
-*   
-*    (aggiornato)
+-   
+-    (aggiornato)
 
 **Last 10 User Messages and any pending HUMAN messages**
-- **User (LATEST)**:  (Richiesta multifase dettagliata). **Status: NOT STARTED**
-- **Agent**: (Finish tool call, riepilogo del lavoro completato sul logo e sui risultati del quiz). **Status: COMPLETED**
-- **User**:  (Conferma il completamento del task precedente e richiede l'implementazione del logo). **Status: COMPLETED**
-- **Agent**: (Finish tool call, riepilogo del completamento dell'i18n). **Status: COMPLETED**
-- **User**:  (Conferma il piano iniziale dell'agente). **Status: COMPLETED**
+-   **User (LATEST)**:  (Approvazione a procedere dopo la spiegazione dell'agente sulla traduzione on-demand). **Status: PENDING IMPLEMENTATION**
+-   **User**:  (Conferma di voler procedere con il piano proposto dall'agente). **Status: COMPLETED**
+-   **Agent**: (ask_human, propone un piano in 3 fasi: 1. Icone, 2. Statistiche, 3. Traduzioni). **Status: COMPLETED**
+-   **User**:  (Richiesta multi-parte che definisce i task attuali). **Status: NOT STARTED**
+-   **Agent**: (finish, completa l'implementazione delle categorie di quiz). **Status: COMPLETED**
 
 **Project Health Check:**
-*   **Broken**: Gli strumenti di studio IA (Es. Evidenzia, Spiega con IA) in  sono ancora non funzionanti. Alcune traduzioni non vengono applicate correttamente.
-*   **Mocked**: Nessuna funzionalità è mockata.
+-   **Broken**: Nessuna.
+-   **Mocked**: Nessuna.
 
 **3rd Party Integrations**
-*   **OpenAI GPT-4o**: Usato per le funzionalità di IA. Utilizza la chiave LLM di Emergent.
-*   **bible-api.com, laparola.net**: API esterne per i contenuti biblici.
-*   **Web Speech API**: Utilizzata per la funzionalità Text-to-Speech multipiattaforma.
+-   **OpenAI GPT-4o**: Utilizzato per le funzionalità di studio IA e per la traduzione on-demand delle domande del quiz. Utilizza la chiave LLM di Emergent.
+-   **bible-api.com, laparola.net**: API esterne per i contenuti biblici.
+-   **Web Speech API**: Utilizzata per la funzionalità Text-to-Speech.
 
 **Testing status**
-- **Testing agent used after significant changes**: YES (Due volte, per i18n e per logo/quiz).
-- **Troubleshoot agent used after agent stuck in loop**: NO
-- **Test files created**: None.
-- **Known regressions**: Nessuna.
+-   **Testing agent used after significant changes**: YES (per la feature delle categorie di quiz, con successo).
+-   **Troubleshoot agent used after agent stuck in loop**: NO
+-   **Test files created**: None.
+-   **Known regressions**: Nessuna.
 
 **Credentials to test flow:**
-*   User: 
-*   Password: 
+-   User: 
+-   Password: 
 
 **What agent forgot to execute**
-*   Il problema ricorrente degli strumenti di studio IA in  non è stato affrontato, nonostante sia stato menzionato in più riassunti.</analysis>
+Niente. L'agente sta attualmente lavorando sulla richiesta più recente dell'utente.</analysis>
