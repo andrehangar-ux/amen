@@ -98,6 +98,10 @@ export const api = {
   // Progress
   getProgress: () => api.fetch('/api/progress'),
   updateReadingProgress: () => api.fetch('/api/progress/reading', { method: 'POST' }),
+  saveChapterReading: (book: string, chapter: number) =>
+    api.fetch(`/api/progress/reading/chapter?book=${encodeURIComponent(book)}&chapter=${chapter}`, { method: 'POST' }),
+  getReadingHistory: (limit: number = 50) =>
+    api.fetch(`/api/progress/reading/history?limit=${limit}`),
 
   // Account Management
   deleteAccount: () => api.fetch('/api/auth/delete-account', { method: 'DELETE' }),
