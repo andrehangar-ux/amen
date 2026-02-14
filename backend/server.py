@@ -4711,6 +4711,40 @@ async def contact_support(request: Request, user: User = Depends(require_auth)):
     
     return {"success": True, "message": "Messaggio inviato! Ti risponderemo presto.", "ticket_id": support_ticket["ticket_id"]}
 
+# ==================== ONLINE USERS ====================
+
+@api_router.post("/user/heartbeat")
+async def user_heartbeat(request: Request, user: User = Depends(require_auth)):
+    """Update user online status (heartbeat)"""
+    await db.online_users.update_one(
+        {"user_id": user.user_id},
+        {
+            "$set": {
+                "user_id": user.user_id,
+                "user_name": user.name,
+                "last_seen": datetime.now(timezone.utc),
+                "is_online": True
+            }
+        },
+        upsert=True
+    )
+    return {"status": "ok"}
+
+@api_router.get("/community/online-users")
+async def get_online_users(request: Request):
+    """Get list of currently online users (active in last 5 minutes)"""
+    five_minutes_ago = datetime.now(timezone.utc) - timedelta(minutes=5)
+    
+    online_users = await db.online_users.find(
+        {"last_seen": {"$gte": five_minutes_ago}},
+        {"_id": 0, "user_id": 1, "user_name": 1, "last_seen": 1}
+    ).to_list(100)
+    
+    return {
+        "online_count": len(online_users),
+        "users": online_users
+    }
+
 # ==================== HEALTH CHECK ====================
 
 @api_router.get("/")
