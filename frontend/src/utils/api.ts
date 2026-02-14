@@ -340,4 +340,13 @@ export const api = {
   // Online Users
   sendHeartbeat: () => api.fetch('/api/user/heartbeat', { method: 'POST' }),
   getOnlineUsers: () => api.fetch('/api/community/online-users'),
+
+  // Private Messages
+  sendPrivateMessage: (receiverId: string, content: string) =>
+    api.fetch('/api/messages', {
+      method: 'POST',
+      body: JSON.stringify({ receiver_id: receiverId, content }),
+    }),
+  getConversation: (userId: string) =>
+    api.fetch(`/api/messages/conversation/${userId}`),
 };
