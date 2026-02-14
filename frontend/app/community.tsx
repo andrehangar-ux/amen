@@ -514,4 +514,31 @@ const styles = StyleSheet.create({
     color: COLORS.textMuted,
     marginTop: SPACING.xs,
   },
+  quickActionsContainer: {
+    backgroundColor: COLORS.card,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.border,
+    paddingVertical: SPACING.sm,
+  },
+  quickActionsScroll: {
+    paddingHorizontal: SPACING.md,
+    gap: SPACING.md,
+  },
+  quickAction: {
+    alignItems: 'center',
+    width: 70,
+  },
+  quickActionIcon: {
+    width: 48,
+    height: 48,
+    borderRadius: BORDER_RADIUS.full,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: SPACING.xs,
+  },
+  quickActionText: {
+    fontSize: 11,
+    color: COLORS.textLight,
+    textAlign: 'center',
+  },
 });
