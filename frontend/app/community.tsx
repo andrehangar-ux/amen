@@ -98,6 +98,50 @@ export default function CommunityScreen() {
     }
   }, []);
 
+  // Private chat functions
+  const openPrivateChat = async (onlineUser: OnlineUser) => {
+    if (onlineUser.user_id === user?.user_id) return; // Can't message yourself
+    
+    setSelectedUser(onlineUser);
+    setShowPrivateChat(true);
+    setLoadingPrivate(true);
+    
+    try {
+      const data = await api.getConversation(onlineUser.user_id);
+      setPrivateMessages(data || []);
+    } catch (error) {
+      console.log('Error loading conversation:', error);
+      setPrivateMessages([]);
+    } finally {
+      setLoadingPrivate(false);
+    }
+  };
+
+  const sendPrivateMessage = async () => {
+    if (!privateMessage.trim() || !selectedUser) return;
+    
+    setSendingPrivate(true);
+    try {
+      await api.sendPrivateMessage(selectedUser.user_id, privateMessage);
+      setPrivateMessage('');
+      // Refresh conversation
+      const data = await api.getConversation(selectedUser.user_id);
+      setPrivateMessages(data || []);
+    } catch (error) {
+      console.log('Error sending message:', error);
+      Alert.alert(t('error'), t('unableToSendMessage'));
+    } finally {
+      setSendingPrivate(false);
+    }
+  };
+
+  const closePrivateChat = () => {
+    setShowPrivateChat(false);
+    setSelectedUser(null);
+    setPrivateMessages([]);
+    setPrivateMessage('');
+  };
+
   useEffect(() => {
     setLoading(true);
     Promise.all([loadMessages(), loadOnlineUsers()]).finally(() => setLoading(false));
