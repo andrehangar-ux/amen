@@ -108,7 +108,7 @@ export default function QuizScreen() {
   }, [currentLanguage]);
 
   const startQuiz = async (topicId: string) => {
-    setLoading(true);
+    setLoadingQuiz(true);
     try {
       const quiz = await api.getQuiz(topicId, currentLanguage);
       setSelectedTopic(topicId);
@@ -121,12 +121,12 @@ export default function QuizScreen() {
     } catch (error) {
       showAlert(t('error'), t('loadError'));
     } finally {
-      setLoading(false);
+      setLoadingQuiz(false);
     }
   };
 
   const startCategoryQuiz = async (categoryId: string) => {
-    setLoading(true);
+    setLoadingQuiz(true);
     try {
       const quiz = await api.getQuizByCategory(categoryId, currentLanguage);
       setSelectedTopic(categoryId);
@@ -139,7 +139,7 @@ export default function QuizScreen() {
     } catch (error) {
       showAlert(t('error'), t('loadError'));
     } finally {
-      setLoading(false);
+      setLoadingQuiz(false);
     }
   };
 
