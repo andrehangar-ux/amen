@@ -196,7 +196,7 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ book, chapter, verse, note, highlight_color: highlightColor, tags }),
     }),
-  getStudyNotes: () => api.fetch('/api/bible/study/notes'),
+  getAllStudyNotes: () => api.fetch('/api/bible/study/notes'),
   deleteStudyNote: (noteId: string) => api.fetch(`/api/bible/study/notes/${noteId}`, { method: 'DELETE' }),
   aiExplainVerse: (verseRef: string, verseText: string, question?: string, language?: string) =>
     api.fetch('/api/bible/study/ai-explain', {
