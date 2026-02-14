@@ -1,10 +1,15 @@
-{
-  "expo": {
-    "name": "Amen App New",
-    "slug": "amen-spiritual-new",
-    "version": "1.0.0",
-    "android": {
-      "package": "com.amen.spiritualapp.new"
+export default {
+  name: "Amen App New",
+  slug: "amen-spiritual-new",
+  version: "1.0.0",
+  sdkVersion: "54.0.0",
+  platforms: ["android", "ios", "web"],
+  extra: {
+    eas: {
+      projectId: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
     }
+  },
+  cli: {
+    appVersionSource: "remote"
   }
-}
+};
