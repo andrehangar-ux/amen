@@ -382,6 +382,13 @@ const styles = StyleSheet.create({
   },
   checkbox: {
     marginRight: SPACING.sm,
+    width: 28,
+    height: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  checkboxIcon: {
+    fontSize: 22,
   },
   termsTextContainer: {
     flexDirection: 'row',
