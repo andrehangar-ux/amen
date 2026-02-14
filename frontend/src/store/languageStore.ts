@@ -539,6 +539,10 @@ export const translations: Record<string, Record<string, string>> = {
     groups: 'Grupos',
     onlineNow: 'En línea ahora',
     onlineUsers: 'Usuarios en línea',
+    you: 'Tú',
+    startConversation: '¡Inicia la conversación!',
+    writeYourMessage: 'Escribe tu mensaje...',
+    unableToSendMessage: 'No se pudo enviar el mensaje',
   },
   en: {
     welcome: 'Welcome',
