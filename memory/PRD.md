@@ -14,44 +14,51 @@ it, en, es, de, fr, pt (6 lingue con TTS)
 
 ## Cosa è stato implementato
 
-### Sessione Corrente (Feb 2026) - Fork 9
+### Sessione Corrente (Feb 2026) - Fork 10
+
+#### ✅ QUIZ 1000 DOMANDE - SOTTOCATEGORIE TEMATICHE (COMPLETATO)
+- [x] **1000 domande** parsate dal file `qiuz bibbia.txt` fornito dall'utente
+- [x] **33 categorie tematiche** create automaticamente:
+  - Abramo, Apocalisse, Conquista e Giudici, Donne della Bibbia
+  - Elia ed Eliseo, Esilio e Ritorno, Ezechiele e Daniele
+  - Feste e Culto, Formazione del Canone, Geremia
+  - Giacobbe e Giuseppe, I Vangeli, Isaia, L'Alleanza
+  - L'Apostolo Paolo, L'Esodo, La Chiesa Nascente
+  - La Creazione, La Torah, La Vita di Gesù
+  - Lingue e Termini, Lo Scisma, Manoscritti e Traduzioni
+  - Miracoli e Parabole, Noè e il Diluvio
+  - Passione e Risurrezione, Profeti Minori
+  - Salmi e Sapienza, Salomone, Sansone e Samuele
+  - Saul e Davide, Storia e Luoghi, Teologia Biblica
+- [x] **30 domande per quiz** (limite per sessione)
+- [x] **Traduzioni titoli categorie** in tutte e 6 le lingue
+- [x] **Nuova UI con 3 tab**: Quiz Tematici (default), Quiz Classici, Studio Avanzato
+- [x] **Info banner** che mostra "1000 domande in 33 categorie"
+- [x] **API endpoints**:
+  - `GET /api/quiz/categories?lang={lang}` - lista categorie
+  - `GET /api/quiz/category/{id}?lang={lang}` - domande per categoria
+- [x] **File creati**:
+  - `/app/backend/quiz_1000.py` - modulo per gestione categorie
+  - `/app/backend/quiz_categories_data.json` - dati JSON delle 1000 domande
+
+#### Testing Quiz 1000:
+- **Backend**: 15/15 test passati (100%)
+- **Frontend**: 100% funzionante
+
+### Sessione Precedente (Fork 9)
 
 #### ✅ Traduzioni MoodSelector e Sezioni (COMPLETATO)
 - [x] **MoodSelector tradotto** in tutte le 6 lingue
-  - Felice, Triste, Ansioso, Arrabbiato, Grato, Confuso, Speranzoso, Stanco
-- [x] **Sezioni home tradotte**: "Come ti senti oggi?", "Azioni Rapide", "Il Tuo Progresso", "Esplora"
-- [x] **Login/Registrazione tradotti** con tutti i messaggi di errore
+- [x] **Sezioni home tradotte**
+- [x] **Login/Registrazione tradotti**
 
 #### ✅ Login Biometrico (COMPLETATO)
-- [x] **BiometricService** creato (`/app/frontend/src/services/BiometricService.ts`)
-- [x] Supporto per **impronta digitale** e **riconoscimento facciale**
-- [x] **Salvataggio credenziali sicuro** con `expo-secure-store`
-- [x] **Login automatico** con biometria se abilitato
-- [x] **Traduzioni biometria** in 6 lingue
+- [x] **BiometricService** creato
+- [x] Supporto impronta digitale e riconoscimento facciale
+- [x] Salvataggio credenziali sicuro
 
-#### ✅ Registrazione Migliorata (COMPLETATO)
-- [x] **Opzione biometria** nella registrazione (visibile solo su mobile)
-- [x] **Switch** per abilitare/disabilitare accesso con impronta
-- [x] **Tutti gli utenti salvati** nel database MongoDB (21 utenti attualmente)
-
-#### ⚠️ Problema Icone (NOTO)
-- Icone Ionicons mostrano quadrati vuoti su Expo Web
-- Problema noto con caricamento font CDN
-- Funziona correttamente su dispositivi mobili nativi
-
-### Sessioni Precedenti
-
-#### ✅ Logo App Personalizzato (Fork 7/8)
-- [x] **Logo colomba bianca** su sfondo verde oliva con scritta "Amen!"
-- [x] Integrato nelle pagine login/registrazione
-
-#### ✅ Schermata Risultati Quiz Migliorata (Fork 7/8)
-- [x] Emoji dinamica basata sul punteggio
-- [x] Statistiche visive corrette/errate
-- [x] Sezione risposte errate con spiegazioni
-
-#### ✅ Internazionalizzazione Completa (Fork 7/8)
-- [x] ~200+ chiavi di traduzione per 6 lingue
+#### ✅ Fix Icone Web (COMPLETATO)
+- [x] Componente `Icon.tsx` con fallback a emoji per Expo Web
 
 ### Testing
 - **Backend**: 100% test passati
