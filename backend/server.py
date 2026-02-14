@@ -480,15 +480,27 @@ async def delete_account(user: User = Depends(require_auth)):
     try:
         user_id = user.user_id
         
-        # Delete all user data from various collections
+        # Delete all user data from all collections
         await db.users.delete_one({"user_id": user_id})
         await db.user_sessions.delete_many({"user_id": user_id})
         await db.journal_entries.delete_many({"user_id": user_id})
         await db.community_messages.delete_many({"user_id": user_id})
         await db.user_notes.delete_many({"user_id": user_id})
         await db.reading_progress.delete_many({"user_id": user_id})
+        await db.reading_history.delete_many({"user_id": user_id})
+        await db.user_consent_log.delete_many({"user_id": user_id})
+        await db.quiz_results.delete_many({"user_id": user_id})
+        await db.bookmarks.delete_many({"user_id": user_id})
+        await db.chat_history.delete_many({"user_id": user_id})
+        await db.mood_checkins.delete_many({"user_id": user_id})
+        await db.feelings_history.delete_many({"user_id": user_id})
+        await db.private_messages.delete_many({"$or": [{"sender_id": user_id}, {"receiver_id": user_id}]})
+        await db.notifications.delete_many({"user_id": user_id})
+        await db.group_members.delete_many({"user_id": user_id})
+        await db.dictionary_favorites.delete_many({"user_id": user_id})
+        await db.flashcards.delete_many({"user_id": user_id})
         
-        logger.info(f"Account deleted for user: {user_id}")
+        logger.info(f"Account and all data deleted for user: {user_id}")
         
         return {"message": "Account e tutti i dati eliminati con successo"}
     except Exception as e:
