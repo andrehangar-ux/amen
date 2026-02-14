@@ -580,6 +580,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLORS.background,
   },
+  loadingText: {
+    marginTop: SPACING.md,
+    fontSize: 16,
+    color: COLORS.textLight,
+  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
