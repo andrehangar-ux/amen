@@ -12,9 +12,10 @@ import {
   ActivityIndicator,
   Image,
   Switch,
+  Pressable,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { router } from 'expo-router';
+import { router, Link } from 'expo-router';
 import { Icon } from '../../src/components/Icon';
 import { useAuthStore } from '../../src/store/authStore';
 import { useTranslation } from '../../src/store/languageStore';
@@ -39,6 +40,7 @@ export default function RegisterScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [enableBiometric, setEnableBiometric] = useState(false);
   const [biometricAvailable, setBiometricAvailable] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const { register } = useAuthStore();
   const { t } = useTranslation();
 
@@ -64,6 +66,11 @@ export default function RegisterScreen() {
 
     if (password.length < 6) {
       showAlert(t('error'), t('passwordMinLengthError'));
+      return;
+    }
+
+    if (!acceptedTerms) {
+      showAlert(t('error'), t('acceptTermsRequired') || 'Devi accettare i Termini e le Condizioni');
       return;
     }
 
