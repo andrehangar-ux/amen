@@ -21,8 +21,6 @@ import { useAuthStore } from '../../src/store/authStore';
 import { useTranslation } from '../../src/store/languageStore';
 import { BiometricService } from '../../src/services/BiometricService';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
-import { TermsModal } from '../../src/components/TermsModal';
-import { api } from '../../src/utils/api';
 
 const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL || '';
 
