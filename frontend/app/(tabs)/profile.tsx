@@ -141,6 +141,58 @@ export default function ProfileScreen() {
           </View>
         )}
 
+        {/* Reading History Section */}
+        <View style={styles.section}>
+          <TouchableOpacity 
+            style={styles.sectionHeaderRow}
+            onPress={() => setShowHistory(!showHistory)}
+          >
+            <Text style={styles.sectionTitle}>Cronologia Lettura</Text>
+            <Icon 
+              name={showHistory ? "chevron-up" : "chevron-down"} 
+              size={20} 
+              color={COLORS.textLight} 
+            />
+          </TouchableOpacity>
+          
+          {showHistory && (
+            <View style={styles.menuCard}>
+              {readingHistory.length === 0 ? (
+                <View style={styles.emptyHistory}>
+                  <Icon name="book-outline" size={40} color={COLORS.textMuted} />
+                  <Text style={styles.emptyHistoryText}>
+                    Nessun capitolo letto. Inizia a leggere la Bibbia!
+                  </Text>
+                </View>
+              ) : (
+                readingHistory.map((item, index) => (
+                  <TouchableOpacity
+                    key={`${item.book}-${item.chapter}-${index}`}
+                    style={[
+                      styles.historyItem,
+                      index < readingHistory.length - 1 && styles.historyItemBorder
+                    ]}
+                    onPress={() => goToChapter(item.book, item.chapter)}
+                  >
+                    <View style={styles.historyIcon}>
+                      <Icon name="book" size={20} color={COLORS.primary} />
+                    </View>
+                    <View style={styles.historyContent}>
+                      <Text style={styles.historyTitle}>
+                        {item.book} {item.chapter}
+                      </Text>
+                      <Text style={styles.historyMeta}>
+                        Letto {item.read_count || 1}x • {new Date(item.last_read).toLocaleDateString('it-IT')}
+                      </Text>
+                    </View>
+                    <Icon name="chevron-forward" size={20} color={COLORS.textMuted} />
+                  </TouchableOpacity>
+                ))
+              )}
+            </View>
+          )}
+        </View>
+
         {/* App Features */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Funzionalità</Text>
