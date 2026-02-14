@@ -3,10 +3,15 @@
 
 import json
 import os
+import asyncio
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Load questions from JSON file
 DATA_FILE = Path(__file__).parent / 'quiz_categories_data.json'
+TRANSLATIONS_CACHE_FILE = Path(__file__).parent / 'quiz_translations_cache.json'
 
 def load_quiz_categories():
     """Load quiz categories from JSON file"""
@@ -14,6 +19,88 @@ def load_quiz_categories():
         with open(DATA_FILE, 'r', encoding='utf-8') as f:
             return json.load(f)
     return {}
+
+def load_translations_cache():
+    """Load cached translations"""
+    if TRANSLATIONS_CACHE_FILE.exists():
+        with open(TRANSLATIONS_CACHE_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+def save_translations_cache(cache):
+    """Save translations to cache file"""
+    with open(TRANSLATIONS_CACHE_FILE, 'w', encoding='utf-8') as f:
+        json.dump(cache, f, ensure_ascii=False, indent=2)
+
+# Translation cache
+_translations_cache = None
+
+def get_translations_cache():
+    global _translations_cache
+    if _translations_cache is None:
+        _translations_cache = load_translations_cache()
+    return _translations_cache
+
+async def translate_question(question: dict, target_lang: str) -> dict:
+    """Translate a single question using OpenAI"""
+    from emergentintegrations.llm.chat import LlmChat, UserMessage
+    
+    EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY')
+    
+    lang_names = {
+        'es': 'Spanish', 'en': 'English', 'de': 'German', 
+        'fr': 'French', 'pt': 'Portuguese'
+    }
+    
+    # Check cache first
+    cache = get_translations_cache()
+    cache_key = f"{question['id']}_{target_lang}"
+    
+    if cache_key in cache:
+        return cache[cache_key]
+    
+    try:
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=f"translate_{question['id']}_{target_lang}",
+            system_message=f"Translate the following Bible quiz from Italian to {lang_names.get(target_lang, 'English')}. Return JSON with keys: question, options (array of 4), explanation. Keep biblical names in their common form."
+        ).with_model("openai", "gpt-4o")
+        
+        text = f"""Question: {question['question']}
+Options: {json.dumps(question['options'], ensure_ascii=False)}
+Explanation: {question['explanation']}"""
+        
+        response = await chat.send_message(UserMessage(text=text))
+        
+        # Parse JSON response
+        # Find JSON in response
+        import re
+        json_match = re.search(r'\{[^{}]*\}', response, re.DOTALL)
+        if json_match:
+            translated = json.loads(json_match.group())
+        else:
+            # Try parsing entire response as JSON
+            translated = json.loads(response)
+        
+        result = {
+            'id': question['id'],
+            'question': translated.get('question', question['question']),
+            'options': translated.get('options', question['options']),
+            'correct': question['correct'],
+            'explanation': translated.get('explanation', question['explanation']),
+            'verse_ref': question.get('verse_ref', '')
+        }
+        
+        # Cache the result
+        cache[cache_key] = result
+        save_translations_cache(cache)
+        
+        return result
+        
+    except Exception as e:
+        print(f"Translation error for {question['id']}: {e}")
+        # Return original on error
+        return question
 
 # Category metadata with translations
 CATEGORY_TRANSLATIONS = {
