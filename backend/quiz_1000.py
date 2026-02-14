@@ -1,0 +1,342 @@
+# Quiz 1000 - Nuove categorie di quiz biblici
+# 1000 domande organizzate in 33 sottocategorie tematiche
+
+import json
+import os
+from pathlib import Path
+
+# Load questions from JSON file
+DATA_FILE = Path(__file__).parent / 'quiz_categories_data.json'
+
+def load_quiz_categories():
+    """Load quiz categories from JSON file"""
+    if DATA_FILE.exists():
+        with open(DATA_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+# Category metadata with translations
+CATEGORY_TRANSLATIONS = {
+    'canone_bibbia': {
+        'it': {'title': 'Formazione del Canone', 'desc': 'Come si è formata la Bibbia'},
+        'es': {'title': 'Formación del Canon', 'desc': 'Cómo se formó la Biblia'},
+        'en': {'title': 'Canon Formation', 'desc': 'How the Bible was formed'},
+        'pt': {'title': 'Formação do Cânon', 'desc': 'Como a Bíblia foi formada'},
+        'fr': {'title': 'Formation du Canon', 'desc': 'Comment la Bible a été formée'},
+        'de': {'title': 'Kanonbildung', 'desc': 'Wie die Bibel entstand'},
+    },
+    'manoscritti': {
+        'it': {'title': 'Manoscritti e Traduzioni', 'desc': 'Trasmissione del testo biblico'},
+        'es': {'title': 'Manuscritos y Traducciones', 'desc': 'Transmisión del texto bíblico'},
+        'en': {'title': 'Manuscripts and Translations', 'desc': 'Biblical text transmission'},
+        'pt': {'title': 'Manuscritos e Traduções', 'desc': 'Transmissão do texto bíblico'},
+        'fr': {'title': 'Manuscrits et Traductions', 'desc': 'Transmission du texte biblique'},
+        'de': {'title': 'Handschriften und Übersetzungen', 'desc': 'Überlieferung des Bibeltextes'},
+    },
+    'creazione': {
+        'it': {'title': 'La Creazione', 'desc': 'Genesi 1-4: le origini'},
+        'es': {'title': 'La Creación', 'desc': 'Génesis 1-4: los orígenes'},
+        'en': {'title': 'The Creation', 'desc': 'Genesis 1-4: the origins'},
+        'pt': {'title': 'A Criação', 'desc': 'Gênesis 1-4: as origens'},
+        'fr': {'title': 'La Création', 'desc': 'Genèse 1-4: les origines'},
+        'de': {'title': 'Die Schöpfung', 'desc': 'Genesis 1-4: die Ursprünge'},
+    },
+    'patriarchi_1': {
+        'it': {'title': 'Noè e il Diluvio', 'desc': 'Genesi 6-11: il nuovo inizio'},
+        'es': {'title': 'Noé y el Diluvio', 'desc': 'Génesis 6-11: el nuevo comienzo'},
+        'en': {'title': 'Noah and the Flood', 'desc': 'Genesis 6-11: a new beginning'},
+        'pt': {'title': 'Noé e o Dilúvio', 'desc': 'Gênesis 6-11: um novo começo'},
+        'fr': {'title': 'Noé et le Déluge', 'desc': 'Genèse 6-11: un nouveau départ'},
+        'de': {'title': 'Noah und die Sintflut', 'desc': 'Genesis 6-11: ein Neuanfang'},
+    },
+    'patriarchi_2': {
+        'it': {'title': 'Abramo', 'desc': 'Il padre della fede'},
+        'es': {'title': 'Abraham', 'desc': 'El padre de la fe'},
+        'en': {'title': 'Abraham', 'desc': 'The father of faith'},
+        'pt': {'title': 'Abraão', 'desc': 'O pai da fé'},
+        'fr': {'title': 'Abraham', 'desc': 'Le père de la foi'},
+        'de': {'title': 'Abraham', 'desc': 'Der Vater des Glaubens'},
+    },
+    'patriarchi_3': {
+        'it': {'title': 'Giacobbe e Giuseppe', 'desc': 'Da Canaan all\'Egitto'},
+        'es': {'title': 'Jacob y José', 'desc': 'De Canaán a Egipto'},
+        'en': {'title': 'Jacob and Joseph', 'desc': 'From Canaan to Egypt'},
+        'pt': {'title': 'Jacó e José', 'desc': 'De Canaã ao Egito'},
+        'fr': {'title': 'Jacob et Joseph', 'desc': 'De Canaan à l\'Égypte'},
+        'de': {'title': 'Jakob und Josef', 'desc': 'Von Kanaan nach Ägypten'},
+    },
+    'esodo_liberazione': {
+        'it': {'title': 'L\'Esodo', 'desc': 'La liberazione dall\'Egitto'},
+        'es': {'title': 'El Éxodo', 'desc': 'La liberación de Egipto'},
+        'en': {'title': 'The Exodus', 'desc': 'Liberation from Egypt'},
+        'pt': {'title': 'O Êxodo', 'desc': 'A libertação do Egito'},
+        'fr': {'title': 'L\'Exode', 'desc': 'La libération d\'Égypte'},
+        'de': {'title': 'Der Exodus', 'desc': 'Die Befreiung aus Ägypten'},
+    },
+    'legge': {
+        'it': {'title': 'La Torah', 'desc': 'La Legge di Mosè'},
+        'es': {'title': 'La Torá', 'desc': 'La Ley de Moisés'},
+        'en': {'title': 'The Torah', 'desc': 'The Law of Moses'},
+        'pt': {'title': 'A Torá', 'desc': 'A Lei de Moisés'},
+        'fr': {'title': 'La Torah', 'desc': 'La Loi de Moïse'},
+        'de': {'title': 'Die Tora', 'desc': 'Das Gesetz des Mose'},
+    },
+    'alleanza_teologia': {
+        'it': {'title': 'L\'Alleanza', 'desc': 'Il Patto con Dio'},
+        'es': {'title': 'La Alianza', 'desc': 'El Pacto con Dios'},
+        'en': {'title': 'The Covenant', 'desc': 'The Pact with God'},
+        'pt': {'title': 'A Aliança', 'desc': 'O Pacto com Deus'},
+        'fr': {'title': 'L\'Alliance', 'desc': 'Le Pacte avec Dieu'},
+        'de': {'title': 'Der Bund', 'desc': 'Der Pakt mit Gott'},
+    },
+    'conquista_giudici': {
+        'it': {'title': 'Conquista e Giudici', 'desc': 'Dalla conquista ai Giudici'},
+        'es': {'title': 'Conquista y Jueces', 'desc': 'De la conquista a los Jueces'},
+        'en': {'title': 'Conquest and Judges', 'desc': 'From conquest to the Judges'},
+        'pt': {'title': 'Conquista e Juízes', 'desc': 'Da conquista aos Juízes'},
+        'fr': {'title': 'Conquête et Juges', 'desc': 'De la conquête aux Juges'},
+        'de': {'title': 'Eroberung und Richter', 'desc': 'Von der Eroberung bis zu den Richtern'},
+    },
+    'sansone_samuele': {
+        'it': {'title': 'Sansone e Samuele', 'desc': 'Gli ultimi Giudici'},
+        'es': {'title': 'Sansón y Samuel', 'desc': 'Los últimos Jueces'},
+        'en': {'title': 'Samson and Samuel', 'desc': 'The last Judges'},
+        'pt': {'title': 'Sansão e Samuel', 'desc': 'Os últimos Juízes'},
+        'fr': {'title': 'Samson et Samuel', 'desc': 'Les derniers Juges'},
+        'de': {'title': 'Simson und Samuel', 'desc': 'Die letzten Richter'},
+    },
+    'saul_davide': {
+        'it': {'title': 'Saul e Davide', 'desc': 'I primi re'},
+        'es': {'title': 'Saúl y David', 'desc': 'Los primeros reyes'},
+        'en': {'title': 'Saul and David', 'desc': 'The first kings'},
+        'pt': {'title': 'Saul e Davi', 'desc': 'Os primeiros reis'},
+        'fr': {'title': 'Saül et David', 'desc': 'Les premiers rois'},
+        'de': {'title': 'Saul und David', 'desc': 'Die ersten Könige'},
+    },
+    'salomone_tempio': {
+        'it': {'title': 'Salomone', 'desc': 'Il re saggio e il Tempio'},
+        'es': {'title': 'Salomón', 'desc': 'El rey sabio y el Templo'},
+        'en': {'title': 'Solomon', 'desc': 'The wise king and the Temple'},
+        'pt': {'title': 'Salomão', 'desc': 'O rei sábio e o Templo'},
+        'fr': {'title': 'Salomon', 'desc': 'Le roi sage et le Temple'},
+        'de': {'title': 'Salomo', 'desc': 'Der weise König und der Tempel'},
+    },
+    'regni_scisma': {
+        'it': {'title': 'Lo Scisma', 'desc': 'La divisione del Regno'},
+        'es': {'title': 'El Cisma', 'desc': 'La división del Reino'},
+        'en': {'title': 'The Schism', 'desc': 'The division of the Kingdom'},
+        'pt': {'title': 'O Cisma', 'desc': 'A divisão do Reino'},
+        'fr': {'title': 'Le Schisme', 'desc': 'La division du Royaume'},
+        'de': {'title': 'Das Schisma', 'desc': 'Die Teilung des Reiches'},
+    },
+    'profeti_nord': {
+        'it': {'title': 'Elia ed Eliseo', 'desc': 'I profeti del Nord'},
+        'es': {'title': 'Elías y Eliseo', 'desc': 'Los profetas del Norte'},
+        'en': {'title': 'Elijah and Elisha', 'desc': 'The prophets of the North'},
+        'pt': {'title': 'Elias e Eliseu', 'desc': 'Os profetas do Norte'},
+        'fr': {'title': 'Élie et Élisée', 'desc': 'Les prophètes du Nord'},
+        'de': {'title': 'Elia und Elisa', 'desc': 'Die Propheten des Nordens'},
+    },
+    'profeti_isaia': {
+        'it': {'title': 'Isaia', 'desc': 'Il profeta della consolazione'},
+        'es': {'title': 'Isaías', 'desc': 'El profeta de la consolación'},
+        'en': {'title': 'Isaiah', 'desc': 'The prophet of consolation'},
+        'pt': {'title': 'Isaías', 'desc': 'O profeta da consolação'},
+        'fr': {'title': 'Isaïe', 'desc': 'Le prophète de la consolation'},
+        'de': {'title': 'Jesaja', 'desc': 'Der Prophet des Trostes'},
+    },
+    'profeti_geremia': {
+        'it': {'title': 'Geremia', 'desc': 'Il profeta delle lacrime'},
+        'es': {'title': 'Jeremías', 'desc': 'El profeta de las lágrimas'},
+        'en': {'title': 'Jeremiah', 'desc': 'The weeping prophet'},
+        'pt': {'title': 'Jeremias', 'desc': 'O profeta das lágrimas'},
+        'fr': {'title': 'Jérémie', 'desc': 'Le prophète des larmes'},
+        'de': {'title': 'Jeremia', 'desc': 'Der weinende Prophet'},
+    },
+    'profeti_ezechiele_daniele': {
+        'it': {'title': 'Ezechiele e Daniele', 'desc': 'Profeti dell\'esilio'},
+        'es': {'title': 'Ezequiel y Daniel', 'desc': 'Profetas del exilio'},
+        'en': {'title': 'Ezekiel and Daniel', 'desc': 'Prophets of the exile'},
+        'pt': {'title': 'Ezequiel e Daniel', 'desc': 'Profetas do exílio'},
+        'fr': {'title': 'Ézéchiel et Daniel', 'desc': 'Prophètes de l\'exil'},
+        'de': {'title': 'Hesekiel und Daniel', 'desc': 'Propheten des Exils'},
+    },
+    'profeti_minori': {
+        'it': {'title': 'Profeti Minori', 'desc': 'I Dodici'},
+        'es': {'title': 'Profetas Menores', 'desc': 'Los Doce'},
+        'en': {'title': 'Minor Prophets', 'desc': 'The Twelve'},
+        'pt': {'title': 'Profetas Menores', 'desc': 'Os Doze'},
+        'fr': {'title': 'Petits Prophètes', 'desc': 'Les Douze'},
+        'de': {'title': 'Kleine Propheten', 'desc': 'Die Zwölf'},
+    },
+    'esilio_ritorno': {
+        'it': {'title': 'Esilio e Ritorno', 'desc': 'La cattività babilonese'},
+        'es': {'title': 'Exilio y Regreso', 'desc': 'El cautiverio babilónico'},
+        'en': {'title': 'Exile and Return', 'desc': 'The Babylonian captivity'},
+        'pt': {'title': 'Exílio e Retorno', 'desc': 'O cativeiro babilônico'},
+        'fr': {'title': 'Exil et Retour', 'desc': 'La captivité babylonienne'},
+        'de': {'title': 'Exil und Rückkehr', 'desc': 'Die babylonische Gefangenschaft'},
+    },
+    'salmi_sapienza': {
+        'it': {'title': 'Salmi e Sapienza', 'desc': 'Poesia e riflessione'},
+        'es': {'title': 'Salmos y Sabiduría', 'desc': 'Poesía y reflexión'},
+        'en': {'title': 'Psalms and Wisdom', 'desc': 'Poetry and reflection'},
+        'pt': {'title': 'Salmos e Sabedoria', 'desc': 'Poesia e reflexão'},
+        'fr': {'title': 'Psaumes et Sagesse', 'desc': 'Poésie et réflexion'},
+        'de': {'title': 'Psalmen und Weisheit', 'desc': 'Poesie und Reflexion'},
+    },
+    'donne_bibbia': {
+        'it': {'title': 'Donne della Bibbia', 'desc': 'Figure femminili'},
+        'es': {'title': 'Mujeres de la Biblia', 'desc': 'Figuras femeninas'},
+        'en': {'title': 'Women of the Bible', 'desc': 'Female figures'},
+        'pt': {'title': 'Mulheres da Bíblia', 'desc': 'Figuras femininas'},
+        'fr': {'title': 'Femmes de la Bible', 'desc': 'Figures féminines'},
+        'de': {'title': 'Frauen der Bibel', 'desc': 'Weibliche Gestalten'},
+    },
+    'gesu_vita': {
+        'it': {'title': 'La Vita di Gesù', 'desc': 'Dall\'infanzia al ministero'},
+        'es': {'title': 'La Vida de Jesús', 'desc': 'De la infancia al ministerio'},
+        'en': {'title': 'The Life of Jesus', 'desc': 'From childhood to ministry'},
+        'pt': {'title': 'A Vida de Jesus', 'desc': 'Da infância ao ministério'},
+        'fr': {'title': 'La Vie de Jésus', 'desc': 'De l\'enfance au ministère'},
+        'de': {'title': 'Das Leben Jesu', 'desc': 'Von der Kindheit zum Dienst'},
+    },
+    'vangeli': {
+        'it': {'title': 'I Vangeli', 'desc': 'I quattro evangelisti'},
+        'es': {'title': 'Los Evangelios', 'desc': 'Los cuatro evangelistas'},
+        'en': {'title': 'The Gospels', 'desc': 'The four evangelists'},
+        'pt': {'title': 'Os Evangelhos', 'desc': 'Os quatro evangelistas'},
+        'fr': {'title': 'Les Évangiles', 'desc': 'Les quatre évangélistes'},
+        'de': {'title': 'Die Evangelien', 'desc': 'Die vier Evangelisten'},
+    },
+    'miracoli_parabole': {
+        'it': {'title': 'Miracoli e Parabole', 'desc': 'L\'insegnamento di Gesù'},
+        'es': {'title': 'Milagros y Parábolas', 'desc': 'La enseñanza de Jesús'},
+        'en': {'title': 'Miracles and Parables', 'desc': 'The teaching of Jesus'},
+        'pt': {'title': 'Milagres e Parábolas', 'desc': 'O ensino de Jesus'},
+        'fr': {'title': 'Miracles et Paraboles', 'desc': 'L\'enseignement de Jésus'},
+        'de': {'title': 'Wunder und Gleichnisse', 'desc': 'Die Lehre Jesu'},
+    },
+    'passione': {
+        'it': {'title': 'Passione e Risurrezione', 'desc': 'La Pasqua del Signore'},
+        'es': {'title': 'Pasión y Resurrección', 'desc': 'La Pascua del Señor'},
+        'en': {'title': 'Passion and Resurrection', 'desc': 'The Lord\'s Easter'},
+        'pt': {'title': 'Paixão e Ressurreição', 'desc': 'A Páscoa do Senhor'},
+        'fr': {'title': 'Passion et Résurrection', 'desc': 'La Pâques du Seigneur'},
+        'de': {'title': 'Passion und Auferstehung', 'desc': 'Ostern des Herrn'},
+    },
+    'atti_chiesa': {
+        'it': {'title': 'La Chiesa Nascente', 'desc': 'Gli Atti degli Apostoli'},
+        'es': {'title': 'La Iglesia Naciente', 'desc': 'Los Hechos de los Apóstoles'},
+        'en': {'title': 'The Early Church', 'desc': 'The Acts of the Apostles'},
+        'pt': {'title': 'A Igreja Nascente', 'desc': 'Os Atos dos Apóstolos'},
+        'fr': {'title': 'L\'Église Naissante', 'desc': 'Les Actes des Apôtres'},
+        'de': {'title': 'Die frühe Kirche', 'desc': 'Die Apostelgeschichte'},
+    },
+    'paolo': {
+        'it': {'title': 'L\'Apostolo Paolo', 'desc': 'Missioni e Lettere'},
+        'es': {'title': 'El Apóstol Pablo', 'desc': 'Misiones y Cartas'},
+        'en': {'title': 'The Apostle Paul', 'desc': 'Missions and Letters'},
+        'pt': {'title': 'O Apóstolo Paulo', 'desc': 'Missões e Cartas'},
+        'fr': {'title': 'L\'Apôtre Paul', 'desc': 'Missions et Lettres'},
+        'de': {'title': 'Der Apostel Paulus', 'desc': 'Missionen und Briefe'},
+    },
+    'apocalisse': {
+        'it': {'title': 'Apocalisse', 'desc': 'La Rivelazione'},
+        'es': {'title': 'Apocalipsis', 'desc': 'La Revelación'},
+        'en': {'title': 'Revelation', 'desc': 'The Apocalypse'},
+        'pt': {'title': 'Apocalipse', 'desc': 'A Revelação'},
+        'fr': {'title': 'Apocalypse', 'desc': 'La Révélation'},
+        'de': {'title': 'Offenbarung', 'desc': 'Die Apokalypse'},
+    },
+    'lingue_termini': {
+        'it': {'title': 'Lingue e Termini', 'desc': 'Terminologia biblica'},
+        'es': {'title': 'Lenguas y Términos', 'desc': 'Terminología bíblica'},
+        'en': {'title': 'Languages and Terms', 'desc': 'Biblical terminology'},
+        'pt': {'title': 'Línguas e Termos', 'desc': 'Terminologia bíblica'},
+        'fr': {'title': 'Langues et Termes', 'desc': 'Terminologie biblique'},
+        'de': {'title': 'Sprachen und Begriffe', 'desc': 'Biblische Terminologie'},
+    },
+    'feste_culto': {
+        'it': {'title': 'Feste e Culto', 'desc': 'Celebrazioni e liturgia'},
+        'es': {'title': 'Fiestas y Culto', 'desc': 'Celebraciones y liturgia'},
+        'en': {'title': 'Feasts and Worship', 'desc': 'Celebrations and liturgy'},
+        'pt': {'title': 'Festas e Culto', 'desc': 'Celebrações e liturgia'},
+        'fr': {'title': 'Fêtes et Culte', 'desc': 'Célébrations et liturgie'},
+        'de': {'title': 'Feste und Gottesdienst', 'desc': 'Feiern und Liturgie'},
+    },
+    'storia_geografia': {
+        'it': {'title': 'Storia e Luoghi', 'desc': 'Geografia e archeologia'},
+        'es': {'title': 'Historia y Lugares', 'desc': 'Geografía y arqueología'},
+        'en': {'title': 'History and Places', 'desc': 'Geography and archaeology'},
+        'pt': {'title': 'História e Lugares', 'desc': 'Geografia e arqueologia'},
+        'fr': {'title': 'Histoire et Lieux', 'desc': 'Géographie et archéologie'},
+        'de': {'title': 'Geschichte und Orte', 'desc': 'Geographie und Archäologie'},
+    },
+    'teologia_generale': {
+        'it': {'title': 'Teologia Biblica', 'desc': 'Concetti fondamentali'},
+        'es': {'title': 'Teología Bíblica', 'desc': 'Conceptos fundamentales'},
+        'en': {'title': 'Biblical Theology', 'desc': 'Fundamental concepts'},
+        'pt': {'title': 'Teologia Bíblica', 'desc': 'Conceitos fundamentais'},
+        'fr': {'title': 'Théologie Biblique', 'desc': 'Concepts fondamentaux'},
+        'de': {'title': 'Biblische Theologie', 'desc': 'Grundlegende Konzepte'},
+    },
+}
+
+# Cache for loaded data
+_quiz_data_cache = None
+
+def get_quiz_1000_data():
+    """Get all quiz categories data with caching"""
+    global _quiz_data_cache
+    if _quiz_data_cache is None:
+        _quiz_data_cache = load_quiz_categories()
+    return _quiz_data_cache
+
+def get_quiz_1000_topics(lang: str = 'it') -> list:
+    """Get list of quiz topics for the new 1000 questions quiz"""
+    data = get_quiz_1000_data()
+    topics = []
+    
+    for cat_id, cat_data in data.items():
+        # Get translated metadata
+        trans = CATEGORY_TRANSLATIONS.get(cat_id, {}).get(lang, {})
+        title = trans.get('title', cat_data.get('title', cat_id))
+        desc = trans.get('desc', cat_data.get('description', ''))
+        
+        topics.append({
+            'id': f"cat_{cat_id}",
+            'title': title,
+            'description': desc,
+            'questions_count': len(cat_data.get('questions', [])),
+            'difficulty': 'medium'
+        })
+    
+    # Sort by title
+    topics.sort(key=lambda x: x['title'])
+    return topics
+
+def get_quiz_1000_by_category(category_id: str, lang: str = 'it') -> dict:
+    """Get quiz questions for a specific category"""
+    data = get_quiz_1000_data()
+    
+    # Remove "cat_" prefix if present
+    cat_id = category_id.replace('cat_', '')
+    
+    if cat_id not in data:
+        return None
+    
+    cat_data = data[cat_id]
+    
+    # Get translated metadata
+    trans = CATEGORY_TRANSLATIONS.get(cat_id, {}).get(lang, {})
+    title = trans.get('title', cat_data.get('title', cat_id))
+    
+    # For now, return Italian questions (translations can be added later via AI)
+    questions = cat_data.get('questions', [])
+    
+    return {
+        'id': f"cat_{cat_id}",
+        'title': title,
+        'questions': questions[:30] if len(questions) > 30 else questions  # Limit to 30 per quiz session
+    }
