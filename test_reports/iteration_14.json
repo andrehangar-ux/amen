@@ -1,0 +1,93 @@
+{
+  "summary": "Iteration 14 testing complete: Online Users feature (heartbeat + online-users APIs), Community Quick Actions Bar, and Profile Daily Verse Notification Toggle. Backend 13/13 tests pass. Frontend features verified.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Community Online Users Section",
+        "issue": "Online users section not always visible even when API returns users - intermittent 520 server errors seen during page load",
+        "priority": "MEDIUM"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_online_users_notifications.py",
+    "/app/test_reports/pytest/pytest_iteration_14.xml"
+  ],
+  "action_items": [
+    "Investigate intermittent 520 errors that may prevent Online Users section from loading consistently"
+  ],
+  "critical_code_review_comments": [
+    "Online users section only renders when onlineUsers.length > 0 - this is correct conditional rendering",
+    "NotificationService.ts correctly handles web vs mobile notification scheduling",
+    "Daily verse notification uses AsyncStorage for persistence across sessions"
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_online_users_notifications.py"
+  ],
+  "success_rate": {
+    "backend": "100% (13/13 tests passed)",
+    "frontend": "95% - All major features working, minor intermittent issue with Online Users display"
+  },
+  "test_credentials": {
+    "email": "testbible@cibospirituale.it",
+    "password": "Test123!"
+  },
+  "seed_data_creation": "None - used existing test user",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 14 features verified. Community page has Quick Actions Bar (readBible, quiz, Diario, groups, Dizionario). Profile page has Notifications section with 'Versetto del Giorno' toggle switch. Backend heartbeat and online-users APIs working correctly.",
+  "features_verified": {
+    "api_heartbeat": {
+      "status": "PASS",
+      "details": "POST /api/user/heartbeat returns {status: 'ok'} with valid auth, 401 without auth"
+    },
+    "api_online_users": {
+      "status": "PASS",
+      "details": "GET /api/community/online-users returns online_count and users array, works without auth"
+    },
+    "community_quick_actions_bar": {
+      "status": "PASS",
+      "details": "5 quick actions visible: readBible, quiz, Diario, groups, Dizionario"
+    },
+    "community_messages": {
+      "status": "PASS",
+      "details": "Messages loading correctly, users can see and post messages"
+    },
+    "profile_notification_section": {
+      "status": "PASS",
+      "details": "Notifiche section with 'Versetto del Giorno' toggle visible in profile"
+    },
+    "notification_toggle": {
+      "status": "PASS",
+      "details": "Switch element present for daily verse notification toggle"
+    },
+    "notification_service_ts": {
+      "status": "PASS",
+      "details": "NotificationService.ts exists with scheduleDailyVerseNotification, cancelDailyVerseNotification, isNotificationEnabled methods"
+    }
+  },
+  "api_test_results": {
+    "POST /api/user/heartbeat (no auth)": "401 - Non autenticato",
+    "POST /api/user/heartbeat (with auth)": "200 - {status: 'ok'}",
+    "GET /api/community/online-users": "200 - Returns online_count and users",
+    "GET /api/community/messages (no auth)": "401 - Non autenticato",
+    "GET /api/community/messages (with auth)": "200 - Returns messages array",
+    "POST /api/community/messages (with auth)": "200 - Creates message",
+    "GET /api/quiz/topics": "200 - Returns topics",
+    "GET /api/dictionary": "200 - Returns dictionary terms",
+    "POST /api/groups (no auth)": "401 - Non autenticato",
+    "GET /api/journal (no auth)": "401 - Non autenticato",
+    "GET /api/bible/daily-verse": "200 - Returns daily verse"
+  },
+  "screenshots_taken": [
+    "/app/.screenshots/iteration14_after_login.png - Home page after login",
+    "/app/.screenshots/iteration14_community_after_login.png - Community page with messages and quick actions",
+    "/app/.screenshots/iteration14_profile_notifications.png - Profile page showing Notifiche section with Versetto del Giorno toggle"
+  ]
+}
