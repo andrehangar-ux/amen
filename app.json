@@ -2,14 +2,9 @@
   "expo": {
     "name": "Amen!",
     "slug": "amen-spiritual-app",
-    "version": "1.0.8",
+    "version": "1.1.0",
     "android": {
       "package": "com.amen.spiritualapp"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "7082a9a6-058d-4ecb-a901-a6cf335e5cfa"
-      }
     }
   }
 }
