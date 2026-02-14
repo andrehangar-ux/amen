@@ -20,36 +20,40 @@ const TAB_LABELS: Record<string, Record<string, string>> = {
 export default function TabLayout() {
   const { currentLanguage } = useLanguageStore();
   const [showTermsModal, setShowTermsModal] = useState(false);
-  const [consentChecked, setConsentChecked] = useState(false);
   const labels = TAB_LABELS[currentLanguage] || TAB_LABELS['it'];
   
-  // Check consent when tabs are mounted
+  // Check consent when tabs are mounted - runs once on mount
   useEffect(() => {
+    let mounted = true;
+    
     const checkConsentStatus = async () => {
-      if (!consentChecked) {
-        try {
-          // Small delay to ensure token is saved
-          await new Promise(resolve => setTimeout(resolve, 500));
-          
-          console.log('Checking consent status...');
-          const status = await api.getConsentStatus();
-          console.log('Consent status:', status);
-          setConsentChecked(true);
-          if (!status.accepted) {
-            console.log('Showing terms modal');
-            setShowTermsModal(true);
-          }
-        } catch (error) {
-          console.log('Error checking consent:', error);
-          // If error, show modal to be safe
-          setConsentChecked(true);
+      try {
+        // Small delay to ensure token is saved
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        console.log('[TabLayout] Checking consent status...');
+        const status = await api.getConsentStatus();
+        console.log('[TabLayout] Consent status:', status);
+        
+        if (mounted && !status.accepted) {
+          console.log('[TabLayout] Showing terms modal');
+          setShowTermsModal(true);
+        }
+      } catch (error) {
+        console.log('[TabLayout] Error checking consent:', error);
+        // If error, show modal to be safe
+        if (mounted) {
           setShowTermsModal(true);
         }
       }
     };
     
     checkConsentStatus();
-  }, [consentChecked]);
+    
+    return () => {
+      mounted = false;
+    };
+  }, []); // Empty dependency - only run once
 
   const handleTermsAccept = () => {
     setShowTermsModal(false);
