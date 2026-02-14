@@ -7,7 +7,7 @@
     "platforms": ["android", "ios", "web"],
     "extra": {
       "eas": {
-        "projectId": "85c1417c-1351-479a-bbfc-5fef554e3b67"
+        "projectId": "f9d221b0-05a0-45e5-8a13-e4e8f23c00d2"
       }
     },
     "cli": {
