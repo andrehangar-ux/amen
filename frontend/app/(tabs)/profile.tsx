@@ -13,31 +13,224 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon } from '../../src/components/Icon';
 import { router } from 'expo-router';
 import { useAuthStore } from '../../src/store/authStore';
+import { useLanguageStore } from '../../src/store/languageStore';
 import { api } from '../../src/utils/api';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
 
+// Translations for profile page
+const translations: Record<string, Record<string, string>> = {
+  it: {
+    progress: 'Il Tuo Progresso',
+    streak: 'Serie',
+    chapters: 'Capitoli',
+    entries: 'Voci',
+    readingHistory: 'Cronologia Lettura',
+    noHistory: 'Nessun capitolo letto. Inizia a leggere la Bibbia!',
+    readCount: 'Letto',
+    times: 'volte',
+    appFeatures: 'Funzionalità App',
+    quizSection: 'Sezione Quiz',
+    quizDesc: 'Metti alla prova le tue conoscenze',
+    dictionarySection: 'Dizionario Biblico',
+    dictionaryDesc: 'Esplora i termini biblici',
+    journalSection: 'Diario Spirituale',
+    journalDesc: 'Registra il tuo cammino',
+    groupsSection: 'Gruppi',
+    groupsDesc: 'Comunità di studio',
+    account: 'Account',
+    privacy: 'Privacy e Termini',
+    privacyDesc: 'GDPR, T&C, consensi',
+    logout: 'Disconnetti',
+    logoutTitle: 'Disconnetti',
+    logoutMsg: 'Vuoi uscire dal tuo account?',
+    deleteAccount: 'Elimina Account',
+    deleteTitle: 'Elimina Account',
+    deleteMsg: 'Questa azione è irreversibile. Tutti i tuoi dati saranno eliminati.',
+    cancel: 'Annulla',
+    confirm: 'Conferma',
+    version: 'Versione',
+  },
+  en: {
+    progress: 'Your Progress',
+    streak: 'Streak',
+    chapters: 'Chapters',
+    entries: 'Entries',
+    readingHistory: 'Reading History',
+    noHistory: 'No chapters read. Start reading the Bible!',
+    readCount: 'Read',
+    times: 'times',
+    appFeatures: 'App Features',
+    quizSection: 'Quiz Section',
+    quizDesc: 'Test your knowledge',
+    dictionarySection: 'Bible Dictionary',
+    dictionaryDesc: 'Explore biblical terms',
+    journalSection: 'Spiritual Journal',
+    journalDesc: 'Record your journey',
+    groupsSection: 'Groups',
+    groupsDesc: 'Study community',
+    account: 'Account',
+    privacy: 'Privacy & Terms',
+    privacyDesc: 'GDPR, T&C, consents',
+    logout: 'Log Out',
+    logoutTitle: 'Log Out',
+    logoutMsg: 'Do you want to log out?',
+    deleteAccount: 'Delete Account',
+    deleteTitle: 'Delete Account',
+    deleteMsg: 'This action is irreversible. All your data will be deleted.',
+    cancel: 'Cancel',
+    confirm: 'Confirm',
+    version: 'Version',
+  },
+  es: {
+    progress: 'Tu Progreso',
+    streak: 'Racha',
+    chapters: 'Capítulos',
+    entries: 'Entradas',
+    readingHistory: 'Historial de Lectura',
+    noHistory: 'Sin capítulos leídos. ¡Empieza a leer la Biblia!',
+    readCount: 'Leído',
+    times: 'veces',
+    appFeatures: 'Funciones de la App',
+    quizSection: 'Sección Quiz',
+    quizDesc: 'Pon a prueba tus conocimientos',
+    dictionarySection: 'Diccionario Bíblico',
+    dictionaryDesc: 'Explora términos bíblicos',
+    journalSection: 'Diario Espiritual',
+    journalDesc: 'Registra tu camino',
+    groupsSection: 'Grupos',
+    groupsDesc: 'Comunidad de estudio',
+    account: 'Cuenta',
+    privacy: 'Privacidad y Términos',
+    privacyDesc: 'RGPD, T&C, consentimientos',
+    logout: 'Cerrar Sesión',
+    logoutTitle: 'Cerrar Sesión',
+    logoutMsg: '¿Quieres cerrar sesión?',
+    deleteAccount: 'Eliminar Cuenta',
+    deleteTitle: 'Eliminar Cuenta',
+    deleteMsg: 'Esta acción es irreversible. Todos tus datos serán eliminados.',
+    cancel: 'Cancelar',
+    confirm: 'Confirmar',
+    version: 'Versión',
+  },
+  de: {
+    progress: 'Dein Fortschritt',
+    streak: 'Serie',
+    chapters: 'Kapitel',
+    entries: 'Einträge',
+    readingHistory: 'Leseverlauf',
+    noHistory: 'Keine Kapitel gelesen. Beginne mit dem Bibellesen!',
+    readCount: 'Gelesen',
+    times: 'mal',
+    appFeatures: 'App-Funktionen',
+    quizSection: 'Quiz-Bereich',
+    quizDesc: 'Teste dein Wissen',
+    dictionarySection: 'Bibel-Wörterbuch',
+    dictionaryDesc: 'Erkunde biblische Begriffe',
+    journalSection: 'Spirituelles Tagebuch',
+    journalDesc: 'Dokumentiere deinen Weg',
+    groupsSection: 'Gruppen',
+    groupsDesc: 'Studiengemeinschaft',
+    account: 'Konto',
+    privacy: 'Datenschutz & AGB',
+    privacyDesc: 'DSGVO, AGB, Einwilligungen',
+    logout: 'Abmelden',
+    logoutTitle: 'Abmelden',
+    logoutMsg: 'Möchtest du dich abmelden?',
+    deleteAccount: 'Konto löschen',
+    deleteTitle: 'Konto löschen',
+    deleteMsg: 'Diese Aktion ist irreversibel. Alle deine Daten werden gelöscht.',
+    cancel: 'Abbrechen',
+    confirm: 'Bestätigen',
+    version: 'Version',
+  },
+  fr: {
+    progress: 'Votre Progression',
+    streak: 'Série',
+    chapters: 'Chapitres',
+    entries: 'Entrées',
+    readingHistory: 'Historique de Lecture',
+    noHistory: 'Aucun chapitre lu. Commencez à lire la Bible!',
+    readCount: 'Lu',
+    times: 'fois',
+    appFeatures: 'Fonctionnalités',
+    quizSection: 'Section Quiz',
+    quizDesc: 'Testez vos connaissances',
+    dictionarySection: 'Dictionnaire Biblique',
+    dictionaryDesc: 'Explorez les termes bibliques',
+    journalSection: 'Journal Spirituel',
+    journalDesc: 'Enregistrez votre parcours',
+    groupsSection: 'Groupes',
+    groupsDesc: 'Communauté d\'étude',
+    account: 'Compte',
+    privacy: 'Confidentialité et Conditions',
+    privacyDesc: 'RGPD, CGU, consentements',
+    logout: 'Déconnexion',
+    logoutTitle: 'Déconnexion',
+    logoutMsg: 'Voulez-vous vous déconnecter?',
+    deleteAccount: 'Supprimer le Compte',
+    deleteTitle: 'Supprimer le Compte',
+    deleteMsg: 'Cette action est irréversible. Toutes vos données seront supprimées.',
+    cancel: 'Annuler',
+    confirm: 'Confirmer',
+    version: 'Version',
+  },
+  pt: {
+    progress: 'Seu Progresso',
+    streak: 'Sequência',
+    chapters: 'Capítulos',
+    entries: 'Entradas',
+    readingHistory: 'Histórico de Leitura',
+    noHistory: 'Nenhum capítulo lido. Comece a ler a Bíblia!',
+    readCount: 'Lido',
+    times: 'vezes',
+    appFeatures: 'Recursos do App',
+    quizSection: 'Seção Quiz',
+    quizDesc: 'Teste seus conhecimentos',
+    dictionarySection: 'Dicionário Bíblico',
+    dictionaryDesc: 'Explore termos bíblicos',
+    journalSection: 'Diário Espiritual',
+    journalDesc: 'Registre sua jornada',
+    groupsSection: 'Grupos',
+    groupsDesc: 'Comunidade de estudo',
+    account: 'Conta',
+    privacy: 'Privacidade e Termos',
+    privacyDesc: 'LGPD, T&C, consentimentos',
+    logout: 'Sair',
+    logoutTitle: 'Sair',
+    logoutMsg: 'Deseja sair da sua conta?',
+    deleteAccount: 'Excluir Conta',
+    deleteTitle: 'Excluir Conta',
+    deleteMsg: 'Esta ação é irreversível. Todos os seus dados serão excluídos.',
+    cancel: 'Cancelar',
+    confirm: 'Confirmar',
+    version: 'Versão',
+  },
+};
+
 // Cross-platform confirm dialog
-const showConfirm = (title: string, message: string, onConfirm: () => void) => {
+const showConfirm = (title: string, message: string, onConfirm: () => void, cancelText: string = 'Annulla', confirmText: string = 'Conferma') => {
   if (Platform.OS === 'web') {
-    // On web, use a simple confirm
     const confirmed = window.confirm(`${title}\n\n${message}`);
     if (confirmed) {
       onConfirm();
     }
   } else {
     Alert.alert(title, message, [
-      { text: 'Annulla', style: 'cancel' },
-      { text: 'Conferma', style: 'destructive', onPress: onConfirm },
+      { text: cancelText, style: 'cancel' },
+      { text: confirmText, style: 'destructive', onPress: onConfirm },
     ]);
   }
 };
 
 export default function ProfileScreen() {
   const { user, logout, setUser, setSessionToken } = useAuthStore();
+  const { currentLanguage } = useLanguageStore();
   const [progress, setProgress] = useState<any>(null);
   const [readingHistory, setReadingHistory] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
+
+  const t = (key: string) => translations[currentLanguage]?.[key] || translations['it'][key] || key;
 
   useEffect(() => {
     loadData();
