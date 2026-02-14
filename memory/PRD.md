@@ -16,54 +16,60 @@ it, en, es, de, fr, pt (6 lingue con TTS)
 
 ### Sessione Corrente (Feb 2026) - Fork 12
 
-#### ✅ FIX QUIZ LENTO (COMPLETATO)
-- [x] Caricamento parallelo topics e categories con Promise.all
-- [x] Tempo caricamento ridotto da ~5s a ~2s
-- [x] Stato loading separato per avvio quiz
-- [x] Messaggio "Caricamento quiz..." durante attesa
-
-#### ✅ FIX TTS MULTILINGUA (COMPLETATO)
-- [x] Selezione voice robusta con fallback chain
-- [x] Supporto 6 lingue: it-IT, es-ES, en-GB, de-DE, fr-FR, pt-BR
-- [x] Gestione asincrona voci Chrome
-- [x] Timeout fallback se voci non caricano
-
-#### ✅ CRONOLOGIA LETTURA (COMPLETATO)
-- [x] Nuovo endpoint `POST /api/progress/reading/chapter`
-- [x] Nuovo endpoint `GET /api/progress/reading/history`
-- [x] Salvataggio automatico capitoli letti da bible.tsx
+#### ✅ CRONOLOGIA LETTURA MULTILINGUA (COMPLETATO)
 - [x] Sezione "Cronologia Lettura" nel profilo
-- [x] Click per riprendere lettura capitolo
-- [x] Mostra conteggio letture e data
+- [x] Traduzioni complete in 6 lingue
+- [x] Click su capitolo → apre lettura biblica
+- [x] Mostra libro, capitolo, conteggio letture, data
+- [x] Endpoint `/api/progress/reading/chapter` e `/api/progress/reading/history`
 
-#### ✅ FLUIDITÀ APP (COMPLETATO)
-- [x] API response times: ~0.1-0.3s
-- [x] Caricamento parallelo dove possibile
-- [x] Ottimizzazione query MongoDB
+#### ✅ PRIVACY E TERMINI - GDPR COMPLIANCE (COMPLETATO)
+- [x] Pagina `/privacy` con documentazione legale completa
+- [x] **Termini e Condizioni (T&C)**:
+  - Licenza d'uso SaaS non esclusiva
+  - Divieto Reverse Engineering, Model Scraping, Prompt Injection
+  - Clausola risoluzione automatica
+  - Safe Harbor Clause per manleva
+  - Limitazione responsabilità
+- [x] **Privacy Policy GDPR 2026**:
+  - Titolare: Andrea Hangar (andrehangar@live.it)
+  - Modalità Ephemeris (cancellazione post-sessione)
+  - Standard C2PA per metadati crittografici
+  - Threshold originalità 15%
+- [x] **Tabella Dati Trattati**:
+  - Email, Nome, Preferenze, Hash password, Log consenso, Prompt AI
+  - Base giuridica per ogni dato (Art. 6.1.a/b/c/f)
+- [x] **Trasparenza AI** (Art. 22 GDPR / EU AI Act):
+  - Dichiarazione uso GPT-4o
+  - Limitazioni note
+- [x] **Diritti Utente** (Artt. 15-22 GDPR):
+  - Accesso, Rettifica, Cancellazione, Limitazione, Portabilità, Opposizione
+  - Procedura richiesta (30 giorni)
+- [x] **Protocollo Consenso Click-wrap**:
+  - Log timestamp, hash documento (SHA-256), IP mascherato
+  - No pre-tick (GDPR compliance)
+  - Badge "Accettato" verde dopo accettazione
+- [x] Endpoint API: `/api/consent/status`, `/api/consent/accept`, `/api/consent/withdraw`
 
 ### Sessione Precedente (Fork 11)
 
-#### ✅ TRADUZIONE ON-DEMAND QUIZ 1000 DOMANDE
-- [x] Sistema traduzione on-demand per 1000 domande
-- [x] Cache traduzioni su file JSON
-- [x] 6 lingue supportate
-
-#### ✅ STATISTICHE E CORREZIONI QUIZ
-- [x] Endpoint `/api/quiz/submit` con risultati dettagliati
-- [x] UI risultati con punteggio, feedback, correzioni
-
-#### ✅ ICONE SEZIONE QUIZ
-- [x] Componente Icon.tsx con fallback emoji
+#### ✅ FIX QUIZ, TTS, CRONOLOGIA, FLUIDITÀ
+- [x] Quiz caricamento parallelo (~2s)
+- [x] TTS migliorato con selezione voice robusta
+- [x] Cronologia lettura con click per riprendere
+- [x] API response times ~0.1-0.3s
 
 ### Sessioni Precedenti
+- Traduzione 1000 domande quiz on-demand
+- Statistiche fine quiz con correzioni
 - Quiz 1000 domande in 33 categorie
 - Login Biometrico
 - Dizionario Biblico (69 termini)
 - Sistema Preferiti e Flashcard
-- TTS multilingua con Web Speech API
 
 ## Database Collections
-- `reading_history` - Cronologia capitoli letti (NUOVO)
+- `consent_logs` - Log consensi GDPR (NUOVO)
+- `reading_history` - Cronologia capitoli letti
 - `quiz_translations_cache` - Cache traduzioni quiz
 - `dictionary_translations` - Cache traduzioni AI
 - `dictionary_favorites` - Preferiti utente
@@ -89,14 +95,18 @@ it, en, es, de, fr, pt (6 lingue con TTS)
 - `/app/backend/server.py` - API principale
 
 ### Frontend
+- `/app/frontend/app/(tabs)/profile.tsx` - Profilo con traduzioni e cronologia
+- `/app/frontend/app/privacy.tsx` - Pagina Privacy e Termini GDPR
 - `/app/frontend/app/quiz.tsx` - UI quiz ottimizzata
 - `/app/frontend/app/(tabs)/bible.tsx` - Lettore con TTS migliorato
-- `/app/frontend/app/(tabs)/profile.tsx` - Profilo con cronologia
 
 ## API Endpoints
 
 | Endpoint | Metodo | Descrizione |
 |----------|--------|-------------|
+| `/api/consent/status` | GET | Status consenso utente |
+| `/api/consent/accept` | POST | Accetta T&C con audit trail |
+| `/api/consent/withdraw` | DELETE | Revoca consenso (GDPR Art. 17) |
 | `/api/progress/reading/chapter` | POST | Salva capitolo letto |
 | `/api/progress/reading/history` | GET | Cronologia lettura |
 | `/api/quiz/categories` | GET | Lista categorie |
@@ -106,11 +116,9 @@ it, en, es, de, fr, pt (6 lingue con TTS)
 ## Credenziali Test
 - User: testbible@cibospirituale.it / Test123!
 
-## Performance
-- Quiz load: ~2s
-- Quiz start: ~3s  
-- API response: ~0.1-0.3s
-- TTS: Immediato con voci locali
+## Titolare Trattamento Dati
+- Nome: Andrea Hangar
+- Email: andrehangar@live.it
 
 ## Test Reports
-- `/app/test_reports/iteration_11.json` - 17/17 test passati
+- `/app/test_reports/iteration_12.json` - 17/17 test passati
