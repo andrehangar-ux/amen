@@ -45,28 +45,31 @@ export default function HomeScreen() {
   const [moodCheckinResult, setMoodCheckinResult] = useState<any>(null);
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
+  const [termsCheckDone, setTermsCheckDone] = useState(false);
 
-  // Check terms acceptance on mount and when user changes
+  // Check terms acceptance on mount
   useEffect(() => {
-    if (!user) return; // Don't check if not logged in
+    if (termsCheckDone) return;
     
     const checkTerms = async () => {
       try {
         const status = await api.getConsentStatus();
+        setTermsCheckDone(true);
         if (!status.accepted) {
           setShowTermsModal(true);
         }
       } catch (error) {
         console.log('Error checking consent:', error);
+        setTermsCheckDone(true);
         // Show modal on error to be safe
         setShowTermsModal(true);
       }
     };
     
     // Small delay to ensure auth is fully complete
-    const timer = setTimeout(checkTerms, 500);
+    const timer = setTimeout(checkTerms, 800);
     return () => clearTimeout(timer);
-  }, [user]); // Re-run when user changes
+  }, [termsCheckDone]);
 
   const handleTermsAccept = () => {
     setShowTermsModal(false);
