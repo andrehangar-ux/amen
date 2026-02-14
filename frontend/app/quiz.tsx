@@ -203,6 +203,16 @@ export default function QuizScreen() {
     );
   }
 
+  // Loading quiz - show overlay
+  if (loadingQuiz) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={COLORS.primary} />
+        <Text style={styles.loadingText}>{t('loadingQuiz')}</Text>
+      </View>
+    );
+  }
+
   // Show result with detailed corrections
   if (result) {
     const wrongAnswers = result.results.filter(r => !r.is_correct);
