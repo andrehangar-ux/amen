@@ -1,0 +1,98 @@
+{
+  "summary": "Iteration 13 testing complete: T&C checkbox on registration, Logout/Delete Account buttons in profile, and auto-login session persistence. All backend tests pass (11/11). Frontend features verified working correctly.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iteration_13.py",
+    "/app/test_reports/pytest/pytest_iteration_13.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "T&C checkbox implementation uses emoji icons (⬜/☑️) which is accessible but unconventional",
+    "Registration button correctly disabled via CSS opacity when T&C not accepted",
+    "Delete account endpoint properly cleans up all user data from multiple collections (GDPR compliant)"
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iteration_13.py"
+  ],
+  "success_rate": {
+    "backend": "100% (11/11 tests passed)",
+    "frontend": "100% - All features verified working"
+  },
+  "test_credentials": {
+    "email": "testbible@cibospirituale.it",
+    "password": "Test123!"
+  },
+  "seed_data_creation": "None - used existing test user",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "All iteration 13 features verified working. T&C checkbox on register page with 'Termini e Condizioni' link to /privacy. Profile page has Disconnetti (logout) and Elimina Account (delete) buttons. Session token persisted via AsyncStorage enables auto-login after refresh.",
+  "features_verified": {
+    "tc_checkbox_present": {
+      "status": "PASS",
+      "details": "Checkbox with emoji ⬜/☑️ found on /register page with text 'Accetto i Termini e Condizioni'"
+    },
+    "register_button_disabled_state": {
+      "status": "PASS",
+      "details": "Registrati button has opacity 0.5 (faded) and disabled when T&C not accepted"
+    },
+    "tc_link_navigation": {
+      "status": "PASS",
+      "details": "Clicking 'Termini e Condizioni' link navigates to /privacy page"
+    },
+    "privacy_page_content": {
+      "status": "PASS",
+      "details": "/privacy shows full T&C: DEFINIZIONI E LICENZA D'USO, DIVIETI ESPLICITI (Reverse Engineering, Model Scraping, Prompt Injection), CLAUSOLA DI RISOLUZIONE AUTOMATICA, SAFE HARBOR CLAUSE, LIMITAZIONE DI RESPONSABILITÀ"
+    },
+    "logout_button_visible": {
+      "status": "PASS",
+      "details": "'Disconnetti' button visible in Account section of profile page with red exit icon"
+    },
+    "logout_functionality": {
+      "status": "PASS",
+      "details": "Clicking Disconnetti shows confirmation dialog, then redirects to /login page"
+    },
+    "delete_account_button_visible": {
+      "status": "PASS",
+      "details": "'Elimina Account' button visible in Account section of profile page with trash icon"
+    },
+    "delete_account_api": {
+      "status": "PASS",
+      "details": "DELETE /api/auth/delete-account returns 200 and removes all user data from collections"
+    },
+    "auto_login_session_persistence": {
+      "status": "PASS",
+      "details": "After login, page refresh maintains session. User can navigate between pages without re-login"
+    },
+    "session_token_storage": {
+      "status": "PASS",
+      "details": "Session token saved to AsyncStorage and sent via Authorization header for API calls"
+    }
+  },
+  "api_test_results": {
+    "GET /api/health": "200 - healthy",
+    "POST /api/auth/login (valid)": "200 - Returns session_token and user",
+    "POST /api/auth/login (invalid)": "401 - Rejected",
+    "GET /api/auth/me (no auth)": "401 - Unauthorized",
+    "GET /api/auth/me (with auth)": "200 - Returns user",
+    "POST /api/auth/logout": "200 - Disconnesso con successo",
+    "DELETE /api/auth/delete-account (no auth)": "401 - Unauthorized",
+    "DELETE /api/auth/delete-account (with auth)": "200 - Account eliminato",
+    "POST /api/auth/register (duplicate)": "400 - Email già registrata",
+    "POST /api/auth/register + DELETE flow": "200 - Full cycle verified"
+  },
+  "screenshots_taken": [
+    "/app/.screenshots/register_page_full.png - Registration page with T&C checkbox",
+    "/app/.screenshots/tc_privacy_page.png - Privacy page after clicking T&C link",
+    "/app/.screenshots/profile_page.png - Profile page with Account section",
+    "/app/.screenshots/logout_final.png - Login page after logout",
+    "/app/.screenshots/auto_login_test.png - Profile page after refresh (session persisted)"
+  ]
+}
