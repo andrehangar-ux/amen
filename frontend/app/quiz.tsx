@@ -224,13 +224,13 @@ export default function QuizScreen() {
               <Text style={styles.resultMessage}>{scoreMessage}</Text>
               <View style={styles.resultStatsRow}>
                 <View style={styles.resultStat}>
-                  <Ionicons name="checkmark-circle" size={24} color={COLORS.success} />
+                  <Icon name="checkmark-circle" size={24} color={COLORS.success} />
                   <Text style={styles.resultStatNumber}>{result.correct_count}</Text>
                   <Text style={styles.resultStatLabel}>{t('correct')}</Text>
                 </View>
                 <View style={styles.resultStatDivider} />
                 <View style={styles.resultStat}>
-                  <Ionicons name="close-circle" size={24} color={COLORS.error} />
+                  <Icon name="close-circle" size={24} color={COLORS.error} />
                   <Text style={styles.resultStatNumber}>{result.total - result.correct_count}</Text>
                   <Text style={styles.resultStatLabel}>{t('wrong')}</Text>
                 </View>
@@ -247,7 +247,7 @@ export default function QuizScreen() {
               style={styles.showAllBtn}
               onPress={() => setShowCorrections(!showCorrections)}
             >
-              <Ionicons 
+              <Icon 
                 name={showCorrections ? "chevron-up" : "list"} 
                 size={20} 
                 color={COLORS.primary} 
@@ -264,7 +264,7 @@ export default function QuizScreen() {
                 {wrongAnswers.length > 0 && (
                   <View style={styles.answerSection}>
                     <View style={styles.sectionHeader}>
-                      <Ionicons name="close-circle" size={20} color={COLORS.error} />
+                      <Icon name="close-circle" size={20} color={COLORS.error} />
                       <Text style={styles.sectionHeaderText}>{t('wrongAnswers')} ({wrongAnswers.length})</Text>
                     </View>
                     {wrongAnswers.map((r, idx) => {
@@ -279,7 +279,7 @@ export default function QuizScreen() {
                           
                           {/* User's wrong answer */}
                           <View style={styles.answerRow}>
-                            <Ionicons name="close-circle" size={18} color={COLORS.error} />
+                            <Icon name="close-circle" size={18} color={COLORS.error} />
                             <Text style={styles.wrongAnswerLabel}>{t('yourAnswer')}: </Text>
                             <Text style={styles.wrongAnswerText}>
                               {r.user_answer >= 0 ? question.options[r.user_answer] : t('noAnswer')}
@@ -288,7 +288,7 @@ export default function QuizScreen() {
                           
                           {/* Correct answer */}
                           <View style={styles.answerRow}>
-                            <Ionicons name="checkmark-circle" size={18} color={COLORS.success} />
+                            <Icon name="checkmark-circle" size={18} color={COLORS.success} />
                             <Text style={styles.correctAnswerLabel}>{t('correctAnswer')}: </Text>
                             <Text style={styles.correctAnswerText}>
                               {question.options[r.correct_answer]}
@@ -317,7 +317,7 @@ export default function QuizScreen() {
                 {correctAnswers.length > 0 && (
                   <View style={styles.answerSection}>
                     <View style={styles.sectionHeader}>
-                      <Ionicons name="checkmark-circle" size={20} color={COLORS.success} />
+                      <Icon name="checkmark-circle" size={20} color={COLORS.success} />
                       <Text style={styles.sectionHeaderText}>{t('correctAnswers')} ({correctAnswers.length})</Text>
                     </View>
                     {correctAnswers.map((r, idx) => {
@@ -332,7 +332,7 @@ export default function QuizScreen() {
                           
                           {/* User's correct answer */}
                           <View style={styles.answerRow}>
-                            <Ionicons name="checkmark-circle" size={18} color={COLORS.success} />
+                            <Icon name="checkmark-circle" size={18} color={COLORS.success} />
                             <Text style={styles.correctAnswerLabel}>{t('yourAnswer')}: </Text>
                             <Text style={styles.correctAnswerText}>
                               {question.options[r.user_answer]}
@@ -453,7 +453,7 @@ export default function QuizScreen() {
               style={styles.navButton}
               onPress={nextQuestion}
             >
-              <Ionicons name="chevron-forward" size={24} color={COLORS.primary} />
+              <Icon name="chevron-forward" size={24} color={COLORS.primary} />
             </TouchableOpacity>
           )}
         </View>
@@ -542,7 +542,7 @@ export default function QuizScreen() {
                 styles.topicIcon,
                 selectedCategory === 'avanzato' && { backgroundColor: COLORS.accent + '15' }
               ]}>
-                <Ionicons 
+                <Icon 
                   name={selectedCategory === 'avanzato' ? "school" : "help-circle"} 
                   size={30} 
                   color={selectedCategory === 'avanzato' ? COLORS.accent : COLORS.primary} 
@@ -553,7 +553,7 @@ export default function QuizScreen() {
                 <Text style={styles.topicDescription}>{topic.description}</Text>
                 <Text style={styles.topicMeta}>{topic.questions_count} {t('questions')}</Text>
               </View>
-              <Ionicons name="chevron-forward" size={24} color={COLORS.textMuted} />
+              <Icon name="chevron-forward" size={24} color={COLORS.textMuted} />
             </TouchableOpacity>
           ))
         )}
