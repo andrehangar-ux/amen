@@ -348,5 +348,5 @@ export const api = {
       body: JSON.stringify({ receiver_id: receiverId, content }),
     }),
   getConversation: (userId: string) =>
-    api.fetch(`/api/messages/conversation/${userId}`),
+    api.fetch(`/api/messages/${userId}`),
 };
