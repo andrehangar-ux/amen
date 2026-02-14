@@ -312,15 +312,26 @@ export default function CommunityScreen() {
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.onlineUsersScroll}>
             {onlineUsers.map((onlineUser) => (
-              <View key={onlineUser.user_id} style={styles.onlineUserItem}>
-                <View style={styles.onlineUserAvatar}>
+              <TouchableOpacity 
+                key={onlineUser.user_id} 
+                style={styles.onlineUserItem}
+                onPress={() => openPrivateChat(onlineUser)}
+                disabled={onlineUser.user_id === user?.user_id}
+              >
+                <View style={[
+                  styles.onlineUserAvatar,
+                  onlineUser.user_id === user?.user_id && styles.ownUserAvatar
+                ]}>
                   <Text style={styles.onlineUserAvatarText}>{onlineUser.user_name.charAt(0).toUpperCase()}</Text>
                   <View style={styles.onlineIndicator} />
                 </View>
                 <Text style={styles.onlineUserName} numberOfLines={1}>
-                  {onlineUser.user_name.split(' ')[0]}
+                  {onlineUser.user_id === user?.user_id ? t('you') || 'Tu' : onlineUser.user_name.split(' ')[0]}
                 </Text>
-              </View>
+                {onlineUser.user_id !== user?.user_id && (
+                  <Icon name="chatbubble-outline" size={12} color={COLORS.primary} style={{ marginTop: 2 }} />
+                )}
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </View>
