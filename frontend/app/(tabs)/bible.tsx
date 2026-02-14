@@ -226,7 +226,11 @@ export default function BibleScreen() {
       const data = await api.getChapter(book, chapter, languageToUse);
       setVerses(data.verses || []);
       setView('reading');
-      await api.updateReadingProgress().catch(() => {});
+      // Save reading history and update progress
+      await Promise.all([
+        api.updateReadingProgress().catch(() => {}),
+        api.saveChapterReading(book, chapter).catch(() => {})
+      ]);
       // Load study data
       loadStudyData(book, chapter);
     } catch (error) {
