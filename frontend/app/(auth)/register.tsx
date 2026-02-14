@@ -373,4 +373,32 @@ const styles = StyleSheet.create({
     color: COLORS.text,
     fontWeight: '500',
   },
+  primaryButtonDisabled: {
+    opacity: 0.5,
+  },
+  termsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: SPACING.md,
+    paddingHorizontal: SPACING.xs,
+  },
+  checkbox: {
+    marginRight: SPACING.sm,
+  },
+  termsTextContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    flex: 1,
+  },
+  termsText: {
+    fontSize: 14,
+    color: COLORS.textLight,
+  },
+  termsLink: {
+    fontSize: 14,
+    color: COLORS.primary,
+    fontWeight: '600',
+    textDecorationLine: 'underline',
+  },
 });
