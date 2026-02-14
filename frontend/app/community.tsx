@@ -96,7 +96,7 @@ export default function CommunityScreen() {
 
   const onRefresh = async () => {
     setRefreshing(true);
-    await loadMessages();
+    await Promise.all([loadMessages(), loadOnlineUsers()]);
     setRefreshing(false);
   };
 
