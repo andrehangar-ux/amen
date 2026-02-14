@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Modal,
   View,
@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { COLORS } from '../utils/theme';
 import { useLanguageStore } from '../store/languageStore';
-import { api } from '../utils/api';
+import { useConsentStore } from '../store/consentStore';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 const TERMS_VERSION = '1.0';
