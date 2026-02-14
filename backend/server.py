@@ -3171,9 +3171,23 @@ class QuizSubmission(BaseModel):
 
 @api_router.post("/quiz/submit")
 async def submit_quiz(data: QuizSubmission, user: User = Depends(require_auth)):
-    """Submit quiz answers and get AI feedback"""
+    """Submit quiz answers and get AI feedback - supports both classic and category quizzes"""
     lang = data.language or 'it'
-    quiz = get_quiz_for_language(data.topic, lang)
+    quiz = None
+    quiz_title = ""
+    
+    # Check if it's a category quiz (new 1000 questions system)
+    if data.topic.startswith('cat_'):
+        from quiz_1000 import get_quiz_1000_by_category
+        category_quiz = get_quiz_1000_by_category(data.topic, lang)
+        if category_quiz:
+            quiz = {"questions": category_quiz["questions"], "title": category_quiz["title"]}
+            quiz_title = category_quiz["title"]
+    else:
+        # Classic quiz
+        quiz = get_quiz_for_language(data.topic, lang)
+        if quiz:
+            quiz_title = quiz.get("title", data.topic)
     
     if not quiz:
         raise HTTPException(status_code=404, detail="Quiz non trovato")
@@ -3192,20 +3206,22 @@ async def submit_quiz(data: QuizSubmission, user: User = Depends(require_auth)):
             "is_correct": is_correct,
             "correct_answer": question["correct"],
             "user_answer": user_answer,
-            "explanation": question["explanation"],
-            "verse_ref": question["verse_ref"]
+            "explanation": question.get("explanation", ""),
+            "verse_ref": question.get("verse_ref", ""),
+            "question_text": question.get("question", ""),
+            "options": question.get("options", [])
         })
     
     score = (correct_count / total) * 100 if total > 0 else 0
     
     # Language-specific feedback prompts
     feedback_prompts = {
-        "it": f"L'utente ha completato il quiz '{quiz['title']}' con un punteggio di {score:.0f}% ({correct_count}/{total} risposte corrette). Dai un feedback breve e incoraggiante in italiano.",
-        "es": f"El usuario completó el quiz '{quiz['title']}' con una puntuación del {score:.0f}% ({correct_count}/{total} respuestas correctas). Da un feedback breve y alentador en español.",
-        "en": f"The user completed the quiz '{quiz['title']}' with a score of {score:.0f}% ({correct_count}/{total} correct answers). Give brief and encouraging feedback in English.",
-        "de": f"Der Benutzer hat das Quiz '{quiz['title']}' mit {score:.0f}% ({correct_count}/{total} richtige Antworten) abgeschlossen. Gib kurzes, ermutigendes Feedback auf Deutsch.",
-        "fr": f"L'utilisateur a terminé le quiz '{quiz['title']}' avec un score de {score:.0f}% ({correct_count}/{total} bonnes réponses). Donne un feedback bref et encourageant en français.",
-        "pt": f"O usuário completou o quiz '{quiz['title']}' com pontuação de {score:.0f}% ({correct_count}/{total} respostas corretas). Dê um feedback breve e encorajador em português."
+        "it": f"L'utente ha completato il quiz '{quiz_title}' con un punteggio di {score:.0f}% ({correct_count}/{total} risposte corrette). Dai un feedback breve e incoraggiante in italiano.",
+        "es": f"El usuario completó el quiz '{quiz_title}' con una puntuación del {score:.0f}% ({correct_count}/{total} respuestas correctas). Da un feedback breve y alentador en español.",
+        "en": f"The user completed the quiz '{quiz_title}' with a score of {score:.0f}% ({correct_count}/{total} correct answers). Give brief and encouraging feedback in English.",
+        "de": f"Der Benutzer hat das Quiz '{quiz_title}' mit {score:.0f}% ({correct_count}/{total} richtige Antworten) abgeschlossen. Gib kurzes, ermutigendes Feedback auf Deutsch.",
+        "fr": f"L'utilisateur a terminé le quiz '{quiz_title}' avec un score de {score:.0f}% ({correct_count}/{total} bonnes réponses). Donne un feedback bref et encourageant en français.",
+        "pt": f"O usuário completou o quiz '{quiz_title}' com pontuação de {score:.0f}% ({correct_count}/{total} respostas corretas). Dê um feedback breve e encorajador em português."
     }
     
     # Generate AI feedback
