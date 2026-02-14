@@ -1,11 +1,14 @@
 // Amen! Theme
 export const COLORS = {
   primary: '#6B7F5B',      // Deep Sage Green
+  primaryLight: '#8FA17D', // Light Sage Green
   secondary: '#F5F3F0',    // Warm Cream
   accent: '#D4A574',       // Golden Yellow
   background: '#FAFAF8',
+  surface: '#FFFFFF',      // Surface color for cards/modals
   card: '#FFFFFF',
   text: '#2D3436',
+  textSecondary: '#636E72',
   textLight: '#636E72',
   textMuted: '#B2BEC3',
   border: '#E8E8E8',
