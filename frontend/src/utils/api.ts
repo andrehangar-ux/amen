@@ -349,4 +349,8 @@ export const api = {
     }),
   getConversation: (userId: string) =>
     api.fetch(`/api/messages/${userId}`),
+
+  // Progress & Stats
+  getReadingStats: () => api.fetch('/api/progress/stats'),
+  getBookProgress: (bookName: string) => api.fetch(`/api/progress/book/${encodeURIComponent(bookName)}`),
 };
