@@ -234,10 +234,34 @@ export default function CommunityScreen() {
           <Text style={styles.headerTitle}>{t('community')}</Text>
           <Text style={styles.headerSubtitle}>{t('connectWithBrothers')}</Text>
         </View>
-        <View style={styles.languageBadge}>
-          <Text style={styles.languageFlag}>{languages[currentLanguage]?.flag}</Text>
+        <View style={styles.onlineBadge}>
+          <View style={styles.onlineDot} />
+          <Text style={styles.onlineText}>{onlineCount}</Text>
         </View>
       </View>
+
+      {/* Online Users Section */}
+      {onlineUsers.length > 0 && (
+        <View style={styles.onlineUsersContainer}>
+          <View style={styles.onlineUsersHeader}>
+            <Icon name="radio-button-on" size={12} color="#4CAF50" />
+            <Text style={styles.onlineUsersTitle}>{t('onlineNow')}</Text>
+          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.onlineUsersScroll}>
+            {onlineUsers.map((onlineUser) => (
+              <View key={onlineUser.user_id} style={styles.onlineUserItem}>
+                <View style={styles.onlineUserAvatar}>
+                  <Text style={styles.onlineUserAvatarText}>{onlineUser.user_name.charAt(0).toUpperCase()}</Text>
+                  <View style={styles.onlineIndicator} />
+                </View>
+                <Text style={styles.onlineUserName} numberOfLines={1}>
+                  {onlineUser.user_name.split(' ')[0]}
+                </Text>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+      )}
 
       {/* Quick Actions Bar */}
       <View style={styles.quickActionsContainer}>
