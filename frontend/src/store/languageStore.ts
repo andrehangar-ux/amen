@@ -1230,6 +1230,7 @@ export const translations: Record<string, Record<string, string>> = {
     termsAndConditions: 'Conditions Générales',
     acceptTermsRequired: 'Vous devez accepter les Conditions Générales pour vous inscrire',
   },
+  de: {
     welcome: 'Willkommen',
     goodMorning: 'Guten Morgen',
     goodAfternoon: 'Guten Tag',
