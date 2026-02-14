@@ -6,7 +6,7 @@ import pytest
 import requests
 import os
 
-BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://amen-user-persist.preview.emergentagent.com')
+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://amen-community-hub.preview.emergentagent.com')
 
 # Test credentials
 TEST_EMAIL = "testbible@cibospirituale.it"

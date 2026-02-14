@@ -100,7 +100,7 @@ index be14590..e69de29 100644
 ------+import os
 ------+import time
 ------+
-------+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://amen-user-persist.preview.emergentagent.com')
+------+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://amen-community-hub.preview.emergentagent.com')
 ------+
 ------+# Test credentials
 ------+TEST_EMAIL = "testbible@cibospirituale.it"
@@ -602,7 +602,7 @@ index be14590..e69de29 100644
 -------+import requests
 -------+import os
 -------+
--------+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://amen-user-persist.preview.emergentagent.com')
+-------+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://amen-community-hub.preview.emergentagent.com')
 -------+
 -------+# Test credentials
 -------+TEST_EMAIL = "testbible@cibospirituale.it"
@@ -1050,7 +1050,7 @@ index be14590..e69de29 100644
 ---------+import os
 ---------+import uuid
 ---------+
----------+BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://amen-user-persist.preview.emergentagent.com').rstrip('/')
+---------+BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://amen-community-hub.preview.emergentagent.com').rstrip('/')
 ---------+
 ---------+class TestUserRegistration:
 ---------+    """Test user registration endpoint - main bug fix verification"""
@@ -1323,7 +1323,7 @@ index be14590..e69de29 100644
 -----------+import requests
 -----------+import os
 -----------+
------------+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://amen-user-persist.preview.emergentagent.com')
+-----------+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://amen-community-hub.preview.emergentagent.com')
 -----------+
 -----------+# Test credentials
 -----------+TEST_EMAIL = "testbible@cibospirituale.it"
