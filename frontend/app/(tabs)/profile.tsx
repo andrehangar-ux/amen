@@ -262,12 +262,40 @@ export default function ProfileScreen() {
   const [readingHistory, setReadingHistory] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
+  const [notificationEnabled, setNotificationEnabled] = useState(false);
 
   const t = (key: string) => translations[currentLanguage]?.[key] || translations['it'][key] || key;
 
   useEffect(() => {
     loadData();
+    checkNotificationStatus();
   }, []);
+
+  const checkNotificationStatus = async () => {
+    const enabled = await NotificationService.isNotificationEnabled();
+    setNotificationEnabled(enabled);
+  };
+
+  const toggleNotification = async () => {
+    if (notificationEnabled) {
+      await NotificationService.cancelDailyVerseNotification();
+      setNotificationEnabled(false);
+    } else {
+      const success = await NotificationService.scheduleDailyVerseNotification(8, 0);
+      if (success) {
+        setNotificationEnabled(true);
+        Alert.alert(
+          t('dailyVerse'),
+          t('notificationEnabled') + ' - 08:00'
+        );
+      } else {
+        Alert.alert(
+          'Errore',
+          'Impossibile attivare le notifiche. Controlla i permessi.'
+        );
+      }
+    }
+  };
 
   const loadData = async () => {
     setLoading(true);
