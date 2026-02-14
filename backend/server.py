@@ -2113,6 +2113,77 @@ async def get_reading_history(
     
     return {"history": history, "total": len(history)}
 
+@api_router.get("/progress/stats")
+async def get_reading_stats(user: User = Depends(require_auth)):
+    """Get detailed reading statistics and progress"""
+    # Get basic progress
+    progress = await db.progress.find_one({"user_id": user.user_id}, {"_id": 0})
+    if not progress:
+        progress = {
+            "reading_streak": 0,
+            "total_chapters_read": 0,
+            "total_journal_entries": 0
+        }
+    
+    # Get all reading history for detailed stats
+    all_history = await db.reading_history.find(
+        {"user_id": user.user_id},
+        {"_id": 0, "book": 1, "chapter": 1, "read_count": 1, "last_read": 1, "language": 1}
+    ).to_list(1000)
+    
+    # Calculate stats by book
+    books_progress = {}
+    total_read_count = 0
+    for entry in all_history:
+        book = entry.get("book", "Unknown")
+        if book not in books_progress:
+            books_progress[book] = {
+                "book": book,
+                "chapters_read": 0,
+                "total_reads": 0,
+                "last_read": None
+            }
+        books_progress[book]["chapters_read"] += 1
+        books_progress[book]["total_reads"] += entry.get("read_count", 1)
+        total_read_count += entry.get("read_count", 1)
+        
+        last_read = entry.get("last_read")
+        if last_read and (books_progress[book]["last_read"] is None or last_read > books_progress[book]["last_read"]):
+            books_progress[book]["last_read"] = last_read
+    
+    # Sort books by chapters read
+    sorted_books = sorted(books_progress.values(), key=lambda x: x["chapters_read"], reverse=True)
+    
+    # Get recent activity (last 7 days)
+    seven_days_ago = datetime.now(timezone.utc) - timedelta(days=7)
+    recent_reads = [h for h in all_history if h.get("last_read") and h["last_read"] >= seven_days_ago]
+    
+    # Get unique chapters read list for Bible page indicators
+    chapters_read = [{"book": h["book"], "chapter": h["chapter"]} for h in all_history]
+    
+    return {
+        "basic_stats": progress,
+        "total_unique_chapters": len(all_history),
+        "total_read_count": total_read_count,
+        "books_progress": sorted_books[:10],  # Top 10 books
+        "recent_activity_count": len(recent_reads),
+        "chapters_read": chapters_read  # List for Bible page indicators
+    }
+
+@api_router.get("/progress/book/{book_name}")
+async def get_book_progress(book_name: str, user: User = Depends(require_auth)):
+    """Get chapters read for a specific book"""
+    chapters = await db.reading_history.find(
+        {"user_id": user.user_id, "book": book_name},
+        {"_id": 0, "chapter": 1, "read_count": 1, "last_read": 1}
+    ).to_list(200)
+    
+    return {
+        "book": book_name,
+        "chapters_read": [c["chapter"] for c in chapters],
+        "details": chapters
+    }
+
 # ==================== LEGAL & CONSENT ENDPOINTS ====================
 
 import hashlib
