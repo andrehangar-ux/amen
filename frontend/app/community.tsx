@@ -11,6 +11,8 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Modal,
+  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon } from '../src/components/Icon';
@@ -40,6 +42,15 @@ interface OnlineUser {
   last_seen: string;
 }
 
+interface PrivateMessage {
+  message_id: string;
+  sender_id: string;
+  sender_name: string;
+  receiver_id: string;
+  content: string;
+  created_at: string;
+}
+
 export default function CommunityScreen() {
   const { user } = useAuthStore();
   const { currentLanguage, languages } = useLanguageStore();
@@ -51,6 +62,14 @@ export default function CommunityScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState<OnlineUser[]>([]);
   const [onlineCount, setOnlineCount] = useState(0);
+  
+  // Private message modal state
+  const [showPrivateChat, setShowPrivateChat] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<OnlineUser | null>(null);
+  const [privateMessages, setPrivateMessages] = useState<PrivateMessage[]>([]);
+  const [privateMessage, setPrivateMessage] = useState('');
+  const [loadingPrivate, setLoadingPrivate] = useState(false);
+  const [sendingPrivate, setSendingPrivate] = useState(false);
 
   const loadMessages = useCallback(async () => {
     try {
