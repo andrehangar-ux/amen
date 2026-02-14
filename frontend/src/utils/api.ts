@@ -336,4 +336,8 @@ export const api = {
   // Global Search
   globalSearch: (query: string) =>
     api.fetch(`/api/search?q=${encodeURIComponent(query)}`),
+
+  // Online Users
+  sendHeartbeat: () => api.fetch('/api/user/heartbeat', { method: 'POST' }),
+  getOnlineUsers: () => api.fetch('/api/community/online-users'),
 };
