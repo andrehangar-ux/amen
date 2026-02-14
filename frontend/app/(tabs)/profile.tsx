@@ -277,11 +277,23 @@ export default function ProfileScreen() {
       t('confirm')
     );
   };
+
+  const handleDeleteAccount = () => {
+    showConfirm(
+      t('deleteTitle'),
+      t('deleteMsg'),
+      async () => {
+        try {
+          await api.deleteAccount();
           setUser(null);
           setSessionToken(null);
           router.replace('/(auth)/login');
+        } catch (error) {
+          console.error('Delete account error:', error);
         }
-      }
+      },
+      t('cancel'),
+      t('confirm')
     );
   };
 
@@ -325,17 +337,17 @@ export default function ProfileScreen() {
           <View style={styles.statsContainer}>
             <View style={styles.statItem}>
               <Text style={styles.statValue}>{progress.reading_streak || 0}</Text>
-              <Text style={styles.statLabel}>Giorni</Text>
+              <Text style={styles.statLabel}>{t('streak')}</Text>
             </View>
             <View style={styles.statDivider} />
             <View style={styles.statItem}>
               <Text style={styles.statValue}>{progress.total_chapters_read || 0}</Text>
-              <Text style={styles.statLabel}>Capitoli</Text>
+              <Text style={styles.statLabel}>{t('chapters')}</Text>
             </View>
             <View style={styles.statDivider} />
             <View style={styles.statItem}>
               <Text style={styles.statValue}>{progress.total_journal_entries || 0}</Text>
-              <Text style={styles.statLabel}>Voci</Text>
+              <Text style={styles.statLabel}>{t('entries')}</Text>
             </View>
           </View>
         )}
@@ -345,8 +357,9 @@ export default function ProfileScreen() {
           <TouchableOpacity 
             style={styles.sectionHeaderRow}
             onPress={() => setShowHistory(!showHistory)}
+            data-testid="reading-history-toggle"
           >
-            <Text style={styles.sectionTitle}>Cronologia Lettura</Text>
+            <Text style={styles.sectionTitle}>{t('readingHistory')}</Text>
             <Icon 
               name={showHistory ? "chevron-up" : "chevron-down"} 
               size={20} 
@@ -360,7 +373,7 @@ export default function ProfileScreen() {
                 <View style={styles.emptyHistory}>
                   <Icon name="book-outline" size={40} color={COLORS.textMuted} />
                   <Text style={styles.emptyHistoryText}>
-                    Nessun capitolo letto. Inizia a leggere la Bibbia!
+                    {t('noHistory')}
                   </Text>
                 </View>
               ) : (
@@ -372,6 +385,7 @@ export default function ProfileScreen() {
                       index < readingHistory.length - 1 && styles.historyItemBorder
                     ]}
                     onPress={() => goToChapter(item.book, item.chapter)}
+                    data-testid={`history-item-${item.book}-${item.chapter}`}
                   >
                     <View style={styles.historyIcon}>
                       <Icon name="book" size={20} color={COLORS.primary} />
@@ -381,7 +395,7 @@ export default function ProfileScreen() {
                         {item.book} {item.chapter}
                       </Text>
                       <Text style={styles.historyMeta}>
-                        Letto {item.read_count || 1}x • {new Date(item.last_read).toLocaleDateString('it-IT')}
+                        {t('readCount')} {item.read_count || 1}x • {new Date(item.last_read).toLocaleDateString(currentLanguage)}
                       </Text>
                     </View>
                     <Icon name="chevron-forward" size={20} color={COLORS.textMuted} />
@@ -394,74 +408,60 @@ export default function ProfileScreen() {
 
         {/* App Features */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Funzionalità</Text>
+          <Text style={styles.sectionTitle}>{t('appFeatures')}</Text>
           <View style={styles.menuCard}>
             <MenuItem
-              icon="radio"
-              title="Radio Evangeliche"
-              subtitle="Ascolta radio da tutto il mondo"
-              onPress={() => router.push('/radio')}
-              color={COLORS.primary}
-            />
-            <MenuItem
-              icon="people"
-              title="Community"
-              subtitle="Forum e condivisione"
-              onPress={() => router.push('/community')}
-              color={COLORS.secondary}
-            />
-            <MenuItem
               icon="school"
-              title="Quiz Biblici"
-              subtitle="Metti alla prova le tue conoscenze"
+              title={t('quizSection')}
+              subtitle={t('quizDesc')}
               onPress={() => router.push('/quiz')}
               color="#4CAF50"
             />
-          </View>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Supporta il Ministero</Text>
-          <View style={styles.menuCard}>
             <MenuItem
-              icon="heart"
-              title="Fai una Donazione"
-              subtitle="Supporta Amen!"
-              onPress={() => router.push('/donate')}
-              color={COLORS.error}
+              icon="book"
+              title={t('dictionarySection')}
+              subtitle={t('dictionaryDesc')}
+              onPress={() => router.push('/dictionary')}
+              color={COLORS.primary}
+            />
+            <MenuItem
+              icon="journal"
+              title={t('journalSection')}
+              subtitle={t('journalDesc')}
+              onPress={() => router.push('/journal')}
+              color={COLORS.secondary}
+            />
+            <MenuItem
+              icon="people"
+              title={t('groupsSection')}
+              subtitle={t('groupsDesc')}
+              onPress={() => router.push('/groups')}
+              color="#9C27B0"
             />
           </View>
         </View>
 
+        {/* Account Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Account</Text>
+          <Text style={styles.sectionTitle}>{t('account')}</Text>
           <View style={styles.menuCard}>
             <MenuItem
-              icon="settings"
-              title="Impostazioni"
-              subtitle="Preferenze, lingua, notifiche"
-              onPress={() => router.push('/settings')}
-              color={COLORS.textLight}
-            />
-            <MenuItem
-              icon="help-circle"
-              title="Aiuto"
-              subtitle="FAQ, contattaci"
-              onPress={() => router.push('/faq')}
+              icon="shield-checkmark"
+              title={t('privacy')}
+              subtitle={t('privacyDesc')}
+              onPress={() => router.push('/privacy')}
               color={COLORS.primary}
             />
             <MenuItem
               icon="log-out"
-              title="Esci"
-              subtitle="Disconnetti il tuo account"
+              title={t('logout')}
               onPress={handleLogout}
               color={COLORS.error}
-              data-testid="profile-logout-button"
             />
           </View>
         </View>
 
-        <Text style={styles.version}>Amen! v1.0.0</Text>
+        <Text style={styles.version}>{t('version')}: Amen! v1.0.0</Text>
       </ScrollView>
     </SafeAreaView>
   );
