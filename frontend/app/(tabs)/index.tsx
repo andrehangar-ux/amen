@@ -301,6 +301,12 @@ export default function HomeScreen() {
         visible={showLanguageSelector}
         onClose={() => setShowLanguageSelector(false)}
       />
+      
+      {/* Terms and Conditions Modal */}
+      <TermsModal 
+        visible={showTermsModal} 
+        onAccept={handleTermsAccept} 
+      />
     </SafeAreaView>
   );
 }
