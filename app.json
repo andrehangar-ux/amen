@@ -5,6 +5,9 @@
     "version": "1.0.0",
     "sdkVersion": "54.0.0",
     "platforms": ["android", "ios", "web"],
+    "android": {
+      "package": "com.amen.app"
+    },
     "extra": {
       "eas": {
         "projectId": "e9ffaa89-f033-4cda-b391-e81071415173"
