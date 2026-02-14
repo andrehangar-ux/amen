@@ -202,10 +202,35 @@ export default function RegisterScreen() {
               </View>
             )}
 
+            {/* Terms and Conditions */}
+            <View style={styles.termsContainer}>
+              <Pressable
+                style={styles.checkbox}
+                onPress={() => setAcceptedTerms(!acceptedTerms)}
+                data-testid="terms-checkbox"
+              >
+                {acceptedTerms ? (
+                  <Icon name="checkbox" size={24} color={COLORS.primary} />
+                ) : (
+                  <Icon name="square-outline" size={24} color={COLORS.textMuted} />
+                )}
+              </Pressable>
+              <View style={styles.termsTextContainer}>
+                <Text style={styles.termsText}>
+                  {t('iAccept') || 'Accetto i'}{' '}
+                </Text>
+                <Pressable onPress={() => router.push('/privacy')}>
+                  <Text style={styles.termsLink}>
+                    {t('termsAndConditions') || 'Termini e Condizioni'}
+                  </Text>
+                </Pressable>
+              </View>
+            </View>
+
             <TouchableOpacity
-              style={styles.primaryButton}
+              style={[styles.primaryButton, !acceptedTerms && styles.primaryButtonDisabled]}
               onPress={handleRegister}
-              disabled={loading}
+              disabled={loading || !acceptedTerms}
               data-testid="register-submit-button"
             >
               {loading ? (
