@@ -991,8 +991,11 @@ export const translations: Record<string, Record<string, string>> = {
     biometricNotAvailable: 'Autenticação biométrica não disponível',
     rememberCredentials: 'Lembrar credenciais',
     usePassword: 'Usar senha',
+    // Terms and Conditions
+    iAccept: 'Aceito os',
+    termsAndConditions: 'Termos e Condições',
+    acceptTermsRequired: 'Você deve aceitar os Termos e Condições para se registrar',
   },
-  fr: {
     welcome: 'Bienvenue',
     goodMorning: 'Bonjour',
     goodAfternoon: 'Bon après-midi',
