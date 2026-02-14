@@ -1459,6 +1459,10 @@ export const translations: Record<string, Record<string, string>> = {
     biometricNotAvailable: 'Biometrische Authentifizierung nicht verfügbar',
     rememberCredentials: 'Anmeldedaten merken',
     usePassword: 'Passwort verwenden',
+    // Terms and Conditions
+    iAccept: 'Ich akzeptiere die',
+    termsAndConditions: 'Allgemeinen Geschäftsbedingungen',
+    acceptTermsRequired: 'Du musst die AGB akzeptieren, um dich zu registrieren',
   },
 };
 
