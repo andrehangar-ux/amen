@@ -21,6 +21,8 @@ import { useAuthStore } from '../../src/store/authStore';
 import { useTranslation } from '../../src/store/languageStore';
 import { BiometricService } from '../../src/services/BiometricService';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
+import { TermsModal } from '../../src/components/TermsModal';
+import { api } from '../../src/utils/api';
 
 const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL || '';
 
@@ -31,6 +33,8 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [biometricAvailable, setBiometricAvailable] = useState(false);
   const [hasSavedCredentials, setHasSavedCredentials] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
+  const [pendingNavigation, setPendingNavigation] = useState(false);
   const { login, googleLogin } = useAuthStore();
   const { t } = useTranslation();
 
@@ -52,6 +56,34 @@ export default function LoginScreen() {
     }
   };
 
+  // Check consent and navigate
+  const checkConsentAndNavigate = async () => {
+    try {
+      const status = await api.getConsentStatus();
+      if (!status.accepted) {
+        // Show terms modal before navigating
+        setPendingNavigation(true);
+        setShowTermsModal(true);
+      } else {
+        // User has accepted, navigate directly
+        router.replace('/(tabs)');
+      }
+    } catch (error) {
+      console.log('Error checking consent:', error);
+      // On error, show modal to be safe
+      setPendingNavigation(true);
+      setShowTermsModal(true);
+    }
+  };
+
+  const handleTermsAccept = () => {
+    setShowTermsModal(false);
+    if (pendingNavigation) {
+      setPendingNavigation(false);
+      router.replace('/(tabs)');
+    }
+  };
+
   const handleBiometricLogin = async () => {
     setLoading(true);
     try {
@@ -61,7 +93,7 @@ export default function LoginScreen() {
         const credentials = await BiometricService.getCredentials();
         if (credentials) {
           await login(credentials.email, credentials.password);
-          router.replace('/(tabs)');
+          await checkConsentAndNavigate();
         }
       }
     } catch (error: any) {
