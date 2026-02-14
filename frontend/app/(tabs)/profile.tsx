@@ -258,19 +258,25 @@ export default function ProfileScreen() {
 
   const handleLogout = () => {
     showConfirm(
-      'Disconnetti',
-      'Vuoi uscire dal tuo account?',
+      t('logoutTitle'),
+      t('logoutMsg'),
       async () => {
         try {
           await logout();
-          // Clear auth state explicitly
           setUser(null);
           setSessionToken(null);
-          // Force navigation to login
           router.replace('/(auth)/login');
         } catch (error) {
           console.error('Logout error:', error);
-          // Force logout anyway
+          setUser(null);
+          setSessionToken(null);
+          router.replace('/(auth)/login');
+        }
+      },
+      t('cancel'),
+      t('confirm')
+    );
+  };
           setUser(null);
           setSessionToken(null);
           router.replace('/(auth)/login');
