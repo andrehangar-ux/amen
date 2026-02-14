@@ -103,6 +103,12 @@ export const api = {
   getReadingHistory: (limit: number = 50) =>
     api.fetch(`/api/progress/reading/history?limit=${limit}`),
 
+  // Legal & Consent
+  getConsentStatus: () => api.fetch('/api/consent/status'),
+  acceptTerms: (version: string) =>
+    api.fetch(`/api/consent/accept?version=${version}`, { method: 'POST' }),
+  withdrawConsent: () => api.fetch('/api/consent/withdraw', { method: 'DELETE' }),
+
   // Account Management
   deleteAccount: () => api.fetch('/api/auth/delete-account', { method: 'DELETE' }),
 
