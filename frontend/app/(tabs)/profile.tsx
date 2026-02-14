@@ -458,6 +458,12 @@ export default function ProfileScreen() {
               onPress={handleLogout}
               color={COLORS.error}
             />
+            <MenuItem
+              icon="trash"
+              title={t('deleteAccount')}
+              onPress={handleDeleteAccount}
+              color={COLORS.error}
+            />
           </View>
         </View>
 
