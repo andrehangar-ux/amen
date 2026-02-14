@@ -286,6 +286,10 @@ export const translations: Record<string, Record<string, string>> = {
     biometricNotAvailable: 'Autenticazione biometrica non disponibile',
     rememberCredentials: 'Ricorda credenziali',
     usePassword: 'Usa password',
+    // Terms and Conditions
+    iAccept: 'Accetto i',
+    termsAndConditions: 'Termini e Condizioni',
+    acceptTermsRequired: 'Devi accettare i Termini e le Condizioni per registrarti',
   },
   es: {
     welcome: 'Bienvenido',
@@ -517,6 +521,10 @@ export const translations: Record<string, Record<string, string>> = {
     biometricNotAvailable: 'Autenticación biométrica no disponible',
     rememberCredentials: 'Recordar credenciales',
     usePassword: 'Usar contraseña',
+    // Terms and Conditions
+    iAccept: 'Acepto los',
+    termsAndConditions: 'Términos y Condiciones',
+    acceptTermsRequired: 'Debes aceptar los Términos y Condiciones para registrarte',
   },
   en: {
     welcome: 'Welcome',
@@ -748,6 +756,10 @@ export const translations: Record<string, Record<string, string>> = {
     biometricNotAvailable: 'Biometric authentication not available',
     rememberCredentials: 'Remember credentials',
     usePassword: 'Use password',
+    // Terms and Conditions
+    iAccept: 'I accept the',
+    termsAndConditions: 'Terms and Conditions',
+    acceptTermsRequired: 'You must accept the Terms and Conditions to register',
   },
   pt: {
     welcome: 'Bem-vindo',
