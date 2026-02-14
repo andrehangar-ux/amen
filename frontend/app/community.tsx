@@ -18,7 +18,7 @@ import { router } from 'expo-router';
 import { api } from '../src/utils/api';
 import { useLanguageStore, useTranslation } from '../src/store/languageStore';
 import { useAuthStore } from '../src/store/authStore';
-import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, MOODS } from '../src/utils/theme';
+import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../src/utils/theme';
 import { format } from 'date-fns';
 
 interface CommunityMessage {
@@ -34,6 +34,12 @@ interface CommunityMessage {
   created_at: string;
 }
 
+interface OnlineUser {
+  user_id: string;
+  user_name: string;
+  last_seen: string;
+}
+
 export default function CommunityScreen() {
   const { user } = useAuthStore();
   const { currentLanguage, languages } = useLanguageStore();
@@ -43,6 +49,8 @@ export default function CommunityScreen() {
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [onlineUsers, setOnlineUsers] = useState<OnlineUser[]>([]);
+  const [onlineCount, setOnlineCount] = useState(0);
 
   const loadMessages = useCallback(async () => {
     try {
