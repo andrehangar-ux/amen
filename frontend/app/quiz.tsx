@@ -183,12 +183,20 @@ export default function QuizScreen() {
     setAnswers({});
     setResult(null);
     setShowCorrections(false);
+    setIsCategoryQuiz(false);
   };
 
   // Filter topics by category (base vs advanced)
   const baseTopics = topics.filter(t => t.id !== 'studio_avanzato');
   const advancedTopics = topics.filter(t => t.id === 'studio_avanzato');
-  const filteredTopics = selectedCategory === 'base' ? baseTopics : advancedTopics;
+  
+  // Get filtered list based on selection
+  const getFilteredList = () => {
+    if (selectedCategory === 'tematici') return categories;
+    if (selectedCategory === 'classici') return baseTopics;
+    return advancedTopics;
+  };
+  const filteredTopics = getFilteredList();
 
   if (loading) {
     return (
