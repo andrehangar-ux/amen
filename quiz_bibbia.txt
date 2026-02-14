@@ -1,0 +1,1001 @@
+ID;Domanda;Opzione A;Opzione B;Opzione C;Opzione D;Corretta;Spiegazione/Fonte
+1;Cosa significa il termine greco "kanòn"?;Verità;Regola o limite;Libro sacro;Ispirazione;B;Individua l'elenco ufficiale dei testi ritenuti ispirati [1-3].
+2;In quale secolo fu introdotta la divisione in capitoli?;V sec. d.C.;X sec. d.C.;XIII sec. d.C.;XVI sec. d.C.;C;Per facilitare la lettura nelle chiese [1, 4, 5].
+3;In che anno iniziò la numerazione dei versetti?;1200;1528;1850;1947;B;Fu introdotta da Sante Pagnini per la comodità dei rimandi [1, 4, 6].
+4;Quanti libri comprende la Bibbia ebraica?;27;39;46;73;B;Corrisponde al canone palestinese [1, 7].
+5;Quanti libri comprende la Bibbia cattolica?;39;46;66;73;D;Include 46 libri dell'Antico e 27 del Nuovo Testamento [8-10].
+6;Cosa sono i libri "deuterocanonici"?;Libri falsi;Libri del secondo canone;Libri profetici;Libri perduti;B;Sette testi inclusi nella versione dei Settanta (LXX) [11-14].
+7;Qual è il materiale ricavato dalla pelle di animali?;Papiro;Ostraca;Pergamena;Carta;C;Più resistente del papiro, ma molto costoso: servivano 50-60 pecore per un codice [15-17].
+8;Dove sono stati trovati i manoscritti più antichi nel 1947?;Roma;Alessandria;Qumran;Gerusalemme;C;Hanno permesso di risalire al II sec. a.C. [18].
+9;In quale lingua è scritto quasi tutto il Nuovo Testamento?;Ebraico;Aramaico;Greco (Koinè);Latino;C;La lingua comune parlata nel Mediterraneo [9, 19, 20].
+10;Chi tradusse la Bibbia in latino (Vulgata)?;S. Agostino;S. Girolamo;S. Ambrogio;Papa Damaso;B;Tradusse dall'ebraico nel IV sec. d.C. [21-23].
+11;Qual è il significato di "Diathèke"?;Morte;Patto o Alleanza;Eredità;Libro;B;Indica il legame di fedeltà tra Dio e l'uomo [24-26].
+12;Cosa significa "Apòkryphos"?;Eretico;Falso;Tenere segreto;Perduto;C;Libri non riconosciuti nel canone dalla Chiesa [11, 27].
+13;Chi sono i "Masoreti"?;Soldati;Saggi che aggiunsero le vocali al testo;Traduttori greci;Scribi di Qumran;B;Operarono tra il VII e X sec. d.C. per fissare la pronuncia [28-30].
+14;Cosa si intende per "Inerranza" (Dei Verbum)?;Assenza di errori storici;Verità salvifica senza errore;Perfezione linguistica;Verità scientifica;B;Garantisce la verità che Dio ha voluto per la nostra salvezza [12, 31, 32].
+15;Qual è il porto fenicio legato al nome "Bibbia"?;Tiro;Sidone;Gebal (Biblo);Gaza;C;Era il centro commerciale del papiro (40 km a nord di Beirut) [19, 33, 34].
+16;Cosa significa il nome "Adam"?;Primo uomo;Umanità / fatto di terra;Amico di Dio;Re;B;Nome collettivo derivante da adamah (terra) [18, 35, 36].
+17;Cosa rappresenta l'arcobaleno dopo il Diluvio?;La pioggia;Segno dell'alleanza con Noè;Un miracolo fisico;La fine del freddo;B;Sigillo dell'alleanza perenne con ogni carne [15, 32, 37].
+18;In quale città Dio confuse le lingue?;Ninive;Babele;Gerico;Sodoma;B;Interpretata popolarmente come "confusione" [38, 39].
+19;Quanti anni aveva Abramo quando lasciò Carran?;50;75;100;120;B;Partì come ordinato dal Signore [40, 41].
+20;Qual è il segno dell'alleanza dato ad Abramo?;Il sabato;La circoncisione;Il sacrificio;L'incenso;B;Comandata come segno perenne nella carne [42-44].
+21;Cosa significa il nome "Israele"?;Dio è re;Uomo che contende con Dio;Terra promessa;Figlio di Isacco;B;Deriva da ish (uomo), sarah (contende) ed El (Dio) [45-47].
+22;Quale figlio di Giacobbe fu venduto per l'Egitto?;Giuda;Ruben;Giuseppe;Beniamino;C;Venduto dai fratelli ai mercanti [1, 48, 49].
+23;Qual è il significato di "Esodo"?;Conquista;Uscita;Leggi;Deserto;B;Dal greco éxodos, narra l'uscita dalla schiavitù [13, 50, 51].
+24;Dove apparve Dio a Mosè nel roveto ardente?;Sinai;Monte Oreb;Egitto;Madian;B;Dio rivelò qui il Suo nome "Io sono colui che sono" [29, 52, 53].
+25;Qual è la decima piaga d'Egitto?;Locuste;Tenebre;Morte dei primogeniti;Grandine;C;Colpì ogni primogenito egiziano [21, 54, 55].
+26;In quale mare annegarono gli Egiziani?;Mar Morto;Mediterraneo;Mar Rosso;Nilo;C;Le acque si divisero davanti agli Ebrei [9, 56, 57].
+27;Per quanto tempo Israele mangiò la manna?;7 anni;12 anni;40 anni;70 anni;C;Sino al loro arrivo nella terra di Canaan [58-60].
+28;Qual è il cuore della Legge nel Pentateuco?;I sacrifici;Le genealogie;I Dieci Comandamenti;Il censimento;C;Costituiscono la carta costituzionale dell'alleanza [61-64].
+29;Quale tribù è consacrata al servizio del santuario?;Giuda;Beniamino;Levi;Efraim;C;Costituisce il quinto livello dell'alleanza [65-68].
+30;Cos'è la "Legge del Taglione"?;Perdono;Limite alla vendetta;Pena di morte;Multa;B;Proporzionalità: vita per vita, ferita per ferita [69-71].
+31;Quale libro tratta della santità e del culto?;Genesi;Esodo;Levitico;Numeri;C;Contiene collezioni legislative sul rituale [72-74].
+32;Cosa commemora la Pasqua ebraica?;La Legge;Il Diluvio;La liberazione dall'Egitto;La creazione;C;Dal termine "passaggio" (pèsach) [75-77].
+33;Quanti esploratori mandò Giosuè a Gerico?;12;7;2;3;C;Raab li nascose e fu salvata [78-80].
+34;A quale età morì Giosuè?;100;110;120;80;B;Fu sepolto nel territorio di Efraim [81-83].
+35;Chi uccise Sisara con un piolo?;Debora;Giaele;Rut;Giuditta;B;Moglie di Eber il Kenita [84-86].
+36;Qual era il segreto della forza di Sansone?;I muscoli;Il voto di nazireato;La lancia;La preghiera;B;Capelli mai tagliati e astensione dal vino [62, 87, 88].
+37;Chi è considerato l'ultimo dei Giudici?;Gedeone;Sansone;Samuele;Iefte;C;Segnò il passaggio alla monarchia [66, 89, 90].
+38;Chi fu il primo re consacrato d'Israele?;Davide;Saul;Salomone;Giosia;B;Figlio di Kis, unto da Samuele [91-93].
+39;Quale città Davide rese capitale?;Hebron;Sichem;Gerusalemme;Betlemme;C;La strappò ai Gebusei (Sion) [94-96].
+40;Quale profeta denunciò il peccato di Davide?;Samuele;Natan;Gad;Elia;B;Usò la parabola della pecorella del povero [97-99].
+41;In quale anno avvenne lo scisma del Regno?;1000 a.C.;931 a.C.;722 a.C.;587 a.C.;B;Alla morte di Salomone tra Roboamo e Geroboamo [100-102].
+42;Quale re costruì il primo Tempio?;Davide;Salomone;Ezechia;Giosia;B;Sul monte Moria a Gerusalemme [103-105].
+43;Chi fu il primo re del Regno del Nord?;Roboamo;Geroboamo;Acab;Ieu;B;Scelto dalle dieci tribù settentrionali [106-108].
+44;In quale anno cadde Gerusalemme (Babilonesi)?;722 a.C.;622 a.C.;587 a.C.;538 a.C.;C;Per mano di Nabucodonosor [109-111].
+45;Quale re persiano permise il ritorno?;Dario;Serse;Ciro;Artaserse;C;Emanò l'editto nel 538 a.C. [112-114].
+46;Qual è il significato di "Vangelo"?;Legge;Buona Notizia;Storia;Visione;B;Dal greco euanghèlion [115-117].
+47;Quali sono i Vangeli sinottici?;Matteo-Giovanni;Matteo-Marco-Luca;Luca-Giovanni;Marco-Giovanni;B;Hanno uno sguardo d'insieme [118-120].
+48;Quale animale è il simbolo di Marco?;Uomo;Leone;Bue;Aquila;B;Per il grido del Battista nel deserto [121-123].
+49;Quale Vangelo presenta Gesù come "Logos"?;Matteo;Marco;Luca;Giovanni;D;Nel Prologo "In principio era il Verbo" [124-126].
+50;Chi scrisse gli Atti degli Apostoli?;Pietro;Paolo;Luca;Marco;C;Pensato come continuazione del Vangelo [127-129].
+51;Qual è l'ultimo libro dell'Antico Testamento?;Malachia;Siracide;Sapienza;Daniele;C;Scritto verso la metà del I sec. a.C. [130-132].
+52;Chi è il primo "grande profeta" che parlava con Dio "faccia a faccia"?;Elia;Samuele;Mosè;Isaia;C;Modello di ogni profezia d'Israele [133-135].
+53;Come viene diviso il libro di Isaia?;In 2 parti;In 3 parti;In 5 libri;In 12 capitoli;B;Proto, Deutero e Trito-Isaia [118, 136, 137].
+54;Chi era il segretario di Geremia?;Esdra;Neemia;Baruc;Tichico;C;Trascrisse gli oracoli del profeta [138-140].
+55;Quale profeta vide le ossa inaridite tornare in vita?;Isaia;Geremia;Ezechiele;Daniele;C;Simbolo della rinascita dopo l'esilio [141-143].
+56;In quale isola fu esiliato l'autore dell'Apocalisse?;Cipro;Creta;Patmos;Malta;C;Ricevette qui le visioni profetiche [144-146].
+57;Qual è il numero simbolico dei redenti nell'Apocalisse?;1000;12000;144000;7000;C;Pienezza del popolo di Dio (12x12x1000) [147-149].
+58;Cosa significa "Maranà-thà"?;Dio ci aiuti;Vieni, Signore!;Dio è qui;Pace a voi;B;Invocazione aramaica per il ritorno di Cristo [150-152].
+59;In che anno Alessandro Magno occupò la Palestina?;538 a.C.;63 a.C.;333 a.C.;164 a.C.;C;Inizio dell'influsso ellenistico [153-155].
+60;Chi è l'autore della Vulgata?;Agostino;Girolamo;Ambrogio;Damaso;B;Traduzione latina ufficiale del IV secolo [22, 23, 156].
+61;Cosa indica il termine "Paraclito"?;Giudice;Intercessore;Messia;Sacerdote;B;Riferito allo Spirito Santo nel Vangelo di Giovanni [157-159].
+62;Quale re di Giuda fu protagonista della riforma del 622 a.C.?;Ezechia;Giosia;Davide;Asa;B;Basata sul ritrovamento del libro della Legge [160-162].
+63;Quanti sono i Salmi nel Salterio?;100;120;150;200;C;Suddivisi in 5 libri dalla tradizione ebraica [163-165].
+64;Chi era il sommo sacerdote al tempo di Gesù?;Anna;Caifa;Erode;Pilato;B;Condannò Gesù davanti al Sinedrio [166-168].
+65;Quale città vide la morte del re Saul?;Gerusalemme;Bet-Sean;Ebron;Rama;B;Cadde sul monte Gelboe contro i Filistei [169-171].
+66;Cosa significa il nome "Emanuele"?;Dio salva;Dio con noi;Signore;Luce;B;Dalla profezia di Isaia ripresa da Matteo [172-174].
+67;Chi fu il primo martire cristiano?;Giacomo;Pietro;Stefano;Paolo;C;Lapidato a Gerusalemme per la fede [175-177].
+68;Quale mare è il più profondo della terra?;Mar Rosso;Mediterraneo;Mar Morto;Galilea;C;Dove sfocia il Giordano a -423m [178-180].
+69;Chi guidò la rivolta nel 167 a.C.?;Davide;Giosuè;Mattatia;Samuele;C;Inizio dell'epopea maccabaica [181-183].
+70;Quale Vangelo sottolinea la misericordia verso i poveri?;Matteo;Marco;Luca;Giovanni;C;Presenta Gesù come Salvatore universale [184-186].
+71;Dove avvenne la trasfigurazione di Gesù?;Sinai;Tabor;Carmelo;Nebo;B;Davanti a Pietro, Giacomo e Giovanni [187-189].
+72;Chi è il destinatario di Luca e Atti?;Teofilo;Paolo;Pietro;Giacomo;A;Eminente personaggio che doveva essere istruito [190-192].
+73;Cosa simboleggia il "Leone" per Marco?;Potenza;Ruggito del Battista;Coraggio;Regalità;B;Il deserto dove risuona la voce di Giovanni [122, 123, 193].
+74;Quale libro inizia con "Vanità delle vanità"?;Proverbi;Siracide;Qoelet;Sapienza;C;Riflessione sulla caducità umana [194-196].
+75;Qual è il "carisma più grande" per Paolo?;Profezia;Lingue;Carità;Sapienza;C;Cantato in 1 Corinzi 13 [197-199].
+76;Chi fu eletto al posto di Giuda Iscariota?;Paolo;Barnaba;Mattia;Stefano;C;Scelto per sorteggio tra i Dodici [200-202].
+77;In quale lingua è scritto il libro della Sapienza?;Ebraico;Aramaico;Greco;Latino;C;Risente della cultura ellenistica [115, 203, 204].
+78;Cosa significa "Hokmah"?;Magia;Sapienza pratica;Filosofia;Legge;B;Arte di vivere rettamente secondo Dio [205-207].
+79;Quale profeta affrontò i profeti di Baal?;Eliseo;Elia;Isaia;Michea;B;Sul monte Carmelo per la fede in Jhwh [208-210].
+80;Quanti anni rimasero gli Ebrei in Egitto?;40;70;430;100;C;Dalla discesa di Giacobbe all'Esodo [55, 211].
+81;Chi era la madre di Samuele?;Rachele;Anna;Sara;Rebecca;B; Sterile, ottenne il figlio con la preghiera [212-214].
+82;Quale segno salvò le case durante la X piaga?;Acqua;Fuoco;Sangue d'agnello;Olio;C;Sugli stipiti e sull'architrave [77, 215, 216].
+83;Chi era lo schiavo fuggiasco di Paolo?;Tichico;Onesimo;Epafra;Tito;B;Convertito in prigione e rimandato a Filemone [217-219].
+84;Quale città fu la prima capitale di Davide?;Gerusalemme;Ebron;Betlemme;Sichem;B;Vi regnò 7 anni prima di Gerusalemme [220-222].
+85;Cosa significa "Purim"?;Purificazione;Sorte;Libertà;Preghiera;B;Dalla sorte gettata da Aman nel libro di Ester [223-225].
+86;Quale re chiese il dono del "cuore docile"?;Saul;Davide;Salomone;Giosia;C;Dio gli concesse la sapienza suprema [226-228].
+87;Quanti furono i "Giudici" maggiori?;3;6;12;24;B;Inclusi Gedeone, Sansone e Debora [229, 230].
+88;In quale città morì Geremia?;Gerusalemme;Babilonia;Egitto;Roma;C;Tradizionalmente inghiottito in terra egiziana [231-233].
+89;Chi è l'unico apostolo sotto la croce in Giovanni?;Pietro;Giovanni;Andrea;Tommaso;B;Identificato come il discepolo amato [234-236].
+90;Cosa significa "Abba"?;Signore;Re;Padre;Creatore;C;Termine aramaico familiare usato da Gesù [237, 238].
+91;Quale re assiro assediò Gerusalemme nell'701?;Sargon;Sennacherib;Dario;Serse;B;Sotto il regno di Ezechia [239-241].
+92;Cosa sono i libri "Sapienziali"?;Leggi;Profezie;Riflessioni sulla vita;Storie di re;C;Giobbe, Salmi, Proverbi, ecc. [195, 242].
+93;In che secolo è nato il movimento AdP?;XVII;XVIII;XIX;XX;C;Nel 1844 da giovani gesuiti [243, 244].
+94;Qual è il tema centrale di Romani?;Circoncisione;Giustificazione per fede;Miracoli;Regno di Dio;B;L'uomo è reso giusto per la grazia [245-247].
+95;Cosa indica l'Alfa e l'Omega?;Inizio e fine;Amore;Sofferenza;Giustizia;A;Attributo di Dio e di Cristo nell'Apocalisse [248, 249].
+96;Chi scrisse il IV Vangelo?;Matteo;Marco;Luca;Giovanni;D;Presenta Gesù come Verbo incarnato [33, 244].
+97;Quale mare si divise davanti a Mosè?;Mar Morto;Mediterraneo;Mar Rosso;Galilea;C;Evento fondante della libertà d'Israele [56, 57, 250].
+98;Quante sono le piaghe d'Egitto?;3;7;10;12;C;Castighi divini per convincere il Faraone [54, 251, 252].
+99;Chi fu il successore di Elia?;Isaia;Geremia;Eliseo;Amos;C;Ne raccolse il mantello e lo spirito [210, 253].
+100;Cosa significa "Amen"?;Grazie;Pace;Certamente/Così sia;Addio;C;Formula di adesione alla parola di Dio [254, 255].
+101;Etimologia di "prophetès"?;Veggente;Portavoce di un altro;Scrittore;Eremita;B;Colui che parla in nome di Dio [256].
+102;Formula tipica profetica?;Amen;Ascolta;Così dice il Signore;Pace;C;Indica l'autorità del messaggio [257].
+103;Sviluppo della profezia?;X-II sec;X-VI sec;VIII-IV sec;XII-X sec;B;Soprattutto nel periodo monarchico [258].
+104;Protagonista del Pentateuco?;Abramo;Isacco;Giacobbe;Mosè;D;Guida d'Israele verso la libertà [134, 258].
+105;Isaia - Proto?;1-39;40-55;56-66;1-12;A;Periodo pre-esilico [137, 259].
+106;Isaia - Deutero?;1-39;40-55;56-66;24-27;B;Periodo dell'esilio [137, 260].
+107;Isaia - Trito?;1-39;40-55;56-66;34-35;C;Periodo post-esilico [137, 261].
+108;Tema del Trito-Isaia?;Babilonia;Culto e Sabato;Idoli;Guerra;B;Riedificazione del popolo dopo il ritorno [261].
+109;Patria di Geremia?;Gerusalemme;Anatòt;Betlemme;Samaria;B;Figlio di Chelkia [233, 262].
+110;Segretario di Geremia?;Safan;Esdra;Baruc;Neemia;C;Trascrisse i lamenti e oracoli [139, 140].
+111;Re che bruciò il rotolo?;Ioiachìn;Ioiakìm;Sedecìa;Ezechia;B;Rifiuto della parola divina [263].
+112;Circoncisione del cuore?;Rito fisico;Fedeltà interiore;Festa;Legge;B;Metafora di Geremia per la conversione [55, 264].
+113;Giogo di Geremia?;Vittoria;Sottomissione a Babilonia;Pace;Potere;B;Gesto simbolico per la resa [51, 265].
+114;Anno caduta Tempio?;722;587;538;63;B;Distruzione di Nabucodonosor [110, 111].
+115;Ezechiele - Nome?;Dio salva;Dio dà forza;Amico;Servo;B;Sacerdote deportato nel 597 a.C. [266].
+116;Segno sulla fronte (Ez)?;Croce;Cerchio;Tau;Stella;C;L'ultima lettera dell'alfabeto ebraico [267, 268].
+117;Ossa inaridite (Ez 37)?;Morte;Rinascita Israele;Fine;Inferno;B;Speranza dopo l'esilio [143, 269].
+118;Gesto fuga notturna (Ez)?;Capelli;Breccia nel muro;Muto;Teglia;B;Prefigurò la cattura di Sedecia [270].
+119;Sadociti?;Falsi dèi;Leviti addetti al culto;Soldati;Re;B;Discendenti di Sadoc [271].
+120;Fiume dal Tempio?;Giordano;Nilo;Presenza divina feconda;Morte;C;Visione finale di Ezechiele [272, 273].
+121;Carro di Cherubini?;Isaia;Geremia;Ezechiele;Daniele;C;Visione presso il fiume Chebar [274, 275].
+122;Zaccaria 1-8?;Greco;Post-esilico (Tempio);Pre-esilico;Persiano;B;Periodo della ricostruzione [276].
+123;Perché "Profeti minori"?;Meno santi;Libri più brevi;Più recenti;Pagani;C;Distinzione puramente materiale [277, 278].
+124;Lingua di Daniele?;Ebraico;Ebraico e Aramaico;Greco;Latino;B;Capitoli 2-7 in aramaico [279].
+125;Profeta con Zaccaria?;Osea;Aggeo;Amos;Michea;B;Scosse gli animi per il Tempio [280].
+126;Significato di Vangelo?;Codice;Buona Notizia;Leggenda;Storia;B;Riferito alla persona di Gesù [117, 281].
+127;Vangeli Sinottici?;Mt-Mc-Lc;Gv-Lc;Mc-Gv;Tutti;A;Sguardo d'insieme [70, 120].
+128;Vangelo vs Antico Testam.?;Marco;Luca;Matteo;Giovanni;C;Sottolinea il compimento delle promesse [282].
+129;Vangelo senza infanzia?;Matteo;Marco;Luca;Giovanni;B;Inizia con il ministero pubblico [283, 284].
+130;Segreto Messianico?;Setta;Gesù cela identità;Codice;Miracolo;B;Tipico di Marco [285, 286].
+131;Destinatario Teofilo?;Matteo;Marco;Luca;Giovanni;C;Significa "Amico di Dio" [191, 192].
+132;Simbolo di Marco?;Angelo;Leone;Bue;Aquila;B;Giovanni Battista nel deserto [123, 287].
+133;Parabola Buon Samaritano?;Matteo;Marco;Luca;Giovanni;C;Solo nel terzo Vangelo [288, 289].
+134;Gesù "Logos"?;Matteo;Marco;Luca;Giovanni;D;Il Verbo fatto carne [125, 290].
+135;Discorso Montagna (Mt)?;Fine;Nuova Legge/Beatitudini;Missione;Regno;B;Richiama il Sinai [291, 292].
+136;Segni in Giovanni?;3;7;12;40;B;Miracoli chiamati "opere" [293, 294].
+137;Culla Cristianesimo?;Betlemme;Nazaret;Golgota/Risurrezione;Antiochia;C;Sorgente della fede [172, 295].
+138;Primo Vangelo redatto?;Matteo;Marco;Luca;Giovanni;B;Intorno al 70 d.C. [296, 297].
+139;Simbolo di Luca?;Leone;Bue;Angelo;Aquila;B;Mansuetudine e sacrificio [298, 299].
+140;Paraclito?;Giudice;Intercessore;Dottore;Re;B;Lo Spirito Santo [159, 300].
+141;Lingua parlata da Gesù?;Ebraico;Aramaico;Greco;Latino;B;Dialetto semitico del tempo [301, 302].
+142;Apostolicità?;Età;Legame con i Dodici;Lunghezza;Lingua;B;Criterio di canonicità [303, 304].
+143;Libro dei Segni/Gloria?;Matteo;Marco;Luca;Giovanni;D;Struttura del IV Vangelo [294, 305].
+144;Autore degli Atti?;Pietro;Paolo;Luca;Marco;C;Compagno di Paolo [129, 306].
+145;Inizio missione Atti?;Pasqua;Pentecoste;Conversione Paolo;Cena;B;Dono dello Spirito [307, 308].
+146;Primo Martire (Atti)?;Giacomo;Pietro;Stefano;Andrea;C;Lapidato a Gerusalemme [177, 309].
+147;Città nome "Cristiani"?;Roma;Gerusalemme;Antiochia;Efeso;C;Missione ai pagani [310, 311].
+148;Compagno I viaggio Paolo?;Sila;Barnaba;Timoteo;Luca;B;Insieme a Cipro [312, 313].
+149;Concilio Gerusalemme?;No idoli;No circoncisione pagani;No Sabato;Solo Roma;B;Apertura universale [292, 314].
+150;Meta finale Atti?;Gerusalemme;Atene;Roma;Spagna;C;Il Vangelo al centro del mondo [315, 316].
+151;Geremia nella cisterna?;Fame;No resa a Babilonia;Idolatria;Lotta;B;Accusato di tradimento [317].
+152;Emmanuele (Mt)?;Messia;Dio con noi;Salvezza;Luce;B;Da Isaia 7 [174, 318].
+153;Mt 25 - Pecore/Capri?;Talenti;Giudizio Finale;Vignaiolo;Seminatore;A;Responsabilità verso i poveri [319, 320].
+154;Gesù svelato Messia (Mc)?;Battesimo;Trasfigurazione;Croce;Tempio;C;Riconoscimento del centurione [286, 321].
+155;Nunc Dimittis (Simeone)?;Matteo;Marco;Luca;Giovanni;C;Preghiera della sera [322, 323].
+156;Zaccheo?;Fariseo;Capo pubblicani;Pescatore;Soldato;B;Salì sul sicomoro [324, 325].
+157;Segno risurrezione (Gv)?;Pani;Cieco;Lazzaro;Cana;B;Ultimo e più grande segno [326, 327].
+158;Cana di Galilea?;Cieco;Pani;Vino alle nozze;Tempesta;C;Primo segno in Giovanni [328, 329].
+159;Apostolo incredulo?;Pietro;Gv;Tommaso;Giacomo;C;"Mio Signore e mio Dio" [330, 331].
+160;Lingua del NT?;Ebraico;Aramaico;Greco (Koinè);Latino;C;Lingua colta ma popolare [332, 333].
+161;Sette Stelle (Ap)?;Sette piaghe;Angeli delle Chiese;Tribù;Sacramenti;B;Visione inaugurale [334, 335].
+162;Bestia dal mare (Ap)?;Leone;Potere persecutore;Drago;Agnello;C;Impero ostile a Dio [336-338].
+163;Patmos?;Cipro;Creta;Patmos;Malta;C;Isola della rivelazione [145, 339].
+164;Degno di aprire i sigilli?;Mosè;Angelo;L'Agnello (Cristo);Giovanni;C;Vincitore per il sangue [340, 341].
+165;Nuova Gerusalemme?;Città di Davide;Dimora eterna di Dio;Fortezza;Sogno;B;Fine dell'Apocalisse [342, 343].
+166;Matteo - Simbolo?;Leone;Uomo/Angelo;Bue;Aquila;B;Genealogia umana [344, 345].
+167;Salvatore di tutti (Lc)?;Matteo;Luca;Marco;Giovanni;B;Dimensione universale [185, 346].
+168;Ambiente profetico?;Sinedrio;Scuola dei discepoli;Corte;Esercito;B;Trasmissione oracoli [347].
+169;Ezechiele 37?;Tempio;Ossa secche;Gog;Carro;B;Risurrezione d'Israele [143, 348].
+170;Samuele - Ruolo?;Re;Ultimo Giudice/I Profeta;Sacerdote;Generale;B;Transizione alla monarchia [89, 90].
+171;Ciro di Persia?;Messia di Dio;Nemico;Faraone;Saggio;A;Liberò gli esuli nel 538 a.C. [114, 349].
+172;Elia vs Baal?;Sinai;Carmelo;Tabor;Nebo;B;Fuoco dal cielo [210, 350].
+173;Inghiottito dal pesce?;Osea;Giona;Amos;Michea;B;Segno della risurrezione [351, 352].
+174;Apocalisse - Etimo?;Fine;Rivelazione;Distruzione;Paura;B;Svelamento [230, 353].
+175;Salvati (Ap)?;1.000;12.000;144.000;7.000;C;Pienezza simbolica [148, 149, 354].
+176;In principio era il Verbo?;Matteo;Marco;Luca;Giovanni;D;Divinità del Logos [22, 126].
+177;Morte di Geremia?;Babilonia;Egitto;Roma;Anatot;B;Inghiottito dalla terra straniera [232].
+178;Io sono la Via...?;Matteo;Marco;Luca;Giovanni;D;Autorivelazione di Gesù [294, 355].
+179;Viaggi di Paolo?;Vangelo;Atti;Apocalisse;Romani;B;Da Gerusalemme a Roma [356, 357].
+180;Sommo Sacerdote condanna?;Anna;Caifa;Erode;Pilato;B;Uno solo muoia per il popolo [27, 167, 358].
+181;V discorso Matteo?;Beatitudini;Missione;Parabole;Escatologia (fine);D;Compimento del Regno [358, 359].
+182;Fiele del pesce (Tobia)?;Veleno;Medicina occhi Tobi;Cibo;Idolo;B;Guarigione della cecità [360, 361].
+183;Virtù in 1 Pietro?;Fede;Speranza;Giustizia;Sapienza;B;Sostegno nelle prove [362-364].
+184;150 preghiere?;Proverbi;Salmi;Qoelet;Siracide;B;Lodi (Tehillim) [365, 366].
+185;Autore di Romani?;Pietro;Paolo;Giacomo;Giovanni;B;Vangelo potenza di Dio [367, 368].
+186;Isaia - Significato?;Dio con noi;Il Signore salva;Re;Profeta;B;Ministero di 40 anni [278].
+187;Tempio ideale (Ez)?;Isaia;Geremia;Ezechiele;Daniele;C;Nuova organizzazione [273, 369].
+188;Confessioni di Geremia?;3;5;7;10;B;Dramma interiore profetico [370].
+189;Maria e le donne (Lc)?;Matteo;Marco;Luca;Giovanni;C;Sensibilità verso gli ultimi [154, 371, 372].
+190;Anticristo (2 Ts)?;Atti;2 Tessalonicesi;Romani;Giacomo;B;L'uomo dell'iniquità [338, 373, 374].
+191;Successore di Eli?;Aronne;Zadok;Samuele;Natan;C;A Silo [375, 376].
+192;Riforma 622 a.C.?;Ezechia;Giosia;Davide;Salomone;B;Ritrovamento della Legge [161, 162, 377].
+193;Passaggio Mar Rosso?;Ebrei;Egiziani;Filistei;Assiri;A;Libertà dalla schiavitù [56, 57, 179].
+194;Libri del NT?;39;46;27;73;C;Unanimità cristiana [378, 379].
+195;Versetti numerati?;XIII sec;XVI sec;II sec;IV sec;B;1528 d.C. [1, 6, 380].
+196;Diathèke?;Morte;Alleanza;Eredità;Libro;B;Patto di sangue [26, 381, 382].
+197;Monte della Legge?;Sinai/Oreb;Tabor;Carmelo;Nebo;A;Cuore dell'alleanza [52, 53, 383].
+198;Biblo/Gebal?;Pergamena;Papiro;Pietra;Seta;B;Origine del nome Bibbia [34, 384, 385].
+199;Vulgata latina?;Agostino;Girolamo;Ambrogio;Damaso;B;Testo ufficiale [21-23, 386].
+200;Circoncisione?;Sabato;Abramo;Decima;Agnello;B;Segno perenne della carne [43, 44, 387].
+201;Sapienza - Definizione?;Magia;Esperienza pratica;Legge;Futuro;B;Arte di vivere [206, 207, 388].
+202;Inizio della Sapienza?;Amore;Legge;Timore del Signore;Digiuno;C;Fondamento etico [389, 390].
+203;Patrono dei Sapienti?;Davide;Salomone;Mosè;Ezechiele;B;Punto di riferimento [391].
+204;Soferenza innocente?;Proverbi;Siracide;Giobbe;Qoelet;C;Dramma di Uz [392, 393].
+205;Satana in Giobbe?;Diavolo;Accusatore/Ministro;Re;Profeta;B;Nel prologo [394, 395].
+206;Tutto è vanità?;Gloria;Qoelet;Taglione;Tempio;B;Transitorietà [195, 196, 396].
+207;Ultimo libro AT (cronol)?;Malachia;Siracide;Sapienza;Daniele;C;Metà I sec a.C. [131, 132, 397].
+208;Lingua Siracide?;Aramaico;Greco (da ebraico);Latino;Puro greco;B;Traduzione di Ben Sira [136, 398].
+209;Tehillim?;Leggi;Salmi;Profeti;Saggi;B;Significa "Lodi" [165, 366, 399].
+210;Libri del Salterio?;3;12;5;7;C;Come la Torah [164, 400, 401].
+211;Cantico per eccellenza?;Salmi;Lamentazioni;Cantico dei Cantici;Sapienza;C;Poesia amorosa [112, 402].
+212;Protagonisti Cantico?;Dio-Mosè;Innamorati;Re-Popolo;Cristo-Apostoli;B;Amore umano e divino [133, 153, 403].
+213;Sofferenza giusti (Sap)?;Peccato;Prova fedeltà;Destino;Ira;B;Maturazione del fedele [404].
+214;Raffaele - Nome?;Forza;Medicina di Dio;Chi è come Dio;Luce;B;Guaritore in Tobia [405, 406].
+215;Atto di pietà di Tobi?;Digiuno;Seppellire i morti;Preghiera;Sacrificio;B;Rischio della vita [407-409].
+216;Uccise Oloferne?;Ester;Rut;Giuditta;Debora;C;Liberò Betulia [140, 410, 411].
+217;Purim?;Legge;Liberazione via Ester;Diluvio;Canaan;B;Festa della sorte [224, 412, 413].
+218;Risurrezione (2 Mac)?;Monoteismo;Risurrezione dei morti;Sabato;Circoncisione;B;Fede dei martiri [414, 415].
+219;Miracoli in Giovanni?;Prodigi;Segni;Magie;Visioni;B;Rivelano l'identità [294, 416].
+220;I Segno (Gv)?;Cieco;Pani;Nozze di Cana;Lazzaro;C;Acqua in vino [329, 417].
+221;Andò da Gesù di notte?;Pilato;Nicodèmo;Caifa;Lazzaro;B;Capo dei Giudei [418].
+222;Acqua viva (Gv 4)?;Battesimo;Spirito Santo;Pioggia;Vino;B;Alla Samaritana [419].
+223;Nome divino in Gesù?;Pane;Vite;Io Sono;Via;C;Egò eimì [420, 421].
+224;Risorto a Betania?;Simone;Lazzaro;Tommaso;Filippo;B;Simbolo risurrezione Gesù [327, 422].
+225;Intercessore?;Logos;Paràclito;Vangelo;Testamento;B;Spirito Santo [158, 159].
+226;Sangue e acqua?;Morte;Eucaristia e Battesimo;Sofferenza;Peccato;B;Fianco di Cristo [423, 424].
+227;Confessione di Tommaso?;Grazie;Signore;Mio Signore e mio Dio;Maestro;C;NT [425-427].
+228;Fine degli Atti (città)?;Gerusalemme;Antiochia;Efeso;Roma;D;Missione compiuta [192, 315, 316].
+229;Sostituì Giuda?;Paolo;Barnaba;Mattia;Stefano;C;Sorteggio [200, 201, 428].
+230;Discesa Spirito?;Ascensione;Pentecoste;Trasfigurazione;Pasqua;B;50 giorni dopo [308, 429].
+231;Stefano diacono?;Filippo;Stefano;Nicanore;Timone;B;L'uomo del discorso [176, 177].
+232;Conversione di Saulo?;Gerico;Damasco;Tempio;Roma;B;Sulla via [430].
+233;Cornelio?;Longino;Cornelio;Giulio;Quirino;B;Centurione pagano [431].
+234;Nome "Cristiani"?;Gerusalemme;Antiochia;Roma;Corinto;B;Siria [432-434].
+235;Compagno Paolo I?;Sila;Timoteo;Barnaba;Luca;C;Antiochia-Cipro [313, 435].
+236;Nome romano di Saulo?;Pietro;Paolo;Marco;Luca;B;Dopo Cipro [436].
+237;Concilio Gerusalemme?;No Sabato;No circoncisione pagani;Solo Roma;Scomunica;B;At 15 [292, 437].
+238;Lidia?;Damaris;Prisca;Lidia;Febe;C;Filippi [438-440].
+239;Dio Ignoto?;Corinto;Atene;Efeso;Tessalonica;B;Areopago [359, 441].
+240;Governatore a Cesarea?;Pilato;Felice;Erode;Quirino;B;Due anni di prigione [442].
+241;Lettere nel NT?;13;7;21;27;C;Paoline e Cattoliche [435, 443].
+242;Ordine Lettere Paolo?;Cronologia;Lunghezza;Alfabetico;Importanza;B;Disposizione canonica [444, 445].
+243;Lettere principali?;Ts;Romani-Corinzi-Galati;Ef-Col;Tm;B;Ampie e teologiche [446, 447].
+244;Lettere pastorali?;Ef;Gal;Timoteo-Tito;Cor;C;Organizzazione [447-449].
+245;Scrisse Romani da...?;Roma;Efeso;Corinto;Gerusalemme;C;Terza visita [450].
+246;Tema di Romani?;Circoncisione;Giustificazione per fede;Fine;Miracoli;B;Grazia [246, 451].
+247;Esempio fede (Rm 4)?;Mosè;Davide;Abramo;Noè;C;Padre dei credenti [452, 453].
+248;Abbà?;Signore;Padre;Re;Creatore;B;Filiazione [188, 238].
+249;Sacrificio vivente?;Tori;Offrire se stessi;Preghiera;Digiuno;B;Culto razionale [454, 455].
+250;Colletta?;Tasse;Poveri Gerusalemme;Tempio;Pergamene;B;Solidarietà [456, 457].
+251;Perché 1 Corinzi?;Ringrazio;Risposta a divisioni;Viaggio;Soldi;B;Quesiti morali [458, 459].
+252;Carismi (1 Cor)?;Romani;Galati;1 Corinzi;Filippesi;C;Corpo di Cristo [460, 461].
+253;Via più alta?;Profezia;Lingue;Fede;Carità;D;1 Cor 13 [198, 462, 463].
+254;Glossolalia?;Traduzione;Lingue (estasi);Scrittura;Esegesi;B;Dono spirituale [464, 465].
+255;Vasi di creta?;Principi;Apostoli;Padroni;Angeli;B;2 Cor 4 [466-468].
+256;Magna charta libertà?;Romani;Galati;Efesini;Colossesi;B;Contro legalismo [286, 469].
+257;Lettere prigionia?;Rm;Ef-Fil-Col-Fm;Ts;Tm;B;In catene [447, 470, 471].
+258;Chiesa in Efesini?;Gregge;Corpo e Sposa;Vigna;Esercito;B;Unità in Cristo [472-474].
+259;Inno Kènosis?;Carità;Sapienza;Cristologico (svuotamento);Creazione;C;Fil 2 [189, 475, 476].
+260;Lettera per schiavo?;Timoteo;Tito;Filemone;Onesimo;C;Breve biglietto [218, 477, 478].
+261;Genere Ebrei?;Lettera;Omelia/Discorso;Profezia;Apocalisse;B;Restaurazione culto [447, 479].
+262;Melchisedek?;Aronne;Mosè;Re-Sacerdote eterno;Abramo;C;Anticipo di Cristo [425, 480, 481].
+263;Tesi Ebrei?;Ritorno;Superiorità sacerdozio Cristo;Circoncisione;Preghiera;B;Una volta per tutte [482, 483].
+264;Fede e Opere?;Paolo;Giovanni;Giacomo;Pietro;C;Lettera pratica [484, 485].
+265;1 Pietro - Tema?;Gioia;Speranza nelle prove;Fine;Povertà;B;Perseguitati [128, 364, 486].
+266;Dio è Amore?;Forza;Legge;Amore/Luce;Giudice;C;1 Gv [216, 323, 487].
+267;Apocalisse?;Distruzione;Fine;Rivelazione;Terremoto;C;Togliere il velo [185, 488, 489].
+268;Giovanni a...?;Cipro;Creta;Patmos;Malta;C;Confinato [339, 490, 491].
+269;Sette Chiese?;Roma;Totalità della Chiesa;Tribù;Angeli;B;Universalità [335, 492].
+270;Chi apre i sigilli?;Mosè;Angelo;L'Agnello (Cristo);Giovanni;C;Immolato [341, 493].
+271;Quattro esseri?;Stagioni;Evangelisti;Angeli;Regni;B;Trono di Dio [493, 494].
+272;144.000?;Tribù;Totalità dei redenti;Martiri;Leviti;B;Simbolo [148, 149, 495].
+273;Bestia dal mare?;Terremoto;Impero persecutore;Morte;Mare;B;Roma pagana [496, 497].
+274;Nuova Gerusalemme?;Città Davide;Dimora Dio con uomini;Fortezza;Sogno;B;Sposa [343, 498].
+275;Invocazione finale?;Aiuto;Giustizia;Vieni, Signore Gesù;Pace;C;Maranà-thà [151, 499].
+276;Papiro 52?;Vaticano;Gv 18 (125 d.C.);Vulgata;Aleppo;B; NT antico [15, 500, 501].
+277;Riferimenti AT in Gv?;56;30;22;16;D;Distribuzione Murdocca [502, 503].
+278;Libro AT più citato?;Genesi;Isaia;Salmi;Levitico;B;Nel Nuovo Testamento [503, 504].
+279;Inerranza?;Scienza;Verità salvifica;Greco;Geografia;B;Concilio Vat II [31, 505, 506].
+280;Capitoli?;I sec;XIII sec;XVI sec;IV sec;B;Uso liturgico [1, 4, 507].
+281;Versetti (1528)?;Girolamo;Erasmo;Sante Pagnini;Lutero;C;Numerazione [1, 4, 380, 508].
+282;Testamentum?;Ultima volontà;Alleanza;Legge;Codice;B;Traduzione latina [24-26].
+283;Nome "Bibbia"?;Tiro;Sidone;Gebal (Biblo);Arvad;C;Papiro [19, 33, 385].
+284;Materiale resistente?;Papiro;Pergamena;Carta;Seta;B;Pelle animale [15, 16, 509].
+285;Pecore per un codice?;10;50-60;100;200;B;Costo elevato [15, 294, 510].
+286;Codici IV secolo?;Aleppo;Sinaitico e Vaticano;Qumran;Bodmer;B;Pergamena [511].
+287;Lingua NT?;Ebraico;Aramaico;Greco (Koinè);Latino;C;Lingua comune [333, 512].
+288;Masoreti?;Settanta;Vocali al testo ebraico;Nemici;Scribi;B;Fissazione [30, 329].
+289;Apòkryphos?;Falso;Nascosto/Segreto;Eretico;Perduto;B;Non canonico [11, 27].
+290;Apostolicità?;Liturgico;Ortodossia;Legame con Apostoli;Universalità;C;Criterio [303, 304].
+291;Girolamo (Vulgata)?;Ebraico;Greco;Ebraico in Latino;Aramaico;C;IV sec [21-23].
+292;70 d.C.?;63 a.C.;135 d.C.;70 d.C.;313 d.C.;C;Distruzione Tempio [229, 513, 514].
+293;Autore Ebrei?;Paolo;Pietro;Ignoto;Luca;C;Stile alessandrino [235, 447, 515].
+294;Rivolta 66-70 d.C.?;Atti;Luca;Nessuno;Apocalisse;C;Sfondo storico [229, 516].
+295;Naufragio Paolo?;Cipro;Creta;Malta;Rodi;C;Verso Roma [517, 518].
+296;Compagno Paolo II?;Barnaba;Sila;Marco;Giacomo;B;Dopo scisma [519, 520].
+297;Sede di Giovanni?;Gerusalemme;Roma;Efeso;Antiochia;C;Tradizione [521, 522].
+298;Sinottici?;Latino;Sguardo d'insieme;Giudei;Anonimi;B;Similitudini [119, 120, 359].
+299;Maranà-thà?;Dio ci aiuti;Vieni, Signore!;Qui;Pace;B;NT [151, 152, 523].
+300;Voci Proverbi/Daniele?;Ravasi;Giuseppe Bernini;Murdocca;Ricciotti;B;Ed. San Paolo [524, 525].
+301;Bibbia esente errore?;Scienza;Verità salvifica;Cronologia;Geografia;B;Inerranza DV [505, 506, 526].
+302;597 a.C.?;722;587;597;538;C;Prima deportazione [527, 528].
+303;Autore Luca (San Paolo)?;Ghidelli;Martini;Segalla;Sisti;A;Edizione [525, 529, 530].
+304;qadôsh?;Puro;Perfetto;Separato;Divino;C;Santità ebraica [531-533].
+305;Biblo porto?;Tiro;Gebal (Biblo);Sidone;Arvad;B;Papiro [34, 534, 535].
+306;Lingua AT?;Greco;Latino;Ebraico;Aramaico;C;Testo originale [536].
+307;Opera Deuteronomistica?;Wellhausen;Martin Noth;De Wette;Origene;B;Gs-2 Re [344, 537].
+308;333 a.C.?;538;63;333;164;C;Alessandro Magno [155, 538].
+309;Sedecìa deportato?;Ioiachìn;Ioiakìm;Sedecìa;Ezechia;C;Ultimo Re [539, 540].
+310;Diatesseron?;Commento;Sintesi 4 Vangeli;Critica;Traduzione;B;Taziano [122, 541, 542].
+311;Visione carro (Chebar)?;Isaia;Geremia;Ezechiele;Daniele;C;593 a.C. [56, 275, 543].
+312;Baruc?;Esdra;Neemia;Baruc;Tichico;C;Segretario Geremia [138, 139, 544].
+313;P52?;Pergamena;Pietra;Papiro;Carta;C;Giovanni (125 d.C.) [501, 545, 546].
+314;Libri Deuterocanonici?;5;7;10;12;B;Solo cattolici [11, 14, 547].
+315;Rimozione negromanti?;Davide;Salomone;Saul;Giosia;C;Poi consultata [424, 548].
+316;Editto 538 a.C.?;Dario;Serse;Ciro;Artaserse;C;Ritorno [113, 114, 549].
+317;Uccise Sisara piolo?;Debora;Rut;Giaele;Giuditta;C;Giudici [86, 550, 551].
+318;Tema Levitico?;Conquista;Purità e santità;Deserto;Creazione;B;Culto [73, 74, 426].
+319;Giosia riforma?;Ezechia;Giosia;Davide;Asa;B;Libro Legge [162, 377, 552].
+320;Apocalisse a...?;Cipro;Creta;Patmos;Malta;C;Giovanni [339, 491, 553].
+321;Mattia?;Paolo;Barnaba;Mattia;Stefano;C;Post Giuda [201, 202].
+322;Apokàlypsis?;Euanghèlion;Rivelazione;Diathèke;Kanòn;B;Svelamento [353, 357, 554].
+323;63 a.C.?;164;333;63;70;C;Pompeo [45, 192, 555].
+324;Tre parti di Isaia?;Geremia;Ezechiele;Isaia;Zaccaria;C;Redazione [137, 437].
+325;Quanti Salmi?;100;120;150;200;C;Tehillim [163, 165, 399].
+326;Tutto è vanità?;Proverbi;Sapienza;Qoelet;Giobbe;C;Finitudine [196, 429].
+327;Vulgata?;Agostino;Ambrogio;Girolamo;Damaso;C;Latino [22, 23, 428].
+328;Salvatore di tutti (Lc)?;Matteo;Marco;Luca;Giovanni;C;Misericordia [185, 186].
+329;Antiochia - Nome?;Gerusalemme;Roma;Antiochia;Efeso;C;Cristiani [433, 434, 556].
+330;Emanuele?;Dio forte;Dio con noi;Salva;Luce;B;Mt 1 [173, 174].
+331;Eli?;Aronne;Eli;Zadok;Caifa;B;Sacerdote di Silo [433, 557].
+332;Donna moabita?;Ester;Giuditta;Rut;Debora;C;Bisnonna Davide [439, 558, 559].
+333;Monte Decalogo?;Tabor;Carmelo;Sinai;Nebo;C;Mosaica [53, 441, 560].
+334;Maccabei - Mattatia?;Davide;Giosuè;Mattatia;Simone;C;167 a.C. [182, 183, 561].
+335;Ordine Re?;Davide-Saul;Saul-Davide-Salomone;Sal-Dav;Saul-Sal-Dav;B;Storia [562].
+336;Euanghèlion?;Legge;Buona notizia;Visione;Codice;B;Lieto annuncio [117, 518].
+337;Ossa inaridite?;Isaia;Geremia;Ezechiele;Daniele;C;Ez 37 [142, 143, 435].
+338;Libri cattolici?;66;73;39;27;B;Bibbia [9, 10, 445, 563].
+339;Precursore?;Mosè;Elia;Giovanni Battista;Giuseppe;C;Voce [122, 193, 447].
+340;Mar Rosso?;Mar Morto;Mediterraneo;Mar Rosso;Galilea;C;Esodo [57, 368, 564].
+341;70 d.C. Tito?;63 a.C.;135 d.C.;70 d.C.;313 d.C.;C;Distruzione [229, 246, 514].
+342;Legame Apostoli?;Liturgico;Ortodossia;Apostolicità;Universalità;C;NT [303, 304, 565].
+343;Autore Atti?;Paolo;Pietro;Luca;Giovanni;C;III Vangelo [129, 202, 566].
+344;Isaia più citato?;Genesi;Isaia;Salmi;Levitico;B;In NT [503, 567].
+345;Giosuè - Etimo?;Dio forte;Jhwh salva;Pace;Nun;B;Salvezza [455, 568, 569].
+346;Capitoli divisione?;II sec;XIII sec;XVI sec;IV sec;B;Medioevo [1, 570].
+347;La più grande?;Fede;Speranza;Carità;Sapienza;C;1 Cor 13 [199, 571, 572].
+348;Stefano protomartire?;Giacomo;Pietro;Stefano;Paolo;C;Atti [177, 573].
+349;Bestia dal mare?;Leone;Bestia mare;Agnello;Aquila;B;Potere [337, 338, 574].
+350;40 anni?;7;12;40;70;C;Deserto [59, 60, 459].
+351;Circoncisione Abramo?;Arco;Sabato;Circoncisione;Tavole;C;Segno [44, 575].
+352;Agnello sigilli?;Mosè;Angelo;L'Agnello;Giovanni;C;Apocalisse [331, 576, 577].
+353;Lingua di Gesù?;Ebraico;Aramaico;Greco;Latino;B;Palestina [19, 301, 302].
+354;Capitale di Davide?;Sichem;Gerusalemme;Hebron;Samaria;B;Sion [95, 96, 578].
+355;Autore Romani?;Pietro;Giacomo;Paolo;Luca;C;Giustificazione [368, 579].
+356;Israele lotta?;Abramo;Isacco;Giacobbe;Giuseppe;C;Giacobbe [46, 461, 580].
+357;Pentateuco?;Cinque leggi;Cinque rotoli;Storie;Fratelli;B;Etimo [8, 581, 582].
+358;Buon Samaritano (solo)?;Matteo;Marco;Luca;Giovanni;C;Luca [288, 289].
+359;Morte di Saul?;Gerusalemme;Bet-Sean (Gelboe);Ebron;Rama;B;Caduta [171, 583].
+360;Elia vs Baal?;Eliseo;Elia;Isaia;Amos;B;Carmelo [209, 210].
+361;587 a.C.?;722;587;538;63;B;Nabucodonosor [111, 584].
+362;Tommaso?;Pietro;Giovanni;Tommaso;Andrea;C;Signore e Dio [426, 585, 586].
+363;Isacco sacrificio?;Esodo;Levitico;Genesi;Numeri;C;Moria [256, 457, 587].
+364;Apocalisse autore?;Paolo;Luca;Giovanni;Pietro;C;Patmos [588, 589].
+365;Arcobaleno?;Stella;Arcobaleno;Nube;Sole;B;Noè [32, 37, 590].
+366;Madre di Gesù?;Elisabetta;Anna;Maria;Sara;C;Vangeli [467].
+367;Salomone sapienza?;Saul;Davide;Salomone;Ezechia;B;Cuore docile [228, 591].
+368;Adam etimo?;Primo;Umanità (terra);Amico;Re;B;Nome [35, 592, 593].
+369;Gv - Logos?;Matteo;Marco;Luca;Giovanni;D;Prologo [125, 126].
+370;Sette giri Gerico?;Ai;Gerico;Gabaon;Hazor;B;Trombe [594, 595].
+371;Successore Mosè?;Aronne;Caleb;Giosuè;Samuele;C;Giosuè [469, 596].
+372;Pergamena?;Papiro;Pergamena;Ostraca;Legno;B;Pelle [509, 597, 598].
+373;Versetti numerati?;XIII;XVI (1528);II;IV;B;Sante Pagnini [6, 599].
+374;Nuova alleanza cuore?;Isaia;Geremia;Ezechiele;Daniele;B;Ger 31 [600, 601].
+375;Autore Ebrei?;Paolo;Pietro;Ignoto;Luca;C;Moderni [235, 602].
+376;Tribù senza terra?;Giuda;Beniamino;Levi;Efraim;C;Sacerdoti [603, 604].
+377;Testamentum?;Legge;Alleanza;Eredità;Libro;B;Patto [382, 605].
+378;I viaggio Paolo?;Sila;Barnaba;Timoteo;Luca;B;Barnaba [435, 473].
+379;Totalità redenti?;1.000;12.000;144.000;7.000;C;Eletti [149, 606].
+380;Pesce grande?;Osea;Giona;Amos;Michea;B;Giona [352, 607].
+381;Caifa condanna?;Anna;Caifa;Erode;Pilato;B;Uno per tutti [167, 168].
+382;Dieci Comandamenti?;Genesi;Esodo;Levitico;Numeri;B;Tavole [64, 608, 609].
+383;Areopago?;Corinto;Atene;Filippi;Tessalonica;B;Dio Ignoto [441, 610].
+384;Salomone Tempio?;Saul;Davide;Salomone;Giosia;C;Costruzione [105, 611].
+385;Samuele Giudice?;Gedeone;Samuele;Saul;Davide;B;Transizione [90].
+386;Mar Morto?;Rosso;Mediterraneo;Mar Morto;Galilea;C;-423m [178, 180].
+387;Deuterocanonici?;Falsi;Perduti;Secondo canone;Profetici;C;LXX [11, 14, 612].
+388;Servo sofferente?;Geremia;Ezechiele;Isaia;Daniele;C;Carmi [613, 614].
+389;Gv - No parabole?;Matteo;Marco;Luca;Giovanni;D;Segni/Discorsi [16, 471].
+390;Circoncisione distintiva?;Arco;Sabato;Circoncisione;Pane;C;Popolo [44, 615].
+391;931 a.C. Scisma?;XII;XI;X (931 a.C.);VI;C;Monarchia [102, 476].
+392;Chelkia trova libro?;Geremia;Chelkia;Esdra;Safan;B;Giosia [616, 617].
+393;1 Pietro virtù?;Fede;Speranza;Carità;Prudenza;B;Sostegno [364, 618].
+394;Malta naufragio?;Cipro;Creta;Malta;Rodi;C;Paolo [517, 518, 619].
+395;Vulgata autore?;Agostino;Girolamo;Ambrogio;Damaso;B;Latino [21, 23, 620].
+396;Giovanni - Sigilli?;Isaia;Geremia;Ezechiele;Giovanni;D;Apocalisse [331, 493, 621].
+397;Biblía?;Dio;Sacro;I Libri;Legge;C;Significato [34, 45, 622].
+398;Ciro sconfitta Babilonia?;Dario;Ciro;Serse;Artaserse;B;539 a.C. [623, 624].
+399;Marco - No infanzia?;Matteo;Marco;Luca;Giovanni;B;Predicazione [283, 284, 286].
+400;Lidia convertita?;Damaris;Lidia;Prisca;Febe;B;Europa [439, 440, 625].
+401;V livello Alleanza?;Abramo;Sinai;Tribù di Levi;Davide;C;Murdocca [66, 68, 626].
+402;VI livello Alleanza?;Arco;Circoncisione;Trono/Sacerdozio;Tavole;C;Davide [91, 627].
+403;VII gradino Alleanza?;Ritorno;Tempio;Messia re e sacerdote;Fine;C;Culmine [91, 520, 628].
+404;Cronache - Storia?;Militare;Storia sacra (tesi);Biografia;Scienza;B;Prospettiva [103, 629, 630].
+405;Rimunerazione?;Ribellione;Premio/Castigo;Democrazia;Caso;B;Principio [103, 631].
+406;Israele etimo?;Dio grande;Uomo contende con Dio;Terra;Amico;B;Giacobbe [46, 47, 632].
+407;Efraim e Manasse?;12;2;3;Nessuno;B;Figli di Giuseppe [633-635].
+408;Giuseppe trattiene...?;Ruben;Giuda;Simeone;Beniamino;C;Prova [636-638].
+409;Monte Moria?;Sinai;Tabor;Moria;Carmelo;C;Isacco [256, 587, 639].
+410;Angelo ferma Abramo?;Pioggia;Angelo del Signore;Soldati;Pianto;B;Fede [640, 641].
+411;Segni Mosè?;Bastone/Mano/Acqua;Fuoco;Sogni;Pane;A;Incredulità [642, 643].
+412;Manna - Tempo?;7 anni;12 anni;40 anni;100 anni;C;Sostentamento [59, 644, 645].
+413;Sinai sinonimo?;Hermon;Oreb;Pisga;Ebal;B;Monte di Dio [52, 53, 374].
+414;Arca - Contenuto?;Manna;Olio;Testimonianza (Decalogo);Vesti;C;Tavole [238, 646, 647].
+415;Velo Dimora?;Coperta;Sole;Separa Santo/Santissimo;Avvolge;C;Santuario [240, 263, 385, 648].
+416;Guida notturna?;Stella;Mappa;Fuoco sulla Dimora;Corno;C;Colonna [135, 528, 649].
+417;Sacrificio gradito (Lv)?;Tori;Amore/Preghiera;Digiuno;Danza;B;Adesione [283, 650, 651].
+418;Voti donna?;Sempre;Mai;Se marito non disapprova;Sacerdote;C;Numeri [652].
+419;Scelta Deuteronomio?;Guerra;Vita/Bene o Morte/Male;Ricchezza;Esilio;B;Dt 30 [653-655].
+420;Sichem - Rinnovo?;Gerusalemme;Gerico;Sichem;Ebron;C;Assemblea Giosuè [449, 656, 657].
+421;Giosuè morte età?;100;110;120;80;B;Fine libro [82, 83, 658].
+422;Giaele uccise Sisara?;Debora;Rut;Giaele;Giuditta;C;Piolo [86, 551, 659].
+423;Sansone anni giudice?;7;10;20;40;C;Filistei [87, 660, 661].
+424;Anna madre di...?;Rachele;Anna;Sara;Rebecca;B;Samuele [662-664].
+425;Eli sacerdote?;Aronne;Zadok;Eli;Caifa;C;Custode Samuele [557, 665].
+426;Parla, Signore...?;Chi è?;Parla, Signore, il tuo servo ascolta;Eccomi;No;B;Vocazione [666-668].
+427;Davide contro Golia?;1;3;5;7;C;Ciottoli lisci [669-671].
+428;Retribuzione (amici Gb)?;Errore;Punizione colpa;Casuale;Dono;B;Tesi [672-674].
+429;Eliu - Sofferenza?;Maledizione;Medicinale/Istruzione;Fine;Illusione;B;Giovane [675-677].
+430;Cherubini - Carro (Ez)?;Isaia;Geremia;Ezechiele;Daniele;C;Visione [274, 275, 678].
+431;Euanghèlion?;Legge;Buona notizia;Storia;Visione;B;Gesù [117, 679].
+432;Genealogia (Mt)?;Matteo;Marco;Luca;Giovanni;A;Abramo/Davide [442, 680].
+433;Gv - Io Sono?;Matteo;Marco;Luca;Giovanni;D;Divinità [421, 519, 681].
+434;Discepolo amato?;Pietro;Discepolo amato;Tommaso;Andrea;B;Croce [235, 236, 545].
+435;Antiochia - Cristiani?;Gerusalemme;Antiochia;Roma;Efeso;B;Atti 11 [311, 434, 682].
+436;Barnaba con Paolo?;Sila;Barnaba;Timoteo;Luca;B;Cipro [313, 435, 683].
+437;Sara e Agar (Gal)?;Romani;1 Corinzi;Galati;Efesini;C;Allegoria [597, 684].
+438;Kènosis (Fil)?;Creazione;Svuotamento di Cristo;Fine;Carità;B;Fil 2 [189, 685, 686].
+439;Onèsimo schiavo?;Tichico;Onèsimo;Epafra;Marco;B;Filemone [219, 478, 687].
+440;144.000 (Ap)?;Tribù;Totalità redenti;Martiri;Leviti;B;Pienezza [148, 149, 218].
+441;Vieni, Signore Gesù?;Giovanni;Atti;Apocalisse;Ebrei;C;Conclusione [151, 688].
+442;Ref. AT in NT (Murdocca)?;100;200;304;500;C;Conteggio [689, 690].
+443;pluralis maiestatis?;Errore;Trinità/Deliberativo;Dèi;Traduzione;B;Gen 1 [313, 691].
+444;Tobi fedele?;Digiuno;Seppellire i morti;Legge;Argento;B;Pietà [407-409].
+445;Apokalypsis?;Fine;Distruzione;Rivelazione;Terremoto;C;Velo [353, 489, 692].
+446;Giorno Sabato?;Sesto;Settimo;Primo;Ottavo;B;Consacrato [670, 693, 694].
+447;Fiumi Eden?;Giordano;Nilo;Senza nome;Tevere;C;Pison/Ghicon/Tigri/Eufrate [483, 695, 696].
+448;Caino - Custode?;Cacciatore;Morto;Sono forse io il custode?;No;C;Rifiuto [697-699].
+449;Segno Diluvio?;Altare;Arco nelle nubi;Libro;Montagna;B;Pace [32, 694, 700].
+450;Abramo - Carran età?;50;75;99;100;B;Obbedienza [41, 701, 702].
+451;Ismaele figlio di...?;Isacco;Ismaele;Set;Esaù;B;Agar [6, 703, 704].
+452;Circoncisione età?;75;86;99;100;C;Segno perenne [26, 43, 387].
+453;Perché "Sara"?;Bellezza;Madre di nazioni;Punizione;Re;B;Benedizione [39, 705].
+454;Giusti Sodoma?;100;12;Fino a 10;Solo 1;C;Preghiera Abramo [706, 707].
+455;Caverna Macpela?;Sichem;Betel;Caverna Macpela;Gat;C;Sepolcro [101, 453].
+456;Giuramento servo?;Egitto;No Cananee;Agnello;No ritorno;B;Sposa Isacco [256, 708].
+457;Signore che desse bere?;Veste;Giovane generosa;Anello;Sogno;B;Rebecca [256, 709].
+458;Esaù primogenitura?;Denaro;Odio;Minestra lenticchie;Cavallo;C;Fame [710-712].
+459;Giacobbe inganno?;Combattendo;Travestendosi;Comprando;Aspettando;B;Pelli [256, 713].
+460;Scala di Giacobbe?;Roveto;Scala verso il cielo;Carro;Vacche;B;Betel [714, 715].
+461;Anni per Rachele?;7;14;20;1;B;Servizio a Labano [256, 485].
+462;Salario Giacobbe?;Oro;Animali punteggiati;Terra;Libertà;B;Astuzia [30, 716].
+463;Penuel lotta?;Betel;Sichem;Guado Iabbok (Penuel);Sinai;C;Israele [46, 717, 718].
+464;Tunica Giuseppe?;Arco;Anello;Tunica maniche lunghe;Gregge;C;Preferenza [20, 719].
+465;Ruben cisterna?;Giuda;Ruben;Simeone;Beniamino;B;Salvare [720, 721].
+466;Giuseppe venduto a...?;Faraone;Potifar;Pastore;Mercante;B;Egitto [634, 722].
+467;Moglie Potifar accusa?;Furto;Falsa accusa tradimento;Omicidio;Sogno;B;Prigione [634, 723].
+468;Titolo Giuseppe?;Sacerdote;Zafnat-Paneach;Mosè;Ramses;B;Governatore [486, 634, 724].
+469;Giuseppe anni Faraone?;17;20;30;40;C;Maturità [634, 725].
+470;Portare Beniamino?;Oro;Portare Beniamino;Schiavi;Esilio;B;Giuseppe [637, 726].
+471;Coppa d'argento?;Ruben;Giuda;Sacco Beniamino;Scomparsa;C;Test [634, 727, 728].
+472;Gosen?;Menfi;Tebe;Gosen;Alessandria;C;Regione fertile [634, 729].
+473;Resti di Giuseppe?;Bruciati;Imbalsamati e portati via;Nilo;Piramide;B;Esodo [634, 730, 731].
+474;Dina?;Tamar;Dina;Rachele;Lia;B;Figlia Giacobbe [732, 733].
+475;Roveto ardente?;Terremoto;Roveto ardente;Manna;Fumo;B;Mosè Oreb [52, 734].
+476;Decima piaga?;Locuste;Tenebre;Morte primogeniti;Grandine;C;Egitto [54, 55, 735].
+477;Sangue agnello?;Preghiera;Sangue sugli stipiti;Digiuno;Incenso;B;Pasqua [77, 216].
+478;Mese Abib?;Nisan;Abib;Elul;Adar;B;Uscita [23, 51, 736].
+479;600 carri?;100;600;1000;12;B;Inseguimento Faraone [737, 738].
+480;Bastone Mosè?;Lancia;Spada;Bastone;Mani;C;Mar Rosso [53, 739].
+481;Mara?;Dolce;Amara;Santa;Profonda;B;Sorgente [142, 740].
+482;Quaglie sera?;Pane;Quaglie;Rugiada;Miele;B;Insieme manna [142, 741].
+483;Refidim (Massa/Meriba)?;Sinai;Refidim;Mara;Gerico;B;Roccia/Acqua [742, 743].
+484;Ietro?;Aronne;Giosuè;Ietro (suocero);Caleb;C;Consiglio giudici [743-745].
+485;Divieto Sinai?;Mangiare;Non toccare monte;Cantare;Dormire;B;Purezza [63, 746].
+486;I Comandamento?;Non uccidere;Onora;Non avrai altri dèi;Sabato;C;Esclusività [609, 747, 748].
+487;Taglione?;Vendetta;Limite (proporzionalità);Morte;Multa;B;Esodo/Lv [71, 749, 750].
+488;Schiavo ebreo anni?;1;3;6;10;C;Settimo anno libero [70, 522].
+489;Azzimi?;Pentecoste;Pasqua;Capanne;Purim;B;Pane senza lievito [51, 76].
+490;Aronne vitello?;Popolo;Aronne;Giosuè;Artigiano;B;Idolatria [751, 752].
+491;Levi - Punizione?;Giuda;Beniamino;Levi;Efraim;C;Consacrazione [752, 753].
+492;Vedere Gloria?;Volto;Gloria;Miracolo;Fine;B;Mosè Sinai [754, 755].
+493;Volto raggiante?;Vecchio;Raggiante;Polveroso;Uguale;B;Velo Mosè [135, 756].
+494;Montone riparazione?;Toro;Montone;Colomba;Maiale;B;Levitico [757-759].
+495;Ama prossimo?;Non rubare;Amerai prossimo come te stesso;Onora;Sabato;B;Lv 19 [651, 760, 761].
+496;Paga bracciante?;Fine mese;Non deve restare la notte;Frustate;No diritti;B;Lv 19 [761, 762].
+497;50 anni?;7;10;50;100;C;Giubileo [70, 763-765].
+498;Interesse (usura)?;10%;Vietato tra fratelli;Solo viveri;Permesso;B;Solidarietà [149, 766].
+499;Dura cervice?;Forti;Testardi/Ribelli;Eletti;Saggi;B;Popolo [88, 95, 767].
+500;Balaam?;Elia;Balaam;Samuele;Michea;B;Maledire Israele [505, 768, 769].
+501;Qual è il significato etimologico del nome "Giosuè"?;Dio è con noi;Jhwh salva;Re di giustizia;Servo del Signore;B;Ha la stessa radice del nome di Gesù [1].
+502;Quale compito ricevette Giosuè alla morte di Mosè?;Scrivere leggi;Guidare l'ingresso in Canaan;Costruire il Tempio;Sacerdote di Silo;B;Giosuè guidò il popolo nella terra promessa [2].
+503;Quanti esploratori inviò Giosuè a Gerico?;12;7;2;3;C;Inviò due uomini per esplorare segretamente la città [3].
+504;Quale segno salvò la casa di Raab a Gerico?;Un agnello;Un filo di corda scarlatta;Una croce;Un ramo d'ulivo;B;Posto alla finestra come segno di riconoscimento [4].
+505;Cosa accadde alle mura di Gerico al settimo giro?;Bruciarono;Furono abbattute da macchine;Crollarono al grido del popolo;Si aprirono le porte;C;Al suono delle trombe e al grido di guerra [5].
+506;Cosa indica il termine "Anatema" (herem)?;Benedizione;Votare allo sterminio/consacrazione;Sacrificio animale;Tregua;B;Ciò che è votato a Dio deve essere distrutto o dato al tesoro [6].
+507;Quale miracolo astronomico è narrato a Gabaon?;Eclissi;Pioggia di stelle;Il sole e la luna si fermarono;Colonna di fuoco;C;Giosuè lo invocò per finire la battaglia [5].
+508;In quale città Giosuè rinnovò l'alleanza finale?;Gerusalemme;Sichem;Gerico;Betel;B;Sichem fu il luogo del patto solenne [4].
+509;A quale età morì Giosuè?;120 anni;100 anni;110 anni;80 anni;C;Fu sepolto nel territorio di Efraim [4].
+510;Chi sono i "Giudici" (Shofetim)?;Magistrati;Capi militari e civili;Sacerdoti;Re;B;Uomini scelti da Dio per liberare le tribù [7, 8].
+511;Qual è il ciclo narrativo tipico dei Giudici?;Pace-Guerra;Peccato-Castigo-Invocazione-Liberazione;Gloria-Caduta;Nascita-Morte;B;Uno schema che si ripete per l'infedeltà del popolo [8].
+512;Chi fu l'unica donna giudice e profetessa?;Rut;Giaele;Debora;Noemi;C;Amministrava la giustizia sotto una palma [8, 9].
+513;Come morì il generale cananeo Sisara?;In battaglia;Ucciso da Giaele con un piolo;Cadendo;Lapidato;B;Giaele lo colpì alla tempia mentre dormiva [10].
+514;Qual era il segreto della forza di Sansone?;Muscoli;Voto di nazireato (capelli);Lancia;Preghiera;B;Consacrato a Dio fin dal seno materno [10].
+515;Per quanti anni Sansone fu giudice?;40 anni;10 anni;20 anni;12 anni;C;Al tempo della dominazione dei Filistei [11].
+516;Chi è considerato l'ultimo dei Giudici?;Gedeone;Sansone;Samuele;Iefte;C;Segnò il passaggio alla monarchia [12].
+517;Chi era la madre di Samuele?;Rachele;Anna;Sara;Rebecca;B;Sterile, ottenne il figlio con la preghiera [13].
+518;Cosa significa il nome "Samuele"?;Dio è grande;L'ho domandato al Signore;Figlio della gioia;Forte;B;In memoria della preghiera di Anna [13, 14].
+519;Dove era l'Arca nell'infanzia di Samuele?;Gerusalemme;Silo;Ebron;Sichem;B;Nel tempio dove serviva il sacerdote Eli [13].
+520;Perché Israele chiese un re?;Per amore;Per essere come gli altri popoli;Per sconfiggere l'Egitto;Comando divino;B;Volevano un capo visibile [13].
+521;Chi fu il primo re consacrato d'Israele?;Davide;Saul;Salomone;Giosia;B;Unto dal profeta Samuele [13, 15].
+522;Con quale strumento Davide calmava Saul?;Flauto;Cetra;Tamburello;Tromba;B;Lo spirito malvagio si allontanava al suono della cetra [16].
+523;Quale città era la patria di Davide?;Gerusalemme;Betlemme;Rama;Ebron;B;Figlio di Iesse il Betlemita [16].
+524;Quali armi usò Davide contro Golia?;Spada;Fionda e cinque ciottoli;Arco;Scudo;B;Andò nel nome del Signore degli eserciti [16, 17].
+525;Quale città Davide rese capitale?;Sichem;Gerusalemme (Sion);Samaria;Dan;B;La strappò ai Gebusei [18, 19].
+526;Qual è il cuore del "Patto Davidico"?;Un palazzo;Stabilità eterna della dinastia;Conquista Egitto;Perdono Saul;B;Promessa di un discendente eterno [20, 21].
+527;Chi era la moglie di Uria di cui Davide si peccò?;Michal;Betsabea;Abigail;Tamar;B;Madre di Salomone [22].
+528;Quale parabola usò Natan contro Davide?;Pecora smarrita;Pecorella del povero rubata;Vignaiolo;Seminatore;B;Per denunciare il suo peccato [22].
+529;Chi costruì il primo Tempio?;Davide;Salomone;Ezechia;Giosia;B;Seguendo i preparativi di Davide [23, 24].
+530;In che anno avvenne lo scisma del regno?;1000 a.C.;931 a.C.;722 a.C.;587 a.C.;B;Alla morte di Salomone [25, 26].
+531;Chi fu il primo re del Regno del Nord?;Roboamo;Geroboamo;Acab;Ieu;B;Scelto dalle dieci tribù settentrionali [25, 27].
+532;Quale re di Giuda attuò la riforma del 622 a.C.?;Ezechia;Giosia;Davide;Manasse;B;Basata sul ritrovamento del Libro della Legge [28, 29].
+533;In quale anno cadde Gerusalemme (Babilonesi)?;722 a.C.;63 a.C.;587 a.C.;538 a.C.;C;Sotto Nabucodonosor [30, 31].
+534;Quale re persiano permise il ritorno dall'esilio?;Dario;Serse;Ciro;Artaserse;C;Emanò l'editto nel 538 a.C. [32, 33].
+535;Chi guidò la ricostruzione delle mura?;Esdra;Zorobabele;Neemia;Zaccaria;C;Funzionario di Artaserse [34, 35].
+536;Cosa significa il termine "Hokmah"?;Magia;Sapienza pratica;Filosofia;Legge;B;Arte di vivere rettamente [36, 37].
+537;Qual è il tema centrale di Giobbe?;Lode;Sofferenza dell'innocente;Sabato;Genealogia;B;Affronta il mistero del dolore [38, 39].
+538;Chi è il giovane che interviene in Giobbe?;Elifaz;Bildad;Zofar;Eliu;D;Sostiene che la sofferenza istruisce [40].
+539;Quanti sono i Salmi nel Salterio?;100;120;150;200;C;Chiamati "Tehillim" (Lodi) [41, 42].
+540;Quale libro afferma che "Tutto è vanità"?;Proverbi;Siracide;Qoelet;Sapienza;C;Riflessione sulla caducità umana [43, 44].
+541;Quale libro è un grande poema d'amore?;Salmi;Lamentazioni;Cantico dei Cantici;Sapienza;C;Amore tra Dio e l'anima/Chiesa [45, 46].
+542;Quale personaggio uccise Oloferne?;Ester;Rut;Giuditta;Debora;C;Decapitò il generale per liberare Betulia [47, 48].
+543;Cosa significa il nome "Raffaele"?;Forza;Medicina di Dio;Luce;Re;B;Angelo guaritore in Tobia [49, 50].
+544;Cosa commemora la festa di Purim?;Uscita Egitto;Liberazione via Ester;Legge;Diluvio;B;Dal "Pur" (sorte) gettato da Aman [51, 52].
+545;Chi è il primo grande profeta "faccia a faccia"?;Elia;Samuele;Mosè;Isaia;C;Modello di ogni profezia [53, 54].
+546;In quante parti è diviso il libro di Isaia?;2;3 (Proto, Deutero, Trito);5;12;B;Copre periodi pre, esilico e post [55, 56].
+547;Quale profeta parla del "Servo sofferente"?;Geremia;Ezechiele;Isaia (Deutero);Daniele;C;Profezia della passione di Cristo [57, 58].
+548;Chi era il segretario di Geremia?;Safan;Esdra;Baruc;Neemia;C;Trascrisse oracoli e lamenti [59, 60].
+549;Quale promessa è centrale in Geremia 31?;Distruzione;Alleanza Nuova scritta nei cuori;Ritorno;Morte;B;Legge incisa nell'anima [61, 62].
+550;Quale profeta vide le ossa inaridite?;Isaia;Geremia;Ezechiele;Daniele;C;Simbolo della rinascita d'Israele [63, 64].
+551;Quale segno segna i giusti in Ezechiele?;Croce;Cerchio;Tau;Stella;C;L'ultima lettera dell'alfabeto ebraico [65, 66].
+552;Cosa indica il termine greco "Euanghèlion"?;Legge;Buona Notizia;Storia;Visione;B;Identifica la persona di Gesù [67, 68].
+553;Quali sono i Vangeli Sinottici?;Mt-Gv;Mt-Mc-Lc;Lc-Gv;Mc-Gv;B;Hanno uno "sguardo d'insieme" [69, 70].
+554;Quale animale simboleggia Matteo?;Leone;Uomo/Angelo;Bue;Aquila;B;Evoca la genealogia umana [71, 72].
+555;Quale animale simboleggia Marco?;Uomo;Leone;Bue;Aquila;B;Per il ruggito del Battista nel deserto [73, 74].
+556;Quale animale simboleggia Luca?;Leone;Bue;Uomo;Aquila;B;Simbolo di mansuetudine e sacrificio [71, 75].
+557;Quale animale simboleggia Giovanni?;Uomo;Leone;Bue;Aquila;D;Per l'altezza del suo prologo [71, 76].
+558;Quale Vangelo presenta Gesù come "Logos"?;Matteo;Marco;Luca;Giovanni;D;Il Verbo fatto carne [77, 78].
+559;Chi scrisse gli Atti degli Apostoli?;Pietro;Paolo;Luca;Marco;C;Continuazione del terzo Vangelo [79, 80].
+560;Dove furono chiamati "Cristiani" per la prima volta?;Roma;Gerusalemme;Antiochia;Efeso;C;Sede della missione ai pagani [81, 82].
+561;Chi fu il primo martire lapidato?;Giacomo;Pietro;Stefano;Paolo;C;Diacono protomartire [83, 84].
+562;Dove avvenne la conversione di Saulo?;Gerico;Damasco;Tempio;Roma;B;Sulla via per perseguitare i cristiani [85].
+563;Quale fu la meta finale di Paolo negli Atti?;Atene;Corinto;Roma;Spagna;C;Vi rimase due anni annunciando il Regno [86, 87].
+564;Quante sono le lettere nel Nuovo Testamento?;13;7;21;27;C;14 paoline e 7 cattoliche [88, 89].
+565;Qual è il tema centrale di Romani?;Circoncisione;Giustificazione per fede;Fine del mondo;Miracoli;B;L'uomo è reso giusto dalla grazia [90, 91].
+566;Qual è il "carisma più grande" (1 Cor 13)?;Profezia;Lingue;Carità (Amore);Sapienza;C;La via più alta [92, 93].
+567;Cosa si intende per "Glossolalia"?;Traduzione;Dono delle lingue (estasi);Scrittura;Esegesi;B;Trattato da Paolo in 1 Corinzi [94, 95].
+568;Cos'è la "spina nella carne" di Paolo?;Peccato;Infermità fisica;Corona;Nemico;B;Dio gli disse: "Ti basta la mia grazia" [96, 97].
+569;In quale inno si parla di "Kènosis"?;Carità;Inno di Filippesi 2;Prologo Gv;Canto Mosè;B;Svuotamento e umiliazione di Cristo [98, 99].
+570;Chi è Onesimo?;Libero;Caro;Utile;Forte;C;Schiavo per cui Paolo intercede [100, 101].
+571;Qual è la tesi della Lettera agli Ebrei?;Ritorno Cristo;Superiorità sacerdozio di Cristo;Circoncisione;Preghiera;B;Sacrificio unico e perfetto [102, 103].
+572;Quale lettera insiste su "Fede e Opere"?;Paolo;Giovanni;Giacomo;Pietro;C;La fede senza opere è morta [104, 105].
+573;Quale virtù è centrale in 1 Pietro?;Fede;Speranza;Giustizia;Sapienza;B;Sostegno per i perseguitati [106, 107].
+574;Qual è la definizione di Dio in 1 Giovanni?;Forza;Legge;Amore;Giudice;C;Dio è Luce e Dio è Amore [108, 109].
+575;Cosa significa "Apocalisse"?;Fine del mondo;Distruzione;Rivelazione (Svelamento);Terremoto;C;Togliere il velo [110, 111].
+576;In quale isola Giovanni ricevette le visioni?;Cipro;Creta;Patmos;Malta;C;Mentre era prigioniero [112, 113].
+577;Chi è degno di aprire i sette sigilli?;Mosè;Angelo;L'Agnello (Cristo);Giovanni;C;Immolato e vittorioso [114, 115].
+578;Qual è il numero simbolico dei salvati?;1000;12000;144.000;7000;C;Totalità del popolo di Dio (12x12x1000) [116, 117].
+579;Cosa simboleggia la Bestia dal mare?;Terremoto;Potere politico persecutore;Morte;Mare;B;L'Impero ostile a Dio [118, 119].
+580;Qual è l'invocazione finale della Bibbia?;Amen;Abba;Maranà-thà (Vieni Signore);Hosanna;C;Attesa della parusia [120, 121].
+581;Quanti riferimenti AT ci sono nel NT?;100;200;304;500;C;Distribuiti in tutto il Nuovo Testamento [122, 123].
+582;Qual è il libro AT più citato nel NT?;Genesi;Isaia;Salmi;Levitico;B;Insieme ai Salmi è il più frequente [124, 125].
+583;In quale anno Pompeo conquistò Gerusalemme?;164 a.C.;333 a.C.;63 a.C.;70 d.C.;C;Inizio dominazione romana [126, 127].
+584;Chi ha curato gli Atti (Ed. San Paolo)?;Lancellotti;Carlo M. Martini;Ghidelli;Laconi;B;Il Cardinale ha curato Atti [128, 129].
+585;Chi ha curato Luca (Ed. San Paolo)?;Martini;Carlo Ghidelli;Sisti;Rossano;B;Ghidelli ha curato il terzo Vangelo [128, 130].
+586;Chi ha curato Marco (Ed. San Paolo)?;Martini;Lancellotti;Adalberto Sisti;Ghidelli;C;Sisti ha curato il secondo Vangelo [128].
+587;Chi ha curato Matteo (Ed. San Paolo)?;Martini;Angelo Lancellotti;Sisti;Ghidelli;B;Lancellotti ha curato il primo Vangelo [128, 131].
+588;Chi ha curato Giovanni (Ed. San Paolo)?;Segalla;Martini;Lancellotti;Ghidelli;A;Giuseppe Segalla [128].
+589;Qual è il papiro più antico del NT?;Vaticano;Papiro 52 (Gv 18);Vulgata;Sinaitico;B;Risalente al 125 d.C. circa [15, 132].
+590;In quale secolo nacquero i capitoli?;I;XIII;XVI;IV;B;Introdotta per l'uso liturgico [133, 134].
+591;In quale anno nacquero i versetti?;1200;1528;1850;1947;B;Numerazione di Sante Pagnini [133, 135].
+592;Cos'è la "Dei Verbum"?;Un libro;Costituzione Concilio Vat II;Preghiera;Salmo;B;Tratta della Rivelazione [136].
+593;Cosa si intende per "Inerranza"?;Nessun nome errato;Esenzione da errore salvifico;Perfezione greca;Scienza esatta;B;Verità per la nostra salvezza [87, 137].
+594;Quanti sono i libri della Bibbia cattolica?;66;73;46;27;B;Include i deuterocanonici [138, 139].
+595;Chi tradusse la Vulgata?;Agostino;San Girolamo;Ambrogio;Damaso;B;Dall'ebraico in latino [140, 141].
+596;Cosa significa "Paràclito"?;Giudice;Intercessore/Assistente;Messia;Sacerdote;B;Riferito allo Spirito Santo [142, 143].
+597;Qual è il porto del papiro "Biblo"?;Tiro;Sidone;Gebal;Gaza;C;Da cui deriva il nome Bibbia [144, 145].
+598;Cosa significa "Adam" con articolo?;Primo uomo;L'Umanità / L'Uomo;Maschio;Padre;B;Termine collettivo [21, 146].
+599;Dove fu gettato Giuseppe dai fratelli?;Pozzo;Cisterna;Fiume;Mare;B;Per invidia dei fratelli [147].
+600;Chi propose di salvare Giuseppe?;Giuda;Ruben;Simeone;Beniamino;B;Voleva riportarlo al padre [147].
+601;Chi comprò Giuseppe in Egitto?;Faraone;Potifar;Pastore;Mercante;B;Ufficiale del Faraone [148].
+602;Quale titolo ebbe Giuseppe?;Viceré;Zafnat-Paneach;Mosè;Ramses;C;Significa governatore [149, 150].
+603;Dove fu trovata la coppa d'argento?;Sacco Ruben;Sacco Giuda;Sacco Beniamino;Persa;C;Prova di Giuseppe per i fratelli [151, 152].
+604;Quale regione ebbe Giacobbe in Egitto?;Menfi;Tebe;Gosen;Alessandria;C;Terra fertile per il bestiame [153, 154].
+605;Quanti anni rimasero in Egitto?;40;70;430;100;C;Dalla discesa all'Esodo [155].
+606;Qual è il nome di Dio all'Oreb?;Signore;Io sono colui che sono;Re;Padre;B;Rivelato a Mosè [156, 157].
+607;Qual è la decima piaga?;Locuste;Tenebre;Morte primogeniti;Grandine;C;Colpì l'Egitto [158, 159].
+608;Quale sangue salvò gli Ebrei?;Toro;Agnello;Capra;Colomba;B;Sugli stipiti delle porte [160].
+609;Quanti carri prese il Faraone?;100;600;1000;12;B;Per inseguire gli Ebrei [161, 162].
+610;Chi consigliò i giudici a Mosè?;Aronne;Giosuè;Ietro (suocero);Caleb;C;Per aiutarlo nel governo [163, 164].
+611;Qual è il primo Comandamento?;Non uccidere;Onora padre;Non avrai altri dèi;Sabato;C;Esclusività di Jhwh [165, 166].
+612;Ogni quanti anni il Giubileo?;7;10;50;100;C;Anno di liberazione [167, 168].
+613;Cosa significa "Dura cervice"?;Forti;Testardi/Ribelli;Eletti;Saggi;B;Definizione del popolo [169].
+614;Chi era Balaam?;Re;Veggente/Profeta;Soldato;Sacerdote;B;Mandato a maledire [170, 171].
+615;Chi peccò prendendo l'anatema?;Giosuè;Acan;Caleb;Finees;B;Causò la sconfitta ad Ai [172, 173].
+616;Chi era Eli?;Re;Sacerdote di Silo;Profeta;Giudice;B;Maestro di Samuele [174, 175].
+617;Cosa disse Samuele nella notte?;Chi è?;Eccomi;Parla Signore il tuo servo ascolta;No;C;Risposta alla chiamata [176, 177].
+618;Quanti anni aveva Davide a Ebron?;20;30;40;50;B;Divenne re a 30 anni [143].
+619;Chi era il generale di Davide?;Abner;Ioab;Benaia;Ittai;B;Figlio di Zeruia [178].
+620;Chi era il profeta di Davide?;Samuele;Natan;Gad;Elia;B;Annunciò il patto [179, 180].
+621;Chi era il figlio ribelle (quercia)?;Salomone;Amnon;Assalonne;Adonia;C;Sospeso per i capelli [181, 182].
+622;Cosa chiese Salomone a Dio?;Ricchezza;Cuore docile (Sapienza);Vittoria;Lunga vita;B;Per governare bene [183, 184].
+623;Quale re divise il regno?;Salomone;Roboamo;Geroboamo;Saul;B;Causò lo scisma [185, 186].
+624;Chi affrontò i profeti di Baal?;Eliseo;Elia;Isaia;Amos;B;Sul monte Carmelo [187, 188].
+625;Chi era il successore di Elia?;Geremia;Ezechiele;Eliseo;Daniele;C;Ne raccolse il mantello [189, 190].
+626;Quale re assediò Gerusalemme (701)?;Sargon;Sennacherib;Dario;Serse;B;Sotto Ezechia [71, 191].
+627;Quale regina salvò gli Ebrei?;Giuditta;Ester;Rut;Debora;B;Sposa di Assuero [192, 193].
+628;Quale libro è di riflessione (Moria)?;Genesi;Esodo;Levitico;Numeri;A;Sacrificio Isacco [122, 194].
+629;Cosa simboleggia l'Arcobaleno?;Pioggia;Pace/Alleanza con Noè;Sole;Nube;B;Sigillo perenne [195, 196].
+630;Quanti anni aveva Abramo (Carran)?;50;75;100;120;B;Quando lasciò la sua terra [197, 198].
+631;Qual è il segno di Abramo?;Sabato;Circoncisione;Offerta;Preghiera;B;Patto nella carne [199, 200].
+632;Chi lottò con Dio (Israele)?;Abramo;Isacco;Giacobbe;Giuseppe;C;Al guado dello Iabbok [201, 202].
+633;Quale figlio fu viceré?;Giuda;Simeone;Giuseppe;Ruben;C;In Egitto [203, 204].
+634;Quale monte per il Decalogo?;Tabor;Carmelo;Sinai;Nebo;C;Monte di Dio [12, 205].
+635;Per quanti anni la manna?;7;12;40;100;C;Nel deserto [206, 207].
+636;Chi peccò col vitello d'oro?;Mosè;Aronne;Giosuè;Caleb;B;Costruito dal popolo [208].
+637;Chi ha curato i Salmi (San Paolo)?;Martini;Angelo Lancellotti;Ghidelli;Ravasi;B;Insieme a Matteo e Apocalisse [128].
+638;Chi ha curato Samuele (San Paolo)?;Laconi;Giovanni Boccali;Sisti;Rossano;B;Versione dei due libri [128].
+639;Chi ha curato i Re (San Paolo)?;Testa;Armando Rolla;Ghidelli;Sisti;B;Libri storici monarchici [128].
+640;Chi ha curato Isaia (San Paolo)?;Testa;Stefano Virgulin;Lombardi;Bernini;B;Insieme a Cronache e Giobbe [128].
+641;Chi ha curato Ezechiele (San Paolo)?;Testa;Enzo Cortese;Ghidelli;Lancellotti;B;Profeta dell'esilio [128].
+642;Chi ha curato Geremia (San Paolo)?;Cortese;Luigi Lombardi;Sisti;Rossano;B;Insieme a Baruc [128].
+643;Chi ha curato Proverbi/Daniele?;Ravasi;Giuseppe Bernini;Ghidelli;Martini;B;Anche i 12 profeti minori [128].
+644;Chi ha curato Romani/Galati?;Martini;Ugo Vanni;Rossano;Cipriani;B;Anche Giacomo, Pietro, Giuda [128].
+645;Chi ha curato Ebrei (San Paolo)?;Vanni;Silverio Zedda;Peretto;Rossano;B;Testo omiletico [128].
+646;Chi ha curato le Pastorali?;Vanni;Settimio Cipriani;Rossano;Peretto;B;Timoteo e Tito [128].
+647;Chi ha curato 1-2 Corinzi?;Vanni;Piero Rossano;Zedda;Peretto;B;Lettere principali [128].
+648;Chi ha curato la Sapienza?;Sisti;Martino Conti;Virgulin;Minissale;B;Libro sapienziale greco [128].
+649;Chi ha curato il Siracide?;Conti;Antonino Minissale;Sacchi;Colombo;B;Ben Sira [128].
+650;Chi ha curato Esdra/Neemia?;Ghidelli;Giuseppe Danieli;Cortese;Testa;B;Ricostruzione post-esilio [128].
+651;In quale materiale è il P52?;Pergamena;Papiro;Ostraca;Legno;B;Frammento di Giovanni [158, 209].
+652;Cosa sono i "Masoreti"?;Sacerdoti;Saggi (vocali testo ebraico);Guerrieri;Scribi Qumran;B;Tra VII e X sec. d.C. [3, 210].
+653;Pelli per un codice (NT)?;10;50-60;100;200;B;Molto costoso [211, 212].
+654;Codice Vaticano (secolo)?;II;III;IV;V;C;Uno dei più antichi [211, 213].
+655;Inerranza riguarda?;Storia profana;Scienza;Verità salvezza;Grammatica;C;Costituzione Dei Verbum [155, 214].
+656;Quanti sono i livelli Alleanza?;3;5;7;10;C;Piramide Murdocca [2, 215].
+657;Settimo gradino Alleanza?;Davide;Sinai;Messia re/sacerdote;Fine;C;Culmine in Cristo [20, 216].
+658;Chi è il destinatario di Luca?;Teofilo;Paolo;Pietro;Giacomo;A;Significa "Amico di Dio" [217, 218].
+659;Chi è il Precursore?;Mosè;Elia;Giovanni Battista;Giuseppe;C;Voce nel deserto [219].
+660;Significato di "Amen"?;Grazie;Pace;Certamente/Così sia;Addio;C;Dall'ebraico [121, 220].
+661;Prima città conquistata (Gs)?;Ai;Gerico;Gabaon;Sichem;B;Sette giri di mura [221, 222].
+662;Donna che uccise Sisara?;Debora;Rut;Giaele;Giuditta;C;Moglie di Eber [223, 224].
+663;Madre di Samuele?;Rachele;Anna;Sara;Rebecca;B;Pregò a Silo [225, 226].
+664;Cosa rispose Caino?;Morto;Non so;Sono forse il custode?;No;C;Dopo uccisione Abele [227, 228].
+665;Fiumi dall'Eden?;1;2;4;7;C;Pison, Ghicon, Tigri, Eufrate [229, 230].
+666;Segno Alleanza Noè?;Arco nubi;Circoncisione;Sabato;Fuoco;A;Dopo il Diluvio [195, 196].
+667;Età Abramo partenza?;50;75;100;120;B;Da Carran [197, 198].
+668;Monte sacrificio Isacco?;Sinai;Tabor;Moria;Carmelo;C;Provato da Dio [122, 231].
+669;Primogenitura Esaù?;Denaro;Odio;Minestra lenticchie;Cavallo;C;A Giacobbe [232, 233].
+670;Visione scala cielo?;Abramo;Isacco;Giacobbe;Giuseppe;C;A Betel [234, 235].
+671;Simeone in Egitto?;Ruben;Giuda;Simeone;Beniamino;C;Trattenuto in prova [236, 237].
+672;Figli Giuseppe?;12;2 (Efraim/Manasse);3;Nessuno;B;Nati in Egitto [170, 238].
+673;Significato di "Mara"?;Dolce;Amara;Santa;Profonda;B;Sorgente nel deserto [239].
+674;Dieci Comandamenti?;Genesi;Esodo;Levitico;Numeri;B;Ricevuti sul Sinai [240, 241].
+675;Tribù servizio culto?;Giuda;Beniamino;Levi;Efraim;C;Eredità Jhwh [242, 243].
+676;Anno Riforma Giosia?;722 a.C.;931 a.C.;622 a.C.;587 a.C.;C;Ritrovamento Legge [29, 38].
+677;Visione ossa (Ez)?;Isaia;Geremia;Ezechiele;Daniele;C;Capitolo 37 [244, 245].
+678;Festa Hanukkah?;Pasqua;Pentecoste;Dedicazione;Capanne;C;Riconsacrazione Tempio [246, 247].
+679;Significato "Apokalypsis"?;Fine;Rivelazione;Terremoto;Paura;B;NT Giovanni [110, 111].
+680;Isola visioni Giovanni?;Cipro;Creta;Patmos;Malta;C;Apocalisse [112, 113].
+681;Riferimenti AT in Matteo?;56;30;22;16;A;Statistica Murdocca [125, 248].
+682;Riferimenti AT in Marco?;56;30;22;16;B;Statistica Murdocca [125, 248].
+683;Riferimenti AT in Luca?;56;30;22;16;C;Statistica Murdocca [125, 248].
+684;Riferimenti AT in Giovanni?;56;30;22;16;D;Statistica Murdocca [125, 248].
+685;Lettera paolina più citazioni AT?;Romani (43);1 Cor;Galati;Ef;A;Centro teologico [125].
+686;Significato "Abba"?;Signore;Padre caro;Re;Creatore;B;Aramaico Gesù/Paolo [249, 250].
+687;Criterio Apostolicità?;Lunghezza;Lingua;Legame con Apostoli;Uso;C;Canone NT [251, 252].
+688;Libri deuterocanonici?;5;7;12;27;B;Solo Bibbia Cattolica [253, 254].
+689;Ultimo libro AT (cronol)?;Sapienza;Daniele;Malachia;Siracide;A;I sec a.C. [255, 256].
+690;Lingua Libro Sapienza?;Ebraico;Aramaico;Greco;Latino;C;Cultura ellenistica [257, 258].
+691;Significato "Maranà-thà"?;Aiuto;Vieni Signore;Qui;Pace;B;Invocazione finale [20, 259].
+692;Inno svuotamento (Fil 2)?;Carità;Kenosi;Creazione;Lode;B;Umiliazione/Esaltazione [99, 260].
+693;Quale miracolo solo Gv?;Pani;Cieco;Risurrezione Lazzaro;Tempesta;C;Simbolo risurrezione [261, 262].
+694;Confessione di Tommaso?;Grazie;Signore;Mio Signore e mio Dio;Maestro;C;Vedendo il Risorto [263, 264].
+695;Città naufragio Paolo?;Cipro;Creta;Malta;Rodi;C;Verso Roma [265, 266].
+696;Compagno I viaggio Paolo?;Sila;Barnaba;Timoteo;Luca;B;Insieme a Cipro [267, 268].
+697;Compagno II viaggio Paolo?;Barnaba;Sila;Marco;Luca;B;Dopo scisma Barnaba [76].
+698;Primo concilio Chiesa?;Gerusalemme (At 15);Roma;Nicea;Trento;A;Questione circoncisione [269, 270].
+699;Dove morì Geremia?;Babilonia;Egitto;Roma;Anatot;B;Tradizione profetica [271, 272].
+700;Chi è l'Anticristo (Gv)?;Re;Chi nega Incarnazione;Demone;Soldato;B;Lettere di Giovanni [273, 274].
+701;Quanti capitoli il Cantico?;5;8;12;150;B;Poema d'amore [275].
+702;Significato "Sion"?;Tempio;Monte della presenza;Città;Regno;B;Tema Isaia [276].
+703;Chi è il "Servo" (Is 53)?;Davide;Ciro;Messia sofferente;Esdra;C;Carmi del Servo [58, 277].
+704;Vocazione di Geremia?;Gerusalemme;Anatòt;Betlemme;Samaria;B;Città natale [278, 279].
+705;Gesto giogo (Geremia)?;Spezzò;Indossò giogo legno;Nudo;Cenere;B;Resa a Babilonia [280, 281].
+706;Significato Ezechiele?;Dio salva;Dio dà forza;Amico;Sacerdote;B;Nome profeta [282, 283].
+707;Visione carro Cherubini?;Isaia;Geremia;Ezechiele;Daniele;C;Fiume Chebar [284, 285].
+708;Lingua Daniele (cap 2-7)?;Ebraico;Aramaico;Greco;Latino;B;Parte del libro [286, 287].
+709;Significato Vangelo?;Legge;Buona Notizia;Storia;Visione;B;Persona di Gesù [67, 68].
+710;Segreto Messianico?;Setta;Gesù cela identità;Codice;Miracolo;B;Tipico di Marco [288].
+711;Parabola Buon Samaritano?;Matteo;Marco;Luca;Giovanni;C;Misericordia [213, 289].
+712;Nunc Dimittis?;Matteo;Marco;Luca;Giovanni;C;Cantico Simeone [290].
+713;Inizio Gv: Prologo?;In principio Dio;In principio era il Verbo;Genealogia;Voce;B;Logos [76, 291].
+714;Intercessore (Gv)?;Logos;Paraclito;Euangelion;Diatheke;B;Spirito Santo [292, 293].
+715;I Segno Giovanni?;Cieco;Pani;Nozze di Cana;Lazzaro;C;Acqua in vino [294, 295].
+716;Chi è Zaccheo?;Fariseo;Capo pubblicani;Pescatore;Soldato;B;Salì sul sicomoro [296, 297].
+717;Protomartire Atti?;Giacomo;Pietro;Stefano;Andrea;C;Lapidato [84, 298].
+718;Sette Stelle (Ap)?;Piaghe;Angeli Chiese;Tribù;Sacramenti;B;Visione Giovanni [299].
+719;Nuova Gerusalemme?;Città Davide;Dimora eterna Dio;Fortezza;Sogno;B;Fine Apocalisse [300, 301].
+720;Significato "Bibbia"?;Dio;Sacro;I Libri;Legge;C;Tà Biblía [302, 303].
+721;Materiale pelle animale?;Papiro;Pergamena;Carta;Seta;B;Resistente [158, 304].
+722;In quale secolo la carta?;I;VIII;XII;XV;C;In Occidente [211].
+723;Cosa indica "Diatheke"?;Morte;Alleanza/Patto;Libro;Legge;B;Testamento [253, 305].
+724;Inizio Sapienza?;Amore;Legge;Timore del Signore;Digiuno;C;Fondamento [306].
+725;Patrono dei Sapienti?;Davide;Salomone;Mosè;Giosuè;B;Prototipo [307].
+726;Pessimismo "Tutto è vanità"?;Proverbi;Siracide;Qoelet;Sapienza;C;Ecclesiaste [308, 309].
+727;Lingua Siracide?;Aramaico;Greco (da ebraico);Latino;Ebraico;B;Traduzione Ben Sira [310].
+728;Significato "Tehillim"?;Leggi;Salmi/Lodi;Profeti;Saggi;B;Titolo ebraico [311, 312].
+729;Sofferenza giusto (Sap)?;Peccato;Prova fedeltà;Destino;Ira;B;Maturazione [313].
+730;Purificazione lebbroso?;Sacerdote;Re;Popolo;Medico;A;Rituale Levitico [314].
+731;Cosa accadde al volto di Mosè?;Vecchio;Raggiante;Polveroso;Uguale;B;Dopo il Sinai [315].
+732;Animale sacrificio riparatorio?;Toro;Montone;Colomba;Maiale;B;Valore in sicli [316].
+733;Comando Lv 19?;Non rubare;Amerai prossimo come te stesso;Onora;Sabato;B;Gesù lo cita [248, 317].
+734;Paga bracciante?;Fine mese;Non restare la notte;Frustate;No diritti;B;Perché povero [318].
+735;Interesse (usura)?;10%;Vietato tra fratelli;Solo viveri;Permesso;B;Solidarietà [319].
+736;Chi guidò la rivolta 167?;Davide;Giosuè;Mattatia (Maccabei);Simone;C;Contro Epifane [320, 321].
+737;Significato "Maranà-thà"?;Aiuto;Vieni Signore;Qui;Pace;B;Invocazione NT [120, 259].
+738;Chi trovò il libro (622)?;Geremia;Chelkia;Esdra;Safan;B;Sacerdote [322, 323].
+739;Monte trasfigurazione?;Sinai;Tabor;Oliveto;Carmelo;B;Davanti ai tre [324, 325].
+740;Confessione Tommaso?;Signore;Maestro;Mio Signore e mio Dio;Grazie;C;Gv 20 [263, 264].
+741;Significato "Biblo"?;Dio;Sacro;Porto del papiro;Legge;C;Porto fenicio [326, 327].
+742;Diatheke in latino?;Morte;Testamentum;Legge;Eredità;B;Alleanza [328].
+743;Materiale 60 pecore?;Papiro;Pergamena;Carta;Ostraca;B;Un codice [211, 212].
+744;Saggi vocali ebraico?;Masoreti;Settanta;Scribi;Copisti;A;Testo masoretico [3, 210].
+745;P52 risale a?;I sec;125 d.C.;IV sec;XV sec;B;Gv 18 [132, 158].
+746;Capitoli introdotti nel?;I sec;XIII sec;XVI sec;IV sec;B;Medioevo [133, 134].
+747;Versetti (1528) da?;Girolamo;Sante Pagnini;Lutero;Damaso;B;Numerazione [133, 135].
+748;Deuterocanonici sono?;5;7;12;27;B;Soli cattolici [253, 254].
+749;Apòkryphos?;Falso;Nascosto/Segreto;Eretico;Perso;B;Non canonico [199, 329].
+750;Inerranza garantisce?;Scienza;Verità salvezza;Storia;Geografia;B;Fede [155, 214].
+751;Pentateuco (etimo)?;5 rotoli;5 leggi;5 storie;5 fratelli;A;Cinque astucci [330, 331].
+752;Giosuè - Etimo?;Dio è con noi;Jhwh salva;Pace;Re;B;Successore Mosè [1, 332].
+753;Chi uccise Sisara?;Debora;Giaele;Rut;Noemi;B;Con un piolo [223, 333].
+754;Chi era Anna?;Regina;Donna sterile (Samuele);Profetessa;Giudice;B;Madre [225, 334].
+755;Chi era Eli?;Sacerdote Silo;Re;Profeta;Guerriero;A;Custode Samuele [174].
+756;Arma Davide vs Golia?;Spada;Fionda/5 ciottoli;Arco;Scudo;B;Fede [17, 335].
+757;Capitale conquistata?;Sichem;Gerusalemme (Sion);Samaria;Dan;B;Gebusei [24, 336].
+758;Profeta vs Davide?;Samuele;Natan;Gad;Elia;B;Peccato Uria [25, 337].
+759;Re che costruì Tempio?;Davide;Salomone;Giosia;Ezechia;B;I Re [23, 338].
+760;Anno Scisma?;1000;931 a.C.;722;587;B;Dopo Salomone [26, 339].
+761;Chi è il "Proto-Isaia"?;1-39;40-55;56-66;24-27;A;Pre-esilio [340].
+762;Chi è il "Deutero-Isaia"?;1-39;40-55;56-66;1-12;B;Esilio [341].
+763;Chi è il "Trito-Isaia"?;1-39;40-55;56-66;34-35;C;Post-esilio [342].
+764;Gesto Geremia (giogo)?;Spezzò;Indossò giogo;Nudo;Teglia;B;Sottomissione [280].
+765;Ossa inaridite (Ez)?;Morte;Rinascita Israele;Fine;Gog;B;Speranza [244, 245].
+766;Sinottici?;Mt-Mc-Lc;Gv-Lc;Mc-Gv;Tutti;A;Sguardo d'insieme [69, 343].
+767;Simbolo Matteo?;Angelo/Uomo;Leone;Bue;Aquila;A;Genealogia [71, 344].
+768;Simbolo Marco?;Uomo;Leone;Bue;Aquila;B;Deserto [73, 345].
+769;Simbolo Luca?;Leone;Bue;Uomo;Aquila;B;Mansuetudine [71, 346].
+770;Simbolo Giovanni?;Uomo;Leone;Bue;Aquila;D;Altezza Logos [71, 347].
+771;Gesù "Logos"?;Matteo;Marco;Luca;Giovanni;D;Prologo [77, 78].
+772;Autore Atti?;Paolo;Pietro;Luca;Giovanni;C;Opera lucana [79, 348].
+773;Nome "Cristiani" a?;Gerusalemme;Roma;Antiochia;Efeso;C;Atti 11 [81, 82].
+774;Conversione Paolo su?;Gerico;Damasco;Tempio;Roma;B;Via di... [85].
+775;Giustificazione (Rm)?;Opere;Fede in Cristo;Circoncisione;Sacrifici;B;Grazia [90, 349].
+776;Inno Carità (cap)?;1 Cor 13;Rm 8;Gal 5;Ef 1;A;Virtù più grande [92, 350].
+777;Onesimo nome?;Libero;Caro;Utile;Forte;C;Da inutile [100, 101].
+778;Melchisedek?;Aronne;Mosè;Re-Sacerdote;Abramo;C;Figura Cristo [351, 352].
+779;Fede e Opere?;Giovanni;Giacomo;Pietro;Giuda;B;Lettera [104, 105].
+780;Definizione Dio (Amore)?;1 Gv;1 Pt;Rm;Gc;A;Lettera [108, 109].
+781;Apokalypsis (etimo)?;Fine;Rivelazione;Terremoto;Fuoco;B;Svelamento [110, 111].
+782;Redenti (Ap)?;1000;12000;144.000;7000;C;Simbolico [116, 117].
+783;Bestia mare persecuzione?;Leone;Bestia sale mare;Agnello;Drago;B;Impero [118, 353].
+784;Sede di Giovanni?;Gerusalemme;Roma;Efeso;Antiochia;C;Tradizione [354].
+785;Papiro antico NT?;Vaticano;P52;Vulgata;Aleppo;B;Frammento Gv [355, 356].
+786;Citazioni AT in NT?;100;200;304;500;C;Statistica Murdocca [122, 123].
+787;Libro AT più citato?;Genesi;Isaia;Salmi;Levitico;B;Statistica [124, 125].
+788;Inerranza DV?;Scienza;Verità salvifica;Cronologia;Storia;B;Vat II [87, 137].
+789;73 libri sono?;Ebraica;Cattolica;Protestante;Gnosa;B;Canone [138, 139].
+790;Girolamo tradusse?;Vulgata;Settanta;P52;Sinaitico;A;In Latino [140, 141].
+791;7 livelli Alleanza?;Murdocca;Ravasi;Ghidelli;Sisti;A;Piramide [2, 215].
+792;Diatesseron di Taziano?;Commento;Sintesi 4 Vangeli;Critica;Traduzione;B;160 d.C. [357, 358].
+793;Ciro Messia?;Dario;Serse;Ciro;Artaserse;C;Libertà esuli [33, 359].
+794;Culda profetessa?;Debora;Culda;Anna;Ester;B;Riforma Giosia [360, 361].
+795;Sennacherib assediò?;Ezechia;Davide;Salomone;Manasse;A;Re assiro [71, 191].
+796;Etimologia Adam?;Primo;Umanità/Uomo terra;Re;Amico;B;Adamah [21, 217].
+797;Arameo errante?;Shema;Mio padre Arameo errante;Decalogo;Credo;B;Piccolo credo [362, 363].
+798;Custode Caino?;Morto;Non so;Sono forse il custode?;No;C;Abele [227, 228].
+799;4 fiumi Eden?;1;2;4;7;C;Genesi [229, 230].
+800;Arcobaleno alleanza?;Adamo;Noè;Abramo;Mosè;B;Dopo Diluvio [195, 196].
+801;Chi ha curato Matteo (SP)?;Martini;Angelo Lancellotti;Ghidelli;Sisti;B;San Paolo [128].
+802;Cosa significa Paraclito?;Giudice;Intercessore/Assistente;Messia;Sacerdote;B;Gv 14 [76, 293].
+803;Riferimenti AT in NT?;100;200;304;500;C;Statistica finale [122].
+804;Adamo con articolo?;Primo uomo;Umanità/L'Uomo;Maschio;Padre;B;Ebraico [270].
+805;Formazione uomo (Gb)?;Pietra;Latte colato/Formaggio;Soffio;Oro;B;Metafora Gb 10 [364].
+806;Fine 2 Maccabei?;Preghiera;Amen;Vino mescolato acqua;Fine;C;Metafora diletto [365].
+807;Significato Pur?;Puro;Sorte/Dado;Libertà;Preghiera;B;Festa Purim [51, 52].
+808;Giovane in Giobbe?;Elifaz;Bildad;Zofar;Eliu;D;Discorso finale [40, 366].
+809;Segno giustiVisione Ez?;Croce;Cerchio;Tau;Stella;C;Ultima lettera [65, 66].
+810;Funzionario mura?;Esdra;Zorobabele;Neemia;Mardocheo;C;Coppiere [34, 35].
+811;Porto fenicio papiro?;Tiro;Sidone;Gebal (Biblo);Arvad;C;Origine nome [144, 326].
+812;Inerranza riguarda?;Scienza;Cronologia;Verità salvezza;Grammatica;C;Dei Verbum [87, 155].
+813;Sezioni Salmi?;3;5;7;12;B;Libri Salterio [367, 368].
+814;Discepolo amato?;Pietro;Giovanni (tradiz);Giacomo;Andrea;B;Sotto la croce [369, 370].
+815;Numero redenti (Ap)?;12000;1000000;144.000;7000;C;Pienezza simbolica [116, 117].
+816;Autore Ebrei?;Paolo;Pietro;Ignoto (Apollo?);Luca;C;Non paolina [371, 372].
+817;Re scudi bronzo?;Roboamo;Asa;Giosafat;Ezechia;A;Persi scudi oro [373, 374].
+818;Profeta Chebar?;Isaia;Geremia;Ezechiele;Daniele;C;Carro Cherubini [284, 285].
+819;Glossolalia?;Traduzione;Lingue (estasi);Scrittura;Esegesi;B;1 Cor 14 [94, 95].
+820;Melchisedek tipo?;Aronne;Mosè;Messia re/sacerdote;Abramo;C;Ebrei 7 [351, 352].
+821;Isola visions?;Cipro;Creta;Patmos;Malta;C;Giovanni [112, 113].
+822;Via più alta?;Fede;Speranza;Carità;Sapienza;C;Inno 1 Cor 13 [93, 375].
+823;Schiavo Onesimo?;Tichico;Onesimo;Epafra;Marco;B;Lettera Filemone [100, 101].
+824;Hanukkah festa?;Pasqua;Pentecoste;Dedicazione;Capanne;C;Maccabei [246, 247].
+825;Fiele pesce guarì?;Tobi;Tobia;Sara;Gabael;A;Cecità di Tobi [376, 377].
+826;Messia Ciro?;Dario;Serse;Ciro;Artaserse;C;Editto 538 [33, 359].
+827;Pelli 60 pecore?;Papiro;Pergamena;Ostraca;Legno;B;Costo codice [211, 212].
+828;Euanghèlion?;Legge;Buona Notizia;Santo;Visione;B;Greco [67, 68].
+829;Nome Cristiani?;Gerusalemme;Roma;Antiochia;Efeso;C;Atti 11 [81, 82].
+830;Stefano protomartire?;Giacomo;Pietro;Stefano;Paolo;C;Lapidato [83, 84].
+831;P52?;Vaticano;Papiro 52 (Gv);Vulgata;Aleppo;B;Antico NT [15, 132].
+832;Riforma 622?;Ezechia;Giosia;Davide;Salomone;B;Giosia [28, 29].
+833;Samuele nome?;Forte;L'ho domandato al Signore;Pace;Servo;B;Memoria Anna [13, 14].
+834;Caleb entrò?;Aronne;Caleb;Finees;Eleazaro;B;Con Giosuè [378, 379].
+835;Sinai Monte?;Tabor;Carmelo;Sinai (Oreb);Nebo;C;Patto Legge [205, 380].
+836;Anni deserto?;7;12;40;70;C;Punizione [72, 381].
+837;Circoncisione?;Arcobaleno;Sabato;Circoncisione;Manna;C;Segno Abramo [380, 382].
+838;Leone Marco?;Uomo;Leone;Bue;Aquila;B;Simbolo [71, 345].
+839;Bue Luca?;Leone;Bue;Uomo;Aquila;B;Mansuetudine [71, 346].
+840;Aquila Giovanni?;Uomo;Leone;Bue;Aquila;D;Teologia Logos [71, 347].
+841;Vulgata tradotta?;Agostino;Girolamo;Ambrogio;Damaso;B;Latino [23, 141].
+842;Libri 73?;66;73;46;27;B;Bibbia Cattolica [138, 139].
+843;Lingua NT?;Ebraico;Aramaico;Greco (Koinè);Latino;C;Comune [383, 384].
+844;Sinottici?;Mt-Gv;Mt-Mc-Lc;Lc-Gv;Mc-Gv;B;Synopsis [343, 385].
+845;Risurrezione Lazzaro?;Pani;Lebbrosi;Lazzaro;Tempesta;C;Giovanni 11 [261, 262].
+846;Speranza 1 Pt?;Fede;Speranza;Giustizia;Sapienza;B;Virtù base [106, 107].
+847;Dio è Amore?;Forza;Legge;Amore;Giudice;C;1 Giovanni [108, 109].
+848;Testamento (etimo)?;Volontà;Alleanza/Patto;Libro;Legge;B;Diatheke [305, 386].
+849;Re Sisach d'Egitto?;Roboamo;Abia;Asa;Giosafat;A;Invasione [387, 388].
+850;Martini curò?;Matteo;Atti;Luca;Marco;B;San Paolo [128, 129].
+851;Monte sacrificio Isacco?;Sinai;Tabor;Moria;Carmelo;C;Isacco [122, 231].
+852;Cronache storia?;Militare;Storia sacra (tesi);Biografica;Scienza;B;Prospettiva [389, 390].
+853;Figli Giuseppe?;12;2;3;Nessuno;B;Efraim e Manasse [170, 238].
+854;Cordone scarlatto?;Agnello;Filo scarlatto;Croce;Olivo;B;Raab Gerico [4, 391].
+855;Donna Debora?;Rut;Giaele;Debora;Noemi;C;Giudice [9, 392].
+856;Nazireato (Sansone)?;Povertà;No taglio/No vino/No impuro;Silenzio;Digiuno;B;Voto [393, 394].
+857;Profeta Natan?;Samuele;Natan;Gad;Michea;B;Patto Davidico [395, 396].
+858;Salomone costruì?;Davide;Salomone;Giosia;Ezechia;B;Tempio [23, 338].
+859;Biblo porto?;Tiro;Sidone;Gebal;Arvad;C;Papiro [144, 327].
+860;Lingua Sapienza?;Ebraico;Aramaico;Greco;Latino;C;Ellenistica [257, 397].
+861;Pane Eucaristia?;Cronologia;Frazione del pane;Genealogia;Filologia;B;Chiave [277, 398].
+862;Settimo livello Alleanza?;Sinai;Davide;Messia re/sacerdote;Apocalisse;C;Murdocca [20, 215].
+863;Sofferenza medicinale?;Maledizione;Castigo medicinale;Errore;Illusione;B;Eliu [399, 400].
+864;Significato qadôsh?;Puro;Perfetto;Separato;Onnipotente;C;Santo [401, 402].
+865;Veggeante Canani?;Roboamo;Asa;Ezechia;Giosia;B;Rimproverò Asa [403, 404].
+866;Salmo 51 (Miserere)?;1;23;51;110;C;Pentimento Davide [405, 406].
+867;Neemia 12 anni?;Esdra;Zorobabele;Neemia;Mardocheo;C;Governatorato [407, 408].
+868;Onesimo significa?;Libero;Caro;Utile;Forte;C;Paolo Filemone [100, 101].
+869;Anticristo (Gv)?;Re;Chi nega Incarnazione;Demone;Soldato;B;Lettere [273, 274].
+870;Maranà-thà (NT)?;Amen;Abba;Maranà-thà;Hosanna;C;Invocazione [120, 409].
+871;Successore Mosè?;Aronne;Caleb;Giosuè;Samuele;C;Giosuè [410, 411].
+872;Peccato anatema?;Giosuè;Acan;Caleb;Finees;B;Sconfitta Ai [172, 173].
+873;Giaele uccise?;Debora;Rut;Giaele;Giuditta;C;Sisara [10, 412].
+874;Israele chiese un re?;Amore;Per essere come altri;Guerra;Comando;B;1 Sam 8 [13, 413].
+875;Cetra Davide?;Flauto;Cetra/Arpa;Tamburello;Tromba;B;Calmava Saul [414, 415].
+876;Golia battuto con?;Spada;Fionda e 5 ciottoli;Arco;Scudo;B;Fede [335, 416].
+877;Masoreti aggiunsero?;Sacerdoti;Vocali testo ebraico;Soldati;Traduttori;B;Fissazione [3, 417].
+878;Etimologia Adam?;Primo;Umanità;Amico;Re;B;Uomo di terra [217, 418].
+879;40 anni manna?;7 anni;12 anni;40 anni;100 anni;C;Sostentamento [207, 419].
+880;Missione ai pagani?;Gerusalemme;Roma;Antiochia;Efeso;C;Centro irradiante [81, 420].
+881;Bestia mare persecutrice?;Leone;Bestia sale mare;Agnello;Aquila;B;Apocalisse [118, 353].
+882;Magnificat in?;Matteo;Marco;Luca;Giovanni;C;Cantico Maria [421, 422].
+883;Ultimo libro AT?;Malachia;Siracide;Sapienza;Daniele;C;I sec a.C. [255, 256].
+884;Festa Purim (Ester)?;Pasqua;Purim;Capanne;Pentecoste;B;Salvezza [51, 423].
+885;Stefano lapidato?;Giacomo;Pietro;Stefano;Paolo;C;Martire [83, 298].
+886;Biblo porto papiro?;Tiro;Biblo;Sidone;Gaza;B;Porto fenicio [326, 424].
+887;Vieni Signore?;Dio aiuto;Vieni, Signore!;Qui;Pace;B;Maranà-thà [20, 259].
+888;Monte trasfigurazione?;Sinai;Tabor;Oliveto;Carmelo;B;Luca 9 [324, 425].
+889;Apocalisse pseudonimo?;Paolo;Luca;Giovanni;Pietro;C;Isola Patmos [426, 427].
+890;Lazzaro simbolo?;Cana;Risurrezione Lazzaro;Cieco;Pani;B;Gv 11 [261, 428].
+891;Zaccheo capo?;Fariseo;Capo pubblicani;Discepolo;Centurione;B;Luca 19 [296, 297].
+892;Autore Atti?;Paolo;Pietro;Luca;Giovanni;C;Secondo libro [80, 348].
+893;Giovanni "Io Sono"?;Matteo;Marco;Luca;Giovanni;D;Gesù divinità [429, 430].
+894;Gerusalemme Davide?;Sichem;Gerusalemme;Samaria;Dan;B;Strappata ai Gebusei [24, 431].
+895;Saul primo re?;Davide;Saul;Salomone;Giosia;B;Unto Samuele [13, 432].
+896;Anna madre Samuele?;Rachele;Anna;Sara;Rebecca;B;Donna sterile [225, 334].
+897;Anni Sansone Giudice?;40;10;20;7;C;Venti anni [433, 434].
+898;Miracolo Gabaon?;Eclissi;Sole e luna fermi;Fuoco;Cometa;B;Giosuè [5, 435].
+899;Giosuè morì a?;100;110;120;80;B;Efraim [4, 436].
+900;Piccolo credo d'Israele?;Shema;Mio padre era Arameo errante;Decalogo;Kaddish;B;Dt 26 [362, 363].
+901;Risposta Caino?;Morto;Non so;Sono forse io il custode?;Perdono;C;Abele [227, 228].
+902;Eden dividendosi in 4?;Giordano;Nilo;Senza nome;Tevere;C;Pison/Ghicon/Tigri/Eufrate [229, 230].
+903;Gerusalemme caduta (anno)?;722;63 a.C.;587 a.C.;538 a.C.;C;Nabucodonosor [30, 31].
+904;Giosia consultò?;Debora;Culda;Anna;Giuditta;B;Profetessa [360, 361].
+905;Ezechia assediato da?;Salmanassar;Sennacherib;Nabucodonosor;Ciro;B;Assiro [71, 191].
+906;Potere politico bestia?;Terremoto;Bestia sale mare;Morte;Mare;B;Apocalisse [118, 119].
+907;Inno Kenosi (Fil)?;Carità;Inno Cristologico;Creazione;Lode;B;Svuotamento [99, 437].
+908;Onesimo utile?;Libero;Caro;Utile;Forte;C;Filemone [100, 438].
+909;Chiesa Efesini?;Gregge;Corpo e Sposa di Cristo;Fortezza;Vigna;B;Capo/Corpo [439, 440].
+910;Spina nella carne?;Peccato;Infermità fisica;Corona;Nemico;B;Paolo [96, 97].
+911;Vasi di creta?;Principi;Vasi di creta;Padroni;Angeli;B;Apostoli 2 Cor [96, 441].
+912;Carità 1 Cor 13?;Profezia;Lingue;Carità;Sapienza;C;Più grande [92, 350].
+913;Giustificazione (Rm)?;Opere;Fede in Gesù Cristo;Circoncisione;Sacrifici;B;Grazia [90, 349].
+914;Rinascita Israele?;Fine;Rinascita d'Israele;Giudizio;Sconfitta;B;Ez 37 [244, 442].
+915;Nuova Alleanza (Ger)?;Distruzione;Nuova Alleanza;Ritorno;Morte;B;Cuori [61, 62].
+916;Anatòt Geremia?;Gerusalemme;Anatòt;Betlemme;Samaria;B;Origine [19, 278].
+917;Servo di Isaia?;Trionfante;Uomo dei dolori/disprezzato;Sapiente;Angelo;B;Passione [58, 443].
+918;Nudo per 3 anni?;Isaia;Geremia;Ezechiele;Daniele;A;Egitto/Etiopia [444, 445].
+919;Geroboamo primo re?;Nord;Sud;Egitto;Persia;A;Israele [27].
+920;Roboamo scisma?;Davide;Roboamo;Geroboamo;Asa;B;Giogo pesante [185, 186].
+921;Alessandro Magno (anno)?;538;63;333 a.C.;164;C;Occupazione [446, 447].
+922;Taziano - Diatesseron?;Commento;Sintesi 4 Vangeli;Critica;Traduzione;B;Armonia [357, 358].
+923;Re Sedecia deportato?;Ioiachin;Ioiakim;Sedecia;Ezechia;C;Accecato [448, 449].
+924;Rimozione negromanti?;Davide;Salomone;Saul;Giosia;C;Iniziale [450, 451].
+925;Giaele uccise Sisara?;Debora;Rut;Giaele;Giuditta;C;Piolo [333, 452].
+926;Ciro editto (anno)?;538 a.C.;333;63;164;A;Ritorno [33, 453].
+927;Pompeo conquista?;164;333;63 a.C.;70 d.C.;C;Romani [127, 454].
+928;Emanuele significa?;Forte;Dio con noi;Salva;Luce;B;Isaia/Matteo [455, 456].
+929;Maccabei - Mattatia?;Davide;Giosuè;Mattatia;Simone;C;167 a.C. [320, 457].
+930;Passaggio Mar Rosso?;Ebrei;Filistei;Assiri;Greci;A;Esodo [458, 459].
+931;Distruzione Tempio II?;63;135;70 d.C.;313;C;Tito [460, 461].
+932;Jhwh salva (nome)?;Forte;Jhwh salva;Pace;Nun;B;Giosuè [1, 332].
+933;Capitoli Bibbia (secolo)?;II;XIII;XVI;IV;B;Medioevo [134, 462].
+934;Lotta guado Iabbok?;Abramo;Isacco;Giacobbe;Giuseppe;C;Israele [201, 202].
+935;Pentateuco (etimo)?;Leggi;5 rotoli;Storie;Fratelli;B;Tôrah [331, 463].
+936;Bet-Sean (Gelboe)?;Gerusalemme;Bet-Sean;Ebron;Rama;B;Morte Saul [464, 465].
+937;Elia vs Baal?;Eliseo;Elia;Isaia;Amos;B;Carmelo [187, 188].
+938;Salomone sapienza?;Saul;Davide;Salomone;Ezechia;B;Gabaon [183, 184].
+939;Giosuè successore?;Aronne;Caleb;Giosuè;Samuele;C;Mosè [410, 466].
+940;Giona inghiottito?;Osea;Giona;Amos;Michea;B;Pesce [467, 468].
+941;Gebal porto?;Tiro;Biblo;Sidone;Gaza;B;Papiro [469, 470].
+942;Pergamena pelle?;Papiro;Pergamena;Ostraca;Legno;B;Resistente [471, 472].
+943;Versetti numerati (anno)?;XIII;1528;II;IV;B;Sante Pagnini [135, 473].
+944;Tribù senza terra?;Giuda;Beniamino;Levi;Efraim;C;Sacerdoti [474, 475].
+945;Servo sofferente (Is)?;Geremia;Ezechiele;Isaia;Daniele;C;Carme [57, 476].
+946;Scisma regno (anno)?;1200;1100;931 a.C.;600;C;Morte Salomone [26, 477].
+947;Chelkia trovò libro?;Geremia;Chelkia;Esdra;Safan;B;622 [322, 323].
+948;Apocalisse autore?;Paolo;Luca;Giovanni;Pietro;C;Patmos [478, 479].
+949;Ciro sconfisse (anno)?;538;539 a.C.;333;63;B;Babilonia [480, 481].
+950;Lidia convertita?;Damaris;Lidia;Prisca;Febe;B;Europa/Filippi [482, 483].
+951;Livello V Alleanza?;Abramo;Sinai;Tribù di Levi;Davide;C;Murdocca [484, 485].
+952;Cronista - Storia?;Militare;Storia sacra;Biografica;Scienza;B;Tesi [486, 487].
+953;Israele significa?;Dio grande;Uomo contende con Dio;Terra;Amico;B;Lotta [488, 489].
+954;Simeone in Egitto?;Ruben;Giuda;Simeone;Beniamino;C;Trattenuto [236, 237].
+955;Angelo fermò Abramo?;Pioggia;Angelo del Signore;Soldati;Pianto;B;Isacco [125, 490].
+956;40 anni deserto?;7;12;40;100;C;Israele [491, 492].
+957;Arca contenuto?;Manna;Olio;Testimonianza (Decalogo);Vesti;C;Tavole [493, 494].
+958;Sacrificio gradito (Lv)?;Tori;Amore/Preghiera;Digiuno;Danza;B;Adesione [128, 495].
+959;Vita o Morte (Dt)?;Guerra;Vita e bene/Morte e male;Ricchezza;Esilio;B;Scelta [496, 497].
+960;Sichem Assemblea?;Gerusalemme;Gerico;Sichem;Ebron;C;Rinnovo [498, 499].
+961;Anna sterile madre?;Rachele;Anna;Sara;Rebecca;B;Samuele [500, 501].
+962;Tesi amici Giobbe?;Dio errore;Sofferenza è punizione;Casuale;Dono;B;Retribuzione [502, 503].
+963;Kenosi Svuotamento?;Carità;Sapienza;Kenosi;Creazione;C;Fil 2 [35, 260].
+964;Rivelazione (etimo)?;Fine;Distruzione;Rivelazione;Terremoto;C;Apoc [111, 504].
+965;Settimo giorno?;Sesto;Settimo;Primo;Ottavo;B;Sabato [505, 506].
+966;Abramo partenza (età)?;50;75;99;100;B;Carran [507, 508].
+967;Ismaele figlio di?;Isacco;Ismaele;Set;Esaù;B;Agar [509, 510].
+968;10 giusti per Sodoma?;100;12;Fino a 10;1;C;Trattativa [511, 512].
+969;Lenticchie Esaù?;Denaro;Odio;Minestra lenticchie;Cavallo;C;Primogenito [232, 233].
+970;Giacobbe visione scala?;Roveto;Scala cielo;Carro;Vacche;B;Betel [234, 235].
+971;Iabbok lotta?;Betel;Sichem;Guado Iabbok;Sinai;C;Israele [513, 514].
+972;Cisterna Giuseppe?;Giuda;Ruben;Simeone;Beniamino;B;Salvatore [147, 515].
+973;Zafnat-Paneach?;Sacerdote;Governatore;Veggente;Ramses;C;Giuseppe [149, 150].
+974;Beniamino coppa?;Ruben;Giuda;Beniamino;Persa;C;Sacco [151, 152].
+975;Morte primogeniti piaga?;Locuste;Tenebre;Morte primogeniti;Grandine;C;X [159, 516].
+976;600 carri Faraone?;100;600;1000;12;B;Esodo [161, 162].
+977;Ietro consigliò?;Aronne;Giosuè;Ietro;Caleb;C;Giudici [163, 164].
+978;I Comandamento?;Non uccidere;Onora padre;Non altri dèi;Sabato;C;Esodo 20 [165, 166].
+979;50 anni giubileo?;7;10;50;100;C;Liberazione [167, 168].
+980;Balaam benedisse?;Elia;Balaam;Samuele;Michea;B;Asina [170, 171].
+981;2 esploratori?;12;7;2;3;C;Gerico [517, 518].
+982;Herem Sterminio?;Benedizione;Votare allo sterminio;Sacrificio;Tregua;B;Anatema [519, 520].
+983;Sansone morte?;Ehud;Otniel;Gedeone;Sansone;D;Con i nemici [521].
+984;Silo Arca Eli?;Gerusalemme;Silo;Ebron;Sichem;B;Infanzia Samuele [522, 523].
+985;Betlemme Davide?;Gerusalemme;Betlemme;Rama;Ebron;B;Origine [524, 525].
+986;Pecorella del povero?;Pecora smarrita;Pecorella rubata;Vignaiolo;Seminatore;B;Natan [179, 526].
+987;Neemia mura?;Esdra;Zorobabele;Neemia;Zaccaria;C;Riedificazione [527, 528].
+988;Eliu giovane Gb?;Eli;Eliu;Giezi;Baruc;B;Medicinale [529, 530].
+989;Speranza 1 Pt?;Fede;Speranza;Giustizia;Sapienza;B;Virtù base [50, 531].
+990;Tau su fronte?;Croce;Cerchio;Tau;Stella;C;Ezechiele giusti [532, 533].
+991;Martini Atti (SP)?;Lancellotti;Martini;Ghidelli;Sisti;B;Curatore [128, 534].
+992;Ghidelli Luca (SP)?;Martini;Ghidelli;Sisti;Rossano;B;Curatore [128, 535].
+993;P52 frammento?;Vaticano;Papiro 52;Vulgata;Sinaitico;B;Antico [132, 356].
+994;Vieni Signore Gesù?;Aiuto;Vieni Signore Gesù;Pace;Amen;B;Maranà-thà [259, 377].
+995;Patmos visionario?;Cipro;Creta;Patmos;Malta;C;Giovanni [112, 536].
+996;Giuditta uccise?;Ester;Rut;Giuditta;Debora;C;Oloferne [537, 538].
+997;Geroboamo primo re?;Nord;Sud;Egitto;Assiria;A;Scisma [6, 193].
+998;Ciro editto 538?;Dario;Serse;Ciro;Artaserse;C;Ritorno [539, 540].
+999;Samuele (significato)?;Forte;L'ho domandato al Signore;Pace;Re;B;Anna [14, 541].
+1000;Ultima parola Bibbia?;Pace;Carità;Amen;Alleluia;C;Conclusione Apocalisse [121].
