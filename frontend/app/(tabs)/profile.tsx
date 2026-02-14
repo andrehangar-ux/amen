@@ -193,8 +193,13 @@ const translations: Record<string, Record<string, string>> = {
     cancel: 'Annuler',
     confirm: 'Confirmer',
     version: 'Version',
+    notifications: 'Notifications',
+    notificationsDesc: 'Verset du jour',
+    dailyVerse: 'Verset du Jour',
+    notificationEnabled: 'Notification activée',
+    notificationDisabled: 'Notification désactivée',
+    notificationTime: 'Heure de notification',
   },
-  pt: {
     progress: 'Seu Progresso',
     streak: 'Sequência',
     chapters: 'Capítulos',
@@ -224,6 +229,12 @@ const translations: Record<string, Record<string, string>> = {
     cancel: 'Cancelar',
     confirm: 'Confirmar',
     version: 'Versão',
+    notifications: 'Notificações',
+    notificationsDesc: 'Versículo do dia',
+    dailyVerse: 'Versículo do Dia',
+    notificationEnabled: 'Notificação ativada',
+    notificationDisabled: 'Notificação desativada',
+    notificationTime: 'Hora da notificação',
   },
 };
 
