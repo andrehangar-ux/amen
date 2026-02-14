@@ -110,11 +110,21 @@ class TestCommunityMessages:
         assert response.status_code == 200, f"Login failed: {response.text}"
         return response.json().get("session_token")
     
-    def test_get_community_messages(self):
-        """Get community messages should work"""
+    def test_get_community_messages_requires_auth(self):
+        """Get community messages should require authentication"""
         response = requests.get(
             f"{BASE_URL}/api/community/messages",
             params={"lang": "it"}
+        )
+        assert response.status_code == 401, f"Expected 401 unauthorized, got {response.status_code}"
+        print("✓ Get community messages requires auth")
+    
+    def test_get_community_messages_with_auth(self, auth_token):
+        """Get community messages should work with authentication"""
+        response = requests.get(
+            f"{BASE_URL}/api/community/messages",
+            params={"lang": "it"},
+            headers={"Authorization": f"Bearer {auth_token}"}
         )
         assert response.status_code == 200, f"Expected 200, got {response.status_code}"
         data = response.json()
