@@ -35,7 +35,9 @@ const showConfirm = (title: string, message: string, onConfirm: () => void) => {
 export default function ProfileScreen() {
   const { user, logout, setUser, setSessionToken } = useAuthStore();
   const [progress, setProgress] = useState<any>(null);
+  const [readingHistory, setReadingHistory] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -44,13 +46,21 @@ export default function ProfileScreen() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const progressData = await api.getProgress();
+      const [progressData, historyData] = await Promise.all([
+        api.getProgress(),
+        api.getReadingHistory(20)
+      ]);
       setProgress(progressData);
+      setReadingHistory(historyData?.history || []);
     } catch (error) {
       console.log('Error loading data:', error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const goToChapter = (book: string, chapter: number) => {
+    router.push(`/bible?book=${encodeURIComponent(book)}&chapter=${chapter}`);
   };
 
   const handleLogout = () => {
