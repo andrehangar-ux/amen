@@ -23,60 +23,108 @@ import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
 
 // Cross-platform TTS helper with robust voice selection
 const speakText = (text: string, langCode: string, onEnd: () => void) => {
+  // Validate text
+  if (!text || text.trim().length === 0) {
+    console.warn('TTS: No text to speak');
+    onEnd();
+    return;
+  }
+
   if (Platform.OS === 'web' && typeof window !== 'undefined' && 'speechSynthesis' in window) {
     // Cancel any ongoing speech
     window.speechSynthesis.cancel();
     
+    // Chrome bug fix: resume if paused
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+    }
+    
     const startSpeaking = () => {
-      const utterance = new SpeechSynthesisUtterance(text);
-      const voices = window.speechSynthesis.getVoices();
-      const langPrefix = langCode.split('-')[0]; // e.g., 'it' from 'it-IT'
-      
-      // Priority order for voice selection
-      let voice = null;
-      
-      // 1. Try exact match (e.g., 'it-IT')
-      voice = voices.find(v => v.lang === langCode);
-      
-      // 2. Try prefix match with local variant (e.g., 'it-IT' for 'it')
-      if (!voice) {
-        voice = voices.find(v => v.lang.startsWith(langPrefix + '-'));
-      }
-      
-      // 3. Try exact prefix match (e.g., 'it')
-      if (!voice) {
-        voice = voices.find(v => v.lang === langPrefix);
-      }
-      
-      // 4. Try any voice containing the language prefix
-      if (!voice) {
-        voice = voices.find(v => v.lang.toLowerCase().startsWith(langPrefix.toLowerCase()));
-      }
-      
-      if (voice) {
-        utterance.voice = voice;
-        utterance.lang = voice.lang;
-      } else {
-        // Fallback to requested language code
-        utterance.lang = langCode;
-      }
-      
-      utterance.rate = 0.9;
-      utterance.pitch = 1.0;
-      utterance.volume = 1.0;
-      
-      utterance.onend = onEnd;
-      utterance.onerror = (e) => {
-        console.error('TTS Error:', e);
+      try {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voices = window.speechSynthesis.getVoices();
+        const langPrefix = langCode.split('-')[0]; // e.g., 'it' from 'it-IT'
+        
+        console.log('TTS: Available voices:', voices.length, 'Language:', langCode);
+        
+        // Priority order for voice selection
+        let voice = null;
+        
+        // 1. Try exact match (e.g., 'it-IT')
+        voice = voices.find(v => v.lang === langCode);
+        
+        // 2. Try prefix match with local variant (e.g., 'it-IT' for 'it')
+        if (!voice) {
+          voice = voices.find(v => v.lang.startsWith(langPrefix + '-'));
+        }
+        
+        // 3. Try exact prefix match (e.g., 'it')
+        if (!voice) {
+          voice = voices.find(v => v.lang === langPrefix);
+        }
+        
+        // 4. Try any voice containing the language prefix
+        if (!voice) {
+          voice = voices.find(v => v.lang.toLowerCase().startsWith(langPrefix.toLowerCase()));
+        }
+
+        // 5. Fallback: try Google voices or any available voice
+        if (!voice && voices.length > 0) {
+          voice = voices.find(v => v.name.toLowerCase().includes('google') && v.lang.startsWith(langPrefix)) 
+                  || voices.find(v => v.lang.startsWith(langPrefix))
+                  || voices[0]; // Last resort: use first available voice
+        }
+        
+        if (voice) {
+          utterance.voice = voice;
+          utterance.lang = voice.lang;
+          console.log('TTS: Using voice:', voice.name, voice.lang);
+        } else {
+          utterance.lang = langCode;
+          console.log('TTS: No matching voice, using lang code:', langCode);
+        }
+        
+        utterance.rate = 0.9;
+        utterance.pitch = 1.0;
+        utterance.volume = 1.0;
+        
+        utterance.onstart = () => {
+          console.log('TTS: Started speaking');
+        };
+        
+        utterance.onend = () => {
+          console.log('TTS: Finished speaking');
+          onEnd();
+        };
+        
+        utterance.onerror = (e) => {
+          console.error('TTS Error:', e.error || e);
+          onEnd();
+        };
+        
+        // Chrome bug fix: need to speak in chunks for long text
+        window.speechSynthesis.speak(utterance);
+        
+        // Chrome bug fix: keep speech alive with periodic resume
+        const keepAlive = setInterval(() => {
+          if (!window.speechSynthesis.speaking) {
+            clearInterval(keepAlive);
+          } else {
+            window.speechSynthesis.pause();
+            window.speechSynthesis.resume();
+          }
+        }, 10000);
+        
+      } catch (err) {
+        console.error('TTS Exception:', err);
         onEnd();
-      };
-      
-      window.speechSynthesis.speak(utterance);
+      }
     };
     
     // Chrome requires voices to be loaded first
     const voices = window.speechSynthesis.getVoices();
     if (voices.length === 0) {
+      console.log('TTS: Waiting for voices to load...');
       // Wait for voices to load
       const voicesLoaded = () => {
         window.speechSynthesis.onvoiceschanged = null;
@@ -85,24 +133,32 @@ const speakText = (text: string, langCode: string, onEnd: () => void) => {
       window.speechSynthesis.onvoiceschanged = voicesLoaded;
       // Fallback timeout in case voices don't load
       setTimeout(() => {
-        if (window.speechSynthesis.getVoices().length > 0) {
+        const loadedVoices = window.speechSynthesis.getVoices();
+        if (loadedVoices.length > 0) {
+          console.log('TTS: Voices loaded via timeout:', loadedVoices.length);
           startSpeaking();
         } else {
-          console.warn('No TTS voices available');
-          onEnd();
+          console.warn('TTS: No voices available after timeout');
+          // Try to speak anyway - browser might use default voice
+          startSpeaking();
         }
-      }, 1000);
+      }, 500);
     } else {
       startSpeaking();
     }
   } else {
     // Use expo-speech on native
+    console.log('TTS Native: Speaking with lang:', langCode);
     Speech.speak(text, {
       language: langCode,
       rate: 0.9,
       pitch: 1.0,
       onDone: onEnd,
       onStopped: onEnd,
+      onError: (err) => {
+        console.error('TTS Native Error:', err);
+        onEnd();
+      },
     });
   }
 };
