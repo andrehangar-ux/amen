@@ -119,7 +119,8 @@ export default function LoginScreen() {
         await BiometricService.saveCredentials(email, password);
       }
       
-      router.replace('/(tabs)');
+      // Check consent before navigating
+      await checkConsentAndNavigate();
     } catch (error: any) {
       Alert.alert(t('error'), error.message || t('loginFailed'));
     } finally {
