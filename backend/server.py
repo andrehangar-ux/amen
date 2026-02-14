@@ -2051,6 +2051,56 @@ async def update_reading_progress(user: User = Depends(require_auth)):
     
     return await db.progress.find_one({"user_id": user.user_id}, {"_id": 0})
 
+# Save reading history for a specific chapter
+@api_router.post("/progress/reading/chapter")
+async def save_chapter_reading(
+    book: str = Query(...),
+    chapter: int = Query(...),
+    user: User = Depends(require_auth)
+):
+    """Save a specific chapter as read and update reading history"""
+    now = datetime.now(timezone.utc)
+    
+    # Update reading history collection
+    existing = await db.reading_history.find_one({
+        "user_id": user.user_id,
+        "book": book,
+        "chapter": chapter
+    })
+    
+    if existing:
+        # Update last read date
+        await db.reading_history.update_one(
+            {"_id": existing["_id"]},
+            {"$set": {"last_read": now, "read_count": existing.get("read_count", 1) + 1}}
+        )
+    else:
+        # Create new entry
+        await db.reading_history.insert_one({
+            "user_id": user.user_id,
+            "book": book,
+            "chapter": chapter,
+            "first_read": now,
+            "last_read": now,
+            "read_count": 1
+        })
+    
+    return {"success": True, "book": book, "chapter": chapter}
+
+# Get reading history
+@api_router.get("/progress/reading/history")
+async def get_reading_history(
+    limit: int = Query(50, ge=1, le=200),
+    user: User = Depends(require_auth)
+):
+    """Get the user's reading history sorted by last read"""
+    history = await db.reading_history.find(
+        {"user_id": user.user_id},
+        {"_id": 0, "user_id": 0}
+    ).sort("last_read", -1).limit(limit).to_list(limit)
+    
+    return {"history": history, "total": len(history)}
+
 # ==================== DONATION ENDPOINTS ====================
 
 # Donation Configuration
