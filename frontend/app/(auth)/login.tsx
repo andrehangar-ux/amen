@@ -59,14 +59,6 @@ export default function LoginScreen() {
     router.replace('/');
   };
 
-  const handleTermsAccept = () => {
-    setShowTermsModal(false);
-    if (pendingNavigation) {
-      setPendingNavigation(false);
-      router.replace('/(tabs)');
-    }
-  };
-
   const handleBiometricLogin = async () => {
     setLoading(true);
     try {
