@@ -996,6 +996,7 @@ export const translations: Record<string, Record<string, string>> = {
     termsAndConditions: 'Termos e Condições',
     acceptTermsRequired: 'Você deve aceitar os Termos e Condições para se registrar',
   },
+  fr: {
     welcome: 'Bienvenue',
     goodMorning: 'Bonjour',
     goodAfternoon: 'Bon après-midi',
