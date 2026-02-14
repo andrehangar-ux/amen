@@ -28,6 +28,9 @@ export default function TabLayout() {
     const checkConsentStatus = async () => {
       if (!consentChecked) {
         try {
+          // Small delay to ensure token is saved
+          await new Promise(resolve => setTimeout(resolve, 500));
+          
           console.log('Checking consent status...');
           const status = await api.getConsentStatus();
           console.log('Consent status:', status);
