@@ -419,11 +419,53 @@ def get_quiz_1000_by_category(category_id: str, lang: str = 'it') -> dict:
     trans = CATEGORY_TRANSLATIONS.get(cat_id, {}).get(lang, {})
     title = trans.get('title', cat_data.get('title', cat_id))
     
-    # For now, return Italian questions (translations can be added later via AI)
+    # Get questions - Italian by default
     questions = cat_data.get('questions', [])
+    questions = questions[:30] if len(questions) > 30 else questions  # Limit to 30 per quiz session
     
     return {
         'id': f"cat_{cat_id}",
         'title': title,
-        'questions': questions[:30] if len(questions) > 30 else questions  # Limit to 30 per quiz session
+        'questions': questions,
+        'lang': lang
+    }
+
+async def get_quiz_1000_by_category_translated(category_id: str, lang: str = 'it') -> dict:
+    """Get quiz questions for a specific category with translation support"""
+    data = get_quiz_1000_data()
+    
+    # Remove "cat_" prefix if present
+    cat_id = category_id.replace('cat_', '')
+    
+    if cat_id not in data:
+        return None
+    
+    cat_data = data[cat_id]
+    
+    # Get translated metadata
+    trans = CATEGORY_TRANSLATIONS.get(cat_id, {}).get(lang, {})
+    title = trans.get('title', cat_data.get('title', cat_id))
+    
+    # Get questions
+    questions = cat_data.get('questions', [])
+    questions = questions[:30] if len(questions) > 30 else questions
+    
+    # For Italian, return as-is
+    if lang == 'it':
+        return {
+            'id': f"cat_{cat_id}",
+            'title': title,
+            'questions': questions
+        }
+    
+    # For other languages, translate on-demand
+    translated_questions = []
+    for q in questions:
+        translated_q = await translate_question(q, lang)
+        translated_questions.append(translated_q)
+    
+    return {
+        'id': f"cat_{cat_id}",
+        'title': title,
+        'questions': translated_questions
     }
