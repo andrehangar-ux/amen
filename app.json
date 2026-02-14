@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Amen!",
-    "slug": "amen-spiritual-app",
-    "version": "1.1.0",
+    "name": "Amen App New",
+    "slug": "amen-spiritual-new",
+    "version": "1.0.0",
     "android": {
-      "package": "com.amen.spiritualapp"
+      "package": "com.amen.spiritualapp.new"
     }
   }
 }
