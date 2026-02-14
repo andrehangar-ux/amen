@@ -14,8 +14,6 @@ import { useLanguageStore } from '../store/languageStore';
 import { useConsentStore } from '../store/consentStore';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const TERMS_VERSION = '1.0';
-
 // Translations for the modal
 const modalTranslations: Record<string, Record<string, string>> = {
   it: {
