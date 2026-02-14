@@ -1,66 +1,67 @@
-# Amen! - App Biblica PWA
+# Amen! - Product Requirements Document
 
-## Problema Originale
-Creare un'app biblica completa con lettura della Bibbia, quiz, diario spirituale, strumenti di studio basati su IA, e funzionalità social.
+## Original Problem Statement
+App cristiana per la lettura della Bibbia, diario spirituale, community e assistente AI.
 
-## Funzionalità Implementate
+## Core Features
+- Lettura Bibbia multilingua (IT, EN, ES, DE, FR, PT)
+- Text-to-Speech per la lettura
+- Diario spirituale con mood tracking
+- Community con utenti online e chat private
+- Assistente AI (GPT-4o)
+- Notifiche push per Versetto del Giorno
+- Statistiche di lettura
 
-### Sessione Corrente (Feb 2025) - Iterazione 16
-- **Pagina Progressi Completa**: Nuova pagina `/progress` accessibile cliccando sulle statistiche nel profilo. Mostra statistiche dettagliate (streak, capitoli letti, letture totali), attività recente, lista libri espandibile con capitoli letti cliccabili
-- **API Statistiche Dettagliate**: Nuovi endpoint `/api/progress/stats` e `/api/progress/book/{book_name}` per ottenere progressi dettagliati
+## What's Been Implemented
 
-### Sessione Precedente - Iterazione 15
-- TTS Migliorato per tutte le 6 lingue
-- Messaggi Privati dalla Community
-- Utenti Online con chat privata
+### Session Dec 14, 2025
+- **Termini e Condizioni (T&C)** - DONE
+  - Modale bloccante che appare dopo il login se l'utente non ha accettato i T&C
+  - Supporto multilingua (IT, EN, ES, DE, FR, PT)
+  - Integrazione con backend API esistenti (/api/consent/status, /api/consent/accept)
+  - Flow: login -> check consent -> if false, show modal -> after accept, navigate to tabs
+  - Files: frontend/app/(tabs)/index.tsx, frontend/app/index.tsx, frontend/src/components/TermsModal.tsx
 
-### Backend API Nuovi
-- `GET /api/progress/stats` - Statistiche complete di lettura
-- `GET /api/progress/book/{book_name}` - Progressi per libro specifico
+### Previous Sessions
+- Community con utenti online e chat private - DONE
+- Text-to-Speech migliorato - DONE
+- Pagina statistiche di lettura (/progress) - DONE
+- Build fixes e stabilizzazione - DONE
 
-### Funzionalità Complete
-- Pagina Progressi con statistiche dettagliate
-- TTS Bibbia in 6 lingue
-- Messaggi privati tra utenti
-- Utenti online nella Community
-- Notifiche push versetto del giorno
-- Checkbox T&C nella registrazione
-- Eliminazione account GDPR compliant
-- Login automatico
-- Quiz con 1000 domande tradotte
-- Cronologia lettura nel profilo
-- Internazionalizzazione completa (6 lingue)
+## Prioritized Backlog
 
-## Architettura
+### P1 - High Priority
+- **Notifiche Push Versetto del Giorno**: Completare la logica di scheduling e invio della notifica giornaliera
 
-```
-/app
-├── backend/
-│   └── server.py               # FastAPI con nuovi endpoint progress
-└── frontend/
-    ├── app/
-    │   ├── progress.tsx        # NUOVA pagina progressi dettagliati
-    │   ├── (tabs)/
-    │   │   ├── bible.tsx       # Lettura Bibbia con TTS
-    │   │   └── profile.tsx     # Link alle statistiche espanse
-    │   └── community.tsx       # Community con chat privata
-    └── src/
-        └── utils/api.ts        # getReadingStats, getBookProgress
-```
+### P2 - Medium Priority
+- Interfaccia Ricerca Globale (/app/frontend/app/search.tsx)
+- Mappe Bibliche (/app/frontend/app/maps.tsx)
+- Personalizzazione temi e font
 
-## Database (MongoDB)
-- `users`, `reading_history`, `progress`, `online_users`, `private_messages`
+### P3 - Low Priority
+- Investigare errori 520 intermittenti
+- Refactoring languageStore.ts in file JSON separati
 
-## Credenziali Test
+## Key Technical Stack
+- Frontend: React Native, Expo, TypeScript, Zustand
+- Backend: FastAPI, MongoDB
+- AI: OpenAI GPT-4o
+- External APIs: bible-api.com, laparola.net
+
+## Key API Endpoints
+- POST /api/auth/login
+- GET /api/consent/status
+- POST /api/consent/accept?version=X
+- DELETE /api/consent/withdraw
+- GET /api/reading-progress
+- POST /api/heartbeat
+- GET /api/online-users
+- POST /api/messages
+- GET /api/messages/{other_user_id}
+
+## Test Credentials
 - Email: testbible@cibospirituale.it
 - Password: Test123!
 
-## Backlog (P2)
-1. Interfaccia Ricerca Globale (`/search.tsx`)
-2. Interfaccia Mappe Bibliche (`/maps.tsx`)
-3. Personalizzazione temi e font
-4. Indicatori visivi capitoli letti nella selezione capitoli Bibbia
-
-## Test Report
-- Iterazione 16: 100% backend (10/10), 100% frontend
-- File: /app/test_reports/iteration_16.json
+## Test Reports
+- /app/test_reports/iteration_17.json (T&C flow - PASS)
