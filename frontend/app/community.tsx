@@ -202,6 +202,46 @@ export default function CommunityScreen() {
         </View>
       </View>
 
+      {/* Quick Actions Bar */}
+      <View style={styles.quickActionsContainer}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.quickActionsScroll}>
+          <TouchableOpacity style={styles.quickAction} onPress={() => router.push('/bible')}>
+            <View style={[styles.quickActionIcon, { backgroundColor: COLORS.primary + '20' }]}>
+              <Icon name="book" size={20} color={COLORS.primary} />
+            </View>
+            <Text style={styles.quickActionText}>{t('readBible')}</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity style={styles.quickAction} onPress={() => router.push('/quiz')}>
+            <View style={[styles.quickActionIcon, { backgroundColor: '#4CAF50' + '20' }]}>
+              <Icon name="help-circle" size={20} color="#4CAF50" />
+            </View>
+            <Text style={styles.quickActionText}>{t('quiz')}</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity style={styles.quickAction} onPress={() => router.push('/journal')}>
+            <View style={[styles.quickActionIcon, { backgroundColor: '#FF9800' + '20' }]}>
+              <Icon name="create" size={20} color="#FF9800" />
+            </View>
+            <Text style={styles.quickActionText}>{t('journal')}</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity style={styles.quickAction} onPress={() => router.push('/groups')}>
+            <View style={[styles.quickActionIcon, { backgroundColor: '#9C27B0' + '20' }]}>
+              <Icon name="people" size={20} color="#9C27B0" />
+            </View>
+            <Text style={styles.quickActionText}>{t('groups')}</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity style={styles.quickAction} onPress={() => router.push('/dictionary')}>
+            <View style={[styles.quickActionIcon, { backgroundColor: '#2196F3' + '20' }]}>
+              <Icon name="library" size={20} color="#2196F3" />
+            </View>
+            <Text style={styles.quickActionText}>{t('dictionary')}</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
+
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.keyboardView}
