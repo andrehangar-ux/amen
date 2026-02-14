@@ -33,8 +33,6 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [biometricAvailable, setBiometricAvailable] = useState(false);
   const [hasSavedCredentials, setHasSavedCredentials] = useState(false);
-  const [showTermsModal, setShowTermsModal] = useState(false);
-  const [pendingNavigation, setPendingNavigation] = useState(false);
   const { login, googleLogin } = useAuthStore();
   const { t } = useTranslation();
 
