@@ -377,7 +377,7 @@ export default function QuizScreen() {
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity onPress={resetQuiz}>
-            <Ionicons name="close" size={28} color={COLORS.text} />
+            <Icon name="close" size={28} color={COLORS.text} />
           </TouchableOpacity>
           <Text style={styles.progressText}>
             {currentQuestion + 1} / {questions.length}
@@ -432,7 +432,7 @@ export default function QuizScreen() {
             onPress={prevQuestion}
             disabled={currentQuestion === 0}
           >
-            <Ionicons name="chevron-back" size={24} color={currentQuestion === 0 ? COLORS.textMuted : COLORS.primary} />
+            <Icon name="chevron-back" size={24} color={currentQuestion === 0 ? COLORS.textMuted : COLORS.primary} />
           </TouchableOpacity>
 
           {currentQuestion === questions.length - 1 ? (
@@ -466,7 +466,7 @@ export default function QuizScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={28} color={COLORS.text} />
+          <Icon name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.title}>{t('title')}</Text>
         <View style={{ width: 28 }} />
@@ -482,7 +482,7 @@ export default function QuizScreen() {
             onPress={() => setSelectedCategory('tematici')}
             data-testid="quiz-thematic-tab"
           >
-            <Ionicons name="albums" size={18} color={selectedCategory === 'tematici' ? '#fff' : COLORS.primary} />
+            <Icon name="albums" size={18} color={selectedCategory === 'tematici' ? '#fff' : COLORS.primary} />
             <Text style={[styles.categoryBtnText, selectedCategory === 'tematici' && styles.categoryBtnTextActive]}>
               {t('thematic')}
             </Text>
@@ -493,7 +493,7 @@ export default function QuizScreen() {
             onPress={() => setSelectedCategory('classici')}
             data-testid="quiz-classic-tab"
           >
-            <Ionicons name="book" size={18} color={selectedCategory === 'classici' ? '#fff' : COLORS.primary} />
+            <Icon name="book" size={18} color={selectedCategory === 'classici' ? '#fff' : COLORS.primary} />
             <Text style={[styles.categoryBtnText, selectedCategory === 'classici' && styles.categoryBtnTextActive]}>
               {t('base')}
             </Text>
@@ -504,7 +504,7 @@ export default function QuizScreen() {
             onPress={() => setSelectedCategory('avanzato')}
             data-testid="quiz-advanced-tab"
           >
-            <Ionicons name="school" size={18} color={selectedCategory === 'avanzato' ? '#fff' : COLORS.accent} />
+            <Icon name="school" size={18} color={selectedCategory === 'avanzato' ? '#fff' : COLORS.accent} />
             <Text style={[styles.categoryBtnText, selectedCategory === 'avanzato' && styles.categoryBtnTextActive]}>
               {t('advanced')}
             </Text>
@@ -514,7 +514,7 @@ export default function QuizScreen() {
         {/* Info banner for thematic quizzes */}
         {selectedCategory === 'tematici' && categories.length > 0 && (
           <View style={styles.infoBanner}>
-            <Ionicons name="information-circle" size={20} color={COLORS.primary} />
+            <Icon name="information-circle" size={20} color={COLORS.primary} />
             <Text style={styles.infoBannerText}>
               {t('thematicDesc')} - {categories.reduce((acc, c) => acc + c.questions_count, 0)} {t('questions')}
             </Text>
@@ -523,7 +523,7 @@ export default function QuizScreen() {
 
         {filteredTopics.length === 0 ? (
           <View style={styles.emptyContainer}>
-            <Ionicons name="help-circle-outline" size={48} color={COLORS.textMuted} />
+            <Icon name="help-circle-outline" size={48} color={COLORS.textMuted} />
             <Text style={styles.emptyText}>
               {selectedCategory === 'avanzato' 
                 ? t('advancedComingSoon')
