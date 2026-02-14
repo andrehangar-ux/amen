@@ -644,6 +644,12 @@ const styles = StyleSheet.create({
     width: 1,
     backgroundColor: COLORS.border,
   },
+  viewProgressHint: {
+    position: 'absolute',
+    right: SPACING.md,
+    top: '50%',
+    marginTop: -8,
+  },
   section: {
     marginTop: SPACING.lg,
     paddingHorizontal: SPACING.md,
