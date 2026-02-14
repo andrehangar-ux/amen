@@ -1515,6 +1515,10 @@ export const translations: Record<string, Record<string, string>> = {
     groups: 'Gruppen',
     onlineNow: 'Jetzt online',
     onlineUsers: 'Online-Benutzer',
+    you: 'Du',
+    startConversation: 'Starten Sie das Gespräch!',
+    writeYourMessage: 'Schreiben Sie Ihre Nachricht...',
+    unableToSendMessage: 'Nachricht konnte nicht gesendet werden',
   },
 };
 
