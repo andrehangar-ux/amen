@@ -502,6 +502,33 @@ export default function ProfileScreen() {
           </View>
         </View>
 
+        {/* Notifications Section */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{t('notifications')}</Text>
+          <View style={styles.menuCard}>
+            <View style={styles.notificationRow}>
+              <View style={styles.notificationInfo}>
+                <View style={[styles.menuIconContainer, { backgroundColor: '#FF9800' + '20' }]}>
+                  <Icon name="notifications" size={20} color="#FF9800" />
+                </View>
+                <View style={styles.notificationTextContainer}>
+                  <Text style={styles.menuTitle}>{t('dailyVerse')}</Text>
+                  <Text style={styles.menuSubtitle}>
+                    {notificationEnabled ? t('notificationEnabled') + ' - 08:00' : t('notificationsDesc')}
+                  </Text>
+                </View>
+              </View>
+              <Switch
+                value={notificationEnabled}
+                onValueChange={toggleNotification}
+                trackColor={{ false: COLORS.border, true: COLORS.primary + '50' }}
+                thumbColor={notificationEnabled ? COLORS.primary : COLORS.textMuted}
+                data-testid="daily-verse-notification-switch"
+              />
+            </View>
+          </View>
+        </View>
+
         {/* Account Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t('account')}</Text>
