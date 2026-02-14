@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useAuthStore } from '../src/store/authStore';
-import { useConsentStore } from '../src/store/consentStore';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { COLORS } from '../src/utils/theme';
 import * as SplashScreen from 'expo-splash-screen';
@@ -11,19 +10,11 @@ import * as SplashScreen from 'expo-splash-screen';
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
 export default function RootLayout() {
-  const { checkAuth, isLoading: authLoading, isAuthenticated } = useAuthStore();
-  const { reset } = useConsentStore();
+  const { checkAuth, isLoading: authLoading } = useAuthStore();
 
   useEffect(() => {
     checkAuth();
   }, []);
-
-  // Reset consent state when user logs out
-  useEffect(() => {
-    if (!isAuthenticated) {
-      reset();
-    }
-  }, [isAuthenticated]);
 
   useEffect(() => {
     if (!authLoading) {
