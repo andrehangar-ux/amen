@@ -1,0 +1,392 @@
+{
+  "q16_en": {
+    "id": "q16",
+    "question": "What does the name \"Adam\" mean?",
+    "options": [
+      "First man",
+      "Humanity / made from earth",
+      "Friend of God",
+      "King"
+    ],
+    "correct": 1,
+    "explanation": "A collective name derived from adamah (earth) [18, 35, 36].",
+    "verse_ref": ""
+  },
+  "q161_en": {
+    "id": "q161",
+    "question": "Seven Stars (Rev)?",
+    "options": [
+      "Seven plagues",
+      "Angels of the Churches",
+      "Tribes",
+      "Sacraments"
+    ],
+    "correct": 1,
+    "explanation": "Inaugural vision [334, 335].",
+    "verse_ref": ""
+  },
+  "q247_en": {
+    "id": "q247",
+    "question": "Example of faith (Romans 4)?",
+    "options": [
+      "Moses",
+      "David",
+      "Abraham",
+      "Noah"
+    ],
+    "correct": 2,
+    "explanation": "Father of believers [452, 453].",
+    "verse_ref": ""
+  },
+  "q259_en": {
+    "id": "q259",
+    "question": "Hymn of Kenosis?",
+    "options": [
+      "Charity",
+      "Wisdom",
+      "Christological (emptying)",
+      "Creation"
+    ],
+    "correct": 2,
+    "explanation": "Philippians 2 [189, 475, 476].",
+    "verse_ref": ""
+  },
+  "q269_en": {
+    "id": "q269",
+    "question": "Seven Churches?",
+    "options": [
+      "Rome",
+      "Totality of the Church",
+      "Tribes",
+      "Angels"
+    ],
+    "correct": 1,
+    "explanation": "Universality [335, 492].",
+    "verse_ref": ""
+  },
+  "q272_en": {
+    "id": "q272",
+    "question": "144,000?",
+    "options": [
+      "Tribes",
+      "Totality of the redeemed",
+      "Martyrs",
+      "Levites"
+    ],
+    "correct": 1,
+    "explanation": "Symbol [148, 149, 495].",
+    "verse_ref": ""
+  },
+  "q368_en": {
+    "id": "q368",
+    "question": "What is the etymology of Adam?",
+    "options": [
+      "First",
+      "Humanity (earth)",
+      "Friend",
+      "King"
+    ],
+    "correct": 1,
+    "explanation": "Name [35, 592, 593].",
+    "verse_ref": ""
+  },
+  "q370_en": {
+    "id": "q370",
+    "question": "Seven circuits around Jericho?",
+    "options": [
+      "Ai",
+      "Jericho",
+      "Gibeon",
+      "Hazor"
+    ],
+    "correct": 1,
+    "explanation": "Trumpets [594, 595].",
+    "verse_ref": ""
+  },
+  "q379_en": {
+    "id": "q379",
+    "question": "Total number of the redeemed?",
+    "options": [
+      "1,000",
+      "12,000",
+      "144,000",
+      "7,000"
+    ],
+    "correct": 2,
+    "explanation": "The elect [Revelation 7:4, 14:1-3].",
+    "verse_ref": ""
+  },
+  "q438_en": {
+    "id": "q438",
+    "question": "Kenosis (Phil)?",
+    "options": [
+      "Creation",
+      "Emptying of Christ",
+      "End",
+      "Charity"
+    ],
+    "correct": 1,
+    "explanation": "Phil 2 [189, 685, 686].",
+    "verse_ref": ""
+  },
+  "q440_en": {
+    "id": "q440",
+    "question": "144,000 (Revelation)?",
+    "options": [
+      "Tribes",
+      "Totality of the redeemed",
+      "Martyrs",
+      "Levites"
+    ],
+    "correct": 1,
+    "explanation": "Fullness [148, 149, 218].",
+    "verse_ref": ""
+  },
+  "q446_en": {
+    "id": "q446",
+    "question": "What day is the Sabbath?",
+    "options": [
+      "Sixth",
+      "Seventh",
+      "First",
+      "Eighth"
+    ],
+    "correct": 1,
+    "explanation": "It is consecrated [670, 693, 694].",
+    "verse_ref": ""
+  },
+  "q447_en": {
+    "id": "q447",
+    "question": "Rivers of Eden?",
+    "options": [
+      "Jordan",
+      "Nile",
+      "Unnamed",
+      "Tiber"
+    ],
+    "correct": 2,
+    "explanation": "Pishon/Gihon/Tigris/Euphrates [483, 695, 696].",
+    "verse_ref": ""
+  },
+  "q448_en": {
+    "id": "q448",
+    "question": "Cain - Keeper?",
+    "options": [
+      "Hunter",
+      "Dead",
+      "Am I my brother's keeper?",
+      "No"
+    ],
+    "correct": 2,
+    "explanation": "Refusal [697-699].",
+    "verse_ref": ""
+  },
+  "q451_en": {
+    "id": "q451",
+    "question": "Ishmael, son of...?",
+    "options": [
+      "Isaac",
+      "Ishmael",
+      "Seth",
+      "Esau"
+    ],
+    "correct": 1,
+    "explanation": "Hagar [6, 703, 704].",
+    "verse_ref": ""
+  },
+  "q488_en": {
+    "id": "q488",
+    "question": "Hebrew slave years?",
+    "options": [
+      "1",
+      "3",
+      "6",
+      "10"
+    ],
+    "correct": 2,
+    "explanation": "Seventh year set free [70, 522].",
+    "verse_ref": ""
+  },
+  "q505_en": {
+    "id": "q505",
+    "question": "What happened to the walls of Jericho on the seventh lap?",
+    "options": [
+      "They burned",
+      "They were torn down by machines",
+      "They collapsed at the shout of the people",
+      "The gates opened"
+    ],
+    "correct": 2,
+    "explanation": "At the sound of the trumpets and the war cry [5].",
+    "verse_ref": ""
+  },
+  "q657_en": {
+    "id": "q657",
+    "question": "Seventh step in the Covenant?",
+    "options": [
+      "David",
+      "Sinai",
+      "Messiah king/priest",
+      "End"
+    ],
+    "correct": 2,
+    "explanation": "Culmination in Christ [20, 216].",
+    "verse_ref": ""
+  },
+  "q664_en": {
+    "id": "q664",
+    "question": "What did Cain reply?",
+    "options": [
+      "Dead",
+      "I don't know",
+      "Am I my brother's keeper?",
+      "No"
+    ],
+    "correct": 2,
+    "explanation": "After killing Abel [227, 228].",
+    "verse_ref": ""
+  },
+  "q665_en": {
+    "id": "q665",
+    "question": "Rivers from Eden?",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "7"
+    ],
+    "correct": 2,
+    "explanation": "Pishon, Gihon, Tigris, Euphrates [229, 230].",
+    "verse_ref": ""
+  },
+  "q692_en": {
+    "id": "q692",
+    "question": "Hymn of emptying (Phil 2)?",
+    "options": [
+      "Charity",
+      "Kenosis",
+      "Creation",
+      "Praise"
+    ],
+    "correct": 1,
+    "explanation": "Humiliation/Exaltation [99, 260].",
+    "verse_ref": ""
+  },
+  "q694_en": {
+    "id": "q694",
+    "question": "Thomas's confession?",
+    "options": [
+      "Thank you",
+      "Lord",
+      "My Lord and my God",
+      "Master"
+    ],
+    "correct": 2,
+    "explanation": "Upon seeing the Risen One [263, 264].",
+    "verse_ref": ""
+  },
+  "q718_en": {
+    "id": "q718",
+    "question": "Seven Stars (Rev)?",
+    "options": [
+      "Plagues",
+      "Church Angels",
+      "Tribes",
+      "Sacraments"
+    ],
+    "correct": 1,
+    "explanation": "Vision of John [299].",
+    "verse_ref": ""
+  },
+  "q782_en": {
+    "id": "q782",
+    "question": "Redeemed (Rev)?",
+    "options": [
+      "1000",
+      "12000",
+      "144,000",
+      "7000"
+    ],
+    "correct": 2,
+    "explanation": "Symbolic [116, 117].",
+    "verse_ref": ""
+  },
+  "q796_en": {
+    "id": "q796",
+    "question": "Etymology of Adam?",
+    "options": [
+      "First",
+      "Humanity/Earth man",
+      "King",
+      "Friend"
+    ],
+    "correct": 1,
+    "explanation": "Adamah [21, 217].",
+    "verse_ref": ""
+  },
+  "q798_en": {
+    "id": "q798",
+    "question": "Am I my brother's keeper?",
+    "options": [
+      "Dead",
+      "I don't know",
+      "Am I my brother's keeper?",
+      "No"
+    ],
+    "correct": 2,
+    "explanation": "Abel [227, 228].",
+    "verse_ref": ""
+  },
+  "q799_en": {
+    "id": "q799",
+    "question": "How many rivers flowed out of Eden?",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "7"
+    ],
+    "correct": 2,
+    "explanation": "Genesis [2:10-14].",
+    "verse_ref": ""
+  },
+  "q804_en": {
+    "id": "q804",
+    "question": "Adam with article?",
+    "options": [
+      "First man",
+      "Humanity/The Man",
+      "Male",
+      "Father"
+    ],
+    "correct": 1,
+    "explanation": "Hebrew [270].",
+    "verse_ref": ""
+  },
+  "q815_en": {
+    "id": "q815",
+    "question": "Number of the redeemed (Revelation)?",
+    "options": [
+      "12000",
+      "1000000",
+      "144,000",
+      "7000"
+    ],
+    "correct": 2,
+    "explanation": "Symbolic fullness [116, 117].",
+    "verse_ref": ""
+  },
+  "q862_en": {
+    "id": "q862",
+    "question": "Seventh level Covenant?",
+    "options": [
+      "Sinai",
+      "David",
+      "Messiah king/priest",
+      "Revelation"
+    ],
+    "correct": 2,
+    "explanation": "Murdocca [20, 215].",
+    "verse_ref": ""
+  }
+}
