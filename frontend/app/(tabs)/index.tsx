@@ -45,38 +45,21 @@ export default function HomeScreen() {
   const [moodCheckinResult, setMoodCheckinResult] = useState<any>(null);
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
-  const [termsCheckDone, setTermsCheckDone] = useState(false);
-
-  // Check terms acceptance on mount
-  useEffect(() => {
-    if (termsCheckDone) return;
-    
-    const checkTerms = async () => {
-      try {
-        const status = await api.getConsentStatus();
-        setTermsCheckDone(true);
-        if (!status.accepted) {
-          setShowTermsModal(true);
-        }
-      } catch (error) {
-        console.log('Error checking consent:', error);
-        setTermsCheckDone(true);
-        // Show modal on error to be safe
-        setShowTermsModal(true);
-      }
-    };
-    
-    // Small delay to ensure auth is fully complete
-    const timer = setTimeout(checkTerms, 800);
-    return () => clearTimeout(timer);
-  }, [termsCheckDone]);
-
-  const handleTermsAccept = () => {
-    setShowTermsModal(false);
-  };
 
   const loadData = useCallback(async () => {
     try {
+      // Check consent status first
+      if (!showTermsModal) {
+        try {
+          const consentStatus = await api.getConsentStatus();
+          if (!consentStatus.accepted) {
+            setShowTermsModal(true);
+          }
+        } catch (e) {
+          console.log('Consent check error:', e);
+        }
+      }
+      
       const [verse, prog] = await Promise.all([
         api.getDailyVerse(currentLanguage),
         api.getProgress(),
@@ -86,7 +69,11 @@ export default function HomeScreen() {
     } catch (error) {
       console.log('Error loading data:', error);
     }
-  }, [currentLanguage]);
+  }, [currentLanguage, showTermsModal]);
+
+  const handleTermsAccept = () => {
+    setShowTermsModal(false);
+  };
 
   useEffect(() => {
     loadLanguage();
