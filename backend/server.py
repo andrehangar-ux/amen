@@ -3134,7 +3134,7 @@ BIBLE_QUIZZES = {
 }
 
 from quiz_data import MULTILINGUAL_QUIZZES, get_quiz_for_language, get_all_topics_for_language
-from quiz_1000 import get_quiz_1000_topics, get_quiz_1000_by_category
+from quiz_1000 import get_quiz_1000_topics, get_quiz_1000_by_category, get_quiz_1000_by_category_translated
 
 @api_router.get("/quiz/topics")
 async def get_quiz_topics(lang: str = "it"):
@@ -3149,9 +3149,13 @@ async def get_quiz_categories(lang: str = "it"):
     return get_quiz_1000_topics(lang)
 
 @api_router.get("/quiz/category/{category_id}")
-async def get_quiz_by_category(category_id: str, lang: str = "it"):
-    """Get quiz questions for a specific category"""
-    quiz = get_quiz_1000_by_category(category_id, lang)
+async def get_quiz_by_category(category_id: str, lang: str = "it", translate: bool = True):
+    """Get quiz questions for a specific category with optional translation"""
+    if translate and lang != 'it':
+        quiz = await get_quiz_1000_by_category_translated(category_id, lang)
+    else:
+        quiz = get_quiz_1000_by_category(category_id, lang)
+    
     if not quiz:
         raise HTTPException(status_code=404, detail="Categoria non trovata")
     return quiz
