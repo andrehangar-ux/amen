@@ -56,7 +56,7 @@ eas submit -p ios
 
 ### Opzione B: Expo Go (Gratuito, Immediato)
 1. I tester scaricano **"Expo Go"** dall'App Store
-2. Condividi il link dell'app: `https://reading-progress-4.preview.emergentagent.com`
+2. Condividi il link dell'app: `https://amen-corrections.preview.emergentagent.com`
 3. Aprono il link in Expo Go
 
 ---
