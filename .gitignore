@@ -81,7 +81,3 @@ android-sdk/
 
 # Note: .env files are NOT ignored as they are needed for Emergent deployment
 # They contain template values that get auto-updated during deployment
--e 
-# Environment files
-*.env
-*.env.*
