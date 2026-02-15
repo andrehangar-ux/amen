@@ -21,8 +21,8 @@ const emojiMap: Record<string, string> = {
   'person-outline': '👤',
   'school': '🎓',
   'school-outline': '🎓',
-  'journal': '📓',
-  'journal-outline': '📓',
+  'journal': '📔',
+  'journal-outline': '📔',
   
   // Chevrons/Arrows
   'chevron-forward': '›',
