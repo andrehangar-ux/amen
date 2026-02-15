@@ -14,6 +14,22 @@ App cristiana per la lettura della Bibbia, diario spirituale, community e assist
 
 ## What's Been Implemented
 
+### Session Feb 15, 2026
+- **Bug Fix: Pulsanti Profilo** - DONE
+  - Pulsanti "Disconnetti" e "Elimina Account" ora funzionano correttamente su web
+  - Modificato showConfirm() con setTimeout per compatibilità browser
+  - Aggiunto activeOpacity e data-testid ai MenuItem
+  - Files: frontend/app/(tabs)/profile.tsx
+
+- **Bug Fix: Traduzione Tedesca** - DONE
+  - Aggiunto versetti biblici in tedesco (de) in SAMPLE_VERSES_MULTILANG
+  - Aggiunto versetti mood in tedesco (de) in MOOD_VERSES_MULTILANG
+  - Files: backend/server.py
+
+- **Bug Fix: Icone App** - DONE
+  - Aggiunto icone mancanti nel fallback emoji (school, journal, add-circle, albums, business, hand-left, library, logo-paypal, radio-button-on, repeat, save, swap-horizontal)
+  - Files: frontend/src/components/Icon.tsx
+
 ### Session Dec 14, 2025
 - **Termini e Condizioni (T&C)** - DONE
   - Modale bloccante che appare dopo il login se l'utente non ha accettato i T&C
@@ -37,6 +53,9 @@ App cristiana per la lettura della Bibbia, diario spirituale, community e assist
 - Interfaccia Ricerca Globale (/app/frontend/app/search.tsx)
 - Mappe Bibliche (/app/frontend/app/maps.tsx)
 - Personalizzazione temi e font
+- Miglioramenti sezione Community (più interattiva)
+- Chat privata tra utenti
+- Utenti online nella sezione Community
 
 ### P3 - Low Priority
 - Investigare errori 520 intermittenti
@@ -50,9 +69,12 @@ App cristiana per la lettura della Bibbia, diario spirituale, community e assist
 
 ## Key API Endpoints
 - POST /api/auth/login
+- POST /api/auth/logout
+- DELETE /api/auth/delete-account
 - GET /api/consent/status
 - POST /api/consent/accept?version=X
 - DELETE /api/consent/withdraw
+- GET /api/bible/daily-verse?lang=XX
 - GET /api/reading-progress
 - POST /api/heartbeat
 - GET /api/online-users
@@ -64,4 +86,4 @@ App cristiana per la lettura della Bibbia, diario spirituale, community e assist
 - Password: Test123!
 
 ## Test Reports
-- /app/test_reports/iteration_17.json (T&C flow - PASS)
+- /app/test_reports/iteration_18.json (Bug fixes - PASS)
