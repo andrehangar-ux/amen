@@ -971,6 +971,16 @@ MOOD_VERSES_MULTILANG = {
         "triste": [{"ref": "Psaume 34:18", "text": "L'Éternel est près de ceux qui ont le cœur brisé."}],
         "stanco": [{"ref": "Matthieu 11:28", "text": "Venez à moi, vous tous qui êtes fatigués et chargés, et je vous donnerai du repos."}],
     },
+    "de": {
+        "felice": [{"ref": "Psalm 118:24", "text": "Dies ist der Tag, den der Herr macht; lasst uns freuen und fröhlich an ihm sein."}],
+        "triste": [{"ref": "Psalm 34:18", "text": "Der Herr ist nahe denen, die zerbrochenen Herzens sind."}],
+        "ansioso": [{"ref": "Philipper 4:6-7", "text": "Sorget nichts! Sondern in allen Dingen lasset eure Bitten vor Gott kund werden."}],
+        "arrabbiato": [{"ref": "Epheser 4:26", "text": "Zürnet, und sündiget nicht; lasset die Sonne nicht über eurem Zorn untergehen."}],
+        "grato": [{"ref": "1. Thessalonicher 5:18", "text": "Seid dankbar in allen Dingen."}],
+        "confuso": [{"ref": "Sprüche 3:5-6", "text": "Vertraue auf den Herrn von ganzem Herzen und verlass dich nicht auf deinen Verstand."}],
+        "speranzoso": [{"ref": "Jeremia 29:11", "text": "Denn ich weiß wohl, was ich für Gedanken über euch habe, Gedanken des Friedens und nicht des Leides."}],
+        "stanco": [{"ref": "Matthäus 11:28", "text": "Kommet her zu mir alle, die ihr mühselig und beladen seid; ich will euch erquicken."}],
+    },
 }
 
 @api_router.get("/bible/books")
