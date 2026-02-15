@@ -106,16 +106,18 @@ export default function LoginScreen() {
   const handleGoogleLogin = async () => {
     setLoading(true);
     try {
-      // Build redirect URL using window.location.origin only (required for OAuth)
-      // On native platforms, use Linking to get the app URL
+      // Build redirect URL using window.location.origin for web (required for OAuth)
+      // For native platforms, use Expo Linking to get the proper app URL scheme
       let redirectUrl: string;
       
       if (Platform.OS === 'web' && typeof window !== 'undefined' && window.location?.origin) {
+        // Web: use the current origin (works for any deployment domain)
         redirectUrl = `${window.location.origin}/auth-callback`;
       } else {
-        // For native platforms, use the backend URL
-        const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL;
-        redirectUrl = backendUrl ? `${backendUrl}/auth-callback` : '';
+        // Native: use Expo Linking to create a proper deep link URL
+        // This creates a URL like: exp://...../auth-callback or myapp://auth-callback
+        const linkingUrl = Linking.createURL('auth-callback');
+        redirectUrl = linkingUrl;
       }
       
       const authUrl = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`;
