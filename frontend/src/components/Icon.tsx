@@ -197,6 +197,29 @@ const emojiMap: Record<string, string> = {
   
   // Social/Logos
   'logo-google': '🔵',
+  'logo-paypal': '💳',
+  
+  // Additional icons
+  'add-circle': '➕',
+  'add-circle-outline': '➕',
+  'close-circle': '❌',
+  'close-circle-outline': '❌',
+  'albums': '📚',
+  'albums-outline': '📚',
+  'business': '🏢',
+  'business-outline': '🏢',
+  'hand-left': '🤚',
+  'hand-left-outline': '🤚',
+  'library': '📚',
+  'library-outline': '📚',
+  'radio-button-on': '🔘',
+  'radio-button-on-outline': '🔘',
+  'repeat': '🔁',
+  'repeat-outline': '🔁',
+  'save': '💾',
+  'save-outline': '💾',
+  'swap-horizontal': '↔️',
+  'swap-horizontal-outline': '↔️',
   
   // Misc
   'add': '+',
