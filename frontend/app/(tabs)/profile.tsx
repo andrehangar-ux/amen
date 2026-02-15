@@ -363,8 +363,13 @@ export default function ProfileScreen() {
     );
   };
 
-  const MenuItem = ({ icon, title, subtitle, onPress, color = COLORS.text }: any) => (
-    <TouchableOpacity style={styles.menuItem} onPress={onPress}>
+  const MenuItem = ({ icon, title, subtitle, onPress, color = COLORS.text, testId }: any) => (
+    <TouchableOpacity 
+      style={styles.menuItem} 
+      onPress={onPress}
+      activeOpacity={0.7}
+      data-testid={testId}
+    >
       <View style={[styles.menuIcon, { backgroundColor: color + '15' }]}>
         <Icon name={icon} size={22} color={color} />
       </View>
