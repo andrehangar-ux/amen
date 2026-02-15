@@ -560,18 +560,21 @@ export default function ProfileScreen() {
               subtitle={t('privacyDesc')}
               onPress={() => router.push('/privacy')}
               color={COLORS.primary}
+              testId="privacy-menu-item"
             />
             <MenuItem
               icon="log-out"
               title={t('logout')}
               onPress={handleLogout}
               color={COLORS.error}
+              testId="logout-menu-item"
             />
             <MenuItem
               icon="trash"
               title={t('deleteAccount')}
               onPress={handleDeleteAccount}
               color={COLORS.error}
+              testId="delete-account-menu-item"
             />
           </View>
         </View>
