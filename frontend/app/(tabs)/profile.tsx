@@ -248,10 +248,13 @@ const translations: Record<string, Record<string, string>> = {
 // Cross-platform confirm dialog
 const showConfirm = (title: string, message: string, onConfirm: () => void, cancelText: string = 'Annulla', confirmText: string = 'Conferma') => {
   if (Platform.OS === 'web') {
-    const confirmed = window.confirm(`${title}\n\n${message}`);
-    if (confirmed) {
-      onConfirm();
-    }
+    // Use setTimeout to ensure the confirm dialog appears after any click handling
+    setTimeout(() => {
+      const confirmed = window.confirm(`${title}\n\n${message}`);
+      if (confirmed) {
+        onConfirm();
+      }
+    }, 100);
   } else {
     Alert.alert(title, message, [
       { text: cancelText, style: 'cancel' },
