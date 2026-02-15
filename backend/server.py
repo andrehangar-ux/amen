@@ -917,6 +917,24 @@ SAMPLE_VERSES_MULTILANG = {
             {"verse": 4, "text": "Quand je marche dans la vallée de l'ombre de la mort, je ne crains aucun mal, car tu es avec moi."},
         ],
     },
+    "de": {
+        "Johannes:3": [
+            {"verse": 16, "text": "Denn also hat Gott die Welt geliebt, daß er seinen eingeborenen Sohn gab, damit alle, die an ihn glauben, nicht verloren werden, sondern das ewige Leben haben."},
+        ],
+        "Psalmen:23": [
+            {"verse": 1, "text": "Der Herr ist mein Hirte, mir wird nichts mangeln."},
+            {"verse": 2, "text": "Er weidet mich auf einer grünen Aue und führet mich zum frischen Wasser."},
+            {"verse": 3, "text": "Er erquickt meine Seele. Er führt mich auf rechter Straße um seines Namens willen."},
+            {"verse": 4, "text": "Und ob ich schon wanderte im finstern Tal, fürchte ich kein Unglück; denn du bist bei mir."},
+        ],
+        "Römer:8": [
+            {"verse": 28, "text": "Wir wissen aber, daß denen, die Gott lieben, alle Dinge zum Besten dienen."},
+            {"verse": 31, "text": "Was wollen wir nun hierzu sagen? Ist Gott für uns, wer kann wider uns sein?"},
+        ],
+        "Philipper:4": [
+            {"verse": 13, "text": "Ich vermag alles durch den, der mich mächtig macht, Christus."},
+        ],
+    },
 }
 
 # Mood verses in multiple languages
