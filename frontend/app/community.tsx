@@ -231,6 +231,54 @@ export default function CommunityScreen() {
         </View>
       </View>
 
+      {/* Online Users + Chat Toggle */}
+      <View style={styles.onlineBar}>
+        <TouchableOpacity
+          style={[styles.tabBtn, !showChats && styles.tabBtnActive]}
+          onPress={() => setShowChats(false)}
+          data-testid="community-tab-messages"
+        >
+          <Icon name="chatbubbles-outline" size={18} color={!showChats ? '#fff' : COLORS.textLight} />
+          <Text style={[styles.tabText, !showChats && styles.tabTextActive]}>{t('community')}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.tabBtn, showChats && styles.tabBtnActive]}
+          onPress={() => { setShowChats(true); loadConversations(); }}
+          data-testid="community-tab-chats"
+        >
+          <Icon name="mail-outline" size={18} color={showChats ? '#fff' : COLORS.textLight} />
+          <Text style={[styles.tabText, showChats && styles.tabTextActive]}>Chat</Text>
+          {conversations.some(c => c.unread_count > 0) && <View style={styles.unreadDot} />}
+        </TouchableOpacity>
+      </View>
+
+      {/* Online Users Strip */}
+      {onlineUsers.length > 0 && (
+        <View style={styles.onlineStrip}>
+          <Text style={styles.onlineLabel}>Online ({onlineUsers.length})</Text>
+          <FlatList
+            horizontal
+            data={onlineUsers}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item) => item.user_id}
+            contentContainerStyle={{ paddingHorizontal: 4 }}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.onlineUser}
+                onPress={() => router.push({ pathname: '/private-chat', params: { userId: item.user_id, userName: item.user_name } })}
+                data-testid={`online-user-${item.user_id}`}
+              >
+                <View style={styles.onlineAvatar}>
+                  <Text style={styles.onlineAvatarText}>{item.user_name.charAt(0).toUpperCase()}</Text>
+                  <View style={styles.onlineDot} />
+                </View>
+                <Text style={styles.onlineUserName} numberOfLines={1}>{item.user_name.split(' ')[0]}</Text>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+      )}
+
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.keyboardView}
