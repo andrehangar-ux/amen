@@ -500,11 +500,54 @@ export default function DictionaryScreen() {
           onChangeText={setSearchQuery}
         />
         {searchQuery ? (
-          <TouchableOpacity onPress={() => setSearchQuery('')}>
+          <TouchableOpacity onPress={() => { setSearchQuery(''); setAiSearchResult(null); }}>
             <Ionicons name="close-circle" size={20} color={COLORS.textMuted} />
           </TouchableOpacity>
         ) : null}
+        {searchQuery.length >= 2 && (
+          <TouchableOpacity
+            style={styles.aiSearchBtn}
+            onPress={handleAiSearch}
+            disabled={aiSearching}
+            data-testid="dictionary-ai-search-btn"
+          >
+            {aiSearching ? (
+              <ActivityIndicator size="small" color="#fff" />
+            ) : (
+              <Ionicons name="sparkles" size={16} color="#fff" />
+            )}
+          </TouchableOpacity>
+        )}
       </View>
+
+      {/* AI Search Result */}
+      {aiSearchResult && (
+        <View style={styles.aiResultCard}>
+          <View style={styles.aiResultHeader}>
+            <Ionicons name="sparkles" size={16} color={COLORS.primary} />
+            <Text style={styles.aiResultTitle}>{aiSearchResult.term}</Text>
+          </View>
+          {aiSearchResult.found === false ? (
+            <Text style={styles.aiResultText}>{aiSearchResult.suggestion || 'Termine non trovato'}</Text>
+          ) : (
+            <>
+              {aiSearchResult.origin && <Text style={styles.aiResultOrigin}>{aiSearchResult.origin}</Text>}
+              {aiSearchResult.meaning && <Text style={styles.aiResultMeaning}>{aiSearchResult.meaning}</Text>}
+              {aiSearchResult.description && <Text style={styles.aiResultText}>{aiSearchResult.description}</Text>}
+              {aiSearchResult.verses && aiSearchResult.verses.length > 0 && (
+                <View style={{ marginTop: 8 }}>
+                  {aiSearchResult.verses.slice(0, 3).map((v: any, i: number) => (
+                    <Text key={i} style={styles.aiVerse}>{v.ref}: {v.text}</Text>
+                  ))}
+                </View>
+              )}
+            </>
+          )}
+          <TouchableOpacity onPress={() => setAiSearchResult(null)} style={styles.aiCloseBtn}>
+            <Text style={styles.aiCloseBtnText}>Chiudi</Text>
+          </TouchableOpacity>
+        </View>
+      )}
 
       {/* Filter Tabs */}
       <View style={styles.filterTabs}>
