@@ -1,0 +1,89 @@
+{
+  "summary": "Iteration 19 - Mobile Auth Redirect Bug Fix Testing Complete. All 11 backend tests PASSED. Frontend testing verified login page with 'Continua con Google' button visible and web auth-callback working correctly.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_mobile_auth_redirect.py",
+    "/app/test_reports/pytest/pytest_mobile_auth.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "The mobile-redirect endpoint is well-implemented with proper HTML bridge page that reads session_id from hash fragment",
+    "Frontend login.tsx correctly detects mobile platform and redirects to backend bridge page",
+    "The auth-callback.tsx has mobile browser detection to redirect to app deep link"
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_mobile_auth_redirect.py"
+  ],
+  "success_rate": {
+    "backend": "100% (11/11 tests passed)",
+    "frontend": "100% - All features verified working"
+  },
+  "test_credentials": {
+    "email": "testbible@cibospirituale.it",
+    "password": "Test123!"
+  },
+  "seed_data_creation": "None - used existing test user",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Mobile Google login fix verified. The /api/auth/mobile-redirect endpoint serves HTML bridge page that extracts session_id from URL hash and redirects to app deep link. Web login and auth-callback pages working correctly.",
+  "features_tested": {
+    "mobile_redirect_endpoint": {
+      "status": "WORKING",
+      "tests": [
+        "GET /api/auth/mobile-redirect?scheme=amen returns HTML with amen:// deep link",
+        "GET /api/auth/mobile-redirect without scheme defaults to 'amen'",
+        "Custom scheme parameter works (e.g., scheme=testapp)",
+        "HTML contains session_id extraction from hash fragment",
+        "HTML shows fallback message after 3 seconds if app doesn't open"
+      ]
+    },
+    "auth_login_endpoint": {
+      "status": "WORKING",
+      "tests": [
+        "POST /api/auth/login with valid credentials returns 200 + user + session_token",
+        "POST /api/auth/login with invalid credentials returns 401"
+      ]
+    },
+    "google_callback_endpoint": {
+      "status": "WORKING",
+      "tests": [
+        "POST /api/auth/google-callback with invalid session returns 401",
+        "POST /api/auth/google-callback without session_id returns 400"
+      ]
+    },
+    "auth_me_endpoint": {
+      "status": "WORKING",
+      "tests": [
+        "GET /api/auth/me with valid session returns user info",
+        "GET /api/auth/me without session returns 401"
+      ]
+    },
+    "web_login_page": {
+      "status": "WORKING",
+      "description": "Login page renders with 'Continua con Google' button visible, email/password fields, and 'Accedi' login button"
+    },
+    "web_auth_callback": {
+      "status": "WORKING",
+      "description": "Auth-callback page processes session_id from query params, shows error for invalid sessions, and redirects to login after timeout"
+    },
+    "web_login_flow": {
+      "status": "WORKING",
+      "description": "Email/password login redirects to main dashboard after successful authentication"
+    }
+  },
+  "mobile_redirect_html_details": {
+    "scheme_parameter": "Uses scheme query param, defaults to 'amen'",
+    "session_extraction": "Reads session_id from window.location.hash using URLSearchParams and regex fallback",
+    "redirect_format": "{scheme}://auth-callback?session_id={sid}",
+    "fallback_message": "Shows 'Se l'app non si apre, torna all'app e riprova.' after 3 seconds",
+    "no_session_error": "Shows 'Sessione non trovata. Torna all'app e riprova.' if no session_id in hash"
+  }
+}
