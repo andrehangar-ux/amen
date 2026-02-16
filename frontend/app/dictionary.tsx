@@ -563,7 +563,7 @@ export default function DictionaryScreen() {
           style={[styles.filterTab, showFavoritesOnly && styles.filterTabActive]}
           onPress={() => setShowFavoritesOnly(true)}
         >
-          <Ionicons 
+          <Icon 
             name="heart" 
             size={16} 
             color={showFavoritesOnly ? '#fff' : COLORS.primary} 
