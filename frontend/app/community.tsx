@@ -466,6 +466,9 @@ const styles = StyleSheet.create({
     position: 'absolute', bottom: 0, right: 0, borderWidth: 2, borderColor: COLORS.card,
   },
   onlineUserName: { fontSize: 10, color: COLORS.textLight, marginTop: 2, textAlign: 'center' },
+  onlineEmpty: { fontSize: 12, color: COLORS.textMuted, paddingHorizontal: SPACING.md, paddingBottom: 8 },
+  // Section title
+  sectionTitle: { fontSize: 13, fontWeight: '700', color: COLORS.primary, paddingHorizontal: SPACING.md, paddingVertical: 8, textTransform: 'uppercase' },
   // Chat list items
   chatItem: {
     flexDirection: 'row', alignItems: 'center', padding: SPACING.md,
@@ -484,6 +487,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center', alignItems: 'center', paddingHorizontal: 6,
   },
   unreadText: { color: '#fff', fontSize: 11, fontWeight: '700' },
+  userOnlineDot: {
+    width: 12, height: 12, borderRadius: 6, backgroundColor: '#22C55E',
+    position: 'absolute', bottom: -1, right: -1, borderWidth: 2, borderColor: COLORS.card,
+  },
   backButton: {
     padding: SPACING.sm,
   },
