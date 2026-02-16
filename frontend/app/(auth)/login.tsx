@@ -98,94 +98,50 @@ export default function LoginScreen() {
   const handleGoogleLogin = async () => {
     setLoading(true);
     try {
-      // REMINDER: DO NOT HARDCODE THE URL, OR ADD ANY FALLBACKS OR REDIRECT URLS, THIS BREAKS THE AUTH
-      // Emergent Auth only supports web URLs - for mobile we use a web redirect page
-      let redirectUrl: string;
-      
       if (Platform.OS === 'web') {
-        // For web, use the current origin + auth-callback route
-        redirectUrl = `${window.location.origin}/auth-callback`;
-      } else {
-        // For mobile (Expo Go/Native), use the web version of auth-callback
-        // This page will receive session_id and redirect back to the app
-        redirectUrl = `${API_URL}/auth-callback`;
-      }
-      
-      const authUrl = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`;
-      
-      console.log('Starting Google auth with redirect:', redirectUrl);
-      console.log('Auth URL:', authUrl);
-      
-      if (Platform.OS === 'web') {
-        // For web, redirect directly
+        // Web flow: redirect directly to Emergent Auth with web callback
+        const redirectUrl = `${window.location.origin}/auth-callback`;
+        const authUrl = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`;
         window.location.href = authUrl;
         return;
       }
-      
-      // For mobile, we need to use a different approach:
-      // 1. Open the auth URL in browser
-      // 2. The web auth-callback page will handle the session_id
-      // 3. Use WebBrowser.openBrowserAsync for a cleaner mobile experience
-      
-      // Create the app's deep link URL that the web callback will redirect to
+
+      // Mobile flow: use backend bridge page that redirects to app deep link
       const appSchemeUrl = Linking.createURL('auth-callback');
-      
-      // We'll pass the app scheme as a parameter so the web callback knows where to redirect
-      const mobileAuthUrl = `${authUrl}&app_scheme=${encodeURIComponent(appSchemeUrl)}`;
-      
-      console.log('Mobile auth URL:', mobileAuthUrl);
-      console.log('App scheme URL:', appSchemeUrl);
-      
-      // Use openAuthSessionAsync with the app scheme as the return URL
-      const result = await WebBrowser.openAuthSessionAsync(
-        authUrl,
-        appSchemeUrl, // This tells the browser what URL pattern will close the session
-        {
-          showInRecents: true,
-          preferEphemeralSession: false,
-        }
-      );
-      
-      console.log('Auth result type:', result.type);
-      
+      // Extract scheme from the deep link URL (e.g. "amen" from "amen://auth-callback")
+      const schemeMatch = appSchemeUrl.match(/^([^:]+):\/\//);
+      const scheme = schemeMatch ? schemeMatch[1] : 'amen';
+
+      const redirectUrl = `${API_URL}/api/auth/mobile-redirect?scheme=${encodeURIComponent(scheme)}`;
+      const authUrl = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`;
+
+      console.log('Mobile Google auth - scheme:', scheme);
+      console.log('Mobile Google auth - appSchemeUrl:', appSchemeUrl);
+      console.log('Mobile Google auth - redirectUrl:', redirectUrl);
+
+      const result = await WebBrowser.openAuthSessionAsync(authUrl, appSchemeUrl);
+
+      console.log('Auth result:', result.type);
+
       if (result.type === 'success' && result.url) {
-        console.log('Full redirect URL:', result.url);
-        
-        // Parse session_id from URL
-        let sessionId = null;
-        const url = result.url;
-        
-        const patterns = [
-          /#session_id=([^&]+)/,
-          /\?session_id=([^&]+)/,
-          /session_id=([^&]+)/
-        ];
-        
-        for (const pattern of patterns) {
-          const match = url.match(pattern);
-          if (match) {
-            sessionId = match[1];
-            console.log('Found session_id with pattern:', pattern);
-            break;
-          }
+        console.log('Auth redirect URL:', result.url);
+
+        // Parse session_id from the returned URL
+        let sessionId: string | null = null;
+        for (const pattern of [/[?&#]session_id=([^&]+)/, /session_id=([^&]+)/]) {
+          const match = result.url.match(pattern);
+          if (match) { sessionId = match[1]; break; }
         }
-        
+
         if (sessionId) {
-          try {
-            await googleLogin(sessionId);
-            router.replace('/(tabs)');
-          } catch (loginError: any) {
-            console.error('Google login API error:', loginError);
-            Alert.alert(t('error'), loginError.message || t('googleLoginFailed'));
-          }
+          await googleLogin(sessionId);
+          router.replace('/(tabs)');
         } else {
-          console.error('No session_id in URL:', url);
+          console.error('No session_id in URL:', result.url);
           Alert.alert(t('error'), t('googleSessionNotFound'));
         }
-      } else if (result.type === 'cancel') {
-        console.log('User cancelled Google login');
-      } else if (result.type === 'dismiss') {
-        console.log('User dismissed the auth session');
+      } else if (result.type === 'cancel' || result.type === 'dismiss') {
+        console.log('User cancelled/dismissed Google login');
       }
     } catch (error: any) {
       console.error('Google login error:', error);
