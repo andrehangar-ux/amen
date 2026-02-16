@@ -92,6 +92,14 @@ class LoginRequest(BaseModel):
     email: str
     password: str
 
+class ForgotPasswordRequest(BaseModel):
+    email: str
+
+class ResetPasswordRequest(BaseModel):
+    email: str
+    code: str
+    new_password: str
+
 class JournalEntry(BaseModel):
     entry_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     user_id: str
