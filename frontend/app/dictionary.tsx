@@ -48,6 +48,8 @@ export default function DictionaryScreen() {
   const [aiQuestion, setAiQuestion] = useState('');
   const [aiAnswer, setAiAnswer] = useState('');
   const [askingAi, setAskingAi] = useState(false);
+  const [aiSearching, setAiSearching] = useState(false);
+  const [aiSearchResult, setAiSearchResult] = useState<any>(null);
   
   // Favorites and flashcards state
   const [isFavorite, setIsFavorite] = useState(false);
