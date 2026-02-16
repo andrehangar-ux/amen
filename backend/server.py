@@ -316,6 +316,30 @@ async def translate_text(text: str, source_lang: str, target_lang: str) -> str:
 
 # ==================== AUTH ENDPOINTS ====================
 
+@api_router.get("/auth/mobile-redirect")
+async def mobile_auth_redirect(request: Request):
+    """Bridge page: reads session_id from hash fragment and redirects to app deep link."""
+    scheme = request.query_params.get("scheme", "amen")
+    html = f"""<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reindirizzamento...</title>
+<style>body{{font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;background:#f5f5f0;color:#333;text-align:center}}
+.loader{{border:4px solid #e0e0e0;border-top:4px solid #4A7C59;border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin:0 auto 16px}}
+@keyframes spin{{0%{{transform:rotate(0)}}100%{{transform:rotate(360deg)}}}}</style></head>
+<body><div><div class="loader"></div><p>Accesso in corso...</p><p id="err" style="color:red;display:none"></p></div>
+<script>
+(function(){{
+  var hash=window.location.hash.substring(1);
+  var p=new URLSearchParams(hash);
+  var sid=p.get('session_id');
+  if(!sid){{var m=window.location.hash.match(/session_id=([^&]+)/);if(m)sid=m[1];}}
+  if(sid){{window.location.href='{scheme}://auth-callback?session_id='+sid;setTimeout(function(){{document.getElementById('err').style.display='block';document.getElementById('err').textContent='Se l\\'app non si apre, torna all\\'app e riprova.';}},3000);}}
+  else{{document.getElementById('err').style.display='block';document.getElementById('err').textContent='Sessione non trovata. Torna all\\'app e riprova.';}}
+}})();
+</script></body></html>"""
+    return HTMLResponse(content=html)
+
+
 @api_router.post("/auth/google-callback")
 async def google_callback(request: Request, response: Response):
     body = await request.json()
