@@ -592,6 +592,8 @@ async def reset_password(data: ResetPasswordRequest):
     )
     
     return {"message": "Password aggiornata con successo"}
+
+@api_router.get("/auth/me")
 async def get_me(user: User = Depends(require_auth)):
     return user.model_dump()
 
