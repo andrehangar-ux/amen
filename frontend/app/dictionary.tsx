@@ -628,6 +628,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLORS.background,
   },
+  // AI Search
+  aiSearchBtn: {
+    width: 32, height: 32, borderRadius: 16, backgroundColor: COLORS.primary,
+    justifyContent: 'center', alignItems: 'center', marginLeft: 6,
+  },
+  aiResultCard: {
+    marginHorizontal: SPACING.md, marginBottom: SPACING.sm, padding: SPACING.md,
+    backgroundColor: COLORS.primary + '08', borderRadius: BORDER_RADIUS.md,
+    borderWidth: 1, borderColor: COLORS.primary + '30',
+  },
+  aiResultHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 8 },
+  aiResultTitle: { fontSize: 18, fontWeight: '700', color: COLORS.primary, marginLeft: 6 },
+  aiResultOrigin: { fontSize: 12, color: COLORS.textLight, marginBottom: 4, fontStyle: 'italic' },
+  aiResultMeaning: { fontSize: 15, fontWeight: '600', color: COLORS.text, marginBottom: 6 },
+  aiResultText: { fontSize: 14, color: COLORS.text, lineHeight: 20 },
+  aiVerse: { fontSize: 13, color: COLORS.textLight, marginTop: 4, fontStyle: 'italic' },
+  aiCloseBtn: { alignSelf: 'flex-end', marginTop: 8 },
+  aiCloseBtnText: { color: COLORS.primary, fontSize: 13, fontWeight: '600' },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
