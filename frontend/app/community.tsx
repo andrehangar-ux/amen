@@ -151,7 +151,11 @@ export default function CommunityScreen() {
     return (
       <View style={[styles.messageCard, isOwn && styles.ownMessage]}>
         <View style={styles.messageHeader}>
-          <View style={styles.userInfo}>
+          <TouchableOpacity
+            style={styles.userInfo}
+            onPress={() => !isOwn && router.push({ pathname: '/private-chat', params: { userId: item.user_id, userName: item.user_name } })}
+            disabled={isOwn}
+          >
             <View style={styles.avatar}>
               <Text style={styles.avatarText}>{item.user_name.charAt(0).toUpperCase()}</Text>
             </View>
@@ -164,7 +168,7 @@ export default function CommunityScreen() {
                 </Text>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
           {item.message_type === 'prayer_request' && (
             <View style={styles.prayerBadge}>
               <Icon name="hand-left" size={12} color={COLORS.accent} />
