@@ -3937,6 +3937,69 @@ async def search_dictionary(query: str):
             })
     return results
 
+@api_router.get("/dictionary/ai-search/{query}")
+async def ai_search_dictionary(query: str, lang: str = "it"):
+    """Use AI to search and generate a definition for any biblical term"""
+    # First check if it exists in our static dictionary
+    query_lower = query.lower()
+    for key, term in BIBLICAL_DICTIONARY.items():
+        if query_lower == term["term"].lower():
+            return {"source": "dictionary", "term": translate_dict_term(term, key, lang)}
+    
+    # Check cache
+    cached = await db.ai_dictionary_cache.find_one(
+        {"query": query_lower, "language": lang}, {"_id": 0}
+    )
+    if cached:
+        return {"source": "ai_cached", "term": cached["result"]}
+    
+    # Use AI to generate definition
+    lang_names = {"it": "italiano", "en": "English", "es": "español", "de": "Deutsch", "fr": "français", "pt": "português"}
+    lang_name = lang_names.get(lang, "italiano")
+    
+    try:
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=f"dict_search_{uuid.uuid4()}",
+            system_message=f"Sei un esperto biblista. Rispondi SOLO in {lang_name}. Rispondi SEMPRE in formato JSON valido."
+        ).with_model("openai", "gpt-4o")
+        
+        prompt = f"""Cerca il termine biblico "{query}" e restituisci un JSON con questa struttura esatta:
+{{
+  "term": "{query}",
+  "origin": "lingua di origine (ebraico/greco/aramaico)",
+  "meaning": "significato breve in {lang_name}",
+  "description": "descrizione dettagliata in {lang_name} (2-3 frasi)",
+  "verses": [{{"ref": "Genesi 1:1", "text": "testo del versetto"}}],
+  "found": true
+}}
+Se il termine non è biblico o non lo conosci, restituisci {{"found": false, "term": "{query}", "suggestion": "suggerimento alternativo"}}"""
+        
+        response = await chat.send_message(UserMessage(text=prompt))
+        
+        # Parse AI response
+        import re as regex
+        json_match = regex.search(r'\{[\s\S]*\}', response)
+        if json_match:
+            result = json.loads(json_match.group())
+            if result.get("found", False):
+                # Cache the result
+                await db.ai_dictionary_cache.update_one(
+                    {"query": query_lower, "language": lang},
+                    {"$set": {"query": query_lower, "language": lang, "result": result, "created_at": datetime.now(timezone.utc)}},
+                    upsert=True
+                )
+                return {"source": "ai", "term": result}
+            else:
+                return {"source": "ai", "term": result}
+        
+        return {"source": "ai", "term": {"found": False, "term": query, "suggestion": "Nessun risultato trovato"}}
+    except Exception as e:
+        logger.error(f"AI dictionary search error: {e}")
+        raise HTTPException(status_code=500, detail="Errore nella ricerca AI")
+
+
+
 # ==================== DICTIONARY FAVORITES & FLASHCARDS ====================
 
 class FavoriteTermRequest(BaseModel):
