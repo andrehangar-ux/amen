@@ -331,7 +331,7 @@ export default function DictionaryScreen() {
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => setSelectedTerm(null)}>
-            <Ionicons name="arrow-back" size={28} color={COLORS.text} />
+            <Icon name="arrow-back" size={28} color={COLORS.text} />
           </TouchableOpacity>
           <Text style={styles.title}>{t('title')}</Text>
           <TouchableOpacity onPress={toggleFavorite} disabled={favoriteLoading}>
