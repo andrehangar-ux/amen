@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background Circle - Deep Sage Green -->
+  <circle cx="256" cy="256" r="256" fill="#4A7C59"/>
+  
+  <!-- Inner glow circle -->
+  <circle cx="256" cy="256" r="220" fill="#5A8F6A" opacity="0.3"/>
+  
+  <!-- White Dove - Stylized and recognizable -->
+  <g fill="#FFFFFF">
+    <!-- Dove Body -->
+    <ellipse cx="256" cy="280" rx="80" ry="50"/>
+    
+    <!-- Dove Head -->
+    <circle cx="310" cy="240" r="35"/>
+    
+    <!-- Dove Beak -->
+    <polygon points="345,240 370,245 345,250"/>
+    
+    <!-- Left Wing (spread) -->
+    <path d="M 176 280 
+             Q 120 200, 140 150
+             Q 180 180, 200 220
+             Q 220 240, 220 280
+             Z"/>
+    
+    <!-- Right Wing (spread) -->
+    <path d="M 336 280
+             Q 392 200, 372 150
+             Q 332 180, 312 220
+             Q 292 240, 292 280
+             Z"/>
+    
+    <!-- Tail feathers -->
+    <path d="M 176 290
+             Q 130 320, 120 370
+             Q 150 350, 176 330
+             Z"/>
+    <path d="M 186 300
+             Q 150 340, 145 380
+             Q 170 355, 190 335
+             Z"/>
+    <path d="M 196 305
+             Q 170 355, 170 390
+             Q 190 360, 205 340
+             Z"/>
+  </g>
+  
+  <!-- Olive branch -->
+  <g fill="#C9A227">
+    <!-- Branch -->
+    <path d="M 355 250 Q 380 270, 400 260" stroke="#8B7355" stroke-width="3" fill="none"/>
+    <!-- Leaves -->
+    <ellipse cx="370" cy="255" rx="8" ry="4" fill="#6B8E23" transform="rotate(-20 370 255)"/>
+    <ellipse cx="385" cy="258" rx="8" ry="4" fill="#6B8E23" transform="rotate(-30 385 258)"/>
+    <ellipse cx="395" cy="255" rx="6" ry="3" fill="#6B8E23" transform="rotate(-40 395 255)"/>
+  </g>
+  
+  <!-- Light rays behind dove -->
+  <g stroke="#FFFFFF" stroke-width="2" opacity="0.3">
+    <line x1="256" y1="100" x2="256" y2="140"/>
+    <line x1="200" y1="115" x2="220" y2="150"/>
+    <line x1="312" y1="115" x2="292" y2="150"/>
+    <line x1="160" y1="150" x2="185" y2="175"/>
+    <line x1="352" y1="150" x2="327" y2="175"/>
+  </g>
+  
+  <!-- AMEN! Text -->
+  <text x="256" y="440" text-anchor="middle" fill="#FFFFFF" font-family="Georgia, serif" font-size="56" font-weight="bold">AMEN!</text>
+</svg>

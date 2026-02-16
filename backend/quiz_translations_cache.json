@@ -1,0 +1,1705 @@
+{
+  "q16_en": {
+    "id": "q16",
+    "question": "What does the name \"Adam\" mean?",
+    "options": [
+      "First man",
+      "Humanity / made from earth",
+      "Friend of God",
+      "King"
+    ],
+    "correct": 1,
+    "explanation": "A collective name derived from adamah (earth) [18, 35, 36].",
+    "verse_ref": ""
+  },
+  "q161_en": {
+    "id": "q161",
+    "question": "Seven Stars (Rev)?",
+    "options": [
+      "Seven plagues",
+      "Angels of the Churches",
+      "Tribes",
+      "Sacraments"
+    ],
+    "correct": 1,
+    "explanation": "Inaugural vision [334, 335].",
+    "verse_ref": ""
+  },
+  "q247_en": {
+    "id": "q247",
+    "question": "Example of faith (Romans 4)?",
+    "options": [
+      "Moses",
+      "David",
+      "Abraham",
+      "Noah"
+    ],
+    "correct": 2,
+    "explanation": "Father of believers [452, 453].",
+    "verse_ref": ""
+  },
+  "q259_en": {
+    "id": "q259",
+    "question": "Hymn of Kenosis?",
+    "options": [
+      "Charity",
+      "Wisdom",
+      "Christological (emptying)",
+      "Creation"
+    ],
+    "correct": 2,
+    "explanation": "Philippians 2 [189, 475, 476].",
+    "verse_ref": ""
+  },
+  "q269_en": {
+    "id": "q269",
+    "question": "Seven Churches?",
+    "options": [
+      "Rome",
+      "Totality of the Church",
+      "Tribes",
+      "Angels"
+    ],
+    "correct": 1,
+    "explanation": "Universality [335, 492].",
+    "verse_ref": ""
+  },
+  "q272_en": {
+    "id": "q272",
+    "question": "144,000?",
+    "options": [
+      "Tribes",
+      "Totality of the redeemed",
+      "Martyrs",
+      "Levites"
+    ],
+    "correct": 1,
+    "explanation": "Symbol [148, 149, 495].",
+    "verse_ref": ""
+  },
+  "q368_en": {
+    "id": "q368",
+    "question": "What is the etymology of Adam?",
+    "options": [
+      "First",
+      "Humanity (earth)",
+      "Friend",
+      "King"
+    ],
+    "correct": 1,
+    "explanation": "Name [35, 592, 593].",
+    "verse_ref": ""
+  },
+  "q370_en": {
+    "id": "q370",
+    "question": "Seven circuits around Jericho?",
+    "options": [
+      "Ai",
+      "Jericho",
+      "Gibeon",
+      "Hazor"
+    ],
+    "correct": 1,
+    "explanation": "Trumpets [594, 595].",
+    "verse_ref": ""
+  },
+  "q379_en": {
+    "id": "q379",
+    "question": "Total number of the redeemed?",
+    "options": [
+      "1,000",
+      "12,000",
+      "144,000",
+      "7,000"
+    ],
+    "correct": 2,
+    "explanation": "The elect [Revelation 7:4, 14:1-3].",
+    "verse_ref": ""
+  },
+  "q438_en": {
+    "id": "q438",
+    "question": "Kenosis (Phil)?",
+    "options": [
+      "Creation",
+      "Emptying of Christ",
+      "End",
+      "Charity"
+    ],
+    "correct": 1,
+    "explanation": "Phil 2 [189, 685, 686].",
+    "verse_ref": ""
+  },
+  "q440_en": {
+    "id": "q440",
+    "question": "144,000 (Revelation)?",
+    "options": [
+      "Tribes",
+      "Totality of the redeemed",
+      "Martyrs",
+      "Levites"
+    ],
+    "correct": 1,
+    "explanation": "Fullness [148, 149, 218].",
+    "verse_ref": ""
+  },
+  "q446_en": {
+    "id": "q446",
+    "question": "What day is the Sabbath?",
+    "options": [
+      "Sixth",
+      "Seventh",
+      "First",
+      "Eighth"
+    ],
+    "correct": 1,
+    "explanation": "It is consecrated [670, 693, 694].",
+    "verse_ref": ""
+  },
+  "q447_en": {
+    "id": "q447",
+    "question": "Rivers of Eden?",
+    "options": [
+      "Jordan",
+      "Nile",
+      "Unnamed",
+      "Tiber"
+    ],
+    "correct": 2,
+    "explanation": "Pishon/Gihon/Tigris/Euphrates [483, 695, 696].",
+    "verse_ref": ""
+  },
+  "q448_en": {
+    "id": "q448",
+    "question": "Cain - Keeper?",
+    "options": [
+      "Hunter",
+      "Dead",
+      "Am I my brother's keeper?",
+      "No"
+    ],
+    "correct": 2,
+    "explanation": "Refusal [697-699].",
+    "verse_ref": ""
+  },
+  "q451_en": {
+    "id": "q451",
+    "question": "Ishmael, son of...?",
+    "options": [
+      "Isaac",
+      "Ishmael",
+      "Seth",
+      "Esau"
+    ],
+    "correct": 1,
+    "explanation": "Hagar [6, 703, 704].",
+    "verse_ref": ""
+  },
+  "q488_en": {
+    "id": "q488",
+    "question": "Hebrew slave years?",
+    "options": [
+      "1",
+      "3",
+      "6",
+      "10"
+    ],
+    "correct": 2,
+    "explanation": "Seventh year set free [70, 522].",
+    "verse_ref": ""
+  },
+  "q505_en": {
+    "id": "q505",
+    "question": "What happened to the walls of Jericho on the seventh lap?",
+    "options": [
+      "They burned",
+      "They were torn down by machines",
+      "They collapsed at the shout of the people",
+      "The gates opened"
+    ],
+    "correct": 2,
+    "explanation": "At the sound of the trumpets and the war cry [5].",
+    "verse_ref": ""
+  },
+  "q657_en": {
+    "id": "q657",
+    "question": "Seventh step in the Covenant?",
+    "options": [
+      "David",
+      "Sinai",
+      "Messiah king/priest",
+      "End"
+    ],
+    "correct": 2,
+    "explanation": "Culmination in Christ [20, 216].",
+    "verse_ref": ""
+  },
+  "q664_en": {
+    "id": "q664",
+    "question": "What did Cain reply?",
+    "options": [
+      "Dead",
+      "I don't know",
+      "Am I my brother's keeper?",
+      "No"
+    ],
+    "correct": 2,
+    "explanation": "After killing Abel [227, 228].",
+    "verse_ref": ""
+  },
+  "q665_en": {
+    "id": "q665",
+    "question": "Rivers from Eden?",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "7"
+    ],
+    "correct": 2,
+    "explanation": "Pishon, Gihon, Tigris, Euphrates [229, 230].",
+    "verse_ref": ""
+  },
+  "q692_en": {
+    "id": "q692",
+    "question": "Hymn of emptying (Phil 2)?",
+    "options": [
+      "Charity",
+      "Kenosis",
+      "Creation",
+      "Praise"
+    ],
+    "correct": 1,
+    "explanation": "Humiliation/Exaltation [99, 260].",
+    "verse_ref": ""
+  },
+  "q694_en": {
+    "id": "q694",
+    "question": "Thomas's confession?",
+    "options": [
+      "Thank you",
+      "Lord",
+      "My Lord and my God",
+      "Master"
+    ],
+    "correct": 2,
+    "explanation": "Upon seeing the Risen One [263, 264].",
+    "verse_ref": ""
+  },
+  "q718_en": {
+    "id": "q718",
+    "question": "Seven Stars (Rev)?",
+    "options": [
+      "Plagues",
+      "Church Angels",
+      "Tribes",
+      "Sacraments"
+    ],
+    "correct": 1,
+    "explanation": "Vision of John [299].",
+    "verse_ref": ""
+  },
+  "q782_en": {
+    "id": "q782",
+    "question": "Redeemed (Rev)?",
+    "options": [
+      "1000",
+      "12000",
+      "144,000",
+      "7000"
+    ],
+    "correct": 2,
+    "explanation": "Symbolic [116, 117].",
+    "verse_ref": ""
+  },
+  "q796_en": {
+    "id": "q796",
+    "question": "Etymology of Adam?",
+    "options": [
+      "First",
+      "Humanity/Earth man",
+      "King",
+      "Friend"
+    ],
+    "correct": 1,
+    "explanation": "Adamah [21, 217].",
+    "verse_ref": ""
+  },
+  "q798_en": {
+    "id": "q798",
+    "question": "Am I my brother's keeper?",
+    "options": [
+      "Dead",
+      "I don't know",
+      "Am I my brother's keeper?",
+      "No"
+    ],
+    "correct": 2,
+    "explanation": "Abel [227, 228].",
+    "verse_ref": ""
+  },
+  "q799_en": {
+    "id": "q799",
+    "question": "How many rivers flowed out of Eden?",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "7"
+    ],
+    "correct": 2,
+    "explanation": "Genesis [2:10-14].",
+    "verse_ref": ""
+  },
+  "q804_en": {
+    "id": "q804",
+    "question": "Adam with article?",
+    "options": [
+      "First man",
+      "Humanity/The Man",
+      "Male",
+      "Father"
+    ],
+    "correct": 1,
+    "explanation": "Hebrew [270].",
+    "verse_ref": ""
+  },
+  "q815_en": {
+    "id": "q815",
+    "question": "Number of the redeemed (Revelation)?",
+    "options": [
+      "12000",
+      "1000000",
+      "144,000",
+      "7000"
+    ],
+    "correct": 2,
+    "explanation": "Symbolic fullness [116, 117].",
+    "verse_ref": ""
+  },
+  "q862_en": {
+    "id": "q862",
+    "question": "Seventh level Covenant?",
+    "options": [
+      "Sinai",
+      "David",
+      "Messiah king/priest",
+      "Revelation"
+    ],
+    "correct": 2,
+    "explanation": "Murdocca [20, 215].",
+    "verse_ref": ""
+  },
+  "q75_es": {
+    "id": "q75",
+    "question": "¿Cuál es el 'don más grande' para Pablo?",
+    "options": [
+      "Profecía",
+      "Lenguas",
+      "Caridad",
+      "Sabiduría"
+    ],
+    "correct": 2,
+    "explanation": "Mencionado en 1 Corintios 13 [197-199].",
+    "verse_ref": ""
+  },
+  "q83_es": {
+    "id": "q83",
+    "question": "¿Quién era el esclavo fugitivo de Pablo?",
+    "options": [
+      "Tíquico",
+      "Onésimo",
+      "Epafras",
+      "Tito"
+    ],
+    "correct": 1,
+    "explanation": "Convertido en prisión y enviado de vuelta a Filemón [217-219].",
+    "verse_ref": ""
+  },
+  "q94_es": {
+    "id": "q94",
+    "question": "¿Cuál es el tema central de Romanos?",
+    "options": [
+      "Circuncisión",
+      "Justificación por la fe",
+      "Milagros",
+      "Reino de Dios"
+    ],
+    "correct": 1,
+    "explanation": "El hombre es hecho justo por la gracia [245-247].",
+    "verse_ref": ""
+  },
+  "q148_es": {
+    "id": "q148",
+    "question": "¿Quién fue compañero de viaje de Pablo?",
+    "options": [
+      "Silas",
+      "Bernabé",
+      "Timoteo",
+      "Lucas"
+    ],
+    "correct": 1,
+    "explanation": "Juntos en Chipre [312, 313].",
+    "verse_ref": ""
+  },
+  "q179_es": {
+    "id": "q179",
+    "question": "¿Viajes de Pablo?",
+    "options": [
+      "Evangelio",
+      "Hechos",
+      "Apocalipsis",
+      "Romanos"
+    ],
+    "correct": 1,
+    "explanation": "De Jerusalén a Roma [356, 357].",
+    "verse_ref": ""
+  },
+  "q190_es": {
+    "id": "q190",
+    "question": "Anticristo (2 Tes)?",
+    "options": [
+      "Hechos",
+      "2 Tesalonicenses",
+      "Romanos",
+      "Santiago"
+    ],
+    "correct": 1,
+    "explanation": "El hombre de la iniquidad [338, 373, 374].",
+    "verse_ref": ""
+  },
+  "q242_es": {
+    "id": "q242",
+    "question": "¿En qué orden están las cartas de Pablo?",
+    "options": [
+      "Cronología",
+      "Longitud",
+      "Alfabético",
+      "Importancia"
+    ],
+    "correct": 1,
+    "explanation": "Disposición canónica [444, 445].",
+    "verse_ref": ""
+  },
+  "q243_es": {
+    "id": "q243",
+    "question": "Letras principales?",
+    "options": [
+      "Ts",
+      "Romanos-Corintios-Gálatas",
+      "Ef-Col",
+      "Tm"
+    ],
+    "correct": 1,
+    "explanation": "Amplias y teológicas [446, 447].",
+    "verse_ref": ""
+  },
+  "q244_es": {
+    "id": "q244",
+    "question": "¿Cartas pastorales?",
+    "options": [
+      "Ef",
+      "Gal",
+      "Timoteo-Tito",
+      "Cor"
+    ],
+    "correct": 2,
+    "explanation": "Organización [447-449].",
+    "verse_ref": ""
+  },
+  "q245_es": {
+    "id": "q245",
+    "question": "¿Pablo escribió Romanos desde...?",
+    "options": [
+      "Roma",
+      "Éfeso",
+      "Corinto",
+      "Jerusalén"
+    ],
+    "correct": 2,
+    "explanation": "Tercera visita [450].",
+    "verse_ref": ""
+  },
+  "q246_es": {
+    "id": "q246",
+    "question": "Tema de Romanos?",
+    "options": [
+      "Circuncisión",
+      "Justificación por fe",
+      "Fin",
+      "Milagros"
+    ],
+    "correct": 1,
+    "explanation": "Gracia [246, 451].",
+    "verse_ref": ""
+  },
+  "q251_es": {
+    "id": "q251",
+    "question": "¿Por qué 1 Corintios?",
+    "options": [
+      "Agradecimiento",
+      "Respuesta a divisiones",
+      "Viaje",
+      "Dinero"
+    ],
+    "correct": 1,
+    "explanation": "Cuestiones morales [458, 459].",
+    "verse_ref": ""
+  },
+  "q252_es": {
+    "id": "q252",
+    "question": "¿Dones espirituales (1 Cor)?",
+    "options": [
+      "Romanos",
+      "Gálatas",
+      "1 Corintios",
+      "Filipenses"
+    ],
+    "correct": 2,
+    "explanation": "Cuerpo de Cristo [460, 461].",
+    "verse_ref": ""
+  },
+  "q256_es": {
+    "id": "q256",
+    "question": "Magna charta libertad?",
+    "options": [
+      "Romanos",
+      "Gálatas",
+      "Efesios",
+      "Colosenses"
+    ],
+    "correct": 1,
+    "explanation": "Contra el legalismo [286, 469].",
+    "verse_ref": ""
+  },
+  "q258_es": {
+    "id": "q258",
+    "question": "Iglesia en Efesios?",
+    "options": [
+      "Rebaño",
+      "Cuerpo y Esposa",
+      "Viña",
+      "Ejército"
+    ],
+    "correct": 1,
+    "explanation": "Unidad en Cristo [472-474].",
+    "verse_ref": ""
+  },
+  "q260_es": {
+    "id": "q260",
+    "question": "Carta para esclavo?",
+    "options": [
+      "Timoteo",
+      "Tito",
+      "Filemón",
+      "Onesimo"
+    ],
+    "correct": 2,
+    "explanation": "Breve carta [218, 477, 478].",
+    "verse_ref": ""
+  },
+  "q264_es": {
+    "id": "q264",
+    "question": "¿Fe y Obras?",
+    "options": [
+      "Pablo",
+      "Juan",
+      "Santiago",
+      "Pedro"
+    ],
+    "correct": 2,
+    "explanation": "Carta práctica [484, 485].",
+    "verse_ref": ""
+  },
+  "q295_es": {
+    "id": "q295",
+    "question": "¿Naufragio de Pablo?",
+    "options": [
+      "Chipre",
+      "Creta",
+      "Malta",
+      "Rodas"
+    ],
+    "correct": 2,
+    "explanation": "Hacia Roma [517, 518].",
+    "verse_ref": ""
+  },
+  "q341_es": {
+    "id": "q341",
+    "question": "70 d.C. Tito?",
+    "options": [
+      "63 a.C.",
+      "135 d.C.",
+      "70 d.C.",
+      "313 d.C."
+    ],
+    "correct": 2,
+    "explanation": "Destrucción [229, 246, 514].",
+    "verse_ref": ""
+  },
+  "q355_es": {
+    "id": "q355",
+    "question": "Autor de Romanos?",
+    "options": [
+      "Pedro",
+      "Jacobo",
+      "Pablo",
+      "Lucas"
+    ],
+    "correct": 2,
+    "explanation": "Justificación [368, 579].",
+    "verse_ref": ""
+  },
+  "q378_es": {
+    "id": "q378",
+    "question": "¿Con quién viajó Pablo?",
+    "options": [
+      "Silas",
+      "Bernabé",
+      "Timoteo",
+      "Lucas"
+    ],
+    "correct": 1,
+    "explanation": "Bernabé [435, 473].",
+    "verse_ref": ""
+  },
+  "q393_es": {
+    "id": "q393",
+    "question": "1 Pedro virtud?",
+    "options": [
+      "Fe",
+      "Esperanza",
+      "Caridad",
+      "Prudencia"
+    ],
+    "correct": 1,
+    "explanation": "Sostenimiento [364, 618].",
+    "verse_ref": ""
+  },
+  "q394_es": {
+    "id": "q394",
+    "question": "¿Naufragio en Malta?",
+    "options": [
+      "Chipre",
+      "Creta",
+      "Malta",
+      "Rodas"
+    ],
+    "correct": 2,
+    "explanation": "Pablo [517, 518, 619].",
+    "verse_ref": ""
+  },
+  "q436_es": {
+    "id": "q436",
+    "question": "¿Barnabás con Pablo?",
+    "options": [
+      "Silas",
+      "Barnabás",
+      "Timoteo",
+      "Lucas"
+    ],
+    "correct": 1,
+    "explanation": "Chipre [313, 435, 683].",
+    "verse_ref": ""
+  },
+  "q437_es": {
+    "id": "q437",
+    "question": "Sara y Agar (Gal)?",
+    "options": [
+      "Romanos",
+      "1 Corintios",
+      "Gálatas",
+      "Efesios"
+    ],
+    "correct": 2,
+    "explanation": "Alegoría [597, 684].",
+    "verse_ref": ""
+  },
+  "q565_es": {
+    "id": "q565",
+    "question": "¿Cuál es el tema central de Romanos?",
+    "options": [
+      "Circuncisión",
+      "Justificación por la fe",
+      "Fin del mundo",
+      "Milagros"
+    ],
+    "correct": 1,
+    "explanation": "El hombre es hecho justo por la gracia [90, 91].",
+    "verse_ref": ""
+  },
+  "q567_es": {
+    "id": "q567",
+    "question": "¿Qué se entiende por 'Glossolalia'?",
+    "options": [
+      "Traducción",
+      "Don de lenguas (éxtasis)",
+      "Escritura",
+      "Exégesis"
+    ],
+    "correct": 1,
+    "explanation": "Tratado por Pablo en 1 Corintios [94, 95].",
+    "verse_ref": ""
+  },
+  "q568_es": {
+    "id": "q568",
+    "question": "¿Qué es la 'espina en la carne' de Pablo?",
+    "options": [
+      "Pecado",
+      "Enfermedad física",
+      "Corona",
+      "Enemigo"
+    ],
+    "correct": 1,
+    "explanation": "Dios le dijo: 'Te basta mi gracia'.",
+    "verse_ref": ""
+  },
+  "q569_es": {
+    "id": "q569",
+    "question": "¿En qué himno se habla de 'Kénosis'?",
+    "options": [
+      "Caridad",
+      "Himno de Filipenses 2",
+      "Prólogo Jn",
+      "Canto de Moisés"
+    ],
+    "correct": 1,
+    "explanation": "Vaciado y humillación de Cristo [98, 99].",
+    "verse_ref": ""
+  },
+  "q570_es": {
+    "id": "q570",
+    "question": "¿Quién es Onésimo?",
+    "options": [
+      "Libre",
+      "Querido",
+      "Útil",
+      "Fuerte"
+    ],
+    "correct": 2,
+    "explanation": "Esclavo por quien Pablo intercede [100, 101].",
+    "verse_ref": ""
+  },
+  "q16_pt": {
+    "id": "q16",
+    "question": "O que significa o nome 'Adão'?",
+    "options": [
+      "Primeiro homem",
+      "Humanidade / feito de terra",
+      "Amigo de Deus",
+      "Rei"
+    ],
+    "correct": 1,
+    "explanation": "Nome coletivo derivado de adamah (terra) [18, 35, 36].",
+    "verse_ref": ""
+  },
+  "q161_pt": {
+    "id": "q161",
+    "question": "Sete Estrelas (Ap)?",
+    "options": [
+      "Sete pragas",
+      "Anjos das Igrejas",
+      "Tribos",
+      "Sacramentos"
+    ],
+    "correct": 1,
+    "explanation": "Visão inaugural [334, 335].",
+    "verse_ref": ""
+  },
+  "q247_pt": {
+    "id": "q247",
+    "question": "Exemplo de fé (Rm 4)?",
+    "options": [
+      "Moisés",
+      "Davi",
+      "Abraão",
+      "Noé"
+    ],
+    "correct": 2,
+    "explanation": "Pai dos crentes [452, 453].",
+    "verse_ref": ""
+  },
+  "q259_pt": {
+    "id": "q259",
+    "question": "Hino Kénosis?",
+    "options": [
+      "Caridade",
+      "Sabedoria",
+      "Cristológico (esvaziamento)",
+      "Criação"
+    ],
+    "correct": 2,
+    "explanation": "Fil 2 [189, 475, 476].",
+    "verse_ref": ""
+  },
+  "q269_pt": {
+    "id": "q269",
+    "question": "Sete Igrejas?",
+    "options": [
+      "Roma",
+      "Totalidade da Igreja",
+      "Tribos",
+      "Anjos"
+    ],
+    "correct": 1,
+    "explanation": "Universalidade [335, 492].",
+    "verse_ref": ""
+  },
+  "q272_pt": {
+    "id": "q272",
+    "question": "144.000?",
+    "options": [
+      "Tribos",
+      "Totalidade dos redimidos",
+      "Mártires",
+      "Levitas"
+    ],
+    "correct": 1,
+    "explanation": "Símbolo [148, 149, 495].",
+    "verse_ref": ""
+  },
+  "q368_pt": {
+    "id": "q368",
+    "question": "Qual é o significado etimológico de Adão?",
+    "options": [
+      "Primeiro",
+      "Humanidade (terra)",
+      "Amigo",
+      "Rei"
+    ],
+    "correct": 1,
+    "explanation": "Nome [35, 592, 593].",
+    "verse_ref": ""
+  },
+  "q370_pt": {
+    "id": "q370",
+    "question": "Sete voltas em Jericó?",
+    "options": [
+      "Ai",
+      "Jericó",
+      "Gibeão",
+      "Hazor"
+    ],
+    "correct": 1,
+    "explanation": "Trombetas [594, 595].",
+    "verse_ref": ""
+  },
+  "q379_pt": {
+    "id": "q379",
+    "question": "Totalidade dos redimidos?",
+    "options": [
+      "1.000",
+      "12.000",
+      "144.000",
+      "7.000"
+    ],
+    "correct": 2,
+    "explanation": "Eleitos [149, 606].",
+    "verse_ref": ""
+  },
+  "q438_pt": {
+    "id": "q438",
+    "question": "Kènosis (Fil)?",
+    "options": [
+      "Criação",
+      "Esvaziamento de Cristo",
+      "Fim",
+      "Caridade"
+    ],
+    "correct": 1,
+    "explanation": "Fil 2 [189, 685, 686].",
+    "verse_ref": ""
+  },
+  "q440_pt": {
+    "id": "q440",
+    "question": "144.000 (Ap)?",
+    "options": [
+      "Tribos",
+      "Totalidade dos redimidos",
+      "Mártires",
+      "Levitas"
+    ],
+    "correct": 1,
+    "explanation": "Plenitude [148, 149, 218].",
+    "verse_ref": ""
+  },
+  "q446_pt": {
+    "id": "q446",
+    "question": "Dia do Sábado?",
+    "options": [
+      "Sexto",
+      "Sétimo",
+      "Primeiro",
+      "Oitavo"
+    ],
+    "correct": 1,
+    "explanation": "Consagrado [670, 693, 694].",
+    "verse_ref": ""
+  },
+  "q447_pt": {
+    "id": "q447",
+    "question": "Rios do Éden?",
+    "options": [
+      "Jordão",
+      "Nilo",
+      "Sem nome",
+      "Tibre"
+    ],
+    "correct": 2,
+    "explanation": "Pisom/Gion/Tigre/Eufrates [483, 695, 696].",
+    "verse_ref": ""
+  },
+  "q448_pt": {
+    "id": "q448",
+    "question": "Caim - Guardador?",
+    "options": [
+      "Caçador",
+      "Morto",
+      "Sou eu o guardador?",
+      "Não"
+    ],
+    "correct": 2,
+    "explanation": "Rejeição [697-699].",
+    "verse_ref": ""
+  },
+  "q451_pt": {
+    "id": "q451",
+    "question": "Ismael é filho de...?",
+    "options": [
+      "Isaque",
+      "Ismael",
+      "Sete",
+      "Esaú"
+    ],
+    "correct": 1,
+    "explanation": "Agar [6, 703, 704].",
+    "verse_ref": ""
+  },
+  "q488_pt": {
+    "id": "q488",
+    "question": "Anos de escravidão de um escravo hebreu?",
+    "options": [
+      "1",
+      "3",
+      "6",
+      "10"
+    ],
+    "correct": 2,
+    "explanation": "No sétimo ano, ele deve ser libertado [70, 522].",
+    "verse_ref": ""
+  },
+  "q505_pt": {
+    "id": "q505",
+    "question": "O que aconteceu com as muralhas de Jericó na sétima volta?",
+    "options": [
+      "Queimaram",
+      "Foram derrubadas por máquinas",
+      "Caíram ao grito do povo",
+      "As portas se abriram"
+    ],
+    "correct": 2,
+    "explanation": "Ao som das trombetas e ao grito de guerra [5].",
+    "verse_ref": ""
+  },
+  "q657_pt": {
+    "id": "q657",
+    "question": "Sétimo passo da Aliança?",
+    "options": [
+      "Davi",
+      "Sinaí",
+      "Messias rei/sacerdote",
+      "Fim"
+    ],
+    "correct": 2,
+    "explanation": "Culminação em Cristo [20, 216].",
+    "verse_ref": ""
+  },
+  "q664_pt": {
+    "id": "q664",
+    "question": "O que respondeu Caim?",
+    "options": [
+      "Morto",
+      "Não sei",
+      "Sou eu acaso o guardador?",
+      "Não"
+    ],
+    "correct": 2,
+    "explanation": "Após matar Abel [227, 228].",
+    "verse_ref": ""
+  },
+  "q665_pt": {
+    "id": "q665",
+    "question": "Rios que saíam do Éden?",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "7"
+    ],
+    "correct": 2,
+    "explanation": "Pison, Giom, Tigre, Eufrates [229, 230].",
+    "verse_ref": ""
+  },
+  "q692_pt": {
+    "id": "q692",
+    "question": "Hino do esvaziamento (Fil 2)?",
+    "options": [
+      "Caridade",
+      "Kenosis",
+      "Criação",
+      "Louvor"
+    ],
+    "correct": 1,
+    "explanation": "Humilhação/Exaltação [99, 260].",
+    "verse_ref": ""
+  },
+  "q694_pt": {
+    "id": "q694",
+    "question": "Confissão de Tomé?",
+    "options": [
+      "Obrigado",
+      "Senhor",
+      "Meu Senhor e meu Deus",
+      "Mestre"
+    ],
+    "correct": 2,
+    "explanation": "Vendo o Ressuscitado [263, 264].",
+    "verse_ref": ""
+  },
+  "q718_pt": {
+    "id": "q718",
+    "question": "Sete Estrelas (Ap)?",
+    "options": [
+      "Pragas",
+      "Anjos das Igrejas",
+      "Tribos",
+      "Sacramentos"
+    ],
+    "correct": 1,
+    "explanation": "Visão de João [299].",
+    "verse_ref": ""
+  },
+  "q782_pt": {
+    "id": "q782",
+    "question": "Quantos são os redimidos no Apocalipse?",
+    "options": [
+      "1000",
+      "12000",
+      "144.000",
+      "7000"
+    ],
+    "correct": 2,
+    "explanation": "Simbolicamente representados [116, 117].",
+    "verse_ref": ""
+  },
+  "q796_pt": {
+    "id": "q796",
+    "question": "Etimologia de Adão?",
+    "options": [
+      "Primeiro",
+      "Humanidade/Homem terra",
+      "Rei",
+      "Amigo"
+    ],
+    "correct": 1,
+    "explanation": "Adamah [21, 217].",
+    "verse_ref": ""
+  },
+  "q798_pt": {
+    "id": "q798",
+    "question": "Guardião de Caim?",
+    "options": [
+      "Morto",
+      "Não sei",
+      "Sou eu o guardião?",
+      "Não"
+    ],
+    "correct": 2,
+    "explanation": "Abel [227, 228].",
+    "verse_ref": ""
+  },
+  "q799_pt": {
+    "id": "q799",
+    "question": "Quantos rios fluíam do Éden?",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "7"
+    ],
+    "correct": 2,
+    "explanation": "Gênesis [2:9, 2:10].",
+    "verse_ref": ""
+  },
+  "q804_pt": {
+    "id": "q804",
+    "question": "Adão com artigo?",
+    "options": [
+      "Primeiro homem",
+      "Humanidade/O Homem",
+      "Masculino",
+      "Pai"
+    ],
+    "correct": 1,
+    "explanation": "Hebraico [270].",
+    "verse_ref": ""
+  },
+  "q815_pt": {
+    "id": "q815",
+    "question": "Número de redimidos (Ap)?",
+    "options": [
+      "12000",
+      "1000000",
+      "144.000",
+      "7000"
+    ],
+    "correct": 2,
+    "explanation": "Plenitude simbólica [116, 117].",
+    "verse_ref": ""
+  },
+  "q862_pt": {
+    "id": "q862",
+    "question": "Sétimo nível Aliança?",
+    "options": [
+      "Sinai",
+      "Davi",
+      "Messias rei/sacerdote",
+      "Apocalipse"
+    ],
+    "correct": 2,
+    "explanation": "Murdocca [20, 215].",
+    "verse_ref": ""
+  },
+  "q19_es": {
+    "id": "q19",
+    "question": "¿Cuántos años tenía Abraham cuando salió de Harán?",
+    "options": [
+      "50",
+      "75",
+      "100",
+      "120"
+    ],
+    "correct": 1,
+    "explanation": "Partió como ordenado por el Señor [40, 41].",
+    "verse_ref": ""
+  },
+  "q20_es": {
+    "id": "q20",
+    "question": "¿Cuál es la señal del pacto dado a Abraham?",
+    "options": [
+      "El sábado",
+      "La circuncisión",
+      "El sacrificio",
+      "El incienso"
+    ],
+    "correct": 1,
+    "explanation": "Comandada como señal perpetua en la carne [42-44].",
+    "verse_ref": ""
+  },
+  "q21_es": {
+    "id": "q21",
+    "question": "¿Qué significa el nombre 'Israel'?",
+    "options": [
+      "Dios es rey",
+      "Hombre que lucha con Dios",
+      "Tierra prometida",
+      "Hijo de Isaac"
+    ],
+    "correct": 1,
+    "explanation": "Proviene de ish (hombre), sarah (lucha) y El (Dios) [45-47].",
+    "verse_ref": ""
+  },
+  "q104_es": {
+    "id": "q104",
+    "question": "Protagonista del Pentateuco?",
+    "options": [
+      "Abraham",
+      "Isaac",
+      "Jacob",
+      "Moisés"
+    ],
+    "correct": 3,
+    "explanation": "Guía de Israel hacia la libertad [134, 258].",
+    "verse_ref": ""
+  },
+  "q112_es": {
+    "id": "q112",
+    "question": "¿Circuncisión del corazón?",
+    "options": [
+      "Rito físico",
+      "Fidelidad interior",
+      "Fiesta",
+      "Ley"
+    ],
+    "correct": 1,
+    "explanation": "Metáfora de Jeremías para la conversión [55, 264].",
+    "verse_ref": ""
+  },
+  "q200_es": {
+    "id": "q200",
+    "question": "¿Circuncisión?",
+    "options": [
+      "Sábado",
+      "Abraham",
+      "Diezmo",
+      "Cordero"
+    ],
+    "correct": 1,
+    "explanation": "Signo perpetuo de la carne [43, 44, 387].",
+    "verse_ref": ""
+  },
+  "q218_es": {
+    "id": "q218",
+    "question": "Resurrección (2 Mac)?",
+    "options": [
+      "Monoteísmo",
+      "Resurrección de los muertos",
+      "Sábado",
+      "Circuncisión"
+    ],
+    "correct": 1,
+    "explanation": "Fe de los mártires [414, 415].",
+    "verse_ref": ""
+  },
+  "q262_es": {
+    "id": "q262",
+    "question": "¿Melquisedec?",
+    "options": [
+      "Aarón",
+      "Moisés",
+      "Rey-Sacerdote eterno",
+      "Abraham"
+    ],
+    "correct": 2,
+    "explanation": "Anticipo de Cristo [425, 480, 481].",
+    "verse_ref": ""
+  },
+  "q263_es": {
+    "id": "q263",
+    "question": "Tesis Hebreos?",
+    "options": [
+      "Regreso",
+      "Superioridad sacerdocio de Cristo",
+      "Circuncisión",
+      "Oración"
+    ],
+    "correct": 1,
+    "explanation": "Una vez para siempre [482, 483].",
+    "verse_ref": ""
+  },
+  "q351_es": {
+    "id": "q351",
+    "question": "¿Circuncisión Abraham?",
+    "options": [
+      "Arco",
+      "Sábado",
+      "Circuncisión",
+      "Tablas"
+    ],
+    "correct": 2,
+    "explanation": "Signo [44, 575].",
+    "verse_ref": ""
+  },
+  "q366_es": {
+    "id": "q366",
+    "question": "Madre de Jesús?",
+    "options": [
+      "Elisabet",
+      "Ana",
+      "María",
+      "Sara"
+    ],
+    "correct": 2,
+    "explanation": "Evangelios [467].",
+    "verse_ref": ""
+  },
+  "q390_es": {
+    "id": "q390",
+    "question": "Distintivo de la circuncisión?",
+    "options": [
+      "Arco",
+      "Sábado",
+      "Circuncisión",
+      "Pan"
+    ],
+    "correct": 2,
+    "explanation": "Pueblo [44, 615].",
+    "verse_ref": ""
+  },
+  "q401_es": {
+    "id": "q401",
+    "question": "Nivel de Alianza?",
+    "options": [
+      "Abraham",
+      "Sinaí",
+      "Tribu de Leví",
+      "David"
+    ],
+    "correct": 2,
+    "explanation": "Murdocca [66, 68, 626].",
+    "verse_ref": ""
+  },
+  "q409_es": {
+    "id": "q409",
+    "question": "¿Monte Moriah?",
+    "options": [
+      "Sinaí",
+      "Tabor",
+      "Moriah",
+      "Carmelo"
+    ],
+    "correct": 2,
+    "explanation": "Isaac [256, 587, 639].",
+    "verse_ref": ""
+  },
+  "q410_es": {
+    "id": "q410",
+    "question": "¿Quién detiene a Abraham?",
+    "options": [
+      "Lluvia",
+      "Ángel del Señor",
+      "Soldados",
+      "Llanto"
+    ],
+    "correct": 1,
+    "explanation": "Fe [640, 641].",
+    "verse_ref": ""
+  },
+  "q450_es": {
+    "id": "q450",
+    "question": "Abraham - Harán edad?",
+    "options": [
+      "50",
+      "75",
+      "99",
+      "100"
+    ],
+    "correct": 1,
+    "explanation": "Obediencia [41, 701, 702].",
+    "verse_ref": ""
+  },
+  "q452_es": {
+    "id": "q452",
+    "question": "¿Edad de la circuncisión?",
+    "options": [
+      "75",
+      "86",
+      "99",
+      "100"
+    ],
+    "correct": 2,
+    "explanation": "Señal perpetua [26, 43, 387].",
+    "verse_ref": ""
+  },
+  "q453_es": {
+    "id": "q453",
+    "question": "¿Por qué 'Sara'?",
+    "options": [
+      "Belleza",
+      "Madre de naciones",
+      "Castigo",
+      "Rey"
+    ],
+    "correct": 1,
+    "explanation": "Bendición [39, 705].",
+    "verse_ref": ""
+  },
+  "q454_es": {
+    "id": "q454",
+    "question": "¿Cuántos justos había en Sodoma?",
+    "options": [
+      "100",
+      "12",
+      "Hasta 10",
+      "Solo 1"
+    ],
+    "correct": 2,
+    "explanation": "Oración de Abraham [706, 707].",
+    "verse_ref": ""
+  },
+  "q456_es": {
+    "id": "q456",
+    "question": "Juramento siervo?",
+    "options": [
+      "Egipto",
+      "No Cananeo",
+      "Cordero",
+      "No retorno"
+    ],
+    "correct": 1,
+    "explanation": "Esposa Isaac [256, 708].",
+    "verse_ref": ""
+  },
+  "q513_es": {
+    "id": "q513",
+    "question": "¿Cómo murió el general cananeo Sísara?",
+    "options": [
+      "En batalla",
+      "Asesinado por Jael con una estaca",
+      "Cayendo",
+      "Apedreado"
+    ],
+    "correct": 1,
+    "explanation": "Jael lo golpeó en la sien mientras dormía [10].",
+    "verse_ref": ""
+  },
+  "q571_es": {
+    "id": "q571",
+    "question": "¿Cuál es la tesis de la Carta a los Hebreos?",
+    "options": [
+      "Regreso de Cristo",
+      "Superioridad del sacerdocio de Cristo",
+      "Circuncisión",
+      "Oración"
+    ],
+    "correct": 1,
+    "explanation": "Sacrificio único y perfecto [102, 103].",
+    "verse_ref": ""
+  },
+  "q630_es": {
+    "id": "q630",
+    "question": "¿Cuántos años tenía Abraham (Harrán)?",
+    "options": [
+      "50",
+      "75",
+      "100",
+      "120"
+    ],
+    "correct": 1,
+    "explanation": "Cuando dejó su tierra [197, 198].",
+    "verse_ref": ""
+  },
+  "q631_es": {
+    "id": "q631",
+    "question": "¿Cuál es el signo de Abraham?",
+    "options": [
+      "Sábado",
+      "Circuncisión",
+      "Ofrenda",
+      "Oración"
+    ],
+    "correct": 1,
+    "explanation": "Pacto en la carne [199, 200].",
+    "verse_ref": ""
+  },
+  "q667_es": {
+    "id": "q667",
+    "question": "¿Edad de Abraham al partir?",
+    "options": [
+      "50",
+      "75",
+      "100",
+      "120"
+    ],
+    "correct": 1,
+    "explanation": "Desde Harán [197, 198].",
+    "verse_ref": ""
+  },
+  "q668_es": {
+    "id": "q668",
+    "question": "¿En qué monte fue sacrificado Isaac?",
+    "options": [
+      "Sinaí",
+      "Tabor",
+      "Moria",
+      "Carmelo"
+    ],
+    "correct": 2,
+    "explanation": "Probado por Dios [122, 231].",
+    "verse_ref": ""
+  },
+  "q670_es": {
+    "id": "q670",
+    "question": "¿Quién tuvo la visión de la escalera que llegaba al cielo?",
+    "options": [
+      "Abraham",
+      "Isaac",
+      "Jacob",
+      "José"
+    ],
+    "correct": 2,
+    "explanation": "En Betel [234, 235].",
+    "verse_ref": ""
+  },
+  "q753_es": {
+    "id": "q753",
+    "question": "¿Quién mató a Sísara?",
+    "options": [
+      "Débora",
+      "Jael",
+      "Rut",
+      "Noemí"
+    ],
+    "correct": 1,
+    "explanation": "Con una estaca.",
+    "verse_ref": ""
+  },
+  "q778_es": {
+    "id": "q778",
+    "question": "¿Melquisedec?",
+    "options": [
+      "Aarón",
+      "Moisés",
+      "Rey-Sacerdote",
+      "Abraham"
+    ],
+    "correct": 2,
+    "explanation": "Figura de Cristo [351, 352].",
+    "verse_ref": ""
+  },
+  "q820_es": {
+    "id": "q820",
+    "question": "¿Melquisedec es un tipo de?",
+    "options": [
+      "Aarón",
+      "Moisés",
+      "Mesías rey/sacerdote",
+      "Abraham"
+    ],
+    "correct": 2,
+    "explanation": "Hebreos 7 [7:1-28].",
+    "verse_ref": ""
+  },
+  "q79_es": {
+    "id": "q79",
+    "question": "¿Qué profeta enfrentó a los profetas de Baal?",
+    "options": [
+      "Eliseo",
+      "Elías",
+      "Isaías",
+      "Miqueas"
+    ],
+    "correct": 1,
+    "explanation": "En el monte Carmelo por la fe en Yahvé [208-210].",
+    "verse_ref": ""
+  },
+  "q91_es": {
+    "id": "q91",
+    "question": "¿Qué rey asirio asedió Jerusalén en el año 701?",
+    "options": [
+      "Sargón",
+      "Senaquerib",
+      "Darío",
+      "Jerjes"
+    ],
+    "correct": 1,
+    "explanation": "Bajo el reinado de Ezequías [239-241].",
+    "verse_ref": ""
+  },
+  "q99_es": {
+    "id": "q99",
+    "question": "¿Quién fue el sucesor de Elías?",
+    "options": [
+      "Isaías",
+      "Jeremías",
+      "Eliseo",
+      "Amós"
+    ],
+    "correct": 2,
+    "explanation": "Él recogió el manto y el espíritu [210, 253].",
+    "verse_ref": ""
+  },
+  "q172_es": {
+    "id": "q172",
+    "question": "¿Elías contra Baal?",
+    "options": [
+      "Sinaí",
+      "Carmelo",
+      "Tabor",
+      "Nebo"
+    ],
+    "correct": 1,
+    "explanation": "Fuego del cielo [210, 350].",
+    "verse_ref": ""
+  },
+  "q360_es": {
+    "id": "q360",
+    "question": "Elías vs Baal?",
+    "options": [
+      "Eliseo",
+      "Elías",
+      "Isaías",
+      "Amós"
+    ],
+    "correct": 1,
+    "explanation": "Carmelo [209, 210].",
+    "verse_ref": ""
+  },
+  "q624_es": {
+    "id": "q624",
+    "question": "¿Quién enfrentó a los profetas de Baal?",
+    "options": [
+      "Eliseo",
+      "Elías",
+      "Isaías",
+      "Amós"
+    ],
+    "correct": 1,
+    "explanation": "En el monte Carmelo [187, 188].",
+    "verse_ref": ""
+  },
+  "q625_es": {
+    "id": "q625",
+    "question": "¿Quién fue el sucesor de Elías?",
+    "options": [
+      "Jeremías",
+      "Ezequiel",
+      "Eliseo",
+      "Daniel"
+    ],
+    "correct": 2,
+    "explanation": "Él recogió el manto [189, 190].",
+    "verse_ref": ""
+  },
+  "q626_es": {
+    "id": "q626",
+    "question": "¿Qué rey asedió Jerusalén (701)?",
+    "options": [
+      "Sargón",
+      "Senaquerib",
+      "Darío",
+      "Jerjes"
+    ],
+    "correct": 1,
+    "explanation": "Bajo Ezequías [71, 191].",
+    "verse_ref": ""
+  },
+  "q937_es": {
+    "id": "q937",
+    "question": "¿Elías contra Baal?",
+    "options": [
+      "Eliseo",
+      "Elías",
+      "Isaías",
+      "Amós"
+    ],
+    "correct": 1,
+    "explanation": "Carmelo [187, 188].",
+    "verse_ref": ""
+  },
+  "q103_es": {
+    "id": "q103",
+    "question": "¿Desarrollo de la profecía?",
+    "options": [
+      "X-II sec",
+      "X-VI sec",
+      "VIII-IV sec",
+      "XII-X sec"
+    ],
+    "correct": 1,
+    "explanation": "Especialmente en el período monárquico [258].",
+    "verse_ref": ""
+  },
+  "q428_es": {
+    "id": "q428",
+    "question": "Retribución (amigos de Job)?",
+    "options": [
+      "Error",
+      "Castigo por culpa",
+      "Casual",
+      "Regalo"
+    ],
+    "correct": 1,
+    "explanation": "Tesis [672-674].",
+    "verse_ref": ""
+  }
+}
