@@ -7,7 +7,7 @@ import requests
 import os
 import uuid
 
-BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://settings-bugs-fix.preview.emergentagent.com').rstrip('/')
+BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://auth-mobile-debug-1.preview.emergentagent.com').rstrip('/')
 
 class TestUserRegistration:
     """Test user registration endpoint - main bug fix verification"""

@@ -10,7 +10,7 @@ import pytest
 import requests
 import os
 
-BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://settings-bugs-fix.preview.emergentagent.com')
+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://auth-mobile-debug-1.preview.emergentagent.com')
 
 # Test credentials
 TEST_EMAIL = "testbible@cibospirituale.it"

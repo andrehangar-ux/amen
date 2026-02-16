@@ -7,7 +7,7 @@ import requests
 import os
 import time
 
-BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://settings-bugs-fix.preview.emergentagent.com').rstrip('/')
+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://auth-mobile-debug-1.preview.emergentagent.com').rstrip('/')
 
 # Test credentials
 TEST_EMAIL = "testbible@cibospirituale.it"
