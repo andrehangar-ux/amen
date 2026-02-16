@@ -572,7 +572,12 @@ async def reset_password(data: ResetPasswordRequest):
     if not token:
         raise HTTPException(status_code=400, detail="Codice non valido o scaduto")
     
-    if datetime.now(timezone.utc) > token["expires_at"]:
+    # Handle timezone-naive datetime from MongoDB
+    expires_at = token["expires_at"]
+    if expires_at.tzinfo is None:
+        expires_at = expires_at.replace(tzinfo=timezone.utc)
+    
+    if datetime.now(timezone.utc) > expires_at:
         raise HTTPException(status_code=400, detail="Codice scaduto. Richiedine uno nuovo.")
     
     # Update password
