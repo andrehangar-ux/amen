@@ -2150,12 +2150,20 @@ async def like_message(message_id: str, user: User = Depends(require_auth)):
     return {"success": True}
 
 @api_router.get("/community/users")
-async def get_community_users(user: User = Depends(require_auth)):
-    """Get public users from community"""
+async def get_community_users(q: str = "", user: User = Depends(require_auth)):
+    """Get all registered users for community interaction"""
+    query = {"user_id": {"$ne": user.user_id}}
+    if q:
+        query["name"] = {"$regex": q, "$options": "i"}
     users = await db.users.find(
-        {"is_public": True},
-        {"_id": 0, "password_hash": 0, "email": 0}
-    ).limit(50).to_list(50)
+        query,
+        {"_id": 0, "user_id": 1, "name": 1, "is_online": 1, "last_heartbeat": 1}
+    ).sort("last_heartbeat", -1).limit(50).to_list(50)
+    
+    threshold = datetime.now(timezone.utc) - timedelta(minutes=2)
+    for u in users:
+        u["is_online"] = bool(u.get("is_online") and u.get("last_heartbeat") and u["last_heartbeat"] >= threshold)
+        u.pop("last_heartbeat", None)
     return users
 
 # ==================== JOURNAL ENDPOINTS ====================
