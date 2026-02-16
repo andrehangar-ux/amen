@@ -351,6 +351,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
+  forgotPasswordLink: {
+    alignSelf: 'flex-end',
+  },
+  forgotPasswordText: {
+    color: COLORS.primary,
+    fontSize: 13,
+    fontWeight: '500',
+  },
   divider: {
     flexDirection: 'row',
     alignItems: 'center',
