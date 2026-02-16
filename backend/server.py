@@ -13,6 +13,9 @@ from datetime import datetime, timezone, timedelta
 import httpx
 import re
 import json
+import asyncio
+import hashlib
+import resend
 from emergentintegrations.llm.chat import LlmChat, UserMessage
 from bible_data import NUOVA_DIODATI, REINA_VALERA_1960, get_bible_chapter
 
@@ -26,6 +29,10 @@ db = client[os.environ['DB_NAME']]
 
 # LLM Key
 EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY', '')
+
+# Resend Email
+resend.api_key = os.environ.get('RESEND_API_KEY', '')
+SENDER_EMAIL = os.environ.get('SENDER_EMAIL', 'onboarding@resend.dev')
 
 # Create the main app
 app = FastAPI(title="Amen! API")
