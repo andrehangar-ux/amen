@@ -347,7 +347,8 @@ export default function CommunityScreen() {
           />
         )}
 
-        {/* Input Area */}
+        {/* Input Area - only show for community messages tab */}
+        {!showChats && (
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
@@ -370,6 +371,7 @@ export default function CommunityScreen() {
             )}
           </TouchableOpacity>
         </View>
+        )}
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
