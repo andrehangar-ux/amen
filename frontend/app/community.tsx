@@ -378,19 +378,59 @@ export default function CommunityScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.background,
-  },
+  container: { flex: 1, backgroundColor: COLORS.background },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: SPACING.md,
-    paddingVertical: SPACING.sm,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.border,
-    backgroundColor: COLORS.card,
+    flexDirection: 'row', alignItems: 'center', paddingHorizontal: SPACING.md,
+    paddingVertical: SPACING.sm, borderBottomWidth: 1, borderBottomColor: COLORS.border, backgroundColor: COLORS.card,
   },
+  // Online bar & tabs
+  onlineBar: {
+    flexDirection: 'row', backgroundColor: COLORS.card, borderBottomWidth: 1, borderBottomColor: COLORS.border,
+  },
+  tabBtn: {
+    flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
+    paddingVertical: SPACING.sm, gap: 6,
+  },
+  tabBtnActive: { backgroundColor: COLORS.primary, borderRadius: BORDER_RADIUS.sm, margin: 4 },
+  tabText: { fontSize: 13, fontWeight: '600', color: COLORS.textLight },
+  tabTextActive: { color: '#fff' },
+  unreadDot: {
+    width: 8, height: 8, borderRadius: 4, backgroundColor: '#EF4444', position: 'absolute', top: 6, right: '30%',
+  },
+  // Online strip
+  onlineStrip: {
+    backgroundColor: COLORS.card, paddingVertical: SPACING.xs, borderBottomWidth: 1, borderBottomColor: COLORS.border,
+  },
+  onlineLabel: { fontSize: 11, fontWeight: '600', color: COLORS.primary, paddingHorizontal: SPACING.md, marginBottom: 4 },
+  onlineUser: { alignItems: 'center', width: 60, paddingVertical: 4 },
+  onlineAvatar: {
+    width: 40, height: 40, borderRadius: 20, backgroundColor: COLORS.primary + '20',
+    justifyContent: 'center', alignItems: 'center',
+  },
+  onlineAvatarText: { fontSize: 16, fontWeight: '600', color: COLORS.primary },
+  onlineDot: {
+    width: 10, height: 10, borderRadius: 5, backgroundColor: '#22C55E',
+    position: 'absolute', bottom: 0, right: 0, borderWidth: 2, borderColor: COLORS.card,
+  },
+  onlineUserName: { fontSize: 10, color: COLORS.textLight, marginTop: 2, textAlign: 'center' },
+  // Chat list items
+  chatItem: {
+    flexDirection: 'row', alignItems: 'center', padding: SPACING.md,
+    borderBottomWidth: 1, borderBottomColor: COLORS.border,
+  },
+  chatAvatar: {
+    width: 44, height: 44, borderRadius: 22, backgroundColor: COLORS.primary,
+    justifyContent: 'center', alignItems: 'center',
+  },
+  chatAvatarText: { color: '#fff', fontSize: 18, fontWeight: '600' },
+  chatInfo: { flex: 1, marginLeft: SPACING.sm },
+  chatName: { fontSize: 15, fontWeight: '600', color: COLORS.text },
+  chatLastMsg: { fontSize: 13, color: COLORS.textLight, marginTop: 2 },
+  unreadBadge: {
+    minWidth: 22, height: 22, borderRadius: 11, backgroundColor: COLORS.primary,
+    justifyContent: 'center', alignItems: 'center', paddingHorizontal: 6,
+  },
+  unreadText: { color: '#fff', fontSize: 11, fontWeight: '700' },
   backButton: {
     padding: SPACING.sm,
   },
