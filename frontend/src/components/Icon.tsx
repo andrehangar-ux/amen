@@ -186,6 +186,12 @@ const emojiMap: Record<string, string> = {
   'bulb-outline': '💡',
   'brush': '🖌️',
   'brush-outline': '🖌️',
+  'card': '🃏',
+  'card-outline': '🃏',
+  'keypad': '🔢',
+  'keypad-outline': '🔢',
+  'close-circle': '✕',
+  'close-circle-outline': '✕',
   
   // Language
   'language': '🌐',
