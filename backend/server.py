@@ -2013,6 +2013,101 @@ async def user_offline(user: User = Depends(require_auth)):
     )
     return {"status": "offline"}
 
+# ==================== PRIVATE MESSAGES ====================
+
+class PrivateMessageCreate(BaseModel):
+    receiver_id: str
+    content: str
+
+@api_router.post("/private-messages")
+async def send_private_message(data: PrivateMessageCreate, user: User = Depends(require_auth)):
+    """Send a private message to another user"""
+    receiver = await db.users.find_one({"user_id": data.receiver_id}, {"_id": 0})
+    if not receiver:
+        raise HTTPException(status_code=404, detail="Utente non trovato")
+    
+    # Create conversation_id (sorted user_ids for consistent lookup)
+    participants = sorted([user.user_id, data.receiver_id])
+    conversation_id = f"{participants[0]}_{participants[1]}"
+    
+    message = {
+        "message_id": str(uuid.uuid4()),
+        "conversation_id": conversation_id,
+        "sender_id": user.user_id,
+        "sender_name": user.name,
+        "receiver_id": data.receiver_id,
+        "receiver_name": receiver.get("name", "Utente"),
+        "content": data.content,
+        "read": False,
+        "created_at": datetime.now(timezone.utc)
+    }
+    await db.private_messages.insert_one(message)
+    message.pop("_id", None)
+    
+    # Update conversation metadata
+    await db.conversations.update_one(
+        {"conversation_id": conversation_id},
+        {"$set": {
+            "conversation_id": conversation_id,
+            "participants": participants,
+            "last_message": data.content[:100],
+            "last_sender_id": user.user_id,
+            "last_sender_name": user.name,
+            "updated_at": datetime.now(timezone.utc)
+        }},
+        upsert=True
+    )
+    return message
+
+@api_router.get("/private-messages/conversations")
+async def get_conversations(user: User = Depends(require_auth)):
+    """Get list of conversations for the current user"""
+    convos = await db.conversations.find(
+        {"participants": user.user_id},
+        {"_id": 0}
+    ).sort("updated_at", -1).to_list(50)
+    
+    # Add unread count and other user info for each conversation
+    result = []
+    for c in convos:
+        other_id = [p for p in c["participants"] if p != user.user_id][0]
+        other_user = await db.users.find_one({"user_id": other_id}, {"_id": 0, "user_id": 1, "name": 1})
+        unread = await db.private_messages.count_documents({
+            "conversation_id": c["conversation_id"],
+            "receiver_id": user.user_id,
+            "read": False
+        })
+        result.append({
+            "conversation_id": c["conversation_id"],
+            "other_user_id": other_id,
+            "other_user_name": other_user.get("name", "Utente") if other_user else "Utente",
+            "last_message": c.get("last_message", ""),
+            "last_sender_name": c.get("last_sender_name", ""),
+            "unread_count": unread,
+            "updated_at": c.get("updated_at", "")
+        })
+    return result
+
+@api_router.get("/private-messages/{other_user_id}")
+async def get_private_messages(other_user_id: str, user: User = Depends(require_auth)):
+    """Get messages between current user and another user"""
+    participants = sorted([user.user_id, other_user_id])
+    conversation_id = f"{participants[0]}_{participants[1]}"
+    
+    messages = await db.private_messages.find(
+        {"conversation_id": conversation_id},
+        {"_id": 0}
+    ).sort("created_at", 1).to_list(200)
+    
+    # Mark messages as read
+    await db.private_messages.update_many(
+        {"conversation_id": conversation_id, "receiver_id": user.user_id, "read": False},
+        {"$set": {"read": True}}
+    )
+    return messages
+
+
+
 @api_router.get("/community/messages")
 async def get_community_messages(
     lang: str = "it",
