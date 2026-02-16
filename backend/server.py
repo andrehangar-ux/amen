@@ -500,7 +500,98 @@ async def login(data: LoginRequest, response: Response):
     user.pop("password_hash", None)
     return {"user": user, "session_token": session_token}
 
-@api_router.get("/auth/me")
+@api_router.post("/auth/forgot-password")
+async def forgot_password(data: ForgotPasswordRequest):
+    user = await db.users.find_one({"email": data.email}, {"_id": 0})
+    if not user:
+        # Return success even if user not found (prevent email enumeration)
+        return {"message": "Se l'email è registrata, riceverai un codice di reset."}
+    
+    # Check if user registered via Google (no password_hash)
+    if not user.get("password_hash"):
+        return {"message": "Se l'email è registrata, riceverai un codice di reset."}
+    
+    # Generate 6-digit reset code
+    import random
+    reset_code = f"{random.randint(100000, 999999)}"
+    expires_at = datetime.now(timezone.utc) + timedelta(minutes=15)
+    
+    # Store reset token (upsert: one active token per email)
+    await db.password_reset_tokens.update_one(
+        {"email": data.email},
+        {"$set": {
+            "email": data.email,
+            "code": reset_code,
+            "expires_at": expires_at,
+            "created_at": datetime.now(timezone.utc),
+            "used": False
+        }},
+        upsert=True
+    )
+    
+    # Send email via Resend
+    html_content = f"""
+    <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px;background:#f5f5f0;border-radius:12px;">
+      <div style="text-align:center;margin-bottom:24px;">
+        <h1 style="color:#4A7C59;font-size:28px;margin:0;">Amen!</h1>
+        <p style="color:#666;margin-top:4px;">Reset Password</p>
+      </div>
+      <div style="background:#fff;padding:24px;border-radius:8px;text-align:center;">
+        <p style="color:#333;font-size:16px;">Il tuo codice di verifica è:</p>
+        <div style="font-size:36px;font-weight:bold;letter-spacing:8px;color:#4A7C59;padding:16px;background:#f0f7f0;border-radius:8px;margin:16px 0;">
+          {reset_code}
+        </div>
+        <p style="color:#888;font-size:14px;">Il codice scade tra 15 minuti.</p>
+        <p style="color:#888;font-size:13px;margin-top:16px;">Se non hai richiesto il reset, ignora questa email.</p>
+      </div>
+    </div>
+    """
+    
+    try:
+        params = {
+            "from": SENDER_EMAIL,
+            "to": [data.email],
+            "subject": "Amen! - Codice Reset Password",
+            "html": html_content
+        }
+        await asyncio.to_thread(resend.Emails.send, params)
+        logger.info(f"Password reset email sent to {data.email}")
+    except Exception as e:
+        logger.error(f"Failed to send reset email: {e}")
+        raise HTTPException(status_code=500, detail="Errore nell'invio dell'email. Riprova.")
+    
+    return {"message": "Se l'email è registrata, riceverai un codice di reset."}
+
+@api_router.post("/auth/reset-password")
+async def reset_password(data: ResetPasswordRequest):
+    token = await db.password_reset_tokens.find_one(
+        {"email": data.email, "code": data.code, "used": False},
+        {"_id": 0}
+    )
+    
+    if not token:
+        raise HTTPException(status_code=400, detail="Codice non valido o scaduto")
+    
+    if datetime.now(timezone.utc) > token["expires_at"]:
+        raise HTTPException(status_code=400, detail="Codice scaduto. Richiedine uno nuovo.")
+    
+    # Update password
+    new_hash = hashlib.sha256(data.new_password.encode()).hexdigest()
+    result = await db.users.update_one(
+        {"email": data.email},
+        {"$set": {"password_hash": new_hash}}
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Utente non trovato")
+    
+    # Mark token as used
+    await db.password_reset_tokens.update_one(
+        {"email": data.email, "code": data.code},
+        {"$set": {"used": True}}
+    )
+    
+    return {"message": "Password aggiornata con successo"}
 async def get_me(user: User = Depends(require_auth)):
     return user.model_dump()
 
