@@ -174,6 +174,23 @@ export const api = {
     api.fetch(`/api/community/messages/${messageId}/like`, { method: 'POST' }),
   getCommunityUsers: () => api.fetch('/api/community/users'),
 
+  // Online Users
+  sendHeartbeat: () => api.fetch('/api/users/heartbeat', { method: 'POST' }),
+  getOnlineUsers: () => api.fetch('/api/users/online'),
+
+  // Private Messages
+  getConversations: () => api.fetch('/api/private-messages/conversations'),
+  getPrivateMessages: (otherUserId: string) => api.fetch(`/api/private-messages/${otherUserId}`),
+  sendPrivateMessage: (receiverId: string, content: string) =>
+    api.fetch('/api/private-messages', {
+      method: 'POST',
+      body: JSON.stringify({ receiver_id: receiverId, content }),
+    }),
+
+  // Dictionary AI Search
+  aiSearchDictionary: (query: string, lang = 'it') =>
+    api.fetch(`/api/dictionary/ai-search/${encodeURIComponent(query)}?lang=${lang}`),
+
   // Donations
   createDonation: (amount: number, method: string, message?: string) =>
     api.fetch('/api/donations', {
