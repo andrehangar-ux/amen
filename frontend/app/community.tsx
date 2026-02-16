@@ -74,9 +74,18 @@ export default function CommunityScreen() {
     }
   }, []);
 
+  const loadAllUsers = useCallback(async () => {
+    try {
+      const data = await api.getCommunityUsers();
+      setAllUsers(data);
+    } catch (error) {
+      console.log('Error loading all users:', error);
+    }
+  }, []);
+
   useEffect(() => {
     setLoading(true);
-    Promise.all([loadMessages(), loadOnlineUsers(), loadConversations()]).finally(() => setLoading(false));
+    Promise.all([loadMessages(), loadOnlineUsers(), loadConversations(), loadAllUsers()]).finally(() => setLoading(false));
     // Heartbeat + periodic refresh
     api.sendHeartbeat().catch(() => {});
     const interval = setInterval(() => {
@@ -85,7 +94,7 @@ export default function CommunityScreen() {
       loadConversations();
     }, 30000);
     return () => clearInterval(interval);
-  }, [loadMessages, loadOnlineUsers, loadConversations]);
+  }, [loadMessages, loadOnlineUsers, loadConversations, loadAllUsers]);
 
   const onRefresh = async () => {
     setRefreshing(true);
