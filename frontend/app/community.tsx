@@ -42,6 +42,9 @@ export default function CommunityScreen() {
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [onlineUsers, setOnlineUsers] = useState<Array<{user_id: string; user_name: string}>>([]);
+  const [conversations, setConversations] = useState<any[]>([]);
+  const [showChats, setShowChats] = useState(false);
 
   const loadMessages = useCallback(async () => {
     try {
