@@ -482,16 +482,16 @@ export default function DictionaryScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={28} color={COLORS.text} />
+          <Icon name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.title}>{t('title')}</Text>
         <TouchableOpacity onPress={() => router.push('/flashcards')}>
-          <Ionicons name="card" size={28} color={COLORS.primary} />
+          <Icon name="card" size={28} color={COLORS.primary} />
         </TouchableOpacity>
       </View>
 
       <View style={styles.searchContainer}>
-        <Ionicons name="search" size={20} color={COLORS.textMuted} />
+        <Icon name="search" size={20} color={COLORS.textMuted} />
         <TextInput
           style={styles.searchInput}
           placeholder={t('search')}
@@ -501,7 +501,7 @@ export default function DictionaryScreen() {
         />
         {searchQuery ? (
           <TouchableOpacity onPress={() => { setSearchQuery(''); setAiSearchResult(null); }}>
-            <Ionicons name="close-circle" size={20} color={COLORS.textMuted} />
+            <Icon name="close-circle" size={20} color={COLORS.textMuted} />
           </TouchableOpacity>
         ) : null}
         {searchQuery.length >= 2 && (
@@ -524,7 +524,7 @@ export default function DictionaryScreen() {
       {aiSearchResult && (
         <View style={styles.aiResultCard}>
           <View style={styles.aiResultHeader}>
-            <Ionicons name="sparkles" size={16} color={COLORS.primary} />
+            <Icon name="sparkles" size={16} color={COLORS.primary} />
             <Text style={styles.aiResultTitle}>{aiSearchResult.term}</Text>
           </View>
           {aiSearchResult.found === false ? (
@@ -582,7 +582,7 @@ export default function DictionaryScreen() {
 
         {displayedTerms.length === 0 ? (
           <View style={styles.emptyState}>
-            <Ionicons name="heart-outline" size={48} color={COLORS.textMuted} />
+            <Icon name="heart-outline" size={48} color={COLORS.textMuted} />
             <Text style={styles.emptyText}>
               {showFavoritesOnly ? 'Nessun preferito salvato' : 'Nessun risultato'}
             </Text>
