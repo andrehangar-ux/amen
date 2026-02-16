@@ -266,10 +266,12 @@ export default function CommunityScreen() {
         </TouchableOpacity>
       </View>
 
-      {/* Online Users Strip */}
-      {onlineUsers.length > 0 && (
-        <View style={styles.onlineStrip}>
-          <Text style={styles.onlineLabel}>Online ({onlineUsers.length})</Text>
+      {/* Online Users Strip - always visible */}
+      <View style={styles.onlineStrip}>
+        <Text style={styles.onlineLabel}>
+          Online ({onlineUsers.length})
+        </Text>
+        {onlineUsers.length > 0 ? (
           <FlatList
             horizontal
             data={onlineUsers}
@@ -290,8 +292,10 @@ export default function CommunityScreen() {
               </TouchableOpacity>
             )}
           />
-        </View>
-      )}
+        ) : (
+          <Text style={styles.onlineEmpty}>Nessun utente online al momento</Text>
+        )}
+      </View>
 
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
