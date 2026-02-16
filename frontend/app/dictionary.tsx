@@ -338,7 +338,7 @@ export default function DictionaryScreen() {
             {favoriteLoading ? (
               <ActivityIndicator size="small" color={COLORS.primary} />
             ) : (
-              <Ionicons 
+              <Icon 
                 name={isFavorite ? "heart" : "heart-outline"} 
                 size={28} 
                 color={isFavorite ? COLORS.error : COLORS.text} 
@@ -370,7 +370,7 @@ export default function DictionaryScreen() {
                   onPress={toggleFavorite}
                   disabled={favoriteLoading}
                 >
-                  <Ionicons 
+                  <Icon 
                     name={isFavorite ? "heart" : "heart-outline"} 
                     size={20} 
                     color={isFavorite ? "#fff" : COLORS.primary} 
@@ -389,7 +389,7 @@ export default function DictionaryScreen() {
                     <ActivityIndicator size="small" color={COLORS.primary} />
                   ) : (
                     <>
-                      <Ionicons name="card-outline" size={20} color={COLORS.primary} />
+                      <Icon name="card-outline" size={20} color={COLORS.primary} />
                       <Text style={styles.actionButtonText}>{t('addFlashcard')}</Text>
                     </>
                   )}
@@ -514,7 +514,7 @@ export default function DictionaryScreen() {
             {aiSearching ? (
               <ActivityIndicator size="small" color="#fff" />
             ) : (
-              <Ionicons name="sparkles" size={16} color="#fff" />
+              <Icon name="sparkles" size={16} color="#fff" />
             )}
           </TouchableOpacity>
         )}
@@ -606,9 +606,9 @@ export default function DictionaryScreen() {
                 <Text style={styles.termCardOrigin}>{term.origin}</Text>
               </View>
               {favoriteIds.has(term.id) && (
-                <Ionicons name="heart" size={16} color={COLORS.error} style={{ marginRight: 8 }} />
+                <Icon name="heart" size={16} color={COLORS.error} style={{ marginRight: 8 }} />
               )}
-              <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+              <Icon name="chevron-forward" size={20} color={COLORS.textMuted} />
             </TouchableOpacity>
           ))
         )}
