@@ -220,6 +220,20 @@ export default function DictionaryScreen() {
     }
   };
 
+  const handleAiSearch = async () => {
+    if (!searchQuery.trim()) return;
+    setAiSearching(true);
+    setAiSearchResult(null);
+    try {
+      const data = await api.aiSearchDictionary(searchQuery.trim(), currentLanguage);
+      setAiSearchResult(data.term);
+    } catch (error) {
+      console.error('AI search error:', error);
+    } finally {
+      setAiSearching(false);
+    }
+  };
+
   const loadTerm = async (termId: string) => {
     setLoadingTerm(true);
     setAiAnswer('');
