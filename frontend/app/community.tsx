@@ -55,10 +55,36 @@ export default function CommunityScreen() {
     }
   }, [currentLanguage]);
 
+  const loadOnlineUsers = useCallback(async () => {
+    try {
+      const data = await api.getOnlineUsers();
+      setOnlineUsers((data.users || []).filter((u: any) => u.user_id !== user?.user_id));
+    } catch (error) {
+      console.log('Error loading online users:', error);
+    }
+  }, [user?.user_id]);
+
+  const loadConversations = useCallback(async () => {
+    try {
+      const data = await api.getConversations();
+      setConversations(data);
+    } catch (error) {
+      console.log('Error loading conversations:', error);
+    }
+  }, []);
+
   useEffect(() => {
     setLoading(true);
-    loadMessages().finally(() => setLoading(false));
-  }, [loadMessages]);
+    Promise.all([loadMessages(), loadOnlineUsers(), loadConversations()]).finally(() => setLoading(false));
+    // Heartbeat + periodic refresh
+    api.sendHeartbeat().catch(() => {});
+    const interval = setInterval(() => {
+      api.sendHeartbeat().catch(() => {});
+      loadOnlineUsers();
+      loadConversations();
+    }, 30000);
+    return () => clearInterval(interval);
+  }, [loadMessages, loadOnlineUsers, loadConversations]);
 
   const onRefresh = async () => {
     setRefreshing(true);
