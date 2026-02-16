@@ -12,60 +12,54 @@ export default function AuthCallbackScreen() {
 
   useEffect(() => {
     const handleCallback = async () => {
-      // Prevent double processing in StrictMode
       if (hasProcessed.current) return;
       hasProcessed.current = true;
       
       try {
-        // Get session_id from different sources
         let sessionId = params.session_id as string;
         
-        // On web, also check the URL hash and search params
-        if (Platform.OS === 'web' && !sessionId) {
-          // Check query params first
-          const urlParams = new URLSearchParams(window.location.search);
-          sessionId = urlParams.get('session_id') || '';
-          
-          // Then check hash (Emergent Auth puts session_id in hash)
+        if (Platform.OS === 'web') {
+          // Extract session_id from query params or hash
+          if (!sessionId) {
+            const urlParams = new URLSearchParams(window.location.search);
+            sessionId = urlParams.get('session_id') || '';
+          }
           if (!sessionId && window.location.hash) {
-            const hashString = window.location.hash.substring(1); // Remove #
+            const hashString = window.location.hash.substring(1);
             const hashParams = new URLSearchParams(hashString);
             sessionId = hashParams.get('session_id') || '';
-            
-            // Also try direct extraction if URLSearchParams fails
             if (!sessionId) {
               const match = window.location.hash.match(/session_id=([^&]+)/);
-              if (match) {
-                sessionId = match[1];
-              }
+              if (match) sessionId = match[1];
             }
+          }
+          
+          // If loaded in a MOBILE BROWSER (from OAuth redirect), redirect to app deep link
+          if (sessionId && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            const appScheme = 'amen';
+            setStatus('Apertura app...');
+            window.location.href = `${appScheme}://auth-callback?session_id=${sessionId}`;
+            // Fallback: if the app doesn't open, show message after delay
+            setTimeout(() => {
+              setStatus('Se l\'app non si apre automaticamente, torna all\'app manualmente.');
+            }, 3000);
+            return;
           }
         }
         
-        // On mobile, also check for session_id in the URL fragment
+        // On mobile native, check deep link URL
         if (!sessionId && Platform.OS !== 'web') {
-          // The session_id might come through Linking
           const Linking = (await import('expo-linking')).default;
           const url = await Linking.getInitialURL();
           if (url) {
-            const patterns = [
-              /#session_id=([^&]+)/,
-              /\?session_id=([^&]+)/,
-              /session_id=([^&]+)/
-            ];
-            
-            for (const pattern of patterns) {
+            for (const pattern of [/#session_id=([^&]+)/, /\?session_id=([^&]+)/, /session_id=([^&]+)/]) {
               const match = url.match(pattern);
-              if (match) {
-                sessionId = match[1];
-                break;
-              }
+              if (match) { sessionId = match[1]; break; }
             }
           }
         }
         
-        console.log('Auth callback - Session ID:', sessionId);
-        console.log('Auth callback - Platform:', Platform.OS);
+        console.log('Auth callback - Session ID:', sessionId, 'Platform:', Platform.OS);
         
         if (sessionId) {
           setStatus('Accesso in corso...');
@@ -74,19 +68,12 @@ export default function AuthCallbackScreen() {
           router.replace('/(tabs)');
         } else {
           setStatus('Sessione non trovata');
-          console.error('No session_id found in callback');
-          console.log('Current URL hash:', Platform.OS === 'web' ? window.location.hash : 'N/A');
-          console.log('Current URL search:', Platform.OS === 'web' ? window.location.search : 'N/A');
-          setTimeout(() => {
-            router.replace('/(auth)/login');
-          }, 2000);
+          setTimeout(() => router.replace('/(auth)/login'), 2000);
         }
       } catch (error: any) {
         console.error('Auth callback error:', error);
         setStatus(`Errore: ${error.message}`);
-        setTimeout(() => {
-          router.replace('/(auth)/login');
-        }, 3000);
+        setTimeout(() => router.replace('/(auth)/login'), 3000);
       }
     };
 
