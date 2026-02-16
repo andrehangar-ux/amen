@@ -283,11 +283,46 @@ export default function CommunityScreen() {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.keyboardView}
       >
-        {/* Messages List */}
+        {/* Messages or Chats List */}
         {loading ? (
           <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color={COLORS.primary} />
           </View>
+        ) : showChats ? (
+          <FlatList
+            data={conversations}
+            keyExtractor={(item) => item.conversation_id}
+            contentContainerStyle={styles.listContent}
+            ListEmptyComponent={
+              <View style={styles.emptyContainer}>
+                <Icon name="mail-outline" size={64} color={COLORS.textMuted} />
+                <Text style={styles.emptyText}>Nessuna chat</Text>
+                <Text style={styles.emptySubtext}>Tocca un utente online per iniziare</Text>
+              </View>
+            }
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.chatItem}
+                onPress={() => router.push({ pathname: '/private-chat', params: { userId: item.other_user_id, userName: item.other_user_name } })}
+                data-testid={`chat-item-${item.other_user_id}`}
+              >
+                <View style={styles.chatAvatar}>
+                  <Text style={styles.chatAvatarText}>{item.other_user_name.charAt(0).toUpperCase()}</Text>
+                </View>
+                <View style={styles.chatInfo}>
+                  <Text style={styles.chatName}>{item.other_user_name}</Text>
+                  <Text style={styles.chatLastMsg} numberOfLines={1}>
+                    {item.last_sender_name}: {item.last_message}
+                  </Text>
+                </View>
+                {item.unread_count > 0 && (
+                  <View style={styles.unreadBadge}>
+                    <Text style={styles.unreadText}>{item.unread_count}</Text>
+                  </View>
+                )}
+              </TouchableOpacity>
+            )}
+          />
         ) : (
           <FlatList
             data={messages}
