@@ -308,38 +308,77 @@ export default function CommunityScreen() {
           </View>
         ) : showChats ? (
           <FlatList
-            data={conversations}
-            keyExtractor={(item) => item.conversation_id}
+            data={[
+              ...conversations.map(c => ({ type: 'conversation' as const, ...c })),
+              ...allUsers
+                .filter(u => !conversations.some(c => c.other_user_id === u.user_id))
+                .map(u => ({ type: 'user' as const, ...u }))
+            ]}
+            keyExtractor={(item) => item.type === 'conversation' ? item.conversation_id : item.user_id}
             contentContainerStyle={styles.listContent}
+            ListHeaderComponent={
+              conversations.length > 0 ? (
+                <Text style={styles.sectionTitle}>Conversazioni</Text>
+              ) : null
+            }
             ListEmptyComponent={
               <View style={styles.emptyContainer}>
-                <Icon name="mail-outline" size={64} color={COLORS.textMuted} />
-                <Text style={styles.emptyText}>Nessuna chat</Text>
-                <Text style={styles.emptySubtext}>Tocca un utente online per iniziare</Text>
+                <Icon name="people-outline" size={64} color={COLORS.textMuted} />
+                <Text style={styles.emptyText}>Nessun utente registrato</Text>
               </View>
             }
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.chatItem}
-                onPress={() => router.push({ pathname: '/private-chat', params: { userId: item.other_user_id, userName: item.other_user_name } })}
-                data-testid={`chat-item-${item.other_user_id}`}
-              >
-                <View style={styles.chatAvatar}>
-                  <Text style={styles.chatAvatarText}>{item.other_user_name.charAt(0).toUpperCase()}</Text>
-                </View>
-                <View style={styles.chatInfo}>
-                  <Text style={styles.chatName}>{item.other_user_name}</Text>
-                  <Text style={styles.chatLastMsg} numberOfLines={1}>
-                    {item.last_sender_name}: {item.last_message}
-                  </Text>
-                </View>
-                {item.unread_count > 0 && (
-                  <View style={styles.unreadBadge}>
-                    <Text style={styles.unreadText}>{item.unread_count}</Text>
-                  </View>
-                )}
-              </TouchableOpacity>
-            )}
+            renderItem={({ item, index }) => {
+              if (item.type === 'conversation') {
+                const c = item as any;
+                return (
+                  <TouchableOpacity
+                    style={styles.chatItem}
+                    onPress={() => router.push({ pathname: '/private-chat', params: { userId: c.other_user_id, userName: c.other_user_name } })}
+                    data-testid={`chat-item-${c.other_user_id}`}
+                  >
+                    <View style={styles.chatAvatar}>
+                      <Text style={styles.chatAvatarText}>{c.other_user_name.charAt(0).toUpperCase()}</Text>
+                    </View>
+                    <View style={styles.chatInfo}>
+                      <Text style={styles.chatName}>{c.other_user_name}</Text>
+                      <Text style={styles.chatLastMsg} numberOfLines={1}>
+                        {c.last_sender_name}: {c.last_message}
+                      </Text>
+                    </View>
+                    {c.unread_count > 0 && (
+                      <View style={styles.unreadBadge}>
+                        <Text style={styles.unreadText}>{c.unread_count}</Text>
+                      </View>
+                    )}
+                  </TouchableOpacity>
+                );
+              } else {
+                const u = item as any;
+                const isFirstUser = index === conversations.length;
+                return (
+                  <>
+                    {isFirstUser && (
+                      <Text style={[styles.sectionTitle, { marginTop: conversations.length > 0 ? 16 : 0 }]}>Tutti gli utenti</Text>
+                    )}
+                    <TouchableOpacity
+                      style={styles.chatItem}
+                      onPress={() => router.push({ pathname: '/private-chat', params: { userId: u.user_id, userName: u.name } })}
+                      data-testid={`user-item-${u.user_id}`}
+                    >
+                      <View style={[styles.chatAvatar, !u.is_online && { backgroundColor: COLORS.textMuted }]}>
+                        <Text style={styles.chatAvatarText}>{u.name.charAt(0).toUpperCase()}</Text>
+                        {u.is_online && <View style={styles.userOnlineDot} />}
+                      </View>
+                      <View style={styles.chatInfo}>
+                        <Text style={styles.chatName}>{u.name}</Text>
+                        <Text style={styles.chatLastMsg}>{u.is_online ? 'Online' : 'Offline'}</Text>
+                      </View>
+                      <Icon name="chatbubble-outline" size={20} color={COLORS.primary} />
+                    </TouchableOpacity>
+                  </>
+                );
+              }
+            }}
           />
         ) : (
           <FlatList
