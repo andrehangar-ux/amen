@@ -299,16 +299,40 @@ export default function ReadingProgressScreen() {
               <Icon name="flame" size={28} color="#FF6B35" />
               <Text style={styles.statValue}>{progress.reading_streak || 0}</Text>
               <Text style={styles.statLabel}>{t('streak')}</Text>
+              <TouchableOpacity
+                style={styles.resetBtn}
+                onPress={() => handleReset('streak')}
+                data-testid="reset-streak-btn"
+              >
+                <Icon name="refresh" size={14} color="#FF6B35" />
+                <Text style={[styles.resetBtnText, { color: '#FF6B35' }]}>{t('reset')}</Text>
+              </TouchableOpacity>
             </View>
             <View style={[styles.statCard, { backgroundColor: '#E8F5E9' }]}>
               <Icon name="book" size={28} color="#4CAF50" />
               <Text style={styles.statValue}>{progress.total_chapters_read || 0}</Text>
               <Text style={styles.statLabel}>{t('chaptersRead')}</Text>
+              <TouchableOpacity
+                style={styles.resetBtn}
+                onPress={() => handleReset('chapters')}
+                data-testid="reset-chapters-btn"
+              >
+                <Icon name="refresh" size={14} color="#4CAF50" />
+                <Text style={[styles.resetBtnText, { color: '#4CAF50' }]}>{t('reset')}</Text>
+              </TouchableOpacity>
             </View>
             <View style={[styles.statCard, { backgroundColor: '#E3F2FD' }]}>
               <Icon name="journal" size={28} color="#2196F3" />
               <Text style={styles.statValue}>{progress.total_journal_entries || 0}</Text>
               <Text style={styles.statLabel}>{t('journalEntries')}</Text>
+              <TouchableOpacity
+                style={styles.resetBtn}
+                onPress={() => handleReset('journal')}
+                data-testid="reset-journal-btn"
+              >
+                <Icon name="refresh" size={14} color="#2196F3" />
+                <Text style={[styles.resetBtnText, { color: '#2196F3' }]}>{t('reset')}</Text>
+              </TouchableOpacity>
             </View>
           </View>
         )}
