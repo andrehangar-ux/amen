@@ -606,6 +606,12 @@ async def get_me(user: User = Depends(require_auth)):
 @api_router.post("/auth/logout")
 async def logout(request: Request, response: Response):
     session_token = request.cookies.get("session_token")
+    
+    if not session_token:
+        auth_header = request.headers.get("Authorization")
+        if auth_header and auth_header.startswith("Bearer "):
+            session_token = auth_header.replace("Bearer ", "")
+    
     if session_token:
         await db.user_sessions.delete_one({"session_token": session_token})
     
