@@ -1,0 +1,103 @@
+{
+  "summary": "Reset Progress Stats feature fully verified - Backend 13/13 tests passed, Frontend UI working with reset buttons and confirmation dialogs",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "reading-progress.tsx",
+        "issue": "data-testid attributes on TouchableOpacity not rendering in web DOM",
+        "selector": "[data-testid='reset-streak-btn']",
+        "priority": "LOW",
+        "note": "This is a React Native Web limitation, not affecting functionality"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_reset_progress.py",
+    "/app/test_reports/pytest/pytest_reset_progress.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Backend reset endpoints correctly isolated - reset/streak only affects streak, not chapters or journal",
+    "reset/chapters clears both total_chapters_read and reading_history as expected",
+    "reset/journal clears both total_journal_entries and journal_entries collection",
+    "reset/history only clears reading_history, not the chapters count",
+    "All reset endpoints require authentication (401 without auth)",
+    "Invalid stat type returns 400 with helpful error message"
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_reset_progress.py"
+  ],
+  "success_rate": {
+    "backend": "100% - 13/13 tests passed",
+    "frontend": "100% - All reset buttons visible and working"
+  },
+  "test_credentials": {
+    "email": "testbible@cibospirituale.it",
+    "password": "Test123!"
+  },
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Reset progress stats feature is fully implemented and working. Backend has individual reset endpoints for streak, chapters, journal, and history. Frontend shows 'Azzera' buttons under each stat card on /reading-progress page. window.confirm is used for confirmation on web. The 'Azzera Cronologia' button only appears when there is reading history to clear.",
+  "features_verified": {
+    "reset_streak": {
+      "endpoint": "POST /api/progress/reset/streak",
+      "status": "PASSED",
+      "behavior": "Zeroes reading_streak and last_reading_date, preserves chapters and journal"
+    },
+    "reset_chapters": {
+      "endpoint": "POST /api/progress/reset/chapters",
+      "status": "PASSED",
+      "behavior": "Zeroes total_chapters_read and deletes reading_history"
+    },
+    "reset_journal": {
+      "endpoint": "POST /api/progress/reset/journal",
+      "status": "PASSED",
+      "behavior": "Zeroes total_journal_entries and deletes journal_entries"
+    },
+    "reset_history": {
+      "endpoint": "POST /api/progress/reset/history",
+      "status": "PASSED",
+      "behavior": "Only deletes reading_history, chapters count unchanged"
+    },
+    "invalid_reset_type": {
+      "endpoint": "POST /api/progress/reset/invalid",
+      "status": "PASSED",
+      "behavior": "Returns 400 with detail message"
+    },
+    "frontend_reset_buttons": {
+      "status": "PASSED",
+      "location": "/reading-progress page",
+      "buttons_visible": ["Azzera (streak)", "Azzera (chapters)", "Azzera (journal)"],
+      "confirmation_dialog": "window.confirm on web shows 'Azzera Statistica' title with specific message"
+    }
+  },
+  "tests_executed": {
+    "backend_pytest": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0,
+      "test_classes": [
+        "TestResetProgressEndpoints - 5 tests for basic endpoint functionality",
+        "TestResetStreakIsolation - 1 test verifying streak reset isolation",
+        "TestResetChaptersWithHistory - 1 test verifying chapters+history reset",
+        "TestResetJournalWithEntries - 1 test verifying journal+entries reset",
+        "TestResetHistoryOnly - 1 test verifying history-only reset",
+        "TestAuthRequired - 4 tests verifying 401 without auth"
+      ]
+    },
+    "frontend_playwright": {
+      "login": "PASSED",
+      "navigation_to_reading_progress": "PASSED",
+      "reset_buttons_visible": "PASSED - 3 'Azzera' buttons found",
+      "confirmation_dialog": "PASSED - window.confirm appeared with correct message",
+      "reset_execution": "PASSED - Reset completed successfully"
+    }
+  }
+}
