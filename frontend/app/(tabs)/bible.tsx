@@ -291,10 +291,22 @@ export default function BibleScreen() {
     if (!selectedBook || !selectedChapter) return;
     const text = `"${verse.text}"\n\n- ${selectedBook.name} ${selectedChapter}:${verse.verse}`;
     try {
-      const { Share } = await import('react-native');
-      await Share.share({ message: text, title: t('verseFromBible') });
+      if (Platform.OS === 'web' && navigator.clipboard) {
+        await navigator.clipboard.writeText(text);
+        Alert.alert('', t('copiedToClipboard') || 'Copiato negli appunti!');
+      } else {
+        const { Share } = await import('react-native');
+        await Share.share({ message: text, title: t('verseFromBible') });
+      }
     } catch (error) {
-      Alert.alert(t('error'), t('unableToShare'));
+      // Fallback: try clipboard
+      try {
+        const { Clipboard } = await import('react-native');
+        Clipboard?.setString?.(text);
+        Alert.alert('', t('copiedToClipboard') || 'Copiato negli appunti!');
+      } catch {
+        Alert.alert(t('error'), t('unableToShare'));
+      }
     }
   };
 
