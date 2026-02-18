@@ -206,8 +206,15 @@ export default function HomeScreen() {
 
         {/* Progress Overview */}
         {progress && (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>{t('yourProgress')}</Text>
+          <TouchableOpacity 
+            style={styles.section}
+            onPress={() => router.push('/reading-progress')}
+            activeOpacity={0.7}
+          >
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>{t('yourProgress')}</Text>
+              <Icon name="chevron-forward" size={20} color={COLORS.textSecondary} />
+            </View>
             <View style={styles.progressCard}>
               <View style={styles.progressItem}>
                 <View style={styles.progressIconContainer}>
