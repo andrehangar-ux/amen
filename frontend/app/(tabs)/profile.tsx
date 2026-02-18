@@ -274,10 +274,6 @@ export default function ProfileScreen() {
     }
   };
 
-  const goToChapter = (book: string, chapter: number) => {
-    router.push(`/bible?book=${encodeURIComponent(book)}&chapter=${chapter}`);
-  };
-
   const handleLogout = () => {
     showConfirm(
       t('logoutTitle'),
