@@ -466,6 +466,13 @@ export default function ProfileScreen() {
               onPress={() => router.push('/groups')}
               color="#9C27B0"
             />
+            <MenuItem
+              icon="heart"
+              title={t('friendsSection') || 'I Miei Amici'}
+              subtitle={t('friendsDesc') || 'Utenti preferiti'}
+              onPress={() => router.push('/friends')}
+              color="#E91E63"
+            />
           </View>
         </View>
 
