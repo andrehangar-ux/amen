@@ -36,6 +36,7 @@ export const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ currentScreen = 'h
     { key: 'home', label: labels.home, icon: 'home', route: '/(tabs)' },
     { key: 'bible', label: labels.bible, icon: 'book', route: '/(tabs)/bible' },
     { key: 'journal', label: labels.journal, icon: 'create', route: '/(tabs)/journal' },
+    { key: 'myContent', label: labels.myContent, icon: 'bookmark', route: '/my-content' },
     { key: 'profile', label: labels.profile, icon: 'person', route: '/(tabs)/profile' },
     { key: 'donate', label: labels.donate, icon: 'heart', route: '/donate' },
     { key: 'settings', label: labels.settings, icon: 'settings', route: '/settings' },
