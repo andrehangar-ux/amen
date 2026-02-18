@@ -1,0 +1,76 @@
+{
+  "summary": "Iteration 29 - Testing Bible 'Salvati' button and mood-checkin API. Backend 12/12 tests passed - mood-checkin API returns different verses on consecutive calls (verified). CRITICAL FRONTEND BUG: 'Salvati' button in Bible reading toolbar is NOT visible in the UI, despite code existing at line 698-705 in bible.tsx. Only 3 buttons render (Edizioni, A16, Aiuto) instead of 4.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "BibleScreen Reading Toolbar",
+        "issue": "CRITICAL: 'Salvati' button (myContent) is NOT rendering in the toolbar. Code exists at lines 698-705 in bible.tsx but only 3 buttons display: Edizioni, A16, Aiuto. The Salvati button should be the first button (with bookmark icon) linking to /my-content.",
+        "selector": "[data-testid='my-content-btn']",
+        "priority": "HIGH",
+        "file": "/app/frontend/app/(tabs)/bible.tsx",
+        "lines": "698-705",
+        "expected": "4 toolbar buttons: Salvati, Edizioni, A16, Aiuto",
+        "actual": "3 toolbar buttons: Edizioni, A16, Aiuto"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iteration_29.py",
+    "/app/test_reports/pytest/pytest_iteration_29.xml"
+  ],
+  "action_items": [
+    "CRITICAL: Fix 'Salvati' button not rendering in Bible reading toolbar - the TouchableOpacity at lines 698-705 in bible.tsx is not being displayed despite code being present",
+    "Check why the first button in readingToolbar View is not rendering - possible rendering order issue or conditional logic",
+    "Verify Icon component 'bookmark' is available and renders correctly",
+    "Consider using testID instead of data-testid for React Native compatibility"
+  ],
+  "critical_code_review_comments": [
+    "The TouchableOpacity for 'Salvati' button exists in code but doesn't render in UI - possible JSX/rendering issue",
+    "Translation key 'myContent' exists in all 6 languages but button still not visible",
+    "Three other toolbar buttons render correctly, suggesting issue is specific to the first button"
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iteration_29.py"
+  ],
+  "success_rate": {
+    "backend": "100% (12/12 tests passed)",
+    "frontend": "0% - Critical button not rendering"
+  },
+  "test_credentials": {
+    "email": "testbible@cibospirituale.it",
+    "password": "Test123!"
+  },
+  "seed_data_creation": "Test created and deleted a bookmark for Salmi 23:1 during testing",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend mood-checkin API working correctly - returns different verses on consecutive calls (verified with 5 consecutive calls for same mood). Critical frontend issue: 'Salvati' button not rendering in Bible reading toolbar. Code exists but button is invisible. Main agent needs to investigate why the first TouchableOpacity in readingToolbar doesn't render.",
+  "features_verified": {
+    "mood_checkin_api": {
+      "status": "PASSED",
+      "endpoint": "POST /api/ai/mood-checkin",
+      "notes": "5 consecutive calls with same mood return different verses - random.choice() working correctly"
+    },
+    "mood_checkin_multilingual": {
+      "status": "PASSED",
+      "notes": "Tested Italian, English, Spanish - all return correct language verses"
+    },
+    "bookmarks_api": {
+      "status": "PASSED",
+      "endpoints": ["GET /api/bookmarks", "POST /api/bookmarks", "DELETE /api/bookmarks/{id}"],
+      "notes": "CRUD operations working correctly"
+    },
+    "bible_toolbar_salvati_button": {
+      "status": "FAILED",
+      "issue": "Button not rendering despite code existing - CRITICAL BUG",
+      "file": "/app/frontend/app/(tabs)/bible.tsx",
+      "lines": "698-705"
+    }
+  },
+  "rca_of_issue": "The 'Salvati' button is defined in bible.tsx at lines 698-705 as the first child of the readingToolbar View. However, in the browser UI only 3 buttons render (Edizioni, A16, Aiuto). The code structure appears correct but the button is simply not displaying. Possible causes: 1) JSX rendering issue, 2) Icon component issue with 'bookmark' name, 3) CSS/style issue hiding the element. The other 3 buttons in the same container render correctly."
+}
