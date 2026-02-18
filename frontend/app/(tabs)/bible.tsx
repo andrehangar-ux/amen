@@ -247,6 +247,26 @@ export default function BibleScreen() {
     try {
       const data = await api.getStudyData(book, chapter);
       setStudyData(data);
+      
+      // Load user bookmarks for this chapter
+      if (data.user_bookmarks && data.user_bookmarks.length > 0) {
+        const bookmarkedSet = new Set<string>();
+        data.user_bookmarks.forEach((bookmark: any) => {
+          bookmarkedSet.add(`${book}:${chapter}:${bookmark.verse}`);
+        });
+        setBookmarkedVerses(bookmarkedSet);
+      }
+      
+      // Load highlighted verses from bookmarks with highlight_color
+      if (data.user_bookmarks && data.user_bookmarks.length > 0) {
+        const highlightedSet = new Set<number>();
+        data.user_bookmarks.forEach((bookmark: any) => {
+          if (bookmark.highlight_color && bookmark.highlight_color !== '#D4A574') {
+            highlightedSet.add(bookmark.verse);
+          }
+        });
+        setHighlightedVerses(highlightedSet);
+      }
     } catch (error) {
       console.log('Error loading study data:', error);
       setStudyData(null);
