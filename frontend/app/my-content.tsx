@@ -164,7 +164,7 @@ export default function MyContentScreen() {
     try {
       const [bookmarksData, notesData] = await Promise.all([
         api.getBookmarks(),
-        api.getStudyNotes(),
+        api.getAllStudyNotes(),
       ]);
       setBookmarks(bookmarksData || []);
       setNotes(notesData || []);
