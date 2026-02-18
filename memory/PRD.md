@@ -5,49 +5,51 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 
 ## Core Features Implemented
 
-### Note, Segnalibri e Evidenziazioni ✅ BUG FIX
-- [x] **Creazione note**: POST /api/bible/study/notes funzionante
-- [x] **Eliminazione note dal diario**: DELETE /api/journal/{entry_id} funzionante
-- [x] **Visualizzazione durante lettura**: GET /api/bible/study/{book}/{chapter} ora restituisce user_notes E user_bookmarks
-- [x] **Caricamento automatico**: bible.tsx carica bookmarks e highlights all'apertura del capitolo
-- [x] **Modal strumenti studio**: Nota, AI Spiega, Dizionario, Evidenzia, Condividi, Segnalibro, Mappe, Wikipedia, LaParola
+### Toolbar Bibbia con accesso "I Miei Contenuti" ✅
+- [x] Pulsante bookmark nel toolbar lettura Bibbia
+- [x] Apre schermata /my-content per vedere note, segnalibri, evidenziazioni
+- [x] Accessibile anche da Menu Hamburger e Profilo
 
-### Eliminazione Contenuti ✅
-- [x] Eliminazione note dalla Bibbia (icona cestino)
-- [x] Eliminazione segnalibri da "I Miei Contenuti"
-- [x] Eliminazione voci dal Diario
+### Versetti Dinamici "Come ti senti oggi?" ✅
+- [x] Backend: random.choice() senza seed - versetti casuali ad ogni chiamata
+- [x] Mapping chiavi EN→IT (happy→felice, hopeful→speranzoso, ecc.)
+- [x] Riflessione AI diversa ad ogni tocco
+- [x] Testato: 5 chiamate consecutive = 4 versetti unici
 
-### I Miei Contenuti ✅
-- [x] Schermata /my-content accessibile da profilo e menu hamburger
-- [x] Tab Segnalibri/Note/Evidenziati con eliminazione
-
-### Versetti Dinamici ✅
-- [x] Cambiano ad ogni tocco
-- [x] Mapping chiavi EN→IT
-- [x] Riflessione AI diversa ogni volta
-
-### Progressi Lettura ✅
-- [x] Schermata /reading-progress
-- [x] Link al capitolo dalla cronologia
+### Note, Segnalibri e Evidenziazioni ✅
+- [x] Creazione e eliminazione note
+- [x] Creazione e eliminazione segnalibri
+- [x] Visualizzazione durante lettura capitolo
+- [x] API GET /bible/study/{book}/{chapter} restituisce user_notes e user_bookmarks
 
 ### Altre Funzionalità
-- [x] Lista amici, Chat privata, Dizionario AI
-- [x] Reset password, Google OAuth
-- [x] Icone standardizzate (Icon component)
+- [x] Eliminazione voci dal Diario
+- [x] Lista amici/utenti preferiti
+- [x] Chat privata
+- [x] Dizionario AI
+- [x] Reset password
+- [x] Progressi lettura
 
 ## Recent Changes
 
 ### 2026-02-18 - Session 6
-- **Bug Fix**: API GET /bible/study/{book}/{chapter} ora restituisce user_bookmarks
-- **Bug Fix**: bible.tsx loadStudyData popola bookmarkedVerses e highlightedVerses
-- **Bug Fix**: Verificata eliminazione voci diario funzionante
+- **Toolbar Bibbia**: Aggiunto pulsante bookmark (Edizioni, A16, Bookmark, Aiuto)
+- **Traduzioni**: Aggiunte myContent, editions, help in 6 lingue
+- **Backend Mood**: Verificato funzionamento random.choice() - versetti diversi ad ogni chiamata
 
 ## Testing Results
-- iteration_28: Backend 100% (10/10), Frontend 95%
+- Backend: 100% - mood-checkin API funzionante (5 chiamate = 4 versetti unici)
+- Frontend: Emoji mood selector funziona correttamente
 
 ## Test Credentials
 - Email: testbible@cibospirituale.it
 - Password: Test123!
+
+## API Endpoints Chiave
+- `POST /api/ai/mood-checkin` - Versetti casuali + riflessione AI
+- `GET /api/bible/study/{book}/{chapter}` - Dati studio con user_notes e user_bookmarks
+- `GET/POST/DELETE /api/bookmarks` - CRUD segnalibri
+- `GET/POST/DELETE /api/bible/study/notes` - CRUD note
 
 ## Remaining Tasks
 - [ ] Notifiche push dinamiche e tradotte
