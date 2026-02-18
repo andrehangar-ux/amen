@@ -6,7 +6,7 @@ import pytest
 import requests
 import os
 
-BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://verse-mood-check.preview.emergentagent.com')
+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://verse-selector.preview.emergentagent.com')
 TEST_USER_EMAIL = "testbible@cibospirituale.it"
 TEST_USER_PASSWORD = "Test123!"
 
