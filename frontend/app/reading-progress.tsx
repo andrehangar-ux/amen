@@ -350,7 +350,19 @@ export default function ReadingProgressScreen() {
 
         {/* Recent Reading */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{t('recentReading')}</Text>
+          <View style={styles.sectionHeaderRow}>
+            <Text style={styles.sectionTitle}>{t('recentReading')}</Text>
+            {history.length > 0 && (
+              <TouchableOpacity
+                style={styles.clearHistoryBtn}
+                onPress={() => handleReset('history')}
+                data-testid="clear-history-btn"
+              >
+                <Icon name="trash-outline" size={16} color={COLORS.error} />
+                <Text style={styles.clearHistoryText}>{t('clearHistory')}</Text>
+              </TouchableOpacity>
+            )}
+          </View>
           
           {history.length === 0 ? (
             <View style={styles.emptyState}>
