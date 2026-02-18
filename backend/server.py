@@ -2017,9 +2017,39 @@ async def mood_checkin(data: MoodRequest, user: User = Depends(require_auth)):
         import random
         lang = data.language or user.language or "it"
         
+        # Map English mood keys to language-specific keys
+        mood_key_mapping = {
+            "it": {"happy": "felice", "sad": "triste", "anxious": "ansioso", "angry": "arrabbiato", 
+                   "grateful": "grato", "confused": "confuso", "hopeful": "speranzoso", "tired": "stanco"},
+            "en": {"happy": "happy", "sad": "sad", "anxious": "anxious", "angry": "angry",
+                   "grateful": "grateful", "confused": "confused", "hopeful": "hopeful", "tired": "tired"},
+            "es": {"happy": "feliz", "sad": "triste", "anxious": "ansioso", "angry": "enojado",
+                   "grateful": "agradecido", "confused": "confundido", "hopeful": "esperanzado", "tired": "cansado"},
+            "pt": {"happy": "feliz", "sad": "triste", "anxious": "ansioso", "angry": "irritado",
+                   "grateful": "grato", "confused": "confuso", "hopeful": "esperançoso", "tired": "cansado"},
+            "fr": {"happy": "heureux", "sad": "triste", "anxious": "anxieux", "angry": "en colère",
+                   "grateful": "reconnaissant", "confused": "confus", "hopeful": "plein d'espoir", "tired": "fatigué"},
+            "de": {"happy": "glücklich", "sad": "traurig", "anxious": "ängstlich", "angry": "wütend",
+                   "grateful": "dankbar", "confused": "verwirrt", "hopeful": "hoffnungsvoll", "tired": "müde"},
+        }
+        
         mood_verses = MOOD_VERSES_MULTILANG.get(lang, MOOD_VERSES_MULTILANG["it"])
-        mood = data.mood.lower()
-        mood_data = mood_verses.get(mood, mood_verses.get("speranzoso", [{"ref": "Salmi 23:1", "text": "Il Signore è il mio pastore."}]))
+        input_mood = data.mood.lower()
+        
+        # Try to map the mood key, or use as-is if already in correct format
+        lang_mapping = mood_key_mapping.get(lang, mood_key_mapping["it"])
+        mood = lang_mapping.get(input_mood, input_mood)
+        
+        # Get verses for the mood, with fallback
+        mood_data = mood_verses.get(mood)
+        if not mood_data:
+            # Try with the original input mood
+            mood_data = mood_verses.get(input_mood)
+        if not mood_data:
+            # Default fallback
+            first_mood = list(mood_verses.keys())[0] if mood_verses else "speranzoso"
+            mood_data = mood_verses.get(first_mood, [{"ref": "Salmi 23:1", "text": "Il Signore è il mio pastore."}])
+        
         # Random selection: different verse each time user taps a mood
         verse = random.choice(mood_data) if mood_data else {"ref": "Salmi 23:1", "text": "Il Signore è il mio pastore."}
         
