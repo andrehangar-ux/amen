@@ -717,7 +717,16 @@ export default function BibleScreen() {
             <Text style={styles.notesSectionTitle}>{t('yourNotes')}</Text>
             {studyData.user_notes.map((note: any, idx: number) => (
               <View key={idx} style={styles.noteCard}>
-                {note.verse && <Text style={styles.noteVerse}>v. {note.verse}</Text>}
+                <View style={styles.noteHeader}>
+                  {note.verse && <Text style={styles.noteVerse}>v. {note.verse}</Text>}
+                  <TouchableOpacity
+                    onPress={() => handleDeleteNote(note.note_id)}
+                    style={styles.deleteNoteBtn}
+                    data-testid={`delete-note-${note.note_id}`}
+                  >
+                    <Icon name="trash-outline" size={16} color="#E74C3C" />
+                  </TouchableOpacity>
+                </View>
                 <Text style={styles.noteText}>{note.note}</Text>
               </View>
             ))}
