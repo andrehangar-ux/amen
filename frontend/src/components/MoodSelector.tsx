@@ -16,6 +16,11 @@ export const MoodSelector: React.FC<MoodSelectorProps> = ({
 }) => {
   const { t } = useTranslation();
 
+  // Always call onSelect, even if same mood is tapped again (to get new verse)
+  const handleMoodPress = (moodKey: string) => {
+    onSelect(moodKey);
+  };
+
   if (horizontal) {
     return (
       <ScrollView 
@@ -30,7 +35,7 @@ export const MoodSelector: React.FC<MoodSelectorProps> = ({
               styles.moodButtonHorizontal,
               selectedMood === mood.key && { backgroundColor: mood.color + '30', borderColor: mood.color },
             ]}
-            onPress={() => onSelect(mood.key)}
+            onPress={() => handleMoodPress(mood.key)}
             data-testid={`mood-${mood.key}`}
           >
             <Text style={styles.moodEmoji}>{mood.emoji}</Text>
@@ -55,7 +60,7 @@ export const MoodSelector: React.FC<MoodSelectorProps> = ({
             styles.moodButton,
             selectedMood === mood.key && { backgroundColor: mood.color + '30', borderColor: mood.color },
           ]}
-          onPress={() => onSelect(mood.key)}
+          onPress={() => handleMoodPress(mood.key)}
           data-testid={`mood-${mood.key}`}
         >
           <Text style={styles.moodEmoji}>{mood.emoji}</Text>
