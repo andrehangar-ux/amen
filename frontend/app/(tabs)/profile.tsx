@@ -281,14 +281,14 @@ export default function ProfileScreen() {
       async () => {
         try {
           await logout();
-          setUser(null);
-          setSessionToken(null);
-          router.replace('/(auth)/login');
         } catch (error) {
           console.error('Logout error:', error);
-          setUser(null);
-          setSessionToken(null);
-          router.replace('/(auth)/login');
+        } finally {
+          if (Platform.OS === 'web') {
+            window.location.href = '/';
+          } else {
+            router.replace('/(auth)/login');
+          }
         }
       },
       t('cancel'),
@@ -303,11 +303,15 @@ export default function ProfileScreen() {
       async () => {
         try {
           await api.deleteAccount();
-          setUser(null);
-          setSessionToken(null);
-          router.replace('/(auth)/login');
+          await logout();
         } catch (error) {
           console.error('Delete account error:', error);
+        } finally {
+          if (Platform.OS === 'web') {
+            window.location.href = '/';
+          } else {
+            router.replace('/(auth)/login');
+          }
         }
       },
       t('cancel'),
