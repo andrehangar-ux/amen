@@ -163,6 +163,18 @@ export const api = {
     api.fetch(`/api/notifications/${notificationId}/read`, { method: 'POST' }),
   markAllNotificationsRead: () => api.fetch('/api/notifications/read-all', { method: 'POST' }),
 
+  // Friends
+  getFriends: () => api.fetch('/api/friends'),
+  addFriend: (friendId: string) =>
+    api.fetch('/api/friends', {
+      method: 'POST',
+      body: JSON.stringify({ friend_id: friendId }),
+    }),
+  removeFriend: (friendId: string) =>
+    api.fetch(`/api/friends/${friendId}`, { method: 'DELETE' }),
+  checkFriendship: (friendId: string) =>
+    api.fetch(`/api/friends/check/${friendId}`),
+
   // Community
   getCommunityMessages: (lang = 'it') => api.fetch(`/api/community/messages?lang=${lang}`),
   createCommunityMessage: (content: string, language: string, messageType = 'text') =>
