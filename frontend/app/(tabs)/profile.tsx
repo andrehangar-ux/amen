@@ -368,43 +368,45 @@ export default function ProfileScreen() {
 
         {/* Stats */}
         {progress && (
-          <TouchableOpacity 
-            style={styles.statsContainer}
-            onPress={() => router.push('/reading-progress')}
-            data-testid="progress-stats-btn"
-          >
-            <View style={styles.statItem}>
-              <Text style={styles.statValue}>{progress.reading_streak || 0}</Text>
-              <Text style={styles.statLabel}>{t('streak')}</Text>
-            </View>
-            <View style={styles.statDivider} />
-            <View style={styles.statItem}>
-              <Text style={styles.statValue}>{progress.total_chapters_read || 0}</Text>
-              <Text style={styles.statLabel}>{t('chapters')}</Text>
-            </View>
-            <View style={styles.statDivider} />
-            <View style={styles.statItem}>
-              <Text style={styles.statValue}>{progress.total_journal_entries || 0}</Text>
-              <Text style={styles.statLabel}>{t('entries')}</Text>
-            </View>
-            <Icon name="chevron-forward" size={20} color={COLORS.textSecondary} style={{ marginLeft: SPACING.sm }} />
-          </TouchableOpacity>
+          <Link href="/reading-progress" asChild>
+            <Pressable 
+              style={styles.statsContainer}
+              data-testid="progress-stats-btn"
+            >
+              <View style={styles.statItem}>
+                <Text style={styles.statValue}>{progress.reading_streak || 0}</Text>
+                <Text style={styles.statLabel}>{t('streak')}</Text>
+              </View>
+              <View style={styles.statDivider} />
+              <View style={styles.statItem}>
+                <Text style={styles.statValue}>{progress.total_chapters_read || 0}</Text>
+                <Text style={styles.statLabel}>{t('chapters')}</Text>
+              </View>
+              <View style={styles.statDivider} />
+              <View style={styles.statItem}>
+                <Text style={styles.statValue}>{progress.total_journal_entries || 0}</Text>
+                <Text style={styles.statLabel}>{t('entries')}</Text>
+              </View>
+              <Icon name="chevron-forward" size={20} color={COLORS.textSecondary} style={{ marginLeft: SPACING.sm }} />
+            </Pressable>
+          </Link>
         )}
 
         {/* Reading History Section */}
         <View style={styles.section}>
-          <TouchableOpacity 
-            style={styles.sectionHeaderRow}
-            onPress={() => router.push('/reading-progress')}
-            data-testid="reading-history-toggle"
-          >
-            <Text style={styles.sectionTitle}>{t('readingHistory')}</Text>
-            <Icon 
-              name={showHistory ? "chevron-up" : "chevron-down"} 
-              size={20} 
-              color={COLORS.textLight} 
-            />
-          </TouchableOpacity>
+          <Link href="/reading-progress" asChild>
+            <Pressable 
+              style={styles.sectionHeaderRow}
+              data-testid="reading-history-toggle"
+            >
+              <Text style={styles.sectionTitle}>{t('readingHistory')}</Text>
+              <Icon 
+                name="chevron-forward" 
+                size={20} 
+                color={COLORS.textLight} 
+              />
+            </Pressable>
+          </Link>
           
           {showHistory && (
             <View style={styles.menuCard}>
