@@ -8,11 +8,12 @@ import {
   Alert,
   ActivityIndicator,
   Platform,
+  Pressable,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon } from '../../src/components/Icon';
 import { HamburgerMenu } from '../../src/components/HamburgerMenu';
-import { router } from 'expo-router';
+import { router, Link } from 'expo-router';
 import { useAuthStore } from '../../src/store/authStore';
 import { useLanguageStore } from '../../src/store/languageStore';
 import { api } from '../../src/utils/api';
