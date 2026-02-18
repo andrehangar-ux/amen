@@ -701,7 +701,6 @@ export default function BibleScreen() {
             data-testid="my-content-btn"
           >
             <Icon name="bookmark" size={20} color={COLORS.primary} />
-            <Text style={styles.toolbarButtonText}>{t('myContent') || 'Salvati'}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity 
