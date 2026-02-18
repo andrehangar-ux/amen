@@ -38,13 +38,17 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 
 ## Recent Changes
 
-### 2026-02-19 - Session 7 (Bug Fix P0)
+### 2026-02-19 - Session 7 (Bug Fix P0 + Logout/Delete Fix)
 - **Bug P0 RISOLTO**: Versetti "Come ti senti oggi?" ora cambiano ad ogni tocco
   - Backend: aggiunto `exclude_ref` a MoodRequest per escludere versetto precedente
   - Backend: fallback DB per controllare ultimo checkin utente/mood
   - Backend: session_id LLM unico per ogni chiamata (uuid)
   - Frontend: passa previousRef come exclude_ref
   - Frontend: key unica `_ts` per forzare re-mount componente risultato
+- **Bug Fix: Logout/Elimina Account**
+  - Backend logout ora legge token sia da cookie che da Authorization header
+  - Frontend: redirect robusto con `window.location.href = '/'` su web
+  - Frontend: handleDeleteAccount ora chiama anche logout() per pulizia completa
 - **Testing**: 100% backend (10/10 test), 100% frontend (UI verificata)
 
 ### 2026-02-18 - Session 6
