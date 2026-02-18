@@ -463,18 +463,30 @@ export default function ProfileScreen() {
               onPress={() => router.push('/privacy')}
               color={COLORS.primary}
             />
-            <MenuItem
-              icon="log-out"
-              title={t('logout')}
+          </View>
+          <View style={{ marginTop: SPACING.md, gap: SPACING.sm }}>
+            <Pressable
+              style={({ pressed }) => [
+                styles.accountActionBtn,
+                { borderColor: COLORS.error + '40', backgroundColor: pressed ? COLORS.error + '15' : COLORS.card },
+              ]}
               onPress={handleLogout}
-              color={COLORS.error}
-            />
-            <MenuItem
-              icon="trash"
-              title={t('deleteAccount')}
+              data-testid="logout-btn"
+            >
+              <Icon name="log-out" size={20} color={COLORS.error} />
+              <Text style={[styles.accountActionText, { color: COLORS.error }]}>{t('logout')}</Text>
+            </Pressable>
+            <Pressable
+              style={({ pressed }) => [
+                styles.accountActionBtn,
+                { borderColor: COLORS.error + '80', backgroundColor: pressed ? COLORS.error + '20' : COLORS.error + '08' },
+              ]}
               onPress={handleDeleteAccount}
-              color={COLORS.error}
-            />
+              data-testid="delete-account-btn"
+            >
+              <Icon name="trash" size={20} color={COLORS.error} />
+              <Text style={[styles.accountActionText, { color: COLORS.error }]}>{t('deleteAccount')}</Text>
+            </Pressable>
           </View>
         </View>
 
