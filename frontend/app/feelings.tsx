@@ -117,7 +117,7 @@ export default function FeelingsScreen() {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={24} color={COLORS.text} />
+          <Icon name="arrow-back" size={24} color={COLORS.text} />
         </TouchableOpacity>
         <View style={styles.headerContent}>
           <Text style={styles.headerTitle}>Come Ti Senti?</Text>
@@ -127,7 +127,7 @@ export default function FeelingsScreen() {
           style={styles.historyButton}
           onPress={() => setShowHistory(!showHistory)}
         >
-          <Ionicons name="time-outline" size={24} color={COLORS.text} />
+          <Icon name="time-outline" size={24} color={COLORS.text} />
         </TouchableOpacity>
       </View>
 
@@ -174,7 +174,7 @@ export default function FeelingsScreen() {
                   <ActivityIndicator color="#fff" />
                 ) : (
                   <>
-                    <Ionicons name="heart" size={20} color="#fff" />
+                    <Icon name="heart" size={20} color="#fff" />
                     <Text style={styles.submitButtonText}>Ricevi Guida Spirituale</Text>
                   </>
                 )}
@@ -204,7 +204,7 @@ export default function FeelingsScreen() {
               <View style={styles.responseSection}>
                 <View style={styles.responseHeader}>
                   <View style={styles.responseIcon}>
-                    <Ionicons name="book" size={24} color={COLORS.primary} />
+                    <Icon name="book" size={24} color={COLORS.primary} />
                   </View>
                   <Text style={styles.responseTitle}>La Parola per Te</Text>
                   <TouchableOpacity onPress={handleSpeak}>

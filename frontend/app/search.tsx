@@ -141,14 +141,14 @@ export default function SearchScreen() {
         onPress={handlePress}
       >
         <View style={[styles.resultIcon, { backgroundColor: getColor() + '20' }]}>
-          <Ionicons name={getIcon() as any} size={20} color={getColor()} />
+          <Icon name={getIcon() as any} size={20} color={getColor()} />
         </View>
         <View style={styles.resultContent}>
           <Text style={styles.resultTitle}>{getTitle()}</Text>
           <Text style={styles.resultSubtitle} numberOfLines={2}>{getSubtitle()}</Text>
           <Text style={styles.resultType}>{item.type.toUpperCase()}</Text>
         </View>
-        <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+        <Icon name="chevron-forward" size={20} color={COLORS.textMuted} />
       </TouchableOpacity>
     );
   };
@@ -159,7 +159,7 @@ export default function SearchScreen() {
     return (
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <Ionicons name={icon as any} size={20} color={COLORS.primary} />
+          <Icon name={icon as any} size={20} color={COLORS.primary} />
           <Text style={styles.sectionTitle}>{title} ({items.length})</Text>
         </View>
         {items.map((item, index) => renderResultItem(item, index))}
@@ -171,7 +171,7 @@ export default function SearchScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={28} color={COLORS.text} />
+          <Icon name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.title}>🔍 Cerca</Text>
         <View style={{ width: 28 }} />
@@ -179,7 +179,7 @@ export default function SearchScreen() {
 
       <View style={styles.searchContainer}>
         <View style={styles.searchInputContainer}>
-          <Ionicons name="search" size={20} color={COLORS.textMuted} />
+          <Icon name="search" size={20} color={COLORS.textMuted} />
           <TextInput
             style={styles.searchInput}
             placeholder="Cerca note, segnalibri, amici, radio..."
@@ -191,7 +191,7 @@ export default function SearchScreen() {
           />
           {query.length > 0 && (
             <TouchableOpacity onPress={() => setQuery('')}>
-              <Ionicons name="close-circle" size={20} color={COLORS.textMuted} />
+              <Icon name="close-circle" size={20} color={COLORS.textMuted} />
             </TouchableOpacity>
           )}
         </View>
@@ -221,7 +221,7 @@ export default function SearchScreen() {
             </>
           ) : (
             <View style={styles.emptyContainer}>
-              <Ionicons name="search-outline" size={64} color={COLORS.textMuted} />
+              <Icon name="search-outline" size={64} color={COLORS.textMuted} />
               <Text style={styles.emptyText}>Nessun risultato trovato</Text>
               <Text style={styles.emptySubtext}>Prova con altre parole chiave</Text>
             </View>
@@ -229,7 +229,7 @@ export default function SearchScreen() {
         </ScrollView>
       ) : (
         <View style={styles.emptyContainer}>
-          <Ionicons name="search-outline" size={64} color={COLORS.textMuted} />
+          <Icon name="search-outline" size={64} color={COLORS.textMuted} />
           <Text style={styles.emptyText}>Cerca nell'app</Text>
           <Text style={styles.emptySubtext}>
             Trova note, segnalibri, evidenziazioni, amici, termini biblici e radio

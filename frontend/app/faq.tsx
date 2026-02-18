@@ -78,7 +78,7 @@ export default function FaqScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={28} color={COLORS.text} />
+          <Icon name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.title}>Aiuto e FAQ</Text>
         <View style={{ width: 28 }} />
@@ -86,7 +86,7 @@ export default function FaqScreen() {
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.heroCard}>
-          <Ionicons name="help-buoy" size={40} color={COLORS.primary} />
+          <Icon name="help-buoy" size={40} color={COLORS.primary} />
           <Text style={styles.heroTitle}>Come possiamo aiutarti?</Text>
           <Text style={styles.heroText}>
             Trova risposte alle domande frequenti o contattaci direttamente.
@@ -140,7 +140,7 @@ export default function FaqScreen() {
               <ActivityIndicator color="#fff" size="small" />
             ) : (
               <>
-                <Ionicons name="send" size={18} color="#fff" />
+                <Icon name="send" size={18} color="#fff" />
                 <Text style={styles.sendButtonText}>Invia Messaggio</Text>
               </>
             )}
@@ -150,7 +150,7 @@ export default function FaqScreen() {
         <View style={styles.contactInfo}>
           <Text style={styles.contactInfoTitle}>Altri Modi per Contattarci</Text>
           <View style={styles.contactMethod}>
-            <Ionicons name="mail" size={20} color={COLORS.primary} />
+            <Icon name="mail" size={20} color={COLORS.primary} />
             <Text style={styles.contactMethodText}>andrehangar@live.it</Text>
           </View>
         </View>
