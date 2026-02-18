@@ -102,6 +102,8 @@ export const api = {
     api.fetch(`/api/progress/reading/chapter?book=${encodeURIComponent(book)}&chapter=${chapter}`, { method: 'POST' }),
   getReadingHistory: (limit: number = 50) =>
     api.fetch(`/api/progress/reading/history?limit=${limit}`),
+  resetProgressStat: (statType: string) =>
+    api.fetch(`/api/progress/reset/${statType}`, { method: 'POST' }),
 
   // Legal & Consent
   getConsentStatus: () => api.fetch('/api/consent/status'),
