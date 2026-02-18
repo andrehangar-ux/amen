@@ -2020,7 +2020,11 @@ async def mood_checkin(data: MoodRequest, user: User = Depends(require_auth)):
         mood_verses = MOOD_VERSES_MULTILANG.get(lang, MOOD_VERSES_MULTILANG["it"])
         mood = data.mood.lower()
         mood_data = mood_verses.get(mood, mood_verses.get("speranzoso", [{"ref": "Salmi 23:1", "text": "Il Signore è il mio pastore."}]))
+        # Daily rotation: use date + mood as seed for deterministic but changing selection
+        today = datetime.now(timezone.utc).strftime("%Y%m%d")
+        random.seed(hash(f"{today}_{mood}"))
         verse = random.choice(mood_data) if mood_data else {"ref": "Salmi 23:1", "text": "Il Signore è il mio pastore."}
+        random.seed()  # Reset seed
         
         # Generate reflection in user's language
         lang_prompts = {
