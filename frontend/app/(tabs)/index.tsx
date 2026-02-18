@@ -240,7 +240,7 @@ export default function HomeScreen() {
                 <Text style={styles.progressLabel}>{t('journalEntries')}</Text>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         )}
 
         {/* Esplora Features */}
