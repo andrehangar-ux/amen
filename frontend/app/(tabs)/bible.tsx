@@ -697,14 +697,6 @@ export default function BibleScreen() {
         <View style={styles.readingToolbar}>
           <TouchableOpacity 
             style={styles.toolbarButton}
-            onPress={() => router.push('/my-content')}
-            data-testid="my-content-btn"
-          >
-            <Icon name="bookmark" size={20} color={COLORS.primary} />
-          </TouchableOpacity>
-
-          <TouchableOpacity 
-            style={styles.toolbarButton}
             onPress={() => setShowEditionSelector(true)}
           >
             <Icon name="swap-horizontal" size={20} color={COLORS.accent} />
@@ -724,10 +716,16 @@ export default function BibleScreen() {
 
           <TouchableOpacity 
             style={styles.toolbarButton}
+            onPress={() => router.push('/my-content')}
+          >
+            <Icon name="bookmark" size={20} color={COLORS.primary} />
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.toolbarButton}
             onPress={() => setShowTutorial(true)}
           >
             <Icon name="help-circle" size={20} color="#9B59B6" />
-            <Text style={styles.toolbarButtonText}>{t('help')}</Text>
           </TouchableOpacity>
         </View>
 
