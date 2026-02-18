@@ -1687,11 +1687,19 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderLeftColor: COLORS.accent,
   },
+  noteHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  deleteNoteBtn: {
+    padding: 4,
+  },
   noteVerse: {
     fontSize: 12,
     fontWeight: '600',
     color: COLORS.primary,
-    marginBottom: 4,
   },
   noteText: {
     fontSize: 14,
