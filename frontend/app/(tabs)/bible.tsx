@@ -697,6 +697,15 @@ export default function BibleScreen() {
         <View style={styles.readingToolbar}>
           <TouchableOpacity 
             style={styles.toolbarButton}
+            onPress={() => router.push('/my-content')}
+            data-testid="my-content-btn"
+          >
+            <Icon name="bookmark" size={20} color={COLORS.primary} />
+            <Text style={styles.toolbarButtonText}>{t('myContent') || 'Salvati'}</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.toolbarButton}
             onPress={() => setShowEditionSelector(true)}
           >
             <Icon name="swap-horizontal" size={20} color={COLORS.accent} />
