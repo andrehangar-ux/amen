@@ -1145,6 +1145,596 @@ BIBLICAL_DICTIONARY = {
         ],
         "image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400"
     },
+
+    # ===== NUOVI TERMINI: GRECO (Metafisica e Cosmologia) =====
+    "aion": {
+        "term": "Aion (αἰών)",
+        "transliteration": "aiōn",
+        "origin": "Greco",
+        "pronunciation": "ai-ON",
+        "meaning": "Eternità, Era",
+        "root": "Dal greco αἰών - durata di vita, epoca",
+        "description": "Designa un periodo di tempo indefinito, un'era o l'eternità stessa. Nel Nuovo Testamento indica sia le epoche del mondo sia la vita eterna che Dio promette ai credenti.",
+        "verses": [
+            {"ref": "Matteo 28:20", "text": "Io sono con voi tutti i giorni, fino alla fine dell'età (αἰώνος)"},
+            {"ref": "Efesini 2:7", "text": "Nei secoli (αἰῶσιν) avvenire mostrasse le immense ricchezze della sua grazia"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Eone_(filosofia)",
+        "image_url": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400"
+    },
+    "anamnesis": {
+        "term": "Anamnesis (ἀνάμνησις)",
+        "transliteration": "anamnēsis",
+        "origin": "Greco",
+        "pronunciation": "a-NAM-ne-sis",
+        "meaning": "Reminiscenza, Memoriale",
+        "root": "Da ἀνά (di nuovo) + μνῆσις (ricordo)",
+        "description": "Nella filosofia platonica indica il ricordo dell'anima delle verità eterne. Nel contesto cristiano, è il memoriale dell'Ultima Cena, il fare memoria della Passione di Cristo.",
+        "verses": [
+            {"ref": "Luca 22:19", "text": "Fate questo in memoria (ἀνάμνησιν) di me"},
+            {"ref": "1 Corinzi 11:24-25", "text": "Fate questo in memoria di me"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Anamnesi_(religione)",
+        "image_url": "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=400"
+    },
+    "asomatos": {
+        "term": "Asōmatos (ἀσώματος)",
+        "transliteration": "asōmatos",
+        "origin": "Greco",
+        "pronunciation": "a-SO-ma-tos",
+        "meaning": "Incorporeo",
+        "root": "Da ἀ- (senza) + σῶμα (corpo)",
+        "description": "Termine filosofico greco che indica ciò che è privo di corpo materiale. Applicato alla natura divina e agli angeli nella teologia cristiana, esprime la trascendenza di Dio rispetto alla materia.",
+        "verses": [
+            {"ref": "Giovanni 4:24", "text": "Dio è spirito; e quelli che lo adorano devono adorarlo in spirito e verità"},
+            {"ref": "Colossesi 1:15", "text": "Egli è l'immagine del Dio invisibile"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Incorporeit%C3%A0",
+        "image_url": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400"
+    },
+    "demiourgos": {
+        "term": "Demiourgos (δημιουργός)",
+        "transliteration": "dēmiourgos",
+        "origin": "Greco",
+        "pronunciation": "de-mi-ur-GOS",
+        "meaning": "Artefice, Costruttore",
+        "root": "Da δῆμος (popolo) + ἔργον (opera)",
+        "description": "In Platone, il Demiurgo è l'artefice divino che plasma il cosmo. Nel cristianesimo, il concetto si fonde con quello del Dio Creatore che dal nulla trae l'universo.",
+        "verses": [
+            {"ref": "Ebrei 11:10", "text": "Aspettava la città che ha le fondamenta, il cui architetto (τεχνίτης) e costruttore è Dio"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Demiurgo",
+        "image_url": "https://images.unsplash.com/photo-1534081333815-ae5ac7e9ad43?w=400"
+    },
+    "ekpyrosis": {
+        "term": "Ekpyrosis (ἐκπύρωσις)",
+        "transliteration": "ekpyrōsis",
+        "origin": "Greco",
+        "pronunciation": "ek-PY-ro-sis",
+        "meaning": "Conflagrazione cosmica",
+        "root": "Da ἐκ (fuori) + πῦρ (fuoco)",
+        "description": "Nella cosmologia stoica, la conflagrazione finale in cui l'universo viene consumato dal fuoco per rinascere. Nel cristianesimo si ricollega al giudizio finale e alla purificazione del mondo.",
+        "verses": [
+            {"ref": "2 Pietro 3:10", "text": "Il giorno del Signore verrà come un ladro; i cieli passeranno con gran fragore e gli elementi infiammati si dissolveranno"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Ecpirosi",
+        "image_url": "https://images.unsplash.com/photo-1468276311594-df7cb65d8df6?w=400"
+    },
+    "entelecheia": {
+        "term": "Entelecheia (ἐντελέχεια)",
+        "transliteration": "entelecheia",
+        "origin": "Greco",
+        "pronunciation": "en-te-LE-chei-a",
+        "meaning": "Fine raggiunto, Perfezione dell'atto",
+        "root": "Da ἐν (in) + τέλος (fine) + ἔχω (avere)",
+        "description": "Concetto aristotelico che indica la realizzazione completa della potenzialità di un essere. Nella teologia, Dio è puro atto (actus purus), entelechia suprema.",
+        "verses": [
+            {"ref": "Filippesi 1:6", "text": "Colui che ha cominciato in voi un'opera buona la porterà a compimento"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Entelechia",
+        "image_url": "https://images.unsplash.com/photo-1509909756405-be0199881695?w=400"
+    },
+    "homoousios": {
+        "term": "Homooùsios (ὁμοούσιος)",
+        "transliteration": "homoousios",
+        "origin": "Greco",
+        "pronunciation": "ho-mo-U-sios",
+        "meaning": "Della stessa sostanza, Consustanziale",
+        "root": "Da ὁμός (stesso) + οὐσία (sostanza)",
+        "description": "Termine chiave del Concilio di Nicea (325 d.C.) per definire il rapporto tra Padre e Figlio nella Trinità. Cristo è della stessa sostanza del Padre, non creatura ma Dio.",
+        "verses": [
+            {"ref": "Giovanni 10:30", "text": "Io e il Padre siamo uno"},
+            {"ref": "Colossesi 2:9", "text": "In lui abita corporalmente tutta la pienezza della Deità"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Consustanziale",
+        "image_url": "https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=400"
+    },
+    "hypostasis": {
+        "term": "Hypostasis (ὑπόστασις)",
+        "transliteration": "hypostasis",
+        "origin": "Greco",
+        "pronunciation": "hy-PO-sta-sis",
+        "meaning": "Realtà sussistente, Fondamento",
+        "root": "Da ὑπό (sotto) + στάσις (stare)",
+        "description": "Indica la realtà oggettiva e sussistente. Nel dogma trinitario, le tre Persone divine sono tre ipostasi in una sola ousia (sostanza). Nell'epistola agli Ebrei indica la fede come fondamento delle cose sperate.",
+        "verses": [
+            {"ref": "Ebrei 1:3", "text": "Il Figlio è lo splendore della sua gloria e l'impronta della sua essenza (ὑποστάσεως)"},
+            {"ref": "Ebrei 11:1", "text": "La fede è certezza (ὑπόστασις) di cose che si sperano"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Ipostasi",
+        "image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400"
+    },
+    "koinonia": {
+        "term": "Koinōnia (κοινωνία)",
+        "transliteration": "koinōnia",
+        "origin": "Greco",
+        "pronunciation": "koi-no-NI-a",
+        "meaning": "Comunione, Partecipazione",
+        "root": "Da κοινός (comune)",
+        "description": "Esprime la comunione fraterna tra i credenti e la partecipazione alla vita divina. Fondamento della comunità cristiana primitiva e dell'Eucaristia.",
+        "verses": [
+            {"ref": "Atti 2:42", "text": "Erano perseveranti nell'insegnamento degli apostoli, nella comunione (κοινωνίᾳ)"},
+            {"ref": "1 Giovanni 1:3", "text": "La nostra comunione è col Padre e col Figlio suo, Gesù Cristo"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Koinonia",
+        "image_url": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400"
+    },
+    "monas": {
+        "term": "Monas (μονάς)",
+        "transliteration": "monas",
+        "origin": "Greco",
+        "pronunciation": "mo-NAS",
+        "meaning": "Unità indivisibile",
+        "root": "Da μόνος (solo, unico)",
+        "description": "L'unità fondamentale e indivisibile. Nella filosofia pitagorica e neoplatonica, la Monade è il principio primo da cui tutto procede. Nella teologia cristiana si ricollega all'unicità di Dio.",
+        "verses": [
+            {"ref": "Deuteronomio 6:4", "text": "Ascolta, Israele! L'Eterno, il nostro Dio, l'Eterno è uno"},
+            {"ref": "Marco 12:29", "text": "Il Signore Dio nostro è l'unico Signore"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Monade_(filosofia)",
+        "image_url": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400"
+    },
+    "noesis": {
+        "term": "Noēsis (νόησις)",
+        "transliteration": "noēsis",
+        "origin": "Greco",
+        "pronunciation": "NO-e-sis",
+        "meaning": "Pensiero puro, Intuizione intellettuale",
+        "root": "Da νοῦς (mente, intelletto)",
+        "description": "Nella filosofia aristotelica, il pensiero che pensa se stesso - l'attività più alta dell'intelletto divino. In Dio, noesis e noeton coincidono.",
+        "verses": [
+            {"ref": "Romani 11:33", "text": "O profondità della ricchezza, della sapienza e della scienza di Dio!"},
+            {"ref": "Isaia 55:8-9", "text": "I miei pensieri non sono i vostri pensieri"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Noesi",
+        "image_url": "https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=400"
+    },
+    "ousia": {
+        "term": "Ousia (οὐσία)",
+        "transliteration": "ousia",
+        "origin": "Greco",
+        "pronunciation": "u-SI-a",
+        "meaning": "Essenza, Sostanza primordiale",
+        "root": "Dal participio femminile di εἶναι (essere)",
+        "description": "Termine fondamentale della teologia trinitaria. Indica la sostanza divina unica e comune alle tre Persone della Trinità. Definito al Concilio di Nicea come la natura divina condivisa da Padre, Figlio e Spirito Santo.",
+        "verses": [
+            {"ref": "Ebrei 1:3", "text": "Impronta della sua essenza (ὑποστάσεως)"},
+            {"ref": "Giovanni 1:1", "text": "In principio era il Verbo, e il Verbo era presso Dio, e il Verbo era Dio"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Ousia",
+        "image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400"
+    },
+    "pantokrator": {
+        "term": "Pantokratōr (παντοκράτωρ)",
+        "transliteration": "pantokratōr",
+        "origin": "Greco",
+        "pronunciation": "pan-to-KRA-tor",
+        "meaning": "Sovrano di tutto, Onnipotente",
+        "root": "Da πᾶς (tutto) + κράτος (potere)",
+        "description": "Titolo divino che esprime la sovranità assoluta di Dio su tutto il creato. Nell'iconografia bizantina, Cristo Pantocratore è rappresentato come re e giudice dell'universo.",
+        "verses": [
+            {"ref": "Apocalisse 1:8", "text": "Io sono l'Alfa e l'Omega, dice il Signore Dio, colui che è, che era e che viene, l'Onnipotente (παντοκράτωρ)"},
+            {"ref": "2 Corinzi 6:18", "text": "Dice il Signore onnipotente (παντοκράτωρ)"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Cristo_Pantocrator",
+        "image_url": "https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=400"
+    },
+    "pleroma": {
+        "term": "Pleroma (πλήρωμα)",
+        "transliteration": "plērōma",
+        "origin": "Greco",
+        "pronunciation": "PLE-ro-ma",
+        "meaning": "Pienezza, Totalità",
+        "root": "Da πληρόω (riempire)",
+        "description": "Indica la pienezza divina che risiede in Cristo. Nello gnosticismo, è il mondo spirituale nella sua totalità. Paolo lo usa per affermare che tutta la pienezza della divinità abita in Cristo.",
+        "verses": [
+            {"ref": "Colossesi 1:19", "text": "Poiché al Padre piacque di far abitare in lui tutta la pienezza (πλήρωμα)"},
+            {"ref": "Efesini 1:23", "text": "La chiesa è il suo corpo, la pienezza (πλήρωμα) di colui che porta a compimento ogni cosa"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Pleroma",
+        "image_url": "https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=400"
+    },
+    "stoicheion": {
+        "term": "Stoiheion (στοιχεῖον)",
+        "transliteration": "stoicheion",
+        "origin": "Greco",
+        "pronunciation": "stoi-CHEI-on",
+        "meaning": "Elemento basilare, Principio primo",
+        "root": "Da στοῖχος (fila, serie)",
+        "description": "Indica gli elementi fondamentali del cosmo (terra, acqua, aria, fuoco) o i principi primi del sapere. Paolo usa il termine per indicare le potenze elementari del mondo da cui Cristo libera i credenti.",
+        "verses": [
+            {"ref": "Galati 4:3", "text": "Eravamo tenuti in servitù sotto gli elementi (στοιχεῖα) del mondo"},
+            {"ref": "2 Pietro 3:10", "text": "Gli elementi (στοιχεῖα) infiammati si dissolveranno"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Elemento_(filosofia)",
+        "image_url": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400"
+    },
+
+    # ===== NUOVI TERMINI: EBRAICO (Sacralità e Struttura) =====
+    "ayin_la_ayin": {
+        "term": "Ayin la-Ayin (עַיִן בְּעַיִן)",
+        "transliteration": "ʿayin lā-ʿayin",
+        "origin": "Ebraico",
+        "pronunciation": "A-yin la-A-yin",
+        "meaning": "Occhio per occhio",
+        "root": "Da עַיִן (occhio)",
+        "description": "Principio della legge del taglione nella Torah, che regola la giustizia proporzionale. Non inteso come vendetta ma come limitazione della punizione al danno effettivo causato.",
+        "verses": [
+            {"ref": "Esodo 21:24", "text": "Occhio per occhio, dente per dente"},
+            {"ref": "Matteo 5:38-39", "text": "Voi avete udito che fu detto: Occhio per occhio. Ma io vi dico: non resistete al malvagio"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Legge_del_taglione",
+        "image_url": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400"
+    },
+    "bamah": {
+        "term": "Bamah (בָּמָה)",
+        "transliteration": "bāmāh",
+        "origin": "Ebraico",
+        "pronunciation": "ba-MA",
+        "meaning": "Alto luogo, Piattaforma elevata",
+        "root": "Da radice semitica per 'altezza'",
+        "description": "Luogo di culto elevato nell'antico Israele, spesso associato a pratiche idolatre. I profeti condannavano le bamot come luoghi di culto pagano.",
+        "verses": [
+            {"ref": "1 Re 3:2", "text": "Il popolo sacrificava sugli alti luoghi (בָּמוֹת)"},
+            {"ref": "2 Re 23:8", "text": "Giosia demolì gli alti luoghi (בָּמוֹת)"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Bamah",
+        "image_url": "https://images.unsplash.com/photo-1505533542167-0e89634a0a90?w=400"
+    },
+    "chashmal": {
+        "term": "Chashmal (חַשְׁמַל)",
+        "transliteration": "ḥašmal",
+        "origin": "Ebraico",
+        "pronunciation": "chash-MAL",
+        "meaning": "Bagliore ambrato, Elettricità",
+        "root": "Termine misterioso della visione di Ezechiele",
+        "description": "Parola rara che appare nella visione del carro divino di Ezechiele. Descrive un bagliore brillante come l'ambra. Nell'ebraico moderno è diventato il termine per 'elettricità'.",
+        "verses": [
+            {"ref": "Ezechiele 1:4", "text": "Una nube grande e un fuoco che si avvolgeva, e intorno ad esso uno splendore (חַשְׁמַל)"},
+            {"ref": "Ezechiele 1:27", "text": "Vidi come il colore dell'ambra (חַשְׁמַל), come l'aspetto del fuoco"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Chashmal",
+        "image_url": "https://images.unsplash.com/photo-1468276311594-df7cb65d8df6?w=400"
+    },
+    "chozeh": {
+        "term": "Chozeh (חוֹזֶה)",
+        "transliteration": "ḥōzeh",
+        "origin": "Ebraico",
+        "pronunciation": "cho-ZE",
+        "meaning": "Visionario, Veggente",
+        "root": "Da חָזָה (vedere in visione)",
+        "description": "Titolo dei profeti che ricevevano visioni divine. Distinto dal 'nabi' (profeta che parla), il chozeh è colui che 'vede' la realtà spirituale oltre il visibile.",
+        "verses": [
+            {"ref": "2 Samuele 24:11", "text": "La parola dell'Eterno fu rivolta al profeta Gad, veggente (חֹזֵה) di Davide"},
+            {"ref": "2 Cronache 9:29", "text": "Nelle visioni del veggente (חֹזֵה) Iddo"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Profeta",
+        "image_url": "https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=400"
+    },
+    "derekh": {
+        "term": "Derekh (דֶּרֶךְ)",
+        "transliteration": "dereḵ",
+        "origin": "Ebraico",
+        "pronunciation": "DE-rech",
+        "meaning": "Via, Percorso, Cammino",
+        "root": "Da radice דרך (camminare, calpestare)",
+        "description": "Concetto fondamentale che indica sia il cammino fisico che quello spirituale. La 'via del Signore' è la condotta retta che Dio chiede al suo popolo.",
+        "verses": [
+            {"ref": "Salmi 1:6", "text": "L'Eterno conosce la via (דֶּרֶךְ) dei giusti"},
+            {"ref": "Proverbi 22:6", "text": "Istruisci il fanciullo sulla via (דֶּרֶךְ) da seguire"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Halakhah",
+        "image_url": "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=400"
+    },
+    "gevurah": {
+        "term": "Gevurah (גְּבוּרָה)",
+        "transliteration": "gəḇūrāh",
+        "origin": "Ebraico",
+        "pronunciation": "ghe-vu-RA",
+        "meaning": "Forza, Rigore, Potenza",
+        "root": "Da גבר (essere forte)",
+        "description": "Nella Cabala, Gevurah è la quinta Sefirah, rappresenta il giudizio divino, la forza e la disciplina. Bilancia Chesed (misericordia) nell'Albero della Vita.",
+        "verses": [
+            {"ref": "Salmi 89:14", "text": "La potenza (גְּבוּרָה) e la giustizia sono la base del tuo trono"},
+            {"ref": "1 Cronache 29:11", "text": "Tua, o Eterno, è la grandezza, la potenza (הַגְּבוּרָה)"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Gevurah",
+        "image_url": "https://images.unsplash.com/photo-1534081333815-ae5ac7e9ad43?w=400"
+    },
+    "kav": {
+        "term": "Kav (קַו)",
+        "transliteration": "qaw",
+        "origin": "Ebraico",
+        "pronunciation": "KAV",
+        "meaning": "Linea, Filo a piombo, Misura",
+        "root": "Dalla radice קוה (misurare, attendere)",
+        "description": "La linea retta usata nella costruzione e nella misurazione. Nella Cabala luriana, il Kav è il raggio di luce divina che penetra lo spazio vuoto dopo lo Tzimtzum.",
+        "verses": [
+            {"ref": "Isaia 28:17", "text": "Prenderò il diritto come misura (קַו) e la giustizia come filo a piombo"},
+            {"ref": "Zaccaria 1:16", "text": "La corda da misurare (קַו) sarà stesa sopra Gerusalemme"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Cabala_lurianica",
+        "image_url": "https://images.unsplash.com/photo-1509909756405-be0199881695?w=400"
+    },
+    "malkhut": {
+        "term": "Malkhut (מַלְכוּת)",
+        "transliteration": "malḵūṯ",
+        "origin": "Ebraico",
+        "pronunciation": "mal-CHUT",
+        "meaning": "Regno, Sovranità",
+        "root": "Da מלך (regnare)",
+        "description": "Il dominio reale di Dio. Nella Cabala, Malkhut è l'ultima delle dieci Sefirot, il punto in cui la luce divina si manifesta nel mondo materiale.",
+        "verses": [
+            {"ref": "Salmi 145:13", "text": "Il tuo regno (מַלְכוּתְךָ) è un regno eterno"},
+            {"ref": "Daniele 4:3", "text": "Il suo regno (מַלְכוּתֵהּ) dura di generazione in generazione"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Malkuth",
+        "image_url": "https://images.unsplash.com/photo-1551524559-8af4e6624178?w=400"
+    },
+    "nitsots": {
+        "term": "Nitsots (נִיצוֹץ)",
+        "transliteration": "nīṣōṣ",
+        "origin": "Ebraico",
+        "pronunciation": "ni-TSOTS",
+        "meaning": "Scintilla divina",
+        "root": "Da נצץ (brillare, scintillare)",
+        "description": "Le scintille di luce divina disperse nella creazione secondo la Cabala luriana. Il compito dell'uomo (Tikkun) è raccogliere e restaurare queste scintille.",
+        "verses": [
+            {"ref": "Isaia 1:31", "text": "L'uomo forte sarà come la stoppa e la sua opera come una scintilla (נִיצוֹץ)"},
+            {"ref": "Giobbe 18:5", "text": "La luce dell'empio si spegnerà, e la fiamma (נִיצוֹץ) del suo fuoco non risplenderà"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Cabala_lurianica#Shevirat_ha-Kelim",
+        "image_url": "https://images.unsplash.com/photo-1468276311594-df7cb65d8df6?w=400"
+    },
+    "olam": {
+        "term": "Olam (עוֹלָם)",
+        "transliteration": "ʿōlām",
+        "origin": "Ebraico",
+        "pronunciation": "o-LAM",
+        "meaning": "Mondo, Universo, Tempo indefinito",
+        "root": "Da עלם (nascosto, remoto)",
+        "description": "Può significare sia 'mondo' (spazio) che 'eternità' (tempo). 'Le-olam va-ed' (per sempre e sempre) è una formula liturgica ebraica che esprime l'eternità di Dio.",
+        "verses": [
+            {"ref": "Ecclesiaste 3:11", "text": "Dio ha messo l'eternità (עוֹלָם) nel cuore degli uomini"},
+            {"ref": "Salmi 90:2", "text": "Da eternità (עוֹלָם) a eternità (עוֹלָם), tu sei Dio"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Olam",
+        "image_url": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400"
+    },
+    "qodesh": {
+        "term": "Qodesh (קֹדֶשׁ)",
+        "transliteration": "qōḏeš",
+        "origin": "Ebraico",
+        "pronunciation": "KO-desh",
+        "meaning": "Santità, Separazione dal profano",
+        "root": "Da קדש (separare, consacrare)",
+        "description": "La santità nella concezione biblica è innanzitutto separazione: Dio è santo perché è totalmente 'altro'. Il popolo è chiamato a essere santo separandosi dalle pratiche impure.",
+        "verses": [
+            {"ref": "Levitico 19:2", "text": "Siate santi (קְדֹשִׁים), poiché io, l'Eterno vostro Dio, sono santo"},
+            {"ref": "Isaia 6:3", "text": "Santo, santo, santo (קָדוֹשׁ) è l'Eterno degli eserciti"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Qedushah",
+        "image_url": "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=400"
+    },
+    "sefirah": {
+        "term": "Sefirah (סְפִירָה)",
+        "transliteration": "səp̄īrāh",
+        "origin": "Ebraico",
+        "pronunciation": "se-fi-RA",
+        "meaning": "Emanazione, Numerazione, Sfera di influenza",
+        "root": "Da ספר (contare, raccontare) o ספיר (zaffiro, splendore)",
+        "description": "Nella Cabala, le dieci Sefirot sono le emanazioni attraverso cui Dio si manifesta e crea il mondo. Formano l'Albero della Vita, struttura fondamentale della mistica ebraica.",
+        "verses": [
+            {"ref": "Esodo 24:10", "text": "Sotto i suoi piedi c'era come un lavoro di zaffiro (סַפִּיר) limpido"},
+            {"ref": "Proverbi 3:19", "text": "L'Eterno con la sapienza ha fondato la terra"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Sefirot",
+        "image_url": "https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=400"
+    },
+    "tzimtzum": {
+        "term": "Tzimtzum (צִמְצוּם)",
+        "transliteration": "ṣimṣūm",
+        "origin": "Ebraico",
+        "pronunciation": "tsim-TSUM",
+        "meaning": "Contrazione, Restrizione",
+        "root": "Da צמצם (restringere, contrarre)",
+        "description": "Concetto cabalistico di Isaac Luria: Dio si 'contrasse' per creare uno spazio vuoto in cui il mondo potesse esistere. Esprime il paradosso della creazione: Dio limita la sua infinità per permettere l'esistenza del finito.",
+        "verses": [
+            {"ref": "Isaia 45:15", "text": "In verità tu sei un Dio che si nasconde, o Dio d'Israele"},
+            {"ref": "1 Re 8:27", "text": "Ma è proprio vero che Dio abita sulla terra? I cieli e i cieli dei cieli non ti possono contenere"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Tzimtzum",
+        "image_url": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400"
+    },
+    "yesod": {
+        "term": "Yesod (יְסוֹד)",
+        "transliteration": "yəsōḏ",
+        "origin": "Ebraico",
+        "pronunciation": "ye-SOD",
+        "meaning": "Fondamento",
+        "root": "Da יסד (fondare, stabilire)",
+        "description": "Nella Cabala, Yesod è la nona Sefirah, il canale che trasmette la luce divina da tutte le Sefirot superiori a Malkhut. Rappresenta il fondamento spirituale e materiale della creazione.",
+        "verses": [
+            {"ref": "Isaia 28:16", "text": "Ecco, io pongo come fondamento (יְסוֹד) in Sion una pietra provata"},
+            {"ref": "Salmi 11:3", "text": "Se i fondamenti (הַשָּׁתוֹת) sono distrutti, che può fare il giusto?"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Yesod",
+        "image_url": "https://images.unsplash.com/photo-1534081333815-ae5ac7e9ad43?w=400"
+    },
+    "maaseh": {
+        "term": "Ma'aseh (מַעֲשֶׂה)",
+        "transliteration": "maʿăśeh",
+        "origin": "Ebraico",
+        "pronunciation": "ma-a-SE",
+        "meaning": "Opera, Manufatto, Creazione",
+        "root": "Da עשה (fare, creare)",
+        "description": "Indica l'opera divina della creazione e le opere dell'uomo. 'Ma'aseh bereshit' è lo studio della creazione, uno dei rami della mistica ebraica.",
+        "verses": [
+            {"ref": "Salmi 19:1", "text": "I cieli raccontano la gloria di Dio e il firmamento dichiara l'opera (מַעֲשֵׂה) delle sue mani"},
+            {"ref": "Salmi 8:3", "text": "Quando considero i tuoi cieli, opera (מַעֲשֵׂה) delle tue dita"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Cabala#Ma%27aseh_Bereshit",
+        "image_url": "https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=400"
+    },
+
+    # ===== NUOVI TERMINI: LATINO (Dogmatica e Scolastica) =====
+    "actus_purus": {
+        "term": "Actus Purus",
+        "transliteration": "actus purus",
+        "origin": "Latino (Scolastica)",
+        "pronunciation": "AK-tus PU-rus",
+        "meaning": "Atto puro, privo di potenzialità",
+        "root": "Dal latino actus (atto) + purus (puro)",
+        "description": "Concetto tomistico fondamentale: Dio è puro atto senza alcuna potenzialità. In Lui non c'è nulla da realizzare perché è eternamente perfetto e completo.",
+        "verses": [
+            {"ref": "Esodo 3:14", "text": "Io sono colui che sono"},
+            {"ref": "Giacomo 1:17", "text": "Presso il quale non c'è variazione né ombra di mutamento"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Atto_puro",
+        "image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400"
+    },
+    "ex_nihilo": {
+        "term": "Ex Nihilo",
+        "transliteration": "ex nihilo",
+        "origin": "Latino (Dogmatica)",
+        "pronunciation": "eks NI-hi-lo",
+        "meaning": "Dal nulla",
+        "root": "Dal latino ex (da) + nihilum (nulla)",
+        "description": "Dottrina della creazione dal nulla: Dio non ha usato materia preesistente per creare il mondo, ma ha tratto tutto dall'assoluto nulla per un atto della sua volontà.",
+        "verses": [
+            {"ref": "Genesi 1:1", "text": "In principio Dio creò i cieli e la terra"},
+            {"ref": "Ebrei 11:3", "text": "Per fede intendiamo che i mondi sono stati formati dalla parola di Dio"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Creatio_ex_nihilo",
+        "image_url": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400"
+    },
+    "transubstantiatio": {
+        "term": "Transubstantiatio",
+        "transliteration": "transubstantiatio",
+        "origin": "Latino (Dogmatica)",
+        "pronunciation": "tran-sub-stan-ti-A-tsi-o",
+        "meaning": "Transustanziazione",
+        "root": "Da trans (attraverso) + substantia (sostanza)",
+        "description": "Dottrina cattolica secondo cui, nell'Eucaristia, la sostanza del pane e del vino si trasforma nella sostanza del Corpo e Sangue di Cristo, mentre gli accidenti (apparenze) rimangono invariati.",
+        "verses": [
+            {"ref": "Matteo 26:26", "text": "Gesù prese del pane e disse: Prendete, mangiate, questo è il mio corpo"},
+            {"ref": "1 Corinzi 11:24", "text": "Questo è il mio corpo che è dato per voi; fate questo in memoria di me"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Transustanziazione",
+        "image_url": "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=400"
+    },
+    "consubstantialis": {
+        "term": "Consubstantialis",
+        "transliteration": "consubstantialis",
+        "origin": "Latino (Dogmatica)",
+        "pronunciation": "kon-sub-stan-ti-A-lis",
+        "meaning": "Identità di sostanza, Consustanziale",
+        "root": "Da con- (insieme) + substantia (sostanza)",
+        "description": "Traduzione latina di homoousios. Indica che il Figlio è della stessa sostanza del Padre, non una creatura ma Dio da Dio, come definito nel Credo Niceno.",
+        "verses": [
+            {"ref": "Giovanni 10:30", "text": "Io e il Padre siamo uno"},
+            {"ref": "Giovanni 14:9", "text": "Chi ha visto me ha visto il Padre"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Consustanziale",
+        "image_url": "https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=400"
+    },
+    "quidditas": {
+        "term": "Quidditas",
+        "transliteration": "quidditas",
+        "origin": "Latino (Scolastica)",
+        "pronunciation": "KWID-di-tas",
+        "meaning": "L'essenza di ciò che una cosa è",
+        "root": "Dal latino quid (che cosa) + -itas (suffisso astratto)",
+        "description": "Nella filosofia scolastica, la quidditas è l'essenza di una cosa, ciò che la rende quella cosa e non un'altra. Nella teologia, la quidditas di Dio è ineffabile e inaccessibile alla mente umana in questa vita.",
+        "verses": [
+            {"ref": "Esodo 3:14", "text": "Io sono colui che sono - la risposta di Dio sulla sua essenza"},
+            {"ref": "1 Timoteo 6:16", "text": "Il solo che possiede l'immortalità e che abita una luce inaccessibile"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Quidditas",
+        "image_url": "https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=400"
+    },
+    "primum_mobile": {
+        "term": "Primum Mobile",
+        "transliteration": "primum mobile",
+        "origin": "Latino (Astronomia Scolastica)",
+        "pronunciation": "PRI-mum MO-bi-le",
+        "meaning": "Il Primo Mobile, Motore primo",
+        "root": "Dal latino primus (primo) + mobilis (mobile)",
+        "description": "Nella cosmologia aristotelico-tolemaica, la sfera celeste più esterna che riceve il moto direttamente da Dio (Motore Immobile) e lo trasmette a tutte le sfere inferiori.",
+        "verses": [
+            {"ref": "Genesi 1:1", "text": "In principio Dio creò i cieli e la terra"},
+            {"ref": "Atti 17:28", "text": "In lui viviamo, ci muoviamo e siamo"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Primo_Mobile",
+        "image_url": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400"
+    },
+
+    # ===== NUOVI TERMINI: TECNICI STORICI (Astronomia e Ingegneria) =====
+    "astrolabos": {
+        "term": "Astrolabos (ἀστρολάβος)",
+        "transliteration": "astrolabos",
+        "origin": "Greco (Astronomia)",
+        "pronunciation": "a-STRO-la-bos",
+        "meaning": "Misuratore di stelle",
+        "root": "Da ἀστήρ (stella) + λαμβάνω (prendere, misurare)",
+        "description": "Antico strumento astronomico di alta precisione usato per determinare la posizione delle stelle. I Magi d'Oriente probabilmente usavano strumenti simili per seguire la stella di Betlemme.",
+        "verses": [
+            {"ref": "Matteo 2:2", "text": "Abbiamo visto la sua stella in oriente e siamo venuti per adorarlo"},
+            {"ref": "Salmi 19:1", "text": "I cieli raccontano la gloria di Dio"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Astrolabio",
+        "image_url": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400"
+    },
+    "gnomon": {
+        "term": "Gnomon (γνώμων)",
+        "transliteration": "gnōmōn",
+        "origin": "Greco (Ingegneria)",
+        "pronunciation": "GNO-mon",
+        "meaning": "Indice della meridiana",
+        "root": "Da γιγνώσκω (conoscere, discernere)",
+        "description": "Lo stilo verticale della meridiana la cui ombra indica l'ora. Nella Bibbia, il miracolo dell'ombra che retrocede sulla meridiana di Acaz è un segno divino dato al re Ezechia.",
+        "verses": [
+            {"ref": "2 Re 20:11", "text": "Il profeta Isaia invocò l'Eterno, il quale fece retrocedere l'ombra di dieci gradi sulla meridiana di Acaz"},
+            {"ref": "Isaia 38:8", "text": "Farò retrocedere l'ombra sui gradini che il sole ha disceso sulla meridiana"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Gnomone",
+        "image_url": "https://images.unsplash.com/photo-1509909756405-be0199881695?w=400"
+    },
+    "dioptra": {
+        "term": "Dioptra (διόπτρα)",
+        "transliteration": "dioptra",
+        "origin": "Greco (Ingegneria)",
+        "pronunciation": "di-OP-tra",
+        "meaning": "Strumento per misurare angoli e altezze",
+        "root": "Da διά (attraverso) + ὀπτική (visione)",
+        "description": "Strumento topografico dell'antichità per la misurazione precisa di angoli. La precisione di Dio nella creazione è paragonabile alla perizia dell'ingegnere con la sua dioptra.",
+        "verses": [
+            {"ref": "Giobbe 38:5", "text": "Chi ne ha fissato le dimensioni? Chi ha teso su di essa la corda per misurare?"},
+            {"ref": "Proverbi 8:27", "text": "Quando tracciava un cerchio sulla superficie dell'abisso, io ero là"}
+        ],
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Diottra",
+        "image_url": "https://images.unsplash.com/photo-1509909756405-be0199881695?w=400"
+    },
 }
 
-# Total: 80+ terms organized alphabetically
+# Total: 120+ terms organized alphabetically
