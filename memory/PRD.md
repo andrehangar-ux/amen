@@ -31,16 +31,24 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 - [x] Preferiti e Flashcards
 
 ### Funzionalità "Come ti senti oggi?"
-- [x] Versetti dinamici con rotazione giornaliera per ogni stato d'animo
+- [x] Versetti dinamici che cambiano ad ogni tocco (non più rotazione giornaliera)
 - [x] Versetti tradotti nella lingua dell'utente (IT/EN/ES/PT/FR/DE)
-- [x] Riflessione AI personalizzata
+- [x] Riflessione AI personalizzata nella lingua selezionata
+
+### I Miei Contenuti (NUOVO)
+- [x] Schermata dedicata per visualizzare contenuti salvati
+- [x] Tab Segnalibri: versetti salvati con note
+- [x] Tab Note: note di studio personali
+- [x] Tab Evidenziati: versetti evidenziati con colori
+- [x] Azioni: elimina, vai al versetto
+- [x] Traduzioni in 6 lingue
 
 ### Progressi
 - [x] Tracciamento capitoli letti con data
 - [x] Statistiche lettura nel profilo
 
 ### Profile & Settings
-- [x] Profilo con statistiche, Quiz, Dizionario, Diario, Gruppi
+- [x] Profilo con statistiche, Quiz, Dizionario, Diario, Gruppi, I Miei Contenuti
 - [x] Privacy/Termini, Logout, Elimina Account
 - [x] Cambio lingua (6 lingue), Notifiche push
 
@@ -69,29 +77,29 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 - `GET /api/dictionary` | `GET /api/dictionary/search/{query}` | `GET /api/dictionary/ai-search/{query}`
 - `POST /api/ai/mood-checkin` | `GET /api/progress` | `POST /api/progress/reading/chapter`
 
+### Bookmarks & Notes
+- `GET /api/bookmarks` | `POST /api/bookmarks` | `DELETE /api/bookmarks/{id}`
+- `GET /api/bible/study/notes` | `POST /api/bible/study/notes` | `DELETE /api/bible/study/notes/{id}`
+
 ## Recent Changes
 
 ### 2026-02-18 - Session 6 (Current)
-- **P0 Features Verified**: Tutte le funzionalità P0 sono state testate e confermate funzionanti:
-  - Versetti dinamici con rotazione giornaliera per stati d'animo
-  - Traduzione versetti multilingua (IT/EN/ES/PT/FR/DE)
-  - Dizionario biblico con 106+ termini
-  - Pulsante "Condividi" con fallback web
+- **Versetti dinamici**: Modificato backend per cambiare versetto ad ogni tocco (rimosso random.seed giornaliero)
+- **Nuova schermata "I Miei Contenuti"**: Creato `/app/frontend/app/my-content.tsx` con 3 tab (Segnalibri, Note, Evidenziati)
+- **Link nel profilo**: Aggiunto menu item "I Miei Contenuti" in tutte le 6 lingue
+- **Route fix**: Aggiunta route `my-content` in `_layout.tsx`
 
 ### 2026-02-16 - Session 5
-- **Reset Password**: Backend (forgot-password + reset-password endpoints) + Frontend (forgot-password.tsx) con Resend email
-- **Community Chat Privata**: Backend (private-messages CRUD) + Frontend (tab Community/Chat, utenti online strip, private-chat.tsx)
-- **Dizionario AI**: Backend (ai-search con GPT-4o + cache) + Frontend (pulsante sparkles nella barra di ricerca, pannello risultati AI)
-- **Login Google Mobile**: Bridge redirect endpoint per APK
+- **Reset Password**: Backend + Frontend con Resend email
+- **Community Chat Privata**: Backend + Frontend
+- **Dizionario AI**: Backend + Frontend
+- **Login Google Mobile**: Bridge redirect endpoint
 
 ### Testing Results
+- iteration_24: 100% backend (12/12), 95% frontend (route working)
 - iteration_23: 100% backend, 100% frontend (P0 features verified)
-- iteration_19: 100% (mobile auth redirect)
-- iteration_20: 100% (password reset)
-- iteration_21: 92% backend, 100% frontend (3 nuove feature)
 
 ## Upcoming (P1)
-- [ ] Sezione per visualizzare versetti evidenziati, segnalibri e note dell'utente
 - [ ] Rendere dinamiche e tradotte le notifiche push del versetto del giorno
 
 ## Backlog (P2)
@@ -101,7 +109,7 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 - [ ] Personalizzazione temi e font
 
 ## Refactoring Suggerito
-- [ ] Suddividere `server.py` in moduli (auth.py, community.py, bible.py) per migliorare manutenibilità
+- [ ] Suddividere `server.py` in moduli (auth.py, community.py, bible.py)
 
 ## Test Credentials
 - Email: testbible@cibospirituale.it
