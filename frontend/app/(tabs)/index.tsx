@@ -157,7 +157,7 @@ export default function HomeScreen() {
           </View>
         )}
         {!moodLoading && moodCheckinResult && (
-          <View style={styles.moodResult}>
+          <View key={`mood-result-${moodCheckinResult._ts}`} style={styles.moodResult}>
             <View style={styles.moodVerseContainer}>
               <Text style={styles.moodVerseRef}>{moodCheckinResult.verse?.ref}</Text>
               <Text style={styles.moodVerseText}>"{moodCheckinResult.verse?.text}"</Text>
