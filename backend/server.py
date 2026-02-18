@@ -2619,6 +2619,43 @@ async def get_reading_history(
     
     return {"history": history, "total": len(history)}
 
+
+# Reset individual progress stats
+@api_router.post("/progress/reset/{stat_type}")
+async def reset_progress_stat(stat_type: str, user: User = Depends(require_auth)):
+    """Reset a specific progress stat: streak, chapters, journal, history"""
+    user_id = user.user_id
+
+    if stat_type == "streak":
+        await db.progress.update_one(
+            {"user_id": user_id},
+            {"$set": {"reading_streak": 0, "last_reading_date": None}}
+        )
+        return {"message": "Serie azzerata", "reset": "reading_streak"}
+
+    elif stat_type == "chapters":
+        await db.progress.update_one(
+            {"user_id": user_id},
+            {"$set": {"total_chapters_read": 0}}
+        )
+        await db.reading_history.delete_many({"user_id": user_id})
+        return {"message": "Capitoli letti e cronologia azzerati", "reset": "total_chapters_read"}
+
+    elif stat_type == "journal":
+        await db.progress.update_one(
+            {"user_id": user_id},
+            {"$set": {"total_journal_entries": 0}}
+        )
+        await db.journal_entries.delete_many({"user_id": user_id})
+        return {"message": "Voci diario azzerate", "reset": "total_journal_entries"}
+
+    elif stat_type == "history":
+        await db.reading_history.delete_many({"user_id": user_id})
+        return {"message": "Cronologia lettura azzerata", "reset": "reading_history"}
+
+    else:
+        raise HTTPException(status_code=400, detail="Tipo di reset non valido. Usa: streak, chapters, journal, history")
+
 # ==================== LEGAL & CONSENT ENDPOINTS ====================
 
 import hashlib
