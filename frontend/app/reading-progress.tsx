@@ -206,6 +206,35 @@ export default function ReadingProgressScreen() {
     loadData();
   };
 
+  const showConfirm = (title: string, message: string, onConfirm: () => void) => {
+    if (Platform.OS === 'web') {
+      const confirmed = window.confirm(`${title}\n\n${message}`);
+      if (confirmed) onConfirm();
+    } else {
+      Alert.alert(title, message, [
+        { text: t('cancel'), style: 'cancel' },
+        { text: t('confirm'), style: 'destructive', onPress: onConfirm },
+      ]);
+    }
+  };
+
+  const handleReset = (statType: string) => {
+    const messages: Record<string, string> = {
+      streak: t('resetStreakMsg'),
+      chapters: t('resetChaptersMsg'),
+      journal: t('resetJournalMsg'),
+      history: t('resetHistoryMsg'),
+    };
+    showConfirm(t('resetConfirmTitle'), messages[statType] || '', async () => {
+      try {
+        await api.resetProgressStat(statType);
+        await loadData();
+      } catch (error) {
+        console.error('Reset error:', error);
+      }
+    });
+  };
+
   const goToChapter = (book: string, chapter: number) => {
     router.push({
       pathname: '/(tabs)/bible',
