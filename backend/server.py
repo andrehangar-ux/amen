@@ -2087,7 +2087,7 @@ async def mood_checkin(data: MoodRequest, user: User = Depends(require_auth)):
         
         chat = LlmChat(
             api_key=EMERGENT_LLM_KEY,
-            session_id=f"mood_{user.user_id}_{datetime.now().strftime('%Y%m%d')}",
+            session_id=f"mood_{user.user_id}_{uuid.uuid4().hex[:8]}",
             system_message="You are a spiritual counselor. Generate brief, encouraging reflections."
         ).with_model("openai", "gpt-4o")
         

@@ -69,10 +69,10 @@ export const api = {
     }),
   getChatHistory: () => api.fetch('/api/ai/chat-history'),
   clearChatHistory: () => api.fetch('/api/ai/chat-history', { method: 'DELETE' }),
-  moodCheckin: (mood: string, language?: string) => 
+  moodCheckin: (mood: string, language?: string, excludeRef?: string) => 
     api.fetch('/api/ai/mood-checkin', {
       method: 'POST',
-      body: JSON.stringify({ mood, language }),
+      body: JSON.stringify({ mood, language, exclude_ref: excludeRef || null }),
     }),
 
   // Journal
