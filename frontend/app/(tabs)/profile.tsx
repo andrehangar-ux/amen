@@ -89,6 +89,8 @@ const translations: Record<string, Record<string, string>> = {
     cancel: 'Cancel',
     confirm: 'Confirm',
     version: 'Version',
+    friendsSection: 'My Friends',
+    friendsDesc: 'Favorite users',
   },
   es: {
     progress: 'Tu Progreso',
