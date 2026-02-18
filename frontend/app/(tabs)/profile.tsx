@@ -194,6 +194,8 @@ const translations: Record<string, Record<string, string>> = {
     cancel: 'Annuler',
     confirm: 'Confirmer',
     version: 'Version',
+    friendsSection: 'Mes Amis',
+    friendsDesc: 'Utilisateurs favoris',
   },
   pt: {
     progress: 'Seu Progresso',
