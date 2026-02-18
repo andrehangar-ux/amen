@@ -15,12 +15,12 @@ import { COLORS, SHADOWS, SPACING } from '../utils/theme';
 import { useLanguageStore } from '../store/languageStore';
 
 const MENU_LABELS: Record<string, Record<string, string>> = {
-  it: { home: 'Home', bible: 'Bibbia', journal: 'Diario', profile: 'Profilo', donate: 'Donazioni', settings: 'Impostazioni' },
-  en: { home: 'Home', bible: 'Bible', journal: 'Journal', profile: 'Profile', donate: 'Donate', settings: 'Settings' },
-  es: { home: 'Inicio', bible: 'Biblia', journal: 'Diario', profile: 'Perfil', donate: 'Donar', settings: 'Configuración' },
-  de: { home: 'Start', bible: 'Bibel', journal: 'Tagebuch', profile: 'Profil', donate: 'Spenden', settings: 'Einstellungen' },
-  fr: { home: 'Accueil', bible: 'Bible', journal: 'Journal', profile: 'Profil', donate: 'Dons', settings: 'Paramètres' },
-  pt: { home: 'Início', bible: 'Bíblia', journal: 'Diário', profile: 'Perfil', donate: 'Doar', settings: 'Configurações' },
+  it: { home: 'Home', bible: 'Bibbia', journal: 'Diario', profile: 'Profilo', donate: 'Donazioni', settings: 'Impostazioni', myContent: 'I Miei Contenuti' },
+  en: { home: 'Home', bible: 'Bible', journal: 'Journal', profile: 'Profile', donate: 'Donate', settings: 'Settings', myContent: 'My Content' },
+  es: { home: 'Inicio', bible: 'Biblia', journal: 'Diario', profile: 'Perfil', donate: 'Donar', settings: 'Configuración', myContent: 'Mi Contenido' },
+  de: { home: 'Start', bible: 'Bibel', journal: 'Tagebuch', profile: 'Profil', donate: 'Spenden', settings: 'Einstellungen', myContent: 'Meine Inhalte' },
+  fr: { home: 'Accueil', bible: 'Bible', journal: 'Journal', profile: 'Profil', donate: 'Dons', settings: 'Paramètres', myContent: 'Mon Contenu' },
+  pt: { home: 'Início', bible: 'Bíblia', journal: 'Diário', profile: 'Perfil', donate: 'Doar', settings: 'Configurações', myContent: 'Meu Conteúdo' },
 };
 
 interface HamburgerMenuProps {
