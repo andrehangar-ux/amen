@@ -229,6 +229,8 @@ const translations: Record<string, Record<string, string>> = {
     cancel: 'Cancelar',
     confirm: 'Confirmar',
     version: 'Versão',
+    friendsSection: 'Meus Amigos',
+    friendsDesc: 'Usuários favoritos',
   },
 };
 
