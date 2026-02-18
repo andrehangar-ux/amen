@@ -137,9 +137,12 @@ class TestDailyVerseAPI:
         assert response.status_code == 200
         
         data = response.json()
-        assert "verse" in data
+        # API returns: text, reference, language
+        assert "text" in data
         assert "reference" in data
-        print(f"Daily verse IT: {data['reference']}")
+        assert "language" in data
+        assert data["language"] == "it"
+        print(f"Daily verse IT: {data['reference']} - {data['text'][:50]}...")
     
     def test_daily_verse_english(self, auth_headers):
         """Test daily verse in English"""
@@ -150,9 +153,10 @@ class TestDailyVerseAPI:
         assert response.status_code == 200
         
         data = response.json()
-        assert "verse" in data
+        assert "text" in data
         assert "reference" in data
-        print(f"Daily verse EN: {data['reference']}")
+        assert data["language"] == "en"
+        print(f"Daily verse EN: {data['reference']} - {data['text'][:50]}...")
     
     def test_daily_verse_spanish(self, auth_headers):
         """Test daily verse in Spanish"""
@@ -163,8 +167,10 @@ class TestDailyVerseAPI:
         assert response.status_code == 200
         
         data = response.json()
-        assert "verse" in data
-        print(f"Daily verse ES: {data['reference']}")
+        assert "text" in data
+        assert "reference" in data
+        assert data["language"] == "es"
+        print(f"Daily verse ES: {data['reference']} - {data['text'][:50]}...")
 
 
 class TestBookmarksAPI:
