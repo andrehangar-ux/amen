@@ -295,7 +295,7 @@ export default function FlashcardsScreen() {
       return (
         <SafeAreaView style={styles.container}>
           <View style={styles.completeContainer}>
-            <Ionicons name="checkmark-circle" size={80} color={COLORS.success} />
+            <Icon name="checkmark-circle" size={80} color={COLORS.success} />
             <Text style={styles.completeTitle}>{t('studyComplete')}</Text>
             <Text style={styles.completeDesc}>{t('studyCompleteDesc')}</Text>
             <TouchableOpacity 
@@ -313,7 +313,7 @@ export default function FlashcardsScreen() {
       <SafeAreaView style={styles.container}>
         <View style={styles.studyHeader}>
           <TouchableOpacity onPress={() => setStudyMode(false)}>
-            <Ionicons name="close" size={28} color={COLORS.text} />
+            <Icon name="close" size={28} color={COLORS.text} />
           </TouchableOpacity>
           <Text style={styles.studyProgress}>
             {currentCardIndex + 1} / {dueCards.length}
@@ -397,7 +397,7 @@ export default function FlashcardsScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={28} color={COLORS.text} />
+          <Icon name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.title}>{t('title')}</Text>
         <View style={{ width: 28 }} />
@@ -410,17 +410,17 @@ export default function FlashcardsScreen() {
         {stats && (
           <View style={styles.statsRow}>
             <View style={[styles.statCard, { backgroundColor: COLORS.primary + '15' }]}>
-              <Ionicons name="layers" size={24} color={COLORS.primary} />
+              <Icon name="layers" size={24} color={COLORS.primary} />
               <Text style={styles.statNumber}>{stats.total_flashcards}</Text>
               <Text style={styles.statLabel}>{t('totalCards')}</Text>
             </View>
             <View style={[styles.statCard, { backgroundColor: '#F97316' + '15' }]}>
-              <Ionicons name="time" size={24} color="#F97316" />
+              <Icon name="time" size={24} color="#F97316" />
               <Text style={styles.statNumber}>{stats.due_for_review}</Text>
               <Text style={styles.statLabel}>{t('cardsToReview')}</Text>
             </View>
             <View style={[styles.statCard, { backgroundColor: '#22C55E' + '15' }]}>
-              <Ionicons name="checkmark-circle" size={24} color="#22C55E" />
+              <Icon name="checkmark-circle" size={24} color="#22C55E" />
               <Text style={styles.statNumber}>{stats.mastered}</Text>
               <Text style={styles.statLabel}>{t('mastered')}</Text>
             </View>
@@ -430,7 +430,7 @@ export default function FlashcardsScreen() {
         {/* Start Study Button */}
         {dueCards.length > 0 && (
           <TouchableOpacity style={styles.studyButton} onPress={startStudy}>
-            <Ionicons name="play" size={24} color="#fff" />
+            <Icon name="play" size={24} color="#fff" />
             <Text style={styles.studyButtonText}>
               {t('startStudy')} ({dueCards.length} {t('dueForReview').toLowerCase()})
             </Text>
@@ -440,14 +440,14 @@ export default function FlashcardsScreen() {
         {/* Empty State */}
         {flashcards.length === 0 && (
           <View style={styles.emptyState}>
-            <Ionicons name="card-outline" size={64} color={COLORS.textMuted} />
+            <Icon name="card-outline" size={64} color={COLORS.textMuted} />
             <Text style={styles.emptyTitle}>{t('noCards')}</Text>
             <Text style={styles.emptyDesc}>{t('noCardsDesc')}</Text>
             <TouchableOpacity 
               style={styles.primaryButton}
               onPress={() => router.push('/dictionary')}
             >
-              <Ionicons name="book" size={20} color="#fff" />
+              <Icon name="book" size={20} color="#fff" />
               <Text style={styles.primaryButtonText}>{t('goToDictionary')}</Text>
             </TouchableOpacity>
           </View>
@@ -473,7 +473,7 @@ export default function FlashcardsScreen() {
                   onPress={() => deleteFlashcard(card.flashcard_id)}
                   style={styles.deleteButton}
                 >
-                  <Ionicons name="trash-outline" size={20} color={COLORS.error} />
+                  <Icon name="trash-outline" size={20} color={COLORS.error} />
                 </TouchableOpacity>
               </View>
             ))}

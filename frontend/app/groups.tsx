@@ -123,7 +123,7 @@ export default function GroupsScreen() {
           <Text style={styles.groupName}>{item.name}</Text>
           <Text style={styles.groupDesc} numberOfLines={2}>{item.description}</Text>
           <View style={styles.groupMeta}>
-            <Ionicons name="people-outline" size={14} color={COLORS.textMuted} />
+            <Icon name="people-outline" size={14} color={COLORS.textMuted} />
             <Text style={styles.groupMetaText}>{item.members_count} membri</Text>
             <Text style={styles.groupMetaText}>\u2022</Text>
             <Text style={styles.groupMetaText}>{topic?.name}</Text>
@@ -134,7 +134,7 @@ export default function GroupsScreen() {
             style={styles.joinButton}
             onPress={() => handleJoinGroup(item.group_id)}
           >
-            <Ionicons name="add" size={20} color={COLORS.primary} />
+            <Icon name="add" size={20} color={COLORS.primary} />
           </TouchableOpacity>
         )}
       </TouchableOpacity>
@@ -148,7 +148,7 @@ export default function GroupsScreen() {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={24} color={COLORS.text} />
+          <Icon name="arrow-back" size={24} color={COLORS.text} />
         </TouchableOpacity>
         <View style={styles.headerContent}>
           <Text style={styles.headerTitle}>Gruppi Biblici</Text>
@@ -158,7 +158,7 @@ export default function GroupsScreen() {
           style={styles.createButton}
           onPress={() => setShowCreateModal(true)}
         >
-          <Ionicons name="add-circle" size={28} color={COLORS.primary} />
+          <Icon name="add-circle" size={28} color={COLORS.primary} />
         </TouchableOpacity>
       </View>
 
@@ -220,7 +220,7 @@ export default function GroupsScreen() {
           }
           ListEmptyComponent={
             <View style={styles.emptyContainer}>
-              <Ionicons name="people-outline" size={64} color={COLORS.textMuted} />
+              <Icon name="people-outline" size={64} color={COLORS.textMuted} />
               <Text style={styles.emptyText}>
                 {activeTab === 'my' ? 'Non sei ancora in nessun gruppo' : 'Nessun gruppo trovato'}
               </Text>
@@ -241,7 +241,7 @@ export default function GroupsScreen() {
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Crea Nuovo Gruppo</Text>
               <TouchableOpacity onPress={() => setShowCreateModal(false)}>
-                <Ionicons name="close" size={24} color={COLORS.text} />
+                <Icon name="close" size={24} color={COLORS.text} />
               </TouchableOpacity>
             </View>
 

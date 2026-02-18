@@ -144,7 +144,7 @@ export default function MapsScreen() {
                     onPress={() => setSelectedLocation(loc)}
                   >
                     <View style={[styles.markerIcon, { backgroundColor: getLocationColor(loc.type) + '20' }]}>
-                      <Ionicons name={getLocationIcon(loc.type)} size={20} color={getLocationColor(loc.type)} />
+                      <Icon name={getLocationIcon(loc.type)} size={20} color={getLocationColor(loc.type)} />
                     </View>
                     <Text style={styles.markerName} numberOfLines={1}>{loc.name}</Text>
                   </TouchableOpacity>
@@ -157,7 +157,7 @@ export default function MapsScreen() {
               <View style={styles.locationDetails}>
                 <View style={styles.locationHeader}>
                   <View style={[styles.locationIcon, { backgroundColor: getLocationColor(selectedLocation.type) }]}>
-                    <Ionicons name={getLocationIcon(selectedLocation.type)} size={24} color="#fff" />
+                    <Icon name={getLocationIcon(selectedLocation.type)} size={24} color="#fff" />
                   </View>
                   <Text style={styles.locationName}>{selectedLocation.name}</Text>
                 </View>
@@ -180,7 +180,7 @@ export default function MapsScreen() {
                 onPress={() => setSelectedLocation(loc)}
               >
                 <View style={[styles.locationCardIcon, { backgroundColor: getLocationColor(loc.type) + '20' }]}>
-                  <Ionicons name={getLocationIcon(loc.type)} size={22} color={getLocationColor(loc.type)} />
+                  <Icon name={getLocationIcon(loc.type)} size={22} color={getLocationColor(loc.type)} />
                 </View>
                 <View style={styles.locationCardContent}>
                   <Text style={styles.locationCardName}>{loc.name}</Text>

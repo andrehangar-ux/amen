@@ -148,17 +148,17 @@ export default function EventsScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={28} color={COLORS.text} />
+          <Icon name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.title}>Eventi Live</Text>
         <TouchableOpacity onPress={() => setShowNewEvent(true)}>
-          <Ionicons name="add-circle" size={28} color={COLORS.primary} />
+          <Icon name="add-circle" size={28} color={COLORS.primary} />
         </TouchableOpacity>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.heroCard}>
-          <Ionicons name="videocam" size={40} color={COLORS.primary} />
+          <Icon name="videocam" size={40} color={COLORS.primary} />
           <Text style={styles.heroTitle}>Eventi Sincronizzati</Text>
           <Text style={styles.heroText}>
             Partecipa a letture bibliche, momenti di lode e preghiera con altri credenti in tempo reale.
@@ -171,7 +171,7 @@ export default function EventsScreen() {
           {EVENT_TYPES.map((type) => (
             <View key={type.id} style={styles.typeCard}>
               <View style={[styles.typeIcon, { backgroundColor: type.color + '20' }]}>
-                <Ionicons name={type.icon as any} size={24} color={type.color} />
+                <Icon name={type.icon as any} size={24} color={type.color} />
               </View>
               <Text style={styles.typeName}>{type.name}</Text>
             </View>
@@ -182,7 +182,7 @@ export default function EventsScreen() {
         <Text style={styles.sectionTitle}>Prossimi Eventi</Text>
         {events.length === 0 ? (
           <View style={styles.emptyContainer}>
-            <Ionicons name="calendar-outline" size={60} color={COLORS.textMuted} />
+            <Icon name="calendar-outline" size={60} color={COLORS.textMuted} />
             <Text style={styles.emptyText}>Nessun evento in programma</Text>
             <Text style={styles.emptySubtext}>Crea il primo evento!</Text>
           </View>
@@ -195,7 +195,7 @@ export default function EventsScreen() {
               <View key={event.event_id} style={styles.eventCard}>
                 <View style={styles.eventHeader}>
                   <View style={[styles.eventTypeIcon, { backgroundColor: type.color + '20' }]}>
-                    <Ionicons name={type.icon as any} size={22} color={type.color} />
+                    <Icon name={type.icon as any} size={22} color={type.color} />
                   </View>
                   <View style={styles.eventHeaderContent}>
                     <Text style={styles.eventTitle}>{event.title}</Text>
@@ -214,15 +214,15 @@ export default function EventsScreen() {
 
                 <View style={styles.eventMeta}>
                   <View style={styles.eventMetaItem}>
-                    <Ionicons name="calendar" size={16} color={COLORS.textMuted} />
+                    <Icon name="calendar" size={16} color={COLORS.textMuted} />
                     <Text style={styles.eventMetaText}>{formatDate(event.scheduled_at)}</Text>
                   </View>
                   <View style={styles.eventMetaItem}>
-                    <Ionicons name="time" size={16} color={COLORS.textMuted} />
+                    <Icon name="time" size={16} color={COLORS.textMuted} />
                     <Text style={styles.eventMetaText}>{event.duration_minutes} min</Text>
                   </View>
                   <View style={styles.eventMetaItem}>
-                    <Ionicons name="people" size={16} color={COLORS.textMuted} />
+                    <Icon name="people" size={16} color={COLORS.textMuted} />
                     <Text style={styles.eventMetaText}>{event.participants.length}</Text>
                   </View>
                 </View>
@@ -238,7 +238,7 @@ export default function EventsScreen() {
 
                 {event.status === 'live' && (
                   <TouchableOpacity style={[styles.joinButton, styles.liveButton]}>
-                    <Ionicons name="radio" size={18} color="#fff" />
+                    <Icon name="radio" size={18} color="#fff" />
                     <Text style={styles.joinButtonText}>Entra nella Diretta</Text>
                   </TouchableOpacity>
                 )}
@@ -255,7 +255,7 @@ export default function EventsScreen() {
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Nuovo Evento</Text>
               <TouchableOpacity onPress={() => setShowNewEvent(false)}>
-                <Ionicons name="close" size={28} color={COLORS.text} />
+                <Icon name="close" size={28} color={COLORS.text} />
               </TouchableOpacity>
             </View>
 
@@ -271,7 +271,7 @@ export default function EventsScreen() {
                     ]}
                     onPress={() => setNewType(type.id)}
                   >
-                    <Ionicons name={type.icon as any} size={20} color={newType === type.id ? '#fff' : type.color} />
+                    <Icon name={type.icon as any} size={20} color={newType === type.id ? '#fff' : type.color} />
                     <Text style={[styles.typeOptionText, newType === type.id && { color: '#fff' }]}>
                       {type.name}
                     </Text>
@@ -304,7 +304,7 @@ export default function EventsScreen() {
                 style={styles.dateButton}
                 onPress={() => setShowDatePicker(true)}
               >
-                <Ionicons name="calendar" size={20} color={COLORS.primary} />
+                <Icon name="calendar" size={20} color={COLORS.primary} />
                 <Text style={styles.dateButtonText}>
                   {newDate.toLocaleDateString('it-IT', {
                     weekday: 'long',
