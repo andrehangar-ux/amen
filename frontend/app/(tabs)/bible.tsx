@@ -336,6 +336,59 @@ export default function BibleScreen() {
     router.push('/maps');
   };
 
+  // Delete a note
+  const handleDeleteNote = async (noteId: string) => {
+    Alert.alert(
+      t('confirmDelete') || 'Conferma',
+      t('deleteNoteConfirm') || 'Eliminare questa nota?',
+      [
+        { text: t('cancel') || 'Annulla', style: 'cancel' },
+        {
+          text: t('delete') || 'Elimina',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await api.deleteStudyNote(noteId);
+              // Reload study data
+              if (selectedBook && selectedChapter) {
+                loadStudyData(selectedBook.name, selectedChapter);
+              }
+            } catch (error) {
+              Alert.alert(t('error'), t('unableToDeleteNote') || 'Impossibile eliminare la nota');
+            }
+          },
+        },
+      ]
+    );
+  };
+
+  // Delete a bookmark
+  const handleDeleteBookmark = async (bookmarkId: string, verseKey: string) => {
+    Alert.alert(
+      t('confirmDelete') || 'Conferma',
+      t('deleteBookmarkConfirm') || 'Rimuovere questo segnalibro?',
+      [
+        { text: t('cancel') || 'Annulla', style: 'cancel' },
+        {
+          text: t('delete') || 'Elimina',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await api.deleteBookmark(bookmarkId);
+              setBookmarkedVerses(prev => {
+                const newSet = new Set(prev);
+                newSet.delete(verseKey);
+                return newSet;
+              });
+            } catch (error) {
+              Alert.alert(t('error'), t('unableToDeleteBookmark') || 'Impossibile eliminare il segnalibro');
+            }
+          },
+        },
+      ]
+    );
+  };
+
   const saveNote = async () => {
     if (!selectedBook || !selectedChapter || !noteText.trim()) return;
     
