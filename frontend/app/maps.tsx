@@ -110,7 +110,7 @@ export default function MapsScreen() {
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => { setSelectedMap(null); setSelectedLocation(null); }}>
-            <Ionicons name="arrow-back" size={28} color={COLORS.text} />
+            <Icon name="arrow-back" size={28} color={COLORS.text} />
           </TouchableOpacity>
           <Text style={styles.title} numberOfLines={1}>{selectedMap.name}</Text>
           <View style={{ width: 28 }} />
@@ -125,7 +125,7 @@ export default function MapsScreen() {
             {/* Simplified Map Visualization */}
             <View style={styles.mapContainer}>
               <View style={styles.mapPlaceholder}>
-                <Ionicons name="map" size={60} color={COLORS.primary} />
+                <Icon name="map" size={60} color={COLORS.primary} />
                 <Text style={styles.mapPlaceholderText}>Mappa Interattiva</Text>
                 <Text style={styles.mapCoords}>
                   Centro: {selectedMap.center.lat.toFixed(2)}°N, {selectedMap.center.lng.toFixed(2)}°E
@@ -163,7 +163,7 @@ export default function MapsScreen() {
                 </View>
                 <Text style={styles.locationDescription}>{selectedLocation.description}</Text>
                 <View style={styles.locationCoords}>
-                  <Ionicons name="location" size={16} color={COLORS.textMuted} />
+                  <Icon name="location" size={16} color={COLORS.textMuted} />
                   <Text style={styles.locationCoordsText}>
                     {selectedLocation.lat.toFixed(4)}°N, {selectedLocation.lng.toFixed(4)}°E
                   </Text>
@@ -186,7 +186,7 @@ export default function MapsScreen() {
                   <Text style={styles.locationCardName}>{loc.name}</Text>
                   <Text style={styles.locationCardDesc} numberOfLines={2}>{loc.description}</Text>
                 </View>
-                <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+                <Icon name="chevron-forward" size={20} color={COLORS.textMuted} />
               </TouchableOpacity>
             ))}
           </ScrollView>
@@ -200,7 +200,7 @@ export default function MapsScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={28} color={COLORS.text} />
+          <Icon name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.title}>Mappe Bibliche</Text>
         <View style={{ width: 28 }} />
@@ -208,7 +208,7 @@ export default function MapsScreen() {
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.heroCard}>
-          <Ionicons name="globe" size={50} color={COLORS.primary} />
+          <Icon name="globe" size={50} color={COLORS.primary} />
           <Text style={styles.heroTitle}>Esplora la Terra Santa</Text>
           <Text style={styles.heroText}>
             Scopri i luoghi biblici dove si sono svolti gli eventi della Scrittura.
@@ -222,14 +222,14 @@ export default function MapsScreen() {
             onPress={() => loadMap(map.id)}
           >
             <View style={styles.mapCardIcon}>
-              <Ionicons name="map" size={32} color={COLORS.primary} />
+              <Icon name="map" size={32} color={COLORS.primary} />
             </View>
             <View style={styles.mapCardContent}>
               <Text style={styles.mapCardTitle}>{map.name}</Text>
               <Text style={styles.mapCardDescription} numberOfLines={2}>{map.description}</Text>
               <Text style={styles.mapCardMeta}>{map.locations_count} luoghi</Text>
             </View>
-            <Ionicons name="chevron-forward" size={24} color={COLORS.textMuted} />
+            <Icon name="chevron-forward" size={24} color={COLORS.textMuted} />
           </TouchableOpacity>
         ))}
       </ScrollView>
