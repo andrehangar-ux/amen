@@ -65,6 +65,8 @@ const translations: Record<string, Record<string, string>> = {
     readCount: 'Read',
     times: 'times',
     appFeatures: 'App Features',
+    myContentSection: 'My Content',
+    myContentDesc: 'Bookmarks, notes and highlights',
     quizSection: 'Quiz Section',
     quizDesc: 'Test your knowledge',
     dictionarySection: 'Bible Dictionary',
