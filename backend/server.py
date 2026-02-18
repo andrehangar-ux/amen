@@ -157,6 +157,7 @@ class MoodCheckIn(BaseModel):
 class MoodRequest(BaseModel):
     mood: str
     language: str = "it"
+    exclude_ref: str = None
 
 class Progress(BaseModel):
     user_id: str
@@ -2057,8 +2058,23 @@ async def mood_checkin(data: MoodRequest, user: User = Depends(require_auth)):
             first_mood = list(mood_verses.keys())[0] if mood_verses else "speranzoso"
             mood_data = mood_verses.get(first_mood, [{"ref": "Salmi 23:1", "text": "Il Signore è il mio pastore."}])
         
-        # Random selection: different verse each time user taps a mood
-        verse = random.choice(mood_data) if mood_data else {"ref": "Salmi 23:1", "text": "Il Signore è il mio pastore."}
+        # Ensure different verse each time: exclude the previous verse ref
+        if data.exclude_ref and len(mood_data) > 1:
+            available = [v for v in mood_data if v["ref"] != data.exclude_ref]
+            verse = random.choice(available) if available else random.choice(mood_data)
+        else:
+            # Also check DB for last checkin to avoid repeats
+            last_checkin = await db.mood_checkins.find_one(
+                {"user_id": user.user_id, "mood": mood},
+                sort=[("created_at", -1)],
+                projection={"verse_reference": 1, "_id": 0}
+            )
+            last_ref = last_checkin.get("verse_reference") if last_checkin else None
+            if last_ref and len(mood_data) > 1:
+                available = [v for v in mood_data if v["ref"] != last_ref]
+                verse = random.choice(available) if available else random.choice(mood_data)
+            else:
+                verse = random.choice(mood_data) if mood_data else {"ref": "Salmi 23:1", "text": "Il Signore è il mio pastore."}
         
         # Generate reflection in user's language
         lang_prompts = {
