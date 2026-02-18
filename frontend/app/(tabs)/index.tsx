@@ -142,14 +142,19 @@ export default function HomeScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t('howAreYou')}</Text>
           <MoodSelector
-            selectedMood={moodCheckinResult?.mood || null}
+            selectedMood={moodLoading ? null : (moodCheckinResult?.mood || null)}
             onSelect={handleMoodSelect}
             horizontal
           />
         </View>
 
         {/* Mood Result */}
-        {moodCheckinResult && (
+        {moodLoading && (
+          <View style={styles.moodResult}>
+            <ActivityIndicator size="small" color={COLORS.primary} />
+          </View>
+        )}
+        {!moodLoading && moodCheckinResult && (
           <View style={styles.moodResult}>
             <View style={styles.moodVerseContainer}>
               <Text style={styles.moodVerseRef}>{moodCheckinResult.verse?.ref}</Text>
