@@ -44,6 +44,7 @@ export default function HomeScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [moodCheckinResult, setMoodCheckinResult] = useState<any>(null);
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
+  const [moodLoading, setMoodLoading] = useState(false);
 
   const loadData = useCallback(async () => {
     try {
