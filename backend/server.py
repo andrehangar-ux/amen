@@ -1077,46 +1077,224 @@ SAMPLE_VERSES_MULTILANG = {
 # Mood verses in multiple languages
 MOOD_VERSES_MULTILANG = {
     "it": {
-        "felice": [{"ref": "Salmi 118:24", "text": "Questo è il giorno che l'Eterno ha fatto; rallegriamoci e gioisciamo in esso."}],
-        "triste": [{"ref": "Salmi 34:18", "text": "L'Eterno è vicino a quelli che hanno il cuore rotto."}],
-        "ansioso": [{"ref": "Filippesi 4:6-7", "text": "Non angustiatevi di nulla, ma in ogni cosa fate conoscere le vostre richieste a Dio."}],
-        "arrabbiato": [{"ref": "Efesini 4:26", "text": "Adiratevi e non peccate; il sole non tramonti sopra la vostra ira."}],
-        "grato": [{"ref": "1 Tessalonicesi 5:18", "text": "In ogni cosa rendete grazie."}],
-        "confuso": [{"ref": "Proverbi 3:5-6", "text": "Confida nell'Eterno con tutto il cuore e non appoggiarti sul tuo intendimento."}],
-        "speranzoso": [{"ref": "Geremia 29:11", "text": "Poiché io conosco i pensieri che ho per voi, pensieri di pace e non di male."}],
-        "stanco": [{"ref": "Matteo 11:28", "text": "Venite a me, voi tutti che siete travagliati e aggravati, e io vi darò riposo."}],
-    },
-    "es": {
-        "felice": [{"ref": "Salmos 118:24", "text": "Este es el día que hizo Jehová; nos gozaremos y alegraremos en él."}],
-        "triste": [{"ref": "Salmos 34:18", "text": "Cercano está Jehová a los quebrantados de corazón."}],
-        "ansioso": [{"ref": "Filipenses 4:6-7", "text": "Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios."}],
-        "stanco": [{"ref": "Mateo 11:28", "text": "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar."}],
+        "felice": [
+            {"ref": "Salmi 118:24", "text": "Questo è il giorno che l'Eterno ha fatto; rallegriamoci e gioisciamo in esso."},
+            {"ref": "Salmi 16:11", "text": "Tu mi farai conoscere il sentiero della vita; c'è abbondanza di gioia alla tua presenza."},
+            {"ref": "Neemia 8:10", "text": "La gioia dell'Eterno è la vostra forza."},
+            {"ref": "Romani 15:13", "text": "Il Dio della speranza vi riempia di ogni gioia e pace nel credere."},
+            {"ref": "Salmi 126:3", "text": "L'Eterno ha fatto grandi cose per noi e ne siamo lieti."},
+            {"ref": "Isaia 55:12", "text": "Voi uscirete con gioia e sarete ricondotti in pace."},
+        ],
+        "triste": [
+            {"ref": "Salmi 34:18", "text": "L'Eterno è vicino a quelli che hanno il cuore rotto."},
+            {"ref": "Salmi 30:5", "text": "Il pianto può durare una notte, ma la mattina viene la gioia."},
+            {"ref": "Salmi 147:3", "text": "Egli sana quelli che hanno il cuore rotto e fascia le loro ferite."},
+            {"ref": "2 Corinzi 1:3-4", "text": "Dio di ogni consolazione, che ci consola in ogni nostra afflizione."},
+            {"ref": "Apocalisse 21:4", "text": "Egli asciugherà ogni lacrima dai loro occhi."},
+            {"ref": "Salmi 42:11", "text": "Perché ti abbatti, anima mia? Spera in Dio, perché io lo celebrerò ancora."},
+        ],
+        "ansioso": [
+            {"ref": "Filippesi 4:6-7", "text": "Non angustiatevi di nulla, ma in ogni cosa fate conoscere le vostre richieste a Dio."},
+            {"ref": "1 Pietro 5:7", "text": "Gettando su di lui ogni vostra preoccupazione, perché egli ha cura di voi."},
+            {"ref": "Isaia 41:10", "text": "Non temere, perché io sono con te; non smarrirti, perché io sono il tuo Dio."},
+            {"ref": "Matteo 6:34", "text": "Non siate dunque in ansia per il domani, perché il domani si preoccuperà di se stesso."},
+            {"ref": "Salmi 55:22", "text": "Getta sull'Eterno il tuo peso, ed egli ti sosterrà."},
+            {"ref": "Giovanni 14:27", "text": "Vi lascio la pace, vi do la mia pace. Non come il mondo la dà, io la do a voi."},
+        ],
+        "arrabbiato": [
+            {"ref": "Efesini 4:26", "text": "Adiratevi e non peccate; il sole non tramonti sopra la vostra ira."},
+            {"ref": "Proverbi 15:1", "text": "Una risposta dolce calma il furore, ma una parola dura eccita l'ira."},
+            {"ref": "Giacomo 1:19-20", "text": "Ogni uomo sia pronto ad ascoltare, lento a parlare, lento all'ira."},
+            {"ref": "Colossesi 3:8", "text": "Ora deponete anche voi tutte queste cose: ira, collera, malignità."},
+            {"ref": "Proverbi 29:11", "text": "Lo stolto dà sfogo a tutta la sua ira, ma il saggio la reprime."},
+        ],
+        "grato": [
+            {"ref": "1 Tessalonicesi 5:18", "text": "In ogni cosa rendete grazie."},
+            {"ref": "Salmi 100:4", "text": "Entrate nelle sue porte con ringraziamento, nei suoi cortili con lode."},
+            {"ref": "Colossesi 3:17", "text": "Qualunque cosa facciate, in parola o in opera, fate ogni cosa nel nome del Signore Gesù, ringraziando Dio."},
+            {"ref": "Salmi 107:1", "text": "Celebrate l'Eterno, perché è buono, perché la sua benignità dura in eterno."},
+            {"ref": "Salmi 136:1", "text": "Lodate l'Eterno perché è buono, perché la sua benignità dura in eterno."},
+        ],
+        "confuso": [
+            {"ref": "Proverbi 3:5-6", "text": "Confida nell'Eterno con tutto il cuore e non appoggiarti sul tuo intendimento."},
+            {"ref": "Giacomo 1:5", "text": "Se qualcuno di voi manca di sapienza, la chieda a Dio che dona a tutti liberamente."},
+            {"ref": "Salmi 32:8", "text": "Io ti istruirò e t'insegnerò la via per la quale devi camminare."},
+            {"ref": "Isaia 30:21", "text": "Le tue orecchie udranno una parola dietro a te: Questa è la via, camminate in essa."},
+            {"ref": "Salmi 119:105", "text": "La tua parola è una lampada al mio piede e una luce sul mio sentiero."},
+        ],
+        "speranzoso": [
+            {"ref": "Geremia 29:11", "text": "Poiché io conosco i pensieri che ho per voi, pensieri di pace e non di male."},
+            {"ref": "Romani 8:28", "text": "Tutte le cose cooperano al bene di quelli che amano Dio."},
+            {"ref": "Isaia 40:31", "text": "Quelli che sperano nell'Eterno acquistano nuove forze."},
+            {"ref": "Salmi 27:14", "text": "Spera nell'Eterno! Sii forte, il tuo cuore si faccia animo; sì, spera nell'Eterno!"},
+            {"ref": "Ebrei 11:1", "text": "La fede è certezza di cose che si sperano, dimostrazione di realtà che non si vedono."},
+        ],
+        "stanco": [
+            {"ref": "Matteo 11:28", "text": "Venite a me, voi tutti che siete travagliati e aggravati, e io vi darò riposo."},
+            {"ref": "Isaia 40:29", "text": "Egli dà forza allo stanco e accresce vigore a chi è spossato."},
+            {"ref": "Salmi 23:2-3", "text": "Egli mi fa riposare in verdeggianti pascoli, mi guida lungo le acque calme, egli ristora la mia anima."},
+            {"ref": "Esodo 33:14", "text": "La mia presenza andrà con te e io ti darò riposo."},
+            {"ref": "Salmi 62:1", "text": "Solo in Dio l'anima mia trova riposo; da lui viene la mia salvezza."},
+        ],
     },
     "en": {
-        "felice": [{"ref": "Psalm 118:24", "text": "This is the day which the Lord hath made; we will rejoice and be glad in it."}],
-        "triste": [{"ref": "Psalm 34:18", "text": "The Lord is nigh unto them that are of a broken heart."}],
-        "ansioso": [{"ref": "Philippians 4:6-7", "text": "Be careful for nothing; but in every thing by prayer let your requests be made known unto God."}],
-        "stanco": [{"ref": "Matthew 11:28", "text": "Come unto me, all ye that labour and are heavy laden, and I will give you rest."}],
+        "felice": [
+            {"ref": "Psalm 118:24", "text": "This is the day which the Lord hath made; we will rejoice and be glad in it."},
+            {"ref": "Psalm 16:11", "text": "You make known to me the path of life; in your presence there is fullness of joy."},
+            {"ref": "Nehemiah 8:10", "text": "The joy of the Lord is your strength."},
+            {"ref": "Romans 15:13", "text": "May the God of hope fill you with all joy and peace in believing."},
+            {"ref": "Psalm 126:3", "text": "The Lord has done great things for us, and we are filled with joy."},
+        ],
+        "triste": [
+            {"ref": "Psalm 34:18", "text": "The Lord is nigh unto them that are of a broken heart."},
+            {"ref": "Psalm 30:5", "text": "Weeping may endure for a night, but joy comes in the morning."},
+            {"ref": "Psalm 147:3", "text": "He heals the brokenhearted and binds up their wounds."},
+            {"ref": "Revelation 21:4", "text": "He will wipe every tear from their eyes."},
+            {"ref": "Psalm 42:11", "text": "Why are you cast down, O my soul? Hope in God, for I shall yet praise Him."},
+        ],
+        "ansioso": [
+            {"ref": "Philippians 4:6-7", "text": "Be careful for nothing; but in every thing by prayer let your requests be made known unto God."},
+            {"ref": "1 Peter 5:7", "text": "Cast all your anxiety on Him because He cares for you."},
+            {"ref": "Isaiah 41:10", "text": "Fear not, for I am with you; be not dismayed, for I am your God."},
+            {"ref": "John 14:27", "text": "Peace I leave with you; my peace I give you. Not as the world gives do I give to you."},
+            {"ref": "Psalm 55:22", "text": "Cast your burden on the Lord, and He shall sustain you."},
+        ],
+        "arrabbiato": [
+            {"ref": "Ephesians 4:26", "text": "Be angry and sin not; let not the sun go down upon your wrath."},
+            {"ref": "Proverbs 15:1", "text": "A soft answer turns away wrath, but a harsh word stirs up anger."},
+            {"ref": "James 1:19-20", "text": "Let every man be swift to hear, slow to speak, slow to wrath."},
+        ],
+        "grato": [
+            {"ref": "1 Thessalonians 5:18", "text": "In every thing give thanks."},
+            {"ref": "Psalm 100:4", "text": "Enter His gates with thanksgiving, and His courts with praise."},
+            {"ref": "Colossians 3:17", "text": "Whatever you do in word or deed, do all in the name of the Lord Jesus, giving thanks to God."},
+        ],
+        "confuso": [
+            {"ref": "Proverbs 3:5-6", "text": "Trust in the Lord with all your heart and lean not on your own understanding."},
+            {"ref": "James 1:5", "text": "If any of you lacks wisdom, let him ask of God, who gives to all liberally."},
+            {"ref": "Psalm 119:105", "text": "Your word is a lamp to my feet and a light to my path."},
+        ],
+        "speranzoso": [
+            {"ref": "Jeremiah 29:11", "text": "For I know the plans I have for you, plans to prosper you and not to harm you."},
+            {"ref": "Romans 8:28", "text": "All things work together for good to those who love God."},
+            {"ref": "Isaiah 40:31", "text": "Those who hope in the Lord will renew their strength."},
+        ],
+        "stanco": [
+            {"ref": "Matthew 11:28", "text": "Come unto me, all ye that labour and are heavy laden, and I will give you rest."},
+            {"ref": "Isaiah 40:29", "text": "He gives strength to the weary and increases the power of the weak."},
+            {"ref": "Psalm 23:2-3", "text": "He makes me lie down in green pastures, He leads me beside still waters, He restores my soul."},
+        ],
+    },
+    "es": {
+        "felice": [
+            {"ref": "Salmos 118:24", "text": "Este es el día que hizo Jehová; nos gozaremos y alegraremos en él."},
+            {"ref": "Salmos 16:11", "text": "Me mostrarás la senda de la vida; en tu presencia hay plenitud de gozo."},
+            {"ref": "Nehemías 8:10", "text": "El gozo de Jehová es vuestra fuerza."},
+        ],
+        "triste": [
+            {"ref": "Salmos 34:18", "text": "Cercano está Jehová a los quebrantados de corazón."},
+            {"ref": "Salmos 30:5", "text": "El llanto puede durar toda la noche, pero a la mañana viene la alegría."},
+            {"ref": "Apocalipsis 21:4", "text": "Enjugará Dios toda lágrima de los ojos de ellos."},
+        ],
+        "ansioso": [
+            {"ref": "Filipenses 4:6-7", "text": "Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios."},
+            {"ref": "1 Pedro 5:7", "text": "Echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros."},
+            {"ref": "Isaías 41:10", "text": "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios."},
+        ],
+        "stanco": [
+            {"ref": "Mateo 11:28", "text": "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar."},
+            {"ref": "Isaías 40:29", "text": "Él da esfuerzo al cansado, y multiplica las fuerzas al que no tiene ningunas."},
+        ],
+        "arrabbiato": [
+            {"ref": "Efesios 4:26", "text": "Airaos, pero no pequéis; no se ponga el sol sobre vuestro enojo."},
+        ],
+        "grato": [
+            {"ref": "1 Tesalonicenses 5:18", "text": "Dad gracias en todo."},
+        ],
+        "confuso": [
+            {"ref": "Proverbios 3:5-6", "text": "Fíate de Jehová de todo tu corazón, y no te apoyes en tu propia prudencia."},
+        ],
+        "speranzoso": [
+            {"ref": "Jeremías 29:11", "text": "Porque yo sé los pensamientos que tengo acerca de vosotros, pensamientos de paz, y no de mal."},
+        ],
     },
     "pt": {
-        "felice": [{"ref": "Salmos 118:24", "text": "Este é o dia que o Senhor fez; regozijemo-nos e alegremo-nos nele."}],
-        "triste": [{"ref": "Salmos 34:18", "text": "Perto está o Senhor dos que têm o coração quebrantado."}],
-        "stanco": [{"ref": "Mateus 11:28", "text": "Vinde a mim, todos os que estais cansados e oprimidos, e eu vos aliviarei."}],
+        "felice": [
+            {"ref": "Salmos 118:24", "text": "Este é o dia que o Senhor fez; regozijemo-nos e alegremo-nos nele."},
+            {"ref": "Salmos 16:11", "text": "Tu me farás ver a vereda da vida; na tua presença há fartura de alegrias."},
+        ],
+        "triste": [
+            {"ref": "Salmos 34:18", "text": "Perto está o Senhor dos que têm o coração quebrantado."},
+            {"ref": "Salmos 30:5", "text": "O choro pode durar uma noite, mas a alegria vem pela manhã."},
+        ],
+        "ansioso": [
+            {"ref": "Filipenses 4:6-7", "text": "Não estejais inquietos por coisa alguma; antes as vossas petições sejam conhecidas diante de Deus."},
+            {"ref": "1 Pedro 5:7", "text": "Lançando sobre ele toda a vossa ansiedade, porque ele tem cuidado de vós."},
+        ],
+        "stanco": [
+            {"ref": "Mateus 11:28", "text": "Vinde a mim, todos os que estais cansados e oprimidos, e eu vos aliviarei."},
+            {"ref": "Isaías 40:29", "text": "Ele dá forças ao cansado e multiplica as forças ao que não tem nenhum vigor."},
+        ],
+        "speranzoso": [
+            {"ref": "Jeremias 29:11", "text": "Eu é que sei que pensamentos tenho a vosso respeito, pensamentos de paz e não de mal."},
+        ],
+        "confuso": [
+            {"ref": "Provérbios 3:5-6", "text": "Confia no Senhor de todo o teu coração, e não te estribes no teu próprio entendimento."},
+        ],
     },
     "fr": {
-        "felice": [{"ref": "Psaume 118:24", "text": "C'est ici la journée que l'Éternel a faite: Qu'elle soit pour nous un sujet d'allégresse et de joie!"}],
-        "triste": [{"ref": "Psaume 34:18", "text": "L'Éternel est près de ceux qui ont le cœur brisé."}],
-        "stanco": [{"ref": "Matthieu 11:28", "text": "Venez à moi, vous tous qui êtes fatigués et chargés, et je vous donnerai du repos."}],
+        "felice": [
+            {"ref": "Psaume 118:24", "text": "C'est ici la journée que l'Éternel a faite: Qu'elle soit pour nous un sujet d'allégresse et de joie!"},
+            {"ref": "Psaume 16:11", "text": "Tu me feras connaître le sentier de la vie; il y a d'abondantes joies devant ta face."},
+        ],
+        "triste": [
+            {"ref": "Psaume 34:18", "text": "L'Éternel est près de ceux qui ont le cœur brisé."},
+            {"ref": "Psaume 30:5", "text": "Les pleurs peuvent durer toute une nuit, mais le matin la joie est là."},
+        ],
+        "ansioso": [
+            {"ref": "Philippiens 4:6-7", "text": "Ne vous inquiétez de rien; mais en toute chose faites connaître vos besoins à Dieu."},
+            {"ref": "1 Pierre 5:7", "text": "Déchargez-vous sur lui de tous vos soucis, car lui-même prend soin de vous."},
+        ],
+        "stanco": [
+            {"ref": "Matthieu 11:28", "text": "Venez à moi, vous tous qui êtes fatigués et chargés, et je vous donnerai du repos."},
+            {"ref": "Ésaïe 40:29", "text": "Il donne de la force à celui qui est las, et il augmente la vigueur de celui qui tombe en défaillance."},
+        ],
+        "speranzoso": [
+            {"ref": "Jérémie 29:11", "text": "Car je connais les projets que j'ai formés sur vous, projets de paix et non de malheur."},
+        ],
+        "confuso": [
+            {"ref": "Proverbes 3:5-6", "text": "Confie-toi en l'Éternel de tout ton cœur, et ne t'appuie pas sur ta sagesse."},
+        ],
     },
     "de": {
-        "felice": [{"ref": "Psalm 118:24", "text": "Dies ist der Tag, den der Herr macht; lasst uns freuen und fröhlich an ihm sein."}],
-        "triste": [{"ref": "Psalm 34:18", "text": "Der Herr ist nahe denen, die zerbrochenen Herzens sind."}],
-        "ansioso": [{"ref": "Philipper 4:6-7", "text": "Sorgt euch um nichts, sondern in allen Dingen lasst eure Bitten vor Gott kundwerden."}],
-        "arrabbiato": [{"ref": "Epheser 4:26", "text": "Zürnet ihr, so sündigt nicht; lasst die Sonne nicht über eurem Zorn untergehen."}],
-        "grato": [{"ref": "1. Thessalonicher 5:18", "text": "Seid dankbar in allen Dingen."}],
-        "confuso": [{"ref": "Sprüche 3:5-6", "text": "Verlass dich auf den Herrn von ganzem Herzen und verlass dich nicht auf deinen Verstand."}],
-        "speranzoso": [{"ref": "Jeremia 29:11", "text": "Denn ich weiß wohl, was ich für Gedanken über euch habe, Gedanken des Friedens und nicht des Leides."}],
-        "stanco": [{"ref": "Matthäus 11:28", "text": "Kommt her zu mir, alle, die ihr mühselig und beladen seid; ich will euch erquicken."}],
+        "felice": [
+            {"ref": "Psalm 118:24", "text": "Dies ist der Tag, den der Herr macht; lasst uns freuen und fröhlich an ihm sein."},
+            {"ref": "Psalm 16:11", "text": "Du tust mir kund den Weg zum Leben: Vor dir ist Freude die Fülle."},
+        ],
+        "triste": [
+            {"ref": "Psalm 34:18", "text": "Der Herr ist nahe denen, die zerbrochenen Herzens sind."},
+            {"ref": "Psalm 30:5", "text": "Den Abend lang währet das Weinen, aber des Morgens ist Freude."},
+        ],
+        "ansioso": [
+            {"ref": "Philipper 4:6-7", "text": "Sorgt euch um nichts, sondern in allen Dingen lasst eure Bitten vor Gott kundwerden."},
+            {"ref": "1 Petrus 5:7", "text": "Alle eure Sorge werft auf ihn; denn er sorgt für euch."},
+        ],
+        "arrabbiato": [
+            {"ref": "Epheser 4:26", "text": "Zürnet ihr, so sündigt nicht; lasst die Sonne nicht über eurem Zorn untergehen."},
+        ],
+        "grato": [
+            {"ref": "1. Thessalonicher 5:18", "text": "Seid dankbar in allen Dingen."},
+        ],
+        "confuso": [
+            {"ref": "Sprüche 3:5-6", "text": "Verlass dich auf den Herrn von ganzem Herzen und verlass dich nicht auf deinen Verstand."},
+        ],
+        "speranzoso": [
+            {"ref": "Jeremia 29:11", "text": "Denn ich weiß wohl, was ich für Gedanken über euch habe, Gedanken des Friedens und nicht des Leides."},
+        ],
+        "stanco": [
+            {"ref": "Matthäus 11:28", "text": "Kommt her zu mir, alle, die ihr mühselig und beladen seid; ich will euch erquicken."},
+            {"ref": "Jesaja 40:29", "text": "Er gibt dem Müden Kraft und Stärke genug dem Unvermögenden."},
+        ],
     },
 }
 
