@@ -1775,13 +1775,20 @@ async def get_study_data(book: str, chapter: int, verse: Optional[int] = None, u
         {"_id": 0}
     ).to_list(100)
     
+    # Get user's bookmarks for this chapter
+    user_bookmarks = await db.bookmarks.find(
+        {"user_id": user.user_id, "book": book, "chapter": chapter},
+        {"_id": 0}
+    ).to_list(100)
+    
     return {
         "book": book,
         "chapter": chapter,
         "cross_references": cross_refs,
         "dictionary_links": dict_links,
         "study_context": context,
-        "user_notes": user_notes
+        "user_notes": user_notes,
+        "user_bookmarks": user_bookmarks
     }
 
 @api_router.post("/bible/study/notes")
