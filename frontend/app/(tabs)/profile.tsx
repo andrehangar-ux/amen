@@ -407,44 +407,6 @@ export default function ProfileScreen() {
               />
             </Pressable>
           </Link>
-          
-          {showHistory && (
-            <View style={styles.menuCard}>
-              {readingHistory.length === 0 ? (
-                <View style={styles.emptyHistory}>
-                  <Icon name="book-outline" size={40} color={COLORS.textMuted} />
-                  <Text style={styles.emptyHistoryText}>
-                    {t('noHistory')}
-                  </Text>
-                </View>
-              ) : (
-                readingHistory.map((item, index) => (
-                  <TouchableOpacity
-                    key={`${item.book}-${item.chapter}-${index}`}
-                    style={[
-                      styles.historyItem,
-                      index < readingHistory.length - 1 && styles.historyItemBorder
-                    ]}
-                    onPress={() => goToChapter(item.book, item.chapter)}
-                    data-testid={`history-item-${item.book}-${item.chapter}`}
-                  >
-                    <View style={styles.historyIcon}>
-                      <Icon name="book" size={20} color={COLORS.primary} />
-                    </View>
-                    <View style={styles.historyContent}>
-                      <Text style={styles.historyTitle}>
-                        {item.book} {item.chapter}
-                      </Text>
-                      <Text style={styles.historyMeta}>
-                        {t('readCount')} {item.read_count || 1}x • {new Date(item.last_read).toLocaleDateString(currentLanguage)}
-                      </Text>
-                    </View>
-                    <Icon name="chevron-forward" size={20} color={COLORS.textMuted} />
-                  </TouchableOpacity>
-                ))
-              )}
-            </View>
-          )}
         </View>
 
         {/* App Features */}
