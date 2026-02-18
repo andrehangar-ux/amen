@@ -3383,6 +3383,92 @@ async def mark_all_read(user: User = Depends(require_auth)):
     )
     return {"success": True}
 
+# ==================== FRIENDS / FAVORITE USERS ====================
+
+class FriendRequest(BaseModel):
+    friend_id: str
+
+@api_router.get("/friends")
+async def get_friends(user: User = Depends(require_auth)):
+    """Get user's friends list"""
+    friendships = await db.friendships.find(
+        {"user_id": user.user_id},
+        {"_id": 0}
+    ).to_list(100)
+    
+    friend_ids = [f["friend_id"] for f in friendships]
+    friends = []
+    
+    for friend_id in friend_ids:
+        friend = await db.users.find_one({"user_id": friend_id}, {"_id": 0, "password_hash": 0})
+        if friend:
+            # Check if online
+            heartbeat = await db.user_heartbeats.find_one({"user_id": friend_id})
+            is_online = False
+            if heartbeat:
+                last_seen = heartbeat.get("last_seen")
+                if last_seen:
+                    if last_seen.tzinfo is None:
+                        last_seen = last_seen.replace(tzinfo=timezone.utc)
+                    is_online = (datetime.now(timezone.utc) - last_seen).total_seconds() < 120
+            
+            friends.append({
+                **friend,
+                "is_online": is_online,
+                "added_at": next((f["added_at"] for f in friendships if f["friend_id"] == friend_id), None)
+            })
+    
+    return friends
+
+@api_router.post("/friends")
+async def add_friend(data: FriendRequest, user: User = Depends(require_auth)):
+    """Add a user to friends list"""
+    if data.friend_id == user.user_id:
+        raise HTTPException(status_code=400, detail="Non puoi aggiungere te stesso")
+    
+    # Check if already friends
+    existing = await db.friendships.find_one({
+        "user_id": user.user_id,
+        "friend_id": data.friend_id
+    })
+    if existing:
+        raise HTTPException(status_code=400, detail="Utente già nei preferiti")
+    
+    # Check if friend exists
+    friend = await db.users.find_one({"user_id": data.friend_id}, {"_id": 0})
+    if not friend:
+        raise HTTPException(status_code=404, detail="Utente non trovato")
+    
+    friendship = {
+        "friendship_id": str(uuid.uuid4()),
+        "user_id": user.user_id,
+        "friend_id": data.friend_id,
+        "added_at": datetime.now(timezone.utc)
+    }
+    await db.friendships.insert_one(friendship)
+    
+    return {"message": "Utente aggiunto ai preferiti", "friend": friend}
+
+@api_router.delete("/friends/{friend_id}")
+async def remove_friend(friend_id: str, user: User = Depends(require_auth)):
+    """Remove a user from friends list"""
+    result = await db.friendships.delete_one({
+        "user_id": user.user_id,
+        "friend_id": friend_id
+    })
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Amicizia non trovata")
+    return {"message": "Utente rimosso dai preferiti"}
+
+@api_router.get("/friends/check/{friend_id}")
+async def check_friendship(friend_id: str, user: User = Depends(require_auth)):
+    """Check if a user is in friends list"""
+    friendship = await db.friendships.find_one({
+        "user_id": user.user_id,
+        "friend_id": friend_id
+    })
+    return {"is_friend": friendship is not None}
+
 # ==================== QUIZ BIBLICO ====================
 
 BIBLE_QUIZZES = {
