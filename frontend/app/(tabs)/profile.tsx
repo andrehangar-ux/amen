@@ -124,6 +124,8 @@ const translations: Record<string, Record<string, string>> = {
     cancel: 'Cancelar',
     confirm: 'Confirmar',
     version: 'Versión',
+    friendsSection: 'Mis Amigos',
+    friendsDesc: 'Usuarios favoritos',
   },
   de: {
     progress: 'Dein Fortschritt',
@@ -157,6 +159,8 @@ const translations: Record<string, Record<string, string>> = {
     cancel: 'Abbrechen',
     confirm: 'Bestätigen',
     version: 'Version',
+    friendsSection: 'Meine Freunde',
+    friendsDesc: 'Lieblingsbenutzer',
   },
   fr: {
     progress: 'Votre Progression',
