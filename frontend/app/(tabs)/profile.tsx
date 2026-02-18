@@ -254,9 +254,7 @@ export default function ProfileScreen() {
   const { user, logout, setUser, setSessionToken } = useAuthStore();
   const { currentLanguage } = useLanguageStore();
   const [progress, setProgress] = useState<any>(null);
-  const [readingHistory, setReadingHistory] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [showHistory, setShowHistory] = useState(false);
 
   const t = (key: string) => translations[currentLanguage]?.[key] || translations['it'][key] || key;
 
@@ -267,12 +265,8 @@ export default function ProfileScreen() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [progressData, historyData] = await Promise.all([
-        api.getProgress(),
-        api.getReadingHistory(20)
-      ]);
+      const progressData = await api.getProgress();
       setProgress(progressData);
-      setReadingHistory(historyData?.history || []);
     } catch (error) {
       console.log('Error loading data:', error);
     } finally {
