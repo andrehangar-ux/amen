@@ -662,6 +662,20 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: SPACING.xl,
   },
+  accountActionBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: SPACING.md,
+    paddingHorizontal: SPACING.lg,
+    borderRadius: BORDER_RADIUS.lg,
+    borderWidth: 1,
+    gap: SPACING.sm,
+  },
+  accountActionText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
   // Reading History Styles
   sectionHeaderRow: {
     flexDirection: 'row',
