@@ -367,7 +367,11 @@ export default function ProfileScreen() {
 
         {/* Stats */}
         {progress && (
-          <View style={styles.statsContainer}>
+          <TouchableOpacity 
+            style={styles.statsContainer}
+            onPress={() => router.push('/reading-progress')}
+            data-testid="progress-stats-btn"
+          >
             <View style={styles.statItem}>
               <Text style={styles.statValue}>{progress.reading_streak || 0}</Text>
               <Text style={styles.statLabel}>{t('streak')}</Text>
@@ -382,14 +386,15 @@ export default function ProfileScreen() {
               <Text style={styles.statValue}>{progress.total_journal_entries || 0}</Text>
               <Text style={styles.statLabel}>{t('entries')}</Text>
             </View>
-          </View>
+            <Icon name="chevron-forward" size={20} color={COLORS.textSecondary} style={{ marginLeft: SPACING.sm }} />
+          </TouchableOpacity>
         )}
 
         {/* Reading History Section */}
         <View style={styles.section}>
           <TouchableOpacity 
             style={styles.sectionHeaderRow}
-            onPress={() => setShowHistory(!showHistory)}
+            onPress={() => router.push('/reading-progress')}
             data-testid="reading-history-toggle"
           >
             <Text style={styles.sectionTitle}>{t('readingHistory')}</Text>
