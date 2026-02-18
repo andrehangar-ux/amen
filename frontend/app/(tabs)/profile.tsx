@@ -31,6 +31,8 @@ const translations: Record<string, Record<string, string>> = {
     readCount: 'Letto',
     times: 'volte',
     appFeatures: 'Funzionalità App',
+    myContentSection: 'I Miei Contenuti',
+    myContentDesc: 'Segnalibri, note ed evidenziazioni',
     quizSection: 'Sezione Quiz',
     quizDesc: 'Metti alla prova le tue conoscenze',
     dictionarySection: 'Dizionario Biblico',
