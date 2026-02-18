@@ -81,11 +81,16 @@ export default function HomeScreen() {
   };
 
   const handleMoodSelect = async (mood: string) => {
+    // Reset result and show loading to force UI update
+    setMoodLoading(true);
+    setMoodCheckinResult(null);
     try {
       const result = await api.moodCheckin(mood, currentLanguage);
       setMoodCheckinResult(result);
     } catch (error: any) {
       Alert.alert(t('error'), error.message);
+    } finally {
+      setMoodLoading(false);
     }
   };
 
