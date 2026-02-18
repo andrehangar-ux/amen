@@ -53,6 +53,8 @@ const translations: Record<string, Record<string, string>> = {
     cancel: 'Annulla',
     confirm: 'Conferma',
     version: 'Versione',
+    friendsSection: 'I Miei Amici',
+    friendsDesc: 'Utenti preferiti',
   },
   en: {
     profile: 'Profile',
