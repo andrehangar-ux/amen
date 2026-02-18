@@ -5,78 +5,47 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 
 ## Core Features Implemented
 
-### Funzionalità "Come ti senti oggi?" ✅ AGGIORNATO
-- [x] Versetti dinamici che cambiano ad OGNI TOCCO (random.choice)
-- [x] Mapping chiavi inglesi (happy/hopeful) → italiane (felice/speranzoso)
-- [x] Riflessione AI che cambia ad ogni chiamata
-- [x] Versetti tradotti nella lingua dell'utente (IT/EN/ES/PT/FR/DE)
-- [x] Loading indicator durante il caricamento
+### Eliminazione Note e Segnalibri ✅ NUOVO
+- [x] Eliminazione note dalla Bibbia (icona cestino su ogni nota)
+- [x] Eliminazione segnalibri dalla schermata "I Miei Contenuti"
+- [x] Eliminazione voci dal Diario (già esistente)
+- [x] API DELETE funzionanti per bookmarks e notes
 
-### Progressi di Lettura ✅ AGGIORNATO
-- [x] Nuova schermata dedicata `/reading-progress`
-- [x] Statistiche: giorni consecutivi, capitoli letti, voci diario
-- [x] Cronologia delle letture recenti
-- [x] Link diretto al capitolo nella Bibbia (tocca per leggere)
-- [x] Pulsante "Continua a Leggere"
-- [x] Profilo: stats cliccabili con Link/Pressable per navigazione web
+### I Miei Contenuti ✅
+- [x] Schermata dedicata `/my-content` accessibile dal profilo e menu hamburger
+- [x] Tab Segnalibri: lista con eliminazione
+- [x] Tab Note: lista con eliminazione
+- [x] Tab Evidenziati: versetti colorati
+- [x] Link "Vai al versetto" per ogni elemento
+
+### Icone "Torna Indietro" ✅ STANDARDIZZATE
+- [x] Tutti i file usano il componente `Icon` invece di `Ionicons`
+- [x] File corretti: maps.tsx, search.tsx, faq.tsx, feelings.tsx, flashcards.tsx, groups.tsx, events.tsx, mood-checkin.tsx, notifications.tsx
+- [x] Icona `arrow-back` uniforme in tutte le schermate
+
+### Menu Hamburger ✅
+- [x] Aggiunto "I Miei Contenuti" al menu hamburger
 - [x] Traduzioni in 6 lingue
 
-### Authentication & Account
-- [x] Login/Register con email/password
-- [x] Google OAuth (Web + Mobile bridge redirect)
-- [x] Reset Password via email (Resend)
-- [x] Login automatico, Logout, Elimina Account (GDPR)
-
-### Bible Reading
-- [x] Lettura capitoli in italiano + multilingua
-- [x] Versetto del Giorno (con rotazione giornaliera e traduzione)
-- [x] Text-to-Speech, Strumenti di studio IA
-- [x] Pulsante "Condividi" con fallback web
-
-### Community & Chat
-- [x] Messaggi community pubblici multilingua
-- [x] Utenti online con pallino verde
-- [x] Chat privata 1:1 tra utenti
-- [x] Lista conversazioni
-
-### Dizionario Biblico
-- [x] 106+ termini ebraici/greci/aramaici
-- [x] Ricerca AI con GPT-4o
-- [x] Preferiti e Flashcards
-
-### I Miei Contenuti
-- [x] Tab Segnalibri/Note/Evidenziati
-- [x] Azioni: elimina, vai al versetto
-
-### I Miei Amici
-- [x] Gestione utenti preferiti
-- [x] Stato online/offline
-- [x] Chat diretta
-
-## API Endpoints
-
-### Mood Checkin
-- `POST /api/ai/mood-checkin` - Restituisce versetto E riflessione diversi ad ogni chiamata
-  - Input: `{mood: "happy"|"hopeful"|..., language: "it"|"en"|...}`
-  - Output: `{mood, verse: {ref, text}, reflection, language}`
-  - Mapping automatico chiavi EN→lingua selezionata
-
-### Progress
-- `GET /api/progress` - Statistiche generali
-- `GET /api/progress/reading/history?limit=N` - Cronologia letture
+### Altre Funzionalità Implementate
+- [x] Versetti dinamici ad ogni tocco
+- [x] Mapping chiavi mood EN→IT
+- [x] Schermata progressi lettura
+- [x] Lista amici/utenti preferiti
+- [x] Chat privata
+- [x] Dizionario AI
+- [x] Reset password
 
 ## Recent Changes
 
-### 2026-02-18 - Session 6
-- **Mood Checkin Fix**: Aggiunto mapping chiavi inglesi (happy, hopeful, sad...) → chiavi per lingua (felice, speranzoso, triste...)
-- **Versetti dinamici**: Ogni tocco = versetto diverso + riflessione AI diversa
-- **Loading state**: Aggiunto indicatore durante il caricamento
-- **Schermata Progressi**: Nuova `/reading-progress` con stats e cronologia
-- **Profilo**: Stats cliccabili con Link/Pressable per web compatibility
-- **Link Bibbia**: Ogni voce cronologia porta al capitolo
+### 2026-02-18 - Session 6 (Current)
+- **Eliminazione contenuti**: Aggiunta funzione `handleDeleteNote` in bible.tsx con conferma
+- **Menu Hamburger**: Aggiunto link "I Miei Contenuti"
+- **Standardizzazione icone**: Migrati tutti i file da `Ionicons` a `Icon` component
+- **Schermate corrette**: 9 file aggiornati per uniformità icone
 
 ### Testing Results
-- iteration_26: 100% backend (12/12), 70% frontend (navigation fix applied)
+- iteration_27: Backend 100%, Frontend OK
 
 ## Test Credentials
 - Email: testbible@cibospirituale.it
