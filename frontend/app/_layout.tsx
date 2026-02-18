@@ -51,6 +51,7 @@ export default function RootLayout() {
         />
         <Stack.Screen name="mood-checkin" options={{ presentation: 'modal' }} />
         <Stack.Screen name="my-content" options={{ presentation: 'card' }} />
+        <Stack.Screen name="friends" options={{ presentation: 'card' }} />
         <Stack.Screen name="community" options={{ presentation: 'card' }} />
         <Stack.Screen name="donate" options={{ presentation: 'card' }} />
       </Stack>
