@@ -157,7 +157,7 @@ class MoodCheckIn(BaseModel):
 class MoodRequest(BaseModel):
     mood: str
     language: str = "it"
-    exclude_ref: str = None
+    exclude_ref: Optional[str] = None
 
 class Progress(BaseModel):
     user_id: str
