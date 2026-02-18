@@ -49,7 +49,13 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
   - Backend logout ora legge token sia da cookie che da Authorization header
   - Frontend: redirect robusto con `window.location.href = '/'` su web
   - Frontend: handleDeleteAccount ora chiama anche logout() per pulizia completa
-- **Testing**: 100% backend (10/10 test), 100% frontend (UI verificata)
+- **Feature: Reset Statistiche Individuali**
+  - Backend: POST /api/progress/reset/{stat_type} con 4 tipi: streak, chapters, journal, history
+  - Frontend: pulsanti "Azzera" sotto ogni stat card nella schermata progressi
+  - Frontend: pulsante "Azzera Cronologia" nella sezione letture recenti
+  - Conferma obbligatoria prima di ogni reset
+  - Ogni reset è indipendente e non tocca le altre statistiche
+- **Testing**: 100% backend (13/13 test reset + 10/10 mood), 100% frontend
 
 ### 2026-02-18 - Session 6
 - Toolbar Bibbia con pulsante bookmark
