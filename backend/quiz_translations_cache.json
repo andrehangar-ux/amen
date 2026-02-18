@@ -1701,5 +1701,395 @@
     "correct": 1,
     "explanation": "Tesis [672-674].",
     "verse_ref": ""
+  },
+  "q56_es": {
+    "id": "q56",
+    "question": "¿En qué isla fue exiliado el autor del Apocalipsis?",
+    "options": [
+      "Chipre",
+      "Creta",
+      "Patmos",
+      "Malta"
+    ],
+    "correct": 2,
+    "explanation": "Aquí recibió las visiones proféticas [144-146].",
+    "verse_ref": ""
+  },
+  "q57_es": {
+    "id": "q57",
+    "question": "¿Cuál es el número simbólico de los redimidos en el Apocalipsis?",
+    "options": [
+      "1000",
+      "12000",
+      "144000",
+      "7000"
+    ],
+    "correct": 2,
+    "explanation": "Plenitud del pueblo de Dios (12x12x1000) [147-149].",
+    "verse_ref": ""
+  },
+  "q95_es": {
+    "id": "q95",
+    "question": "¿Qué indica el Alfa y el Omega?",
+    "options": [
+      "Principio y fin",
+      "Amor",
+      "Sufrimiento",
+      "Justicia"
+    ],
+    "correct": 0,
+    "explanation": "Atributo de Dios y de Cristo en el Apocalipsis [248, 249].",
+    "verse_ref": ""
+  },
+  "q162_es": {
+    "id": "q162",
+    "question": "Bestia del mar (Ap)?",
+    "options": [
+      "León",
+      "Poder perseguidor",
+      "Dragón",
+      "Cordero"
+    ],
+    "correct": 2,
+    "explanation": "Imperio hostil a Dios [336-338].",
+    "verse_ref": ""
+  },
+  "q163_es": {
+    "id": "q163",
+    "question": "¿Patmos?",
+    "options": [
+      "Chipre",
+      "Creta",
+      "Patmos",
+      "Malta"
+    ],
+    "correct": 2,
+    "explanation": "Isla de la revelación [145, 339].",
+    "verse_ref": ""
+  },
+  "q164_es": {
+    "id": "q164",
+    "question": "¿Quién es digno de abrir los sellos?",
+    "options": [
+      "Moisés",
+      "Ángel",
+      "El Cordero (Cristo)",
+      "Juan"
+    ],
+    "correct": 2,
+    "explanation": "Vencedor por la sangre [340, 341].",
+    "verse_ref": ""
+  },
+  "q165_es": {
+    "id": "q165",
+    "question": "Nueva Jerusalén?",
+    "options": [
+      "Ciudad de David",
+      "Morada eterna de Dios",
+      "Fortaleza",
+      "Sueño"
+    ],
+    "correct": 1,
+    "explanation": "Final del Apocalipsis [342, 343].",
+    "verse_ref": ""
+  },
+  "q174_es": {
+    "id": "q174",
+    "question": "Apocalipsis - Etimología?",
+    "options": [
+      "Fin",
+      "Revelación",
+      "Destrucción",
+      "Miedo"
+    ],
+    "correct": 1,
+    "explanation": "Desvelamiento [230, 353].",
+    "verse_ref": ""
+  },
+  "q267_es": {
+    "id": "q267",
+    "question": "Apocalipsis?",
+    "options": [
+      "Destrucción",
+      "Fin",
+      "Revelación",
+      "Terremoto"
+    ],
+    "correct": 2,
+    "explanation": "Quitar el velo [185, 488, 489].",
+    "verse_ref": ""
+  },
+  "q268_es": {
+    "id": "q268",
+    "question": "Juan en...?",
+    "options": [
+      "Chipre",
+      "Creta",
+      "Patmos",
+      "Malta"
+    ],
+    "correct": 2,
+    "explanation": "Desterrado [339, 490, 491].",
+    "verse_ref": ""
+  },
+  "q270_es": {
+    "id": "q270",
+    "question": "¿Quién abre los sellos?",
+    "options": [
+      "Moisés",
+      "Ángel",
+      "El Cordero (Cristo)",
+      "Juan"
+    ],
+    "correct": 2,
+    "explanation": "Inmolado [341, 493].",
+    "verse_ref": ""
+  },
+  "q273_es": {
+    "id": "q273",
+    "question": "¿Bestia del mar?",
+    "options": [
+      "Terremoto",
+      "Imperio perseguidor",
+      "Muerte",
+      "Mar"
+    ],
+    "correct": 1,
+    "explanation": "Roma pagana [496, 497].",
+    "verse_ref": ""
+  },
+  "q275_es": {
+    "id": "q275",
+    "question": "Invocación final?",
+    "options": [
+      "Ayuda",
+      "Justicia",
+      "Ven, Señor Jesús",
+      "Paz"
+    ],
+    "correct": 2,
+    "explanation": "Maranà-thà [151, 499].",
+    "verse_ref": ""
+  },
+  "q299_es": {
+    "id": "q299",
+    "question": "¿Maranata?",
+    "options": [
+      "Dios ayúdanos",
+      "¡Ven, Señor!",
+      "Aquí",
+      "Paz"
+    ],
+    "correct": 1,
+    "explanation": "NT [151, 152, 523].",
+    "verse_ref": ""
+  },
+  "q320_es": {
+    "id": "q320",
+    "question": "Apocalipsis a...?",
+    "options": [
+      "Chipre",
+      "Creta",
+      "Patmos",
+      "Malta"
+    ],
+    "correct": 2,
+    "explanation": "Juan [339, 491, 553].",
+    "verse_ref": ""
+  },
+  "q352_es": {
+    "id": "q352",
+    "question": "¿Quién es digno de abrir los sellos del libro?",
+    "options": [
+      "Moisés",
+      "Ángel",
+      "El Cordero",
+      "Juan"
+    ],
+    "correct": 2,
+    "explanation": "Apocalipsis [331, 576, 577].",
+    "verse_ref": ""
+  },
+  "q364_es": {
+    "id": "q364",
+    "question": "¿Quién es el autor del Apocalipsis?",
+    "options": [
+      "Pablo",
+      "Lucas",
+      "Juan",
+      "Pedro"
+    ],
+    "correct": 2,
+    "explanation": "Patmos [588, 589].",
+    "verse_ref": ""
+  },
+  "q396_es": {
+    "id": "q396",
+    "question": "Juan - Sellos?",
+    "options": [
+      "Isaías",
+      "Jeremías",
+      "Ezequiel",
+      "Juan"
+    ],
+    "correct": 3,
+    "explanation": "Apocalipsis [331, 493, 621].",
+    "verse_ref": ""
+  },
+  "q426_es": {
+    "id": "q426",
+    "question": "Habla, Señor...?",
+    "options": [
+      "¿Quién es?",
+      "Habla, Señor, tu siervo escucha",
+      "Aquí estoy",
+      "No"
+    ],
+    "correct": 1,
+    "explanation": "Vocación [666-668].",
+    "verse_ref": ""
+  },
+  "q445_es": {
+    "id": "q445",
+    "question": "Apocalipsis?",
+    "options": [
+      "Fin",
+      "Destrucción",
+      "Revelación",
+      "Terremoto"
+    ],
+    "correct": 2,
+    "explanation": "Velo [353, 489, 692].",
+    "verse_ref": ""
+  },
+  "q477_es": {
+    "id": "q477",
+    "question": "¿Sangre de cordero?",
+    "options": [
+      "Oración",
+      "Sangre en los dinteles",
+      "Ayuno",
+      "Incienso"
+    ],
+    "correct": 1,
+    "explanation": "Pascua [77, 216].",
+    "verse_ref": ""
+  },
+  "q575_es": {
+    "id": "q575",
+    "question": "¿Qué significa 'Apocalipsis'?",
+    "options": [
+      "Fin del mundo",
+      "Destrucción",
+      "Revelación (Desvelamiento)",
+      "Terremoto"
+    ],
+    "correct": 2,
+    "explanation": "Quitar el velo [110, 111].",
+    "verse_ref": ""
+  },
+  "q577_es": {
+    "id": "q577",
+    "question": "¿Quién es digno de abrir los siete sellos?",
+    "options": [
+      "Moisés",
+      "Ángel",
+      "El Cordero (Cristo)",
+      "Juan"
+    ],
+    "correct": 2,
+    "explanation": "Inmolado y victorioso [114, 115].",
+    "verse_ref": ""
+  },
+  "q579_es": {
+    "id": "q579",
+    "question": "¿Qué simboliza la Bestia del mar?",
+    "options": [
+      "Terremoto",
+      "Poder político perseguidor",
+      "Muerte",
+      "Mar"
+    ],
+    "correct": 1,
+    "explanation": "El imperio hostil a Dios [118, 119].",
+    "verse_ref": ""
+  },
+  "q608_es": {
+    "id": "q608",
+    "question": "¿Qué sangre salvó a los Hebreos?",
+    "options": [
+      "Toro",
+      "Cordero",
+      "Cabra",
+      "Paloma"
+    ],
+    "correct": 1,
+    "explanation": "En los dinteles de las puertas [160].",
+    "verse_ref": ""
+  },
+  "q679_es": {
+    "id": "q679",
+    "question": "¿Significado de 'Apokalypsis'?",
+    "options": [
+      "Fin",
+      "Revelación",
+      "Terremoto",
+      "Miedo"
+    ],
+    "correct": 1,
+    "explanation": "NT Juan [110, 111].",
+    "verse_ref": ""
+  },
+  "q680_es": {
+    "id": "q680",
+    "question": "¿Isla de visiones de Juan?",
+    "options": [
+      "Chipre",
+      "Creta",
+      "Patmos",
+      "Malta"
+    ],
+    "correct": 2,
+    "explanation": "Apocalipsis [112, 113].",
+    "verse_ref": ""
+  },
+  "q691_es": {
+    "id": "q691",
+    "question": "Significado de 'Maraná-thá'?",
+    "options": [
+      "Ayuda",
+      "Ven Señor",
+      "Aquí",
+      "Paz"
+    ],
+    "correct": 1,
+    "explanation": "Invocación final [20, 259].",
+    "verse_ref": ""
+  },
+  "q719_es": {
+    "id": "q719",
+    "question": "Nueva Jerusalén?",
+    "options": [
+      "Ciudad de David",
+      "Morada eterna de Dios",
+      "Fortaleza",
+      "Sueño"
+    ],
+    "correct": 1,
+    "explanation": "Final del Apocalipsis [300, 301].",
+    "verse_ref": ""
+  },
+  "q737_es": {
+    "id": "q737",
+    "question": "¿Significado de 'Maraná-tha'?",
+    "options": [
+      "Ayuda",
+      "Ven Señor",
+      "Aquí",
+      "Paz"
+    ],
+    "correct": 1,
+    "explanation": "Invocación NT [120, 259].",
+    "verse_ref": ""
   }
 }
