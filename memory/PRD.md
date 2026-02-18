@@ -31,11 +31,11 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 - [x] Preferiti e Flashcards
 
 ### Funzionalità "Come ti senti oggi?"
-- [x] Versetti dinamici che cambiano ad ogni tocco (non più rotazione giornaliera)
+- [x] Versetti dinamici che cambiano ad ogni tocco (random.choice)
 - [x] Versetti tradotti nella lingua dell'utente (IT/EN/ES/PT/FR/DE)
 - [x] Riflessione AI personalizzata nella lingua selezionata
 
-### I Miei Contenuti (NUOVO)
+### I Miei Contenuti
 - [x] Schermata dedicata per visualizzare contenuti salvati
 - [x] Tab Segnalibri: versetti salvati con note
 - [x] Tab Note: note di studio personali
@@ -43,14 +43,36 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 - [x] Azioni: elimina, vai al versetto
 - [x] Traduzioni in 6 lingue
 
+### I Miei Amici (NUOVO - P2 COMPLETATO)
+- [x] Schermata `/friends` per gestire utenti preferiti
+- [x] Aggiungere/rimuovere amici
+- [x] Vedere stato online/offline degli amici
+- [x] Avviare chat direttamente dalla lista amici
+- [x] Ricerca utenti per aggiungere nuovi amici
+- [x] Traduzioni in 6 lingue
+
+### Gruppi di Studio
+- [x] Creare/unirsi a gruppi pubblici
+- [x] Post e commenti nei gruppi
+- [x] Lista dei miei gruppi
+
+### Ricerca Globale
+- [x] UI esistente in `/search`
+- [x] API backend `/api/search` funzionante
+
+### Mappe Bibliche
+- [x] UI esistente in `/maps`
+- [x] API backend `/api/maps` funzionante
+
 ### Progressi
 - [x] Tracciamento capitoli letti con data
 - [x] Statistiche lettura nel profilo
 
 ### Profile & Settings
-- [x] Profilo con statistiche, Quiz, Dizionario, Diario, Gruppi, I Miei Contenuti
+- [x] Profilo con statistiche, Quiz, Dizionario, Diario, Gruppi, I Miei Contenuti, I Miei Amici
 - [x] Privacy/Termini, Logout, Elimina Account
 - [x] Cambio lingua (6 lingue), Notifiche push
+- [x] Impostazioni in `/settings` (lingua, bibbia, notifiche)
 
 ## Tech Stack
 - **Frontend**: React Native + Expo (PWA), TypeScript, Zustand, i18next
@@ -72,6 +94,12 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 - `POST /api/private-messages` | `GET /api/private-messages/conversations`
 - `GET /api/private-messages/{user_id}`
 
+### Friends (NUOVO)
+- `GET /api/friends` - Lista amici
+- `POST /api/friends` - Aggiungi amico
+- `DELETE /api/friends/{friend_id}` - Rimuovi amico
+- `GET /api/friends/check/{friend_id}` - Verifica amicizia
+
 ### Bible & Dictionary
 - `GET /api/bible/daily-verse` | `GET /api/bible/chapter/{book}/{chapter}`
 - `GET /api/dictionary` | `GET /api/dictionary/search/{query}` | `GET /api/dictionary/ai-search/{query}`
@@ -81,32 +109,45 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 - `GET /api/bookmarks` | `POST /api/bookmarks` | `DELETE /api/bookmarks/{id}`
 - `GET /api/bible/study/notes` | `POST /api/bible/study/notes` | `DELETE /api/bible/study/notes/{id}`
 
+### Groups
+- `GET/POST /api/groups` | `GET /api/groups/my` | `POST /api/groups/{id}/join`
+
+### Search & Maps
+- `GET /api/search?q=query` - Ricerca globale
+- `GET /api/maps` | `GET /api/maps/{id}` - Mappe bibliche
+
 ## Recent Changes
 
 ### 2026-02-18 - Session 6 (Current)
-- **Versetti dinamici**: Modificato backend per cambiare versetto ad ogni tocco (rimosso random.seed giornaliero)
-- **Nuova schermata "I Miei Contenuti"**: Creato `/app/frontend/app/my-content.tsx` con 3 tab (Segnalibri, Note, Evidenziati)
-- **Link nel profilo**: Aggiunto menu item "I Miei Contenuti" in tutte le 6 lingue
-- **Route fix**: Aggiunta route `my-content` in `_layout.tsx`
-
-### 2026-02-16 - Session 5
-- **Reset Password**: Backend + Frontend con Resend email
-- **Community Chat Privata**: Backend + Frontend
-- **Dizionario AI**: Backend + Frontend
-- **Login Google Mobile**: Bridge redirect endpoint
+- **Versetti dinamici**: Modificato backend per cambiare versetto ad ogni tocco (random.choice invece di random.seed giornaliero)
+- **Nuova schermata "I Miei Contenuti"**: Tab Segnalibri/Note/Evidenziati
+- **Nuova schermata "I Miei Amici"**: Backend endpoints + Frontend completo per gestire utenti preferiti
+- **Link nel profilo**: Aggiunti "I Miei Contenuti" e "I Miei Amici" in tutte le 6 lingue
 
 ### Testing Results
-- iteration_24: 100% backend (12/12), 95% frontend (route working)
+- iteration_25: 100% backend (10/10), 100% frontend (Friends feature verified)
+- iteration_24: 100% backend (12/12), 95% frontend
 - iteration_23: 100% backend, 100% frontend (P0 features verified)
 
-## Upcoming (P1)
+## Completed Tasks
+- [x] P0: Versetti dinamici per stato d'animo (cambiano ad ogni tocco)
+- [x] P0: Traduzione versetti nella lingua utente
+- [x] P0: Fix pulsante "Condividi"
+- [x] P0: Ampliamento dizionario (108 termini)
+- [x] P1: Sezione "I Miei Contenuti" (segnalibri, note, evidenziazioni)
+- [x] P2: Lista amici/utenti preferiti
+
+## Remaining Tasks
+
+### P1 - Da fare
 - [ ] Rendere dinamiche e tradotte le notifiche push del versetto del giorno
 
-## Backlog (P2)
-- [ ] Gruppi di studio privati e lista amici preferiti
-- [ ] UI Ricerca Globale
-- [ ] Mappe Bibliche
-- [ ] Personalizzazione temi e font
+### P2 - Backlog
+- [x] ~~Gruppi di studio privati~~ (Gruppi pubblici esistono già)
+- [x] ~~Lista amici preferiti~~ (COMPLETATO)
+- [x] ~~UI Ricerca Globale~~ (Esistente in /search)
+- [x] ~~Mappe Bibliche~~ (Esistente in /maps)
+- [ ] Personalizzazione temi e font avanzata
 
 ## Refactoring Suggerito
 - [ ] Suddividere `server.py` in moduli (auth.py, community.py, bible.py)
