@@ -420,6 +420,13 @@ export default function ProfileScreen() {
           <Text style={styles.sectionTitle}>{t('appFeatures')}</Text>
           <View style={styles.menuCard}>
             <MenuItem
+              icon="bookmark"
+              title={t('myContentSection') || 'I Miei Contenuti'}
+              subtitle={t('myContentDesc') || 'Segnalibri, note ed evidenziazioni'}
+              onPress={() => router.push('/my-content')}
+              color="#E91E63"
+            />
+            <MenuItem
               icon="school"
               title={t('quizSection')}
               subtitle={t('quizDesc')}
