@@ -65,9 +65,11 @@ class TestFriendsAPI:
             assert "name" in friend, "Friend should have name"
             print(f"  Friend example: {friend.get('name')} - {friend.get('user_id')}")
     
-    def test_get_friends_unauthenticated(self, session):
+    def test_get_friends_unauthenticated(self):
         """Test GET /api/friends without auth - should fail"""
-        response = session.get(f"{BASE_URL}/api/friends")
+        # Use a fresh session without cookies to test unauth
+        fresh_session = requests.Session()
+        response = fresh_session.get(f"{BASE_URL}/api/friends")
         
         assert response.status_code == 401, f"Expected 401, got {response.status_code}"
         print("✓ GET /api/friends requires authentication")
@@ -160,11 +162,13 @@ class TestMoodCheckinDynamicVerses:
         assert response.status_code == 200, f"Expected 200, got {response.status_code}: {response.text}"
         
         data = response.json()
-        assert "verse_reference" in data, "Response should have verse_reference"
-        assert "verse_text" in data, "Response should have verse_text"
+        # API returns verse as object with ref and text
+        assert "verse" in data, "Response should have verse object"
+        assert "ref" in data["verse"], "Verse should have ref"
+        assert "text" in data["verse"], "Verse should have text"
         assert "reflection" in data, "Response should have reflection"
         
-        print(f"✓ Mood-checkin returned: {data.get('verse_reference')}")
+        print(f"✓ Mood-checkin returned: {data['verse'].get('ref')}")
         return data
     
     def test_mood_checkin_dynamic_verses(self, session, auth_headers):
@@ -183,7 +187,8 @@ class TestMoodCheckinDynamicVerses:
             assert response.status_code == 200, f"Call {i+1} failed: {response.status_code}"
             
             data = response.json()
-            verse_ref = data.get("verse_reference")
+            # verse is an object with ref and text
+            verse_ref = data.get("verse", {}).get("ref")
             verses_seen.add(verse_ref)
             print(f"  Call {i+1}: {verse_ref}")
         
