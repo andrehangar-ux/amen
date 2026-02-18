@@ -108,7 +108,7 @@ export default function NotificationsScreen() {
       onPress={() => handleNotificationPress(item)}
     >
       <View style={[styles.iconContainer, { backgroundColor: getColor(item.notification_type) + '20' }]}>
-        <Ionicons name={getIcon(item.notification_type) as any} size={22} color={getColor(item.notification_type)} />
+        <Icon name={getIcon(item.notification_type) as any} size={22} color={getColor(item.notification_type)} />
       </View>
       <View style={styles.notificationContent}>
         <Text style={styles.notificationTitle}>{item.title}</Text>
@@ -128,7 +128,7 @@ export default function NotificationsScreen() {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={24} color={COLORS.text} />
+          <Icon name="arrow-back" size={24} color={COLORS.text} />
         </TouchableOpacity>
         <View style={styles.headerContent}>
           <Text style={styles.headerTitle}>Notifiche</Text>
@@ -159,7 +159,7 @@ export default function NotificationsScreen() {
           }
           ListEmptyComponent={
             <View style={styles.emptyContainer}>
-              <Ionicons name="notifications-off-outline" size={64} color={COLORS.textMuted} />
+              <Icon name="notifications-off-outline" size={64} color={COLORS.textMuted} />
               <Text style={styles.emptyText}>Nessuna notifica</Text>
             </View>
           }

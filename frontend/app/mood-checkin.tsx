@@ -37,7 +37,7 @@ export default function MoodCheckinScreen() {
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.closeButton} onPress={() => router.back()}>
-            <Ionicons name="close" size={24} color={COLORS.text} />
+            <Icon name="close" size={24} color={COLORS.text} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>La Tua Parola</Text>
           <View style={{ width: 40 }} />
@@ -51,7 +51,7 @@ export default function MoodCheckinScreen() {
 
           <View style={styles.reflectionCard}>
             <View style={styles.reflectionHeader}>
-              <Ionicons name="sparkles" size={20} color={COLORS.accent} />
+              <Icon name="sparkles" size={20} color={COLORS.accent} />
               <Text style={styles.reflectionTitle}>Riflessione per Te</Text>
             </View>
             <Text style={styles.reflectionText}>{result.reflection}</Text>
@@ -72,7 +72,7 @@ export default function MoodCheckinScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.closeButton} onPress={() => router.back()}>
-          <Ionicons name="close" size={24} color={COLORS.text} />
+          <Icon name="close" size={24} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Come Ti Senti?</Text>
         <View style={{ width: 40 }} />
