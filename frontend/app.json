@@ -10,10 +10,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.amen.spiritualapp",
-      "infoPlist": {
-        "NSMicrophoneUsageDescription": "Per registrare messaggi audio"
-      }
+      "bundleIdentifier": "com.amen.spiritualapp"
     },
     "android": {
       "package": "com.amen.spiritualapp",
@@ -22,9 +19,7 @@
         "backgroundColor": "#4A7C59"
       },
       "edgeToEdgeEnabled": true,
-      "permissions": [
-        "android.permission.RECORD_AUDIO"
-      ]
+      "permissions": []
     },
     "web": {
       "bundler": "metro",
