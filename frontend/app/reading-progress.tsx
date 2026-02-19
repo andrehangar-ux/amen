@@ -272,7 +272,7 @@ export default function ReadingProgressScreen() {
                 <View style={styles.historyContent}>
                   <Text style={styles.historyTitle}>{item.book} {item.chapter}</Text>
                   <Text style={styles.historyDate}>
-                    {t('readOn')} {formatDate(item.read_at)}
+                    {t('readOn')} {formatDate(item.last_read)}
                     {item.read_count && item.read_count > 1 && (
                       <Text style={styles.readCount}> • {item.read_count}x {t('times')}</Text>
                     )}
