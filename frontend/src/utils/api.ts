@@ -72,7 +72,11 @@ export const api = {
   moodCheckin: (mood: string, language?: string) => 
     api.fetch('/api/ai/mood-checkin', {
       method: 'POST',
-      body: JSON.stringify({ mood, language }),
+      headers: {
+        'Cache-Control': 'no-cache, no-store',
+        'Pragma': 'no-cache',
+      },
+      body: JSON.stringify({ mood, language, _t: Date.now() }),
     }),
 
   // Journal
