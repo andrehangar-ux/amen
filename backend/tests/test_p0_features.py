@@ -10,7 +10,7 @@ import requests
 import os
 import hashlib
 
-BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://verse-mood-check.preview.emergentagent.com')
+BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://spirit-study-update.preview.emergentagent.com')
 if BASE_URL.endswith('/'):
     BASE_URL = BASE_URL.rstrip('/')
 

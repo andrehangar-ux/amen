@@ -12,7 +12,7 @@ import requests
 import os
 import time
 
-BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://verse-mood-check.preview.emergentagent.com').rstrip('/')
+BASE_URL = os.environ.get('EXPO_PUBLIC_BACKEND_URL', 'https://spirit-study-update.preview.emergentagent.com').rstrip('/')
 
 # Test credentials
 TEST_EMAIL = "testbible@cibospirituale.it"
