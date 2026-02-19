@@ -127,6 +127,8 @@ export const translations: Record<string, Record<string, string>> = {
     advancedComingSoon: 'Quiz avanzati disponibili prossimamente',
     // Bible screen
     loadingBooks: 'Caricamento libri...',
+    previousChapter: 'Precedente',
+    nextChapter: 'Successivo',
     noBooksAvailable: 'Nessun libro disponibile',
     retry: 'Riprova',
     chapters: 'capitoli',
