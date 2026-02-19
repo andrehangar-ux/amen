@@ -18,7 +18,7 @@ import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../src/utils/theme';
 interface ReadingEntry {
   book: string;
   chapter: number;
-  read_at: string;
+  last_read: string;
   read_count?: number;
 }
 
