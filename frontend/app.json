@@ -12,8 +12,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.amen.spiritualapp",
       "infoPlist": {
-        "NSMicrophoneUsageDescription": "Per registrare messaggi audio",
-        "NSCameraUsageDescription": "Per condividere foto nella community"
+        "NSMicrophoneUsageDescription": "Per registrare messaggi audio"
       }
     },
     "android": {
@@ -24,8 +23,7 @@
       },
       "edgeToEdgeEnabled": true,
       "permissions": [
-        "android.permission.RECORD_AUDIO",
-        "android.permission.CAMERA"
+        "android.permission.RECORD_AUDIO"
       ]
     },
     "web": {
