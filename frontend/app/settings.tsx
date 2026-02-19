@@ -255,7 +255,10 @@ export default function SettingsScreen() {
         </TouchableOpacity>
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+      <ScrollView 
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={true}
+      >
         <Text style={styles.sectionTitle}>{t('profile')}</Text>
         <View style={styles.card}>
           <Text style={styles.fieldLabel}>{t('yourName')}</Text>
