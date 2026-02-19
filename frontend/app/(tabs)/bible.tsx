@@ -280,6 +280,59 @@ export default function BibleScreen() {
     setShowStudyTools(true);
   };
 
+  // Navigation between chapters
+  const goToPreviousChapter = () => {
+    if (!selectedBook || !selectedChapter) return;
+    
+    if (selectedChapter > 1) {
+      // Go to previous chapter in same book
+      setSelectedChapter(selectedChapter - 1);
+      loadChapter(selectedBook.name, selectedChapter - 1);
+    } else {
+      // Go to last chapter of previous book
+      const currentBookIndex = books.findIndex(b => b.name === selectedBook.name);
+      if (currentBookIndex > 0) {
+        const prevBook = books[currentBookIndex - 1];
+        setSelectedBook(prevBook);
+        setSelectedChapter(prevBook.chapters);
+        loadChapter(prevBook.name, prevBook.chapters);
+      }
+    }
+  };
+
+  const goToNextChapter = () => {
+    if (!selectedBook || !selectedChapter) return;
+    
+    if (selectedChapter < selectedBook.chapters) {
+      // Go to next chapter in same book
+      setSelectedChapter(selectedChapter + 1);
+      loadChapter(selectedBook.name, selectedChapter + 1);
+    } else {
+      // Go to first chapter of next book
+      const currentBookIndex = books.findIndex(b => b.name === selectedBook.name);
+      if (currentBookIndex < books.length - 1) {
+        const nextBook = books[currentBookIndex + 1];
+        setSelectedBook(nextBook);
+        setSelectedChapter(1);
+        loadChapter(nextBook.name, 1);
+      }
+    }
+  };
+
+  const canGoPrevious = () => {
+    if (!selectedBook || !selectedChapter) return false;
+    if (selectedChapter > 1) return true;
+    const currentBookIndex = books.findIndex(b => b.name === selectedBook.name);
+    return currentBookIndex > 0;
+  };
+
+  const canGoNext = () => {
+    if (!selectedBook || !selectedChapter) return false;
+    if (selectedChapter < selectedBook.chapters) return true;
+    const currentBookIndex = books.findIndex(b => b.name === selectedBook.name);
+    return currentBookIndex < books.length - 1;
+  };
+
   // Toggle highlight for a verse
   const toggleHighlight = (verseNum: number) => {
     setHighlightedVerses(prev => {
