@@ -391,6 +391,8 @@ export const translations: Record<string, Record<string, string>> = {
     advancedComingSoon: 'Quiz avanzados disponibles próximamente',
     // Bible screen
     loadingBooks: 'Cargando libros...',
+    previousChapter: 'Anterior',
+    nextChapter: 'Siguiente',
     noBooksAvailable: 'No hay libros disponibles',
     retry: 'Reintentar',
     chapters: 'capítulos',
@@ -644,6 +646,8 @@ export const translations: Record<string, Record<string, string>> = {
     advancedComingSoon: 'Advanced quizzes coming soon',
     // Bible screen
     loadingBooks: 'Loading books...',
+    previousChapter: 'Previous',
+    nextChapter: 'Next',
     noBooksAvailable: 'No books available',
     retry: 'Retry',
     chapters: 'chapters',
