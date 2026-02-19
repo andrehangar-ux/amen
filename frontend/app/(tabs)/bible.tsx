@@ -1835,6 +1835,49 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
     marginLeft: SPACING.sm,
   },
+  // Chapter Navigation
+  chapterNavigation: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: COLORS.card,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.border,
+    paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.md,
+  },
+  navButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.xs,
+    flex: 1,
+  },
+  navButtonDisabled: {
+    opacity: 0.4,
+  },
+  navButtonText: {
+    fontSize: 12,
+    color: COLORS.primary,
+    fontWeight: '500',
+  },
+  navButtonTextDisabled: {
+    color: COLORS.textMuted,
+  },
+  chapterSelectorBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.background,
+    paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.md,
+    borderRadius: BORDER_RADIUS.md,
+    gap: SPACING.xs,
+  },
+  chapterSelectorText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: COLORS.text,
+  },
   // Study Modal
   studyModal: {
     backgroundColor: COLORS.card,
