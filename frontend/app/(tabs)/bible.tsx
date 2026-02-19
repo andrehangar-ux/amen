@@ -874,6 +874,44 @@ export default function BibleScreen() {
           <Text style={styles.addNoteText}>{t('addChapterNote')}</Text>
         </TouchableOpacity>
       </ScrollView>
+
+      {/* Chapter Navigation Buttons */}
+      <View style={styles.chapterNavigation}>
+        <TouchableOpacity 
+          style={[styles.navButton, !canGoPrevious() && styles.navButtonDisabled]}
+          onPress={goToPreviousChapter}
+          disabled={!canGoPrevious()}
+          data-testid="prev-chapter-btn"
+        >
+          <Icon name="chevron-back" size={24} color={canGoPrevious() ? COLORS.primary : COLORS.textMuted} />
+          <Text style={[styles.navButtonText, !canGoPrevious() && styles.navButtonTextDisabled]}>
+            {t('previousChapter') || 'Capitolo precedente'}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+          style={styles.chapterSelectorBtn}
+          onPress={() => setView('chapters')}
+          data-testid="chapter-selector-btn"
+        >
+          <Text style={styles.chapterSelectorText}>
+            {selectedBook?.name} {selectedChapter}
+          </Text>
+          <Icon name="list" size={18} color={COLORS.text} />
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+          style={[styles.navButton, !canGoNext() && styles.navButtonDisabled]}
+          onPress={goToNextChapter}
+          disabled={!canGoNext()}
+          data-testid="next-chapter-btn"
+        >
+          <Text style={[styles.navButtonText, !canGoNext() && styles.navButtonTextDisabled]}>
+            {t('nextChapter') || 'Capitolo successivo'}
+          </Text>
+          <Icon name="chevron-forward" size={24} color={canGoNext() ? COLORS.primary : COLORS.textMuted} />
+        </TouchableOpacity>
+      </View>
       </View>
     );
   };
