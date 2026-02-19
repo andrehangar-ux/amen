@@ -85,10 +85,20 @@ export default function HomeScreen() {
     // Reset result and show loading to force UI update
     setMoodLoading(true);
     setMoodCheckinResult(null);
+    
     try {
+      // Add timestamp to avoid any potential caching
+      const timestamp = Date.now();
+      console.log(`[MoodCheckin] Requesting new verse for mood: ${mood}, timestamp: ${timestamp}`);
+      
       const result = await api.moodCheckin(mood, currentLanguage);
-      setMoodCheckinResult(result);
+      
+      console.log(`[MoodCheckin] Received verse: ${result?.verse?.ref}`);
+      
+      // Add timestamp to result to force React to see it as a new object
+      setMoodCheckinResult({ ...result, _timestamp: timestamp });
     } catch (error: any) {
+      console.error(`[MoodCheckin] Error:`, error);
       Alert.alert(t('error'), error.message);
     } finally {
       setMoodLoading(false);
