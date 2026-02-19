@@ -5,6 +5,13 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 
 ## Core Features Implemented
 
+### Navigazione Capitoli Bibbia ✅ (AGGIUNTO 2026-02-19)
+- [x] Pulsanti "Precedente" / "Successivo" per navigare tra capitoli
+- [x] Pulsante centrale per tornare alla selezione capitoli
+- [x] Navigazione automatica tra libri (fine libro → inizio libro successivo)
+- [x] Pulsanti disabilitati ai limiti (inizio/fine Bibbia)
+- [x] Traduzioni multilingua (IT, ES, EN)
+
 ### Toolbar Bibbia con accesso "I Miei Contenuti" ✅
 - [x] Pulsante bookmark nel toolbar lettura Bibbia
 - [x] Apre schermata /my-content per vedere note, segnalibri, evidenziazioni
@@ -41,7 +48,11 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 
 ## Recent Changes
 
-### 2026-02-19 - Session 7 (Current)
+### 2026-02-19 - Session 8 (Current)
+- **Navigazione Capitoli**: Aggiunti pulsanti "Precedente" / "Successivo" nella lettura Bibbia
+- **Fix Android Permissions**: Rimosso permesso CAMERA non utilizzato da app.json
+
+### 2026-02-19 - Session 7
 - **BUG FIX CRITICO**: Versetti mood selector ora cambiano ad ogni click
   - Aggiunto timestamp anti-cache nella chiamata API
   - Aggiunto Cache-Control: no-cache headers
