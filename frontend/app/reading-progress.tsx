@@ -162,14 +162,23 @@ export default function ReadingProgressScreen() {
   };
 
   const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const locale = currentLanguage === 'en' ? 'en-US' : `${currentLanguage}-${currentLanguage.toUpperCase()}`;
-    return date.toLocaleDateString(locale, { 
-      day: 'numeric', 
-      month: 'short',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    if (!dateString) return '-';
+    
+    try {
+      const date = new Date(dateString);
+      // Check if date is valid
+      if (isNaN(date.getTime())) return '-';
+      
+      const locale = currentLanguage === 'en' ? 'en-US' : `${currentLanguage}-${currentLanguage.toUpperCase()}`;
+      return date.toLocaleDateString(locale, { 
+        day: 'numeric', 
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    } catch {
+      return '-';
+    }
   };
 
   if (loading) {
