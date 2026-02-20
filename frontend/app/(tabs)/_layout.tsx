@@ -7,28 +7,17 @@ import { COLORS, SHADOWS } from '../../src/utils/theme';
 
 export default function TabLayout() {
   return (
-    <View style={styles.container}>
-      <Tabs
-        screenOptions={{
-          headerShown: false,
-          tabBarStyle: { display: 'none' },
-        }}
-      >
-        <Tabs.Screen name="index" />
-        <Tabs.Screen name="bible" />
-        <Tabs.Screen name="journal" />
-        <Tabs.Screen name="profile" />
-      </Tabs>
-      
-      {/* Floating AI Assistant Button */}
-      <TouchableOpacity
-        style={styles.fab}
-        onPress={() => router.push('/assistant')}
-        activeOpacity={0.8}
-      >
-        <Icon name="chatbubbles" size={28} color="#fff" />
-      </TouchableOpacity>
-    </View>
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: { display: 'none' },
+      }}
+    >
+      <Tabs.Screen name="index" />
+      <Tabs.Screen name="bible" />
+      <Tabs.Screen name="journal" />
+      <Tabs.Screen name="profile" />
+    </Tabs>
   );
 }
 
