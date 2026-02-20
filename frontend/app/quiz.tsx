@@ -659,9 +659,6 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     color: COLORS.text,
     textAlign: 'center',
-    lineHeight: 28,
-    includeFontPadding: false,
-    textAlignVertical: 'center',
   },
   title: {
     fontSize: 20,
