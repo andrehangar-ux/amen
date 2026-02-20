@@ -212,7 +212,7 @@ export default function QuizScreen() {
   const getFilteredList = () => {
     if (selectedCategory === 'tematici') return categories;
     if (selectedCategory === 'classici') return baseTopics;
-    return advancedTopics;
+    return advancedSubcategories;
   };
   const filteredTopics = getFilteredList();
 
