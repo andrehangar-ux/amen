@@ -3868,6 +3868,19 @@ async def get_quiz_categories(lang: str = "it"):
     """Get all quiz categories (1000 questions organized in 33 themes)"""
     return get_quiz_1000_topics(lang)
 
+@api_router.get("/quiz/advanced-subcategories")
+async def get_advanced_subcategories_endpoint(lang: str = "it"):
+    """Get the 6 advanced subcategory topics"""
+    return get_advanced_subcategory_topics(lang)
+
+@api_router.get("/quiz/advanced-subcategory/{subcategory_id}")
+async def get_advanced_subcategory_endpoint(subcategory_id: str, lang: str = "it"):
+    """Get quiz questions for a specific advanced subcategory"""
+    quiz = get_advanced_subcategory_quiz(subcategory_id, lang)
+    if not quiz:
+        raise HTTPException(status_code=404, detail="Sottocategoria non trovata")
+    return quiz
+
 @api_router.get("/quiz/category/{category_id}")
 async def get_quiz_by_category(category_id: str, lang: str = "it", translate: bool = True):
     """Get quiz questions for a specific category with optional translation"""
