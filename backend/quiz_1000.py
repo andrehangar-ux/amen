@@ -507,6 +507,56 @@ def get_quiz_1000_by_category(category_id: str, lang: str = 'it') -> dict:
         'lang': lang
     }
 
+# ==================== ADVANCED SUBCATEGORIES ====================
+
+_advanced_subcategories_cache = None
+
+def load_advanced_subcategories():
+    """Load advanced subcategories from JSON"""
+    if ADVANCED_SUBCATEGORIES_FILE.exists():
+        with open(ADVANCED_SUBCATEGORIES_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+def get_advanced_subcategories():
+    """Get advanced subcategories data with caching"""
+    global _advanced_subcategories_cache
+    if _advanced_subcategories_cache is None:
+        _advanced_subcategories_cache = load_advanced_subcategories()
+    return _advanced_subcategories_cache
+
+def get_advanced_subcategory_topics(lang: str = 'it') -> list:
+    """Get list of advanced subcategory topics"""
+    data = get_advanced_subcategories()
+    topics = []
+    for sub_id, sub_data in data.items():
+        trans = ADVANCED_SUBCATEGORY_TRANSLATIONS.get(sub_id, {}).get(lang, {})
+        title = trans.get('title', sub_data.get('title', sub_id))
+        desc = trans.get('desc', sub_data.get('description', ''))
+        topics.append({
+            'id': f"adv_{sub_id}",
+            'title': title,
+            'description': desc,
+            'questions_count': len(sub_data.get('questions', [])),
+            'difficulty': 'advanced'
+        })
+    return topics
+
+def get_advanced_subcategory_quiz(subcategory_id: str, lang: str = 'it') -> dict:
+    """Get quiz questions for a specific advanced subcategory"""
+    data = get_advanced_subcategories()
+    sub_id = subcategory_id.replace('adv_', '')
+    if sub_id not in data:
+        return None
+    sub_data = data[sub_id]
+    trans = ADVANCED_SUBCATEGORY_TRANSLATIONS.get(sub_id, {}).get(lang, {})
+    title = trans.get('title', sub_data.get('title', sub_id))
+    return {
+        'id': f"adv_{sub_id}",
+        'title': title,
+        'questions': sub_data.get('questions', [])
+    }
+
 async def get_quiz_1000_by_category_translated(category_id: str, lang: str = 'it') -> dict:
     """Get quiz questions for a specific category with translation support"""
     data = get_quiz_1000_data()
