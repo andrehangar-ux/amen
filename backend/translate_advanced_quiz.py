@@ -34,7 +34,7 @@ async def translate_question_batch(questions: list, target_lang: str) -> list:
         api_key=EMERGENT_LLM_KEY,
         session_id=f"batch_translate_{target_lang}_{questions[0]['id']}",
         system_message=f"Translate the following Bible quiz questions from Italian to {LANG_NAMES[target_lang]}. Return a JSON array with objects containing: id, question, options (array of 4 strings), explanation. Keep biblical names and references in their common {LANG_NAMES[target_lang]} form. Return ONLY the JSON array, no markdown."
-    ).with_model("openai", "gpt-4o")
+    ).with_model("openai", "gpt-4o-mini")
     
     response = await chat.send_message(UserMessage(text=batch_text))
     
