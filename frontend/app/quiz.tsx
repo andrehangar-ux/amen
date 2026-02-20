@@ -551,13 +551,21 @@ export default function QuizScreen() {
           </View>
         )}
 
+        {/* Info banner for advanced quizzes */}
+        {selectedCategory === 'avanzato' && advancedSubcategories.length > 0 && (
+          <View style={[styles.infoBanner, { backgroundColor: COLORS.accent + '15' }]}>
+            <Icon name="school" size={20} color={COLORS.accent} />
+            <Text style={[styles.infoBannerText, { color: COLORS.accent }]}>
+              6 quiz - 48 {t('questions')}
+            </Text>
+          </View>
+        )}
+
         {filteredTopics.length === 0 ? (
           <View style={styles.emptyContainer}>
             <Icon name="help-circle-outline" size={48} color={COLORS.textMuted} />
             <Text style={styles.emptyText}>
-              {selectedCategory === 'avanzato' 
-                ? t('advancedComingSoon')
-                : t('noQuizzes')}
+              {t('noQuizzes')}
             </Text>
           </View>
         ) : (
@@ -565,7 +573,11 @@ export default function QuizScreen() {
             <TouchableOpacity
               key={topic.id}
               style={styles.topicCard}
-              onPress={() => selectedCategory === 'tematici' ? startCategoryQuiz(topic.id) : startQuiz(topic.id)}
+              onPress={() => {
+                if (selectedCategory === 'avanzato') startAdvancedQuiz(topic.id);
+                else if (selectedCategory === 'tematici') startCategoryQuiz(topic.id);
+                else startQuiz(topic.id);
+              }}
               data-testid={`quiz-topic-${topic.id}`}
             >
               <View style={[
