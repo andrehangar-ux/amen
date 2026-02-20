@@ -126,11 +126,11 @@ export const FloatingMenu: React.FC = () => {
 const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
-    bottom: Platform.OS === 'ios' ? 32 : 20,
+    bottom: Platform.OS === 'ios' ? 100 : 90,
     right: 20,
-    width: 52,
-    height: 52,
-    borderRadius: 26,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     backgroundColor: COLORS.primary,
     justifyContent: 'center',
     alignItems: 'center',
