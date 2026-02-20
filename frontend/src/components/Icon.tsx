@@ -246,12 +246,17 @@ interface IconProps {
 }
 
 export const Icon: React.FC<IconProps> = ({ name, size = 24, color = '#000', style }) => {
-  // On native platforms, always use Ionicons
+  // On native platforms, wrap in View with pointerEvents="none"
+  // so touch events pass through to parent TouchableOpacity/Pressable
   if (Platform.OS !== 'web') {
-    return <Ionicons name={name as any} size={size} color={color} style={style} />;
+    return (
+      <View pointerEvents="none" style={[{ width: size, height: size, alignItems: 'center', justifyContent: 'center' }, style]}>
+        <Ionicons name={name as any} size={size} color={color} />
+      </View>
+    );
   }
   
-  // On web, use emoji fallback
+  // On web, use emoji fallback with pointerEvents: 'none'
   const emoji = emojiMap[name];
   
   if (emoji) {
@@ -262,7 +267,7 @@ export const Icon: React.FC<IconProps> = ({ name, size = 24, color = '#000', sty
     );
   }
   
-  // Fallback to Ionicons (might not render correctly but try anyway)
+  // Fallback to Ionicons
   return <Ionicons name={name as any} size={size} color={color} style={[{ pointerEvents: 'none' }, style]} />;
 };
 
