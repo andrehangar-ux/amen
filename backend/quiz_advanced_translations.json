@@ -1805,6 +1805,1210 @@
           "explanation": "Sanders und die Neue Perspektive auf Paulus haben argumentiert, dass der Judaismus des 1. Jahrhunderts nicht legalistischer Verdienstglaube, sondern 'Bundesnomismus' war."
         }
       ]
+    },
+    "fr": {
+      "questions": [
+        {
+          "id": "tnt_1",
+          "question": "Le terme grec \"Kenosis\" (Philippiens 2:7) décrit théologiquement :",
+          "options": [
+            "L'ascension au ciel du Christ.",
+            "Le vide des prérogatives divines dans l'incarnation.",
+            "La plénitude de la grâce reçue par les croyants.",
+            "Le jugement final des nations."
+          ],
+          "correct": 1,
+          "explanation": "La kenosis (du grec 'vidage') fait référence à l'acte du Christ de 'se vider' en prenant la forme d'un serviteur."
+        },
+        {
+          "id": "tnt_2",
+          "question": "Que signifie le terme \"Kerygma\" ?",
+          "options": [
+            "Le manuel de discipline d'une communauté.",
+            "Le noyau central de l'annonce chrétienne primitive (mort et résurrection du Christ).",
+            "L'ensemble des lois morales de la Torah.",
+            "La structure architecturale d'une basilique."
+          ],
+          "correct": 1,
+          "explanation": "Kerygma (grec 'proclamation') désigne le noyau essentiel de la prédication apostolique : mort, sépulture et résurrection du Christ."
+        },
+        {
+          "id": "tnt_3",
+          "question": "Que signifie le terme \"Parousie\" ?",
+          "options": [
+            "La mort d'un apôtre.",
+            "La venue/retour glorieux du Christ à la fin des temps.",
+            "Le banquet eucharistique.",
+            "La prédication dans le temple."
+          ],
+          "correct": 1,
+          "explanation": "Parousie (grec 'présence, venue') dans le NT indique la seconde venue glorieuse du Christ à la fin des temps."
+        },
+        {
+          "id": "tnt_4",
+          "question": "En théologie, l'\"Escatologie Réalisée\" soutient que :",
+          "options": [
+            "Le Royaume de Dieu est entièrement dans le futur.",
+            "Le Royaume de Dieu est déjà présent et agissant à travers la venue de Jésus.",
+            "Le monde finira demain.",
+            "Il n'existe pas de vie après la mort."
+          ],
+          "correct": 1,
+          "explanation": "L'eschatologie réalisée (C.H. Dodd) souligne qu'en Jésus, les réalités eschatologiques sont déjà présentes : le Royaume est venu."
+        },
+        {
+          "id": "tnt_5",
+          "question": "Le \"Logos\" dans le prologue de Jean a des racines philosophiques et théologiques dans :",
+          "options": [
+            "Uniquement dans la philosophie stoïcienne grecque.",
+            "Uniquement dans la 'Sagesse' personnifiée de l'AT.",
+            "À la fois dans le concept grec de raison universelle et dans la 'Parole' créatrice hébraïque.",
+            "Exclusivement dans le mysticisme égyptien."
+          ],
+          "correct": 2,
+          "explanation": "Le Logos johannique intègre le concept philosophique grec de la raison cosmique avec la tradition hébraïque de la Parole créatrice de Dieu."
+        },
+        {
+          "id": "tnt_6",
+          "question": "Dans Romains 3:25, le terme \"Ilastérion\" se réfère à :",
+          "options": [
+            "Le couvercle de l'Arche de l'Alliance (Propitiatoire).",
+            "L'autel des holocaustes.",
+            "La porte du Temple.",
+            "Le calice de la dernière cène."
+          ],
+          "correct": 0,
+          "explanation": "Hilastérion dans le grec de la LXX traduit le 'kapporet', le couvercle de l'Arche où avait lieu l'aspersion du sang le Jour de l'Expiation."
+        },
+        {
+          "id": "tnt_7",
+          "question": "Le concept de \"Christologie par le bas\" part de l'étude de :",
+          "options": [
+            "La préexistence du Logos en Dieu.",
+            "L'humanité historique de Jésus et son parcours vers la divinité.",
+            "Les prophéties messianiques d'Isaïe.",
+            "La hiérarchie angélique."
+          ],
+          "correct": 1,
+          "explanation": "La christologie 'par le bas' part de l'humanité historique de Jésus et progresse vers la confession de sa divinité."
+        },
+        {
+          "id": "tnt_8",
+          "question": "La \"Nouvelle Perspective sur Paul\" (E.P. Sanders) soutient que :",
+          "options": [
+            "Paul détestait le judaïsme.",
+            "Le judaïsme du Ier siècle n'était pas une religion de 'mérites légaux' mais de 'nomisme d'alliance'.",
+            "Paul n'a jamais écrit la Lettre aux Romains.",
+            "La justification par la foi est une invention de Luther."
+          ],
+          "correct": 1,
+          "explanation": "Sanders et la Nouvelle Perspective sur Paul ont soutenu que le judaïsme du Ier siècle n'était pas un légalisme méritocratique mais 'covenantal nomism'."
+        }
+      ]
+    },
+    "pt": {
+      "questions": [
+        {
+          "id": "tnt_1",
+          "question": "O termo grego \"Kenosis\" (Filipenses 2:7) descreve teologicamente:",
+          "options": [
+            "A ascensão ao céu de Cristo.",
+            "O esvaziamento das prerrogativas divinas na encarnação.",
+            "A plenitude da graça recebida pelos crentes.",
+            "O juízo final das nações."
+          ],
+          "correct": 1,
+          "explanation": "A kenosis (do grego 'esvaziamento') refere-se ao ato de Cristo de 'esvaziar-se' assumindo a forma de servo."
+        },
+        {
+          "id": "tnt_2",
+          "question": "O que indica o termo \"Kerygma\"?",
+          "options": [
+            "O manual de disciplina de uma comunidade.",
+            "O núcleo central do anúncio cristão primitivo (morte e ressurreição de Cristo).",
+            "O conjunto das leis morais da Torah.",
+            "A estrutura arquitetônica de uma basílica."
+          ],
+          "correct": 1,
+          "explanation": "Kerygma (grego 'proclamação') indica o núcleo essencial da pregação apostólica: morte, sepultamento e ressurreição de Cristo."
+        },
+        {
+          "id": "tnt_3",
+          "question": "O que indica o termo \"Parusia\"?",
+          "options": [
+            "A morte de um apóstolo.",
+            "A vinda/retorno glorioso de Cristo no fim dos tempos.",
+            "O banquete eucarístico.",
+            "A pregação no templo."
+          ],
+          "correct": 1,
+          "explanation": "Parousia (grego 'presença, vinda') no NT indica a segunda vinda gloriosa de Cristo no fim dos tempos."
+        },
+        {
+          "id": "tnt_4",
+          "question": "Em teologia, a \"Escatologia Realizada\" sustenta que:",
+          "options": [
+            "O Reino de Deus está inteiramente no futuro.",
+            "O Reino de Deus já está presente e atuante através da vinda de Jesus.",
+            "O mundo acabará amanhã.",
+            "Não existe vida após a morte."
+          ],
+          "correct": 1,
+          "explanation": "A escatologia realizada (C.H. Dodd) enfatiza que em Jesus as realidades escatológicas já estão presentes: o Reino já veio."
+        },
+        {
+          "id": "tnt_5",
+          "question": "O \"Logos\" no prólogo de João tem raízes filosóficas e teológicas em:",
+          "options": [
+            "Somente na filosofia estóica grega.",
+            "Somente na 'Sabedoria' personificada do AT.",
+            "Tanto no conceito grego de razão universal quanto na 'Palavra' criadora hebraica.",
+            "Exclusivamente no misticismo egípcio."
+          ],
+          "correct": 2,
+          "explanation": "O Logos joanino integra o conceito filosófico grego da razão cósmica com a tradição hebraica da Palavra criadora de Deus."
+        },
+        {
+          "id": "tnt_6",
+          "question": "Em Romanos 3:25, o termo \"Ilastérion\" se refere a:",
+          "options": [
+            "A tampa da Arca da Aliança (Propiciatório).",
+            "O altar dos holocaustos.",
+            "A porta do Templo.",
+            "O cálice da última ceia."
+          ],
+          "correct": 0,
+          "explanation": "Hilasterion no grego da LXX traduz o 'kapporet', a tampa da Arca onde acontecia a aspersão do sangue no Dia da Expiação."
+        },
+        {
+          "id": "tnt_7",
+          "question": "O conceito de \"Cristologia de baixo para cima\" parte do estudo de:",
+          "options": [
+            "A pré-existência do Logos em Deus.",
+            "A humanidade histórica de Jesus e seu caminho em direção à divindade.",
+            "As profecias messiânicas de Isaías.",
+            "A hierarquia angelical."
+          ],
+          "correct": 1,
+          "explanation": "A cristologia 'de baixo' parte da humanidade histórica de Jesus e avança para a confissão de sua divindade."
+        },
+        {
+          "id": "tnt_8",
+          "question": "A \"Nova Perspectiva sobre Paulo\" (E.P. Sanders) sustenta que:",
+          "options": [
+            "Paulo odiava o judaísmo.",
+            "O judaísmo do primeiro século não era uma religião de 'méritos jurídicos' mas de 'nomismo da aliança'.",
+            "Paulo nunca escreveu a Carta aos Romanos.",
+            "A justificação pela fé é uma invenção de Lutero."
+          ],
+          "correct": 1,
+          "explanation": "Sanders e a Nova Perspectiva sobre Paulo sustentaram que o judaísmo do I século não era legalismo meritocrático, mas 'nomismo da aliança'."
+        }
+      ]
+    }
+  },
+  "teologia_at": {
+    "en": {
+      "questions": [
+        {
+          "id": "tat_1",
+          "question": "What is the main interest of the 'P' source (Priestly) attributed in the documentary hypothesis (JEDP)?",
+          "options": [
+            "Anthropomorphic narratives and patriarchal legends.",
+            "Genealogies, cultic laws, chronology, and rituals.",
+            "Centralized reforms in the temple of Jerusalem.",
+            "Prophetic traditions of the Northern Kingdom."
+          ],
+          "correct": 1,
+          "explanation": "The P source (Priestly Code) is characterized by its interest in cultic issues, genealogies, precise chronologies, and ritual norms."
+        },
+        {
+          "id": "tat_2",
+          "question": "What is the main characteristic of the 'Q Source' (Quelle)?",
+          "options": [
+            "It is a complete gospel of passion and resurrection.",
+            "It is a hypothetical collection of sayings of Jesus (logia) used by Matthew and Luke.",
+            "It is the logbook of the apostle Peter.",
+            "It is the Aramaic translation of the Gospel of Mark."
+          ],
+          "correct": 1,
+          "explanation": "Q (from the German Quelle, 'source') is a hypothetical source containing primarily sayings of Jesus, used by Matthew and Luke alongside Mark."
+        },
+        {
+          "id": "tat_3",
+          "question": "The 'Theology of the Remnant' is typical of which prophetic realm?",
+          "options": [
+            "Only of the minor prophets.",
+            "Of the hope that a small faithful group survives judgment to rebuild Israel.",
+            "Of the belief that all Israel will be saved without judgment.",
+            "Of total rejection of the Davidic promises."
+          ],
+          "correct": 1,
+          "explanation": "The theology of the remnant expresses the hope that a faithful core of Israel survives divine judgment and becomes the seed of restoration."
+        },
+        {
+          "id": "tat_4",
+          "question": "The archetype of the 'Man of Sorrows' is found in the book of:",
+          "options": [
+            "Jeremiah",
+            "Daniel",
+            "Isaiah (Servant Songs)",
+            "Ezekiel"
+          ],
+          "correct": 2,
+          "explanation": "The 'Man of Sorrows' appears in Isaiah 53:3, in the fourth Song of the Suffering Servant (Isa 52:13-53:12)."
+        },
+        {
+          "id": "tat_5",
+          "question": "What is the meaning of the name 'YHWH' revealed in Exodus 3:14?",
+          "options": [
+            "'The God of the strong.'",
+            "'I am who I am' (or 'I will be what I will be').",
+            "'The creator of the sun.'",
+            "'The judge of the nations.'"
+          ],
+          "correct": 1,
+          "explanation": "In Exodus 3:14, God reveals His name as 'Ehyeh asher ehyeh' ('I am who I am'), linked to the verb 'to be'."
+        },
+        {
+          "id": "tat_6",
+          "question": "Which book of the Old Testament is the only one that never explicitly mentions the name of God?",
+          "options": [
+            "Song of Songs",
+            "Esther",
+            "Ecclesiastes",
+            "Exodus"
+          ],
+          "correct": 1,
+          "explanation": "The book of Esther is the only book in the Hebrew Bible that does not explicitly mention the name of God."
+        },
+        {
+          "id": "tat_7",
+          "question": "What is meant by 'Deuteronomist' (Dtr)?",
+          "options": [
+            "One who writes the book of Deuteronomy.",
+            "A theological school responsible for the redaction of the history of Israel (from Joshua to Kings).",
+            "An opponent of the priests.",
+            "A translator of the Septuagint."
+          ],
+          "correct": 1,
+          "explanation": "The Deuteronomist school is responsible for the redaction of the historical work that spans from Deuteronomy to 2 Kings."
+        },
+        {
+          "id": "tat_8",
+          "question": "The system of 'vicarious sacrifice' in the Old Testament reaches its ritual peak in which feast?",
+          "options": [
+            "Passover (Pesach)",
+            "Day of Atonement (Yom Kippur)",
+            "Feast of Tabernacles (Sukkot)",
+            "Pentecost (Shavuot)"
+          ],
+          "correct": 1,
+          "explanation": "Yom Kippur (Day of Atonement) was the culmination of the sacrificial system when the high priest entered the Holy of Holies."
+        }
+      ]
+    },
+    "es": {
+      "questions": [
+        {
+          "id": "tat_1",
+          "question": "¿A qué interés principal se atribuye la fuente \"P\" (Sacerdotal) según la hipótesis documental (JEDP)?",
+          "options": [
+            "Narraciones antropomórficas y leyendas patriarcales.",
+            "Genealogías, leyes cultuales, cronología y rituales.",
+            "Reformas centralizadas en el templo de Jerusalén.",
+            "Tradiciones proféticas del Reino del Norte."
+          ],
+          "correct": 1,
+          "explanation": "La fuente P (Código Sacerdotal) se caracteriza por su interés en cuestiones cultuales, genealogías, cronologías precisas y normas rituales."
+        },
+        {
+          "id": "tat_2",
+          "question": "¿Cuál es la característica principal de la \"Fuente Q\" (Quelle)?",
+          "options": [
+            "Es un evangelio completo de pasión y resurrección.",
+            "Es una colección hipotética de dichos de Jesús (logia) utilizada por Mateo y Lucas.",
+            "Es el diario de a bordo del apóstol Pedro.",
+            "Es la traducción aramea del Evangelio de Marcos."
+          ],
+          "correct": 1,
+          "explanation": "Q (del alemán Quelle, 'fuente') es una fuente hipotética que contiene principalmente dichos de Jesús, utilizada por Mateo y Lucas además de Marcos."
+        },
+        {
+          "id": "tat_3",
+          "question": "¿La \"Teología del Resto\" es típica de qué ámbito profético?",
+          "options": [
+            "Sólo de los profetas menores.",
+            "De la esperanza de que un pequeño grupo fiel sobreviva al juicio para reconstruir Israel.",
+            "De la convicción de que todo Israel será salvo sin juicio.",
+            "Del rechazo total de las promesas davídicas."
+          ],
+          "correct": 1,
+          "explanation": "La teología del resto expresa la esperanza de que un núcleo fiel de Israel sobreviva al juicio divino y se convierta en la semilla de la restauración."
+        },
+        {
+          "id": "tat_4",
+          "question": "¿En qué libro se encuentra el arquetipo del \"Hombre de Dolores\"?",
+          "options": [
+            "Jeremías",
+            "Daniel",
+            "Isaías (Cantos del Siervo)",
+            "Ezequiel"
+          ],
+          "correct": 2,
+          "explanation": "El 'Hombre de dolores' aparece en Isaías 53:3, en el cuarto Canto del Siervo Sufriente (Is 52:13-53:12)."
+        },
+        {
+          "id": "tat_5",
+          "question": "¿Cuál es el significado del nombre \"YHWH\" revelado en Éxodo 3:14?",
+          "options": [
+            "'El Dios de los fuertes'.",
+            "'Yo soy el que soy' (o 'Yo seré lo que seré').",
+            "'El creador del sol'.",
+            "'El juez de las naciones'."
+          ],
+          "correct": 1,
+          "explanation": "En Éxodo 3:14, Dios revela su nombre como 'Ehyeh asher ehyeh' ('Yo soy el que soy'), ligado al verbo 'ser'."
+        },
+        {
+          "id": "tat_6",
+          "question": "¿Cuál libro del AT es el único que nunca menciona explícitamente el nombre de Dios?",
+          "options": [
+            "Cantar de los Cantares",
+            "Ester",
+            "Qohelet",
+            "Éxodo"
+          ],
+          "correct": 1,
+          "explanation": "El libro de Ester es el único libro de la Biblia hebrea que no menciona explícitamente el nombre de Dios."
+        },
+        {
+          "id": "tat_7",
+          "question": "¿Qué se entiende por \"Deuteronomista\" (Dtr)?",
+          "options": [
+            "Quien escribe el libro del Deuteronomio.",
+            "Una escuela teológica responsable de la redacción de la historia de Israel (desde Josué hasta Reyes).",
+            "Un opositor de los sacerdotes.",
+            "Un traductor de la Septuaginta."
+          ],
+          "correct": 1,
+          "explanation": "La escuela deuteronomista es responsable de la redacción de la obra histórica que va desde Deuteronomio hasta 2 Reyes."
+        },
+        {
+          "id": "tat_8",
+          "question": "¿El sistema de \"sacrificio vicario\" en el AT alcanza su ápice ritual en qué festividad?",
+          "options": [
+            "Pascua (Pesach)",
+            "Día de la Expiación (Yom Kipur)",
+            "Fiesta de las Cabañas (Sukkot)",
+            "Pentecostés (Shavuot)"
+          ],
+          "correct": 1,
+          "explanation": "El Yom Kipur (Día de la Expiación) era el culmen del sistema sacrificial, cuando el sumo sacerdote entraba en el Santo de los Santos."
+        }
+      ]
+    },
+    "de": {
+      "questions": [
+        {
+          "id": "tat_1",
+          "question": "Welchem Hauptinteresse wird die 'P'-Quelle (Priestercodex) in der dokumentarischen Hypothese (JEDP) zugeschrieben?",
+          "options": [
+            "Anthropomorphe Erzählungen und patriarchale Legenden.",
+            "Genealogien, kultische Gesetze, Chronologie und Rituale.",
+            "Zentralisierte Reformen im Tempel von Jerusalem.",
+            "Prophetische Traditionen des Nordreichs."
+          ],
+          "correct": 1,
+          "explanation": "Die P-Quelle (Priestercodex) zeichnet sich durch ihr Interesse an kultischen Fragen, Genealogien, präziser Chronologie und rituellen Normen aus."
+        },
+        {
+          "id": "tat_2",
+          "question": "Was ist das Hauptmerkmal der 'Q'-Quelle (Quelle)?",
+          "options": [
+            "Es ist ein vollständiges Evangelium der Passion und Auferstehung.",
+            "Es ist eine hypothetische Sammlung von Aussprüchen Jesu (Logion), die von Matthäus und Lukas verwendet wird.",
+            "Es ist das Logbuch des Apostels Petrus.",
+            "Es ist die aramäische Übersetzung des Markus-Evangeliums."
+          ],
+          "correct": 1,
+          "explanation": "Q (vom deutschen Quelle, 'Quelle') ist eine hypothetische Quelle, die hauptsächlich Aussprüche Jesu enthält und von Matthäus und Lukas zusätzlich zu Markus verwendet wird."
+        },
+        {
+          "id": "tat_3",
+          "question": "Die 'Theologie des Restes' ist typisch für welches prophetische Gebiet?",
+          "options": [
+            "Nur für die kleinen Propheten.",
+            "Für die Hoffnung, dass eine kleine treue Gruppe das Gericht übersteht, um Israel wieder aufzubauen.",
+            "Für die Überzeugung, dass ganz Israel ohne Gericht gerettet wird.",
+            "Für die vollständige Ablehnung der davidischen Verheißungen."
+          ],
+          "correct": 1,
+          "explanation": "Die Theologie des Restes drückt die Hoffnung aus, dass ein treuer Kern von Israel das göttliche Gericht übersteht und der Samen der Wiederherstellung wird."
+        },
+        {
+          "id": "tat_4",
+          "question": "Das Archetyp des 'Menschen der Schmerzen' findet sich im Buch:",
+          "options": [
+            "Jeremia",
+            "Daniel",
+            "Jesaja (Lieder des Leidenden Dieners)",
+            "Ezechiel"
+          ],
+          "correct": 2,
+          "explanation": "Der 'Mensch der Schmerzen' erscheint in Jesaja 53:3, im vierten Lied des leidenden Dieners (Jes 52:13-53:12)."
+        },
+        {
+          "id": "tat_5",
+          "question": "Was bedeutet der Name 'YHWH', der in Exodus 3:14 offenbart wird?",
+          "options": [
+            "'Der Gott der Starken'.",
+            "'Ich bin, der ich bin' (oder 'Ich werde sein, was ich sein werde').",
+            "'Der Schöpfer der Sonne'.",
+            "'Der Richter der Nationen'."
+          ],
+          "correct": 1,
+          "explanation": "In Exodus 3:14 offenbart Gott seinen Namen als 'Ehyeh asher ehyeh' ('Ich bin, der ich bin'), was mit dem Verb 'sein' verbunden ist."
+        },
+        {
+          "id": "tat_6",
+          "question": "Welches Buch des AT erwähnt niemals ausdrücklich den Namen Gottes?",
+          "options": [
+            "Hoheslied",
+            "Esther",
+            "Kohelet",
+            "Exodus"
+          ],
+          "correct": 1,
+          "explanation": "Das Buch Esther ist das einzige Buch der hebräischen Bibel, das den Namen Gottes niemals ausdrücklich erwähnt."
+        },
+        {
+          "id": "tat_7",
+          "question": "Was versteht man unter 'Deuteronomist' (Dtr)?",
+          "options": [
+            "Jemand, der das Buch Deuteronomium schreibt.",
+            "Eine theologische Schule, die für die Redaktion der Geschichte Israels (von Josua bis Könige) verantwortlich ist.",
+            "Ein Widersacher der Priester.",
+            "Ein Übersetzer der Septuaginta."
+          ],
+          "correct": 1,
+          "explanation": "Die deuteronomistische Schule ist verantwortlich für die Redaktion des historischen Werkes von Deuteronomium bis 2. Könige."
+        },
+        {
+          "id": "tat_8",
+          "question": "Das System des 'stellvertretenden Opfers' im AT findet seinen rituellen Höhepunkt in welchem Fest?",
+          "options": [
+            "Passah (Pesach)",
+            "Tag der Versöhnung (Jom Kippur)",
+            "Laubhüttenfest (Sukkot)",
+            "Pfingsten (Schawuot)"
+          ],
+          "correct": 1,
+          "explanation": "Der Jom Kippur (Tag der Versöhnung) war der Höhepunkt des Opfersystems, als der Hohepriester in das Allerheiligste eintrat."
+        }
+      ]
+    },
+    "fr": {
+      "questions": [
+        {
+          "id": "tat_1",
+          "question": "L'hypothèse documentaire (JEDP) attribue la source \"P\" (sacerdotale) à quel intérêt principal?",
+          "options": [
+            "Récits anthropomorphiques et légendes patriarcales.",
+            "Généalogies, lois cultuelles, chronologie et rituels.",
+            "Réformes centralisées dans le temple de Jérusalem.",
+            "Traditions prophétiques du royaume du Nord."
+          ],
+          "correct": 1,
+          "explanation": "La source P (Codex sacerdotal) est caractérisée par son intérêt pour les questions cultuelles, les généalogies, les chronologies précises et les normes rituelles."
+        },
+        {
+          "id": "tat_2",
+          "question": "Quelle est la principale caractéristique de la \"Source Q\" (Quelle)?",
+          "options": [
+            "C'est un évangile complet de passion et de résurrection.",
+            "C'est un recueil hypothétique de paroles de Jésus (logia) utilisé par Matthieu et Luc.",
+            "C'est le journal de bord de l'apôtre Pierre.",
+            "C'est la traduction araméenne de l'évangile de Marc."
+          ],
+          "correct": 1,
+          "explanation": "Q (du allemand Quelle, 'source') est une source hypothétique contenant principalement des paroles de Jésus, utilisée par Matthieu et Luc en plus de Marc."
+        },
+        {
+          "id": "tat_3",
+          "question": "La \"Théologie du Reste\" est typique de quel domaine prophétique?",
+          "options": [
+            "Seulement des prophètes mineurs.",
+            "De l'espoir qu'un petit groupe fidèle survive au jugement pour reconstruire Israël.",
+            "De la conviction que tout Israël sera sauvé sans jugement.",
+            "Du refus total des promesses davidiques."
+          ],
+          "correct": 1,
+          "explanation": "La théologie du reste exprime l'espoir qu'un noyau fidèle d'Israël survive au jugement divin et devienne la semence de la restauration."
+        },
+        {
+          "id": "tat_4",
+          "question": "L'archétype de \"l'Homme de Douleurs\" se trouve dans le livre de:",
+          "options": [
+            "Jérémie",
+            "Daniel",
+            "Isaïe (Chants du Serviteur)",
+            "Ézéchiel"
+          ],
+          "correct": 2,
+          "explanation": "L'Homme de douleurs apparaît dans Ésaïe 53:3, dans le quatrième Cantique du Serviteur Souffrant (Ésaïe 52:13-53:12)."
+        },
+        {
+          "id": "tat_5",
+          "question": "Quelle est la signification du nom \"YHWH\" révélé dans Exode 3:14?",
+          "options": [
+            "'Le Dieu des forts.'",
+            "'Je suis celui qui suis' (ou 'Je serai ce que je serai').",
+            "'Le créateur du soleil.'",
+            "'Le juge des nations.'"
+          ],
+          "correct": 1,
+          "explanation": "Dans Exode 3:14, Dieu révèle son nom comme 'Ehyeh asher ehyeh' ('Je suis celui qui suis'), lié au verbe 'être'."
+        },
+        {
+          "id": "tat_6",
+          "question": "Quel livre de l'AT est le seul à ne jamais mentionner explicitement le nom de Dieu?",
+          "options": [
+            "Cantique des cantiques",
+            "Esther",
+            "Ecclésiaste",
+            "Exode"
+          ],
+          "correct": 1,
+          "explanation": "Le livre d'Esther est le seul livre de la Bible hébraïque qui ne mentionne pas explicitement le nom de Dieu."
+        },
+        {
+          "id": "tat_7",
+          "question": "Que désigne le terme \"Déutéronomiste\" (Dtr)?",
+          "options": [
+            "Celui qui écrit le livre du Deutéronome.",
+            "Une école théologique responsable de la rédaction de l'histoire d'Israël (de Josué à Rois).",
+            "Un opposant des prêtres.",
+            "Un traducteur de la Septante."
+          ],
+          "correct": 1,
+          "explanation": "L'école deutéronomiste est responsable de la rédaction de l'œuvre historique allant du Deutéronome à 2 Rois."
+        },
+        {
+          "id": "tat_8",
+          "question": "Le système de \"sacrifice vicarial\" dans l'AT atteint son apogée rituelle lors de quelle fête?",
+          "options": [
+            "Pâque (Pessah)",
+            "Jour de l'Expiation (Yom Kippour)",
+            "Fête des Cabanes (Souccot)",
+            "Pentecôte (Chavouot)"
+          ],
+          "correct": 1,
+          "explanation": "Le Yom Kippour (Jour de l'Expiation) était le point culminant du système sacrificiel, lorsque le grand prêtre entrait dans le Saint des Saints."
+        }
+      ]
+    },
+    "pt": {
+      "questions": [
+        {
+          "id": "tat_1",
+          "question": "A hipótese documentária (JEDP) atribui a fonte \"P\" (Sacerdotal) a qual interesse principal?",
+          "options": [
+            "Narrativas antropomórficas e lendas patriarcais.",
+            "Genealogias, leis cultuais, cronologia e rituais.",
+            "Reformas centralizadas no templo de Jerusalém.",
+            "Tradições proféticas do Reino do Norte."
+          ],
+          "correct": 1,
+          "explanation": "A fonte P (Código Sacerdotal) é caracterizada pelo interesse em questões cultuais, genealogias, cronologias precisas e normas rituais."
+        },
+        {
+          "id": "tat_2",
+          "question": "Qual é a principal característica da \"Fonte Q\" (Quelle)?",
+          "options": [
+            "É um evangelho completo de paixão e ressurreição.",
+            "É uma coletânea hipotética de ditos de Jesus (logia) usada por Mateus e Lucas.",
+            "É o diário de bordo do apóstolo Pedro.",
+            "É a tradução aramaica do Evangelho de Marcos."
+          ],
+          "correct": 1,
+          "explanation": "Q (do alemão Quelle, 'fonte') é uma fonte hipotética que contém principalmente ditos de Jesus, usada por Mateus e Lucas, além de Marcos."
+        },
+        {
+          "id": "tat_3",
+          "question": "A \"Teologia do Resto\" é típica de qual área profética?",
+          "options": [
+            "Somente dos profetas menores.",
+            "Da esperança de que um pequeno grupo fiel sobreviva ao julgamento para reconstruir Israel.",
+            "Da convicção de que todo Israel será salvo sem julgamento.",
+            "Do rótulo total das promessas davídicas."
+          ],
+          "correct": 1,
+          "explanation": "A teologia do resto expressa a esperança de que um núcleo fiel de Israel sobreviva ao julgamento divino e se torne a semente da restauração."
+        },
+        {
+          "id": "tat_4",
+          "question": "O arquétipo do \"Homem de Dores\" encontra-se no livro de:",
+          "options": [
+            "Jeremias",
+            "Daniel",
+            "Isaías (Cânticos do Servo)",
+            "Ezequiel"
+          ],
+          "correct": 2,
+          "explanation": "O 'Homem de dores' aparece em Isaías 53:3, no quarto Cântico do Servo Sofredor (Is 52:13-53:12)."
+        },
+        {
+          "id": "tat_5",
+          "question": "Qual é o significado do nome \"YHWH\" revelado em Êxodo 3:14?",
+          "options": [
+            "'O Deus dos fortes'.",
+            "'Eu sou aquele que sou' (ou 'Eu serei o que serei').",
+            "'O criador do sol'.",
+            "'O juiz das nações.'."
+          ],
+          "correct": 1,
+          "explanation": "Em Êxodo 3:14, Deus revela seu nome como 'Ehyeh asher ehyeh' ('Eu sou aquele que sou'), ligado ao verbo 'ser'."
+        },
+        {
+          "id": "tat_6",
+          "question": "Qual livro do AT é o único a não mencionar nunca explicitamente o nome de Deus?",
+          "options": [
+            "Cântico dos Cânticos",
+            "Ester",
+            "Qohelet",
+            "Êxodo"
+          ],
+          "correct": 1,
+          "explanation": "O livro de Ester é o único livro da Bíblia hebraica que não menciona explicitamente o nome de Deus."
+        },
+        {
+          "id": "tat_7",
+          "question": "O que se entende por \"Deuteronomista\" (Dtr)?",
+          "options": [
+            "Quem escreve o livro do Deuteronômio.",
+            "Uma escola teológica responsável pela redação da história de Israel (de Josué a Reis).",
+            "Um opositor dos sacerdotes.",
+            "Um tradutor da Septuaginta."
+          ],
+          "correct": 1,
+          "explanation": "A escola deuteronomista é responsável pela redação da obra histórica que vai de Deuteronômio a 2 Reis."
+        },
+        {
+          "id": "tat_8",
+          "question": "O sistema de \"sacrifício vicário\" no AT encontra seu ápice ritual em qual festa?",
+          "options": [
+            "Páscoa (Pesach)",
+            "Dia da Expiação (Yom Kippur)",
+            "Festa das Cabanas (Sukkot)",
+            "Pentecostes (Shavuot)"
+          ],
+          "correct": 1,
+          "explanation": "O Yom Kippur (Dia da Expiação) era o clímax do sistema sacrificial, quando o sumo sacerdote entrava no Santo dos Santos."
+        }
+      ]
+    }
+  },
+  "storia_chiesa": {
+    "en": {
+      "questions": [
+        {
+          "id": "sc_1",
+          "question": "Which 2nd-century heresy claimed that the God of the Old Testament was different and inferior to the Father of Jesus?",
+          "options": [
+            "Gnosticism",
+            "Marcionism",
+            "Arianism",
+            "Montanism"
+          ],
+          "correct": 1,
+          "explanation": "Marcion of Sinope (circa 85-160 AD) taught that the God of the Old Testament was an inferior demiurge, distinct from the God of love revealed by Jesus."
+        },
+        {
+          "id": "sc_2",
+          "question": "The work \"Against Heresies\" (Adversus Haereses) was written by:",
+          "options": [
+            "Augustine of Hippo",
+            "Irenaeus of Lyon",
+            "Justin Martyr",
+            "Origen"
+          ],
+          "correct": 1,
+          "explanation": "Irenaeus of Lyon (circa 130-202 AD) wrote 'Adversus Haereses', a fundamental work against Gnosticism."
+        },
+        {
+          "id": "sc_3",
+          "question": "Who wrote the \"Vulgate\"?",
+          "options": [
+            "Augustine",
+            "Jerome",
+            "Ambrose",
+            "Benedict"
+          ],
+          "correct": 1,
+          "explanation": "St. Jerome (347-420 AD) translated the Bible into Latin (Vulgate) at the request of Pope Damasus I."
+        },
+        {
+          "id": "sc_4",
+          "question": "The term \"Theotokos\" was central to the dispute at the Council of:",
+          "options": [
+            "Nicaea",
+            "Ephesus",
+            "Chalcedon",
+            "Constantinople"
+          ],
+          "correct": 1,
+          "explanation": "The Council of Ephesus (431 AD) defined Mary as 'Theotokos' (Mother of God) against Nestorius."
+        },
+        {
+          "id": "sc_5",
+          "question": "The \"Theology of the Cross\" was contrasted with the \"Theology of Glory\" by:",
+          "options": [
+            "Thomas Aquinas",
+            "Martin Luther",
+            "John Calvin",
+            "Karl Barth"
+          ],
+          "correct": 1,
+          "explanation": "Luther in the Heidelberg Theses (1518) contrasted the theology of the cross with the theology of glory."
+        },
+        {
+          "id": "sc_6",
+          "question": "Who are the \"Essenes\"?",
+          "options": [
+            "Phoenician merchants.",
+            "Jewish ascetic group, often associated with the Qumran community.",
+            "Followers of John the Baptist in Ephesus.",
+            "Roman governors of Judea."
+          ],
+          "correct": 1,
+          "explanation": "The Essenes were an ascetic Jewish sect from the 2nd century BC to the 1st century AD, often identified with the Qumran community."
+        },
+        {
+          "id": "sc_7",
+          "question": "\"The Shepherd of Hermas\" is:",
+          "options": [
+            "A book of the Old Testament.",
+            "A writing of the Apostolic Fathers, very popular in the early Church.",
+            "A medieval commentary.",
+            "A lost parable of Jesus."
+          ],
+          "correct": 1,
+          "explanation": "\"The Shepherd of Hermas\" (2nd century AD) is a Christian apocalyptic writing that was widely read in the early Church."
+        },
+        {
+          "id": "sc_8",
+          "question": "The concept of \"Justification by faith alone\" is the cornerstone of which reform?",
+          "options": [
+            "Catholic Counter-Reformation.",
+            "Protestant Reformation.",
+            "Cluniac Reform.",
+            "Jansenism."
+          ],
+          "correct": 1,
+          "explanation": "'Sola fide' is one of the fundamental principles of the Protestant Reformation, particularly of Luther."
+        }
+      ]
+    },
+    "es": {
+      "questions": [
+        {
+          "id": "sc_1",
+          "question": "¿Qué herejía del siglo II sostenía que el Dios del AT era diferente e inferior al Padre de Jesús?",
+          "options": [
+            "Gnosticismo",
+            "Marcionismo",
+            "Arianismo",
+            "Montanismo"
+          ],
+          "correct": 1,
+          "explanation": "Marción de Sinope (ca. 85-160 d.C.) enseñaba que el Dios del AT era un demiurgo inferior, distinto del Dios de amor revelado por Jesús."
+        },
+        {
+          "id": "sc_2",
+          "question": "La obra 'Contra las herejías' (Adversus Haereses) fue escrita por:",
+          "options": [
+            "Agustín de Hipona",
+            "Ireneo de Lyon",
+            "Justo de Samarcanda",
+            "Orígenes"
+          ],
+          "correct": 1,
+          "explanation": "Ireneo de Lyon (ca. 130-202 d.C.) escribió 'Adversus Haereses', obra fundamental contra el gnosticismo."
+        },
+        {
+          "id": "sc_3",
+          "question": "¿Quién escribió la 'Vulgata'?",
+          "options": [
+            "Agustín",
+            "Jerónimo",
+            "Ambrosio",
+            "Benedicto"
+          ],
+          "correct": 1,
+          "explanation": "San Jerónimo (347-420 d.C.) tradujo la Biblia al latín (Vulgata) por encargo del papa Damaso I."
+        },
+        {
+          "id": "sc_4",
+          "question": "El término 'Theotokos' fue el centro de la disputa en el Concilio de:",
+          "options": [
+            "Nicea",
+            "Éfeso",
+            "Calcedonia",
+            "Constantinopla"
+          ],
+          "correct": 1,
+          "explanation": "El Concilio de Éfeso (431 d.C.) definió a María como 'Theotokos' (Madre de Dios) contra Nestorio."
+        },
+        {
+          "id": "sc_5",
+          "question": "La 'Teología de la Cruz' fue opuesta a la 'Teología de la Gloria' por:",
+          "options": [
+            "Tomás de Aquino",
+            "Martín Lutero",
+            "Juan Calvino",
+            "Karl Barth"
+          ],
+          "correct": 1,
+          "explanation": "Lutero en las Tesis de Heidelberg (1518) opuso la theologia crucis a la theologia gloriae."
+        },
+        {
+          "id": "sc_6",
+          "question": "¿Quiénes son los 'Esénicos'?",
+          "options": [
+            "Comerciantes fenicios.",
+            "Grupo ascético judío, a menudo asociado con la comunidad de Qumrán.",
+            "Seguidores de Juan el Bautista en Éfeso.",
+            "Gobernadores romanos de Judea."
+          ],
+          "correct": 1,
+          "explanation": "Los Esénicos eran una secta judía ascética del siglo II a.C. - I d.C., a menudo identificados con la comunidad de Qumrán."
+        },
+        {
+          "id": "sc_7",
+          "question": "El 'Pastor de Hermas' es:",
+          "options": [
+            "Un libro del Antiguo Testamento.",
+            "Un escrito de los Padres Apostólicos, muy popular en la Iglesia primitiva.",
+            "Un comentario medieval.",
+            "Una parábola perdida de Jesús."
+          ],
+          "correct": 1,
+          "explanation": "El Pastor de Hermas (siglo II d.C.) es un escrito apocalíptico cristiano muy leído en la Iglesia primitiva."
+        },
+        {
+          "id": "sc_8",
+          "question": "El concepto de 'Justificación por sola fe' es el pilar de qué reforma?",
+          "options": [
+            "Contrarreforma católica.",
+            "Reforma Protestante.",
+            "Reforma Cluniacense.",
+            "Jansenismo."
+          ],
+          "correct": 1,
+          "explanation": "La 'sola fide' es uno de los principios fundamentales de la Reforma Protestante, en particular de Lutero."
+        }
+      ]
+    },
+    "de": {
+      "questions": [
+        {
+          "id": "sc_1",
+          "question": "Welche Häresie des 2. Jahrhunderts behauptete, dass der Gott des AT unterschiedlich und minderwertig im Vergleich zum Vater Jesu sei?",
+          "options": [
+            "Gnostizismus",
+            "Marcionismus",
+            "Arianismus",
+            "Montanismus"
+          ],
+          "correct": 1,
+          "explanation": "Marcian von Sinope (ca. 85-160 n. Chr.) lehrte, dass der Gott des AT ein minderwertiger Demiurg sei, der sich vom Gott der Liebe unterscheidet, der durch Jesus offenbart wurde."
+        },
+        {
+          "id": "sc_2",
+          "question": "Das Werk \"Gegen die Häresien\" (Adversus Haereses) wurde geschrieben von:",
+          "options": [
+            "Augustinus von Hippo",
+            "Irenäus von Lyon",
+            "Justinus der Märtyrer",
+            "Origenes"
+          ],
+          "correct": 1,
+          "explanation": "Irenäus von Lyon (ca. 130-202 n. Chr.) schrieb 'Adversus Haereses', ein grundlegendes Werk gegen den Gnostizismus."
+        },
+        {
+          "id": "sc_3",
+          "question": "Wer schrieb die \"Vulgata\"?",
+          "options": [
+            "Augustinus",
+            "Hieronymus",
+            "Ambrosius",
+            "Benedikt"
+          ],
+          "correct": 1,
+          "explanation": "Der heilige Hieronymus (347-420 n. Chr.) übersetzte die Bibel ins Lateinische (Vulgata) im Auftrag von Papst Damasus I."
+        },
+        {
+          "id": "sc_4",
+          "question": "Der Begriff \"Theotokos\" war zentral in der Auseinandersetzung im Konzil von:",
+          "options": [
+            "Nizäa",
+            "Ephesus",
+            "Kalkedon",
+            "Konstantinopel"
+          ],
+          "correct": 1,
+          "explanation": "Das Konzil von Ephesus (431 n. Chr.) definierte Maria als 'Theotokos' (Gottesgebärerin) gegen Nestorius."
+        },
+        {
+          "id": "sc_5",
+          "question": "\"Theologie des Kreuzes\" wurde der \"Theologie der Herrlichkeit\" gegenübergestellt von:",
+          "options": [
+            "Thomas von Aquin",
+            "Martin Luther",
+            "Johannes Calvin",
+            "Karl Barth"
+          ],
+          "correct": 1,
+          "explanation": "Luther stellte in den Heidelberger Thesen (1518) die theologia crucis der theologia gloriae gegenüber."
+        },
+        {
+          "id": "sc_6",
+          "question": "Wer sind die \"Essener\"?",
+          "options": [
+            "Phönizische Händler.",
+            "Jüdische asketische Gruppe, oft mit der Gemeinschaft von Qumran verbunden.",
+            "Anhänger von Johannes dem Täufer in Ephesus.",
+            "Römische Gouverneure von Judäa."
+          ],
+          "correct": 1,
+          "explanation": "Die Essener waren eine jüdische asketische Sekte des 2. Jh. v. Chr. - 1. Jh. n. Chr., oft identifiziert mit der Gemeinschaft von Qumran."
+        },
+        {
+          "id": "sc_7",
+          "question": "Der \"Hirte des Hermas\" ist:",
+          "options": [
+            "Ein Buch des Alten Testaments.",
+            "Ein Schriftwerk der Apostolischen Väter, das in der frühen Kirche sehr beliebt war.",
+            "Ein mittelalterlicher Kommentar.",
+            "Ein verlorenes Gleichnis von Jesus."
+          ],
+          "correct": 1,
+          "explanation": "Der Hirte des Hermas (2. Jh. n. Chr.) ist ein apokalyptisches christliches Schriftwerk, das in der frühen Kirche viel gelesen wurde."
+        },
+        {
+          "id": "sc_8",
+          "question": "Das Konzept der \"Rechtfertigung durch Glauben allein\" ist das Fundament welcher Reform?",
+          "options": [
+            "Katholische Gegenreformation.",
+            "Protestantische Reform.",
+            "Cluniazensische Reform.",
+            "Jansenismus."
+          ],
+          "correct": 1,
+          "explanation": "Die 'sola fide' ist eines der grundlegenden Prinzipien der Protestantischen Reform, insbesondere von Luther."
+        }
+      ]
+    },
+    "fr": {
+      "questions": [
+        {
+          "id": "sc_1",
+          "question": "Quelle hérésie du IIe siècle soutenait que le Dieu de l'AT était différent et inférieur au Père de Jésus ?",
+          "options": [
+            "Gnosticisme",
+            "Marcionisme",
+            "Arianisme",
+            "Montanisme"
+          ],
+          "correct": 1,
+          "explanation": "Marcions de Sinope (vers 85-160 ap. J.-C.) enseignait que le Dieu de l'AT était un demiurge inférieur, distinct du Dieu d'amour révélé par Jésus."
+        },
+        {
+          "id": "sc_2",
+          "question": "L'œuvre \"Contre les Hérésies\" (Adversus Haereses) a été écrite par :",
+          "options": [
+            "Augustin d'Hippone",
+            "Irénée de Lyon",
+            "Justin Martyr",
+            "Origène"
+          ],
+          "correct": 1,
+          "explanation": "Irénée de Lyon (vers 130-202 ap. J.-C.) a écrit 'Adversus Haereses', une œuvre fondamentale contre le gnosticisme."
+        },
+        {
+          "id": "sc_3",
+          "question": "Qui a écrit la \"Vulgate\" ?",
+          "options": [
+            "Augustin",
+            "Jérôme",
+            "Ambroise",
+            "Benoît"
+          ],
+          "correct": 1,
+          "explanation": "Saint Jérôme (347-420 ap. J.-C.) a traduit la Bible en latin (Vulgate) à la demande du pape Damase I."
+        },
+        {
+          "id": "sc_4",
+          "question": "Le terme \"Theotokos\" était au centre de la controverse au Concile de :",
+          "options": [
+            "Nicaea",
+            "Éphèse",
+            "Chalcédoine",
+            "Constantinople"
+          ],
+          "correct": 1,
+          "explanation": "Le Concile d'Éphèse (431 ap. J.-C.) a défini Marie comme 'Theotokos' (Mère de Dieu) contre Nestorius."
+        },
+        {
+          "id": "sc_5",
+          "question": "La \"Théologie de la Croix\" a été opposée à la \"Théologie de la Gloire\" par :",
+          "options": [
+            "Thomas d'Aquin",
+            "Martin Luther",
+            "Jean Calvin",
+            "Karl Barth"
+          ],
+          "correct": 1,
+          "explanation": "Luther dans les Thèses de Heidelberg (1518) a opposé la théologie crucis à la théologie gloriae."
+        },
+        {
+          "id": "sc_6",
+          "question": "Qui sont les \"Esséniens\" ?",
+          "options": [
+            "Commerçants phéniciens.",
+            "Groupe ascétique juif, souvent associé à la communauté de Qumrân.",
+            "Disciples de Jean-Baptiste à Éphèse.",
+            "Gouverneurs romains de la Judée."
+          ],
+          "correct": 1,
+          "explanation": "Les Esséniens étaient une secte juive ascétique du IIe siècle av. J.-C. - Ier siècle ap. J.-C., souvent identifiés à la communauté de Qumrân."
+        },
+        {
+          "id": "sc_7",
+          "question": "Le \"Pasteur d'Hermas\" est :",
+          "options": [
+            "Un livre de l'Ancien Testament.",
+            "Un écrit des Pères Apostoliques, très populaire dans l'Église primitive.",
+            "Un commentaire médiéval.",
+            "Une parabole perdue de Jésus."
+          ],
+          "correct": 1,
+          "explanation": "Le Pasteur d'Hermas (IIe siècle ap. J.-C.) est un écrit apocalyptique chrétien qui a été largement lu dans l'Église primitive."
+        },
+        {
+          "id": "sc_8",
+          "question": "Le concept de \"Justification par la foi seule\" est le pilier de quelle réforme ?",
+          "options": [
+            "Contre-réforme catholique.",
+            "Réforme Protestant.",
+            "Réforme Clunisienne.",
+            "Jansénisme."
+          ],
+          "correct": 1,
+          "explanation": "La 'sola fide' est l'un des principes fondamentaux de la Réforme Protestant, en particulier de Luther."
+        }
+      ]
+    },
+    "pt": {
+      "questions": [
+        {
+          "id": "sc_1",
+          "question": "Qual é a heresia do século II que sustentava que o Deus do AT era diferente e inferior ao Pai de Jesus?",
+          "options": [
+            "Gnosticismo",
+            "Marcionismo",
+            "Arianismo",
+            "Montanismo"
+          ],
+          "correct": 1,
+          "explanation": "Marcião de Sinope (c. 85-160 d.C.) ensinava que o Deus do AT era um demiurgo inferior, distinto do Deus de amor revelado por Jesus."
+        },
+        {
+          "id": "sc_2",
+          "question": "A obra \"Contra as Heresias\" (Adversus Haereses) foi escrita por:",
+          "options": [
+            "Agostinho de Hipona",
+            "Ireneu de Lyon",
+            "Justino Mártir",
+            "Orígenes"
+          ],
+          "correct": 1,
+          "explanation": "Ireneu de Lyon (c. 130-202 d.C.) escreveu 'Adversus Haereses', obra fundamental contra o gnosticismo."
+        },
+        {
+          "id": "sc_3",
+          "question": "Quem escreveu a \"Vulgata\"?",
+          "options": [
+            "Agostinho",
+            "Jerônimo",
+            "Ambrose",
+            "Benedito"
+          ],
+          "correct": 1,
+          "explanation": "São Jerônimo (347-420 d.C.) traduziu a Bíblia para o latim (Vulgata) por encomenda do Papa Damaso I."
+        },
+        {
+          "id": "sc_4",
+          "question": "O termo \"Teotokos\" esteve no centro da disputa no Concílio de:",
+          "options": [
+            "Niceia",
+            "Éfeso",
+            "Calcedônia",
+            "Constantinopla"
+          ],
+          "correct": 1,
+          "explanation": "O Concílio de Éfeso (431 d.C.) definiu Maria como 'Teotokos' (Mãe de Deus) contra Nestório."
+        },
+        {
+          "id": "sc_5",
+          "question": "A \"Teologia da Cruz\" foi contraposta à \"Teologia da Glória\" por:",
+          "options": [
+            "Tomás de Aquino",
+            "Martinho Lutero",
+            "João Calvino",
+            "Karl Barth"
+          ],
+          "correct": 1,
+          "explanation": "Lutero nas Teses de Heidelberg (1518) contrapôs a theologia crucis à theologia gloriae."
+        },
+        {
+          "id": "sc_6",
+          "question": "Quem são os \"Essênios\"?",
+          "options": [
+            "Comerciantes fenícios.",
+            "Grupo ascético judaico, frequentemente associado à comunidade de Qumran.",
+            "Seguidores de João Batista em Éfeso.",
+            "Governadores romanos da Judeia."
+          ],
+          "correct": 1,
+          "explanation": "Os Essênios eram uma seita judaica ascética do século II a.C. - I d.C., frequentemente identificados com a comunidade de Qumran."
+        },
+        {
+          "id": "sc_7",
+          "question": "O \"Pastor de Hermas\" é:",
+          "options": [
+            "Um livro do Antigo Testamento.",
+            "Um escrito dos Pais Apostólicos, muito popular na Igreja primitiva.",
+            "Um comentário medieval.",
+            "Uma parábola perdida de Jesus."
+          ],
+          "correct": 1,
+          "explanation": "O Pastor de Hermas (II século d.C.) é um escrito apocalíptico cristão muito lido na Igreja primitiva."
+        },
+        {
+          "id": "sc_8",
+          "question": "O conceito de \"Justificação pela fé somente\" é o pilar de qual reforma?",
+          "options": [
+            "Contrarreforma católica.",
+            "Reforma Protestante.",
+            "Reforma Cluniacense.",
+            "Jansenismo."
+          ],
+          "correct": 1,
+          "explanation": "A 'sola fide' é um dos princípios fundamentais da Reforma Protestante, em particular de Lutero."
+        }
+      ]
     }
   }
 }
