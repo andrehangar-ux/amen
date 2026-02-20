@@ -256,14 +256,14 @@ export const Icon: React.FC<IconProps> = ({ name, size = 24, color = '#000', sty
   
   if (emoji) {
     return (
-      <Text style={[styles.emoji, { fontSize: size * 0.85, color }, style]}>
+      <Text style={[styles.emoji, { fontSize: size * 0.85, color, pointerEvents: 'none' }, style]}>
         {emoji}
       </Text>
     );
   }
   
   // Fallback to Ionicons (might not render correctly but try anyway)
-  return <Ionicons name={name as any} size={size} color={color} style={style} />;
+  return <Ionicons name={name as any} size={size} color={color} style={[{ pointerEvents: 'none' }, style]} />;
 };
 
 const styles = StyleSheet.create({
