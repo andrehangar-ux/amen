@@ -3854,7 +3854,7 @@ BIBLE_QUIZZES = {
 }
 
 from quiz_data import MULTILINGUAL_QUIZZES, get_quiz_for_language, get_all_topics_for_language
-from quiz_1000 import get_quiz_1000_topics, get_quiz_1000_by_category, get_quiz_1000_by_category_translated
+from quiz_1000 import get_quiz_1000_topics, get_quiz_1000_by_category, get_quiz_1000_by_category_translated, get_advanced_subcategory_topics, get_advanced_subcategory_quiz
 
 @api_router.get("/quiz/topics")
 async def get_quiz_topics(lang: str = "it"):
