@@ -368,6 +368,14 @@ CATEGORY_TRANSLATIONS = {
         'fr': {'title': 'Théologie Biblique', 'desc': 'Concepts fondamentaux'},
         'de': {'title': 'Biblische Theologie', 'desc': 'Grundlegende Konzepte'},
     },
+    'studio_avanzato': {
+        'it': {'title': 'Studio Biblico Avanzato', 'desc': '100 domande di critica testuale ed esegesi'},
+        'es': {'title': 'Estudio Bíblico Avanzado', 'desc': '100 preguntas de crítica textual y exégesis'},
+        'en': {'title': 'Advanced Bible Study', 'desc': '100 questions on textual criticism and exegesis'},
+        'pt': {'title': 'Estudo Bíblico Avançado', 'desc': '100 questões de crítica textual e exegese'},
+        'fr': {'title': 'Étude Biblique Avancée', 'desc': '100 questions de critique textuelle et exégèse'},
+        'de': {'title': 'Fortgeschrittenes Bibelstudium', 'desc': '100 Fragen zur Textkritik und Exegese'},
+    },
 }
 
 # Cache for loaded data
