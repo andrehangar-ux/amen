@@ -48,6 +48,15 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 
 ## Recent Changes
 
+### 2026-02-20 - Session 9 (Current)
+- **Quiz Studio Biblico Avanzato**: Aggiunte 100 domande di critica testuale, esegesi e teologia biblica
+- **Statistiche Quiz**: Nuova schermata `/quiz-stats` con:
+  - Punteggio medio e migliore
+  - Streak giorni consecutivi
+  - Statistiche per categoria
+  - Attività recente
+- **API /quiz/stats**: Nuovo endpoint per statistiche aggregate
+
 ### 2026-02-19 - Session 8 (Current)
 - **Navigazione Capitoli**: Aggiunti pulsanti "Precedente" / "Successivo" nella lettura Bibbia
 - **Fix Android Permissions**: Rimosso permesso CAMERA non utilizzato da app.json
