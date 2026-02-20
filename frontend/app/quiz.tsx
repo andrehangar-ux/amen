@@ -63,6 +63,7 @@ export default function QuizScreen() {
   const { currentLanguage } = useLanguageStore();
   const [topics, setTopics] = useState<QuizTopic[]>([]);
   const [categories, setCategories] = useState<QuizTopic[]>([]); // New 1000 questions categories
+  const [advancedSubcategories, setAdvancedSubcategories] = useState<QuizTopic[]>([]); // 6 advanced subcategories
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
