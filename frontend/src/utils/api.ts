@@ -268,6 +268,7 @@ export const api = {
       body: JSON.stringify({ topic, answers, language }),
     }),
   getQuizHistory: () => api.fetch('/api/quiz/history'),
+  getQuizStats: () => api.fetch('/api/quiz/stats'),
 
   // Dictionary
   getDictionaryTerms: (lang = 'it') => api.fetch(`/api/dictionary?lang=${lang}`),
