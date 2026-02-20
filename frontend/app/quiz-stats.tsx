@@ -360,7 +360,26 @@ const styles = StyleSheet.create({
     borderBottomColor: COLORS.border,
   },
   backButton: {
-    padding: SPACING.xs,
+    width: 44,
+    height: 44,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  arrowLine1: {
+    position: 'absolute',
+    width: 12,
+    height: 2,
+    backgroundColor: COLORS.text,
+    borderRadius: 1,
+    transform: [{ rotate: '-45deg' }, { translateX: -3 }, { translateY: -4 }],
+  },
+  arrowLine2: {
+    position: 'absolute',
+    width: 12,
+    height: 2,
+    backgroundColor: COLORS.text,
+    borderRadius: 1,
+    transform: [{ rotate: '45deg' }, { translateX: -3 }, { translateY: 4 }],
   },
   title: {
     fontSize: 18,
