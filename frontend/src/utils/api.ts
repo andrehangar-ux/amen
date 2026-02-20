@@ -262,6 +262,8 @@ export const api = {
   getQuiz: (topic: string, lang = 'it') => api.fetch(`/api/quiz/${topic}?lang=${lang}`),
   getQuizCategories: (lang = 'it') => api.fetch(`/api/quiz/categories?lang=${lang}`),
   getQuizByCategory: (categoryId: string, lang = 'it') => api.fetch(`/api/quiz/category/${categoryId}?lang=${lang}`),
+  getAdvancedSubcategories: (lang = 'it') => api.fetch(`/api/quiz/advanced-subcategories?lang=${lang}`),
+  getAdvancedSubcategoryQuiz: (subcategoryId: string, lang = 'it') => api.fetch(`/api/quiz/advanced-subcategory/${subcategoryId}?lang=${lang}`),
   submitQuiz: (topic: string, answers: Record<string, number>, language = 'it') =>
     api.fetch('/api/quiz/submit', {
       method: 'POST',
