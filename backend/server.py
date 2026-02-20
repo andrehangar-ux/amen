@@ -5466,6 +5466,19 @@ async def download_apk():
         media_type="application/vnd.android.package-archive"
     )
 
+# AAB Download endpoint
+@api_router.get("/download/aab")
+async def download_aab():
+    """Download the Android App Bundle (AAB) file"""
+    aab_path = ROOT_DIR / "static" / "amen_app.aab"
+    if not aab_path.exists():
+        raise HTTPException(status_code=404, detail="AAB file not found")
+    return FileResponse(
+        path=str(aab_path),
+        filename="Amen-Bible-App.aab",
+        media_type="application/octet-stream"
+    )
+
 # Include the router
 app.include_router(api_router)
 
