@@ -498,9 +498,13 @@ export default function QuizScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()}>
+        <Pressable
+          onPress={() => router.push('/')}
+          style={({ pressed }) => [styles.closeButton, pressed && { opacity: 0.5 }]}
+          data-testid="quiz-back-btn"
+        >
           <Icon name="arrow-back" size={28} color={COLORS.text} />
-        </TouchableOpacity>
+        </Pressable>
         <Text style={styles.title}>{t('title')}</Text>
         <TouchableOpacity onPress={() => router.push('/quiz-stats')} data-testid="quiz-stats-btn">
           <Icon name="stats-chart" size={26} color={COLORS.primary} />
