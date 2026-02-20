@@ -173,8 +173,9 @@ export default function QuizStatsScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-            <Icon name="arrow-back" size={24} color={COLORS.text} />
+          <TouchableOpacity onPress={() => router.back()} activeOpacity={0.4} style={styles.backButton}>
+            <View style={styles.arrowLine1} />
+            <View style={styles.arrowLine2} />
           </TouchableOpacity>
           <Text style={styles.title}>{t('title')}</Text>
           <View style={{ width: 40 }} />
@@ -191,8 +192,9 @@ export default function QuizStatsScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-            <Icon name="arrow-back" size={24} color={COLORS.text} />
+          <TouchableOpacity onPress={() => router.back()} activeOpacity={0.4} style={styles.backButton}>
+            <View style={styles.arrowLine1} />
+            <View style={styles.arrowLine2} />
           </TouchableOpacity>
           <Text style={styles.title}>{t('title')}</Text>
           <View style={{ width: 40 }} />
