@@ -640,6 +640,10 @@ const styles = StyleSheet.create({
     padding: SPACING.md,
     backgroundColor: COLORS.card,
   },
+  closeButton: {
+    padding: 8,
+    cursor: 'pointer',
+  },
   title: {
     fontSize: 20,
     fontWeight: '700',
