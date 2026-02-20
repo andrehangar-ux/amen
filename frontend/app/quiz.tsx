@@ -388,14 +388,13 @@ export default function QuizScreen() {
               </View>
             )}
             
-            <Pressable
-              style={({ pressed }) => [styles.primaryButton, pressed && { opacity: 0.7 }]}
-              onPress={resetQuiz}
-              hitSlop={10}
-              accessibilityRole="button"
+            <TouchableOpacity
+              style={styles.primaryButton}
+              onPress={() => resetQuiz()}
+              activeOpacity={0.6}
             >
               <Text style={styles.primaryButtonText}>{t('back')}</Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </SafeAreaView>
