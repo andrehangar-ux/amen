@@ -146,6 +146,24 @@ export default function QuizScreen() {
     }
   };
 
+  const startAdvancedQuiz = async (subcategoryId: string) => {
+    setLoadingQuiz(true);
+    try {
+      const quiz = await api.getAdvancedSubcategoryQuiz(subcategoryId, currentLanguage);
+      setSelectedTopic(subcategoryId);
+      setQuestions(quiz.questions);
+      setCurrentQuestion(0);
+      setAnswers({});
+      setResult(null);
+      setShowCorrections(false);
+      setIsCategoryQuiz(true);
+    } catch (error) {
+      showAlert(t('error'), t('loadError'));
+    } finally {
+      setLoadingQuiz(false);
+    }
+  };
+
   const selectAnswer = (questionId: string, optionIndex: number) => {
     setAnswers(prev => ({ ...prev, [questionId]: optionIndex }));
   };
