@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useAuthStore } from '../src/store/authStore';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { COLORS } from '../src/utils/theme';
+import { FloatingMenu } from '../src/components/FloatingMenu';
 import * as SplashScreen from 'expo-splash-screen';
 
 // Prevent splash screen from auto-hiding
