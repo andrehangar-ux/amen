@@ -5453,6 +5453,19 @@ async def root():
 async def health():
     return {"status": "healthy"}
 
+# APK Download endpoint
+@api_router.get("/download/apk")
+async def download_apk():
+    """Download the Android APK file"""
+    apk_path = ROOT_DIR / "static" / "amen_app.apk"
+    if not apk_path.exists():
+        raise HTTPException(status_code=404, detail="APK file not found")
+    return FileResponse(
+        path=str(apk_path),
+        filename="Amen-Bible-App.apk",
+        media_type="application/vnd.android.package-archive"
+    )
+
 # Include the router
 app.include_router(api_router)
 
