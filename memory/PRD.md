@@ -5,6 +5,13 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 
 ## Core Features Implemented
 
+### Quiz Studio Biblico Avanzato - 6 Sotto-Quiz Tematici ✅ (2026-02-20)
+- [x] 6 sottocategorie da 8 domande ciascuna sotto il tab "Studio Avanzato"
+- [x] Backend: quiz_advanced_subcategories.json + endpoint dedicati
+- [x] Frontend: Tab avanzato mostra sottocategorie invece del singolo quiz da 100 domande
+- [x] Pulsante X (indietro) funzionante nelle schermate quiz
+- [x] Invio quiz e risultati funzionanti per le sottocategorie avanzate
+
 ### Navigazione Capitoli Bibbia ✅ (AGGIUNTO 2026-02-19)
 - [x] Pulsanti "Precedente" / "Successivo" per navigare tra capitoli
 - [x] Pulsante centrale per tornare alla selezione capitoli
@@ -48,7 +55,21 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 
 ## Recent Changes
 
-### 2026-02-20 - Session 9 (Current)
+### 2026-02-20 - Session 10 (Current)
+- **Quiz Studio Avanzato Suddiviso**: Le 100 domande avanzate sono state suddivise in 6 sotto-quiz tematici da 8 domande:
+  1. Critica Testuale - Manoscritti, codici e varianti testuali
+  2. Esegesi e Metodi - Tecniche interpretative e figure retoriche
+  3. Lingue Bibliche - Ebraico, aramaico e greco del NT
+  4. Teologia del NT - Cristologia, soteriologia e escatologia
+  5. Teologia dell'AT - Pentateuco, profeti e sapienza
+  6. Storia e Padri - Eresie, concili e Padri della Chiesa
+- **Nuovi endpoint**: `/api/quiz/advanced-subcategories` e `/api/quiz/advanced-subcategory/{id}`
+- **Tab Studio Avanzato**: Ora mostra le 6 sottocategorie con banner "6 quiz - 48 domande"
+- **Fix quiz-stats.tsx**: Corretto errore FONT_SIZES non definito
+- **Pulsante X (indietro) verificato**: Funziona correttamente nei quiz e nello studio avanzato
+- **Test Report**: /app/test_reports/iteration_32.json - 100% backend + frontend
+
+### 2026-02-20 - Session 9
 - **Quiz Studio Biblico Avanzato**: Aggiunte 100 domande di critica testuale, esegesi e teologia biblica
 - **Statistiche Quiz**: Nuova schermata `/quiz-stats` con:
   - Punteggio medio e migliore
