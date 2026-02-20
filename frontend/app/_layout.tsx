@@ -32,7 +32,7 @@ export default function RootLayout() {
   }
 
   return (
-    <>
+    <View style={{ flex: 1 }}>
       <StatusBar style="dark" />
       <Stack
         screenOptions={{
@@ -57,7 +57,8 @@ export default function RootLayout() {
         <Stack.Screen name="community" options={{ presentation: 'card' }} />
         <Stack.Screen name="donate" options={{ presentation: 'card' }} />
       </Stack>
-    </>
+      <FloatingMenu />
+    </View>
   );
 }
 
