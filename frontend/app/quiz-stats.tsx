@@ -11,7 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { api } from '../src/utils/api';
 import { useLanguageStore } from '../src/store/languageStore';
-import { COLORS, SPACING, BORDER_RADIUS, FONT_SIZES } from '../src/utils/theme';
+import { COLORS, SPACING, BORDER_RADIUS } from '../src/utils/theme';
 import Icon from '../src/components/Icon';
 
 interface QuizStats {
