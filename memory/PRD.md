@@ -66,9 +66,14 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 - **Nuovi endpoint**: `/api/quiz/advanced-subcategories` e `/api/quiz/advanced-subcategory/{id}`
 - **Tab Studio Avanzato**: Ora mostra le 6 sottocategorie con banner "6 quiz - 48 domande"
 - **Fix quiz-stats.tsx**: Corretto errore FONT_SIZES non definito
-- **Fix Pulsante X/Indietro**: Risolto bug click su web - Icon con `pointerEvents: 'none'`, Pressable con `minWidth/minHeight: 44`, `router.push('/')` invece di `router.back()`
+- **Fix Pulsante X/Indietro (Web + iOS Nativo)**: Risolto bug click/touch:
+  - `<View pointerEvents="none">` intorno a Icon per prevenire intercettazione events
+  - `hitSlop={20}` per area touch più grande
+  - `accessibilityRole="button"` per migliore gestione touch su nativo
+  - `minWidth/minHeight: 44px` per touch target Apple-compliant
+  - `router.push('/')` per navigazione affidabile
 - **Traduzioni Quiz Avanzati**: 48 domande tradotte in 5 lingue (en, es, de, fr, pt) con traduzioni pre-generate salvate in `quiz_advanced_translations.json`
-- **Test Report**: /app/test_reports/iteration_32.json, iteration_33.json - 100% backend + frontend
+- **Test Report**: /app/test_reports/iteration_32.json, iteration_33.json
 
 ### 2026-02-20 - Session 9
 - **Quiz Studio Biblico Avanzato**: Aggiunte 100 domande di critica testuale, esegesi e teologia biblica
