@@ -2468,5 +2468,18 @@
     "correct": 2,
     "explanation": "Figure du Christ [351, 352].",
     "verse_ref": ""
+  },
+  "q820_fr": {
+    "id": "q820",
+    "question": "Melchisédek est un type de?",
+    "options": [
+      "Aaron",
+      "Moïse",
+      "Messie roi/prêtre",
+      "Abraham"
+    ],
+    "correct": 2,
+    "explanation": "Hébreux 7 [351, 352].",
+    "verse_ref": ""
   }
 }
