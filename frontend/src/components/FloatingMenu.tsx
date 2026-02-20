@@ -43,6 +43,7 @@ export const FloatingMenu: React.FC = () => {
     { key: 'dictionary', label: labels.dictionary, icon: 'search', route: '/dictionary' },
     { key: 'community', label: labels.community, icon: 'people', route: '/community' },
     { key: 'myContent', label: labels.myContent, icon: 'bookmark', route: '/my-content' },
+    { key: 'assistant', label: 'AI', icon: 'chatbubbles', route: '/assistant' },
     { key: 'profile', label: labels.profile, icon: 'person', route: '/(tabs)/profile' },
     { key: 'donate', label: labels.donate, icon: 'heart', route: '/donate' },
     { key: 'settings', label: labels.settings, icon: 'settings', route: '/settings' },
