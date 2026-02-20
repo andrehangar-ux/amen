@@ -648,9 +648,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.card,
   },
   closeButton: {
-    padding: 8,
-    minWidth: 44,
-    minHeight: 44,
+    width: 44,
+    height: 44,
     justifyContent: 'center',
     alignItems: 'center',
   },
