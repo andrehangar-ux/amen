@@ -1,0 +1,1810 @@
+{
+  "critica_testuale": {
+    "en": {
+      "questions": [
+        {
+          "id": "ct_1",
+          "question": "In textual criticism, the phenomenon of Homoioteleuton indicates:",
+          "options": [
+            "The erroneous repetition of a word by the scribe.",
+            "The skipping of a portion of text due to identical line endings.",
+            "The confusion between similar vowel sounds in Koine Greek.",
+            "The literal translation of a Hebraism into Greek."
+          ],
+          "correct": 1,
+          "explanation": "Homoioteleuton (from Greek 'similar ending') is a copying error where the scribe skips text because two lines or sections end with the same letters or words."
+        },
+        {
+          "id": "ct_2",
+          "question": "The Codex Vaticanus (B) is a key witness of which textual type?",
+          "options": [
+            "Byzantine",
+            "Western",
+            "Alexandrian",
+            "Caesarean"
+          ],
+          "correct": 2,
+          "explanation": "Codex Vaticanus is one of the most important witnesses of the Alexandrian text-type, generally considered the closest to the original texts."
+        },
+        {
+          "id": "ct_3",
+          "question": "What is meant by \"Lectio Difficilior Potior\"?",
+          "options": [
+            "The longer reading is always the more authoritative.",
+            "The more difficult text is likely the original because it is less subject to simplifying 'corrections'.",
+            "The variant present in the largest number of manuscripts is the most correct.",
+            "The Latin translation should take precedence over the Greek."
+          ],
+          "correct": 1,
+          "explanation": "This principle of textual criticism states that the more difficult reading is likely the original, as scribes tended to simplify rather than complicate the text."
+        },
+        {
+          "id": "ct_4",
+          "question": "What is the significance of Papyrus P52?",
+          "options": [
+            "It contains the complete text of Revelation.",
+            "It is the oldest known fragment of the New Testament (Gospel of John).",
+            "It is the only papyrus written in Aramaic.",
+            "It proves that the Gospel of Luke was written in the 2nd century."
+          ],
+          "correct": 1,
+          "explanation": "P52 (Rylands Library Papyrus P457), dated ca. 125 AD, contains John 18:31-33, 37-38 and is the oldest known fragment of the NT."
+        },
+        {
+          "id": "ct_5",
+          "question": "Who are the \"Masoretes\"?",
+          "options": [
+            "A sect from Qumran.",
+            "Jewish scholars who fixed the text, vocalization, and cantillation of the Old Testament.",
+            "The translators of the Latin Vulgate.",
+            "The leaders of the Maccabean revolt."
+          ],
+          "correct": 1,
+          "explanation": "The Masoretes were Jewish scholars (6th to 10th century AD) who standardized the consonantal text of the OT, adding vowels and cantillation marks."
+        },
+        {
+          "id": "ct_6",
+          "question": "The \"Bodmer Papyrus XIV-XV\" (P75) is famous for its close textual affinity with:",
+          "options": [
+            "The Codex Sinaiticus.",
+            "The Codex Vaticanus.",
+            "The Textus Receptus.",
+            "The King James Version."
+          ],
+          "correct": 1,
+          "explanation": "P75 (ca. 175-225 AD) contains Luke and John and is significantly close to Codex Vaticanus, confirming the antiquity of the Alexandrian text-type."
+        },
+        {
+          "id": "ct_7",
+          "question": "The \"Masoretic Text\" (MT) was finally stabilized between:",
+          "options": [
+            "200 and 100 BC.",
+            "The 7th and 10th century AD.",
+            "During the Maccabean period.",
+            "Under the reign of King David."
+          ],
+          "correct": 1,
+          "explanation": "The Masoretic text was stabilized by the Masoretes between the 7th and 10th centuries AD, when they added vowels and cantillation marks to the consonantal text."
+        },
+        {
+          "id": "ct_8",
+          "question": "What is meant by the \"Muratorian Canon\"?",
+          "options": [
+            "The system of Jerusalem's walls.",
+            "The oldest known list of New Testament books (2nd century).",
+            "An archaeological excavation method.",
+            "The translation of the Psalms into Syriac."
+          ],
+          "correct": 1,
+          "explanation": "The Muratorian Fragment (ca. 170-200 AD) is the oldest list of NT books, attesting to the development of the Christian canon."
+        }
+      ]
+    },
+    "es": {
+      "questions": [
+        {
+          "id": "ct_1",
+          "question": "En la crítica textual, el fenómeno del Omeoteluto indica:",
+          "options": [
+            "La repetición errónea de una palabra por parte del copista.",
+            "El salto de una porción de texto debido a finales de línea idénticos.",
+            "La confusión entre sonidos vocálicos similares en el griego koiné.",
+            "La traducción literal de un hebraísmo al griego."
+          ],
+          "correct": 1,
+          "explanation": "El omeoteluto (del griego 'terminación similar') es un error de copia en el cual el copista salta texto porque dos líneas o secciones terminan con las mismas letras o palabras."
+        },
+        {
+          "id": "ct_2",
+          "question": "El Codex Vaticanus (B) es un testigo fundamental de qué tipo textual?",
+          "options": [
+            "Bizantino",
+            "Occidental",
+            "Alejandrino",
+            "Cesáreo"
+          ],
+          "correct": 2,
+          "explanation": "El Codex Vaticanus es uno de los más importantes testigos del tipo textual Alejandrino, considerado generalmente el más cercano a los textos originales."
+        },
+        {
+          "id": "ct_3",
+          "question": "¿Qué se entiende por \"Lectio Difficilior Potior\"?",
+          "options": [
+            "La lectura más larga siempre es la más autorizada.",
+            "El texto más difícil es probablemente el original porque está menos sujeto a 'correcciones' simplificativas.",
+            "La variante presente en el mayor número de manuscritos es la más correcta.",
+            "La traducción latina debe tener precedencia sobre el griego."
+          ],
+          "correct": 1,
+          "explanation": "Este principio de la crítica textual afirma que la lectura más difícil es probablemente la original, ya que los copistas tendían a simplificar en lugar de complicar el texto."
+        },
+        {
+          "id": "ct_4",
+          "question": "¿Cuál es la importancia del Papiro P52?",
+          "options": [
+            "Contiene el texto completo del Apocalipsis.",
+            "Es el fragmento más antiguo del Nuevo Testamento (Evangelio de Juan) conocido.",
+            "Es el único papiro escrito en arameo.",
+            "Demuestra que el Evangelio de Lucas fue escrito en el siglo II."
+          ],
+          "correct": 1,
+          "explanation": "P52 (Papiro Rylands 457), datado aprox. 125 d.C., contiene Juan 18:31-33, 37-38 y es el fragmento más antiguo del NT conocido."
+        },
+        {
+          "id": "ct_5",
+          "question": "¿Quiénes son los \"Masoretas\"?",
+          "options": [
+            "Una secta de Qumrán.",
+            "Estudiosos judíos que fijaron el texto, la vocalización y la cantilación del Antiguo Testamento.",
+            "Los traductores de la Vulgata latina.",
+            "Los líderes de la revuelta macabea."
+          ],
+          "correct": 1,
+          "explanation": "Los Masoretas fueron estudiosos judíos (siglos VI-X d.C.) que estandarizaron el texto consonántico del AT, añadiendo vocales y signos de cantilación."
+        },
+        {
+          "id": "ct_6",
+          "question": "El \"Papiro Bodmer XIV-XV\" (P75) es célebre por su estrecha afinidad textual con:",
+          "options": [
+            "El Codex Sinaiticus.",
+            "El Codex Vaticanus.",
+            "El Textus Receptus.",
+            "La versión de Rey Jacobo."
+          ],
+          "correct": 1,
+          "explanation": "P75 (aprox. 175-225 d.C.) contiene Lucas y Juan y es notablemente cercano al Codex Vaticanus, confirmando la antigüedad del tipo textual alejandrino."
+        },
+        {
+          "id": "ct_7",
+          "question": "El \"Texto Masorético\" (MT) fue estabilizado definitivamente entre:",
+          "options": [
+            "El 200 y el 100 a.C.",
+            "El siglo VII y el X d.C.",
+            "Durante el período macabeo.",
+            "Bajo el reinado del rey David."
+          ],
+          "correct": 1,
+          "explanation": "El texto masorético fue estabilizado por los Masoretas entre el siglo VII y el X d.C., cuando añadieron vocales y signos de cantilación al texto consonántico."
+        },
+        {
+          "id": "ct_8",
+          "question": "¿Qué se entiende por \"Canon Muratorio\"?",
+          "options": [
+            "El sistema de muros de Jerusalén.",
+            "La lista más antigua conocida de los libros del Nuevo Testamento (siglo II).",
+            "Un método de excavación arqueológica.",
+            "La traducción de los Salmos al siríaco."
+          ],
+          "correct": 1,
+          "explanation": "El Fragmento Muratorio (aprox. 170-200 d.C.) es la lista más antigua de los libros del NT, atestiguando el desarrollo del canon cristiano."
+        }
+      ]
+    },
+    "de": {
+      "questions": [
+        {
+          "id": "ct_1",
+          "question": "Im Bereich der Textkritik bezeichnet das Phänomen der Homöoteleuton:",
+          "options": [
+            "Die fehlerhafte Wiederholung eines Wortes durch den Schreiber.",
+            "Das Überspringen eines Textabschnitts aufgrund identischer Zeilenenden.",
+            "Die Verwechslung zwischen ähnlichen Vokallaute im Koiné-Griechisch.",
+            "Die wörtliche Übersetzung eines Hebraismus ins Griechische."
+          ],
+          "correct": 1,
+          "explanation": "Homöoteleuton (aus dem Griechischen für 'vergleichbares Ende') ist ein Kopierfehler, bei dem der Schreiber Text überspringt, weil zwei Zeilen oder Abschnitte mit denselben Buchstaben oder Wörtern enden."
+        },
+        {
+          "id": "ct_2",
+          "question": "Der Codex Vaticanus (B) ist ein grundlegendes Zeugnis welchen Texttyps?",
+          "options": [
+            "Byzantinisch",
+            "Westlich",
+            "Alexandrinisch",
+            "Cäsareisch"
+          ],
+          "correct": 2,
+          "explanation": "Der Codex Vaticanus ist eines der wichtigsten Zeugnisse des alexandrinischen Texttyps, der allgemein als dem ursprünglichen Text am nächsten betrachtet wird."
+        },
+        {
+          "id": "ct_3",
+          "question": "Was versteht man unter \"Lectio Difficilior Potior\"?",
+          "options": [
+            "Der längere Text ist immer der maßgebliche.",
+            "Der schwierigere Text ist wahrscheinlich das Original, da er weniger zu vereinfachenden 'Korrekturen' neigt.",
+            "Die Variante mit der größten Anzahl an Manuskripten ist die korrekteste.",
+            "Die lateinische Übersetzung muss Vorrang vor dem Griechischen haben."
+          ],
+          "correct": 1,
+          "explanation": "Dieses Prinzip der Textkritik besagt, dass die schwierigere Lesart wahrscheinlich die ursprüngliche ist, da die Schreiber dazu neigten, den Text zu vereinfachen, statt ihn zu verkomplizieren."
+        },
+        {
+          "id": "ct_4",
+          "question": "Welche Bedeutung hat das Papyrus P52?",
+          "options": [
+            "Es enthält den vollständigen Text der Offenbarung.",
+            "Es ist das älteste bekannte Fragment des Neuen Testaments (Johannesevangelium).",
+            "Es ist das einzige Papyrus, das auf Aramäisch geschrieben ist.",
+            "Es beweist, dass das Lukasevangelium im 2. Jahrhundert geschrieben wurde."
+          ],
+          "correct": 1,
+          "explanation": "P52 (Papyrus Rylands 457), datiert ca. 125 n. Chr., enthält Johannes 18:31-33, 37-38 und ist das älteste bekannte Fragment des NT."
+        },
+        {
+          "id": "ct_5",
+          "question": "Wer sind die \"Masoreten\"?",
+          "options": [
+            "Eine Sekte aus Qumran.",
+            "Jüdische Gelehrte, die den Text, die Vokalisierung und die Akzentuierung des Alten Testaments festlegten.",
+            "Die Übersetzer der lateinischen Vulgata.",
+            "Die Führer des Makkabäeraufstands."
+          ],
+          "correct": 1,
+          "explanation": "Die Masoreten waren jüdische Gelehrte (6.-10. Jahrhundert n. Chr.), die den konsonantischen Text des AT standardisierten und Vokale sowie Akzentzeichen hinzufügten."
+        },
+        {
+          "id": "ct_6",
+          "question": "Das \"Papyrus Bodmer XIV-XV\" (P75) ist bekannt für seine enge textliche Affinität zu:",
+          "options": [
+            "Dem Codex Sinaiticus.",
+            "Dem Codex Vaticanus.",
+            "Dem Textus Receptus.",
+            "Der King-James-Version."
+          ],
+          "correct": 1,
+          "explanation": "P75 (ca. 175-225 n. Chr.) enthält Lukas und Johannes und ist bemerkenswert nah am Codex Vaticanus, was die Altertümlichkeit des alexandrinischen Texttyps bestätigt."
+        },
+        {
+          "id": "ct_7",
+          "question": "Der \"Masoretische Text\" (MT) wurde endgültig stabilisiert zwischen:",
+          "options": [
+            "200 und 100 v. Chr.",
+            "Dem 7. und 10. Jahrhundert n. Chr.",
+            "Während der makkabäischen Zeit.",
+            "Unter der Herrschaft von König David."
+          ],
+          "correct": 1,
+          "explanation": "Der masoretische Text wurde von den Masoreten zwischen dem 7. und 10. Jahrhundert n. Chr. stabilisiert, als sie Vokale und Akzentzeichen zum konsonantischen Text hinzufügten."
+        },
+        {
+          "id": "ct_8",
+          "question": "Was versteht man unter dem \"Muratorischen Kanon\"?",
+          "options": [
+            "Das Mauersystem Jerusalems.",
+            "Die älteste bekannte Liste der Bücher des Neuen Testaments (2. Jahrhundert).",
+            "Eine archäologische Grabungsmethode.",
+            "Die Übersetzung der Psalmen ins Syrische."
+          ],
+          "correct": 1,
+          "explanation": "Das Muratorische Fragment (ca. 170-200 n. Chr.) ist die älteste Liste der Bücher des NT, die die Entwicklung des christlichen Kanons bezeugt."
+        }
+      ]
+    },
+    "fr": {
+      "questions": [
+        {
+          "id": "ct_1",
+          "question": "Dans la critique textuelle, le phénomène de l'homéotéleute indique :",
+          "options": [
+            "La répétition erronée d'un mot par le copiste.",
+            "Le saut d'une partie du texte dû à des fins de ligne identiques.",
+            "La confusion entre des sons vocaliques similaires en grec koinè.",
+            "La traduction littérale d'un hébraïsme en grec."
+          ],
+          "correct": 1,
+          "explanation": "L'homéotéleute (du grec 'terminaison semblable') est une erreur de copie où le copiste saute du texte parce que deux lignes ou sections se terminent par les mêmes lettres ou mots."
+        },
+        {
+          "id": "ct_2",
+          "question": "Le Codex Vaticanus (B) est un témoin fondamental de quel type textuel ?",
+          "options": [
+            "Byzantin",
+            "Occidental",
+            "Alexandrin",
+            "Césaréen"
+          ],
+          "correct": 2,
+          "explanation": "Le Codex Vaticanus est l'un des témoins les plus importants du type textuel Alexandrin, considéré généralement comme le plus proche des textes originaux."
+        },
+        {
+          "id": "ct_3",
+          "question": "Que signifie \"Lectio Difficilior Potior\" ?",
+          "options": [
+            "La lecture la plus longue est toujours la plus autoritaire.",
+            "Le texte le plus difficile est probablement l'original, car moins sujet à des \"corrections\" simplificatrices.",
+            "La variante présente dans le plus grand nombre de manuscrits est la plus correcte.",
+            "La traduction latine doit avoir la priorité sur le grec."
+          ],
+          "correct": 1,
+          "explanation": "Ce principe de la critique textuelle affirme que la lecture la plus difficile est probablement l'originale, car les copistes avaient tendance à simplifier plutôt qu'à compliquer le texte."
+        },
+        {
+          "id": "ct_4",
+          "question": "Quelle est l'importance du Papyrus P52 ?",
+          "options": [
+            "Il contient le texte complet de l'Apocalypse.",
+            "C'est le plus ancien fragment du Nouveau Testament (Évangile de Jean) connu.",
+            "C'est le seul papyrus écrit en araméen.",
+            "Il démontre que l'Évangile de Luc a été écrit au IIe siècle."
+          ],
+          "correct": 1,
+          "explanation": "P52 (Papyrus Rylands 457), daté d'environ 125 après J.-C., contient Jean 18:31-33, 37-38 et est le plus ancien fragment du NT connu."
+        },
+        {
+          "id": "ct_5",
+          "question": "Qui sont les \"Massorètes\" ?",
+          "options": [
+            "Une secte de Qumran.",
+            "Des érudits juifs ayant fixé le texte, la vocalisation et la cantillation de l'Ancien Testament.",
+            "Les traducteurs de la Vulgate latine.",
+            "Les chefs de la révolte maccabéenne."
+          ],
+          "correct": 1,
+          "explanation": "Les Massorètes étaient des érudits juifs (VIe-Xe siècle après J.-C.) qui ont standardisé le texte consonantique de l'AT, ajoutant voyelles et signes de cantillation."
+        },
+        {
+          "id": "ct_6",
+          "question": "Le \"Papyrus Bodmer XIV-XV\" (P75) est célèbre pour son affinité textuelle étroite avec :",
+          "options": [
+            "Le Codex Sinaiticus.",
+            "Le Codex Vaticanus.",
+            "Le Textus Receptus.",
+            "La version du Roi Jacques."
+          ],
+          "correct": 1,
+          "explanation": "P75 (environ 175-225 après J.-C.) contient Luc et Jean et est remarquablement proche du Codex Vaticanus, confirmant l'ancienneté du type textuel alexandrin."
+        },
+        {
+          "id": "ct_7",
+          "question": "Le \"Texte Massorétique\" (TM) a été définitivement stabilisé entre :",
+          "options": [
+            "200 et 100 avant J.-C.",
+            "Le VIIe et le Xe siècle après J.-C.",
+            "Pendant la période maccabéenne.",
+            "Sous le règne du roi David."
+          ],
+          "correct": 1,
+          "explanation": "Le texte massorétique a été stabilisé par les Massorètes entre le VIIe et le Xe siècle après J.-C., lorsqu'ils ont ajouté voyelles et signes de cantillation au texte consonantique."
+        },
+        {
+          "id": "ct_8",
+          "question": "Que signifie \"Canon de Muratori\" ?",
+          "options": [
+            "Le système de murailles de Jérusalem.",
+            "La plus ancienne liste connue des livres du Nouveau Testament (IIe siècle).",
+            "Une méthode de fouille archéologique.",
+            "La traduction des Psaumes en syriaque."
+          ],
+          "correct": 1,
+          "explanation": "Le Fragment de Muratori (environ 170-200 après J.-C.) est la plus ancienne liste des livres du NT, attestant du développement du canon chrétien."
+        }
+      ]
+    },
+    "pt": {
+      "questions": [
+        {
+          "id": "ct_1",
+          "question": "Na crítica textual, o fenômeno da Homeotelia indica:",
+          "options": [
+            "A repetição errada de uma palavra pelo copista.",
+            "O salto de uma porção de texto devido a finais de linha idênticos.",
+            "A confusão entre sons vocálicos semelhantes no grego koiné.",
+            "A tradução literal de um hebraísmo para o grego."
+          ],
+          "correct": 1,
+          "explanation": "A homeotelia (do grego 'terminação semelhante') é um erro de cópia em que o copista pula texto porque duas linhas ou seções terminam com as mesmas letras ou palavras."
+        },
+        {
+          "id": "ct_2",
+          "question": "O Codex Vaticanus (B) é um testemunho fundamental de qual tipo textual?",
+          "options": [
+            "Bizantino",
+            "Ocidental",
+            "Alexandrino",
+            "Cesariana"
+          ],
+          "correct": 2,
+          "explanation": "O Codex Vaticanus é um dos mais importantes testemunhos do tipo textual Alexandrino, geralmente considerado o mais próximo dos textos originais."
+        },
+        {
+          "id": "ct_3",
+          "question": "O que se entende por \"Lectio Difficilior Potior\"?",
+          "options": [
+            "A leitura mais longa é sempre a mais autoritativa.",
+            "O texto mais difícil é provavelmente o original porque está menos sujeito a 'correções' simplificadoras.",
+            "A variante presente no maior número de manuscritos é a mais correta.",
+            "A tradução latina deve ter precedência sobre o grego."
+          ],
+          "correct": 1,
+          "explanation": "Este princípio da crítica textual afirma que a leitura mais difícil é provavelmente a original, pois os copistas tendiam a simplificar em vez de complicar o texto."
+        },
+        {
+          "id": "ct_4",
+          "question": "Qual é a importância do Papiro P52?",
+          "options": [
+            "Contém o texto completo do Apocalipse.",
+            "É o mais antigo fragmento do Novo Testamento (Evangelho de João) conhecido.",
+            "É o único papiro escrito em aramaico.",
+            "Demonstra que o Evangelho de Lucas foi escrito no século II."
+          ],
+          "correct": 1,
+          "explanation": "P52 (Papiro Rylands 457), datado ca. 125 d.C., contém João 18:31-33, 37-38 e é o mais antigo fragmento do NT conhecido."
+        },
+        {
+          "id": "ct_5",
+          "question": "Quem são os \"Massoretas\"?",
+          "options": [
+            "Uma seita de Qumran.",
+            "Estudiosos judeus que fixaram o texto, a vocalização e a cantilação do Antigo Testamento.",
+            "Os tradutores da Vulgata latina.",
+            "Os líderes da revolta dos Macabeus."
+          ],
+          "correct": 1,
+          "explanation": "Os Massoretas foram estudiosos judeus (VI-X sec. d.C.) que padronizaram o texto consonantal do AT, adicionando vogais e sinais de cantilação."
+        },
+        {
+          "id": "ct_6",
+          "question": "O \"Papiro Bodmer XIV-XV\" (P75) é célebre por sua estreita afinidade textual com:",
+          "options": [
+            "O Codex Sinaiticus.",
+            "O Codex Vaticanus.",
+            "O Textus Receptus.",
+            "A versão do Rei James."
+          ],
+          "correct": 1,
+          "explanation": "P75 (ca. 175-225 d.C.) contém Lucas e João e é notavelmente próximo ao Codex Vaticanus, confirmando a antiguidade do tipo textual alexandrino."
+        },
+        {
+          "id": "ct_7",
+          "question": "O \"Texto Massorético\" (MT) foi definitivamente estabilizado entre:",
+          "options": [
+            "200 e 100 a.C.",
+            "O século VII e X d.C.",
+            "Durante o período dos Macabeus.",
+            "Sob o reinado do rei Davi."
+          ],
+          "correct": 1,
+          "explanation": "O texto massorético foi estabilizado pelos Massoretas entre o século VII e X d.C., quando adicionaram vogais e sinais de cantilação ao texto consonantal."
+        },
+        {
+          "id": "ct_8",
+          "question": "O que se entende por \"Cânone Muratoriano\"?",
+          "options": [
+            "O sistema de muros de Jerusalém.",
+            "A mais antiga lista conhecida dos livros do Novo Testamento (século II).",
+            "Um método de escavação arqueológica.",
+            "A tradução dos Salmos para o siríaco."
+          ],
+          "correct": 1,
+          "explanation": "O Fragmento Muratoriano (ca. 170-200 d.C.) é a mais antiga lista dos livros do NT, atestando o desenvolvimento do cânone cristão."
+        }
+      ]
+    }
+  },
+  "esegesi_biblica": {
+    "en": {
+      "questions": [
+        {
+          "id": "es_1",
+          "question": "In exegesis, an Inclusio is a rhetorical device that consists of:",
+          "options": [
+            "Inserting a story within another (sandwich structure).",
+            "Ending a section with the same word or concept with which it started.",
+            "Using opposite terms to describe the same reality.",
+            "Secretly quoting the Old Testament in the New."
+          ],
+          "correct": 1,
+          "explanation": "An inclusio is a literary technique where a section begins and ends with the same theme, word, or phrase, creating a frame that delineates the textual unit."
+        },
+        {
+          "id": "es_2",
+          "question": "The concept of 'Sitz im Leben' in form criticism indicates:",
+          "options": [
+            "The chronological dating of a manuscript.",
+            "The living/social context in which a text was born and transmitted.",
+            "The biography of the author of the text.",
+            "The geographical location where the narrative is set."
+          ],
+          "correct": 1,
+          "explanation": "Sitz im Leben (German for 'life setting') indicates the social, cultural, or liturgical environment in which a biblical literary form originated and functioned."
+        },
+        {
+          "id": "es_3",
+          "question": "The concept of 'Sensus Plenior' indicates:",
+          "options": [
+            "The meaning intended by the human author.",
+            "The historical literal meaning.",
+            "A deeper meaning intended by God that only emerges in light of later revelations.",
+            "The arbitrary allegorical interpretation."
+          ],
+          "correct": 2,
+          "explanation": "Sensus plenior ('fuller sense') refers to a deeper meaning of the text, intended by God but not fully perceived by the human author."
+        },
+        {
+          "id": "es_4",
+          "question": "What does the term 'Eisegesis' indicate?",
+          "options": [
+            "Extracting meaning from the text.",
+            "The arbitrary insertion of one's own biases or ideas into the biblical text.",
+            "Correcting typographical errors.",
+            "The study of the original languages."
+          ],
+          "correct": 1,
+          "explanation": "Eisegesis (from Greek 'to lead into') is the opposite of exegesis: it involves imposing meanings on the text rather than extracting them from it."
+        },
+        {
+          "id": "es_5",
+          "question": "In exegesis, what is a 'Chiasmus'?",
+          "options": [
+            "A form of schism within a church.",
+            "A mirrored literary structure (A-B-B'-A').",
+            "A type of christological heresy.",
+            "A commentary on the Psalms."
+          ],
+          "correct": 1,
+          "explanation": "Chiasmus is a mirror-like literary structure where elements correspond in reverse order: A-B-C-B'-A'."
+        },
+        {
+          "id": "es_6",
+          "question": "In redaction criticism (Redaktionsgeschichte), the emphasis is on:",
+          "options": [
+            "Searching for the lost original source.",
+            "The theological role and editorial activity of the final author of the text.",
+            "The physical dating of the papyrus.",
+            "The translation of textual variants."
+          ],
+          "correct": 1,
+          "explanation": "Redaction criticism studies the theological contribution of the final editor, how they arranged and modified sources to communicate their message."
+        },
+        {
+          "id": "es_7",
+          "question": "What is meant by 'Midrash'?",
+          "options": [
+            "A ceremonial dress.",
+            "A method of Jewish exegesis aimed at actualizing and explaining the biblical text.",
+            "The harvest festival.",
+            "A city in Transjordan."
+          ],
+          "correct": 1,
+          "explanation": "Midrash (from darash, 'to seek, investigate') is the rabbinic exegetical method that seeks deep and current meanings in the biblical text."
+        },
+        {
+          "id": "es_8",
+          "question": "The 'School of Antioch' in patristic exegesis was known for:",
+          "options": [
+            "Emphasizing allegorical and mystical interpretation.",
+            "Emphasizing the literal and historical sense of the text.",
+            "Rejecting the New Testament.",
+            "Exclusive use of Latin."
+          ],
+          "correct": 1,
+          "explanation": "The school of Antioch (Theodore of Mopsuestia, John Chrysostom) favored literal and historical exegesis, in contrast to Alexandrian allegory."
+        }
+      ]
+    },
+    "es": {
+      "questions": [
+        {
+          "id": "es_1",
+          "question": "En exégesis, el Inlusio es una figura retórica que consiste en:",
+          "options": [
+            "Insertar un relato dentro de otro (estructura tipo sándwich).",
+            "Terminar una sección con la misma palabra o concepto con el que comenzó.",
+            "Utilizar términos opuestos para describir la misma realidad.",
+            "Citar el Antiguo Testamento en el Nuevo de manera oculta."
+          ],
+          "correct": 1,
+          "explanation": "La inclusio es una técnica literaria en la que una sección comienza y termina con el mismo tema, palabra o frase, creando un marco que delimita la unidad textual."
+        },
+        {
+          "id": "es_2",
+          "question": "El concepto de \"Sitz im Leben\" en la crítica de formas indica:",
+          "options": [
+            "La datación cronológica de un manuscrito.",
+            "El contexto vital/social en el que un texto nació y fue transmitido.",
+            "La biografía del autor del texto.",
+            "El lugar geográfico donde se ambienta la narrativa."
+          ],
+          "correct": 1,
+          "explanation": "Sitz im Leben (alemán para 'contexto de vida') indica el entorno social, cultural o litúrgico en el cual una forma literaria bíblica se originó y tuvo su función."
+        },
+        {
+          "id": "es_3",
+          "question": "El concepto de \"Sensus Plenior\" indica:",
+          "options": [
+            "El significado intencionado por el autor humano.",
+            "El significado literal histórico.",
+            "Un significado más profundo deseado por Dios que emerge solo a la luz de revelaciones posteriores.",
+            "La interpretación alegórica arbitraria."
+          ],
+          "correct": 2,
+          "explanation": "El sensus plenior ('sentido pleno') se refiere a un significado más profundo del texto, intencionado por Dios pero no plenamente percibido por el autor humano."
+        },
+        {
+          "id": "es_4",
+          "question": "¿Qué indica el término \"Eiségesis\"?",
+          "options": [
+            "La extracción del significado del texto.",
+            "La inserción arbitraria de sus propios prejuicios o ideas en el texto bíblico.",
+            "La corrección de errores de imprenta.",
+            "El estudio de las lenguas originales."
+          ],
+          "correct": 1,
+          "explanation": "La eiségesis (del griego 'llevar dentro') es lo contrario de la exégesis: consiste en imponer significados al texto en lugar de extraerlos de él."
+        },
+        {
+          "id": "es_5",
+          "question": "En exégesis, ¿qué es un \"Quiasmo\"?",
+          "options": [
+            "Una forma de cisma dentro de una iglesia.",
+            "Una estructura literaria especular (A-B-B'-A').",
+            "Un tipo de herejía cristológica.",
+            "Un comentario a los Salmos."
+          ],
+          "correct": 1,
+          "explanation": "El quiasmo es una estructura literaria en forma de espejo donde los elementos se corresponden en orden inverso: A-B-C-B'-A'."
+        },
+        {
+          "id": "es_6",
+          "question": "En la crítica de la redacción (Redaktionsgeschichte), el énfasis se pone en:",
+          "options": [
+            "La búsqueda de la fuente original perdida.",
+            "El rol teológico y la actividad editorial del autor final del texto.",
+            "La datación física del papiro.",
+            "La traducción de las variantes textuales."
+          ],
+          "correct": 1,
+          "explanation": "La crítica de la redacción estudia el aporte teológico del redactor final, cómo organizó y modificó las fuentes para comunicar su mensaje."
+        },
+        {
+          "id": "es_7",
+          "question": "¿Qué se entiende por \"Midrash\"?",
+          "options": [
+            "Un vestido ceremonial.",
+            "Un método de exégesis judía dirigido a actualizar y explicar el texto bíblico.",
+            "La fiesta de la cosecha.",
+            "Una ciudad de Transjordania."
+          ],
+          "correct": 1,
+          "explanation": "Midrash (de darash, 'buscar, investigar') es el método exegético rabínico que busca significados profundos y actuales en el texto bíblico."
+        },
+        {
+          "id": "es_8",
+          "question": "La \"Escuela de Antioquía\" en la exégesis patrística era conocida por:",
+          "options": [
+            "El énfasis en la interpretación alegórica y mística.",
+            "El énfasis en el sentido literal e histórico del texto.",
+            "El rechazo del Nuevo Testamento.",
+            "El uso exclusivo del latín."
+          ],
+          "correct": 1,
+          "explanation": "La escuela de Antioquía (Teodoro de Mopsuestia, Juan Crisóstomo) privilegiaba la exégesis literal e histórica, en contraste con la alegoría alejandrina."
+        }
+      ]
+    },
+    "de": {
+      "questions": [
+        {
+          "id": "es_1",
+          "question": "In der Exegese ist die Inklusion eine rhetorische Figur, die darin besteht:",
+          "options": [
+            "Eine Erzählung in eine andere einzufügen (Sandwich-Struktur).",
+            "Einen Abschnitt mit demselben Wort oder Konzept zu beenden, mit dem er begann.",
+            "Gegensätzliche Begriffe zu verwenden, um dieselbe Realität zu beschreiben.",
+            "Das Alte Testament im Neuen Testament verdeckt zu zitieren."
+          ],
+          "correct": 1,
+          "explanation": "Die Inklusion ist eine literarische Technik, bei der ein Abschnitt mit demselben Thema, Wort oder Satz beginnt und endet, wodurch ein Rahmen geschaffen wird, der die Texteinheit begrenzt."
+        },
+        {
+          "id": "es_2",
+          "question": "Das Konzept des \"Sitz im Leben\" in der Formkritik deutet auf:",
+          "options": [
+            "Die chronologische Datierung eines Manuskripts.",
+            "Den Lebens-/sozialen Kontext, in dem ein Text entstanden und überliefert wurde.",
+            "Die Biografie des Autors des Textes.",
+            "Den geografischen Ort, an dem die Erzählung spielt."
+          ],
+          "correct": 1,
+          "explanation": "Sitz im Leben (deutsch für 'Lebenskontext') bezeichnet die soziale, kulturelle oder liturgische Umgebung, in der eine biblische literarische Form ihren Ursprung und ihre Funktion hatte."
+        },
+        {
+          "id": "es_3",
+          "question": "Das Konzept des \"Sensus Plenior\" bezeichnet:",
+          "options": [
+            "Die Bedeutung, die vom menschlichen Autor beabsichtigt ist.",
+            "Die buchstäbliche historische Bedeutung.",
+            "Eine tiefere Bedeutung, die von Gott beabsichtigt ist und nur im Licht nachfolgender Offenbarungen sichtbar wird.",
+            "Die willkürliche allegorische Interpretation."
+          ],
+          "correct": 2,
+          "explanation": "Der Sensus Plenior ('vollere Bedeutung') bezieht sich auf eine tiefere Bedeutung des Textes, die von Gott beabsichtigt ist, aber nicht vollständig vom menschlichen Autor erfasst wird."
+        },
+        {
+          "id": "es_4",
+          "question": "Was bedeutet der Begriff \"Eisegese\"?",
+          "options": [
+            "Die Bedeutung aus dem Text herauszuziehen.",
+            "Die willkürliche Einfügung eigener Vorurteile oder Ideen in den biblischen Text.",
+            "Die Korrektur von Druckfehlern.",
+            "Das Studium der Originalsprachen."
+          ],
+          "correct": 1,
+          "explanation": "Die Eisegese (aus dem Griechischen 'hineintragen') ist das Gegenteil von Exegese: Sie besteht darin, Bedeutungen dem Text aufzuzwingen, anstatt sie aus ihm herauszuziehen."
+        },
+        {
+          "id": "es_5",
+          "question": "Was ist ein \"Chiasmus\" in der Exegese?",
+          "options": [
+            "Eine Form von Kirchenspaltung.",
+            "Eine spiegelbildliche Struktur (A-B-B'-A').",
+            "Eine Art christologische Häresie.",
+            "Ein Kommentar zu den Psalmen."
+          ],
+          "correct": 1,
+          "explanation": "Der Chiasmus ist eine spiegelbildliche Struktur, bei der die Elemente in umgekehrter Reihenfolge korrespondieren: A-B-C-B'-A'."
+        },
+        {
+          "id": "es_6",
+          "question": "In der Redaktionskritik (Redaktionsgeschichte) liegt der Schwerpunkt auf:",
+          "options": [
+            "Der Suche nach der verlorenen Originalquelle.",
+            "Der theologischen Rolle und der redaktionellen Tätigkeit des endgültigen Autors des Textes.",
+            "Der physischen Datierung des Papyrus.",
+            "Der Übersetzung der Textvarianten."
+          ],
+          "correct": 1,
+          "explanation": "Die Redaktionskritik untersucht den theologischen Beitrag des endgültigen Redakteurs, wie er die Quellen organisiert und modifiziert hat, um seine Botschaft zu vermitteln."
+        },
+        {
+          "id": "es_7",
+          "question": "Was versteht man unter \"Midrasch\"?",
+          "options": [
+            "Ein zeremonielles Gewand.",
+            "Eine Methode der jüdischen Exegese zur Aktualisierung und Erklärung des biblischen Textes.",
+            "Das Erntefest.",
+            "Eine Stadt in Transjordanien."
+          ],
+          "correct": 1,
+          "explanation": "Midrasch (von darash, 'suchen, untersuchen') ist die rabbinische exegetische Methode, die nach tiefen und aktuellen Bedeutungen im biblischen Text sucht."
+        },
+        {
+          "id": "es_8",
+          "question": "Die \"Schule von Antiochien\" in der patristischen Exegese war bekannt für:",
+          "options": [
+            "Den Schwerpunkt auf allegorische und mystische Interpretation.",
+            "Den Schwerpunkt auf den wörtlichen und historischen Sinn des Textes.",
+            "Die Ablehnung des Neuen Testaments.",
+            "Den ausschließlichen Gebrauch des Lateinischen."
+          ],
+          "correct": 1,
+          "explanation": "Die Schule von Antiochien (Theodor von Mopsuestia, Johannes Chrysostomus) bevorzugte die wörtliche und historische Exegese im Gegensatz zur allegorischen Alexandriner Schule."
+        }
+      ]
+    },
+    "fr": {
+      "questions": [
+        {
+          "id": "es_1",
+          "question": "En exégèse, l'inclusio est une figure de style qui consiste à :",
+          "options": [
+            "Insérer un récit dans un autre (structure en sandwich).",
+            "Terminer une section avec le même mot ou concept avec lequel elle a commencé.",
+            "Utiliser des termes opposés pour décrire la même réalité.",
+            "Citer l'Ancien Testament dans le Nouveau de manière occulte."
+          ],
+          "correct": 1,
+          "explanation": "L'inclusio est une technique littéraire où une section commence et se termine par le même thème, mot ou phrase, créant un cadre qui délimite l'unité textuelle."
+        },
+        {
+          "id": "es_2",
+          "question": "Le concept de \"Sitz im Leben\" dans la critique des formes indique :",
+          "options": [
+            "La datation chronologique d'un manuscrit.",
+            "Le contexte vital/social dans lequel un texte est né et a été transmis.",
+            "La biographie de l'auteur du texte.",
+            "Le lieu géographique où la narration est située."
+          ],
+          "correct": 1,
+          "explanation": "Sitz im Leben (allemand pour 'contexte de vie') désigne l'environnement social, culturel ou liturgique dans lequel une forme littéraire biblique a émergé et a fonctionné."
+        },
+        {
+          "id": "es_3",
+          "question": "Le concept de \"Sensus Plenior\" indique :",
+          "options": [
+            "Le sens entendu par l'auteur humain.",
+            "Le sens littéral historique.",
+            "Un sens plus profond voulu par Dieu qui émerge uniquement à la lumière de révélations ultérieures.",
+            "L'interprétation allégorique arbitraire."
+          ],
+          "correct": 2,
+          "explanation": "Le sensus plenior ('sens plein') se réfère à un sens plus profond du texte, voulu par Dieu mais pas entièrement perçu par l'auteur humain."
+        },
+        {
+          "id": "es_4",
+          "question": "Que signifie le terme \"Eisegèse\"?",
+          "options": [
+            "L'extraction du sens à partir du texte.",
+            "L'insertion arbitraire de ses propres préjugés ou idées dans le texte biblique.",
+            "La correction des fautes d'impression.",
+            "L'étude des langues originales."
+          ],
+          "correct": 1,
+          "explanation": "L'eisegèse (du grec 'apporter à l'intérieur') est le contraire de l'exégèse : elle consiste à imposer des significations au texte au lieu de les en extraire."
+        },
+        {
+          "id": "es_5",
+          "question": "En exégèse, qu'est-ce qu'un \"Chiasme\"?",
+          "options": [
+            "Une forme de schisme au sein d'une église.",
+            "Une structure littéraire en miroir (A-B-B'-A').",
+            "Un type d'hérésie christologique.",
+            "Un commentaire sur les Psaumes."
+          ],
+          "correct": 1,
+          "explanation": "Le chiasme est une structure littéraire en miroir où les éléments se correspondent en ordre inverse : A-B-C-B'-A'."
+        },
+        {
+          "id": "es_6",
+          "question": "Dans la critique de la rédaction (Redaktionsgeschichte), l'accent est mis sur :",
+          "options": [
+            "La recherche de la source originale perdue.",
+            "Le rôle théologique et l'activité éditoriale de l'auteur final du texte.",
+            "La datation physique du papyrus.",
+            "La traduction des variantes textuelles."
+          ],
+          "correct": 1,
+          "explanation": "La critique de la rédaction étudie la contribution théologique du rédacteur final, comment il a organisé et modifié les sources pour communiquer son message."
+        },
+        {
+          "id": "es_7",
+          "question": "Que signifie \"Midrash\"?",
+          "options": [
+            "Un vêtement cérémonial.",
+            "Une méthode d'exégèse juive visant à actualiser et expliquer le texte biblique.",
+            "La fête de la moisson.",
+            "Une ville de Transjordanie."
+          ],
+          "correct": 1,
+          "explanation": "Midrash (de darash, 'chercher, enquêter') est la méthode exégétique rabbinique qui cherche des significations profondes et actuelles dans le texte biblique."
+        },
+        {
+          "id": "es_8",
+          "question": "L'École d'Antioche dans l'exégèse patristique était connue pour :",
+          "options": [
+            "L'accent sur l'interprétation allégorique et mystique.",
+            "L'accent sur le sens littéral et historique du texte.",
+            "Le rejet du Nouveau Testament.",
+            "L'utilisation exclusive du latin."
+          ],
+          "correct": 1,
+          "explanation": "L'école d'Antioche (Théodore de Mopsueste, Jean Chrysostome) privilégiait l'exégèse littérale et historique, en contraste avec l'allégorie alexandrine."
+        }
+      ]
+    },
+    "pt": {
+      "questions": [
+        {
+          "id": "es_1",
+          "question": "Em exegese, a Inclusio é uma figura retórica que consiste em:",
+          "options": [
+            "Inserir um relato dentro de outro (estrutura em sanduíche).",
+            "Terminar uma seção com a mesma palavra ou conceito com que começou.",
+            "Usar termos opostos para descrever a mesma realidade.",
+            "Citar o Antigo Testamento no Novo de forma oculta."
+          ],
+          "correct": 1,
+          "explanation": "A inclusio é uma técnica literária em que uma seção começa e termina com o mesmo tema, palavra ou frase, criando uma moldura que delimita a unidade textual."
+        },
+        {
+          "id": "es_2",
+          "question": "O conceito de \"Sitz im Leben\" na crítica das formas indica:",
+          "options": [
+            "A datação cronológica de um manuscrito.",
+            "O contexto vital/social em que um texto nasceu e foi transmitido.",
+            "A biografia do autor do texto.",
+            "O lugar geográfico em que se ambienta a narrativa."
+          ],
+          "correct": 1,
+          "explanation": "Sitz im Leben (alemão para 'contexto de vida') indica o ambiente social, cultural ou litúrgico em que uma forma literária bíblica teve origem e função."
+        },
+        {
+          "id": "es_3",
+          "question": "O conceito de \"Sensus Plenior\" indica:",
+          "options": [
+            "O significado pretendido pelo autor humano.",
+            "O significado histórico literal.",
+            "Um significado mais profundo desejado por Deus que surge apenas à luz de revelações posteriores.",
+            "A interpretação alegórica arbitrária."
+          ],
+          "correct": 2,
+          "explanation": "O sensus plenior ('sentido pleno') refere-se a um significado mais profundo do texto, entendido por Deus, mas não plenamente percebido pelo autor humano."
+        },
+        {
+          "id": "es_4",
+          "question": "O que indica o termo \"Eisegesis\"?",
+          "options": [
+            "A extração do significado do texto.",
+            "A inserção arbitrária de seus próprios preconceitos ou ideias no texto bíblico.",
+            "A correção de erros tipográficos.",
+            "O estudo das línguas originais."
+          ],
+          "correct": 1,
+          "explanation": "A eisegesis (do grego 'trazer para dentro') é o contrário da exegese: consiste em impor significados ao texto em vez de extraí-los dele."
+        },
+        {
+          "id": "es_5",
+          "question": "Em exegese, o que é um \"Quiasmo\"?",
+          "options": [
+            "Uma forma de cisma dentro de uma igreja.",
+            "Uma estrutura literária especular (A-B-B'-A').",
+            "Um tipo de heresia cristológica.",
+            "Um comentário aos Salmos."
+          ],
+          "correct": 1,
+          "explanation": "O quiasmo é uma estrutura literária em forma de espelho onde os elementos correspondem em ordem inversa: A-B-C-B'-A'."
+        },
+        {
+          "id": "es_6",
+          "question": "Na crítica da redação (Redaktionsgeschichte), a ênfase é colocada em:",
+          "options": [
+            "A busca da fonte original perdida.",
+            "O papel teológico e a atividade editorial do autor final do texto.",
+            "A datação física do papiro.",
+            "A tradução das variantes textuais."
+          ],
+          "correct": 1,
+          "explanation": "A crítica da redação estuda a contribuição teológica do redator final, como organizou e modificou as fontes para comunicar sua mensagem."
+        },
+        {
+          "id": "es_7",
+          "question": "O que se entende por \"Midrash\"?",
+          "options": [
+            "Uma vestimenta cerimonial.",
+            "Um método de exegese judaica destinado a atualizar e explicar o texto bíblico.",
+            "A festa da colheita.",
+            "Uma cidade da Transjordânia."
+          ],
+          "correct": 1,
+          "explanation": "Midrash (de darash, 'buscar, investigar') é o método exegético rabínico que busca significados profundos e atuais no texto bíblico."
+        },
+        {
+          "id": "es_8",
+          "question": "A \"Escola de Antioquia\" na exegese patrística era conhecida por:",
+          "options": [
+            "A ênfase na interpretação alegórica e mística.",
+            "A ênfase no sentido literal e histórico do texto.",
+            "O rejeição do Novo Testamento.",
+            "O uso exclusivo do latim."
+          ],
+          "correct": 1,
+          "explanation": "A escola de Antioquia (Teodoro de Mopsuéstia, João Crisóstomo) privilegiava a exegese literal e histórica, em contraste com a alegoria alexandrina."
+        }
+      ]
+    }
+  },
+  "lingue_bibliche": {
+    "en": {
+      "questions": [
+        {
+          "id": "lb_1",
+          "question": "In Biblical Hebrew, the verb form 'Hifil' generally expresses:",
+          "options": [
+            "A passive action.",
+            "A causative action (e.g., 'to make sit' instead of 'to sit').",
+            "A reflexive action.",
+            "An absolute imperative command."
+          ],
+          "correct": 1,
+          "explanation": "The Hifil is the causative form of the Hebrew verb, expressing causing an action (e.g., from 'to rule' to 'to cause to rule')."
+        },
+        {
+          "id": "lb_2",
+          "question": "In NT Greek, the Aorist aspect usually indicates:",
+          "options": [
+            "An action continuing in the present.",
+            "A punctual action or one considered in its entirety, without reference to duration.",
+            "An action repeated daily.",
+            "A future wish."
+          ],
+          "correct": 1,
+          "explanation": "The Greek aorist expresses the action as a simple, punctual fact, without reference to its progression in time."
+        },
+        {
+          "id": "lb_3",
+          "question": "What is the function of the 'Waw Consecutive' in Biblical Hebrew syntax?",
+          "options": [
+            "Serves exclusively as the coordinating conjunction 'and'.",
+            "Transforms the temporal value of a verb (from perfect to imperfect and vice versa).",
+            "Indicates the beginning of a prophetic quotation.",
+            "Serves to emphasize the subject of the sentence."
+          ],
+          "correct": 1,
+          "explanation": "The Waw Consecutive in Biblical Hebrew changes the temporal aspect of the verb: with the imperfect it indicates past (wayyiqtol), with the perfect it indicates future (weqatal)."
+        },
+        {
+          "id": "lb_4",
+          "question": "What is the prevalent original language of the Book of Daniel, besides Hebrew?",
+          "options": [
+            "Greek",
+            "Latin",
+            "Aramaic",
+            "Coptic"
+          ],
+          "correct": 2,
+          "explanation": "Daniel is written in Hebrew (1:1-2:4a; 8-12) and Aramaic (2:4b-7:28), reflecting the bilingual context of the time."
+        },
+        {
+          "id": "lb_5",
+          "question": "In NT Greek, the 'Genitive Absolute' is a construction that:",
+          "options": [
+            "Indicates the exclusive possession of God.",
+            "Serves to introduce a circumstantial subordinate clause.",
+            "Is used only for proper nouns.",
+            "Does not exist in Koine Greek."
+          ],
+          "correct": 1,
+          "explanation": "The genitive absolute is an independent participial construction expressing temporal, causal, or concessive circumstances."
+        },
+        {
+          "id": "lb_6",
+          "question": "The term 'Hagios' in Greek means:",
+          "options": [
+            "Old",
+            "Holy",
+            "Great",
+            "Wise"
+          ],
+          "correct": 1,
+          "explanation": "'Hagios' ('holy, sacred') is the Greek term for that which is set apart for God, consecrated, pure."
+        },
+        {
+          "id": "lb_7",
+          "question": "What does the term 'Hapax Legomenon' indicate?",
+          "options": [
+            "A direct quotation of Jesus.",
+            "A word appearing only once in the entire biblical corpus.",
+            "A recurring spelling error.",
+            "A messianic title."
+          ],
+          "correct": 1,
+          "explanation": "Hapax legomenon (Greek for 'said once') is a technical term for a word that appears only once in a literary corpus."
+        },
+        {
+          "id": "lb_8",
+          "question": "In the OT, the term 'Hébel' in Ecclesiastes literally means:",
+          "options": [
+            "Sin",
+            "Suffering",
+            "Vapor / Breath / Smoke (metaphor for transience)",
+            "Wisdom"
+          ],
+          "correct": 2,
+          "explanation": "'Hébel' (translated 'vanity') literally means 'vapor, breath, puff', a metaphor for life's fleeting and intangible nature."
+        }
+      ]
+    },
+    "es": {
+      "questions": [
+        {
+          "id": "lb_1",
+          "question": "En hebreo bíblico, la forma verbal \"Hifil\" expresa generalmente:",
+          "options": [
+            "Una acción pasiva.",
+            "Una acción causativa (ej. 'hacer sentar' en lugar de 'sentarse').",
+            "Una acción reflexiva.",
+            "Un mandato imperativo absoluto."
+          ],
+          "correct": 1,
+          "explanation": "El Hifil es la forma causativa del verbo hebreo, que expresa el causar una acción (ej. de 'reinar' a 'hacer reinar')."
+        },
+        {
+          "id": "lb_2",
+          "question": "En griego del NT, el aspecto del tiempo Aoristo indica usualmente:",
+          "options": [
+            "Una acción que continúa en el presente.",
+            "Una acción puntual o considerada en su totalidad, sin referencia a la duración.",
+            "Una acción que se repite cada día.",
+            "Un deseo futuro."
+          ],
+          "correct": 1,
+          "explanation": "El aoristo griego expresa la acción como un hecho simple, puntual, sin referencia a su desarrollo en el tiempo."
+        },
+        {
+          "id": "lb_3",
+          "question": "¿Cuál es la función del \"Waw consecutivo\" en la sintaxis del hebreo bíblico?",
+          "options": [
+            "Sirve exclusivamente como conjunción coordinante 'y'.",
+            "Transforma el valor temporal de un verbo (del perfecto al imperfecto y viceversa).",
+            "Indica el inicio de una cita profética.",
+            "Sirve para enfatizar el sujeto de la frase."
+          ],
+          "correct": 1,
+          "explanation": "El Waw consecutivo en hebreo bíblico cambia el aspecto temporal del verbo: con el imperfecto indica pasado (wayyiqtol), con el perfecto indica futuro (weqatal)."
+        },
+        {
+          "id": "lb_4",
+          "question": "¿Cuál es el idioma original prevalente del libro de Daniel, además del hebreo?",
+          "options": [
+            "Griego",
+            "Latín",
+            "Arameo",
+            "Copto"
+          ],
+          "correct": 2,
+          "explanation": "Daniel está escrito en hebreo (1:1-2:4a; 8-12) y arameo (2:4b-7:28), reflejando el contexto bilingüe de la época."
+        },
+        {
+          "id": "lb_5",
+          "question": "En griego del NT, el \"Genitivo Absoluto\" es una construcción que:",
+          "options": [
+            "Indica la posesión exclusiva de Dios.",
+            "Sirve para introducir una proposición subordinada circunstancial.",
+            "Se usa solo para los nombres propios.",
+            "No existe en el griego koiné."
+          ],
+          "correct": 1,
+          "explanation": "El genitivo absoluto es una construcción participial independiente que expresa circunstancias temporales, causales o concesivas."
+        },
+        {
+          "id": "lb_6",
+          "question": "El término \"Hagios\" en griego significa:",
+          "options": [
+            "Viejo",
+            "Santo",
+            "Grande",
+            "Sabio"
+          ],
+          "correct": 1,
+          "explanation": "Hagios ('santo, sagrado') es el término griego para indicar lo que está separado para Dios, consagrado, puro."
+        },
+        {
+          "id": "lb_7",
+          "question": "¿Qué indica el término \"Hapax Legomenon\"?",
+          "options": [
+            "Una cita directa de Jesús.",
+            "Una palabra que aparece una sola vez en todo el corpus bíblico.",
+            "Un error de ortografía recurrente.",
+            "Un título mesiánico."
+          ],
+          "correct": 1,
+          "explanation": "Hapax legomenon (griego para 'dicho una sola vez') es un término técnico para indicar una palabra que aparece una sola vez en un corpus literario."
+        },
+        {
+          "id": "lb_8",
+          "question": "En el AT, el término \"Hébel\" en Eclesiastés significa literalmente:",
+          "options": [
+            "Pecado",
+            "Sufrimiento",
+            "Vapor / Aliento / Humo (metáfora de la transitoriedad)",
+            "Sabiduría"
+          ],
+          "correct": 2,
+          "explanation": "Hébel (traducido 'vanidad') significa literalmente 'vapor, aliento, soplo', metáfora de la fugacidad e inasibilidad de la vida."
+        }
+      ]
+    },
+    "de": {
+      "questions": [
+        {
+          "id": "lb_1",
+          "question": "Im biblischen Hebräisch drückt die Verbform „Hifil“ im Allgemeinen aus:",
+          "options": [
+            "Eine passive Handlung.",
+            "Eine kausative Handlung (z.B. 'setzen' anstelle von 'sitzen').",
+            "Eine reflexive Handlung.",
+            "Einen absoluten Imperativbefehl."
+          ],
+          "correct": 1,
+          "explanation": "Hifil ist die kausative Verbform im Hebräischen, die das Verursachen einer Handlung ausdrückt (z.B. von 'herrschen' zu 'herrschen lassen')."
+        },
+        {
+          "id": "lb_2",
+          "question": "Im Griechischen des NT zeigt der Aspekt der Aorist-Zeitform gewöhnlich:",
+          "options": [
+            "Eine Handlung, die im Präsens fortdauert.",
+            "Eine punktuelle Handlung oder eine Handlung in ihrer Gesamtheit, ohne Bezug auf die Dauer.",
+            "Eine Handlung, die sich jeden Tag wiederholt.",
+            "Einen zukünftigen Wunsch."
+          ],
+          "correct": 1,
+          "explanation": "Der griechische Aorist beschreibt die Handlung als einfachen, punktuellen Sachverhalt, ohne Bezug auf ihren Ablauf in der Zeit."
+        },
+        {
+          "id": "lb_3",
+          "question": "Was ist die Funktion des „Waw consecutivum“ in der Syntax des biblischen Hebräisch?",
+          "options": [
+            "Es dient ausschließlich als koordinierendes Bindewort 'und'.",
+            "Es verändert den zeitlichen Wert eines Verbs (vom Perfekt zum Imperfekt und umgekehrt).",
+            "Es zeigt den Beginn eines prophetischen Zitats an.",
+            "Es dient zur Betonung des Subjekts im Satz."
+          ],
+          "correct": 1,
+          "explanation": "Das Waw consecutivum im biblischen Hebräisch ändert den zeitlichen Aspekt des Verbs: Mit dem Imperfekt zeigt es die Vergangenheit (Wayyiqtol) und mit dem Perfekt die Zukunft (Weqatal) an."
+        },
+        {
+          "id": "lb_4",
+          "question": "Welche ist die vorherrschende Originalsprache des Buches Daniel, außer Hebräisch?",
+          "options": [
+            "Griechisch",
+            "Latein",
+            "Aramäisch",
+            "Koptisch"
+          ],
+          "correct": 2,
+          "explanation": "Das Buch Daniel ist in Hebräisch (1:1-2:4a; 8-12) und Aramäisch (2:4b-7:28) verfasst, was den zweisprachigen Kontext der Epoche widerspiegelt."
+        },
+        {
+          "id": "lb_5",
+          "question": "Im Griechischen des NT ist die \"Genitivus Absolutus\" eine Konstruktion, die:",
+          "options": [
+            "Den ausschließlichen Besitz Gottes anzeigt.",
+            "Einen untergeordneten Umstandssatz einleitet.",
+            "Nur für Eigennamen verwendet wird.",
+            "Im Koine-Griechisch nicht existiert."
+          ],
+          "correct": 1,
+          "explanation": "Der Genitivus Absolutus ist eine unabhängige Partizipialkonstruktion, die zeitliche, kausale oder konzessive Umstände ausdrückt."
+        },
+        {
+          "id": "lb_6",
+          "question": "Das Wort „Hagios“ im Griechischen bedeutet:",
+          "options": [
+            "Alt",
+            "Heilig",
+            "Groß",
+            "Weise"
+          ],
+          "correct": 1,
+          "explanation": "Hagios ('heilig, geweiht') ist der griechische Begriff für das, was für Gott ausgesondert, geweiht, rein ist."
+        },
+        {
+          "id": "lb_7",
+          "question": "Was bezeichnet der Begriff „Hapax Legomenon“?",
+          "options": [
+            "Ein direktes Zitat von Jesus.",
+            "Ein Wort, das im gesamten biblischen Korpus nur einmal vorkommt.",
+            "Ein wiederkehrender Rechtschreibfehler.",
+            "Ein messianischer Titel."
+          ],
+          "correct": 1,
+          "explanation": "Hapax Legomenon (griechisch für 'einmal gesagt') ist ein Fachbegriff für ein Wort, das in einem literarischen Korpus nur einmal vorkommt."
+        },
+        {
+          "id": "lb_8",
+          "question": "Im AT bedeutet der Begriff „Hébel“ in Kohelet wörtlich:",
+          "options": [
+            "Sünde",
+            "Leiden",
+            "Dampf / Atem / Rauch (Metapher für Vergänglichkeit)",
+            "Weisheit"
+          ],
+          "correct": 2,
+          "explanation": "Hébel (übersetzt 'Nichtigkeit') bedeutet wörtlich 'Dampf, Hauch, Atem', eine Metapher für die Vergänglichkeit und Unerreichbarkeit des Lebens."
+        }
+      ]
+    },
+    "fr": {
+      "questions": [
+        {
+          "id": "lb_1",
+          "question": "En hébreu biblique, la forme verbale \"Hifil\" exprime généralement :",
+          "options": [
+            "Une action passive.",
+            "Une action causative (ex. 'faire asseoir' au lieu de 's'asseoir').",
+            "Une action réflexive.",
+            "Un ordre impératif absolu."
+          ],
+          "correct": 1,
+          "explanation": "Le Hifil est la forme causative du verbe hébreu, qui exprime le fait de causer une action (ex. de 'régner' à 'faire régner')."
+        },
+        {
+          "id": "lb_2",
+          "question": "En grec du NT, l'aspect du temps Aoriste indique généralement :",
+          "options": [
+            "Une action qui se poursuit dans le présent.",
+            "Une action ponctuelle ou considérée dans sa globalité, sans référence à la durée.",
+            "Une action qui se répète chaque jour.",
+            "Un désir futur."
+          ],
+          "correct": 1,
+          "explanation": "L'aoriste grec exprime l'action comme un fait simple, ponctuel, sans référence à son déroulement dans le temps."
+        },
+        {
+          "id": "lb_3",
+          "question": "Quelle est la fonction du \"Waw consécutif\" dans la syntaxe de l'hébreu biblique ?",
+          "options": [
+            "Il sert exclusivement de conjonction coordinante 'et'.",
+            "Il transforme la valeur temporelle d'un verbe (du parfait à l'imparfait et inversement).",
+            "Il indique le début d'une citation prophétique.",
+            "Il sert à accentuer le sujet de la phrase."
+          ],
+          "correct": 1,
+          "explanation": "Le Waw consécutif en hébreu biblique change l'aspect temporel du verbe : avec l'imparfait, il indique le passé (wayyiqtol), avec le parfait, il indique le futur (weqatal)."
+        },
+        {
+          "id": "lb_4",
+          "question": "Quelle est la langue originale prévalente du livre de Daniel, en plus de l'hébreu ?",
+          "options": [
+            "Grec",
+            "Latin",
+            "Araméen",
+            "Copte"
+          ],
+          "correct": 2,
+          "explanation": "Daniel est écrit en hébreu (1:1-2:4a; 8-12) et en araméen (2:4b-7:28), reflétant le contexte bilingue de l'époque."
+        },
+        {
+          "id": "lb_5",
+          "question": "En grec du NT, le \"Génitif Absolu\" est une construction qui :",
+          "options": [
+            "Indique la possession exclusive de Dieu.",
+            "Sert à introduire une proposition subordonnée circonstancielle.",
+            "Est utilisée seulement pour les noms propres.",
+            "N'existe pas en grec koinè."
+          ],
+          "correct": 1,
+          "explanation": "Le génitif absolu est une construction participiale indépendante qui exprime des circonstances temporelles, causales ou concessives."
+        },
+        {
+          "id": "lb_6",
+          "question": "Le terme \"Hagios\" en grec signifie :",
+          "options": [
+            "Vieux",
+            "Saint",
+            "Grand",
+            "Sage"
+          ],
+          "correct": 1,
+          "explanation": "Hagios ('saint, sacré') est le terme grec pour indiquer ce qui est séparé pour Dieu, consacré, pur."
+        },
+        {
+          "id": "lb_7",
+          "question": "Que signifie le terme \"Hapax Legomenon\" ?",
+          "options": [
+            "Une citation directe de Jésus.",
+            "Un mot qui apparaît une seule fois dans tout le corpus biblique.",
+            "Une erreur d'orthographe récurrente.",
+            "Un titre messianique."
+          ],
+          "correct": 1,
+          "explanation": "Hapax legomenon (grec pour 'dit une seule fois') est un terme technique pour indiquer un mot qui apparaît une seule fois dans un corpus littéraire."
+        },
+        {
+          "id": "lb_8",
+          "question": "Dans l'AT, le terme \"Hébel\" dans Qohélet signifie littéralement :",
+          "options": [
+            "Péché",
+            "Souffrance",
+            "Vapeur / Souffle / Fumée (métaphore de la transitoireté)",
+            "Sagesse"
+          ],
+          "correct": 2,
+          "explanation": "Hébel (traduit 'vanité') signifie littéralement 'vapeur, souffle, fumée', métaphore de la fugacité et inaccessibilité de la vie."
+        }
+      ]
+    },
+    "pt": {
+      "questions": [
+        {
+          "id": "lb_1",
+          "question": "Em hebraico bíblico, a forma verbal 'Hifil' expressa geralmente:",
+          "options": [
+            "Uma ação passiva.",
+            "Uma ação causativa (ex. 'fazer sentar' em vez de 'sentar').",
+            "Uma ação reflexiva.",
+            "Um comando imperativo absoluto."
+          ],
+          "correct": 1,
+          "explanation": "O Hifil é a forma causativa do verbo hebraico, que expressa o causar de uma ação (ex. de 'reinar' para 'fazer reinar')."
+        },
+        {
+          "id": "lb_2",
+          "question": "Em grego do NT, o aspecto do tempo Aoristo indica geralmente:",
+          "options": [
+            "Uma ação que continua no presente.",
+            "Uma ação pontual ou considerada na sua globalidade, sem referência à duração.",
+            "Uma ação que se repete todos os dias.",
+            "Um desejo futuro."
+          ],
+          "correct": 1,
+          "explanation": "O aoristo grego expressa a ação como um fato simples, pontual, sem referência ao seu desenrolar no tempo."
+        },
+        {
+          "id": "lb_3",
+          "question": "Qual é a função do 'Vav consecutivo' na sintaxe do hebraico bíblico?",
+          "options": [
+            "Serve exclusivamente como conjunção coordenativa 'e'.",
+            "Transforma o valor temporal de um verbo (do perfeito para o imperfeito e vice-versa).",
+            "Indica o início de uma citação profética.",
+            "Serve para enfatizar o sujeito da frase."
+          ],
+          "correct": 1,
+          "explanation": "O Vav consecutivo em hebraico bíblico muda o aspecto temporal do verbo: com o imperfeito indica passado (wayyiqtol), com o perfeito indica futuro (weqatal)."
+        },
+        {
+          "id": "lb_4",
+          "question": "Qual é a língua original predominante do livro de Daniel, além do hebraico?",
+          "options": [
+            "Grego",
+            "Latim",
+            "Aramaico",
+            "Copta"
+          ],
+          "correct": 2,
+          "explanation": "Daniel é escrito em hebraico (1:1-2:4a; 8-12) e aramaico (2:4b-7:28), refletindo o contexto bilíngue da época."
+        },
+        {
+          "id": "lb_5",
+          "question": "Em grego do NT, o 'Genitivo Absoluto' é uma construção que:",
+          "options": [
+            "Indica a posse exclusiva de Deus.",
+            "Serve para introduzir uma proposição subordinada circunstancial.",
+            "É usada apenas para nomes próprios.",
+            "Não existe no grego koiné."
+          ],
+          "correct": 1,
+          "explanation": "O genitivo absoluto é uma construção participial independente que expressa circunstâncias temporais, causais ou concessivas."
+        },
+        {
+          "id": "lb_6",
+          "question": "O termo 'Hagios' em grego significa:",
+          "options": [
+            "Velho",
+            "Santo",
+            "Grande",
+            "Sábio"
+          ],
+          "correct": 1,
+          "explanation": "Hagios ('santo, sagrado') é o termo grego para indicar o que é separado para Deus, consagrado, puro."
+        },
+        {
+          "id": "lb_7",
+          "question": "O que indica o termo 'Hapax Legomenon'?",
+          "options": [
+            "Uma citação direta de Jesus.",
+            "Uma palavra que aparece apenas uma vez em todo o corpus bíblico.",
+            "Um erro de ortografia recorrente.",
+            "Um título messiânico."
+          ],
+          "correct": 1,
+          "explanation": "Hapax legomenon (grego para 'dito uma só vez') é um termo técnico para indicar uma palavra que aparece uma única vez em um corpus literário."
+        },
+        {
+          "id": "lb_8",
+          "question": "No AT, o termo 'Hébel' em Eclesiastes significa literalmente:",
+          "options": [
+            "Pecado",
+            "Sofrimento",
+            "Vapor / Alento / Fumaça (metáfora da transitoriedade)",
+            "Sabedoria"
+          ],
+          "correct": 2,
+          "explanation": "Hébel (traduzido como 'vaidade') significa literalmente 'vapor, alento, sopro', metáfora da fugacidade e inatingibilidade da vida."
+        }
+      ]
+    }
+  },
+  "teologia_nt": {
+    "en": {
+      "questions": [
+        {
+          "id": "tnt_1",
+          "question": "The Greek term 'Kenosis' (Philippians 2:7) theologically describes:",
+          "options": [
+            "The ascension of Christ.",
+            "The emptying of divine prerogatives in the incarnation.",
+            "The fullness of grace received by believers.",
+            "The final judgment of nations."
+          ],
+          "correct": 1,
+          "explanation": "Kenosis (from Greek 'emptying') refers to the act of Christ 'emptying himself' by taking on the form of a servant."
+        },
+        {
+          "id": "tnt_2",
+          "question": "What does the term 'Kerygma' indicate?",
+          "options": [
+            "The discipline manual of a community.",
+            "The central core of the early Christian proclamation (death and resurrection of Christ).",
+            "The set of moral laws of the Torah.",
+            "The architectural structure of a basilica."
+          ],
+          "correct": 1,
+          "explanation": "Kerygma (Greek 'proclamation') indicates the essential core of apostolic preaching: death, burial, and resurrection of Christ."
+        },
+        {
+          "id": "tnt_3",
+          "question": "What does the term 'Parousia' indicate?",
+          "options": [
+            "The death of an apostle.",
+            "The coming/glorious return of Christ at the end of times.",
+            "The Eucharistic banquet.",
+            "Preaching in the temple."
+          ],
+          "correct": 1,
+          "explanation": "Parousia (Greek 'presence, coming') in the NT refers to the second glorious coming of Christ at the end of times."
+        },
+        {
+          "id": "tnt_4",
+          "question": "In theology, 'Realized Eschatology' asserts that:",
+          "options": [
+            "The Kingdom of God is entirely in the future.",
+            "The Kingdom of God is already present and operative through the coming of Jesus.",
+            "The world will end tomorrow.",
+            "There is no life after death."
+          ],
+          "correct": 1,
+          "explanation": "Realized eschatology (C.H. Dodd) emphasizes that in Jesus the eschatological realities are already present: the Kingdom has come."
+        },
+        {
+          "id": "tnt_5",
+          "question": "The 'Logos' in John's prologue has philosophical and theological roots in:",
+          "options": [
+            "Only in Greek Stoic philosophy.",
+            "Only in the personified 'Wisdom' of the OT.",
+            "Both in the Greek concept of universal reason and the Hebrew creative 'Word'.",
+            "Exclusively in Egyptian mysticism."
+          ],
+          "correct": 2,
+          "explanation": "The Johannine Logos integrates the Greek philosophical concept of cosmic reason with the Hebrew tradition of God's creative Word."
+        },
+        {
+          "id": "tnt_6",
+          "question": "In Romans 3:25, the term 'Hilasterion' refers to:",
+          "options": [
+            "The cover of the Ark of the Covenant (Mercy Seat).",
+            "The altar of burnt offerings.",
+            "The door of the Temple.",
+            "The chalice of the last supper."
+          ],
+          "correct": 0,
+          "explanation": "Hilasterion in the Greek of the LXX translates the 'kapporet', the cover of the Ark where the blood was sprinkled on the Day of Atonement."
+        },
+        {
+          "id": "tnt_7",
+          "question": "The concept of 'Christology from below' starts with the study of:",
+          "options": [
+            "The pre-existence of the Logos in God.",
+            "The historical humanity of Jesus and his path to divinity.",
+            "The messianic prophecies of Isaiah.",
+            "The angelic hierarchy."
+          ],
+          "correct": 1,
+          "explanation": "The 'from below' Christology starts from the historical humanity of Jesus and proceeds to the confession of his divinity."
+        },
+        {
+          "id": "tnt_8",
+          "question": "The 'New Perspective on Paul' (E.P. Sanders) argues that:",
+          "options": [
+            "Paul hated Judaism.",
+            "First-century Judaism was not a religion of 'legal merits' but of 'covenantal nomism'.",
+            "Paul never wrote the Letter to the Romans.",
+            "Justification by faith is an invention of Luther."
+          ],
+          "correct": 1,
+          "explanation": "Sanders and the New Perspective on Paul contended that first-century Judaism was not meritocratic legalism but 'covenantal nomism'."
+        }
+      ]
+    },
+    "es": {
+      "questions": [
+        {
+          "id": "tnt_1",
+          "question": "El término griego \"Kenosis\" (Filipenses 2:7) describe teológicamente:",
+          "options": [
+            "La ascensión al cielo de Cristo.",
+            "El vaciamiento de las prerrogativas divinas en la encarnación.",
+            "La plenitud de la gracia recibida por los creyentes.",
+            "El juicio final de las naciones."
+          ],
+          "correct": 1,
+          "explanation": "La kenosis (del griego 'vaciamiento') se refiere al acto de Cristo de 'vaciarse a sí mismo' tomando la forma de siervo."
+        },
+        {
+          "id": "tnt_2",
+          "question": "¿Qué indica el término \"Kerygma\"?",
+          "options": [
+            "El manual de disciplina de una comunidad.",
+            "El núcleo central del anuncio cristiano primitivo (muerte y resurrección de Cristo).",
+            "El conjunto de las leyes morales de la Torá.",
+            "La estructura arquitectónica de una basílica."
+          ],
+          "correct": 1,
+          "explanation": "Kerygma (griego 'proclamación') indica el núcleo esencial de la predicación apostólica: muerte, sepultura y resurrección de Cristo."
+        },
+        {
+          "id": "tnt_3",
+          "question": "¿Qué indica el término \"Parusía\"?",
+          "options": [
+            "La muerte de un apóstol.",
+            "La venida/retorno glorioso de Cristo al final de los tiempos.",
+            "El banquete eucarístico.",
+            "La predicación en el templo."
+          ],
+          "correct": 1,
+          "explanation": "Parusía (griego 'presencia, venida') en el NT indica la segunda venida gloriosa de Cristo al final de los tiempos."
+        },
+        {
+          "id": "tnt_4",
+          "question": "En teología, la \"Escatología Realizada\" sostiene que:",
+          "options": [
+            "El Reino de Dios está enteramente en el futuro.",
+            "El Reino de Dios ya está presente y operante a través de la venida de Jesús.",
+            "El mundo terminará mañana.",
+            "No existe vida después de la muerte."
+          ],
+          "correct": 1,
+          "explanation": "La escatología realizada (C.H. Dodd) enfatiza que en Jesús las realidades escatológicas ya están presentes: el Reino ha venido."
+        },
+        {
+          "id": "tnt_5",
+          "question": "El \"Logos\" en el prólogo de Juan tiene raíces filosóficas y teológicas en:",
+          "options": [
+            "Solo en la filosofía estoica griega.",
+            "Solo en la 'Sabiduría' personificada del AT.",
+            "Tanto en el concepto griego de razón universal como en la 'Palabra' creadora hebrea.",
+            "Exclusivamente en el misticismo egipcio."
+          ],
+          "correct": 2,
+          "explanation": "El Logos joanico integra el concepto filosófico griego de la razón cósmica con la tradición hebrea de la Palabra creadora de Dios."
+        },
+        {
+          "id": "tnt_6",
+          "question": "En Romanos 3:25, el término \"Hilasterion\" se refiere a:",
+          "options": [
+            "La cubierta del Arca de la Alianza (Propiciatorio).",
+            "El altar de los holocaustos.",
+            "La puerta del Templo.",
+            "El cáliz de la última cena."
+          ],
+          "correct": 0,
+          "explanation": "Hilasterion en el griego de la LXX traduce el 'kapporet', la cubierta del Arca donde se realizaba la aspersión de la sangre en el Día de la Expiación."
+        },
+        {
+          "id": "tnt_7",
+          "question": "El concepto de \"Cristología desde abajo\" parte del estudio de:",
+          "options": [
+            "La preexistencia del Logos en Dios.",
+            "La humanidad histórica de Jesús y su camino hacia la divinidad.",
+            "Las profecías mesiánicas de Isaías.",
+            "La jerarquía angelical."
+          ],
+          "correct": 1,
+          "explanation": "La cristología 'desde abajo' parte de la humanidad histórica de Jesús y procede hacia la confesión de su divinidad."
+        },
+        {
+          "id": "tnt_8",
+          "question": "La \"Nueva Perspectiva sobre Pablo\" (E.P. Sanders) sostiene que:",
+          "options": [
+            "Pablo odiaba el judaísmo.",
+            "El judaísmo del primer siglo no era una religión de 'méritos legales' sino de 'nomismo del pacto'.",
+            "Pablo nunca escribió la Carta a los Romanos.",
+            "La justificación por la fe es una invención de Lutero."
+          ],
+          "correct": 1,
+          "explanation": "Sanders y la Nueva Perspectiva sobre Pablo han sostenido que el judaísmo del I siglo no era legalismo meritocrático sino 'nomismo del pacto'."
+        }
+      ]
+    },
+    "de": {
+      "questions": [
+        {
+          "id": "tnt_1",
+          "question": "Der griechische Begriff \"Kenosis\" (Philipper 2:7) beschreibt theologisch:",
+          "options": [
+            "Die Himmelfahrt Christi.",
+            "Die Entäußerung der göttlichen Vorrechte in der Inkarnation.",
+            "Die Fülle der Gnade, die den Gläubigen zuteil wird.",
+            "Das endgültige Gericht über die Nationen."
+          ],
+          "correct": 1,
+          "explanation": "Die Kenosis (vom Griechischen 'Entleerung') bezieht sich auf den Akt Christi, sich selbst zu 'entleeren', indem er die Gestalt eines Dieners annimmt."
+        },
+        {
+          "id": "tnt_2",
+          "question": "Was bezeichnet der Begriff \"Kerygma\"?",
+          "options": [
+            "Das Disziplinhandbuch einer Gemeinschaft.",
+            "Den zentralen Kern der frühchristlichen Verkündigung (Tod und Auferstehung Christi).",
+            "Die Gesamtheit der moralischen Gesetze der Tora.",
+            "Die architektonische Struktur einer Basilika."
+          ],
+          "correct": 1,
+          "explanation": "Kerygma (griechisch 'Verkündung') bezeichnet den wesentlichen Kern der apostolischen Predigt: Tod, Begräbnis und Auferstehung Christi."
+        },
+        {
+          "id": "tnt_3",
+          "question": "Was bezeichnet der Begriff \"Parousia\"?",
+          "options": [
+            "Den Tod eines Apostels.",
+            "Das Kommen/Wiederkommen Christi in Herrlichkeit am Ende der Zeiten.",
+            "Das eucharistische Mahl.",
+            "Die Predigt im Tempel."
+          ],
+          "correct": 1,
+          "explanation": "Parousia (griechisch 'Anwesenheit, Kommen') im NT bezeichnet das zweite, glorreiche Kommen Christi am Ende der Zeiten."
+        },
+        {
+          "id": "tnt_4",
+          "question": "In der Theologie besagt die \"realisierten Eschatologie\", dass:",
+          "options": [
+            "Das Reich Gottes vollständig in der Zukunft liegt.",
+            "Das Reich Gottes bereits gegenwärtig ist und durch das Kommen Jesu wirkt.",
+            "Die Welt morgen enden wird.",
+            "Es kein Leben nach dem Tod gibt."
+          ],
+          "correct": 1,
+          "explanation": "Die realisierte Eschatologie (C.H. Dodd) betont, dass in Jesus die eschatologischen Realitäten bereits präsent sind: Das Reich ist gekommen."
+        },
+        {
+          "id": "tnt_5",
+          "question": "Der \"Logos\" in der Einleitung des Johannes hat philosophische und theologische Wurzeln in:",
+          "options": [
+            "Nur in der stoischen griechischen Philosophie.",
+            "Nur in der personifizierten 'Weisheit' des AT.",
+            "Sowohl im griechischen Konzept des universellen Vernunftprinzips als auch im jüdischen Schöpfungswort.",
+            "Ausschließlich im ägyptischen Mystizismus."
+          ],
+          "correct": 2,
+          "explanation": "Der johanneische Logos integriert das griechische philosophische Konzept des kosmischen Vernunftprinzips mit der jüdischen Tradition des schöpfenden Wortes Gottes."
+        },
+        {
+          "id": "tnt_6",
+          "question": "In Römer 3:25 bezieht sich der Begriff \"Ilastérion\" auf:",
+          "options": [
+            "Den Deckel der Bundeslade (Gnadenstuhl).",
+            "Den Brandopferaltar.",
+            "Das Tor des Tempels.",
+            "Den Kelch des Abendmahls."
+          ],
+          "correct": 0,
+          "explanation": "Hilasterion im griechischen der LXX übersetzt das 'kapporet', den Deckel der Lade, auf dem die Besprengung mit Blut am Versöhnungstag erfolgte."
+        },
+        {
+          "id": "tnt_7",
+          "question": "Das Konzept der \"Christologie von unten\" beginnt mit dem Studium von:",
+          "options": [
+            "Der Präexistenz des Logos in Gott.",
+            "Der historischen Menschheit Jesu und seinem Weg zur Göttlichkeit.",
+            "Den messianischen Prophezeiungen Jesajas.",
+            "Der Engelshierarchie."
+          ],
+          "correct": 1,
+          "explanation": "Die Christologie 'von unten' beginnt mit der historischen Menschheit Jesu und führt zur Bekenntnis seiner Göttlichkeit."
+        },
+        {
+          "id": "tnt_8",
+          "question": "Die \"Neue Perspektive auf Paulus\" (E.P. Sanders) behauptet, dass:",
+          "options": [
+            "Paulus den Judaismus hasste.",
+            "Der Judaismus des ersten Jahrhunderts keine Religion der 'gesetzlichen Verdienste', sondern des 'Bundesnomismus' war.",
+            "Paulus niemals den Römerbrief geschrieben hat.",
+            "Die Rechtfertigung durch Glauben eine Erfindung Luthers ist."
+          ],
+          "correct": 1,
+          "explanation": "Sanders und die Neue Perspektive auf Paulus haben argumentiert, dass der Judaismus des 1. Jahrhunderts nicht legalistischer Verdienstglaube, sondern 'Bundesnomismus' war."
+        }
+      ]
+    }
+  }
+}
