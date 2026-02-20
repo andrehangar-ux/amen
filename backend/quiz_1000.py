@@ -391,6 +391,12 @@ CATEGORY_TRANSLATIONS = {
 # Cache for loaded data
 _quiz_data_cache = None
 
+def reload_quiz_data():
+    """Force reload of quiz data (invalidate cache)"""
+    global _quiz_data_cache
+    _quiz_data_cache = load_quiz_categories()
+    return _quiz_data_cache
+
 def get_quiz_1000_data():
     """Get all quiz categories data with caching"""
     global _quiz_data_cache
