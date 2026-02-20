@@ -1,0 +1,808 @@
+{
+  "studio_avanzato": {
+    "title": "Studio Biblico Avanzato",
+    "description": "100 domande di critica testuale ed esegesi",
+    "questions": [
+      {
+        "id": "adv_1",
+        "question": "Nella critica testuale, il fenomeno dell'Omeoteleuto indica:",
+        "options": ["La ripetizione errata di una parola da parte del copista.", "Il salto di una porzione di testo dovuto a finali di riga identici.", "La confusione tra suoni vocalici simili nel greco koinè.", "La traduzione letterale di un ebraismo in greco."],
+        "correct": 1,
+        "explanation": "L'omeoteleuto (dal greco 'terminazione simile') è un errore di copiatura in cui il copista salta del testo perché due righe o sezioni terminano con le stesse lettere o parole.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_2",
+        "question": "Il Codex Vaticanus (B) è un testimone fondamentale di quale tipo testuale?",
+        "options": ["Bizantino", "Occidentale", "Alessandrino", "Cesareense"],
+        "correct": 2,
+        "explanation": "Il Codex Vaticanus è uno dei più importanti testimoni del tipo testuale Alessandrino, considerato generalmente il più vicino ai testi originali.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_3",
+        "question": "Cosa si intende per \"Lectio Difficilior Potior\"?",
+        "options": ["La lettura più lunga è sempre la più autorevole.", "Il testo più difficile è probabilmente l'originale perché meno soggetto a 'correzioni' semplificative.", "La variante presente nel maggior numero di manoscritti è la più corretta.", "La traduzione latina deve avere la precedenza sul greco."],
+        "correct": 1,
+        "explanation": "Questo principio della critica testuale afferma che la lettura più difficile è probabilmente quella originale, poiché i copisti tendevano a semplificare piuttosto che complicare il testo.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_4",
+        "question": "In esegesi, l'Inclusio è una figura retorica che consiste nel:",
+        "options": ["Inserire un racconto dentro l'altro (struttura a sandwich).", "Terminare una sezione con la stessa parola o concetto con cui è iniziata.", "Utilizzare termini opposti per descrivere la stessa realtà.", "Citare l'Antico Testamento nel Nuovo in modo occulto."],
+        "correct": 1,
+        "explanation": "L'inclusio è una tecnica letteraria in cui una sezione inizia e termina con lo stesso tema, parola o frase, creando una cornice che delimita l'unità testuale.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_5",
+        "question": "L'ipotesi documentale (JEDP) attribuisce la fonte \"P\" (Sacerdotale) a quale interesse principale?",
+        "options": ["Narrazioni antropomorfiche e leggende patriarcali.", "Genealogie, leggi cultuali, cronologia e rituali.", "Riforme centralizzate nel tempio di Gerusalemme.", "Tradizioni profetiche del Regno del Nord."],
+        "correct": 1,
+        "explanation": "La fonte P (Priestercodex o Codice Sacerdotale) è caratterizzata dall'interesse per questioni cultuali, genealogie, cronologie precise e norme rituali.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_6",
+        "question": "Il termine greco \"Kenosis\" (Filippesi 2:7) descrive teologicamente:",
+        "options": ["L'ascesa al cielo di Cristo.", "Lo svuotamento delle prerogative divine nell'incarnazione.", "La pienezza della grazia ricevuta dai credenti.", "Il giudizio finale delle nazioni."],
+        "correct": 1,
+        "explanation": "La kenosis (dal greco 'svuotamento') si riferisce all'atto di Cristo di 'svuotare se stesso' assumendo la forma di servo, come descritto nell'inno cristologico di Filippesi 2:5-11.",
+        "verse_ref": "Filippesi 2:7"
+      },
+      {
+        "id": "adv_7",
+        "question": "Qual è la principale caratteristica della \"Fonte Q\" (Quelle)?",
+        "options": ["È un vangelo completo di passione e resurrezione.", "È una raccolta ipotetica di detti di Gesù (logia) usata da Matteo e Luca.", "È il diario di bordo dell'apostolo Pietro.", "È la traduzione aramaica del Vangelo di Marco."],
+        "correct": 1,
+        "explanation": "Q (dal tedesco Quelle, 'fonte') è una fonte ipotetica contenente principalmente detti di Gesù, utilizzata indipendentemente da Matteo e Luca oltre a Marco.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_8",
+        "question": "La Septuaginta (LXX) è stata redatta principalmente in quale città?",
+        "options": ["Gerusalemme", "Roma", "Alessandria d'Egitto", "Antiochia"],
+        "correct": 2,
+        "explanation": "La traduzione della Septuaginta fu realizzata ad Alessandria d'Egitto a partire dal III secolo a.C., principalmente per la comunità ebraica di lingua greca.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_9",
+        "question": "Nella poesia ebraica, il \"Parallelismo Sintetico\" avviene quando:",
+        "options": ["Il secondo verso ripete il concetto del primo con parole diverse.", "Il secondo verso nega il concetto del primo.", "Il secondo verso completa o sviluppa il pensiero del primo.", "I versi iniziano con lettere consecutive dell'alfabeto."],
+        "correct": 2,
+        "explanation": "Nel parallelismo sintetico (o progressivo), il secondo verso aggiunge informazioni o sviluppa il pensiero del primo, piuttosto che ripeterlo o contrastarlo.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_10",
+        "question": "Il concetto di \"Sitz im Leben\" nella critica delle forme indica:",
+        "options": ["La datazione cronologica di un manoscritto.", "Il contesto vitale/sociale in cui un testo è nato e stato tramandato.", "La biografia dell'autore del testo.", "Il luogo geografico in cui è ambientata la narrazione."],
+        "correct": 1,
+        "explanation": "Sitz im Leben (tedesco per 'contesto di vita') indica l'ambiente sociale, culturale o liturgico in cui una forma letteraria biblica ha avuto origine e funzione.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_11",
+        "question": "Quale eresia del II secolo sosteneva che il Dio dell'Antico Testamento fosse diverso e inferiore al Padre di Gesù?",
+        "options": ["Gnosticismo", "Marcionismo", "Arianesimo", "Montanismo"],
+        "correct": 1,
+        "explanation": "Marcione di Sinope (ca. 85-160 d.C.) insegnava che il Dio dell'AT era un demiurgo inferiore, distinto dal Dio d'amore rivelato da Gesù.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_12",
+        "question": "Cosa indica il termine \"Hapax Legomenon\"?",
+        "options": ["Una citazione diretta di Gesù.", "Una parola che compare una sola volta in tutto il corpus biblico.", "Un errore di ortografia ricorrente.", "Un titolo messianico."],
+        "correct": 1,
+        "explanation": "Hapax legomenon (greco per 'detto una sola volta') è un termine tecnico per indicare una parola che appare una sola volta in un corpus letterario.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_13",
+        "question": "Il \"Segreto Messianico\" è un motivo teologico predominante in quale vangelo?",
+        "options": ["Matteo", "Luca", "Giovanni", "Marco"],
+        "correct": 3,
+        "explanation": "Il segreto messianico è un tema distintivo del Vangelo di Marco, dove Gesù ripetutamente chiede di non rivelare la sua identità.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_14",
+        "question": "Chi sono i \"Masoreti\"?",
+        "options": ["Una setta di Qumran.", "Studiosi ebrei che fissarono il testo, la vocalizzazione e la cantillazione dell'Antico Testamento.", "I traduttori della Vulgata latina.", "I capi della rivolta maccabaica."],
+        "correct": 1,
+        "explanation": "I Masoreti furono studiosi ebrei (VI-X sec. d.C.) che standardizzarono il testo consonantico dell'AT, aggiungendo vocali e segni di cantillazione.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_15",
+        "question": "In Romani 3:25, il termine \"Ilastérion\" si riferisce a:",
+        "options": ["Il coperchio dell'Arca dell'Alleanza (Propiziatorio).", "L'altare degli olocausti.", "La porta del Tempio.", "Il calice dell'ultima cena."],
+        "correct": 0,
+        "explanation": "Hilasterion nel greco della LXX traduce il 'kapporet', il coperchio dell'Arca dove avveniva l'aspersione del sangue nel Giorno dell'Espiazione.",
+        "verse_ref": "Romani 3:25"
+      },
+      {
+        "id": "adv_16",
+        "question": "La \"Teologia del Resto\" è tipica di quale ambito profetico?",
+        "options": ["Solo dei profeti minori.", "Della speranza che un piccolo gruppo fedele sopravviva al giudizio per ricostruire Israele.", "Della convinzione che tutto Israele sarà salvato senza giudizio.", "Del rifiuto totale delle promesse davidiche."],
+        "correct": 1,
+        "explanation": "La teologia del resto (remnant theology) esprime la speranza che un nucleo fedele di Israele sopravviva al giudizio divino e diventi il seme della restaurazione.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_17",
+        "question": "Cosa caratterizza il genere \"Apocalittico\" rispetto a quello \"Profetico\"?",
+        "options": ["Un linguaggio più semplice e diretto.", "L'uso di simbolismo estremo, visioni angeliche e determinismo storico.", "La mancanza di riferimenti al futuro.", "La focalizzazione esclusiva sulla morale sociale."],
+        "correct": 1,
+        "explanation": "La letteratura apocalittica è caratterizzata da simbolismo elaborato, rivelazioni mediate da angeli, dualismo cosmico e visione deterministica della storia.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_18",
+        "question": "Qual è l'importanza del Papiro P52?",
+        "options": ["Contiene il testo completo dell'Apocalisse.", "È il più antico frammento del Nuovo Testamento (Vangelo di Giovanni) conosciuto.", "È l'unico papiro scritto in aramaico.", "Dimostra che il Vangelo di Luca è stato scritto nel II secolo."],
+        "correct": 1,
+        "explanation": "P52 (Papiro Rylands 457), datato ca. 125 d.C., contiene Giovanni 18:31-33, 37-38 ed è il più antico frammento del NT conosciuto.",
+        "verse_ref": "Giovanni 18:31-33"
+      },
+      {
+        "id": "adv_19",
+        "question": "Il concetto di \"Sensus Plenior\" indica:",
+        "options": ["Il significato inteso dall'autore umano.", "Il significato letterale storico.", "Un significato più profondo voluto da Dio che emerge solo alla luce di rivelazioni successive.", "L'interpretazione allegorica arbitraria."],
+        "correct": 2,
+        "explanation": "Il sensus plenior ('senso pieno') si riferisce a un significato più profondo del testo, inteso da Dio ma non pienamente percepito dall'autore umano.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_20",
+        "question": "Nell'ermeneutica della \"Quadriga\", il senso Anagogico riguarda:",
+        "options": ["I fatti storici.", "Ciò che bisogna fare (morale).", "La speranza nelle realtà eterne ed escatologiche (il fine ultimo).", "La fede in Cristo attraverso i tipi dell'AT."],
+        "correct": 2,
+        "explanation": "Nella Quadriga medievale, il senso anagogico (dal greco 'condurre in alto') riguarda le realtà celesti ed escatologiche verso cui tende il credente.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_21",
+        "question": "La \"Nuova Prospettiva su Paolo\" (E.P. Sanders) sostiene che:",
+        "options": ["Paolo odiasse l'ebraismo.", "L'ebraismo del primo secolo non fosse una religione di 'meriti legali' ma di 'nomismo dell'alleanza'.", "Paolo non abbia mai scritto la Lettera ai Romani.", "La giustificazione per fede sia un'invenzione di Lutero."],
+        "correct": 1,
+        "explanation": "Sanders e la New Perspective on Paul hanno sostenuto che l'ebraismo del I secolo non era legalismo meritocratico ma 'covenantal nomism' (nomismo dell'alleanza).",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_22",
+        "question": "Cosa si intende per \"Canone Muratoriano\"?",
+        "options": ["Il sistema di mura di Gerusalemme.", "La più antica lista conosciuta dei libri del Nuovo Testamento (II secolo).", "Un metodo di scavo archeologico.", "La traduzione dei Salmi in siriaco."],
+        "correct": 1,
+        "explanation": "Il Frammento Muratoriano (ca. 170-200 d.C.) è il più antico elenco dei libri del NT, attestante lo sviluppo del canone cristiano.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_23",
+        "question": "In ebraico biblico, la forma verbale \"Hifil\" esprime generalmente:",
+        "options": ["Un'azione passiva.", "Un'azione causativa (es. 'far sedere' invece di 'sedersi').", "Un'azione riflessiva.", "Un comando imperativo assoluto."],
+        "correct": 1,
+        "explanation": "L'Hifil è la forma causativa del verbo ebraico, che esprime il causare un'azione (es. da 'regnare' a 'far regnare').",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_24",
+        "question": "Quale libro dell'Antico Testamento è l'unico a non menzionare mai esplicitamente il nome di Dio?",
+        "options": ["Cantico dei Cantici", "Ester", "Qohelet", "Esodo"],
+        "correct": 1,
+        "explanation": "Il libro di Ester è l'unico libro della Bibbia ebraica che non menziona esplicitamente il nome di Dio, sebbene la sua provvidenza sia sottintesa.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_25",
+        "question": "Cosa indica il termine \"Parusia\"?",
+        "options": ["La morte di un apostolo.", "La venuta/ritorno glorioso di Cristo alla fine dei tempi.", "Il banchetto eucaristico.", "La predicazione nel tempio."],
+        "correct": 1,
+        "explanation": "Parousia (greco 'presenza, venuta') nel NT indica la seconda venuta gloriosa di Cristo alla fine dei tempi.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_26",
+        "question": "L'opera \"Contro le Eresie\" (Adversus Haereses) fu scritta da:",
+        "options": ["Agostino d'Ippona", "Ireneo di Lione", "Giustino Martire", "Origene"],
+        "correct": 1,
+        "explanation": "Ireneo di Lione (ca. 130-202 d.C.) scrisse 'Adversus Haereses', opera fondamentale contro lo gnosticismo.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_27",
+        "question": "Il sistema di \"sacrificio vicario\" nell'Antico Testamento trova il suo apice rituale in quale festa?",
+        "options": ["Pasqua (Pesach)", "Giorno dell'Espiazione (Yom Kippur)", "Festa delle Capanne (Sukkot)", "Pentecoste (Shavuot)"],
+        "correct": 1,
+        "explanation": "Lo Yom Kippur (Giorno dell'Espiazione) era il culmine del sistema sacrificale, quando il sommo sacerdote entrava nel Santo dei Santi.",
+        "verse_ref": "Levitico 16"
+      },
+      {
+        "id": "adv_28",
+        "question": "Quale vangelo sottolinea maggiormente l'umanità di Gesù e il suo interesse per gli emarginati, le donne e i poveri?",
+        "options": ["Matteo", "Marco", "Giovanni", "Luca"],
+        "correct": 3,
+        "explanation": "Luca è noto per l'attenzione alle figure emarginate: donne, poveri, peccatori, samaritani, mostrando la compassione universale di Gesù.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_29",
+        "question": "Il \"Logos\" nel prologo di Giovanni ha radici filosofiche e teologiche in:",
+        "options": ["Solo nella filosofia stoica greca.", "Solo nella 'Sapienza' personificata dell'Antico Testamento.", "Sia nel concetto greco di ragione universale che nella 'Parola' (Memra) creatrice ebraica.", "Esclusivamente nel misticismo egizio."],
+        "correct": 2,
+        "explanation": "Il Logos giovanneo integra il concetto filosofico greco della ragione cosmica con la tradizione ebraica della Parola creatrice di Dio e della Sapienza personificata.",
+        "verse_ref": "Giovanni 1:1"
+      },
+      {
+        "id": "adv_30",
+        "question": "Cosa si intende per \"Pseudoepigrafia\"?",
+        "options": ["Scrivere sotto falso nome per dare autorità a uno scritto (comune nell'antichità).", "Errori di ortografia nei manoscritti.", "Traduzioni errate dal greco al latino.", "L'uso di immagini al posto delle parole."],
+        "correct": 0,
+        "explanation": "La pseudoepigrafia era la pratica antica di attribuire uno scritto a una figura autorevole del passato per conferirgli autorità.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_31",
+        "question": "La \"Stele di Tel Dan\" è famosa perché menziona per la prima volta fuori dalla Bibbia:",
+        "options": ["Il re Salomone.", "La 'Casa di Davide'.", "Il passaggio del Mar Rosso.", "La città di Nazaret."],
+        "correct": 1,
+        "explanation": "La Stele di Tel Dan (IX sec. a.C.) contiene la prima menzione extra-biblica della 'Casa di Davide' (bytdwd), confermando l'esistenza della dinastia davidica.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_32",
+        "question": "In greco del NT, l'aspetto del tempo Aoristo indica solitamente:",
+        "options": ["Un'azione che continua nel presente.", "Un'azione puntuale o considerata nella sua globalità, senza riferimento alla durata.", "Un'azione che si ripete ogni giorno.", "Un desiderio futuro."],
+        "correct": 1,
+        "explanation": "L'aoristo greco esprime l'azione come un fatto semplice, puntuale, senza riferimento al suo svolgimento nel tempo.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_33",
+        "question": "Il \"Documento di Damasco\" è uno dei testi principali ritrovati a:",
+        "options": ["Nag Hammadi", "Qumran (Rotoli del Mar Morto)", "Pompei", "Efeso"],
+        "correct": 1,
+        "explanation": "Il Documento di Damasco (o Scritto di Damasco) è uno dei testi settari più importanti trovati a Qumran, descrivendo regole comunitarie.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_34",
+        "question": "Chi ha formulato la distinzione tra \"Gesù Storico\" e \"Cristo della Fede\"?",
+        "options": ["San Tommaso d'Aquino", "Martin Kähler", "Papa Giovanni Paolo II", "Carlo Magno"],
+        "correct": 1,
+        "explanation": "Martin Kähler (1835-1912) nel suo libro 'Il cosiddetto Gesù storico e il Cristo biblico della fede' (1892) formulò questa influente distinzione.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_35",
+        "question": "La \"Legge del Levirato\" prevedeva che:",
+        "options": ["Un uomo dovesse sposare la vedova del fratello morto senza figli.", "I primogeniti fossero consacrati al tempio.", "Gli schiavi fossero liberati ogni sette anni.", "Non si potesse mangiare carne di maiale."],
+        "correct": 0,
+        "explanation": "Il levirato (da 'levir', cognato) obbligava un uomo a sposare la vedova del fratello morto senza figli per assicurare discendenza al defunto.",
+        "verse_ref": "Deuteronomio 25:5-10"
+      },
+      {
+        "id": "adv_36",
+        "question": "Qual è il tema centrale dell'Epistola ai Galati?",
+        "options": ["L'organizzazione della chiesa locale.", "La difesa della libertà cristiana contro il legalismo dei giudaizzanti.", "La parusia imminente.", "La bellezza del matrimonio."],
+        "correct": 1,
+        "explanation": "Galati difende la libertà in Cristo e la giustificazione per fede contro coloro che volevano imporre la circoncisione e la legge mosaica ai gentili.",
+        "verse_ref": "Galati 5:1"
+      },
+      {
+        "id": "adv_37",
+        "question": "L'archetipo dell'\"Uomo di Dolori\" si trova nel libro di:",
+        "options": ["Geremia", "Daniele", "Isaia (Canti del Servo)", "Ezechiele"],
+        "correct": 2,
+        "explanation": "L''Uomo dei dolori' appare in Isaia 53:3, nel quarto Canto del Servo Sofferente (Is 52:13-53:12).",
+        "verse_ref": "Isaia 53:3"
+      },
+      {
+        "id": "adv_38",
+        "question": "Cosa indica il termine \"Eisegesi\"?",
+        "options": ["L'estrazione del significato dal testo.", "L'inserimento arbitrario dei propri pregiudizi o idee nel testo biblico.", "La correzione dei refusi di stampa.", "Lo studio delle lingue originali."],
+        "correct": 1,
+        "explanation": "L'eisegesi (dal greco 'portare dentro') è il contrario dell'esegesi: consiste nell'imporre significati al testo anziché estrarli da esso.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_39",
+        "question": "Quale di queste lettere è considerata \"Deuteropaolina\" (di attribuzione discussa)?",
+        "options": ["Romani", "1 Corinzi", "Efesini", "Galati"],
+        "correct": 2,
+        "explanation": "Efesini, insieme a Colossesi, 2 Tessalonicesi e le Pastorali, è considerata deuteropaolina dalla critica, per ragioni stilistiche e teologiche.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_40",
+        "question": "Il termine \"Mishnah\" si riferisce a:",
+        "options": ["Una preghiera mattutina.", "La codificazione scritta della legge orale ebraica (circa 200 d.C.).", "Il tempio distrutto.", "Un tipo di pane azzimo."],
+        "correct": 1,
+        "explanation": "La Mishnah è la prima grande raccolta scritta della legge orale ebraica, compilata dal rabbino Yehuda HaNasi verso il 200 d.C.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_41",
+        "question": "Cosa afferma la \"Teoria dei Frammenti\" nella critica del Pentateuco?",
+        "options": ["Che la Bibbia è stata trovata a pezzi.", "Che il Pentateuco è nato dall'unione di numerosi piccoli testi indipendenti e non da 4 grandi fonti.", "Che mancano molti capitoli all'originale.", "Che solo i frammenti dei dieci comandamenti sono ispirati."],
+        "correct": 1,
+        "explanation": "La Teoria dei Frammenti (Fragmentenhypothese) propone che il Pentateuco derivi da molti piccoli documenti indipendenti, non da poche fonti continue.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_42",
+        "question": "Il valore numerico 666 nell'Apocalisse è un esempio di:",
+        "options": ["Ghematria (calcolo del valore numerico delle lettere di un nome).", "Statistica biblica.", "Codice segreto per la data del mondo.", "Errore di calcolo dei copisti."],
+        "correct": 0,
+        "explanation": "La ghematria assegna valori numerici alle lettere; 666 probabilmente corrisponde a 'Nerone Cesare' in lettere ebraiche.",
+        "verse_ref": "Apocalisse 13:18"
+      },
+      {
+        "id": "adv_43",
+        "question": "Nell'Antico Testamento, il termine \"Hébel\" in Qohelet (Ecclesiaste) significa letteralmente:",
+        "options": ["Peccato", "Sofferenza", "Vapore / Alito / Fumo (metafora della transitorietà)", "Saggezza"],
+        "correct": 2,
+        "explanation": "Hébel (tradotto 'vanità') significa letteralmente 'vapore, alito, soffio', metafora della fugacità e inafferrabilità della vita.",
+        "verse_ref": "Qohelet 1:2"
+      },
+      {
+        "id": "adv_44",
+        "question": "Quale di questi libri appartiene ai \"Sapienziali\"?",
+        "options": ["Levitico", "Giobbe", "Giosuè", "Neemia"],
+        "correct": 1,
+        "explanation": "Giobbe, insieme a Proverbi, Qohelet, Siracide e Sapienza, fa parte della letteratura sapienziale biblica.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_45",
+        "question": "Cosa stabilisce il \"Concilio di Gerusalemme\" in Atti 15?",
+        "options": ["Che i pagani convertiti non devono essere circoncisi né obbligati a tutta la legge mosaica.", "Che Pietro è l'unico capo della chiesa.", "Che i cristiani devono combattere contro Roma.", "Che il sabato resta il giorno sacro."],
+        "correct": 0,
+        "explanation": "Il Concilio di Gerusalemme (ca. 49 d.C.) decise che i gentili convertiti non dovevano sottomettersi alla circoncisione e alla legge mosaica.",
+        "verse_ref": "Atti 15"
+      },
+      {
+        "id": "adv_46",
+        "question": "Il \"Pastore di Erma\" è:",
+        "options": ["Un libro dell'Antico Testamento.", "Uno scritto dei Padri Apostolici, molto popolare nella Chiesa primitiva.", "Un commentario medievale.", "Una parabola perduta di Gesù."],
+        "correct": 1,
+        "explanation": "Il Pastore di Erma (II sec. d.C.) è uno scritto apocalittico cristiano molto letto nella Chiesa primitiva, talvolta considerato canonico.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_47",
+        "question": "Qual è la lingua originale prevalente del libro di Daniele, oltre all'ebraico?",
+        "options": ["Greco", "Latino", "Aramaico", "Copto"],
+        "correct": 2,
+        "explanation": "Daniele è scritto in ebraico (1:1-2:4a; 8-12) e aramaico (2:4b-7:28), riflettendo il contesto bilingue dell'epoca.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_48",
+        "question": "In teologia, l'\"Escatologia Realizzata\" sostiene che:",
+        "options": ["Il Regno di Dio è interamente nel futuro.", "Il Regno di Dio è già presente e operante attraverso la venuta di Gesù.", "Il mondo finirà domani.", "Non esiste vita dopo la morte."],
+        "correct": 1,
+        "explanation": "L'escatologia realizzata (C.H. Dodd) enfatizza che in Gesù le realtà escatologiche sono già presenti: il Regno è venuto.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_49",
+        "question": "Chi scrisse la \"Vulgata\"?",
+        "options": ["Agostino", "Girolamo", "Ambrogio", "Benedetto"],
+        "correct": 1,
+        "explanation": "San Girolamo (347-420 d.C.) tradusse la Bibbia in latino (Vulgata) su commissione di papa Damaso I.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_50",
+        "question": "Il termine \"Sinottico\" applicato ai primi tre vangeli significa:",
+        "options": ["Scritto in segreto.", "Che possono essere guardati insieme (per la loro struttura simile).", "Che sono stati scritti nello stesso anno.", "Che contengono solo detti di Gesù."],
+        "correct": 1,
+        "explanation": "Sinottici (dal greco 'vedere insieme') indica che Matteo, Marco e Luca hanno struttura e contenuto così simili da poter essere confrontati in parallelo.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_51",
+        "question": "Qual è la funzione del \"Waw consecutivo\" (o Waw conversivo) nella sintassi dell'ebraico biblico?",
+        "options": ["Serve esclusivamente come congiunzione coordinante 'e'.", "Trasforma il valore temporale di un verbo (dal perfetto all'imperfetto e viceversa).", "Indica l'inizio di una citazione profetica.", "Serve a enfatizzare il soggetto della frase."],
+        "correct": 1,
+        "explanation": "Il Waw consecutivo in ebraico biblico cambia l'aspetto temporale del verbo: con l'imperfetto indica passato (wayyiqtol), con il perfetto indica futuro (weqatal).",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_52",
+        "question": "La \"Teoria dei due regni\" (o dei due poteri nel cielo) è una problematica teologica riguardante:",
+        "options": ["La divisione tra Israele e Giuda.", "Il rapporto tra l'autorità imperiale e quella ecclesiastica.", "Lo sviluppo del monoteismo ebraico in relazione a figure angeliche o messianiche intermedie.", "La lotta tra angeli e demoni nel libro di Daniele."],
+        "correct": 2,
+        "explanation": "La 'teoria dei due poteri nel cielo' riguarda le tradizioni giudaiche su figure divine intermedie (Metatron, Figlio dell'Uomo) e la sfida al monoteismo stretto.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_53",
+        "question": "Cosa indica il termine \"Kerygma\"?",
+        "options": ["Il manuale di disciplina di una comunità.", "Il nucleo centrale dell'annuncio cristiano primitivo (morte e resurrezione di Cristo).", "L'insieme delle leggi morali della Torah.", "La struttura architettonica di una basilica."],
+        "correct": 1,
+        "explanation": "Kerygma (greco 'proclamazione') indica il nucleo essenziale della predicazione apostolica: morte, sepoltura e risurrezione di Cristo.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_54",
+        "question": "Il concetto di \"Cristologia dal basso\" parte dallo studio di:",
+        "options": ["La preesistenza del Logos in Dio.", "L'umanità storica di Gesù e il suo percorso verso la divinità/esaltazione.", "Le profezie messianiche di Isaia.", "La gerarchia angelica."],
+        "correct": 1,
+        "explanation": "La cristologia 'dal basso' parte dall'umanità storica di Gesù e procede verso la confessione della sua divinità, al contrario della cristologia 'dall'alto'.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_55",
+        "question": "Qual è l'apporto fondamentale del \"Codice di Hammurabi\" per lo studio del Pentateuco?",
+        "options": ["Dimostra che Mosè ha copiato interamente le leggi babilonesi.", "Fornisce un contesto comparativo per le leggi civili e penali dell'Esodo (Lex Talionis).", "È il primo testo a menzionare il nome di Yahweh.", "Contiene la prima versione dei Dieci Comandamenti."],
+        "correct": 1,
+        "explanation": "Il Codice di Hammurabi (XVIII sec. a.C.) offre paralleli importanti con le leggi bibliche, permettendo di comprendere il contesto giuridico antico-orientale.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_56",
+        "question": "In quale libro biblico troviamo la descrizione della \"Nuova Gerusalemme\" con misure cubiche simboliche?",
+        "options": ["Ezechiele", "Apocalisse", "Zaccaria", "Entrambi A e B"],
+        "correct": 3,
+        "explanation": "Sia Ezechiele 40-48 che Apocalisse 21-22 descrivono una città ideale con dimensioni simboliche, sebbene con dettagli diversi.",
+        "verse_ref": "Apocalisse 21; Ezechiele 40-48"
+      },
+      {
+        "id": "adv_57",
+        "question": "Il termine \"Anawim\" nell'Antico Testamento si riferisce a:",
+        "options": ["I giganti che abitavano Canaan.", "I 'poveri del Signore', coloro che confidano solo in Dio per la loro salvezza.", "I sacerdoti della stirpe di Aronne.", "Gli scribi esperti nella Legge."],
+        "correct": 1,
+        "explanation": "Gli anawim ('poveri, umili') sono i fedeli che, privi di potere umano, ripongono tutta la loro fiducia in Dio.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_58",
+        "question": "Nella critica della redazione (Redaktionsgeschichte), l'enfasi è posta su:",
+        "options": ["La ricerca della fonte originale perduta.", "Il ruolo teologico e l'attività editoriale dell'autore finale del testo.", "La datazione fisica del papiro.", "La traduzione delle varianti testuali."],
+        "correct": 1,
+        "explanation": "La critica della redazione studia il contributo teologico del redattore finale, come ha organizzato e modificato le fonti per comunicare il suo messaggio.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_59",
+        "question": "Chi era Antioco IV Epifane in relazione al libro di Daniele?",
+        "options": ["Il re persiano che liberò gli ebrei.", "Il sovrano seleucide che profanò il Tempio, scatenando la rivolta maccabaica.", "Il generale romano che distrusse Gerusalemme.", "L'autore dei Salmi di Salomone."],
+        "correct": 1,
+        "explanation": "Antioco IV Epifane (175-164 a.C.), re seleucide, profanò il Tempio installando un altare a Zeus, provocando la rivolta dei Maccabei.",
+        "verse_ref": "Daniele 11"
+      },
+      {
+        "id": "adv_60",
+        "question": "Cosa si intende per \"Canone Alessandrino\"?",
+        "options": ["Il canone ebraico ristretto (Tanakh).", "La collezione di libri biblici (inclusi i deuterocanonici) presenti nella Septuaginta.", "Una lista di libri proibiti dalla Chiesa egiziana.", "Il codice legislativo di Tolomeo."],
+        "correct": 1,
+        "explanation": "Il 'canone alessandrino' indica la collezione più ampia di libri presenti nella LXX, inclusi i deuterocanonici, rispetto al canone palestinese più ristretto.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_61",
+        "question": "Il \"Metodo Storico-Critico\" presuppone che:",
+        "options": ["Il testo biblico debba essere accettato solo per fede, senza analisi.", "La Bibbia debba essere studiata come qualsiasi altro testo dell'antichità, usando strumenti scientifici.", "Dio abbia dettato parola per parola ogni versetto.", "Solo il Nuovo Testamento sia storicamente attendibile."],
+        "correct": 1,
+        "explanation": "Il metodo storico-critico applica alla Bibbia gli stessi strumenti usati per altri testi antichi: analisi linguistica, letteraria, storica.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_62",
+        "question": "In greco del NT, il \"Genitivo Assoluto\" è una costruzione che:",
+        "options": ["Indica il possesso esclusivo di Dio.", "Serve a introdurre una proposizione subordinata circostanziale (temporale, causale, ecc.).", "Viene usata solo per i nomi propri.", "Non esiste nel greco koinè, ma solo in quello classico."],
+        "correct": 1,
+        "explanation": "Il genitivo assoluto è una costruzione participiale indipendente che esprime circostanze temporali, causali o concessive.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_63",
+        "question": "Qual è il tema principale della \"Lettera agli Ebrei\"?",
+        "options": ["La circoncisione dei pagani.", "La superiorità del sacerdozio e del sacrificio di Cristo rispetto al sistema levitico.", "La critica al governo di Roma.", "Il ritorno di Paolo in Spagna."],
+        "correct": 1,
+        "explanation": "Ebrei argomenta la superiorità di Cristo come sommo sacerdote secondo l'ordine di Melchisedek e del suo sacrificio perfetto e definitivo.",
+        "verse_ref": "Ebrei 7-10"
+      },
+      {
+        "id": "adv_64",
+        "question": "Cosa indica il termine \"Eschaton\"?",
+        "options": ["L'inizio della creazione.", "Gli eventi finali o lo stato ultimo della storia e dell'umanità.", "Un tipo di sacrificio cruento.", "Il deserto del Sinai."],
+        "correct": 1,
+        "explanation": "Eschaton (greco 'ultimo') indica la fine dei tempi, gli eventi finali della storia o lo stato definitivo dell'umanità e del cosmo.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_65",
+        "question": "La \"Scuola di Antiochia\" nell'esegesi patristica era nota per:",
+        "options": ["L'enfasi sull'interpretazione allegorica e mistica.", "L'enfasi sul senso letterale e storico del testo.", "Il rifiuto del Nuovo Testamento.", "L'uso esclusivo del latino."],
+        "correct": 1,
+        "explanation": "La scuola di Antiochia (Teodoro di Mopsuestia, Giovanni Crisostomo) privilegiava l'esegesi letterale e storica, in contrasto con l'allegoria alessandrina.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_66",
+        "question": "Il \"Testo Masoretico\" (MT) è stato stabilizzato definitivamente tra:",
+        "options": ["Il 200 e il 100 a.C.", "Il VII e il X secolo d.C.", "Durante il periodo maccabaico.", "Sotto il regno di re Davide."],
+        "correct": 1,
+        "explanation": "Il testo masoretico fu stabilizzato dai Masoreti tra il VII e il X secolo d.C., quando aggiunsero vocali e segni di cantillazione al testo consonantico.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_67",
+        "question": "Cosa s'intende per \"Midrash\"?",
+        "options": ["Un vestito cerimoniale.", "Un metodo di esegesi ebraica volto a attualizzare e spiegare il testo biblico.", "La festa della mietitura.", "Una città della Transgiordania."],
+        "correct": 1,
+        "explanation": "Midrash (da darash, 'cercare, investigare') è il metodo esegetico rabbinico che cerca significati profondi e attuali nel testo biblico.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_68",
+        "question": "Il \"Papiro Bodmer XIV-XV\" (P75) è celebre per la sua stretta affinità testuale con:",
+        "options": ["Il Codex Sinaiticus.", "Il Codex Vaticanus.", "Il Textus Receptus.", "La versione di Re Giacomo."],
+        "correct": 1,
+        "explanation": "P75 (ca. 175-225 d.C.) contiene Luca e Giovanni ed è notevolmente vicino al Codex Vaticanus, confermando l'antichità del tipo testuale alessandrino.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_69",
+        "question": "La figura di \"Melchisedek\" è usata nel NT come \"tipo\" di:",
+        "options": ["Un re guerriero.", "Un sacerdote eterno, senza genealogia umana, prefigurazione di Cristo.", "Un profeta di sventura.", "Un apostolo della prima ora."],
+        "correct": 1,
+        "explanation": "Ebrei 7 presenta Melchisedek come tipo di Cristo: sacerdote eterno, senza genealogia registrata, superiore ad Abramo e al sacerdozio levitico.",
+        "verse_ref": "Ebrei 7"
+      },
+      {
+        "id": "adv_70",
+        "question": "Cosa si intende per \"Nomismo dell'Alleanza\" (Covenantal Nomism)?",
+        "options": ["L'idea che si entri nell'alleanza per grazia, ma si rimanga in essa osservando la legge.", "Il rifiuto totale della legge mosaica.", "La salvezza ottenuta esclusivamente tramite sacrifici animali.", "Una forma di politeismo mascherato."],
+        "correct": 0,
+        "explanation": "Il 'nomismo dell'alleanza' (Sanders) descrive l'ebraismo del II Tempio: si entra nel patto per elezione divina, si resta in esso mediante l'osservanza della Torah.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_71",
+        "question": "Qual è la lingua originale dei \"Rotoli di Qumran\"?",
+        "options": ["Solo Ebraico.", "Solo Aramaico.", "Prevalentemente Ebraico, con porzioni in Aramaico e Greco.", "Solo Greco."],
+        "correct": 2,
+        "explanation": "I Rotoli del Mar Morto sono scritti principalmente in ebraico, con testi significativi in aramaico e alcuni frammenti in greco.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_72",
+        "question": "Il termine \"Diatessaron\" si riferisce a:",
+        "options": ["Una dottrina sulla Trinità.", "Un'armonia dei quattro vangeli creata da Taziano nel II secolo.", "Una serie di quattro piaghe d'Egitto.", "Il nome di un angelo nell'apocrifo di Giovanni."],
+        "correct": 1,
+        "explanation": "Il Diatessaron ('attraverso i quattro') di Taziano (ca. 170 d.C.) è un'armonia evangelica che fonde i quattro vangeli in una narrazione continua.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_73",
+        "question": "In esegesi, cos'è un \"Chiasmo\"?",
+        "options": ["Una forma di scisma all'interno di una chiesa.", "Una struttura letteraria speculare (A-B-B'-A').", "Un tipo di eresia cristologica.", "Un commentario ai Salmi."],
+        "correct": 1,
+        "explanation": "Il chiasmo è una struttura letteraria a specchio dove gli elementi si corrispondono in ordine inverso: A-B-C-B'-A'.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_74",
+        "question": "Il \"Libro di Enoch\" è citato esplicitamente in quale scritto canonico del NT?",
+        "options": ["Lettera di Giuda.", "Vangelo di Matteo.", "Apocalisse.", "2 Pietro."],
+        "correct": 0,
+        "explanation": "Giuda 14-15 cita esplicitamente 1 Enoch 1:9, facendo di Giuda l'unico libro canonico che cita direttamente questo apocrifo.",
+        "verse_ref": "Giuda 14-15"
+      },
+      {
+        "id": "adv_75",
+        "question": "Chi è l'autore della \"Lettera ai Romani\" secondo la critica unanime?",
+        "options": ["Un anonimo discepolo.", "L'apostolo Paolo.", "Luca, l'evangelista.", "Barnaba."],
+        "correct": 1,
+        "explanation": "Romani è universalmente riconosciuta come autentica lettera paolina, considerata il capolavoro teologico dell'apostolo.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_76",
+        "question": "Cosa s'intende per \"Proto-vangelo di Giacomo\"?",
+        "options": ["Il primo capitolo del Vangelo di Marco.", "Un vangelo apocrifo dell'infanzia di Maria e Gesù.", "La fonte principale di Matteo.", "Una lettera di Giacomo perduta."],
+        "correct": 1,
+        "explanation": "Il Protovangelo di Giacomo (II sec.) è un apocrifo che narra l'infanzia di Maria e la nascita di Gesù, molto influente sulla tradizione mariana.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_77",
+        "question": "Il \"Sogno di Giacobbe\" (la scala) si trova in quale libro?",
+        "options": ["Esodo", "Genesi", "Numeri", "Deuteronomio"],
+        "correct": 1,
+        "explanation": "Il sogno della scala di Giacobbe a Betel è narrato in Genesi 28:10-22.",
+        "verse_ref": "Genesi 28:10-22"
+      },
+      {
+        "id": "adv_78",
+        "question": "Il termine \"Theotokos\" fu al centro della disputa nel Concilio di:",
+        "options": ["Nicea", "Efeso", "Calcedonia", "Costantinopoli"],
+        "correct": 1,
+        "explanation": "Il Concilio di Efeso (431 d.C.) definì Maria 'Theotokos' (Madre di Dio) contro Nestorio che preferiva 'Christotokos'.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_79",
+        "question": "Cosa indica la \"Critica delle Tradizioni\" (Traditionsgeschichte)?",
+        "options": ["Lo studio dell'evoluzione di un concetto o tema teologico attraverso i secoli.", "La distruzione delle tradizioni umane.", "Lo studio della biografia dei Padri della Chiesa.", "L'analisi della carta e dell'inchiostro."],
+        "correct": 0,
+        "explanation": "La Traditionsgeschichte studia la storia di un tema, motivo o tradizione attraverso le varie fasi di trasmissione prima della redazione finale.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_80",
+        "question": "Il \"Canto del Mare\" (Esodo 15) è considerato dagli studiosi:",
+        "options": ["Uno dei testi più recenti della Bibbia.", "Uno dei testi più arcaici dell'ebraismo biblico.", "Una traduzione dal greco.", "Un'invenzione di Esdra."],
+        "correct": 1,
+        "explanation": "Il Canto del Mare (Esodo 15:1-18) è considerato uno dei testi poetici più antichi della Bibbia ebraica, forse XII-XI sec. a.C.",
+        "verse_ref": "Esodo 15"
+      },
+      {
+        "id": "adv_81",
+        "question": "Cosa si intende per \"Apocatastasi\"?",
+        "options": ["La fine del mondo per fuoco.", "La dottrina della restaurazione finale di tutte le cose in Dio.", "La caduta degli angeli ribelli.", "Un rito di purificazione."],
+        "correct": 1,
+        "explanation": "L'apocatastasi (restaurazione universale) è la dottrina, sostenuta da Origene, della salvezza finale di tutti gli esseri, inclusi i demoni.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_82",
+        "question": "Qual è la caratteristica principale del \"Vangelo di Giovanni\" rispetto ai Sinottici?",
+        "options": ["La mancanza di parabole e la presenza di lunghi discorsi teologici (discorsi di rivelazione).", "L'uso di un greco molto complesso e barocco.", "L'assenza della crocifissione.", "La focalizzazione esclusiva sulla predicazione in Galilea."],
+        "correct": 0,
+        "explanation": "Giovanni si distingue per l'assenza di parabole tradizionali e la presenza di lunghi discorsi teologici di rivelazione (es. 'Io sono...').",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_83",
+        "question": "Il termine \"Meritì\" (o Meriti dei Padri) è un concetto tipico di:",
+        "options": ["Teologia paolina.", "Soteriologia rabbinica.", "Gnosticismo.", "Razionalismo moderno."],
+        "correct": 1,
+        "explanation": "Lo zekhut avot ('merito dei padri') è un concetto rabbinico secondo cui i meriti dei patriarchi beneficiano i loro discendenti.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_84",
+        "question": "La \"Parabola del Figliol Prodigo\" si trova esclusivamente in:",
+        "options": ["Matteo", "Marco", "Luca", "Giovanni"],
+        "correct": 2,
+        "explanation": "La parabola del figlio prodigo (Luca 15:11-32) è esclusiva di Luca, parte della trilogia sulla misericordia (pecora smarrita, dramma perduta, figlio prodigo).",
+        "verse_ref": "Luca 15:11-32"
+      },
+      {
+        "id": "adv_85",
+        "question": "Cos'è l'\"Ermeneutica del Sospetto\"?",
+        "options": ["Un metodo che cerca di smascherare le ideologie o i rapporti di potere nascosti dietro un testo.", "Il dubbio sulla veridicità della resurrezione.", "La paura di interpretare male la Bibbia.", "Lo studio dei falsi d'autore."],
+        "correct": 0,
+        "explanation": "L'ermeneutica del sospetto (Ricoeur) cerca di svelare gli interessi nascosti, le strutture di potere o le ideologie che il testo potrebbe nascondere.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_86",
+        "question": "In quale città i discepoli furono chiamati \"Cristiani\" per la prima volta?",
+        "options": ["Gerusalemme", "Antiochia", "Efeso", "Roma"],
+        "correct": 1,
+        "explanation": "Secondo Atti 11:26, fu ad Antiochia di Siria che i discepoli furono chiamati 'cristiani' per la prima volta.",
+        "verse_ref": "Atti 11:26"
+      },
+      {
+        "id": "adv_87",
+        "question": "Il \"Sacrificio di Isacco\" (Akedah) in Genesi 22 è un tema centrale per:",
+        "options": ["Solo il cristianesimo (come tipo di Cristo).", "Solo l'ebraismo (come merito dei padri).", "Sia l'ebraismo che il cristianesimo, con sfumature diverse.", "Nessuna delle precedenti."],
+        "correct": 2,
+        "explanation": "L'Akedah è fondamentale sia per l'ebraismo (prova di fede, merito dei padri) che per il cristianesimo (tipo del sacrificio di Cristo).",
+        "verse_ref": "Genesi 22"
+      },
+      {
+        "id": "adv_88",
+        "question": "Cosa s'intende per \"Deuteronomista\" (Dtr)?",
+        "options": ["Chi scrive il libro del Deuteronomio.", "Una scuola teologica responsabile della redazione della storia d'Israele (da Giosuè a Re).", "Un oppositore dei sacerdoti.", "Un traduttore della Septuaginta."],
+        "correct": 1,
+        "explanation": "La scuola deuteronomista è responsabile della redazione dell'opera storica che va da Deuteronomio a 2 Re, con la sua teologia della retribuzione.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_89",
+        "question": "Il termine \"Hagios\" in greco significa:",
+        "options": ["Vecchio", "Santo", "Grande", "Sapiente"],
+        "correct": 1,
+        "explanation": "Hagios ('santo, sacro') è il termine greco per indicare ciò che è separato per Dio, consacrato, puro.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_90",
+        "question": "Qual è il significato del nome \"YHWH\" rivelato in Esodo 3:14?",
+        "options": ["'Il Dio dei forti'.", "'Io sono colui che sono' (o 'Io sarò ciò che sarò').", "'Il creatore del sole'.", "'Il giudice delle nazioni'."],
+        "correct": 1,
+        "explanation": "In Esodo 3:14 Dio rivela il suo nome come 'Ehyeh asher ehyeh' ('Io sono colui che sono'), legato al verbo 'essere'.",
+        "verse_ref": "Esodo 3:14"
+      },
+      {
+        "id": "adv_91",
+        "question": "Il concetto di \"Giustificazione per sola fede\" è il pilastro di quale riforma?",
+        "options": ["Controriforma cattolica.", "Riforma Protestante.", "Riforma Cluniacense.", "Giansenismo."],
+        "correct": 1,
+        "explanation": "La 'sola fide' (giustificazione per sola fede) è uno dei principi fondamentali della Riforma Protestante, in particolare di Lutero.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_92",
+        "question": "Chi sono gli \"Esseni\"?",
+        "options": ["Commercianti fenici.", "Gruppo ascetico ebraico, spesso associato alla comunità di Qumran.", "Seguaci di Giovanni il Battista ad Efeso.", "Governatori romani della Giudea."],
+        "correct": 1,
+        "explanation": "Gli Esseni erano una setta ebraica ascetica del II sec. a.C. - I sec. d.C., spesso identificati con la comunità di Qumran.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_93",
+        "question": "Cosa indica il termine \"Aporia\" in esegesi?",
+        "options": ["Una preghiera di lode.", "Una contraddizione o difficoltà logica insanabile all'interno di un testo.", "Il finale di un vangelo.", "Una variante grammaticale."],
+        "correct": 1,
+        "explanation": "In esegesi, un'aporia è una difficoltà, tensione o apparente contraddizione nel testo che richiede spiegazione.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_94",
+        "question": "Il \"Discorso sul pane della vita\" si trova in:",
+        "options": ["Matteo 5", "Giovanni 6", "Luca 15", "Marco 1"],
+        "correct": 1,
+        "explanation": "Il discorso sul pane della vita è in Giovanni 6, dopo la moltiplicazione dei pani, con la dichiarazione 'Io sono il pane della vita'.",
+        "verse_ref": "Giovanni 6"
+      },
+      {
+        "id": "adv_95",
+        "question": "Chi è il \"Discepolo amato\" nel quarto vangelo?",
+        "options": ["Pietro", "Giacomo", "Una figura anonima, tradizionalmente identificata con l'apostolo Giovanni.", "Giuda Iscariota."],
+        "correct": 2,
+        "explanation": "Il 'discepolo che Gesù amava' appare solo in Giovanni ed è tradizionalmente identificato con l'apostolo Giovanni, autore presunto del vangelo.",
+        "verse_ref": "Giovanni 21:20-24"
+      },
+      {
+        "id": "adv_96",
+        "question": "La \"Teologia della Croce\" (Theologia Crucis) fu contrapposta alla \"Teologia della Gloria\" da:",
+        "options": ["Tommaso d'Aquino", "Martin Lutero", "Giovanni Calvino", "Karl Barth"],
+        "correct": 1,
+        "explanation": "Lutero nelle Tesi di Heidelberg (1518) contrappose la theologia crucis (Dio nascosto nella croce) alla theologia gloriae (Dio conosciuto dalla ragione naturale).",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_97",
+        "question": "In quale libro biblico si trova la celebre citazione \"Vanità delle vanità, tutto è vanità\"?",
+        "options": ["Salmi", "Proverbi", "Qohelet (Ecclesiaste)", "Giobbe"],
+        "correct": 2,
+        "explanation": "La famosa frase 'Vanità delle vanità, tutto è vanità' (hevel havalim) apre e chiude il libro del Qohelet (Ecclesiaste 1:2; 12:8).",
+        "verse_ref": "Qohelet 1:2"
+      },
+      {
+        "id": "adv_98",
+        "question": "Qual è la differenza tra \"Peccato Originale\" e \"Peccato Attuale\"?",
+        "options": ["Non c'è differenza.", "Il primo è lo stato di separazione da Dio ereditato, il secondo è l'atto consapevole di trasgressione.", "Il primo è commesso solo dai bambini, il secondo dagli adulti.", "Il primo è perdonato solo dal battesimo, il secondo solo dalla penitenza."],
+        "correct": 1,
+        "explanation": "Il peccato originale è la condizione ereditata da Adamo, mentre il peccato attuale è ogni atto personale di trasgressione della legge divina.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_99",
+        "question": "Il \"Mistero Pasquale\" comprende:",
+        "options": ["Solo la morte di Gesù.", "Solo la resurrezione.", "Passione, Morte, Resurrezione e Ascensione di Gesù.", "La nascita e il battesimo di Gesù."],
+        "correct": 2,
+        "explanation": "Il Mistero Pasquale abbraccia l'intero evento salvifico: passione, morte, risurrezione e ascensione di Cristo.",
+        "verse_ref": ""
+      },
+      {
+        "id": "adv_100",
+        "question": "Il termine \"Amen\" deriva dall'ebraico e significa:",
+        "options": ["'Sia lodato Dio'.", "'In verità', 'Certamente', 'È stabile/fedele'.", "'Aiutaci Signore'.", "'Fine della preghiera'."],
+        "correct": 1,
+        "explanation": "Amen deriva dalla radice ebraica 'mn (essere stabile, fedele) e significa 'in verità, certamente, così sia, è fedele'.",
+        "verse_ref": ""
+      }
+    ]
+  }
+}
