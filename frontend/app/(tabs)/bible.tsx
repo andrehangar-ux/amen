@@ -14,7 +14,6 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon } from '../../src/components/Icon';
-import { HamburgerMenu } from '../../src/components/HamburgerMenu';
 import * as Speech from 'expo-speech';
 import * as WebBrowser from 'expo-web-browser';
 import { router } from 'expo-router';
@@ -1444,7 +1443,6 @@ export default function BibleScreen() {
               {languages[currentLanguage]?.flag || '🌐'}
             </Text>
           </TouchableOpacity>
-          <HamburgerMenu currentScreen="bible" />
         </View>
       </View>
 

@@ -19,7 +19,6 @@ import { api } from '../../src/utils/api';
 import { DailyVerseCard } from '../../src/components/DailyVerseCard';
 import { MoodSelector } from '../../src/components/MoodSelector';
 import { LanguageSelector } from '../../src/components/LanguageSelector';
-import { HamburgerMenu } from '../../src/components/HamburgerMenu';
 import { Icon } from '../../src/components/Icon';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../src/utils/theme';
 
@@ -136,7 +135,6 @@ export default function HomeScreen() {
             >
               <Text style={styles.languageFlag}>{languages[currentLanguage]?.flag || '🇮🇹'}</Text>
             </TouchableOpacity>
-            <HamburgerMenu currentScreen="home" />
           </View>
         </View>
 

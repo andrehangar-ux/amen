@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon } from '../../src/components/Icon';
-import { HamburgerMenu } from '../../src/components/HamburgerMenu';
 import { router, Link } from 'expo-router';
 import { useAuthStore } from '../../src/store/authStore';
 import { useLanguageStore } from '../../src/store/languageStore';
@@ -341,7 +340,6 @@ export default function ProfileScreen() {
       {/* Top Navigation Header */}
       <View style={styles.topHeader}>
         <Text style={styles.topHeaderTitle}>{t('profile')}</Text>
-        <HamburgerMenu currentScreen="profile" />
       </View>
       
       <ScrollView contentContainerStyle={styles.scrollContent}>

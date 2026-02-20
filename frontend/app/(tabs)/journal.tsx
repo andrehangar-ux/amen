@@ -14,7 +14,6 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon } from '../../src/components/Icon';
-import { HamburgerMenu } from '../../src/components/HamburgerMenu';
 import { api } from '../../src/utils/api';
 import { MoodSelector } from '../../src/components/MoodSelector';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, MOODS } from '../../src/utils/theme';
@@ -153,7 +152,6 @@ export default function JournalScreen() {
                 color="#fff"
               />
             </TouchableOpacity>
-            <HamburgerMenu currentScreen="journal" />
           </View>
         </View>
 
