@@ -57,7 +57,9 @@ export default function RootLayout() {
         <Stack.Screen name="community" options={{ presentation: 'card' }} />
         <Stack.Screen name="donate" options={{ presentation: 'card' }} />
       </Stack>
-      <FloatingMenu />
+      <View style={styles.fabLayer} pointerEvents="box-none">
+        <FloatingMenu />
+      </View>
     </View>
   );
 }
