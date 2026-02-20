@@ -507,15 +507,25 @@ export default function QuizScreen() {
       <View style={styles.header}>
         <Pressable
           onPress={() => router.push('/')}
+          hitSlop={20}
+          accessibilityRole="button"
           style={({ pressed }) => [styles.closeButton, pressed && { opacity: 0.5 }]}
-          data-testid="quiz-back-btn"
         >
-          <Icon name="arrow-back" size={28} color={COLORS.text} />
+          <View pointerEvents="none">
+            <Icon name="arrow-back" size={28} color={COLORS.text} />
+          </View>
         </Pressable>
         <Text style={styles.title}>{t('title')}</Text>
-        <TouchableOpacity onPress={() => router.push('/quiz-stats')} data-testid="quiz-stats-btn">
-          <Icon name="stats-chart" size={26} color={COLORS.primary} />
-        </TouchableOpacity>
+        <Pressable
+          onPress={() => router.push('/quiz-stats')}
+          hitSlop={15}
+          accessibilityRole="button"
+          style={({ pressed }) => [styles.closeButton, pressed && { opacity: 0.5 }]}
+        >
+          <View pointerEvents="none">
+            <Icon name="stats-chart" size={26} color={COLORS.primary} />
+          </View>
+        </Pressable>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
