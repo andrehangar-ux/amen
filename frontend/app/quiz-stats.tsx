@@ -360,7 +360,7 @@ const styles = StyleSheet.create({
     padding: SPACING.xs,
   },
   title: {
-    fontSize: FONT_SIZES.lg,
+    fontSize: 18,
     fontWeight: '600',
     color: COLORS.text,
   },
@@ -384,7 +384,7 @@ const styles = StyleSheet.create({
     padding: SPACING.xl,
   },
   emptyText: {
-    fontSize: FONT_SIZES.md,
+    fontSize: 16,
     color: COLORS.textSecondary,
     marginTop: SPACING.md,
     marginBottom: SPACING.lg,
@@ -398,7 +398,7 @@ const styles = StyleSheet.create({
   startButtonText: {
     color: '#fff',
     fontWeight: '600',
-    fontSize: FONT_SIZES.md,
+    fontSize: 16,
   },
   statsGrid: {
     flexDirection: 'row',
@@ -424,7 +424,7 @@ const styles = StyleSheet.create({
     marginTop: SPACING.xs,
   },
   statLabel: {
-    fontSize: FONT_SIZES.xs,
+    fontSize: 12,
     color: COLORS.textSecondary,
     marginTop: SPACING.xs,
     textAlign: 'center',
@@ -450,7 +450,7 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
   },
   summaryLabel: {
-    fontSize: FONT_SIZES.xs,
+    fontSize: 12,
     color: COLORS.textSecondary,
     marginTop: SPACING.xs,
     textAlign: 'center',
@@ -464,7 +464,7 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.lg,
   },
   sectionTitle: {
-    fontSize: FONT_SIZES.md,
+    fontSize: 16,
     fontWeight: '600',
     color: COLORS.text,
     marginBottom: SPACING.md,
@@ -482,7 +482,7 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.xs,
   },
   categoryName: {
-    fontSize: FONT_SIZES.sm,
+    fontSize: 14,
     fontWeight: '600',
     color: COLORS.text,
     textTransform: 'capitalize',
@@ -495,14 +495,14 @@ const styles = StyleSheet.create({
   },
   categoryBadgeText: {
     color: '#fff',
-    fontSize: FONT_SIZES.xs,
+    fontSize: 12,
     fontWeight: '600',
   },
   categoryStats: {
     marginBottom: SPACING.sm,
   },
   categoryStatText: {
-    fontSize: FONT_SIZES.xs,
+    fontSize: 12,
     color: COLORS.textSecondary,
   },
   progressBar: {
@@ -531,13 +531,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   activityTitle: {
-    fontSize: FONT_SIZES.sm,
+    fontSize: 14,
     fontWeight: '500',
     color: COLORS.text,
     textTransform: 'capitalize',
   },
   activityDate: {
-    fontSize: FONT_SIZES.xs,
+    fontSize: 12,
     color: COLORS.textSecondary,
     marginTop: 2,
   },
@@ -545,7 +545,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   activityScoreText: {
-    fontSize: FONT_SIZES.md,
+    fontSize: 16,
     fontWeight: '700',
   },
   scoreGood: {
@@ -555,7 +555,7 @@ const styles = StyleSheet.create({
     color: COLORS.error,
   },
   activityScoreDetail: {
-    fontSize: FONT_SIZES.xs,
+    fontSize: 12,
     color: COLORS.textSecondary,
   },
 });
