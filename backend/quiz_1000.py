@@ -9,16 +9,26 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Load questions from JSON file
+# Load questions from JSON files
 DATA_FILE = Path(__file__).parent / 'quiz_categories_data.json'
+ADVANCED_DATA_FILE = Path(__file__).parent / 'quiz_advanced_data.json'
 TRANSLATIONS_CACHE_FILE = Path(__file__).parent / 'quiz_translations_cache.json'
 
 def load_quiz_categories():
-    """Load quiz categories from JSON file"""
+    """Load quiz categories from JSON files"""
+    categories = {}
+    
+    # Load main categories
     if DATA_FILE.exists():
         with open(DATA_FILE, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    return {}
+            categories.update(json.load(f))
+    
+    # Load advanced categories
+    if ADVANCED_DATA_FILE.exists():
+        with open(ADVANCED_DATA_FILE, 'r', encoding='utf-8') as f:
+            categories.update(json.load(f))
+    
+    return categories
 
 def load_translations_cache():
     """Load cached translations"""
