@@ -13,6 +13,7 @@ load_dotenv()
 DATA_FILE = Path(__file__).parent / 'quiz_categories_data.json'
 ADVANCED_DATA_FILE = Path(__file__).parent / 'quiz_advanced_data.json'
 ADVANCED_SUBCATEGORIES_FILE = Path(__file__).parent / 'quiz_advanced_subcategories.json'
+ADVANCED_TRANSLATIONS_FILE = Path(__file__).parent / 'quiz_advanced_translations.json'
 TRANSLATIONS_CACHE_FILE = Path(__file__).parent / 'quiz_translations_cache.json'
 
 def load_quiz_categories():
