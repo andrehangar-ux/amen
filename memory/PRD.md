@@ -96,10 +96,10 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 - **Traduzioni**: Aggiunte myContent, editions, help in 6 lingue
 - **Backend Mood**: Verificato funzionamento random.choice()
 
-## Testing Results (2026-02-19)
-- Backend: 100% - mood-checkin API funzionante
-- Frontend: 100% - Mood selector, Progress navigation, Back button tutti verificati
-- Test Report: /app/test_reports/iteration_31.json
+## Testing Results (2026-02-20)
+- Backend: 100% - 10/10 pytest tests passed (iteration_32)
+- Frontend: 100% - 9/9 features verified (quiz subcategories, X button, submission)
+- Test Report: /app/test_reports/iteration_32.json
 
 ## Test Credentials
 - Email: testbible@cibospirituale.it
