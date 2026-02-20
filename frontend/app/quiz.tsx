@@ -476,7 +476,9 @@ export default function QuizScreen() {
           <Icon name="arrow-back" size={28} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.title}>{t('title')}</Text>
-        <View style={{ width: 28 }} />
+        <TouchableOpacity onPress={() => router.push('/quiz-stats')} data-testid="quiz-stats-btn">
+          <Icon name="stats-chart" size={26} color={COLORS.primary} />
+        </TouchableOpacity>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
