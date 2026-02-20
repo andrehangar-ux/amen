@@ -4005,6 +4005,12 @@ async def submit_quiz(data: QuizSubmission, user: User = Depends(require_auth)):
         if category_quiz:
             quiz = {"questions": category_quiz["questions"], "title": category_quiz["title"]}
             quiz_title = category_quiz["title"]
+    elif data.topic.startswith('adv_'):
+        from quiz_1000 import get_advanced_subcategory_quiz
+        adv_quiz = get_advanced_subcategory_quiz(data.topic, lang)
+        if adv_quiz:
+            quiz = {"questions": adv_quiz["questions"], "title": adv_quiz["title"]}
+            quiz_title = adv_quiz["title"]
     else:
         # Classic quiz
         quiz = get_quiz_for_language(data.topic, lang)
