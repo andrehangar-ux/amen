@@ -391,7 +391,8 @@ export default function QuizScreen() {
             <Pressable
               style={({ pressed }) => [styles.primaryButton, pressed && { opacity: 0.7 }]}
               onPress={resetQuiz}
-              data-testid="quiz-result-back-btn"
+              hitSlop={10}
+              accessibilityRole="button"
             >
               <Text style={styles.primaryButtonText}>{t('back')}</Text>
             </Pressable>
