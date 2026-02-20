@@ -405,9 +405,13 @@ export default function QuizScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={resetQuiz}>
+          <Pressable
+            onPress={resetQuiz}
+            style={({ pressed }) => [styles.closeButton, pressed && { opacity: 0.5 }]}
+            data-testid="quiz-close-btn"
+          >
             <Icon name="close" size={28} color={COLORS.text} />
-          </TouchableOpacity>
+          </Pressable>
           <Text style={styles.progressText}>
             {currentQuestion + 1} / {questions.length}
           </Text>
