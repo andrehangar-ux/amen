@@ -2091,5 +2091,382 @@
     "correct": 1,
     "explanation": "Invocación NT [120, 259].",
     "verse_ref": ""
+  },
+  "q19_fr": {
+    "id": "q19",
+    "question": "Quel âge avait Abraham lorsqu'il quitta Charan?",
+    "options": [
+      "50",
+      "75",
+      "100",
+      "120"
+    ],
+    "correct": 1,
+    "explanation": "Il partit comme ordonné par le Seigneur [40, 41].",
+    "verse_ref": ""
+  },
+  "q20_fr": {
+    "id": "q20",
+    "question": "Quel est le signe de l'alliance donné à Abraham?",
+    "options": [
+      "Le sabbat",
+      "La circoncision",
+      "Le sacrifice",
+      "L'encens"
+    ],
+    "correct": 1,
+    "explanation": "Commandé comme signe perpétuel dans la chair [42-44].",
+    "verse_ref": ""
+  },
+  "q21_fr": {
+    "id": "q21",
+    "question": "Que signifie le nom 'Israël'?",
+    "options": [
+      "Dieu est roi",
+      "Homme qui lutte avec Dieu",
+      "Terre promise",
+      "Fils d'Isaac"
+    ],
+    "correct": 1,
+    "explanation": "Il dérive de ish (homme), sarah (lutte) et El (Dieu) [45-47].",
+    "verse_ref": ""
+  },
+  "q104_fr": {
+    "id": "q104",
+    "question": "Protagoniste du Pentateuque?",
+    "options": [
+      "Abraham",
+      "Isaac",
+      "Jacob",
+      "Moïse"
+    ],
+    "correct": 3,
+    "explanation": "Guide Israël vers la liberté [134, 258].",
+    "verse_ref": ""
+  },
+  "q112_fr": {
+    "id": "q112",
+    "question": "Circoncision du cœur?",
+    "options": [
+      "Rite physique",
+      "Fidélité intérieure",
+      "Fête",
+      "Loi"
+    ],
+    "correct": 1,
+    "explanation": "Métaphore de Jérémie pour la conversion [55, 264].",
+    "verse_ref": ""
+  },
+  "q200_fr": {
+    "id": "q200",
+    "question": "Circoncision ?",
+    "options": [
+      "Sabbat",
+      "Abraham",
+      "Dîme",
+      "Agneau"
+    ],
+    "correct": 1,
+    "explanation": "Signe perpétuel de la chair [43, 44, 387].",
+    "verse_ref": ""
+  },
+  "q218_fr": {
+    "id": "q218",
+    "question": "Résurrection (2 Mac)?",
+    "options": [
+      "Monothéisme",
+      "Résurrection des morts",
+      "Sabbat",
+      "Circoncision"
+    ],
+    "correct": 1,
+    "explanation": "Foi des martyrs [414, 415].",
+    "verse_ref": ""
+  },
+  "q262_fr": {
+    "id": "q262",
+    "question": "Melchisédek ?",
+    "options": [
+      "Aaron",
+      "Moïse",
+      "Roi-Prêtre éternel",
+      "Abraham"
+    ],
+    "correct": 2,
+    "explanation": "Anticipation du Christ [425, 480, 481].",
+    "verse_ref": ""
+  },
+  "q263_fr": {
+    "id": "q263",
+    "question": "Hypothèse des Hébreux?",
+    "options": [
+      "Retour",
+      "Supériorité du sacerdoce du Christ",
+      "Circoncision",
+      "Prière"
+    ],
+    "correct": 1,
+    "explanation": "Une fois pour toutes [482, 483].",
+    "verse_ref": ""
+  },
+  "q351_fr": {
+    "id": "q351",
+    "question": "Circoncision d'Abraham?",
+    "options": [
+      "Arc",
+      "Sabbat",
+      "Circoncision",
+      "Tables"
+    ],
+    "correct": 2,
+    "explanation": "Signe [44, 575].",
+    "verse_ref": ""
+  },
+  "q366_fr": {
+    "id": "q366",
+    "question": "Mère de Jésus?",
+    "options": [
+      "Élisabeth",
+      "Anne",
+      "Marie",
+      "Sara"
+    ],
+    "correct": 2,
+    "explanation": "Évangiles [467].",
+    "verse_ref": ""
+  },
+  "q390_fr": {
+    "id": "q390",
+    "question": "Caractéristique distinctive?",
+    "options": [
+      "Arc",
+      "Sabbat",
+      "Circoncision",
+      "Pain"
+    ],
+    "correct": 2,
+    "explanation": "Peuple [44, 615].",
+    "verse_ref": ""
+  },
+  "q401_fr": {
+    "id": "q401",
+    "question": "Niveau V Alliance?",
+    "options": [
+      "Abraham",
+      "Sinaï",
+      "Tribu de Lévi",
+      "David"
+    ],
+    "correct": 2,
+    "explanation": "Murdocca [66, 68, 626].",
+    "verse_ref": ""
+  },
+  "q409_fr": {
+    "id": "q409",
+    "question": "Mont Moriah?",
+    "options": [
+      "Sinaï",
+      "Tabor",
+      "Moriah",
+      "Carmel"
+    ],
+    "correct": 2,
+    "explanation": "Isaac [256, 587, 639].",
+    "verse_ref": ""
+  },
+  "q410_fr": {
+    "id": "q410",
+    "question": "Qui arrêta Abraham?",
+    "options": [
+      "Pluie",
+      "Ange du Seigneur",
+      "Soldats",
+      "Pleurs"
+    ],
+    "correct": 1,
+    "explanation": "La foi [640, 641].",
+    "verse_ref": ""
+  },
+  "q450_fr": {
+    "id": "q450",
+    "question": "Abraham - Haran âge?",
+    "options": [
+      "50",
+      "75",
+      "99",
+      "100"
+    ],
+    "correct": 1,
+    "explanation": "Obéissance [41, 701, 702].",
+    "verse_ref": ""
+  },
+  "q452_fr": {
+    "id": "q452",
+    "question": "Âge de la circoncision ?",
+    "options": [
+      "75",
+      "86",
+      "99",
+      "100"
+    ],
+    "correct": 2,
+    "explanation": "Signe éternel [26, 43, 387].",
+    "verse_ref": ""
+  },
+  "q453_fr": {
+    "id": "q453",
+    "question": "Pourquoi \"Sara\"?",
+    "options": [
+      "Beauté",
+      "Mère des nations",
+      "Punition",
+      "Roi"
+    ],
+    "correct": 1,
+    "explanation": "Bénédiction [39, 705].",
+    "verse_ref": ""
+  },
+  "q454_fr": {
+    "id": "q454",
+    "question": "Justes à Sodome?",
+    "options": [
+      "100",
+      "12",
+      "Jusqu'à 10",
+      "Seulement 1"
+    ],
+    "correct": 2,
+    "explanation": "Prière d'Abraham [706, 707].",
+    "verse_ref": ""
+  },
+  "q456_fr": {
+    "id": "q456",
+    "question": "Serment du serviteur?",
+    "options": [
+      "Égypte",
+      "Pas de Cananéenne",
+      "Agneau",
+      "Pas de retour"
+    ],
+    "correct": 1,
+    "explanation": "Épouse d'Isaac [256, 708].",
+    "verse_ref": ""
+  },
+  "q513_fr": {
+    "id": "q513",
+    "question": "Comment est mort le général cananéen Sisera?",
+    "options": [
+      "À la bataille",
+      "Tué par Jaël avec un piquet",
+      "En tombant",
+      "Lapidé"
+    ],
+    "correct": 1,
+    "explanation": "Jaël l'a frappé dans la tempe pendant qu'il dormait [10].",
+    "verse_ref": ""
+  },
+  "q571_fr": {
+    "id": "q571",
+    "question": "Quelle est la thèse de l'Épître aux Hébreux ?",
+    "options": [
+      "Retour du Christ",
+      "Supériorité du sacerdoce du Christ",
+      "Circoncision",
+      "Prière"
+    ],
+    "correct": 1,
+    "explanation": "Sacrifice unique et parfait [102, 103].",
+    "verse_ref": ""
+  },
+  "q630_fr": {
+    "id": "q630",
+    "question": "Quel âge avait Abraham (Haran) ?",
+    "options": [
+      "50",
+      "75",
+      "100",
+      "120"
+    ],
+    "correct": 1,
+    "explanation": "Lorsqu'il quitta sa terre [197, 198].",
+    "verse_ref": ""
+  },
+  "q631_fr": {
+    "id": "q631",
+    "question": "Quel est le signe d'Abraham?",
+    "options": [
+      "Sabbat",
+      "Circoncision",
+      "Offrande",
+      "Prière"
+    ],
+    "correct": 1,
+    "explanation": "Alliance dans la chair [199, 200].",
+    "verse_ref": ""
+  },
+  "q667_fr": {
+    "id": "q667",
+    "question": "Âge d'Abraham au départ?",
+    "options": [
+      "50",
+      "75",
+      "100",
+      "120"
+    ],
+    "correct": 1,
+    "explanation": "De Haran [197, 198].",
+    "verse_ref": ""
+  },
+  "q668_fr": {
+    "id": "q668",
+    "question": "Montagne du sacrifice d'Isaac?",
+    "options": [
+      "Sinaï",
+      "Tabor",
+      "Moriah",
+      "Carmel"
+    ],
+    "correct": 2,
+    "explanation": "Éprouvé par Dieu [122, 231].",
+    "verse_ref": ""
+  },
+  "q670_fr": {
+    "id": "q670",
+    "question": "Vision d'une échelle jusqu'au ciel?",
+    "options": [
+      "Abraham",
+      "Isaac",
+      "Jacob",
+      "Joseph"
+    ],
+    "correct": 2,
+    "explanation": "À Béthel [234, 235].",
+    "verse_ref": ""
+  },
+  "q753_fr": {
+    "id": "q753",
+    "question": "Qui a tué Sisera?",
+    "options": [
+      "Débora",
+      "Jaël",
+      "Ruth",
+      "Noémie"
+    ],
+    "correct": 1,
+    "explanation": "Avec un piquet [223, 333].",
+    "verse_ref": ""
+  },
+  "q778_fr": {
+    "id": "q778",
+    "question": "Melchisédek?",
+    "options": [
+      "Aaron",
+      "Moïse",
+      "Roi-Prêtre",
+      "Abraham"
+    ],
+    "correct": 2,
+    "explanation": "Figure du Christ [351, 352].",
+    "verse_ref": ""
   }
 }
