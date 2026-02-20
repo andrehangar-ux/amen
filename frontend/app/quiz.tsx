@@ -415,8 +415,8 @@ export default function QuizScreen() {
             activeOpacity={0.4}
             style={styles.closeButton}
           >
-            <View style={styles.xLine1} />
-            <View style={styles.xLine2} />
+            <View style={styles.arrowLine1} />
+            <View style={styles.arrowLine2} />
           </TouchableOpacity>
           <Text style={styles.progressText}>
             {currentQuestion + 1} / {questions.length}
