@@ -44,6 +44,14 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 - [x] Visualizzazione durante lettura capitolo
 - [x] API GET /bible/study/{book}/{chapter} restituisce user_notes e user_bookmarks
 
+### Menu Fluttuante Globale (FAB) ✅ (2026-02-20)
+- [x] FAB verde in basso a destra visibile in tutte le schermate (dopo login)
+- [x] Apre menu modale con 11 voci di navigazione
+- [x] Navigazione funzionante a tutte le sezioni principali
+- [x] Nascosto nelle schermate di autenticazione
+- [x] Non si sovrappone ad altri elementi interattivi
+- [x] Testato su desktop e mobile
+
 ### Altre Funzionalità
 - [x] Eliminazione voci dal Diario
 - [x] Lista amici/utenti preferiti
@@ -55,7 +63,20 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 
 ## Recent Changes
 
-### 2026-02-20 - Session 10 (Current)
+### 2026-02-20 - Session 11 (Current)
+- **Menu Fluttuante Globale (FAB)**: Implementato e funzionante
+  - Pulsante verde FAB in basso a destra visibile in tutte le schermate autenticate
+  - Apre menu con 11 voci: Home, Bibbia, Diario, Quiz, Dizionario, Community, I Miei Contenuti, AI, Profilo, Donazioni, Impostazioni
+  - Navigazione funzionante a tutte le sezioni
+  - Nascosto nelle schermate di login/registrazione
+  - Non si sovrappone ad altri elementi interattivi
+- **Fix cliccabilità FAB**: Risolto bug che impediva il click sul menu
+  - Aggiunto `fabLayer` style con position: absolute e zIndex: 9999
+  - Wrapper con `pointerEvents="box-none"` per permettere click-through
+- **Test Report**: /app/test_reports/iteration_35.json - 100% frontend tests passed
+- **Rimosso vecchio HamburgerMenu**: Sostituito da FloatingMenu in tutte le schermate
+
+### 2026-02-20 - Session 10
 - **Quiz Studio Avanzato Suddiviso**: Le 100 domande avanzate sono state suddivise in 6 sotto-quiz tematici da 8 domande:
   1. Critica Testuale - Manoscritti, codici e varianti testuali
   2. Esegesi e Metodi - Tecniche interpretative e figure retoriche
