@@ -509,7 +509,8 @@ export default function QuizScreen() {
           activeOpacity={0.4}
           style={styles.closeButton}
         >
-          <Text style={styles.closeButtonText}>←</Text>
+          <View style={styles.arrowLine1} />
+          <View style={styles.arrowLine2} />
         </TouchableOpacity>
         <Text style={styles.title}>{t('title')}</Text>
         <TouchableOpacity
