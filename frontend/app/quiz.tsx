@@ -652,6 +652,7 @@ const styles = StyleSheet.create({
     height: 44,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'transparent',
   },
   closeButtonText: {
     fontSize: 24,
@@ -659,6 +660,8 @@ const styles = StyleSheet.create({
     color: COLORS.text,
     textAlign: 'center',
     lineHeight: 28,
+    includeFontPadding: false,
+    textAlignVertical: 'center',
   },
   title: {
     fontSize: 20,
