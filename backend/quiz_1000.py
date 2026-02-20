@@ -511,11 +511,19 @@ def get_quiz_1000_by_category(category_id: str, lang: str = 'it') -> dict:
 # ==================== ADVANCED SUBCATEGORIES ====================
 
 _advanced_subcategories_cache = None
+_advanced_translations_cache = None
 
 def load_advanced_subcategories():
     """Load advanced subcategories from JSON"""
     if ADVANCED_SUBCATEGORIES_FILE.exists():
         with open(ADVANCED_SUBCATEGORIES_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+def load_advanced_translations():
+    """Load pre-generated translations for advanced subcategories"""
+    if ADVANCED_TRANSLATIONS_FILE.exists():
+        with open(ADVANCED_TRANSLATIONS_FILE, 'r', encoding='utf-8') as f:
             return json.load(f)
     return {}
 
@@ -525,6 +533,13 @@ def get_advanced_subcategories():
     if _advanced_subcategories_cache is None:
         _advanced_subcategories_cache = load_advanced_subcategories()
     return _advanced_subcategories_cache
+
+def get_advanced_translations():
+    """Get pre-generated translations with caching"""
+    global _advanced_translations_cache
+    if _advanced_translations_cache is None:
+        _advanced_translations_cache = load_advanced_translations()
+    return _advanced_translations_cache
 
 def get_advanced_subcategory_topics(lang: str = 'it') -> list:
     """Get list of advanced subcategory topics"""
@@ -544,7 +559,7 @@ def get_advanced_subcategory_topics(lang: str = 'it') -> list:
     return topics
 
 def get_advanced_subcategory_quiz(subcategory_id: str, lang: str = 'it') -> dict:
-    """Get quiz questions for a specific advanced subcategory"""
+    """Get quiz questions for a specific advanced subcategory with translations"""
     data = get_advanced_subcategories()
     sub_id = subcategory_id.replace('adv_', '')
     if sub_id not in data:
@@ -552,6 +567,26 @@ def get_advanced_subcategory_quiz(subcategory_id: str, lang: str = 'it') -> dict
     sub_data = data[sub_id]
     trans = ADVANCED_SUBCATEGORY_TRANSLATIONS.get(sub_id, {}).get(lang, {})
     title = trans.get('title', sub_data.get('title', sub_id))
+    
+    # For Italian, return original questions
+    if lang == 'it':
+        return {
+            'id': f"adv_{sub_id}",
+            'title': title,
+            'questions': sub_data.get('questions', [])
+        }
+    
+    # For other languages, use pre-generated translations
+    translations = get_advanced_translations()
+    if sub_id in translations and lang in translations[sub_id]:
+        translated_qs = translations[sub_id][lang].get('questions', [])
+        return {
+            'id': f"adv_{sub_id}",
+            'title': title,
+            'questions': translated_qs
+        }
+    
+    # Fallback to Italian if no translation available
     return {
         'id': f"adv_{sub_id}",
         'title': title,
