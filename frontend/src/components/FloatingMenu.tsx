@@ -71,8 +71,12 @@ export const FloatingMenu: React.FC = () => {
         style={styles.fab}
         onPress={() => setVisible(true)}
         activeOpacity={0.7}
+        testID="floating-menu-button"
+        accessibilityLabel="Menu"
+        accessibilityRole="button"
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
       >
-        <View style={styles.fabInner}>
+        <View style={styles.fabInner} pointerEvents="none">
           <View style={styles.burgLine} />
           <View style={styles.burgLine} />
           <View style={styles.burgLine} />
