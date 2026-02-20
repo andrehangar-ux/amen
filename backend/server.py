@@ -3880,6 +3880,91 @@ async def get_quiz_by_category(category_id: str, lang: str = "it", translate: bo
         raise HTTPException(status_code=404, detail="Categoria non trovata")
     return quiz
 
+@api_router.get("/quiz/history")
+async def get_quiz_history(user: User = Depends(require_auth)):
+    """Get user's quiz history"""
+    history = await db.quiz_results.find(
+        {"user_id": user.user_id},
+        {"_id": 0}
+    ).sort("created_at", -1).limit(50).to_list(50)
+    return history
+
+@api_router.get("/quiz/stats")
+async def get_quiz_stats(user: User = Depends(require_auth)):
+    """Get user's quiz statistics"""
+    # Get all quiz results for user
+    all_results = await db.quiz_results.find(
+        {"user_id": user.user_id},
+        {"_id": 0}
+    ).to_list(1000)
+    
+    if not all_results:
+        return {
+            "total_quizzes": 0,
+            "total_questions": 0,
+            "total_correct": 0,
+            "average_score": 0,
+            "best_score": 0,
+            "categories_completed": {},
+            "recent_quizzes": [],
+            "streak": 0
+        }
+    
+    # Calculate statistics
+    total_quizzes = len(all_results)
+    total_questions = sum(r.get("total", 0) for r in all_results)
+    total_correct = sum(r.get("correct_count", 0) for r in all_results)
+    average_score = round(sum(r.get("score", 0) for r in all_results) / total_quizzes, 1) if total_quizzes > 0 else 0
+    best_score = max((r.get("score", 0) for r in all_results), default=0)
+    
+    # Categories breakdown
+    categories_completed = {}
+    for r in all_results:
+        topic = r.get("topic", "unknown")
+        if topic not in categories_completed:
+            categories_completed[topic] = {
+                "attempts": 0,
+                "best_score": 0,
+                "total_correct": 0,
+                "total_questions": 0
+            }
+        categories_completed[topic]["attempts"] += 1
+        categories_completed[topic]["best_score"] = max(
+            categories_completed[topic]["best_score"], 
+            r.get("score", 0)
+        )
+        categories_completed[topic]["total_correct"] += r.get("correct_count", 0)
+        categories_completed[topic]["total_questions"] += r.get("total", 0)
+    
+    # Calculate streak (consecutive days with at least one quiz)
+    dates_with_quiz = set()
+    for r in all_results:
+        if "created_at" in r:
+            date = r["created_at"]
+            if isinstance(date, str):
+                date = datetime.fromisoformat(date.replace("Z", "+00:00"))
+            dates_with_quiz.add(date.date())
+    
+    streak = 0
+    current_date = datetime.now(timezone.utc).date()
+    while current_date in dates_with_quiz:
+        streak += 1
+        current_date -= timedelta(days=1)
+    
+    # Recent quizzes (last 10)
+    recent_quizzes = sorted(all_results, key=lambda x: x.get("created_at", ""), reverse=True)[:10]
+    
+    return {
+        "total_quizzes": total_quizzes,
+        "total_questions": total_questions,
+        "total_correct": total_correct,
+        "average_score": average_score,
+        "best_score": best_score,
+        "categories_completed": categories_completed,
+        "recent_quizzes": recent_quizzes,
+        "streak": streak
+    }
+
 @api_router.get("/quiz/{topic}")
 async def get_quiz(topic: str, lang: str = "it"):
     """Get quiz by topic in specified language"""
