@@ -389,6 +389,58 @@ CATEGORY_TRANSLATIONS = {
     },
 }
 
+# Translations for advanced subcategories
+ADVANCED_SUBCATEGORY_TRANSLATIONS = {
+    'critica_testuale': {
+        'it': {'title': 'Critica Testuale', 'desc': 'Manoscritti, codici e varianti testuali'},
+        'es': {'title': 'Critica Textual', 'desc': 'Manuscritos, codices y variantes textuales'},
+        'en': {'title': 'Textual Criticism', 'desc': 'Manuscripts, codices and textual variants'},
+        'pt': {'title': 'Critica Textual', 'desc': 'Manuscritos, codices e variantes textuais'},
+        'fr': {'title': 'Critique Textuelle', 'desc': 'Manuscrits, codex et variantes textuelles'},
+        'de': {'title': 'Textkritik', 'desc': 'Handschriften, Kodizes und Textvarianten'},
+    },
+    'esegesi_biblica': {
+        'it': {'title': 'Esegesi e Metodi', 'desc': 'Tecniche interpretative e figure retoriche'},
+        'es': {'title': 'Exegesis y Metodos', 'desc': 'Tecnicas interpretativas y figuras retoricas'},
+        'en': {'title': 'Exegesis and Methods', 'desc': 'Interpretive techniques and rhetorical figures'},
+        'pt': {'title': 'Exegese e Metodos', 'desc': 'Tecnicas interpretativas e figuras retoricas'},
+        'fr': {'title': 'Exegese et Methodes', 'desc': 'Techniques interpretatives et figures rhetoriques'},
+        'de': {'title': 'Exegese und Methoden', 'desc': 'Interpretationstechniken und rhetorische Figuren'},
+    },
+    'lingue_bibliche': {
+        'it': {'title': 'Lingue Bibliche', 'desc': 'Ebraico, aramaico e greco del NT'},
+        'es': {'title': 'Lenguas Biblicas', 'desc': 'Hebreo, arameo y griego del NT'},
+        'en': {'title': 'Biblical Languages', 'desc': 'Hebrew, Aramaic and NT Greek'},
+        'pt': {'title': 'Linguas Biblicas', 'desc': 'Hebraico, aramaico e grego do NT'},
+        'fr': {'title': 'Langues Bibliques', 'desc': 'Hebreu, arameen et grec du NT'},
+        'de': {'title': 'Biblische Sprachen', 'desc': 'Hebraisch, Aramaisch und NT-Griechisch'},
+    },
+    'teologia_nt': {
+        'it': {'title': 'Teologia del NT', 'desc': 'Cristologia, soteriologia e escatologia'},
+        'es': {'title': 'Teologia del NT', 'desc': 'Cristologia, soteriologia y escatologia'},
+        'en': {'title': 'NT Theology', 'desc': 'Christology, soteriology and eschatology'},
+        'pt': {'title': 'Teologia do NT', 'desc': 'Cristologia, soteriologia e escatologia'},
+        'fr': {'title': 'Theologie du NT', 'desc': 'Christologie, soteriologie et eschatologie'},
+        'de': {'title': 'NT-Theologie', 'desc': 'Christologie, Soteriologie und Eschatologie'},
+    },
+    'teologia_at': {
+        'it': {'title': "Teologia dell'AT", 'desc': 'Pentateuco, profeti e sapienza'},
+        'es': {'title': 'Teologia del AT', 'desc': 'Pentateuco, profetas y sabiduria'},
+        'en': {'title': 'OT Theology', 'desc': 'Pentateuch, prophets and wisdom'},
+        'pt': {'title': 'Teologia do AT', 'desc': 'Pentateuco, profetas e sabedoria'},
+        'fr': {'title': "Theologie de l'AT", 'desc': 'Pentateuque, prophetes et sagesse'},
+        'de': {'title': 'AT-Theologie', 'desc': 'Pentateuch, Propheten und Weisheit'},
+    },
+    'storia_chiesa': {
+        'it': {'title': 'Storia e Padri', 'desc': 'Eresie, concili e Padri della Chiesa'},
+        'es': {'title': 'Historia y Padres', 'desc': 'Herejias, concilios y Padres de la Iglesia'},
+        'en': {'title': 'History and Fathers', 'desc': 'Heresies, councils and Church Fathers'},
+        'pt': {'title': 'Historia e Padres', 'desc': 'Heresias, concilios e Padres da Igreja'},
+        'fr': {'title': 'Histoire et Peres', 'desc': 'Heresies, conciles et Peres de l\'Eglise'},
+        'de': {'title': 'Geschichte und Vater', 'desc': 'Haresien, Konzilien und Kirchenvater'},
+    },
+}
+
 # Cache for loaded data
 _quiz_data_cache = None
 
