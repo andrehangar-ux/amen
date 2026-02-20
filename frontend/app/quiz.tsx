@@ -92,13 +92,15 @@ export default function QuizScreen() {
     const loadAllData = async () => {
       setLoading(true);
       try {
-        // Load both in parallel
-        const [topicsData, categoriesData] = await Promise.all([
+        // Load all in parallel
+        const [topicsData, categoriesData, advancedData] = await Promise.all([
           api.getQuizTopics(currentLanguage).catch(() => []),
-          api.getQuizCategories(currentLanguage).catch(() => [])
+          api.getQuizCategories(currentLanguage).catch(() => []),
+          api.getAdvancedSubcategories(currentLanguage).catch(() => [])
         ]);
         setTopics(topicsData || []);
         setCategories(categoriesData || []);
+        setAdvancedSubcategories(advancedData || []);
       } catch (error) {
         console.error('Error loading quiz data:', error);
       } finally {
