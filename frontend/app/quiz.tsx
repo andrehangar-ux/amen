@@ -654,7 +654,13 @@ const styles = StyleSheet.create({
     minHeight: 44,
     justifyContent: 'center',
     alignItems: 'center',
-    cursor: 'pointer',
+  },
+  closeButtonText: {
+    fontSize: 24,
+    fontWeight: '300',
+    color: COLORS.text,
+    textAlign: 'center',
+    lineHeight: 28,
   },
   title: {
     fontSize: 20,
