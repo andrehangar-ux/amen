@@ -410,16 +410,15 @@ export default function QuizScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
-          <Pressable
-            onPress={resetQuiz}
-            hitSlop={20}
-            accessibilityRole="button"
-            style={({ pressed }) => [styles.closeButton, pressed && { opacity: 0.5 }]}
+          <TouchableOpacity
+            onPress={() => {
+              resetQuiz();
+            }}
+            activeOpacity={0.4}
+            style={styles.closeButton}
           >
-            <View pointerEvents="none">
-              <Icon name="close" size={28} color={COLORS.text} />
-            </View>
-          </Pressable>
+            <Text style={styles.closeButtonText}>✕</Text>
+          </TouchableOpacity>
           <Text style={styles.progressText}>
             {currentQuestion + 1} / {questions.length}
           </Text>
