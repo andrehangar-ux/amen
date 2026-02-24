@@ -5552,6 +5552,120 @@ async def root():
 async def health():
     return {"status": "healthy"}
 
+# ==================== MINOR PROTECTION ENDPOINTS ====================
+
+@api_router.get("/safety/status")
+async def get_safety_status(user: User = Depends(require_auth)):
+    """Get user's minor status and safety settings"""
+    user_doc = await db.users.find_one({"user_id": user.user_id}, {"_id": 0})
+    if not user_doc:
+        raise HTTPException(status_code=404, detail="Utente non trovato")
+    
+    birth_date = user_doc.get("birth_date")
+    user_is_minor = is_minor(birth_date)
+    age = calculate_age(birth_date)
+    
+    return {
+        "is_minor": user_is_minor,
+        "age": age,
+        "birth_date": birth_date,
+        "parental_consent": user_doc.get("parental_consent", False),
+        "safety_reminder_shown": user_doc.get("safety_reminder_shown", False),
+        "safety_message": SAFETY_MESSAGES.get(user_doc.get("language", "it"), SAFETY_MESSAGES["it"]) if user_is_minor else None
+    }
+
+@api_router.post("/safety/acknowledge-reminder")
+async def acknowledge_safety_reminder(user: User = Depends(require_auth)):
+    """Mark safety reminder as shown to user"""
+    await db.users.update_one(
+        {"user_id": user.user_id},
+        {"$set": {"safety_reminder_shown": True}}
+    )
+    return {"success": True, "message": "Promemoria di sicurezza confermato"}
+
+class ParentalConsentRequest(BaseModel):
+    consent_code: str  # Simple PIN/password for parental verification
+    consent_given: bool
+
+@api_router.post("/safety/parental-consent")
+async def set_parental_consent(data: ParentalConsentRequest, user: User = Depends(require_auth)):
+    """Set parental consent for a minor user"""
+    user_doc = await db.users.find_one({"user_id": user.user_id}, {"_id": 0})
+    if not user_doc:
+        raise HTTPException(status_code=404, detail="Utente non trovato")
+    
+    # Verify consent code (simple implementation - parent sets a code during registration)
+    # In production, this could involve email verification to parent
+    stored_code = user_doc.get("parental_consent_code")
+    
+    # If no code exists, set it (first time setup)
+    if not stored_code:
+        await db.users.update_one(
+            {"user_id": user.user_id},
+            {"$set": {
+                "parental_consent_code": data.consent_code,
+                "parental_consent": data.consent_given,
+                "parental_consent_date": datetime.now(timezone.utc)
+            }}
+        )
+        return {"success": True, "message": "Codice di controllo genitori impostato"}
+    
+    # Verify existing code
+    if stored_code != data.consent_code:
+        raise HTTPException(status_code=403, detail="Codice di controllo genitori non valido")
+    
+    await db.users.update_one(
+        {"user_id": user.user_id},
+        {"$set": {
+            "parental_consent": data.consent_given,
+            "parental_consent_date": datetime.now(timezone.utc)
+        }}
+    )
+    return {"success": True, "message": "Consenso genitoriale aggiornato"}
+
+@api_router.get("/safety/can-share-info")
+async def can_share_personal_info(user: User = Depends(require_auth)):
+    """Check if user can share personal information (requires parental consent if minor)"""
+    user_doc = await db.users.find_one({"user_id": user.user_id}, {"_id": 0})
+    if not user_doc:
+        raise HTTPException(status_code=404, detail="Utente non trovato")
+    
+    birth_date = user_doc.get("birth_date")
+    user_is_minor = is_minor(birth_date)
+    
+    if not user_is_minor:
+        return {"can_share": True, "reason": "adult"}
+    
+    parental_consent = user_doc.get("parental_consent", False)
+    return {
+        "can_share": parental_consent,
+        "reason": "parental_consent_given" if parental_consent else "parental_consent_required",
+        "message": "Richiedi il permesso di un genitore per condividere informazioni personali." if not parental_consent else None
+    }
+
+@api_router.put("/users/birth-date")
+async def update_birth_date(birth_date: str = Query(..., regex=r"^\d{4}-\d{2}-\d{2}$"), user: User = Depends(require_auth)):
+    """Update user's birth date"""
+    # Validate date format
+    try:
+        datetime.strptime(birth_date, "%Y-%m-%d")
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Formato data non valido. Usa YYYY-MM-DD")
+    
+    await db.users.update_one(
+        {"user_id": user.user_id},
+        {"$set": {"birth_date": birth_date}}
+    )
+    
+    # Check if now minor and reset consent
+    if is_minor(birth_date):
+        await db.users.update_one(
+            {"user_id": user.user_id},
+            {"$set": {"parental_consent": False, "safety_reminder_shown": False}}
+        )
+    
+    return {"success": True, "birth_date": birth_date, "is_minor": is_minor(birth_date)}
+
 # APK Download endpoint
 @api_router.get("/download/apk")
 async def download_apk():
