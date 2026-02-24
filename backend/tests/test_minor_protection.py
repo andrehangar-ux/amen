@@ -232,28 +232,33 @@ class TestDownloads:
     
     def test_download_apk_endpoint(self):
         """Test APK download endpoint returns 200"""
-        response = requests.head(f"{BASE_URL}/api/download/apk")
+        # Use GET with stream to avoid downloading entire file
+        response = requests.get(f"{BASE_URL}/api/download/apk", stream=True)
+        response.close()  # Close without downloading body
         assert response.status_code == 200, f"Expected 200, got {response.status_code}"
         print("PASS: APK download endpoint returns 200")
     
     def test_download_apk_content_type(self):
         """Test APK download has correct content type"""
-        response = requests.head(f"{BASE_URL}/api/download/apk")
+        response = requests.get(f"{BASE_URL}/api/download/apk", stream=True)
         content_type = response.headers.get("content-type", "")
+        response.close()
         # May be application/vnd.android.package-archive or application/octet-stream
         assert "application" in content_type, f"Expected application content type, got {content_type}"
         print(f"PASS: APK content-type: {content_type}")
     
     def test_download_aab_endpoint(self):
         """Test AAB download endpoint returns 200"""
-        response = requests.head(f"{BASE_URL}/api/download/aab")
+        response = requests.get(f"{BASE_URL}/api/download/aab", stream=True)
+        response.close()
         assert response.status_code == 200, f"Expected 200, got {response.status_code}"
         print("PASS: AAB download endpoint returns 200")
     
     def test_download_aab_content_type(self):
         """Test AAB download has correct content type"""
-        response = requests.head(f"{BASE_URL}/api/download/aab")
+        response = requests.get(f"{BASE_URL}/api/download/aab", stream=True)
         content_type = response.headers.get("content-type", "")
+        response.close()
         assert "application" in content_type, f"Expected application content type, got {content_type}"
         print(f"PASS: AAB content-type: {content_type}")
 
