@@ -582,6 +582,15 @@ export const translations: Record<string, Record<string, string>> = {
     iAccept: 'Acepto los',
     termsAndConditions: 'Términos y Condiciones',
     acceptTermsRequired: 'Debes aceptar los Términos y Condiciones para registrarte',
+    // Minor Safety
+    birthDate: 'Fecha de nacimiento (AAAA-MM-DD)',
+    minorNotice: 'Usuario menor de 18 años: algunas funciones requerirán el consentimiento de los padres.',
+    safetyReminderTitle: 'Recordatorio de Seguridad en Línea',
+    safetyReminderMessage: 'Recuerda: nunca compartas información personal como dirección, escuela o número de teléfono con personas que no conoces. Si alguien te hace sentir incómodo, habla con un adulto de confianza.',
+    iUnderstand: 'Entendido, continuar',
+    chatOnlyWithFriends: 'Por tu seguridad, solo puedes chatear con tus amigos.',
+    addFriendToChat: 'Agrega a este usuario como amigo para iniciar una conversación.',
+    parentalConsentRequired: 'Solicita el permiso de un padre para compartir información personal.',
   },
   en: {
     welcome: 'Welcome',
