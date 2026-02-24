@@ -350,7 +350,7 @@ def is_minor(birth_date: str) -> bool:
     age = calculate_age(birth_date)
     return age is not None and age < 18
 
-async def check_friendship(user_id: str, other_user_id: str) -> bool:
+async def check_users_are_friends(user_id: str, other_user_id: str) -> bool:
     """Check if two users are friends"""
     friendship = await db.friendships.find_one({
         "$or": [
