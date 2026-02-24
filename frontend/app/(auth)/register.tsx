@@ -305,6 +305,45 @@ export default function RegisterScreen() {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+
+      {/* Safety Reminder Modal for Minors */}
+      <Modal
+        visible={showSafetyReminder}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowSafetyReminder(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.safetyModal}>
+            <View style={styles.safetyIconContainer}>
+              <Icon name="shield-checkmark" size={48} color={COLORS.primary} />
+            </View>
+            <Text style={styles.safetyTitle}>
+              {t('safetyReminderTitle') || 'Promemoria Sicurezza Online'}
+            </Text>
+            <Text style={styles.safetyMessage}>
+              {t('safetyReminderMessage') || 'Ricorda: non condividere mai informazioni personali come indirizzo, scuola o numero di telefono con persone che non conosci. Se qualcuno ti fa sentire a disagio, parlane con un adulto di fiducia.'}
+            </Text>
+            <View style={styles.safetyBullets}>
+              <Text style={styles.safetyBullet}>• Non condividere dati personali con sconosciuti</Text>
+              <Text style={styles.safetyBullet}>• Chatta solo con amici e familiari</Text>
+              <Text style={styles.safetyBullet}>• Se qualcosa ti preoccupa, parla con un adulto</Text>
+            </View>
+            <TouchableOpacity
+              style={styles.safetyButton}
+              onPress={() => {
+                setShowSafetyReminder(false);
+                handleRegister();
+              }}
+              data-testid="safety-acknowledge-button"
+            >
+              <Text style={styles.safetyButtonText}>
+                {t('iUnderstand') || 'Ho capito, continua'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
