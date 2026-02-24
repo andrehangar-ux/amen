@@ -67,7 +67,27 @@ class User(BaseModel):
     country: Optional[str] = None
     bio: Optional[str] = None
     is_public: bool = False
+    birth_date: Optional[str] = None  # Format: YYYY-MM-DD
+    parental_consent: bool = False  # For minors sharing personal info
+    safety_reminder_shown: bool = False  # Track if safety reminder was shown
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    
+    def get_age(self) -> Optional[int]:
+        """Calculate user's age from birth_date"""
+        if not self.birth_date:
+            return None
+        try:
+            birth = datetime.strptime(self.birth_date, "%Y-%m-%d")
+            today = datetime.now()
+            age = today.year - birth.year - ((today.month, today.day) < (birth.month, birth.day))
+            return age
+        except:
+            return None
+    
+    def is_minor(self) -> bool:
+        """Check if user is under 18"""
+        age = self.get_age()
+        return age is not None and age < 18
 
 class UserSession(BaseModel):
     user_id: str
