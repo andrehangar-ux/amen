@@ -36,13 +36,34 @@ export default function RegisterScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [birthDate, setBirthDate] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [enableBiometric, setEnableBiometric] = useState(false);
   const [biometricAvailable, setBiometricAvailable] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [showSafetyReminder, setShowSafetyReminder] = useState(false);
   const { register } = useAuthStore();
   const { t } = useTranslation();
+
+  // Calculate if user is minor
+  const calculateAge = (dateStr: string): number | null => {
+    if (!dateStr || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return null;
+    try {
+      const birth = new Date(dateStr);
+      const today = new Date();
+      let age = today.getFullYear() - birth.getFullYear();
+      const m = today.getMonth() - birth.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
+        age--;
+      }
+      return age;
+    } catch {
+      return null;
+    }
+  };
+
+  const isMinor = calculateAge(birthDate) !== null && (calculateAge(birthDate) || 0) < 18;
 
   useEffect(() => {
     checkBiometricAvailability();
