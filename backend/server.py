@@ -460,6 +460,9 @@ async def register(data: RegisterRequest, response: Response):
         "country": data.country,
         "bio": None,
         "is_public": False,
+        "birth_date": data.birth_date,
+        "parental_consent": False,
+        "safety_reminder_shown": False,
         "created_at": datetime.now(timezone.utc)
     }
     await db.users.insert_one(user)
