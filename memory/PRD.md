@@ -5,6 +5,26 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 
 ## Core Features Implemented
 
+### Protezione Minori e Sicurezza Online ✅ (2026-02-24)
+- [x] Campo data di nascita nel form di registrazione
+- [x] Calcolo automatico età e rilevamento minori (<18 anni)
+- [x] Modal "Promemoria Sicurezza Online" per minori durante registrazione
+- [x] Restrizione chat: minori possono chattare SOLO con amici
+- [x] API endpoint `/api/safety/status` per verificare stato minore
+- [x] API endpoint `/api/safety/acknowledge-reminder` per conferma promemoria
+- [x] API endpoint `/api/safety/parental-consent` per consenso genitoriale
+- [x] API endpoint `/api/safety/can-share-info` per verifica condivisione info
+- [x] API endpoint `/api/users/birth-date` per aggiornare data nascita
+- [x] Traduzioni IT, ES, EN per tutti i messaggi di sicurezza
+
+### Menu Fluttuante Globale (FAB) ✅ (2026-02-20)
+- [x] FAB verde in basso a destra visibile in tutte le schermate (dopo login)
+- [x] Apre menu modale con 11 voci di navigazione
+- [x] Navigazione funzionante a tutte le sezioni principali
+- [x] Nascosto nelle schermate di autenticazione
+- [x] Non si sovrappone ad altri elementi interattivi
+- [x] Testato su desktop e mobile
+
 ### Quiz Studio Biblico Avanzato - 6 Sotto-Quiz Tematici ✅ (2026-02-20)
 - [x] 6 sottocategorie da 8 domande ciascuna sotto il tab "Studio Avanzato"
 - [x] Backend: quiz_advanced_subcategories.json + endpoint dedicati
