@@ -331,6 +331,68 @@ async def require_auth(request: Request) -> User:
         raise HTTPException(status_code=401, detail="Non autenticato")
     return user
 
+# ==================== MINOR PROTECTION HELPERS ====================
+
+def calculate_age(birth_date: str) -> Optional[int]:
+    """Calculate age from birth_date string (YYYY-MM-DD)"""
+    if not birth_date:
+        return None
+    try:
+        birth = datetime.strptime(birth_date, "%Y-%m-%d")
+        today = datetime.now()
+        age = today.year - birth.year - ((today.month, today.day) < (birth.month, birth.day))
+        return age
+    except:
+        return None
+
+def is_minor(birth_date: str) -> bool:
+    """Check if user is under 18"""
+    age = calculate_age(birth_date)
+    return age is not None and age < 18
+
+async def check_friendship(user_id: str, other_user_id: str) -> bool:
+    """Check if two users are friends"""
+    friendship = await db.friendships.find_one({
+        "$or": [
+            {"user_id": user_id, "friend_id": other_user_id, "status": "accepted"},
+            {"user_id": other_user_id, "friend_id": user_id, "status": "accepted"}
+        ]
+    })
+    return friendship is not None
+
+SAFETY_MESSAGES = {
+    "it": {
+        "title": "Promemoria Sicurezza Online",
+        "message": "Ricorda: non condividere mai informazioni personali come indirizzo, scuola o numero di telefono con persone che non conosci. Se qualcuno ti fa sentire a disagio, parlane con un adulto di fiducia.",
+        "confirm": "Ho capito"
+    },
+    "en": {
+        "title": "Online Safety Reminder",
+        "message": "Remember: never share personal information like address, school, or phone number with people you don't know. If someone makes you feel uncomfortable, talk to a trusted adult.",
+        "confirm": "I understand"
+    },
+    "es": {
+        "title": "Recordatorio de Seguridad en Línea",
+        "message": "Recuerda: nunca compartas información personal como dirección, escuela o número de teléfono con personas que no conoces. Si alguien te hace sentir incómodo, habla con un adulto de confianza.",
+        "confirm": "Entendido"
+    },
+    "de": {
+        "title": "Online-Sicherheitserinnerung",
+        "message": "Denk daran: Teile niemals persönliche Informationen wie Adresse, Schule oder Telefonnummer mit Personen, die du nicht kennst. Wenn dich jemand unwohl fühlen lässt, sprich mit einem vertrauenswürdigen Erwachsenen.",
+        "confirm": "Verstanden"
+    },
+    "fr": {
+        "title": "Rappel de Sécurité en Ligne",
+        "message": "N'oublie pas : ne partage jamais d'informations personnelles comme ton adresse, ton école ou ton numéro de téléphone avec des personnes que tu ne connais pas. Si quelqu'un te met mal à l'aise, parle à un adulte de confiance.",
+        "confirm": "J'ai compris"
+    },
+    "pt": {
+        "title": "Lembrete de Segurança Online",
+        "message": "Lembre-se: nunca compartilhe informações pessoais como endereço, escola ou número de telefone com pessoas que você não conhece. Se alguém fizer você se sentir desconfortável, fale com um adulto de confiança.",
+        "confirm": "Entendi"
+    }
+}
+
 # ==================== TRANSLATION HELPER ====================
 
 async def translate_text(text: str, source_lang: str, target_lang: str) -> str:
