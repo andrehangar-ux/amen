@@ -318,6 +318,15 @@ export const translations: Record<string, Record<string, string>> = {
     minute: 'Minuti',
     notificationScheduled: 'Notifica programmata',
     notificationPermissionDenied: 'Permessi notifiche non concessi. Abilita le notifiche nelle impostazioni.',
+    // Minor Safety
+    birthDate: 'Data di nascita (AAAA-MM-GG)',
+    minorNotice: 'Utente minore di 18 anni: alcune funzionalità richiederanno il consenso dei genitori.',
+    safetyReminderTitle: 'Promemoria Sicurezza Online',
+    safetyReminderMessage: 'Ricorda: non condividere mai informazioni personali come indirizzo, scuola o numero di telefono con persone che non conosci. Se qualcuno ti fa sentire a disagio, parlane con un adulto di fiducia.',
+    iUnderstand: 'Ho capito, continua',
+    chatOnlyWithFriends: 'Per la tua sicurezza, puoi chattare solo con i tuoi amici.',
+    addFriendToChat: 'Aggiungi questo utente come amico per iniziare una conversazione.',
+    parentalConsentRequired: 'Richiedi il permesso di un genitore per condividere informazioni personali.',
   },
   es: {
     welcome: 'Bienvenido',
