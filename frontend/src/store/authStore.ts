@@ -59,7 +59,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     }
   },
 
-  register: async (email, password, name) => {
+  register: async (email, password, name, birthDate) => {
     try {
       const response = await fetch(`${API_URL}/api/auth/register`, {
         method: 'POST',
@@ -67,7 +67,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
           'Content-Type': 'application/json',
           'bypass-tunnel-reminder': 'true'
         },
-        body: JSON.stringify({ email, password, name }),
+        body: JSON.stringify({ email, password, name, birth_date: birthDate }),
       });
       
       if (!response.ok) {
