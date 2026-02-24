@@ -108,6 +108,7 @@ class RegisterRequest(BaseModel):
     name: str
     language: str = "it"
     country: Optional[str] = None
+    birth_date: Optional[str] = None  # Format: YYYY-MM-DD
 
 class LoginRequest(BaseModel):
     email: str
