@@ -13,6 +13,7 @@ import {
   Image,
   Switch,
   Pressable,
+  Modal,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, Link } from 'expo-router';
