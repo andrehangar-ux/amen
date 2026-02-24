@@ -185,6 +185,29 @@ export default function RegisterScreen() {
               />
             </View>
 
+            {/* Birth Date Field */}
+            <View style={styles.inputContainer}>
+              <Icon name="calendar-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
+              <TextInput
+                style={styles.input}
+                placeholder={t('birthDate') || 'Data di nascita (AAAA-MM-GG)'}
+                placeholderTextColor={COLORS.textMuted}
+                value={birthDate}
+                onChangeText={setBirthDate}
+                keyboardType="numeric"
+                maxLength={10}
+                data-testid="register-birthdate-input"
+              />
+            </View>
+            {isMinor && (
+              <View style={styles.minorWarning}>
+                <Icon name="information-circle" size={18} color={COLORS.warning} />
+                <Text style={styles.minorWarningText}>
+                  {t('minorNotice') || 'Utente minore di 18 anni: alcune funzionalità richiederanno il consenso dei genitori.'}
+                </Text>
+              </View>
+            )}
+
             <View style={styles.inputContainer}>
               <Icon name="lock-closed-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
               <TextInput
