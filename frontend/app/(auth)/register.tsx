@@ -75,8 +75,14 @@ export default function RegisterScreen() {
   };
 
   const handleRegister = async () => {
-    if (!name || !email || !password) {
-      showAlert(t('error'), t('fillAllFieldsError'));
+    if (!name || !email || !password || !birthDate) {
+      showAlert(t('error'), t('fillAllFieldsError') || 'Compila tutti i campi obbligatori');
+      return;
+    }
+
+    // Validate birth date format
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(birthDate)) {
+      showAlert(t('error'), 'Formato data non valido. Usa AAAA-MM-GG');
       return;
     }
 
@@ -95,9 +101,15 @@ export default function RegisterScreen() {
       return;
     }
 
+    // Show safety reminder for minors
+    if (isMinor && !showSafetyReminder) {
+      setShowSafetyReminder(true);
+      return;
+    }
+
     setLoading(true);
     try {
-      await register(email, password, name);
+      await register(email, password, name, birthDate);
       
       // Save credentials if biometric is enabled
       if (enableBiometric && biometricAvailable) {
