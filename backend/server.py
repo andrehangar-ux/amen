@@ -2335,7 +2335,7 @@ async def send_private_message(data: PrivateMessageCreate, user: User = Depends(
     
     # MINOR PROTECTION: If sender is under 18, can only chat with friends
     if is_minor(sender_birth_date):
-        is_friend = await check_friendship(user.user_id, data.receiver_id)
+        is_friend = await check_users_are_friends(user.user_id, data.receiver_id)
         if not is_friend:
             raise HTTPException(
                 status_code=403, 
