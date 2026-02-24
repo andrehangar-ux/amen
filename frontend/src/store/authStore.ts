@@ -20,7 +20,7 @@ interface AuthState {
   setUser: (user: User | null) => void;
   setSessionToken: (token: string | null) => void;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, name: string) => Promise<void>;
+  register: (email: string, password: string, name: string, birthDate?: string) => Promise<void>;
   googleLogin: (sessionId: string) => Promise<void>;
   logout: () => Promise<void>;
   checkAuth: () => Promise<void>;
