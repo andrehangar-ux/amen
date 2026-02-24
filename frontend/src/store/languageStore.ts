@@ -854,6 +854,15 @@ export const translations: Record<string, Record<string, string>> = {
     minute: 'Minutes',
     notificationScheduled: 'Notification scheduled',
     notificationPermissionDenied: 'Notification permissions denied. Enable notifications in settings.',
+    // Minor Safety
+    birthDate: 'Date of birth (YYYY-MM-DD)',
+    minorNotice: 'User under 18: some features will require parental consent.',
+    safetyReminderTitle: 'Online Safety Reminder',
+    safetyReminderMessage: 'Remember: never share personal information like address, school, or phone number with people you don\'t know. If someone makes you feel uncomfortable, talk to a trusted adult.',
+    iUnderstand: 'I understand, continue',
+    chatOnlyWithFriends: 'For your safety, you can only chat with your friends.',
+    addFriendToChat: 'Add this user as a friend to start a conversation.',
+    parentalConsentRequired: 'Request a parent\'s permission to share personal information.',
   },
   pt: {
     welcome: 'Bem-vindo',
