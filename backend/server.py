@@ -2329,6 +2329,19 @@ async def send_private_message(data: PrivateMessageCreate, user: User = Depends(
     if not receiver:
         raise HTTPException(status_code=404, detail="Utente non trovato")
     
+    # Get sender's birth_date from DB (user object might not have it)
+    sender_doc = await db.users.find_one({"user_id": user.user_id}, {"_id": 0, "birth_date": 1})
+    sender_birth_date = sender_doc.get("birth_date") if sender_doc else None
+    
+    # MINOR PROTECTION: If sender is under 18, can only chat with friends
+    if is_minor(sender_birth_date):
+        is_friend = await check_friendship(user.user_id, data.receiver_id)
+        if not is_friend:
+            raise HTTPException(
+                status_code=403, 
+                detail="Per la tua sicurezza, puoi chattare solo con i tuoi amici. Aggiungi questo utente come amico per iniziare una conversazione."
+            )
+    
     # Create conversation_id (sorted user_ids for consistent lookup)
     participants = sorted([user.user_id, data.receiver_id])
     conversation_id = f"{participants[0]}_{participants[1]}"
