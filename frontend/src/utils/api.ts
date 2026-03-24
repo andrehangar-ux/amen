@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { offlineService } from '../services/OfflineService';
 
 const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL || '';
 
@@ -39,11 +40,29 @@ export const api = {
       body: JSON.stringify({ text, source_lang: sourceLang, target_lang: targetLang }),
     }),
 
-  // Bible
+  // Bible - with offline support
   getBibleEditions: (lang?: string) => api.fetch(`/api/bible/editions${lang ? `?lang=${lang}` : ''}`),
-  getBibleBooks: (lang = 'it') => api.fetch(`/api/bible/books?lang=${lang}`),
-  getChapter: (book: string, chapter: number, lang = 'it') => 
-    api.fetch(`/api/bible/chapter/${encodeURIComponent(book)}/${chapter}?lang=${lang}`),
+  
+  getBibleBooks: async (lang = 'it') => {
+    const isOnline = await offlineService.checkOnline();
+    if (!isOnline) {
+      const offlineBooks = await offlineService.getBibleBooks(lang);
+      if (offlineBooks) return offlineBooks;
+    }
+    return api.fetch(`/api/bible/books?lang=${lang}`);
+  },
+  
+  getChapter: async (book: string, chapter: number, lang = 'it', edition = 'nuova_diodati') => {
+    const isOnline = await offlineService.checkOnline();
+    if (!isOnline) {
+      const offlineChapter = await offlineService.getBibleChapter(book, chapter, edition, lang);
+      if (offlineChapter) {
+        return { verses: offlineChapter.verses, offline: true };
+      }
+    }
+    return api.fetch(`/api/bible/chapter/${encodeURIComponent(book)}/${chapter}?lang=${lang}&edition=${edition}`);
+  },
+  
   getDailyVerse: (lang = 'it') => api.fetch(`/api/bible/daily-verse?lang=${lang}`),
   getStudyNotes: (book: string, chapter: number, verse: number) =>
     api.fetch(`/api/bible/study/${encodeURIComponent(book)}/${chapter}/${verse}`),
@@ -257,13 +276,41 @@ export const api = {
   // Donations Config
   getDonationConfig: () => api.fetch('/api/donations/config'),
 
-  // Quiz
+  // Quiz - with offline support
   getQuizTopics: (lang = 'it') => api.fetch(`/api/quiz/topics?lang=${lang}`),
-  getQuiz: (topic: string, lang = 'it') => api.fetch(`/api/quiz/${topic}?lang=${lang}`),
-  getQuizCategories: (lang = 'it') => api.fetch(`/api/quiz/categories?lang=${lang}`),
-  getQuizByCategory: (categoryId: string, lang = 'it') => api.fetch(`/api/quiz/category/${categoryId}?lang=${lang}`),
+  getQuiz: async (topic: string, lang = 'it') => {
+    const isOnline = await offlineService.checkOnline();
+    if (!isOnline) {
+      const offlineQuestions = await offlineService.getQuizQuestions(topic);
+      if (offlineQuestions) return offlineQuestions;
+    }
+    return api.fetch(`/api/quiz/${topic}?lang=${lang}`);
+  },
+  getQuizCategories: async (lang = 'it') => {
+    const isOnline = await offlineService.checkOnline();
+    if (!isOnline) {
+      const offlineCategories = await offlineService.getQuizCategories();
+      if (offlineCategories) return offlineCategories;
+    }
+    return api.fetch(`/api/quiz/categories?lang=${lang}`);
+  },
+  getQuizByCategory: async (categoryId: string, lang = 'it') => {
+    const isOnline = await offlineService.checkOnline();
+    if (!isOnline) {
+      const offlineQuestions = await offlineService.getQuizQuestions(categoryId);
+      if (offlineQuestions) return offlineQuestions;
+    }
+    return api.fetch(`/api/quiz/category/${categoryId}?lang=${lang}`);
+  },
   getAdvancedSubcategories: (lang = 'it') => api.fetch(`/api/quiz/advanced-subcategories?lang=${lang}`),
-  getAdvancedSubcategoryQuiz: (subcategoryId: string, lang = 'it') => api.fetch(`/api/quiz/advanced-subcategory/${subcategoryId}?lang=${lang}`),
+  getAdvancedSubcategoryQuiz: async (subcategoryId: string, lang = 'it') => {
+    const isOnline = await offlineService.checkOnline();
+    if (!isOnline) {
+      const offlineQuestions = await offlineService.getQuizQuestions(`adv_${subcategoryId}`);
+      if (offlineQuestions) return offlineQuestions;
+    }
+    return api.fetch(`/api/quiz/advanced-subcategory/${subcategoryId}?lang=${lang}`);
+  },
   submitQuiz: (topic: string, answers: Record<string, number>, language = 'it') =>
     api.fetch('/api/quiz/submit', {
       method: 'POST',

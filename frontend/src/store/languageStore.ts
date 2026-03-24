@@ -174,6 +174,18 @@ export const translations: Record<string, Record<string, string>> = {
     deleteAccountError: 'Impossibile eliminare l\'account. Riprova più tardi.',
     notifications: 'Notifiche',
     email: 'E-mail',
+    // Offline Mode
+    offlineMode: 'Modalità Offline',
+    downloadForOffline: 'Scarica per offline',
+    updateContent: 'Aggiorna contenuti',
+    syncData: 'Sincronizza dati',
+    deleteOfflineData: 'Elimina dati offline',
+    offlineAvailable: 'Contenuti disponibili offline',
+    offlineNotAvailable: 'Non disponibile offline',
+    downloadInProgress: 'Download in corso...',
+    storageUsed: 'Spazio utilizzato',
+    itemsSaved: 'Elementi salvati',
+    lastSync: 'Ultima sincronizzazione',
     // Bible screen additional
     verseFromBible: 'Versetto dalla Bibbia',
     unableToShare: 'Impossibile condividere',

@@ -5,6 +5,17 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 
 ## Core Features Implemented
 
+### Modalità Offline ✅ (2026-03-24)
+- [x] OfflineService per gestione dati offline (AsyncStorage)
+- [x] Rilevamento stato connessione (NetInfo)
+- [x] Download Bibbia (Nuova Diodati, Reina Valera, CEI)
+- [x] Download Quiz offline
+- [x] Sincronizzazione Note e Segnalibri
+- [x] UI OfflineManager nelle Impostazioni
+- [x] Indicatore stato connessione (Online/Offline)
+- [x] Barra progresso download
+- [x] API modificate per fallback offline automatico
+
 ### Protezione Minori e Sicurezza Online ✅ (2026-02-24)
 - [x] Campo data di nascita nel form di registrazione
 - [x] Calcolo automatico età e rilevamento minori (<18 anni)

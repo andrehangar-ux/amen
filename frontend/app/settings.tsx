@@ -19,6 +19,7 @@ import { useTranslation, useLanguageStore } from '../src/store/languageStore';
 import { api } from '../src/utils/api';
 import { NotificationService } from '../src/services/NotificationService';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../src/utils/theme';
+import OfflineManager from '../src/components/OfflineManager';
 
 // Helper to show long text alerts
 const showInfoAlert = (title: string, message: string, buttonText: string) => {
@@ -447,6 +448,12 @@ export default function SettingsScreen() {
         <View style={styles.card}>
           <Text style={styles.infoText}>{t('email')}: {user?.email}</Text>
           <Text style={styles.infoText}>{t('appVersion')}: 1.0.0</Text>
+        </View>
+
+        {/* Offline Mode Section */}
+        <Text style={styles.sectionTitle}>{t('offlineMode') || 'Modalità Offline'}</Text>
+        <View style={styles.card}>
+          <OfflineManager />
         </View>
 
         {/* Privacy & Legal Section */}
