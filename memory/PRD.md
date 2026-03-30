@@ -5,6 +5,13 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 
 ## Core Features Implemented
 
+### Compatibilità Android 15 (API 35) ✅ (2026-03-30)
+- [x] Aggiunto `react-native-edge-to-edge` per gestire le nuove API
+- [x] Configurato plugin in app.json con `parentTheme: "Material3"`
+- [x] Aggiunto `SystemBars` component per gestione status/navigation bar
+- [x] Impostato `targetSdkVersion: 35` in app.json
+- [x] Risolti warning deprecation per `setStatusBarColor`/`setNavigationBarColor`
+
 ### Versetto del Giorno Dinamico ✅ (2026-03-24)
 - [x] 100+ versetti predefiniti in 3 lingue (IT, ES, EN)
 - [x] Cambio automatico basato sul giorno dell'anno
