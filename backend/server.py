@@ -1993,34 +1993,26 @@ Responda em PORTUGUÊS de forma clara e acessível."""
 
 @api_router.get("/bible/daily-verse")
 async def get_daily_verse(lang: str = "it"):
-    """Get daily verse in specified language"""
-    import random
-    verses_dict = SAMPLE_VERSES_MULTILANG.get(lang, SAMPLE_VERSES_MULTILANG["it"])
+    """Get daily verse in specified language - changes every day of the year"""
+    from data.daily_verses import DAILY_VERSES_365
     
-    all_verses = []
-    for ref, verses in verses_dict.items():
-        book, chap = ref.split(":")
-        for v in verses:
-            all_verses.append({
-                "reference": f"{book} {chap}:{v['verse']}",
-                "text": v["text"]
-            })
+    # Get day of year (1-365)
+    today = datetime.now(timezone.utc)
+    day_of_year = today.timetuple().tm_yday
     
-    if not all_verses:
-        # Fallback to Italian
-        for ref, verses in SAMPLE_VERSES_MULTILANG["it"].items():
-            book, chap = ref.split(":")
-            for v in verses:
-                all_verses.append({
-                    "reference": f"{book} {chap}:{v['verse']}",
-                    "text": v["text"]
-                })
+    # Select verse for today (cycling through available verses)
+    index = (day_of_year - 1) % len(DAILY_VERSES_365)
+    verse_data = DAILY_VERSES_365[index]
     
-    today = datetime.now(timezone.utc).strftime("%Y%m%d")
-    random.seed(int(today))
-    verse = random.choice(all_verses)
-    verse["language"] = lang
-    return verse
+    # Get text in requested language, fallback to Italian
+    text = verse_data.get(lang, verse_data.get("it", ""))
+    
+    return {
+        "reference": verse_data["reference"],
+        "text": text,
+        "language": lang,
+        "day_of_year": day_of_year
+    }
 
 @api_router.post("/bible/translate-verse")
 async def translate_verse(request: Request, user: User = Depends(require_auth)):

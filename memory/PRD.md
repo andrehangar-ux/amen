@@ -5,6 +5,12 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 
 ## Core Features Implemented
 
+### Versetto del Giorno Dinamico ✅ (2026-03-24)
+- [x] 100+ versetti predefiniti in 3 lingue (IT, ES, EN)
+- [x] Cambio automatico basato sul giorno dell'anno
+- [x] Endpoint `/api/bible/daily-verse` restituisce versetto + `day_of_year`
+- [x] File `/app/backend/data/daily_verses.py` con i versetti
+
 ### Modalità Offline ✅ (2026-03-24)
 - [x] OfflineService per gestione dati offline (AsyncStorage)
 - [x] Rilevamento stato connessione (NetInfo)
