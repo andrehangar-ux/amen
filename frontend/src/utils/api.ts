@@ -419,4 +419,15 @@ export const api = {
   // Global Search
   globalSearch: (query: string) =>
     api.fetch(`/api/search?q=${encodeURIComponent(query)}`),
+
+  // Minor Safety
+  getSafetyStatus: () => api.fetch('/api/safety/status'),
+  acknowledgeSafetyReminder: () => api.fetch('/api/safety/acknowledge-reminder', { method: 'POST' }),
+  setParentalConsent: (consentCode: string, consentGiven: boolean) =>
+    api.fetch('/api/safety/parental-consent', {
+      method: 'POST',
+      body: JSON.stringify({ consent_code: consentCode, consent_given: consentGiven }),
+    }),
+  canSharePersonalInfo: () => api.fetch('/api/safety/can-share-info'),
+  updateBirthDate: (birthDate: string) => api.fetch(`/api/users/birth-date?birth_date=${birthDate}`, { method: 'PUT' }),
 };

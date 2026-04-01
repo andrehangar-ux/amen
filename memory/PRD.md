@@ -29,11 +29,14 @@ App mobile PWA per lettura della Bibbia con funzionalità di studio, diario spir
 - [x] Barra progresso download
 - [x] API modificate per fallback offline automatico
 
-### Protezione Minori e Sicurezza Online ✅ (2026-02-24)
+### Protezione Minori e Sicurezza Online ✅ (2026-02-24, aggiornato 2026-03-30)
 - [x] Campo data di nascita nel form di registrazione
 - [x] Calcolo automatico età e rilevamento minori (<18 anni)
 - [x] Modal "Promemoria Sicurezza Online" per minori durante registrazione
 - [x] Restrizione chat: minori possono chattare SOLO con amici
+- [x] Schermata "Chat bloccata" per minori che tentano di chattare con non-amici
+- [x] Promemoria sicurezza mostrato anche all'apertura della chat privata
+- [x] Blocco invio messaggi con info personali senza consenso genitoriale
 - [x] API endpoint `/api/safety/status` per verificare stato minore
 - [x] API endpoint `/api/safety/acknowledge-reminder` per conferma promemoria
 - [x] API endpoint `/api/safety/parental-consent` per consenso genitoriale
