@@ -29,11 +29,11 @@ MULTILINGUAL_QUIZZES = {
             "description": "Quanto conosci i Salmi?",
             "questions": [
                 {"id": "sal1", "question": "Chi scrisse la maggior parte dei Salmi?", "options": ["Mosè", "Davide", "Salomone", "Asaf"], "correct": 1, "explanation": "Davide è l'autore della maggior parte dei Salmi.", "verse_ref": "Titoli dei Salmi"},
-                {"id": "sal2", "question": "Completa: 'L'Eterno è il mio...'", "options": ["Re", "Pastore", "Salvatore", "Giudice"], "correct": 1, "explanation": "L'Eterno è il mio pastore, nulla mi mancherà.", "verse_ref": "Salmo 23:1"},
+                {"id": "sal2", "question": "Nel Salmo 23, con quale figura Davide descrive il Signore che si prende cura del suo popolo?", "options": ["Un Re maestoso", "Un Pastore premuroso", "Un Salvatore potente", "Un Giudice giusto"], "correct": 1, "explanation": "L'Eterno è il mio pastore, nulla mi mancherà.", "verse_ref": "Salmo 23:1"},
                 {"id": "sal3", "question": "Quanti Salmi ci sono nella Bibbia?", "options": ["100", "120", "150", "200"], "correct": 2, "explanation": "Il libro dei Salmi contiene 150 salmi.", "verse_ref": "Libro dei Salmi"},
                 {"id": "sal4", "question": "Quale Salmo inizia con 'I cieli narrano la gloria di Dio'?", "options": ["Salmo 1", "Salmo 19", "Salmo 23", "Salmo 100"], "correct": 1, "explanation": "Il Salmo 19 celebra la rivelazione di Dio nella natura.", "verse_ref": "Salmo 19:1"},
                 {"id": "sal5", "question": "Quale Salmo è il più lungo della Bibbia?", "options": ["Salmo 23", "Salmo 91", "Salmo 119", "Salmo 150"], "correct": 2, "explanation": "Il Salmo 119 con i suoi 176 versetti è il più lungo.", "verse_ref": "Salmo 119"},
-                {"id": "sal6", "question": "Completa: 'Il principio della sapienza è...'", "options": ["La conoscenza", "Il timore dell'Eterno", "Lo studio", "La preghiera"], "correct": 1, "explanation": "Il timore dell'Eterno è il principio della sapienza.", "verse_ref": "Salmo 111:10"},
+                {"id": "sal6", "question": "Secondo il Salmo 111:10, qual è il fondamento e l'inizio della vera sapienza?", "options": ["La conoscenza accademica", "Il timore dell'Eterno", "Lo studio approfondito", "La preghiera costante"], "correct": 1, "explanation": "Il timore dell'Eterno è il principio della sapienza.", "verse_ref": "Salmo 111:10"},
                 {"id": "sal7", "question": "Quale Salmo è conosciuto come 'Salmo di protezione'?", "options": ["Salmo 23", "Salmo 91", "Salmo 51", "Salmo 150"], "correct": 1, "explanation": "Il Salmo 91 parla della protezione divina.", "verse_ref": "Salmo 91"},
                 {"id": "sal8", "question": "Quale Salmo è un salmo di pentimento di Davide?", "options": ["Salmo 23", "Salmo 51", "Salmo 100", "Salmo 150"], "correct": 1, "explanation": "Il Salmo 51 fu scritto dopo il peccato con Betsabea.", "verse_ref": "Salmo 51"},
             ]
@@ -44,7 +44,7 @@ MULTILINGUAL_QUIZZES = {
             "questions": [
                 {"id": "van1", "question": "In quale città nacque Gesù?", "options": ["Nazaret", "Gerusalemme", "Betlemme", "Cafarnao"], "correct": 2, "explanation": "Gesù nacque a Betlemme di Giudea.", "verse_ref": "Matteo 2:1"},
                 {"id": "van2", "question": "Quanti apostoli scelse Gesù?", "options": ["7", "10", "12", "14"], "correct": 2, "explanation": "Gesù scelse dodici apostoli.", "verse_ref": "Matteo 10:1-4"},
-                {"id": "van3", "question": "Cosa disse Gesù: 'Io sono la via, la...'", "options": ["luce e la vita", "verità e la vita", "porta e la vita", "risurrezione"], "correct": 1, "explanation": "Io sono la via, la verità e la vita.", "verse_ref": "Giovanni 14:6"},
+                {"id": "van3", "question": "In Giovanni 14:6, Gesù dichiara di essere la via per arrivare al Padre. Quali altri due attributi afferma di possedere?", "options": ["La luce e la vita", "La verità e la vita", "La porta e la vita", "La risurrezione"], "correct": 1, "explanation": "Io sono la via, la verità e la vita.", "verse_ref": "Giovanni 14:6"},
                 {"id": "van4", "question": "Qual è il versetto più famoso della Bibbia?", "options": ["Genesi 1:1", "Salmo 23:1", "Giovanni 3:16", "Romani 8:28"], "correct": 2, "explanation": "Giovanni 3:16 è considerato il 'Vangelo in miniatura'.", "verse_ref": "Giovanni 3:16"},
                 {"id": "van5", "question": "Dove fu battezzato Gesù?", "options": ["Mar Rosso", "Fiume Giordano", "Mare di Galilea", "Pozzo di Giacobbe"], "correct": 1, "explanation": "Gesù fu battezzato nel fiume Giordano.", "verse_ref": "Matteo 3:13"},
                 {"id": "van6", "question": "Chi battezzò Gesù?", "options": ["Pietro", "Giovanni il Battista", "Giacomo", "Paolo"], "correct": 1, "explanation": "Giovanni il Battista battezzò Gesù nel Giordano.", "verse_ref": "Matteo 3:13-17"},
@@ -75,11 +75,11 @@ MULTILINGUAL_QUIZZES = {
             "description": "Le epistole dell'apostolo Paolo",
             "questions": [
                 {"id": "pao1", "question": "Quante lettere scrisse Paolo nel Nuovo Testamento?", "options": ["7", "10", "13", "15"], "correct": 2, "explanation": "Paolo scrisse 13 lettere nel Nuovo Testamento.", "verse_ref": "Epistole di Paolo"},
-                {"id": "pao2", "question": "Completa: 'Il giusto vivrà per...'", "options": ["Opere", "Fede", "Legge", "Grazia"], "correct": 1, "explanation": "Il giusto vivrà per fede.", "verse_ref": "Romani 1:17"},
+                {"id": "pao2", "question": "Secondo Romani 1:17, come vivrà il giusto secondo l'insegnamento di Paolo?", "options": ["Per le sue opere", "Per fede", "Per la Legge", "Per grazia soltanto"], "correct": 1, "explanation": "Il giusto vivrà per fede.", "verse_ref": "Romani 1:17"},
                 {"id": "pao3", "question": "Qual è il frutto dello Spirito secondo Paolo?", "options": ["Ricchezza", "Amore, gioia, pace...", "Potere", "Conoscenza"], "correct": 1, "explanation": "Il frutto dello Spirito è amore, gioia, pace, pazienza...", "verse_ref": "Galati 5:22-23"},
                 {"id": "pao4", "question": "Qual è la lettera più lunga di Paolo?", "options": ["1 Corinzi", "Romani", "Efesini", "Filippesi"], "correct": 1, "explanation": "La lettera ai Romani è la più lunga epistola di Paolo.", "verse_ref": "Romani"},
                 {"id": "pao5", "question": "A quale chiesa Paolo scrisse sull'amore in 1 Corinzi 13?", "options": ["Roma", "Efeso", "Corinto", "Filippi"], "correct": 2, "explanation": "L'inno all'amore fu scritto ai Corinzi.", "verse_ref": "1 Corinzi 13"},
-                {"id": "pao6", "question": "Completa: 'Per grazia siete stati salvati, mediante la...'", "options": ["Legge", "Opera", "Fede", "Preghiera"], "correct": 2, "explanation": "Per grazia siete stati salvati mediante la fede.", "verse_ref": "Efesini 2:8"},
+                {"id": "pao6", "question": "In Efesini 2:8, Paolo insegna che siamo salvati per grazia. Attraverso quale mezzo riceviamo questa salvezza?", "options": ["Mediante la Legge", "Mediante le opere", "Mediante la fede", "Mediante la preghiera"], "correct": 2, "explanation": "Per grazia siete stati salvati mediante la fede.", "verse_ref": "Efesini 2:8"},
                 {"id": "pao7", "question": "Dove si trovava Paolo quando scrisse le 'lettere della prigionia'?", "options": ["Gerusalemme", "Roma", "Cesarea", "Antiochia"], "correct": 1, "explanation": "Paolo scrisse Efesini, Filippesi, Colossesi e Filemone da Roma.", "verse_ref": "Efesini 3:1"},
                 {"id": "pao8", "question": "A chi scrisse Paolo: 'Rallegratevi sempre nel Signore'?", "options": ["Romani", "Corinzi", "Filippesi", "Galati"], "correct": 2, "explanation": "Filippesi è conosciuta come la 'lettera della gioia'.", "verse_ref": "Filippesi 4:4"},
             ]
@@ -107,7 +107,7 @@ MULTILINGUAL_QUIZZES = {
                 {"id": "apo3", "question": "A quante chiese furono inviate le lettere dell'Apocalisse?", "options": ["5", "7", "10", "12"], "correct": 1, "explanation": "Le lettere furono inviate a sette chiese dell'Asia.", "verse_ref": "Apocalisse 1:4"},
                 {"id": "apo4", "question": "Quale numero è associato alla bestia nell'Apocalisse?", "options": ["333", "555", "666", "777"], "correct": 2, "explanation": "Il numero della bestia è 666.", "verse_ref": "Apocalisse 13:18"},
                 {"id": "apo5", "question": "Cos'è la 'Nuova Gerusalemme'?", "options": ["Una città terrena", "La città celeste", "Il tempio", "Il giardino dell'Eden"], "correct": 1, "explanation": "La Nuova Gerusalemme scende dal cielo.", "verse_ref": "Apocalisse 21:2"},
-                {"id": "apo6", "question": "Cosa disse Gesù: 'Ecco, io sto alla...'", "options": ["Finestra", "Porta", "Strada", "Montagna"], "correct": 1, "explanation": "Ecco, io sto alla porta e busso.", "verse_ref": "Apocalisse 3:20"},
+                {"id": "apo6", "question": "In Apocalisse 3:20, Gesù usa un'immagine per descrivere il suo desiderio di entrare nella vita di ogni credente. Dove afferma di stare e bussare?", "options": ["Alla finestra", "Alla porta", "Sulla strada", "Sulla montagna"], "correct": 1, "explanation": "Ecco, io sto alla porta e busso.", "verse_ref": "Apocalisse 3:20"},
                 {"id": "apo7", "question": "Chi è l'Agnello nell'Apocalisse?", "options": ["Giovanni", "Un angelo", "Gesù Cristo", "Michele"], "correct": 2, "explanation": "L'Agnello rappresenta Gesù Cristo.", "verse_ref": "Apocalisse 5:6"},
                 {"id": "apo8", "question": "Quale colore ha il cavallo del primo cavaliere?", "options": ["Rosso", "Nero", "Bianco", "Giallo"], "correct": 2, "explanation": "Il primo cavallo è bianco.", "verse_ref": "Apocalisse 6:2"},
             ]
@@ -313,7 +313,7 @@ MULTILINGUAL_QUIZZES = {
             "description": "¿Cuánto conoces los Salmos?",
             "questions": [
                 {"id": "sal1", "question": "¿Quién escribió la mayoría de los Salmos?", "options": ["Moisés", "David", "Salomón", "Asaf"], "correct": 1, "explanation": "David es el autor de la mayoría de los Salmos.", "verse_ref": "Títulos de los Salmos"},
-                {"id": "sal2", "question": "Completa: 'El Señor es mi...'", "options": ["Rey", "Pastor", "Salvador", "Juez"], "correct": 1, "explanation": "El Señor es mi pastor, nada me faltará.", "verse_ref": "Salmo 23:1"},
+                {"id": "sal2", "question": "En el Salmo 23, ¿con qué figura describe David al Señor que cuida de su pueblo?", "options": ["Un Rey majestuoso", "Un Pastor amoroso", "Un Salvador poderoso", "Un Juez justo"], "correct": 1, "explanation": "El Señor es mi pastor, nada me faltará.", "verse_ref": "Salmo 23:1"},
                 {"id": "sal3", "question": "¿Cuántos Salmos hay en la Biblia?", "options": ["100", "120", "150", "200"], "correct": 2, "explanation": "El libro de los Salmos contiene 150 salmos.", "verse_ref": "Libro de Salmos"},
                 {"id": "sal4", "question": "¿Qué Salmo comienza con 'Los cielos cuentan la gloria de Dios'?", "options": ["Salmo 1", "Salmo 19", "Salmo 23", "Salmo 100"], "correct": 1, "explanation": "El Salmo 19 celebra la revelación de Dios en la naturaleza.", "verse_ref": "Salmo 19:1"},
                 {"id": "sal5", "question": "¿Cuál es el Salmo más largo de la Biblia?", "options": ["Salmo 23", "Salmo 91", "Salmo 119", "Salmo 150"], "correct": 2, "explanation": "El Salmo 119 con sus 176 versículos es el más largo.", "verse_ref": "Salmo 119"},
@@ -463,7 +463,7 @@ MULTILINGUAL_QUIZZES = {
             "description": "How well do you know the Psalms?",
             "questions": [
                 {"id": "psa1", "question": "Who wrote most of the Psalms?", "options": ["Moses", "David", "Solomon", "Asaph"], "correct": 1, "explanation": "David is the author of most of the Psalms.", "verse_ref": "Psalm titles"},
-                {"id": "psa2", "question": "Complete: 'The Lord is my...'", "options": ["King", "Shepherd", "Savior", "Judge"], "correct": 1, "explanation": "The Lord is my shepherd, I shall not want.", "verse_ref": "Psalm 23:1"},
+                {"id": "psa2", "question": "In Psalm 23, what figure does David use to describe the Lord who cares for His people?", "options": ["A majestic King", "A caring Shepherd", "A mighty Savior", "A righteous Judge"], "correct": 1, "explanation": "The Lord is my shepherd, I shall not want.", "verse_ref": "Psalm 23:1"},
                 {"id": "psa3", "question": "How many Psalms are in the Bible?", "options": ["100", "120", "150", "200"], "correct": 2, "explanation": "The book of Psalms contains 150 psalms.", "verse_ref": "Book of Psalms"},
                 {"id": "psa4", "question": "Which Psalm begins with 'The heavens declare the glory of God'?", "options": ["Psalm 1", "Psalm 19", "Psalm 23", "Psalm 100"], "correct": 1, "explanation": "Psalm 19 celebrates God's revelation in nature.", "verse_ref": "Psalm 19:1"},
                 {"id": "psa5", "question": "Which is the longest Psalm in the Bible?", "options": ["Psalm 23", "Psalm 91", "Psalm 119", "Psalm 150"], "correct": 2, "explanation": "Psalm 119 with its 176 verses is the longest.", "verse_ref": "Psalm 119"},
@@ -795,7 +795,7 @@ MULTILINGUAL_QUIZZES = {
             "description": "Quanto você conhece os Salmos?",
             "questions": [
                 {"id": "sal1", "question": "Quem escreveu a maioria dos Salmos?", "options": ["Moisés", "Davi", "Salomão", "Asafe"], "correct": 1, "explanation": "Davi é o autor da maioria dos Salmos.", "verse_ref": "Títulos dos Salmos"},
-                {"id": "sal2", "question": "Complete: 'O Senhor é o meu...'", "options": ["Rei", "Pastor", "Salvador", "Juiz"], "correct": 1, "explanation": "O Senhor é o meu pastor, nada me faltará.", "verse_ref": "Salmo 23:1"},
+                {"id": "sal2", "question": "No Salmo 23, que figura Davi usa para descrever o Senhor que cuida do seu povo?", "options": ["Um Rei majestoso", "Um Pastor amoroso", "Um Salvador poderoso", "Um Juiz justo"], "correct": 1, "explanation": "O Senhor é o meu pastor, nada me faltará.", "verse_ref": "Salmo 23:1"},
                 {"id": "sal3", "question": "Quantos Salmos existem na Bíblia?", "options": ["100", "120", "150", "200"], "correct": 2, "explanation": "O livro dos Salmos contém 150 salmos.", "verse_ref": "Livro dos Salmos"},
             ]
         },

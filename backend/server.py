@@ -5684,6 +5684,17 @@ async def download_aab():
         media_type="application/octet-stream"
     )
 
+# ==================== APP-ADS.TXT FOR ADMOB ====================
+@app.get("/app-ads.txt")
+async def get_app_ads_txt():
+    """Serve app-ads.txt for AdMob verification"""
+    return Response(
+        content="google.com, pub-1876565863299921, DIRECT, f08c47fec0942fa0\n",
+        media_type="text/plain"
+    )
+
+
+
 # Include the router
 app.include_router(api_router)
 
