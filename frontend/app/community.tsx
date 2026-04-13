@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
+  Modal,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon } from '../src/components/Icon';
@@ -33,6 +34,14 @@ interface CommunityMessage {
   created_at: string;
 }
 
+interface SocialAccess {
+  can_use_social: boolean;
+  social_level: string;
+  media_sharing: boolean;
+  reason: string;
+  message?: string;
+}
+
 export default function CommunityScreen() {
   const { user } = useAuthStore();
   const { currentLanguage, languages } = useLanguageStore();
@@ -46,6 +55,48 @@ export default function CommunityScreen() {
   const [conversations, setConversations] = useState<any[]>([]);
   const [allUsers, setAllUsers] = useState<Array<{user_id: string; name: string; is_online: boolean}>>([]);
   const [showChats, setShowChats] = useState(false);
+  const [socialAccess, setSocialAccess] = useState<SocialAccess | null>(null);
+  const [showSafetyReminder, setShowSafetyReminder] = useState(false);
+  const [safetyAcknowledged, setSafetyAcknowledged] = useState(false);
+
+  // Check social access permissions
+  const checkSocialAccess = useCallback(async () => {
+    try {
+      const access = await api.canUseSocialFeatures();
+      setSocialAccess(access);
+      
+      // Show safety reminder for minors before allowing social features
+      if (access.can_use_social && access.reason !== 'adult') {
+        const status = await api.getSafetyStatus();
+        if (status.is_minor && !status.safety_reminder_shown) {
+          setShowSafetyReminder(true);
+        } else {
+          setSafetyAcknowledged(true);
+        }
+      } else if (access.reason === 'adult') {
+        setSafetyAcknowledged(true);
+      }
+    } catch (error) {
+      console.log('Error checking social access:', error);
+      // Allow access on error for backwards compatibility
+      setSocialAccess({ can_use_social: true, social_level: 'all', media_sharing: true, reason: 'error' });
+      setSafetyAcknowledged(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    checkSocialAccess();
+  }, [checkSocialAccess]);
+
+  const handleAcknowledgeSafety = async () => {
+    try {
+      await api.acknowledgeSafetyReminder();
+    } catch (error) {
+      console.log('Error acknowledging:', error);
+    }
+    setShowSafetyReminder(false);
+    setSafetyAcknowledged(true);
+  };
 
   const loadMessages = useCallback(async () => {
     try {
@@ -231,21 +282,107 @@ export default function CommunityScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-          <Icon name="arrow-back" size={24} color={COLORS.text} />
-        </TouchableOpacity>
-        <View style={styles.headerContent}>
-          <Text style={styles.headerTitle}>{t('community')}</Text>
-          <Text style={styles.headerSubtitle}>{t('connectWithBrothers')}</Text>
+      {/* Safety Reminder Modal - Shown BEFORE allowing any social interaction */}
+      <Modal
+        visible={showSafetyReminder}
+        transparent
+        animationType="fade"
+        onRequestClose={() => {}}
+      >
+        <View style={styles.safetyModalOverlay}>
+          <View style={styles.safetyModal}>
+            <View style={styles.safetyIconContainer}>
+              <Icon name="shield-checkmark" size={56} color={COLORS.primary} />
+            </View>
+            <Text style={styles.safetyTitle}>
+              {t('safetyReminderTitle') || 'Promemoria Sicurezza Online'}
+            </Text>
+            <Text style={styles.safetyMessage}>
+              {t('safetyReminderMessage') || 'Prima di interagire con altri utenti, ricorda queste regole importanti per la tua sicurezza:'}
+            </Text>
+            <View style={styles.safetyBullets}>
+              <View style={styles.safetyBulletItem}>
+                <Icon name="close-circle" size={20} color="#E74C3C" />
+                <Text style={styles.safetyBulletText}>
+                  {t('neverSharePersonalInfo') || 'Non condividere mai informazioni personali (indirizzo, scuola, telefono)'}
+                </Text>
+              </View>
+              <View style={styles.safetyBulletItem}>
+                <Icon name="people" size={20} color={COLORS.primary} />
+                <Text style={styles.safetyBulletText}>
+                  {t('chatOnlyWithKnown') || 'Chatta solo con persone che conosci e di cui ti fidi'}
+                </Text>
+              </View>
+              <View style={styles.safetyBulletItem}>
+                <Icon name="alert-circle" size={20} color="#F39C12" />
+                <Text style={styles.safetyBulletText}>
+                  {t('tellAdultIfUncomfortable') || 'Se qualcuno ti fa sentire a disagio, parlane subito con un adulto'}
+                </Text>
+              </View>
+              <View style={styles.safetyBulletItem}>
+                <Icon name="eye-off" size={20} color="#9B59B6" />
+                <Text style={styles.safetyBulletText}>
+                  {t('beCarefulWithStrangers') || 'Le persone online potrebbero non essere chi dicono di essere'}
+                </Text>
+              </View>
+            </View>
+            <TouchableOpacity 
+              style={styles.safetyAcknowledgeBtn} 
+              onPress={handleAcknowledgeSafety}
+              data-testid="safety-acknowledge-btn"
+            >
+              <Icon name="checkmark-circle" size={24} color="#fff" />
+              <Text style={styles.safetyAcknowledgeBtnText}>
+                {t('iUnderstandAndAccept') || 'Ho capito e accetto'}
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.languageBadge}>
-          <Text style={styles.languageFlag}>{languages[currentLanguage]?.flag}</Text>
-        </View>
-      </View>
+      </Modal>
 
-      {/* Online Users + Chat Toggle */}
+      {/* Social Features Blocked Screen */}
+      {socialAccess && !socialAccess.can_use_social ? (
+        <View style={styles.blockedContainer}>
+          <Icon name="lock-closed" size={80} color={COLORS.warning} />
+          <Text style={styles.blockedTitle}>
+            {t('socialFeaturesDisabled') || 'Funzionalità Social Disabilitate'}
+          </Text>
+          <Text style={styles.blockedMessage}>
+            {socialAccess.message || t('parentalControlsBlockedSocial') || 'Il controllo genitori ha disabilitato le funzionalità social per questo account. Chiedi a un genitore di modificare le impostazioni.'}
+          </Text>
+          <TouchableOpacity 
+            style={styles.goToSettingsBtn}
+            onPress={() => router.push('/settings')}
+            data-testid="go-to-settings-btn"
+          >
+            <Icon name="settings" size={20} color="#fff" />
+            <Text style={styles.goToSettingsBtnText}>
+              {t('goToSettings') || 'Vai alle Impostazioni'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      ) : !safetyAcknowledged ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color={COLORS.primary} />
+          <Text style={styles.loadingText}>{t('checkingAccess') || 'Verifica accesso...'}</Text>
+        </View>
+      ) : (
+        <>
+          {/* Header */}
+          <View style={styles.header}>
+            <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+              <Icon name="arrow-back" size={24} color={COLORS.text} />
+            </TouchableOpacity>
+            <View style={styles.headerContent}>
+              <Text style={styles.headerTitle}>{t('community')}</Text>
+              <Text style={styles.headerSubtitle}>{t('connectWithBrothers')}</Text>
+            </View>
+            <View style={styles.languageBadge}>
+              <Text style={styles.languageFlag}>{languages[currentLanguage]?.flag}</Text>
+            </View>
+          </View>
+
+          {/* Online Users + Chat Toggle */}
       <View style={styles.onlineBar}>
         <TouchableOpacity
           style={[styles.tabBtn, !showChats && styles.tabBtnActive]}
@@ -426,6 +563,8 @@ export default function CommunityScreen() {
         </View>
         )}
       </KeyboardAvoidingView>
+        </>
+      )}
     </SafeAreaView>
   );
 }
@@ -690,5 +829,112 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: COLORS.textMuted,
     marginTop: SPACING.xs,
+  },
+  // Safety and Parental Controls Styles
+  safetyModalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: SPACING.lg,
+  },
+  safetyModal: {
+    backgroundColor: COLORS.card,
+    borderRadius: BORDER_RADIUS.lg,
+    padding: SPACING.xl,
+    width: '100%',
+    maxWidth: 400,
+    alignItems: 'center',
+  },
+  safetyIconContainer: {
+    marginBottom: SPACING.md,
+  },
+  safetyTitle: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: COLORS.text,
+    textAlign: 'center',
+    marginBottom: SPACING.md,
+  },
+  safetyMessage: {
+    fontSize: 15,
+    color: COLORS.textMuted,
+    textAlign: 'center',
+    marginBottom: SPACING.lg,
+    lineHeight: 22,
+  },
+  safetyBullets: {
+    width: '100%',
+    gap: SPACING.md,
+    marginBottom: SPACING.xl,
+  },
+  safetyBulletItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: SPACING.sm,
+  },
+  safetyBulletText: {
+    flex: 1,
+    fontSize: 14,
+    color: COLORS.text,
+    lineHeight: 20,
+  },
+  safetyAcknowledgeBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.primary,
+    paddingVertical: SPACING.md,
+    paddingHorizontal: SPACING.xl,
+    borderRadius: BORDER_RADIUS.md,
+    gap: SPACING.sm,
+    width: '100%',
+  },
+  safetyAcknowledgeBtnText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  blockedContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: SPACING.xl,
+    backgroundColor: COLORS.background,
+  },
+  blockedTitle: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: COLORS.text,
+    textAlign: 'center',
+    marginTop: SPACING.lg,
+    marginBottom: SPACING.md,
+  },
+  blockedMessage: {
+    fontSize: 15,
+    color: COLORS.textMuted,
+    textAlign: 'center',
+    marginBottom: SPACING.xl,
+    lineHeight: 22,
+    maxWidth: 300,
+  },
+  goToSettingsBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.primary,
+    paddingVertical: SPACING.md,
+    paddingHorizontal: SPACING.xl,
+    borderRadius: BORDER_RADIUS.md,
+    gap: SPACING.sm,
+  },
+  goToSettingsBtnText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  loadingText: {
+    marginTop: SPACING.md,
+    fontSize: 14,
+    color: COLORS.textMuted,
   },
 });

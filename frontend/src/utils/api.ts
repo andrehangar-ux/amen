@@ -430,4 +430,19 @@ export const api = {
     }),
   canSharePersonalInfo: () => api.fetch('/api/safety/can-share-info'),
   updateBirthDate: (birthDate: string) => api.fetch(`/api/users/birth-date?birth_date=${birthDate}`, { method: 'PUT' }),
+
+  // Parental Controls
+  getParentalControlsStatus: () => api.fetch('/api/parental-controls/status'),
+  setParentPin: (newPin: string) =>
+    api.fetch('/api/parental-controls/set-pin', {
+      method: 'POST',
+      body: JSON.stringify({ new_pin: newPin }),
+    }),
+  verifyParentPin: (pin: string) => api.fetch(`/api/parental-controls/verify-pin?pin=${pin}`, { method: 'POST' }),
+  updateParentalControls: (parentPin: string, settings: { social_features_enabled?: boolean; social_level?: string; media_sharing_enabled?: boolean }) =>
+    api.fetch('/api/parental-controls/update', {
+      method: 'PUT',
+      body: JSON.stringify({ parent_pin: parentPin, ...settings }),
+    }),
+  canUseSocialFeatures: () => api.fetch('/api/parental-controls/can-use-social'),
 };

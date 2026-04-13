@@ -10,6 +10,7 @@ import {
   Alert,
   ActivityIndicator,
   Platform,
+  Modal,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon } from '../src/components/Icon';
@@ -79,6 +80,119 @@ export default function SettingsScreen() {
   const [showLanguages, setShowLanguages] = useState(false);
   const [showBibles, setShowBibles] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
+
+  // Parental Controls States
+  const [showParentalControls, setShowParentalControls] = useState(false);
+  const [showPinModal, setShowPinModal] = useState(false);
+  const [parentalControlsStatus, setParentalControlsStatus] = useState<any>(null);
+  const [parentPin, setParentPin] = useState('');
+  const [newPin, setNewPin] = useState('');
+  const [confirmPin, setConfirmPin] = useState('');
+  const [pinError, setPinError] = useState('');
+  const [socialFeaturesEnabled, setSocialFeaturesEnabled] = useState(true);
+  const [socialLevel, setSocialLevel] = useState('friends_only');
+  const [mediaSharingEnabled, setMediaSharingEnabled] = useState(false);
+  const [loadingParental, setLoadingParental] = useState(false);
+  const [pinVerified, setPinVerified] = useState(false);
+
+  // Load parental controls on mount
+  useEffect(() => {
+    loadParentalControlsStatus();
+  }, []);
+
+  const loadParentalControlsStatus = async () => {
+    try {
+      const status = await api.getParentalControlsStatus();
+      setParentalControlsStatus(status);
+      setSocialFeaturesEnabled(status.social_features_enabled ?? true);
+      setSocialLevel(status.social_level || 'friends_only');
+      setMediaSharingEnabled(status.media_sharing_enabled ?? false);
+    } catch (error) {
+      console.log('Error loading parental controls:', error);
+    }
+  };
+
+  const handleSetPin = async () => {
+    setPinError('');
+    if (newPin.length < 4 || newPin.length > 6) {
+      setPinError(t('pinMustBe4to6') || 'Il PIN deve essere di 4-6 cifre');
+      return;
+    }
+    if (!/^\d+$/.test(newPin)) {
+      setPinError(t('pinMustBeNumbers') || 'Il PIN deve contenere solo numeri');
+      return;
+    }
+    if (newPin !== confirmPin) {
+      setPinError(t('pinsDoNotMatch') || 'I PIN non corrispondono');
+      return;
+    }
+    setLoadingParental(true);
+    try {
+      await api.setParentPin(newPin);
+      setShowPinModal(false);
+      setNewPin('');
+      setConfirmPin('');
+      setPinVerified(true);
+      await loadParentalControlsStatus();
+      showInfoAlert(
+        t('success') || 'Successo',
+        t('parentPinSet') || 'PIN controllo genitori impostato con successo',
+        'OK'
+      );
+    } catch (error: any) {
+      setPinError(error.message || 'Errore durante il salvataggio del PIN');
+    } finally {
+      setLoadingParental(false);
+    }
+  };
+
+  const handleVerifyPin = async () => {
+    setPinError('');
+    setLoadingParental(true);
+    try {
+      await api.verifyParentPin(parentPin);
+      setPinVerified(true);
+      setShowPinModal(false);
+      setParentPin('');
+    } catch (error: any) {
+      setPinError(error.message || 'PIN non valido');
+    } finally {
+      setLoadingParental(false);
+    }
+  };
+
+  const handleUpdateParentalControls = async () => {
+    if (!parentalControlsStatus?.parent_pin_set) {
+      setShowPinModal(true);
+      return;
+    }
+    if (!pinVerified) {
+      setShowPinModal(true);
+      return;
+    }
+    setLoadingParental(true);
+    try {
+      await api.updateParentalControls(parentPin || newPin, {
+        social_features_enabled: socialFeaturesEnabled,
+        social_level: socialLevel,
+        media_sharing_enabled: mediaSharingEnabled,
+      });
+      await loadParentalControlsStatus();
+      showInfoAlert(
+        t('saved') || 'Salvato',
+        t('parentalControlsUpdated') || 'Impostazioni controllo genitori aggiornate',
+        'OK'
+      );
+    } catch (error: any) {
+      showInfoAlert(
+        t('error') || 'Errore',
+        error.message || 'Errore durante l\'aggiornamento',
+        'OK'
+      );
+    } finally {
+      setLoadingParental(false);
+    }
+  };
 
   // Load notification settings on mount
   useEffect(() => {
@@ -456,6 +570,267 @@ export default function SettingsScreen() {
           <OfflineManager />
         </View>
 
+        {/* Parental Controls Section */}
+        <Text style={styles.sectionTitle}>{t('parentalControls') || 'Controllo Genitori'}</Text>
+        <View style={styles.card}>
+          <View style={styles.parentalHeader}>
+            <Icon name="shield-checkmark" size={24} color={COLORS.primary} />
+            <View style={styles.parentalHeaderText}>
+              <Text style={styles.parentalTitle}>{t('parentalControlsTitle') || 'Gestione Funzionalità Social'}</Text>
+              <Text style={styles.parentalSubtitle}>
+                {parentalControlsStatus?.is_minor 
+                  ? (t('minorAccount') || 'Account minorenne - Protetto')
+                  : (t('adultAccount') || 'Account adulto')}
+              </Text>
+            </View>
+          </View>
+
+          {parentalControlsStatus?.is_minor && (
+            <>
+              {/* PIN Setup / Verify Button */}
+              {!parentalControlsStatus?.parent_pin_set ? (
+                <TouchableOpacity 
+                  style={styles.setupPinButton}
+                  onPress={() => setShowPinModal(true)}
+                  data-testid="setup-parent-pin-btn"
+                >
+                  <Icon name="key" size={20} color="#fff" />
+                  <Text style={styles.setupPinButtonText}>
+                    {t('setupParentPin') || 'Imposta PIN Genitore'}
+                  </Text>
+                </TouchableOpacity>
+              ) : (
+                <>
+                  {!pinVerified && (
+                    <TouchableOpacity 
+                      style={styles.verifyPinButton}
+                      onPress={() => setShowPinModal(true)}
+                      data-testid="verify-parent-pin-btn"
+                    >
+                      <Icon name="lock-open" size={20} color={COLORS.primary} />
+                      <Text style={styles.verifyPinButtonText}>
+                        {t('unlockToModify') || 'Sblocca per modificare'}
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+
+                  {pinVerified && (
+                    <View style={styles.parentalControlsContent}>
+                      {/* Social Features Toggle */}
+                      <View style={styles.parentalOption}>
+                        <View style={styles.parentalOptionInfo}>
+                          <Text style={styles.parentalOptionLabel}>
+                            {t('socialFeatures') || 'Funzionalità Social'}
+                          </Text>
+                          <Text style={styles.parentalOptionDesc}>
+                            {t('socialFeaturesDesc') || 'Abilita/disabilita community e chat'}
+                          </Text>
+                        </View>
+                        <Switch
+                          value={socialFeaturesEnabled}
+                          onValueChange={setSocialFeaturesEnabled}
+                          trackColor={{ false: COLORS.border, true: COLORS.primary }}
+                          thumbColor="#fff"
+                        />
+                      </View>
+
+                      {/* Social Level Selection */}
+                      {socialFeaturesEnabled && (
+                        <View style={styles.socialLevelSection}>
+                          <Text style={styles.socialLevelTitle}>
+                            {t('socialLevel') || 'Livello Interazione'}
+                          </Text>
+                          <View style={styles.socialLevelOptions}>
+                            <TouchableOpacity
+                              style={[
+                                styles.socialLevelOption,
+                                socialLevel === 'friends_only' && styles.socialLevelOptionSelected
+                              ]}
+                              onPress={() => setSocialLevel('friends_only')}
+                            >
+                              <Icon name="people" size={20} color={socialLevel === 'friends_only' ? '#fff' : COLORS.text} />
+                              <Text style={[
+                                styles.socialLevelOptionText,
+                                socialLevel === 'friends_only' && styles.socialLevelOptionTextSelected
+                              ]}>
+                                {t('friendsOnly') || 'Solo Amici'}
+                              </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                              style={[
+                                styles.socialLevelOption,
+                                socialLevel === 'disabled' && styles.socialLevelOptionSelected
+                              ]}
+                              onPress={() => setSocialLevel('disabled')}
+                            >
+                              <Icon name="close-circle" size={20} color={socialLevel === 'disabled' ? '#fff' : COLORS.text} />
+                              <Text style={[
+                                styles.socialLevelOptionText,
+                                socialLevel === 'disabled' && styles.socialLevelOptionTextSelected
+                              ]}>
+                                {t('disabled') || 'Disabilitato'}
+                              </Text>
+                            </TouchableOpacity>
+                          </View>
+                        </View>
+                      )}
+
+                      {/* Media Sharing Toggle */}
+                      <View style={styles.parentalOption}>
+                        <View style={styles.parentalOptionInfo}>
+                          <Text style={styles.parentalOptionLabel}>
+                            {t('mediaSharing') || 'Condivisione Media'}
+                          </Text>
+                          <Text style={styles.parentalOptionDesc}>
+                            {t('mediaSharingDesc') || 'Permetti invio/ricezione di immagini'}
+                          </Text>
+                        </View>
+                        <Switch
+                          value={mediaSharingEnabled}
+                          onValueChange={setMediaSharingEnabled}
+                          trackColor={{ false: COLORS.border, true: COLORS.primary }}
+                          thumbColor="#fff"
+                        />
+                      </View>
+
+                      {/* Save Button */}
+                      <TouchableOpacity
+                        style={styles.saveParentalButton}
+                        onPress={handleUpdateParentalControls}
+                        disabled={loadingParental}
+                        data-testid="save-parental-controls-btn"
+                      >
+                        {loadingParental ? (
+                          <ActivityIndicator size="small" color="#fff" />
+                        ) : (
+                          <>
+                            <Icon name="save" size={20} color="#fff" />
+                            <Text style={styles.saveParentalButtonText}>
+                              {t('saveSettings') || 'Salva Impostazioni'}
+                            </Text>
+                          </>
+                        )}
+                      </TouchableOpacity>
+                    </View>
+                  )}
+                </>
+              )}
+            </>
+          )}
+
+          {!parentalControlsStatus?.is_minor && (
+            <Text style={styles.adultMessage}>
+              {t('adultNoRestrictions') || 'Le restrizioni del controllo genitori non si applicano agli utenti adulti.'}
+            </Text>
+          )}
+        </View>
+
+        {/* PIN Modal */}
+        <Modal
+          visible={showPinModal}
+          transparent
+          animationType="fade"
+          onRequestClose={() => setShowPinModal(false)}
+        >
+          <View style={styles.modalOverlay}>
+            <View style={styles.pinModal}>
+              <View style={styles.pinModalHeader}>
+                <Icon name="shield-checkmark" size={32} color={COLORS.primary} />
+                <Text style={styles.pinModalTitle}>
+                  {parentalControlsStatus?.parent_pin_set 
+                    ? (t('enterParentPin') || 'Inserisci PIN Genitore')
+                    : (t('createParentPin') || 'Crea PIN Genitore')}
+                </Text>
+                <Text style={styles.pinModalSubtitle}>
+                  {parentalControlsStatus?.parent_pin_set 
+                    ? (t('enterPinToModify') || 'Inserisci il PIN per modificare le impostazioni')
+                    : (t('createPinDesc') || 'Crea un PIN di 4-6 cifre per proteggere le impostazioni')}
+                </Text>
+              </View>
+
+              {parentalControlsStatus?.parent_pin_set ? (
+                <View style={styles.pinInputContainer}>
+                  <TextInput
+                    style={styles.pinInput}
+                    value={parentPin}
+                    onChangeText={setParentPin}
+                    placeholder="****"
+                    placeholderTextColor={COLORS.textMuted}
+                    keyboardType="numeric"
+                    secureTextEntry
+                    maxLength={6}
+                    autoFocus
+                  />
+                </View>
+              ) : (
+                <>
+                  <View style={styles.pinInputContainer}>
+                    <Text style={styles.pinInputLabel}>{t('newPin') || 'Nuovo PIN'}</Text>
+                    <TextInput
+                      style={styles.pinInput}
+                      value={newPin}
+                      onChangeText={setNewPin}
+                      placeholder="****"
+                      placeholderTextColor={COLORS.textMuted}
+                      keyboardType="numeric"
+                      secureTextEntry
+                      maxLength={6}
+                      autoFocus
+                    />
+                  </View>
+                  <View style={styles.pinInputContainer}>
+                    <Text style={styles.pinInputLabel}>{t('confirmPin') || 'Conferma PIN'}</Text>
+                    <TextInput
+                      style={styles.pinInput}
+                      value={confirmPin}
+                      onChangeText={setConfirmPin}
+                      placeholder="****"
+                      placeholderTextColor={COLORS.textMuted}
+                      keyboardType="numeric"
+                      secureTextEntry
+                      maxLength={6}
+                    />
+                  </View>
+                </>
+              )}
+
+              {pinError ? (
+                <Text style={styles.pinError}>{pinError}</Text>
+              ) : null}
+
+              <View style={styles.pinModalButtons}>
+                <TouchableOpacity
+                  style={styles.pinCancelButton}
+                  onPress={() => {
+                    setShowPinModal(false);
+                    setParentPin('');
+                    setNewPin('');
+                    setConfirmPin('');
+                    setPinError('');
+                  }}
+                >
+                  <Text style={styles.pinCancelButtonText}>{t('cancel') || 'Annulla'}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.pinConfirmButton}
+                  onPress={parentalControlsStatus?.parent_pin_set ? handleVerifyPin : handleSetPin}
+                  disabled={loadingParental}
+                >
+                  {loadingParental ? (
+                    <ActivityIndicator size="small" color="#fff" />
+                  ) : (
+                    <Text style={styles.pinConfirmButtonText}>
+                      {parentalControlsStatus?.parent_pin_set 
+                        ? (t('verify') || 'Verifica')
+                        : (t('create') || 'Crea')}
+                    </Text>
+                  )}
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
+
         {/* Privacy & Legal Section */}
         <Text style={styles.sectionTitle}>{t('privacyLegal')}</Text>
         <View style={styles.card}>
@@ -728,5 +1103,224 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: COLORS.primary,
     fontWeight: '500',
+  },
+  // Parental Controls Styles
+  parentalHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: SPACING.md,
+    gap: SPACING.md,
+  },
+  parentalHeaderText: {
+    flex: 1,
+  },
+  parentalTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: COLORS.text,
+  },
+  parentalSubtitle: {
+    fontSize: 13,
+    color: COLORS.textMuted,
+    marginTop: 2,
+  },
+  setupPinButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.primary,
+    padding: SPACING.md,
+    borderRadius: BORDER_RADIUS.md,
+    gap: SPACING.sm,
+  },
+  setupPinButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  verifyPinButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.primary + '15',
+    padding: SPACING.md,
+    borderRadius: BORDER_RADIUS.md,
+    gap: SPACING.sm,
+    borderWidth: 1,
+    borderColor: COLORS.primary,
+  },
+  verifyPinButtonText: {
+    color: COLORS.primary,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  parentalControlsContent: {
+    marginTop: SPACING.md,
+  },
+  parentalOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: SPACING.md,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.border,
+  },
+  parentalOptionInfo: {
+    flex: 1,
+    marginRight: SPACING.md,
+  },
+  parentalOptionLabel: {
+    fontSize: 15,
+    fontWeight: '500',
+    color: COLORS.text,
+  },
+  parentalOptionDesc: {
+    fontSize: 12,
+    color: COLORS.textMuted,
+    marginTop: 2,
+  },
+  socialLevelSection: {
+    paddingVertical: SPACING.md,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.border,
+  },
+  socialLevelTitle: {
+    fontSize: 15,
+    fontWeight: '500',
+    color: COLORS.text,
+    marginBottom: SPACING.sm,
+  },
+  socialLevelOptions: {
+    flexDirection: 'row',
+    gap: SPACING.sm,
+  },
+  socialLevelOption: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.border,
+    paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.md,
+    borderRadius: BORDER_RADIUS.md,
+    gap: SPACING.xs,
+  },
+  socialLevelOptionSelected: {
+    backgroundColor: COLORS.primary,
+  },
+  socialLevelOptionText: {
+    fontSize: 13,
+    fontWeight: '500',
+    color: COLORS.text,
+  },
+  socialLevelOptionTextSelected: {
+    color: '#fff',
+  },
+  saveParentalButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.primary,
+    padding: SPACING.md,
+    borderRadius: BORDER_RADIUS.md,
+    marginTop: SPACING.lg,
+    gap: SPACING.sm,
+  },
+  saveParentalButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  adultMessage: {
+    fontSize: 14,
+    color: COLORS.textMuted,
+    textAlign: 'center',
+    fontStyle: 'italic',
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: SPACING.lg,
+  },
+  pinModal: {
+    backgroundColor: COLORS.card,
+    borderRadius: BORDER_RADIUS.lg,
+    padding: SPACING.xl,
+    width: '100%',
+    maxWidth: 400,
+  },
+  pinModalHeader: {
+    alignItems: 'center',
+    marginBottom: SPACING.lg,
+  },
+  pinModalTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: COLORS.text,
+    marginTop: SPACING.md,
+    textAlign: 'center',
+  },
+  pinModalSubtitle: {
+    fontSize: 14,
+    color: COLORS.textMuted,
+    marginTop: SPACING.sm,
+    textAlign: 'center',
+  },
+  pinInputContainer: {
+    marginBottom: SPACING.md,
+  },
+  pinInputLabel: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: COLORS.text,
+    marginBottom: SPACING.sm,
+  },
+  pinInput: {
+    backgroundColor: COLORS.background,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderRadius: BORDER_RADIUS.md,
+    padding: SPACING.md,
+    fontSize: 24,
+    textAlign: 'center',
+    letterSpacing: 8,
+    color: COLORS.text,
+  },
+  pinError: {
+    color: '#E74C3C',
+    fontSize: 13,
+    textAlign: 'center',
+    marginBottom: SPACING.md,
+  },
+  pinModalButtons: {
+    flexDirection: 'row',
+    gap: SPACING.md,
+    marginTop: SPACING.md,
+  },
+  pinCancelButton: {
+    flex: 1,
+    padding: SPACING.md,
+    borderRadius: BORDER_RADIUS.md,
+    backgroundColor: COLORS.border,
+    alignItems: 'center',
+  },
+  pinCancelButtonText: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: COLORS.text,
+  },
+  pinConfirmButton: {
+    flex: 1,
+    padding: SPACING.md,
+    borderRadius: BORDER_RADIUS.md,
+    backgroundColor: COLORS.primary,
+    alignItems: 'center',
+  },
+  pinConfirmButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#fff',
   },
 });
