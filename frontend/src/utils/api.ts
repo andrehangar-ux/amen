@@ -445,4 +445,32 @@ export const api = {
       body: JSON.stringify({ parent_pin: parentPin, ...settings }),
     }),
   canUseSocialFeatures: () => api.fetch('/api/parental-controls/can-use-social'),
+
+  // Study Groups
+  createStudyGroup: (name: string, description?: string) =>
+    api.fetch('/api/study-groups', {
+      method: 'POST',
+      body: JSON.stringify({ name, description }),
+    }),
+  getMyStudyGroups: () => api.fetch('/api/study-groups'),
+  getStudyGroup: (groupId: string) => api.fetch(`/api/study-groups/${groupId}`),
+  inviteToStudyGroup: (groupId: string, invitedUserId: string) =>
+    api.fetch(`/api/study-groups/${groupId}/invite?invited_user_id=${invitedUserId}`, { method: 'POST' }),
+  getPendingInvites: () => api.fetch('/api/study-groups/invites/pending'),
+  respondToInvite: (inviteId: string, accept: boolean) =>
+    api.fetch(`/api/study-groups/invites/${inviteId}/respond?accept=${accept}`, { method: 'POST' }),
+  leaveStudyGroup: (groupId: string) =>
+    api.fetch(`/api/study-groups/${groupId}/leave`, { method: 'POST' }),
+  sendGroupMessage: (groupId: string, content: string, messageType: string = 'chat', sharedContent?: any) =>
+    api.fetch(`/api/study-groups/${groupId}/messages`, {
+      method: 'POST',
+      body: JSON.stringify({ content, message_type: messageType, shared_content: sharedContent }),
+    }),
+  getGroupMessages: (groupId: string, limit: number = 50) =>
+    api.fetch(`/api/study-groups/${groupId}/messages?limit=${limit}`),
+  updateCurrentStudy: (groupId: string, book: string, chapter: number, verseStart: number = 1, verseEnd?: number) =>
+    api.fetch(`/api/study-groups/${groupId}/study?book=${encodeURIComponent(book)}&chapter=${chapter}&verse_start=${verseStart}${verseEnd ? `&verse_end=${verseEnd}` : ''}`, { method: 'PUT' }),
+  shareVerseToGroup: (groupId: string, book: string, chapter: number, verse: number, text: string, note?: string) =>
+    api.fetch(`/api/study-groups/${groupId}/share-verse?book=${encodeURIComponent(book)}&chapter=${chapter}&verse=${verse}&text=${encodeURIComponent(text)}${note ? `&note=${encodeURIComponent(note)}` : ''}`, { method: 'POST' }),
+  searchUsersForInvite: (query: string) => api.fetch(`/api/study-groups/search-users?q=${encodeURIComponent(query)}`),
 };
