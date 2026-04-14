@@ -821,7 +821,7 @@ export default function BibleScreen() {
                 )}
               </View>
               <View style={styles.verseContent}>
-                <Text style={[styles.verseText, { fontSize }]}>{verse.text}</Text>
+                <Text selectable={true} style={[styles.verseText, { fontSize }]}>{verse.text}</Text>
                 {hasStudyData && (
                   <View style={styles.verseIndicators}>
                     {hasRefs && (

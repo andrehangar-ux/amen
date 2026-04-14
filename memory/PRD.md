@@ -61,13 +61,15 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
 - File app-ads.txt: `google.com, pub-1876565863299921, DIRECT, f08c47fec0942fa0`
 - Endpoint `/app-ads.txt` attivo
 
-## Sessione Corrente (Dicembre 2025)
+## Sessione Corrente (Febbraio 2026)
 
 ### Completato
 - [x] **365 versetti del giorno** - File completo con un versetto per ogni giorno dell'anno
 - [x] **Gruppi di Studio Privati** - Sistema completo con chat, inviti, condivisione versetti
 - [x] Articolazione migliorata domande quiz
 - [x] File app-ads.txt per AdMob
+- [x] **Fix app.json** - Rimossa `targetSdkVersion` da `android` per risolvere errore validazione schema EAS Build
+- [x] **Testo Bibbia copiabile** - Aggiunto `selectable={true}` ai versetti in `bible.tsx`
 
 ## Task Futuri (Backlog)
 1. **P1**: Notifiche push con versetto del giorno dinamico
