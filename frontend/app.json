@@ -10,10 +10,10 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.amen.spiritualapp"
+      "bundleIdentifier": "com.amen.myapp"
     },
     "android": {
-      "package": "com.amen.spiritualapp",
+      "package": "com.amen.myapp",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#4A7C59"

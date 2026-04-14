@@ -6229,6 +6229,23 @@ async def get_app_ads_txt():
         media_type="text/plain"
     )
 
+# ==================== DIGITAL ASSET LINKS (Android App Links) ====================
+@app.get("/.well-known/assetlinks.json")
+async def get_assetlinks():
+    """Serve Digital Asset Links for Android App verification"""
+    return [
+        {
+            "relation": ["delegate_permission/common.handle_all_urls"],
+            "target": {
+                "namespace": "android_app",
+                "package_name": "com.amen.myapp",
+                "sha256_cert_fingerprints": [
+                    "DB:ED:7B:F3:4F:B8:F2:43:58:9F:84:6B:3F:D1:03:5B:8B:8C:99:C5:57:1B:97:9C:65:DC:1B:80:32:8A:9E:D9"
+                ]
+            }
+        }
+    ]
+
 
 
 # Include the router
