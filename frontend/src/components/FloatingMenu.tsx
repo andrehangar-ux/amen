@@ -15,12 +15,12 @@ import { useLanguageStore } from '../store/languageStore';
 import { useAuthStore } from '../store/authStore';
 
 const MENU_LABELS: Record<string, Record<string, string>> = {
-  it: { home: 'Home', bible: 'Bibbia', journal: 'Diario', profile: 'Profilo', donate: 'Donazioni', settings: 'Impostazioni', myContent: 'I Miei Contenuti', quiz: 'Quiz', dictionary: 'Dizionario', community: 'Community', studyGroups: 'Gruppi di Studio' },
-  en: { home: 'Home', bible: 'Bible', journal: 'Journal', profile: 'Profile', donate: 'Donate', settings: 'Settings', myContent: 'My Content', quiz: 'Quiz', dictionary: 'Dictionary', community: 'Community', studyGroups: 'Study Groups' },
-  es: { home: 'Inicio', bible: 'Biblia', journal: 'Diario', profile: 'Perfil', donate: 'Donar', settings: 'Configuracion', myContent: 'Mi Contenido', quiz: 'Quiz', dictionary: 'Diccionario', community: 'Comunidad', studyGroups: 'Grupos de Estudio' },
-  de: { home: 'Start', bible: 'Bibel', journal: 'Tagebuch', profile: 'Profil', donate: 'Spenden', settings: 'Einstellungen', myContent: 'Meine Inhalte', quiz: 'Quiz', dictionary: 'Worterbuch', community: 'Community', studyGroups: 'Studiengruppen' },
-  fr: { home: 'Accueil', bible: 'Bible', journal: 'Journal', profile: 'Profil', donate: 'Dons', settings: 'Parametres', myContent: 'Mon Contenu', quiz: 'Quiz', dictionary: 'Dictionnaire', community: 'Communaute', studyGroups: 'Groupes d\'Etude' },
-  pt: { home: 'Inicio', bible: 'Biblia', journal: 'Diario', profile: 'Perfil', donate: 'Doar', settings: 'Configuracoes', myContent: 'Meu Conteudo', quiz: 'Quiz', dictionary: 'Dicionario', community: 'Comunidade', studyGroups: 'Grupos de Estudo' },
+  it: { home: 'Home', bible: 'Bibbia', journal: 'Diario', profile: 'Profilo', donate: 'Donazioni', settings: 'Impostazioni', myContent: 'I Miei Contenuti', quiz: 'Quiz', dictionary: 'Dizionario', community: 'Community', studyGroups: 'Gruppi di Studio', friends: 'Amici' },
+  en: { home: 'Home', bible: 'Bible', journal: 'Journal', profile: 'Profile', donate: 'Donate', settings: 'Settings', myContent: 'My Content', quiz: 'Quiz', dictionary: 'Dictionary', community: 'Community', studyGroups: 'Study Groups', friends: 'Friends' },
+  es: { home: 'Inicio', bible: 'Biblia', journal: 'Diario', profile: 'Perfil', donate: 'Donar', settings: 'Configuracion', myContent: 'Mi Contenido', quiz: 'Quiz', dictionary: 'Diccionario', community: 'Comunidad', studyGroups: 'Grupos de Estudio', friends: 'Amigos' },
+  de: { home: 'Start', bible: 'Bibel', journal: 'Tagebuch', profile: 'Profil', donate: 'Spenden', settings: 'Einstellungen', myContent: 'Meine Inhalte', quiz: 'Quiz', dictionary: 'Worterbuch', community: 'Community', studyGroups: 'Studiengruppen', friends: 'Freunde' },
+  fr: { home: 'Accueil', bible: 'Bible', journal: 'Journal', profile: 'Profil', donate: 'Dons', settings: 'Parametres', myContent: 'Mon Contenu', quiz: 'Quiz', dictionary: 'Dictionnaire', community: 'Communaute', studyGroups: 'Groupes d\'Etude', friends: 'Amis' },
+  pt: { home: 'Inicio', bible: 'Biblia', journal: 'Diario', profile: 'Perfil', donate: 'Doar', settings: 'Configuracoes', myContent: 'Meu Conteudo', quiz: 'Quiz', dictionary: 'Dicionario', community: 'Comunidade', studyGroups: 'Grupos de Estudo', friends: 'Amigos' },
 };
 
 const HIDDEN_ON = ['/(auth)', '/login', '/register', '/forgot-password'];
@@ -42,6 +42,7 @@ export const FloatingMenu: React.FC = () => {
     { key: 'quiz', label: labels.quiz, icon: 'help-circle', route: '/quiz' },
     { key: 'dictionary', label: labels.dictionary, icon: 'search', route: '/dictionary' },
     { key: 'community', label: labels.community, icon: 'people', route: '/community' },
+    { key: 'friends', label: labels.friends, icon: 'heart', route: '/friends' },
     { key: 'studyGroups', label: labels.studyGroups, icon: 'school', route: '/study-groups' },
     { key: 'myContent', label: labels.myContent, icon: 'bookmark', route: '/my-content' },
     { key: 'assistant', label: 'AI', icon: 'chatbubbles', route: '/assistant' },

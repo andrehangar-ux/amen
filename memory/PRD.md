@@ -83,13 +83,13 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - Safety reminder ad ogni sessione (non piu una volta sola)
   - Chat solo con amici (lista sconosciuti nascosta)
   - Backend check su community post per minori
+- [x] **Lista Amici completa** - Pagina redesign con stats, tab switch, avatar colorati, empty state, protezione minori (tab "Scopri Persone" nascosto). Aggiunta al FloatingMenu.
 
 ## Task Futuri (Backlog)
 1. **P1**: Notifiche push con versetto del giorno dinamico
-2. **P1**: Lista amici/preferiti completa
-3. **P1**: UI Ricerca Globale
-4. **P2**: UI Mappe Bibliche
-5. **P2**: Refactoring server.py (>6000 righe)
+2. **P1**: UI Ricerca Globale
+3. **P2**: UI Mappe Bibliche
+4. **P2**: Refactoring server.py (>6000 righe)
 
 ## Credenziali Test
 - Email: `testbible@cibospirituale.it`
