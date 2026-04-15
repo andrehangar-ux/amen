@@ -2268,6 +2268,12 @@ def check_content_moderation(content: str, lang: str = "it") -> tuple:
 @api_router.post("/community/messages")
 async def create_community_message(data: CommunityMessageCreate, user: User = Depends(require_auth)):
     """Create a community message with content moderation"""
+    # MINOR PROTECTION: Check if minor can use social features
+    user_doc = await db.users.find_one({"user_id": user.user_id}, {"_id": 0, "birth_date": 1, "social_features_enabled": 1, "parent_pin": 1, "social_level": 1})
+    if user_doc and is_minor(user_doc.get("birth_date")):
+        if not user_doc.get("parent_pin") or not user_doc.get("social_features_enabled", False):
+            raise HTTPException(status_code=403, detail="Le funzionalita social non sono abilitate. Un genitore deve configurare il Controllo Genitori nelle Impostazioni.")
+    
     # Content moderation
     is_clean, filtered_content, warnings = check_content_moderation(data.content, data.language)
     
@@ -5620,7 +5626,7 @@ async def get_safety_status(user: User = Depends(require_auth)):
         # Parental Controls
         "parental_controls_enabled": user_doc.get("parental_controls_enabled", user_is_minor),
         "parent_pin_set": bool(user_doc.get("parent_pin")),
-        "social_features_enabled": user_doc.get("social_features_enabled", True),
+        "social_features_enabled": user_doc.get("social_features_enabled", False),
         "social_level": user_doc.get("social_level", "friends_only"),
         "media_sharing_enabled": user_doc.get("media_sharing_enabled", False)
     }
@@ -5720,7 +5726,7 @@ async def get_parental_controls_status(user: User = Depends(require_auth)):
         "age": calculate_age(birth_date),
         "parental_controls_enabled": user_doc.get("parental_controls_enabled", user_is_minor),
         "parent_pin_set": bool(user_doc.get("parent_pin")),
-        "social_features_enabled": user_doc.get("social_features_enabled", True),
+        "social_features_enabled": user_doc.get("social_features_enabled", False),
         "social_level": user_doc.get("social_level", "friends_only"),
         "media_sharing_enabled": user_doc.get("media_sharing_enabled", False),
         "parental_consent": user_doc.get("parental_consent", False),
@@ -5815,11 +5821,26 @@ async def can_use_social_features(user: User = Depends(require_auth)):
             "can_use_social": True,
             "social_level": "all",
             "media_sharing": True,
-            "reason": "adult"
+            "reason": "adult",
+            "is_minor": False,
+            "parent_pin_set": False
         }
     
-    # Check parental controls for minors
-    social_enabled = user_doc.get("social_features_enabled", True)
+    # MINOR: require parent PIN to be set before ANY social access
+    parent_pin_set = bool(user_doc.get("parent_pin"))
+    if not parent_pin_set:
+        return {
+            "can_use_social": False,
+            "social_level": "disabled",
+            "media_sharing": False,
+            "reason": "no_parent_pin",
+            "is_minor": True,
+            "parent_pin_set": False,
+            "message": "Un genitore deve prima impostare un PIN di controllo nelle Impostazioni per abilitare le funzionalità social."
+        }
+    
+    # Check parental controls for minors (default: disabled until parent enables)
+    social_enabled = user_doc.get("social_features_enabled", False)
     social_level = user_doc.get("social_level", "friends_only")
     media_sharing = user_doc.get("media_sharing_enabled", False)
     
@@ -5830,14 +5851,18 @@ async def can_use_social_features(user: User = Depends(require_auth)):
             "social_level": "disabled",
             "media_sharing": False,
             "reason": "parental_controls_disabled",
-            "message": "Le funzionalità social sono state disabilitate dal controllo genitori."
+            "is_minor": True,
+            "parent_pin_set": True,
+            "message": "Le funzionalità social sono state disabilitate dal controllo genitori. Chiedi a un genitore di modificare le impostazioni."
         }
     
     return {
         "can_use_social": True,
         "social_level": social_level,
         "media_sharing": media_sharing,
-        "reason": "parental_controls_allowed"
+        "reason": "parental_controls_allowed",
+        "is_minor": True,
+        "parent_pin_set": True
     }
 
 

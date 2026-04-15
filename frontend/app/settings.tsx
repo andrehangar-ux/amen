@@ -104,7 +104,7 @@ export default function SettingsScreen() {
     try {
       const status = await api.getParentalControlsStatus();
       setParentalControlsStatus(status);
-      setSocialFeaturesEnabled(status.social_features_enabled ?? true);
+      setSocialFeaturesEnabled(status.social_features_enabled ?? false);
       setSocialLevel(status.social_level || 'friends_only');
       setMediaSharingEnabled(status.media_sharing_enabled ?? false);
     } catch (error) {

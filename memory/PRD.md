@@ -45,12 +45,17 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
 - `POST /api/study-groups/{id}/share-verse` - Condividi versetto
 - `GET /api/study-groups/search-users` - Cerca utenti
 
-### Protezione Minori
+### Protezione Minori (Google Play Families Policy - Compliant)
 - Campo data di nascita obbligatorio
-- Blocco chat con sconosciuti per minori
-- Modal sicurezza in-app
-- Controllo genitori con PIN
-- **Gruppi di studio bloccati per minori**
+- **Social features DISABILITATE per default** per minori (non piu abilitate)
+- **PIN Genitore OBBLIGATORIO** prima di qualsiasi accesso social
+- **Safety reminder mostrato OGNI SESSIONE** (non piu una volta sola)
+- **Chat solo con amici** (friends_only mode) — lista "Tutti gli utenti" nascosta per minori
+- **Utenti online nascosti** per minori (no click su sconosciuti per DM)
+- Controllo genitori con PIN: abilita/disabilita social, scegli livello, media sharing
+- Backend: check minori su community post, private messages, study groups
+- Messaggi di blocco chiari con indicazioni su ruolo genitore
+- Gruppi di studio bloccati per minori senza approvazione parentale
 
 ### Modalità Offline
 - Caching Bibbia, Quiz e Note tramite AsyncStorage
@@ -70,6 +75,14 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
 - [x] File app-ads.txt per AdMob
 - [x] **Fix app.json** - Rimossa `targetSdkVersion` da `android` per risolvere errore validazione schema EAS Build
 - [x] **Testo Bibbia copiabile** - Aggiunto `selectable={true}` ai versetti in `bible.tsx`
+- [x] **Package name** - Aggiornato a `com.amen.myapp` in app.json
+- [x] **Digital Asset Links** - Endpoint `/.well-known/assetlinks.json` con SHA-256 fingerprint
+- [x] **Families Policy Fix (Google Play)** - Rafforzato sistema protezione minori:
+  - Social disabilitate per default per minori
+  - PIN genitore obbligatorio prima di qualsiasi accesso social
+  - Safety reminder ad ogni sessione (non piu una volta sola)
+  - Chat solo con amici (lista sconosciuti nascosta)
+  - Backend check su community post per minori
 
 ## Task Futuri (Backlog)
 1. **P1**: Notifiche push con versetto del giorno dinamico

@@ -206,13 +206,21 @@ export default function StudyGroupsScreen() {
           <Text style={styles.headerTitle}>{t('studyGroups') || 'Gruppi di Studio'}</Text>
         </View>
         <View style={styles.blockedContainer}>
-          <Icon name="lock-closed" size={80} color={COLORS.warning} />
+          <Icon name="shield-checkmark" size={80} color={COLORS.primary} />
           <Text style={styles.blockedTitle}>
             {t('studyGroupsBlocked') || 'Gruppi di Studio Non Disponibili'}
           </Text>
           <Text style={styles.blockedMessage}>
-            {t('minorsCantAccessGroups') || 'I gruppi di studio sono disponibili solo per utenti adulti.'}
+            {t('minorsCantAccessGroups') || 'Per la tua sicurezza, i gruppi di studio richiedono che un genitore abiliti le funzionalita social tramite il Controllo Genitori nelle Impostazioni.'}
           </Text>
+          <TouchableOpacity
+            style={styles.goToSettingsBtn}
+            onPress={() => router.push('/settings')}
+            data-testid="study-groups-go-settings"
+          >
+            <Icon name="settings" size={20} color="#fff" />
+            <Text style={styles.goToSettingsBtnText}>{t('goToSettings') || 'Vai alle Impostazioni'}</Text>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     );
@@ -921,5 +929,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: SPACING.md,
     maxWidth: 300,
+    marginBottom: SPACING.xl,
+    lineHeight: 22,
+  },
+  goToSettingsBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.primary,
+    paddingVertical: SPACING.md,
+    paddingHorizontal: SPACING.xl,
+    borderRadius: BORDER_RADIUS.md,
+    gap: SPACING.sm,
+  },
+  goToSettingsBtnText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });

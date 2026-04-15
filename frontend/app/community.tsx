@@ -40,6 +40,8 @@ interface SocialAccess {
   media_sharing: boolean;
   reason: string;
   message?: string;
+  is_minor?: boolean;
+  parent_pin_set?: boolean;
 }
 
 export default function CommunityScreen() {
@@ -65,22 +67,17 @@ export default function CommunityScreen() {
       const access = await api.canUseSocialFeatures();
       setSocialAccess(access);
       
-      // Show safety reminder for minors before allowing social features
-      if (access.can_use_social && access.reason !== 'adult') {
-        const status = await api.getSafetyStatus();
-        if (status.is_minor && !status.safety_reminder_shown) {
-          setShowSafetyReminder(true);
-        } else {
-          setSafetyAcknowledged(true);
-        }
-      } else if (access.reason === 'adult') {
+      // MINORS: Always show safety reminder every session before allowing social
+      if (access.can_use_social && access.is_minor) {
+        setShowSafetyReminder(true);
+      } else if (!access.is_minor) {
+        // Adults: no reminder needed
         setSafetyAcknowledged(true);
       }
+      // If can_use_social is false, the blocked screen handles it
     } catch (error) {
       console.log('Error checking social access:', error);
-      // Allow access on error for backwards compatibility
-      setSocialAccess({ can_use_social: true, social_level: 'all', media_sharing: true, reason: 'error' });
-      setSafetyAcknowledged(true);
+      setSocialAccess({ can_use_social: false, social_level: 'disabled', media_sharing: false, reason: 'error', message: 'Errore nel verificare l\'accesso. Riprova.' });
     }
   }, []);
 
@@ -292,40 +289,49 @@ export default function CommunityScreen() {
         <View style={styles.safetyModalOverlay}>
           <View style={styles.safetyModal}>
             <View style={styles.safetyIconContainer}>
-              <Icon name="shield-checkmark" size={56} color={COLORS.primary} />
+              <Icon name="shield-checkmark" size={56} color="#E74C3C" />
             </View>
             <Text style={styles.safetyTitle}>
-              {t('safetyReminderTitle') || 'Promemoria Sicurezza Online'}
+              {t('safetyReminderTitle') || 'Avviso di Sicurezza Online'}
             </Text>
             <Text style={styles.safetyMessage}>
-              {t('safetyReminderMessage') || 'Prima di interagire con altri utenti, ricorda queste regole importanti per la tua sicurezza:'}
+              {t('safetyReminderMessage') || 'IMPORTANTE: Interagire online comporta rischi reali. Prima di continuare, leggi attentamente:'}
             </Text>
             <View style={styles.safetyBullets}>
               <View style={styles.safetyBulletItem}>
+                <Icon name="warning" size={20} color="#E74C3C" />
+                <Text style={styles.safetyBulletText}>
+                  {t('realWorldRisks') || 'Le interazioni online possono avere conseguenze reali. Non tutti sono chi dicono di essere.'}
+                </Text>
+              </View>
+              <View style={styles.safetyBulletItem}>
                 <Icon name="close-circle" size={20} color="#E74C3C" />
                 <Text style={styles.safetyBulletText}>
-                  {t('neverSharePersonalInfo') || 'Non condividere mai informazioni personali (indirizzo, scuola, telefono)'}
+                  {t('neverSharePersonalInfo') || 'NON condividere MAI: indirizzo, scuola, telefono, foto personali o posizione.'}
                 </Text>
               </View>
               <View style={styles.safetyBulletItem}>
                 <Icon name="people" size={20} color={COLORS.primary} />
                 <Text style={styles.safetyBulletText}>
-                  {t('chatOnlyWithKnown') || 'Chatta solo con persone che conosci e di cui ti fidi'}
+                  {t('chatOnlyWithKnown') || 'Chatta SOLO con persone che conosci nella vita reale e di cui ti fidi.'}
                 </Text>
               </View>
               <View style={styles.safetyBulletItem}>
-                <Icon name="alert-circle" size={20} color="#F39C12" />
+                <Icon name="hand-left" size={20} color="#F39C12" />
                 <Text style={styles.safetyBulletText}>
-                  {t('tellAdultIfUncomfortable') || 'Se qualcuno ti fa sentire a disagio, parlane subito con un adulto'}
+                  {t('tellAdultIfUncomfortable') || 'Se qualcuno ti fa sentire a disagio o ti chiede informazioni personali, FERMATI e parlane subito con un genitore o un adulto di fiducia.'}
                 </Text>
               </View>
               <View style={styles.safetyBulletItem}>
                 <Icon name="eye-off" size={20} color="#9B59B6" />
                 <Text style={styles.safetyBulletText}>
-                  {t('beCarefulWithStrangers') || 'Le persone online potrebbero non essere chi dicono di essere'}
+                  {t('beCarefulWithStrangers') || 'Non incontrare MAI di persona qualcuno conosciuto online senza un adulto.'}
                 </Text>
               </View>
             </View>
+            <Text style={styles.safetyParentNote}>
+              {t('parentApprovedAccess') || 'L\'accesso a questa sezione e stato approvato da un genitore tramite il Controllo Genitori nelle Impostazioni.'}
+            </Text>
             <TouchableOpacity 
               style={styles.safetyAcknowledgeBtn} 
               onPress={handleAcknowledgeSafety}
@@ -333,7 +339,7 @@ export default function CommunityScreen() {
             >
               <Icon name="checkmark-circle" size={24} color="#fff" />
               <Text style={styles.safetyAcknowledgeBtnText}>
-                {t('iUnderstandAndAccept') || 'Ho capito e accetto'}
+                {t('iUnderstandAndAccept') || 'Ho letto e capisco i rischi'}
               </Text>
             </TouchableOpacity>
           </View>
@@ -343,13 +349,23 @@ export default function CommunityScreen() {
       {/* Social Features Blocked Screen */}
       {socialAccess && !socialAccess.can_use_social ? (
         <View style={styles.blockedContainer}>
-          <Icon name="lock-closed" size={80} color={COLORS.warning} />
+          <Icon name="shield-checkmark" size={80} color={COLORS.primary} />
           <Text style={styles.blockedTitle}>
-            {t('socialFeaturesDisabled') || 'Funzionalità Social Disabilitate'}
+            {socialAccess.reason === 'no_parent_pin'
+              ? (t('parentSetupRequired') || 'Configurazione Genitore Richiesta')
+              : (t('socialFeaturesDisabled') || 'Funzionalita Social Disabilitate')}
           </Text>
           <Text style={styles.blockedMessage}>
-            {socialAccess.message || t('parentalControlsBlockedSocial') || 'Il controllo genitori ha disabilitato le funzionalità social per questo account. Chiedi a un genitore di modificare le impostazioni.'}
+            {socialAccess.reason === 'no_parent_pin'
+              ? (t('parentMustSetupPin') || 'Per la tua sicurezza, un genitore o tutore deve prima configurare un PIN di Controllo Genitori nelle Impostazioni e abilitare le funzionalita social.')
+              : (socialAccess.message || t('parentalControlsBlockedSocial') || 'Il controllo genitori ha disabilitato le funzionalita social per questo account. Chiedi a un genitore di modificare le impostazioni.')}
           </Text>
+          <View style={styles.blockedInfoBox}>
+            <Icon name="information-circle" size={20} color={COLORS.primary} />
+            <Text style={styles.blockedInfoText}>
+              {t('adultRequiredInfo') || 'Solo un adulto puo abilitare o disabilitare le funzionalita social tramite il PIN di Controllo Genitori.'}
+            </Text>
+          </View>
           <TouchableOpacity 
             style={styles.goToSettingsBtn}
             onPress={() => router.push('/settings')}
@@ -403,7 +419,8 @@ export default function CommunityScreen() {
         </TouchableOpacity>
       </View>
 
-      {/* Online Users Strip - always visible */}
+      {/* Online Users Strip - hidden for minors in friends_only mode */}
+      {(!socialAccess?.is_minor || socialAccess?.social_level !== 'friends_only') && (
       <View style={styles.onlineStrip}>
         <Text style={styles.onlineLabel}>
           Online ({onlineUsers.length})
@@ -433,6 +450,17 @@ export default function CommunityScreen() {
           <Text style={styles.onlineEmpty}>Nessun utente online al momento</Text>
         )}
       </View>
+      )}
+
+      {/* Minors: friends_only info banner */}
+      {socialAccess?.is_minor && socialAccess?.social_level === 'friends_only' && (
+        <View style={styles.friendsOnlyBanner}>
+          <Icon name="shield-checkmark" size={16} color={COLORS.primary} />
+          <Text style={styles.friendsOnlyBannerText}>
+            {t('friendsOnlyMode') || 'Modalita protetta: puoi chattare solo con i tuoi amici.'}
+          </Text>
+        </View>
+      )}
 
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -447,9 +475,9 @@ export default function CommunityScreen() {
           <FlatList
             data={[
               ...conversations.map(c => ({ type: 'conversation' as const, ...c })),
-              ...allUsers
+              ...(socialAccess?.is_minor && socialAccess?.social_level === 'friends_only' ? [] : allUsers
                 .filter(u => !conversations.some(c => c.other_user_id === u.user_id))
-                .map(u => ({ type: 'user' as const, ...u }))
+                .map(u => ({ type: 'user' as const, ...u })))
             ]}
             keyExtractor={(item) => item.type === 'conversation' ? item.conversation_id : item.user_id}
             contentContainerStyle={styles.listContent}
@@ -930,6 +958,44 @@ const styles = StyleSheet.create({
   goToSettingsBtnText: {
     color: '#fff',
     fontSize: 16,
+    fontWeight: '600',
+  },
+  blockedInfoBox: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    backgroundColor: COLORS.primary + '12',
+    borderRadius: BORDER_RADIUS.md,
+    padding: SPACING.md,
+    marginBottom: SPACING.xl,
+    maxWidth: 320,
+    gap: SPACING.sm,
+  },
+  blockedInfoText: {
+    flex: 1,
+    fontSize: 13,
+    color: COLORS.primary,
+    lineHeight: 19,
+  },
+  safetyParentNote: {
+    fontSize: 12,
+    color: COLORS.textMuted,
+    textAlign: 'center',
+    marginBottom: SPACING.md,
+    fontStyle: 'italic',
+    lineHeight: 18,
+  },
+  friendsOnlyBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.primary + '15',
+    paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.md,
+    gap: SPACING.sm,
+  },
+  friendsOnlyBannerText: {
+    flex: 1,
+    fontSize: 12,
+    color: COLORS.primary,
     fontWeight: '600',
   },
   loadingText: {
