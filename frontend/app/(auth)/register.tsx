@@ -311,23 +311,31 @@ export default function RegisterScreen() {
         visible={showSafetyReminder}
         transparent
         animationType="fade"
-        onRequestClose={() => setShowSafetyReminder(false)}
+        onRequestClose={() => {}}
       >
         <View style={styles.modalOverlay}>
           <View style={styles.safetyModal}>
             <View style={styles.safetyIconContainer}>
-              <Icon name="shield-checkmark" size={48} color={COLORS.primary} />
+              <Icon name="warning" size={48} color="#E74C3C" />
             </View>
             <Text style={styles.safetyTitle}>
-              {t('safetyReminderTitle') || 'Promemoria Sicurezza Online'}
+              {t('safetyReminderTitle') || 'AVVISO DI SICUREZZA PER MINORI'}
             </Text>
             <Text style={styles.safetyMessage}>
-              {t('safetyReminderMessage') || 'Ricorda: non condividere mai informazioni personali come indirizzo, scuola o numero di telefono con persone che non conosci. Se qualcuno ti fa sentire a disagio, parlane con un adulto di fiducia.'}
+              {t('safetyReminderRegister') || 'ATTENZIONE: Questa app contiene funzionalita social che permettono di comunicare con altre persone. Le interazioni online comportano RISCHI REALI, incluso il contatto con persone sconosciute.'}
             </Text>
             <View style={styles.safetyBullets}>
-              <Text style={styles.safetyBullet}>• Non condividere dati personali con sconosciuti</Text>
-              <Text style={styles.safetyBullet}>• Chatta solo con amici e familiari</Text>
-              <Text style={styles.safetyBullet}>• Se qualcosa ti preoccupa, parla con un adulto</Text>
+              <Text style={styles.safetyBullet}>{'• NON condividere MAI informazioni personali (nome completo, indirizzo, scuola, telefono, foto)'}</Text>
+              <Text style={styles.safetyBullet}>{'• Le persone online potrebbero NON essere chi dicono di essere'}</Text>
+              <Text style={styles.safetyBullet}>{'• Chatta SOLO con persone che conosci nella vita reale (amici, familiari)'}</Text>
+              <Text style={styles.safetyBullet}>{'• NON incontrare MAI di persona qualcuno conosciuto online'}</Text>
+              <Text style={styles.safetyBullet}>{'• Se qualcuno ti mette a disagio, PARLANE SUBITO con un genitore o adulto di fiducia'}</Text>
+            </View>
+            <View style={styles.safetyParentBox}>
+              <Icon name="people" size={20} color={COLORS.primary} />
+              <Text style={styles.safetyParentText}>
+                {'Un genitore o tutore dovra configurare il Controllo Genitori nelle Impostazioni per abilitare le funzionalita social. Senza approvazione adulta, la chat e i gruppi non saranno accessibili.'}
+              </Text>
             </View>
             <TouchableOpacity
               style={styles.safetyButton}
@@ -338,7 +346,7 @@ export default function RegisterScreen() {
               data-testid="safety-acknowledge-button"
             >
               <Text style={styles.safetyButtonText}>
-                {t('iUnderstand') || 'Ho capito, continua'}
+                {t('iUnderstand') || 'Ho letto e compreso i rischi'}
               </Text>
             </TouchableOpacity>
           </View>
@@ -535,7 +543,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: COLORS.primary + '15',
+    backgroundColor: '#E74C3C' + '15',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: SPACING.md,
@@ -579,5 +587,22 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
+  },
+  safetyParentBox: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    backgroundColor: COLORS.primary + '12',
+    borderRadius: BORDER_RADIUS.md,
+    padding: SPACING.md,
+    marginBottom: SPACING.lg,
+    gap: SPACING.sm,
+    alignSelf: 'stretch',
+  },
+  safetyParentText: {
+    flex: 1,
+    fontSize: 13,
+    color: COLORS.primary,
+    lineHeight: 19,
+    fontWeight: '500',
   },
 });

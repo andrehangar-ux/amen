@@ -2,7 +2,7 @@
   "expo": {
     "name": "Amen!",
     "slug": "amen-app",
-    "version": "1.0.0",
+    "version": "1.1.22",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "amen",
@@ -18,7 +18,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#4A7C59"
       },
-      "edgeToEdgeEnabled": true,
+      "edgeToEdgeEnabled": false,
       "permissions": []
     },
     "web": {
@@ -37,16 +37,7 @@
           "backgroundColor": "#4A7C59"
         }
       ],
-      "@react-native-community/datetimepicker",
-      [
-        "react-native-edge-to-edge",
-        {
-          "android": {
-            "parentTheme": "Material3",
-            "enforceNavigationBarContrast": true
-          }
-        }
-      ]
+      "@react-native-community/datetimepicker"
     ],
     "experiments": {
       "typedRoutes": true

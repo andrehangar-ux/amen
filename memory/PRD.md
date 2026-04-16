@@ -84,6 +84,8 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - Chat solo con amici (lista sconosciuti nascosta)
   - Backend check su community post per minori
 - [x] **Lista Amici completa** - Pagina redesign con stats, tab switch, avatar colorati, empty state, protezione minori (tab "Scopri Persone" nascosto). Aggiunta al FloatingMenu.
+- [x] **Families Policy v2 (4o rifiuto)** - Safety reminder registrazione rafforzato con rischi reali, ruolo genitore esplicito. Version bumped a 1.1.22.
+- [x] **Edge-to-edge fix** - Rimosso plugin `react-native-edge-to-edge` e flag `edgeToEdgeEnabled` per eliminare API deprecate Android 15.
 
 ## Task Futuri (Backlog)
 1. **P1**: Notifiche push con versetto del giorno dinamico
