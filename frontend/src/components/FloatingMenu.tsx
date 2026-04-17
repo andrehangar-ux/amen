@@ -7,6 +7,7 @@ import {
   Modal,
   Pressable,
   Platform,
+  ScrollView,
 } from 'react-native';
 import { router, usePathname } from 'expo-router';
 import { Icon } from './Icon';
@@ -101,23 +102,25 @@ export const FloatingMenu: React.FC = () => {
               </TouchableOpacity>
             </View>
             
-            {menuItems.map((item) => (
-              <TouchableOpacity
-                key={item.key}
-                style={[styles.menuItem, isActive(item.key) && styles.menuItemActive]}
-                onPress={() => handleNavigate(item.route)}
-                activeOpacity={0.7}
-              >
-                <Icon
-                  name={item.icon as any}
-                  size={20}
-                  color={isActive(item.key) ? COLORS.primary : COLORS.text}
-                />
-                <Text style={[styles.menuItemText, isActive(item.key) && styles.menuItemTextActive]}>
-                  {item.label}
-                </Text>
-              </TouchableOpacity>
-            ))}
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.menuScrollContent}>
+              {menuItems.map((item) => (
+                <TouchableOpacity
+                  key={item.key}
+                  style={[styles.menuItem, isActive(item.key) && styles.menuItemActive]}
+                  onPress={() => handleNavigate(item.route)}
+                  activeOpacity={0.7}
+                >
+                  <Icon
+                    name={item.icon as any}
+                    size={20}
+                    color={isActive(item.key) ? COLORS.primary : COLORS.text}
+                  />
+                  <Text style={[styles.menuItemText, isActive(item.key) && styles.menuItemTextActive]}>
+                    {item.label}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
           </View>
         </Pressable>
       </Modal>
@@ -162,8 +165,8 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     width: '100%',
-    maxHeight: '70%',
-    paddingBottom: Platform.OS === 'ios' ? 34 : 20,
+    maxHeight: '80%',
+    paddingBottom: Platform.OS === 'ios' ? 34 : 48,
     ...SHADOWS.large,
   },
   menuHeader: {
@@ -207,6 +210,9 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: SPACING.lg,
     gap: 14,
+  },
+  menuScrollContent: {
+    paddingBottom: 8,
   },
   menuItemActive: {
     backgroundColor: COLORS.primary + '10',
