@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     width: '100%',
     maxHeight: '80%',
-    paddingBottom: Platform.OS === 'ios' ? 34 : 48,
+    paddingBottom: Platform.OS === 'ios' ? 34 : 80,
     ...SHADOWS.large,
   },
   menuHeader: {
