@@ -4970,15 +4970,38 @@ async def global_search(q: str, lang: str = "it", user: User = Depends(require_a
             "text": bm.get("text", "")[:120],
         })
     
-    # 5. Search dictionary
+    # 5. Search dictionary (in source Italian + translated meanings)
     for key, term in BIBLICAL_DICTIONARY.items():
+        matched = False
+        display_term = term["term"]
+        display_meaning = term["meaning"]
+        
+        # Check Italian source
         if (query_lower in term["term"].lower() or 
             query_lower in term["meaning"].lower()):
+            matched = True
+        
+        # Check translated meaning/description for the requested language
+        if not matched and lang != "it" and key in DICT_TERM_TRANSLATIONS:
+            trans = DICT_TERM_TRANSLATIONS.get(key, {}).get(lang, {})
+            trans_meaning = trans.get("meaning", "")
+            trans_desc = trans.get("description", "")
+            if (query_lower in trans_meaning.lower() or 
+                query_lower in trans_desc.lower()):
+                matched = True
+        
+        if matched:
+            # Use translated meaning if available
+            if lang != "it" and key in DICT_TERM_TRANSLATIONS:
+                trans = DICT_TERM_TRANSLATIONS.get(key, {}).get(lang, {})
+                if trans.get("meaning"):
+                    display_meaning = trans["meaning"]
+            
             results["dictionary"].append({
                 "type": "dictionary",
                 "id": key,
-                "term": term["term"],
-                "meaning": term["meaning"][:80],
+                "term": display_term,
+                "meaning": display_meaning[:80],
             })
             if len(results["dictionary"]) >= 8:
                 break
