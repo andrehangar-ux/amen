@@ -6309,6 +6309,109 @@ async def get_assetlinks():
         }
     ]
 
+# ==================== CHILD SAFETY & FAMILIES POLICY ====================
+@app.get("/child-safety-policy")
+async def child_safety_policy():
+    """Public child safety policy page for Google Play Families Policy compliance.
+    No authentication required - accessible by Google Play reviewers."""
+    return Response(content="""<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amen! - Child Safety Policy / Politica di Sicurezza per Minori</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;max-width:800px;margin:0 auto;padding:20px;color:#333;line-height:1.7}
+h1{color:#4A7C59}h2{color:#5B8F6B;border-bottom:2px solid #e0e0e0;padding-bottom:8px}
+.section{margin:24px 0;padding:16px;background:#f9f9f9;border-radius:12px;border-left:4px solid #4A7C59}
+.warning{background:#fff3e0;border-left-color:#F39C12}
+ul{padding-left:20px}li{margin:8px 0}
+.badge{display:inline-block;background:#4A7C59;color:#fff;padding:4px 12px;border-radius:20px;font-size:13px;margin:4px}
+</style>
+</head>
+<body>
+<h1>Amen! - Child Safety Policy</h1>
+<p><strong>App:</strong> Amen! Bible Study App<br>
+<strong>Package:</strong> com.amen.myapp<br>
+<strong>Last Updated:</strong> April 2026<br>
+<strong>Target Audience:</strong> All ages (with parental controls for minors)</p>
+
+<h2>1. Safety Measures for Minors</h2>
+<div class="section">
+<p>Amen! implements comprehensive child safety protections:</p>
+<ul>
+<li><strong>Date of Birth Verification:</strong> Required at registration to identify minor users</li>
+<li><strong>Parental PIN Required:</strong> All social features are <strong>disabled by default</strong> for minors. A parent or guardian must set a Parental Control PIN in Settings before any social interaction is possible</li>
+<li><strong>Safety Reminder Every Session:</strong> Minors see a mandatory safety warning about real-world risks of online interaction before accessing any social features, every time they open the app</li>
+<li><strong>Friends-Only Chat:</strong> Minors in "friends_only" mode cannot see or contact unknown users. The "Discover People" section is hidden</li>
+<li><strong>No Personal Info Exchange:</strong> Minors are warned NOT to share personal information (address, school, phone, photos). Adult supervision is required through Parental Controls</li>
+<li><strong>Content Moderation:</strong> Community posts are moderated for inappropriate content</li>
+<li><strong>Study Groups Blocked:</strong> Minors cannot access group features without parental approval</li>
+</ul>
+</div>
+
+<h2>2. Parental Controls</h2>
+<div class="section">
+<p>Parents and guardians have full control over their child's social experience:</p>
+<ul>
+<li><span class="badge">PIN Protected</span> A 4-digit PIN must be set by a parent to manage social settings</li>
+<li><span class="badge">Enable/Disable</span> Social features can be completely enabled or disabled</li>
+<li><span class="badge">Level Control</span> Choose between "Friends Only" (recommended for minors) or "All Users"</li>
+<li><span class="badge">Media Sharing</span> Media/image sharing can be independently enabled or disabled</li>
+</ul>
+</div>
+
+<h2>3. Data Collection for Minors</h2>
+<div class="section warning">
+<p><strong>Minimal Data Collection:</strong></p>
+<ul>
+<li>We collect only: name, email, date of birth (for age verification), and app usage data (reading progress, notes)</li>
+<li>We do NOT collect: location, contacts, photos, device identifiers for advertising, or any data beyond what is necessary for app functionality</li>
+<li>We do NOT use interest-based advertising for minor users</li>
+<li>We do NOT share minor user data with third parties</li>
+<li>Parents can request data deletion by contacting us</li>
+</ul>
+</div>
+
+<h2>4. Educational Content</h2>
+<div class="section">
+<p>Amen! is a Bible study app designed to support spiritual education and growth:</p>
+<ul>
+<li>Bible reading in multiple languages (IT, EN, ES, PT, FR, DE)</li>
+<li>Biblical dictionary with Hebrew/Greek/Aramaic terms</li>
+<li>Interactive quizzes for Bible knowledge</li>
+<li>Personal journal and study notes</li>
+<li>Daily verse for reflection</li>
+<li>All content is age-appropriate and promotes positive values</li>
+</ul>
+</div>
+
+<h2>5. For Teachers and Educators</h2>
+<div class="section">
+<p>Amen! can be used in educational settings:</p>
+<ul>
+<li>Study groups allow supervised group Bible study (adults only by default, or with parental approval)</li>
+<li>Reading progress tracking helps monitor engagement</li>
+<li>Quiz system supports knowledge assessment</li>
+<li>All social features can be disabled for classroom use via Parental Controls</li>
+<li>No ads or in-app purchases disrupt the learning experience</li>
+</ul>
+</div>
+
+<h2>6. Contact</h2>
+<div class="section">
+<p>For questions about our child safety practices:<br>
+<strong>Email:</strong> support@cibospirituale.it<br>
+<strong>Developer:</strong> Amen! App Team</p>
+</div>
+
+<h2>7. COPPA & GDPR-K Compliance</h2>
+<div class="section">
+<p>This app complies with the Children's Online Privacy Protection Act (COPPA) and GDPR provisions for children. We obtain verifiable parental consent through the Parental Controls PIN system before enabling any social or interactive features for users under 13 (or under 16 in applicable jurisdictions).</p>
+</div>
+</body>
+</html>""", media_type="text/html")
+
 
 
 # Include the router
