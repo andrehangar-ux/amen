@@ -3496,11 +3496,26 @@ async def get_messages(user: User = Depends(require_auth)):
     # Combine and get unique conversations
     all_messages = sent + received
     conversations = {}
+    other_ids_needed = set()
+    
+    for msg in all_messages:
+        other_id = msg["receiver_id"] if msg["sender_id"] == user.user_id else msg["sender_id"]
+        other_ids_needed.add(other_id)
+    
+    # Bulk fetch all conversation partners
+    if other_ids_needed:
+        users_list = await db.users.find(
+            {"user_id": {"$in": list(other_ids_needed)}},
+            {"_id": 0, "password_hash": 0}
+        ).to_list(len(other_ids_needed))
+        user_map = {u["user_id"]: u for u in users_list}
+    else:
+        user_map = {}
     
     for msg in all_messages:
         other_id = msg["receiver_id"] if msg["sender_id"] == user.user_id else msg["sender_id"]
         if other_id not in conversations:
-            other_user = await db.users.find_one({"user_id": other_id}, {"_id": 0, "password_hash": 0})
+            other_user = user_map.get(other_id)
             conversations[other_id] = {
                 "user_id": other_id,
                 "user_name": other_user["name"] if other_user else "Utente",
@@ -3585,14 +3600,28 @@ async def get_friends(user: User = Depends(require_auth)):
     ).to_list(100)
     
     friend_ids = [f["friend_id"] for f in friendships]
-    friends = []
     
+    if not friend_ids:
+        return []
+    
+    # Bulk fetch users and heartbeats (avoid N+1)
+    users_list = await db.users.find(
+        {"user_id": {"$in": friend_ids}},
+        {"_id": 0, "password_hash": 0}
+    ).to_list(100)
+    user_map = {u["user_id"]: u for u in users_list}
+    
+    heartbeats_list = await db.user_heartbeats.find(
+        {"user_id": {"$in": friend_ids}}
+    ).to_list(100)
+    heartbeat_map = {h["user_id"]: h for h in heartbeats_list}
+    
+    friends = []
     for friend_id in friend_ids:
-        friend = await db.users.find_one({"user_id": friend_id}, {"_id": 0, "password_hash": 0})
+        friend = user_map.get(friend_id)
         if friend:
-            # Check if online
-            heartbeat = await db.user_heartbeats.find_one({"user_id": friend_id})
             is_online = False
+            heartbeat = heartbeat_map.get(friend_id)
             if heartbeat:
                 last_seen = heartbeat.get("last_seen")
                 if last_seen:
