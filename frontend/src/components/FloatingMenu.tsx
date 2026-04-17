@@ -160,6 +160,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
+    paddingBottom: Platform.OS === 'ios' ? 0 : 60,
   },
   menuContainer: {
     backgroundColor: COLORS.card,
