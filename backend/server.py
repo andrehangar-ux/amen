@@ -4891,86 +4891,86 @@ async def get_dictionary_term(term_id: str, lang: str = "it"):
     return await ai_translate_dict_term(term_data, term_id, lang)
 
 @api_router.get("/search")
-async def global_search(q: str, user: User = Depends(require_auth)):
-    """Global search across notes, bookmarks, highlights, users, and content"""
-    query_lower = q.lower()
+async def global_search(q: str, lang: str = "it", user: User = Depends(require_auth)):
+    """Global search across verses, books, chapters, dictionary, notes, bookmarks"""
+    query_lower = q.lower().strip()
     results = {
+        "verses": [],
+        "books": [],
         "notes": [],
         "bookmarks": [],
-        "highlights": [],
-        "users": [],
         "dictionary": [],
-        "radios": [],
-        "quizzes": []
     }
     
-    # Search user's notes
+    # 1. Search Bible books (instant, from memory)
+    books = BIBLE_BOOKS_MULTILANG.get(lang, BIBLE_BOOKS_MULTILANG["it"])
+    for book in books:
+        if query_lower in book["name"].lower() or query_lower in book["abbrev"].lower():
+            results["books"].append({
+                "type": "book",
+                "name": book["name"],
+                "chapters": book["chapters"],
+                "abbrev": book["abbrev"],
+            })
+    
+    # 2. Search cached Bible verses (from DB)
+    if len(query_lower) >= 3:
+        verses_cursor = db.bible_cache.find({
+            "language": lang,
+            "verses": {"$elemMatch": {"text": {"$regex": q, "$options": "i"}}}
+        }, {"_id": 0, "book": 1, "chapter": 1, "verses": 1}).limit(10)
+        
+        async for doc in verses_cursor:
+            book_name = doc.get("book", "")
+            chapter_num = doc.get("chapter", 0)
+            for v in doc.get("verses", []):
+                if q.lower() in v.get("text", "").lower():
+                    results["verses"].append({
+                        "type": "verse",
+                        "book": book_name,
+                        "chapter": chapter_num,
+                        "verse": v.get("verse", 0),
+                        "text": v.get("text", "")[:150],
+                        "ref": f"{book_name} {chapter_num}:{v.get('verse', 0)}",
+                    })
+                    if len(results["verses"]) >= 20:
+                        break
+            if len(results["verses"]) >= 20:
+                break
+    
+    # 3. Search user's notes
     notes_cursor = db.study_notes.find({
         "user_id": user.user_id,
         "$or": [
             {"content": {"$regex": q, "$options": "i"}},
             {"verse_ref": {"$regex": q, "$options": "i"}}
         ]
-    }).limit(10)
+    }, {"_id": 0}).limit(10)
     async for note in notes_cursor:
         results["notes"].append({
             "type": "note",
-            "id": str(note.get("_id", "")),
+            "id": note.get("note_id", ""),
             "verse_ref": note.get("verse_ref", ""),
-            "content": note.get("content", "")[:100] + "...",
-            "created_at": note.get("created_at", "").isoformat() if note.get("created_at") else ""
+            "content": note.get("content", "")[:120],
         })
     
-    # Search user's bookmarks
+    # 4. Search user's bookmarks
     bookmarks_cursor = db.bookmarks.find({
         "user_id": user.user_id,
         "$or": [
             {"verse_ref": {"$regex": q, "$options": "i"}},
             {"text": {"$regex": q, "$options": "i"}}
         ]
-    }).limit(10)
+    }, {"_id": 0}).limit(10)
     async for bm in bookmarks_cursor:
         results["bookmarks"].append({
             "type": "bookmark",
-            "id": str(bm.get("_id", "")),
+            "id": bm.get("bookmark_id", ""),
             "verse_ref": bm.get("verse_ref", ""),
-            "text": bm.get("text", "")[:100] + "..."
+            "text": bm.get("text", "")[:120],
         })
     
-    # Search user's highlights
-    highlights_cursor = db.highlights.find({
-        "user_id": user.user_id,
-        "$or": [
-            {"verse_ref": {"$regex": q, "$options": "i"}},
-            {"text": {"$regex": q, "$options": "i"}}
-        ]
-    }).limit(10)
-    async for hl in highlights_cursor:
-        results["highlights"].append({
-            "type": "highlight",
-            "id": str(hl.get("_id", "")),
-            "verse_ref": hl.get("verse_ref", ""),
-            "text": hl.get("text", "")[:100] + "...",
-            "color": hl.get("color", "yellow")
-        })
-    
-    # Search users (friends)
-    users_cursor = db.users.find({
-        "$or": [
-            {"name": {"$regex": q, "$options": "i"}},
-            {"email": {"$regex": q, "$options": "i"}}
-        ]
-    }).limit(10)
-    async for u in users_cursor:
-        if u.get("user_id") != user.user_id:  # Exclude self
-            results["users"].append({
-                "type": "user",
-                "id": u.get("user_id", ""),
-                "name": u.get("name", ""),
-                "email": u.get("email", "")[:3] + "***"  # Privacy
-            })
-    
-    # Search dictionary
+    # 5. Search dictionary
     for key, term in BIBLICAL_DICTIONARY.items():
         if (query_lower in term["term"].lower() or 
             query_lower in term["meaning"].lower()):
@@ -4978,25 +4978,11 @@ async def global_search(q: str, user: User = Depends(require_auth)):
                 "type": "dictionary",
                 "id": key,
                 "term": term["term"],
-                "meaning": term["meaning"][:50] + "..."
+                "meaning": term["meaning"][:80],
             })
-            if len(results["dictionary"]) >= 5:
+            if len(results["dictionary"]) >= 8:
                 break
     
-    # Search radios
-    for radio in EVANGELICAL_RADIOS:
-        if (query_lower in radio["name"].lower() or 
-            query_lower in radio["country"].lower()):
-            results["radios"].append({
-                "type": "radio",
-                "name": radio["name"],
-                "country": radio["country"],
-                "url": radio["stream_url"]
-            })
-            if len(results["radios"]) >= 5:
-                break
-    
-    # Count total results
     total = sum(len(v) for v in results.values())
     
     return {

@@ -417,8 +417,8 @@ export const api = {
     }),
 
   // Global Search
-  globalSearch: (query: string) =>
-    api.fetch(`/api/search?q=${encodeURIComponent(query)}`),
+  globalSearch: (query: string, lang: string = 'it') =>
+    api.fetch(`/api/search?q=${encodeURIComponent(query)}&lang=${lang}`),
 
   // Minor Safety
   getSafetyStatus: () => api.fetch('/api/safety/status'),
