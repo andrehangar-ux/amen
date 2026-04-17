@@ -3,7 +3,7 @@
     "name": "Amen!",
     "slug": "amen-app",
     "version": "1.1.22",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "amen",
     "userInterfaceStyle": "automatic",
@@ -18,7 +18,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#4A7C59"
       },
-      "edgeToEdgeEnabled": false,
+      "edgeToEdgeEnabled": true,
       "permissions": []
     },
     "web": {
