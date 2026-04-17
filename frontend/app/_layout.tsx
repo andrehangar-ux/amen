@@ -6,7 +6,6 @@ import { View, ActivityIndicator, StyleSheet, Platform } from 'react-native';
 import { COLORS } from '../src/utils/theme';
 import { FloatingMenu } from '../src/components/FloatingMenu';
 import * as SplashScreen from 'expo-splash-screen';
-import { SystemBars } from 'react-native-edge-to-edge';
 
 // Prevent splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync().catch(() => {});
@@ -35,7 +34,6 @@ export default function RootLayout() {
   return (
     <View style={{ flex: 1 }}>
       <StatusBar style="dark" />
-      {Platform.OS === 'android' && <SystemBars style="dark" />}
       <Stack
         screenOptions={{
           headerShown: false,
