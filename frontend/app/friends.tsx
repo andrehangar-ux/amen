@@ -297,7 +297,8 @@ export default function FriendsScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.container} data-testid="friends-screen">
+    <SocialGuard>
+      <SafeAreaView style={styles.container} data-testid="friends-screen">
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn} data-testid="friends-back-btn">
