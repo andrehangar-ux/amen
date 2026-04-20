@@ -19,6 +19,7 @@ import { api } from '../src/utils/api';
 import { useLanguageStore, useTranslation } from '../src/store/languageStore';
 import { useAuthStore } from '../src/store/authStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, MOODS } from '../src/utils/theme';
+import { SocialGuard } from '../src/components/SocialGuard';
 import { format } from 'date-fns';
 
 interface CommunityMessage {
@@ -278,8 +279,8 @@ export default function CommunityScreen() {
   };
 
   return (
+    <SocialGuard>
     <SafeAreaView style={styles.container}>
-      {/* Safety Reminder Modal - Shown BEFORE allowing any social interaction */}
       <Modal
         visible={showSafetyReminder}
         transparent
@@ -594,6 +595,7 @@ export default function CommunityScreen() {
         </>
       )}
     </SafeAreaView>
+    </SocialGuard>
   );
 }
 

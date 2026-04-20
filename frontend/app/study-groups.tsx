@@ -20,6 +20,7 @@ import { api } from '../src/utils/api';
 import { useAuthStore } from '../src/store/authStore';
 import { useTranslation } from '../src/store/languageStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../src/utils/theme';
+import { SocialGuard } from '../src/components/SocialGuard';
 import { format } from 'date-fns';
 
 interface StudyGroup {
@@ -383,6 +384,7 @@ export default function StudyGroupsScreen() {
 
   // Groups List View
   return (
+    <SocialGuard>
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
@@ -522,6 +524,7 @@ export default function StudyGroupsScreen() {
         </View>
       </Modal>
     </SafeAreaView>
+    </SocialGuard>
   );
 }
 

@@ -18,6 +18,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { api } from '../src/utils/api';
 import { useAuthStore } from '../src/store/authStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../src/utils/theme';
+import { SocialGuard } from '../src/components/SocialGuard';
 import { format } from 'date-fns';
 import { useTranslation } from '../src/store/languageStore';
 
@@ -158,8 +159,8 @@ export default function PrivateChatScreen() {
   };
 
   return (
+    <SocialGuard>
     <SafeAreaView style={styles.container}>
-      {/* Safety Reminder Modal */}
       <Modal
         visible={showSafetyModal}
         transparent
@@ -268,6 +269,7 @@ export default function PrivateChatScreen() {
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
+    </SocialGuard>
   );
 }
 

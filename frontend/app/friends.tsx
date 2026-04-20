@@ -17,6 +17,7 @@ import { router } from 'expo-router';
 import { api } from '../src/utils/api';
 import { useLanguageStore } from '../src/store/languageStore';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../src/utils/theme';
+import { SocialGuard } from '../src/components/SocialGuard';
 
 interface FriendUser {
   user_id: string;
@@ -459,6 +460,7 @@ export default function FriendsScreen() {
         )}
       </ScrollView>
     </SafeAreaView>
+    </SocialGuard>
   );
 }
 

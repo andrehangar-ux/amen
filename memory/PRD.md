@@ -84,7 +84,11 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - Chat solo con amici (lista sconosciuti nascosta)
   - Backend check su community post per minori
 - [x] **Lista Amici completa** - Pagina redesign con stats, tab switch, avatar colorati, empty state, protezione minori (tab "Scopri Persone" nascosto). Aggiunta al FloatingMenu.
-- [x] **Families Policy v2 (4o rifiuto)** - Safety reminder registrazione rafforzato con rischi reali, ruolo genitore esplicito. Version bumped a 1.1.22.
+- [x] **Families Policy v3** - Creato componente `SocialGuard` centralizzato che blocca TUTTE le pagine social (community, private-chat, friends, study-groups). Il guard:
+  - Verifica PIN genitore PRIMA di qualsiasi accesso social per minori
+  - Mostra safety reminder OGNI sessione con 5 punti sui rischi reali
+  - Blocca completamente l'accesso senza approvazione parentale
+  - Mostra schermata di blocco con link a Impostazioni
 - [x] **Edge-to-edge fix** - Rimosso plugin `react-native-edge-to-edge` e flag `edgeToEdgeEnabled` per eliminare API deprecate Android 15.
 - [x] **Ricerca Globale** - Motore di ricerca interno per versetti biblici, libri, capitoli, dizionario, note e segnalibri. Backend con ricerca in bible_cache, BIBLE_BOOKS_MULTILANG e BIBLICAL_DICTIONARY. Frontend con suggerimenti, categorie colorate, card risultati. Aggiunta al FloatingMenu.
 
