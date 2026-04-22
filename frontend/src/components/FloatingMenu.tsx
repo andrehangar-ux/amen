@@ -41,6 +41,7 @@ export const FloatingMenu: React.FC = () => {
     { key: 'bible', label: labels.bible, icon: 'book', route: '/(tabs)/bible' },
     { key: 'search', label: labels.search, icon: 'search', route: '/search' },
     { key: 'journal', label: labels.journal, icon: 'create', route: '/(tabs)/journal' },
+    { key: 'profile', label: labels.profile, icon: 'person', route: '/(tabs)/profile' },
     { key: 'quiz', label: labels.quiz, icon: 'help-circle', route: '/quiz' },
     { key: 'dictionary', label: labels.dictionary, icon: 'library', route: '/dictionary' },
     { key: 'community', label: labels.community, icon: 'people', route: '/community' },
@@ -48,8 +49,7 @@ export const FloatingMenu: React.FC = () => {
     { key: 'studyGroups', label: labels.studyGroups, icon: 'school', route: '/study-groups' },
     { key: 'myContent', label: labels.myContent, icon: 'bookmark', route: '/my-content' },
     { key: 'assistant', label: 'AI', icon: 'chatbubbles', route: '/assistant' },
-    { key: 'profile', label: labels.profile, icon: 'person', route: '/(tabs)/profile' },
-    { key: 'donate', label: labels.donate, icon: 'heart', route: '/donate' },
+    { key: 'donate', label: labels.donate, icon: 'gift', route: '/donate' },
     { key: 'settings', label: labels.settings, icon: 'settings', route: '/settings' },
   ];
 
