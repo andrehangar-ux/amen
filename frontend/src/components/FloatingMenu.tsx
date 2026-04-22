@@ -160,15 +160,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
-    paddingBottom: Platform.OS === 'ios' ? 0 : 60,
   },
   menuContainer: {
     backgroundColor: COLORS.card,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     width: '100%',
-    maxHeight: '80%',
-    paddingBottom: Platform.OS === 'ios' ? 34 : 80,
+    maxHeight: '90%',
+    paddingBottom: 0,
     ...SHADOWS.large,
   },
   menuHeader: {
@@ -209,12 +208,12 @@ const styles = StyleSheet.create({
   menuItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 14,
+    paddingVertical: 11,
     paddingHorizontal: SPACING.lg,
     gap: 14,
   },
   menuScrollContent: {
-    paddingBottom: 8,
+    paddingBottom: Platform.OS === 'ios' ? 40 : 100,
   },
   menuItemActive: {
     backgroundColor: COLORS.primary + '10',
