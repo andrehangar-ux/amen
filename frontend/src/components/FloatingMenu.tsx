@@ -8,8 +8,10 @@ import {
   Pressable,
   Platform,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import { router, usePathname } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Icon } from './Icon';
 import { COLORS, SHADOWS, SPACING } from '../utils/theme';
 import { useLanguageStore } from '../store/languageStore';
@@ -31,7 +33,11 @@ export const FloatingMenu: React.FC = () => {
   const { currentLanguage } = useLanguageStore();
   const { user } = useAuthStore();
   const pathname = usePathname();
+  const insets = useSafeAreaInsets();
   const labels = MENU_LABELS[currentLanguage] || MENU_LABELS['it'];
+
+  // Bottom inset: on 3-button nav ~48dp, gesture ~20dp, fallback 24
+  const bottomSafe = Math.max(insets.bottom, 24);
 
   // Hide on auth screens or when not logged in
   if (!user || HIDDEN_ON.some(p => pathname.startsWith(p))) return null;
@@ -103,7 +109,7 @@ export const FloatingMenu: React.FC = () => {
               </TouchableOpacity>
             </View>
             
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.menuScrollContent}>
+            <ScrollView showsVerticalScrollIndicator={true} contentContainerStyle={{ paddingBottom: bottomSafe + 20 }}>
               {menuItems.map((item) => (
                 <TouchableOpacity
                   key={item.key}
@@ -211,9 +217,6 @@ const styles = StyleSheet.create({
     paddingVertical: 11,
     paddingHorizontal: SPACING.lg,
     gap: 14,
-  },
-  menuScrollContent: {
-    paddingBottom: Platform.OS === 'ios' ? 40 : 100,
   },
   menuItemActive: {
     backgroundColor: COLORS.primary + '10',
