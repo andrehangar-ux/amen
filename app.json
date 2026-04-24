@@ -1,20 +1,21 @@
 {
-  "expo": {
-    "name": "Amen App New",
-    "slug": "amen-spiritual-new",
-    "version": "1.0.0",
+  "esposizione": {
+    "nome": "Nuova app Amen",
+    "lumaca": "amen-spirituale-nuovo",
+    "versione": "1.0.0",
     "sdkVersion": "54.0.0",
-    "platforms": ["android", "ios", "web"],
-    "android": {
-      "package": "com.amen.app"
+    "piattaforme": ["Android", "iOS", "web"],
+    "Android": {
+      "pacchetto": "app.emergent.spiritstudyupdate50228c46",
+      "googleServicesFile": "./frontend/app/google-services.json"
     },
     "extra": {
-      "eas": {
+      "facile": {
         "projectId": "fc95bc94-a8dd-4815-b492-ef13e7d14c6f"
       }
     },
     "cli": {
-      "appVersionSource": "remote"
+      "appVersionSource": "remoto"
     }
   }
 }
