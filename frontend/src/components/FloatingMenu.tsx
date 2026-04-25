@@ -8,10 +8,8 @@ import {
   Pressable,
   Platform,
   ScrollView,
-  Dimensions,
 } from 'react-native';
 import { router, usePathname } from 'expo-router';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Icon } from './Icon';
 import { COLORS, SHADOWS, SPACING } from '../utils/theme';
 import { useLanguageStore } from '../store/languageStore';
@@ -33,21 +31,16 @@ export const FloatingMenu: React.FC = () => {
   const { currentLanguage } = useLanguageStore();
   const { user } = useAuthStore();
   const pathname = usePathname();
-  const insets = useSafeAreaInsets();
   const labels = MENU_LABELS[currentLanguage] || MENU_LABELS['it'];
 
-  // Bottom inset: on 3-button nav ~48dp, gesture ~20dp, fallback 24
-  const bottomSafe = Math.max(insets.bottom, 24);
-
-  // Hide on auth screens or when not logged in
   if (!user || HIDDEN_ON.some(p => pathname.startsWith(p))) return null;
 
   const menuItems = [
     { key: 'home', label: labels.home, icon: 'home', route: '/(tabs)' },
     { key: 'bible', label: labels.bible, icon: 'book', route: '/(tabs)/bible' },
+    { key: 'profile', label: labels.profile, icon: 'person', route: '/(tabs)/profile' },
     { key: 'search', label: labels.search, icon: 'search', route: '/search' },
     { key: 'journal', label: labels.journal, icon: 'create', route: '/(tabs)/journal' },
-    { key: 'profile', label: labels.profile, icon: 'person', route: '/(tabs)/profile' },
     { key: 'quiz', label: labels.quiz, icon: 'help-circle', route: '/quiz' },
     { key: 'dictionary', label: labels.dictionary, icon: 'library', route: '/dictionary' },
     { key: 'community', label: labels.community, icon: 'people', route: '/community' },
@@ -59,11 +52,6 @@ export const FloatingMenu: React.FC = () => {
     { key: 'settings', label: labels.settings, icon: 'settings', route: '/settings' },
   ];
 
-  const handleNavigate = (route: string) => {
-    setVisible(false);
-    router.push(route as any);
-  };
-
   const isActive = (key: string) => {
     if (key === 'home') return pathname === '/' || pathname === '/(tabs)';
     if (key === 'bible') return pathname.includes('bible');
@@ -73,6 +61,11 @@ export const FloatingMenu: React.FC = () => {
     if (key === 'dictionary') return pathname.includes('dictionary');
     if (key === 'community') return pathname.includes('community');
     return false;
+  };
+
+  const handleNavigate = (route: string) => {
+    setVisible(false);
+    setTimeout(() => router.push(route as any), 150);
   };
 
   return (
@@ -99,8 +92,12 @@ export const FloatingMenu: React.FC = () => {
         animationType="fade"
         onRequestClose={() => setVisible(false)}
       >
-        <Pressable style={styles.overlay} onPress={() => setVisible(false)}>
-          <View style={styles.menuContainer} onStartShouldSetResponder={() => true}>
+        <View style={styles.modalFull}>
+          {/* Tappable top area to close */}
+          <Pressable style={styles.topClose} onPress={() => setVisible(false)} />
+
+          {/* Menu panel */}
+          <View style={styles.menuPanel}>
             <View style={styles.menuHeader}>
               <Text style={styles.menuTitle}>Menu</Text>
               <TouchableOpacity onPress={() => setVisible(false)} activeOpacity={0.4} style={styles.closeBtn}>
@@ -108,8 +105,12 @@ export const FloatingMenu: React.FC = () => {
                 <View style={styles.closeLine2} />
               </TouchableOpacity>
             </View>
-            
-            <ScrollView showsVerticalScrollIndicator={true} contentContainerStyle={{ paddingBottom: bottomSafe + 20 }}>
+
+            <ScrollView
+              showsVerticalScrollIndicator={true}
+              bounces={false}
+              contentContainerStyle={styles.scrollContent}
+            >
               {menuItems.map((item) => (
                 <TouchableOpacity
                   key={item.key}
@@ -129,7 +130,7 @@ export const FloatingMenu: React.FC = () => {
               ))}
             </ScrollView>
           </View>
-        </Pressable>
+        </View>
       </Modal>
     </>
   );
@@ -161,26 +162,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 2,
   },
-  overlay: {
+  // Full screen modal layout
+  modalFull: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
   },
-  menuContainer: {
+  topClose: {
+    flex: 1,
+  },
+  menuPanel: {
     backgroundColor: COLORS.card,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    width: '100%',
-    maxHeight: '90%',
-    paddingBottom: 0,
+    maxHeight: '85%',
     ...SHADOWS.large,
   },
   menuHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: SPACING.md,
+    paddingHorizontal: SPACING.lg,
+    paddingVertical: 14,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.border,
   },
@@ -190,14 +192,14 @@ const styles = StyleSheet.create({
     color: COLORS.text,
   },
   closeBtn: {
-    width: 36,
-    height: 36,
+    width: 28,
+    height: 28,
     justifyContent: 'center',
     alignItems: 'center',
   },
   closeLine1: {
     position: 'absolute',
-    width: 18,
+    width: 20,
     height: 2,
     backgroundColor: COLORS.text,
     borderRadius: 1,
@@ -205,24 +207,28 @@ const styles = StyleSheet.create({
   },
   closeLine2: {
     position: 'absolute',
-    width: 18,
+    width: 20,
     height: 2,
     backgroundColor: COLORS.text,
     borderRadius: 1,
     transform: [{ rotate: '-45deg' }],
   },
+  scrollContent: {
+    paddingBottom: 120,
+  },
   menuItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 11,
+    paddingVertical: 13,
     paddingHorizontal: SPACING.lg,
     gap: 14,
   },
   menuItemActive: {
-    backgroundColor: COLORS.primary + '10',
+    backgroundColor: COLORS.primary + '08',
   },
   menuItemText: {
     fontSize: 16,
+    fontWeight: '500',
     color: COLORS.text,
   },
   menuItemTextActive: {
