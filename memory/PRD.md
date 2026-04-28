@@ -98,6 +98,12 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - Ciascuna con toggle on/off e selettore orario personalizzabile
   - Messaggi tradotti in 6 lingue (IT, EN, ES, PT, FR, DE)
   - Canali Android dedicati per ciascun tipo
+- [x] **Firebase + AdMob** - Integrazione completa:
+  - `google-services.json` configurato (progetto amen-15d00)
+  - Plugin `react-native-google-mobile-ads` v16.3.3 con App ID `ca-app-pub-1876565863299921~6716733612`
+  - Componente `AdBanner` con banner adattivo in Home page
+  - Test IDs in dev, production IDs in release
+  - `googleServicesFile` configurato in `app.json`
 
 ## Task Futuri (Backlog)
 1. **P2**: UI Mappe Bibliche

@@ -16,6 +16,7 @@ import * as Speech from 'expo-speech';
 import { useAuthStore } from '../../src/store/authStore';
 import { useLanguageStore, useTranslation } from '../../src/store/languageStore';
 import { api } from '../../src/utils/api';
+import { AdBanner } from '../../src/components/AdBanner';
 import { DailyVerseCard } from '../../src/components/DailyVerseCard';
 import { MoodSelector } from '../../src/components/MoodSelector';
 import { LanguageSelector } from '../../src/components/LanguageSelector';
@@ -298,6 +299,7 @@ export default function HomeScreen() {
         visible={showLanguageSelector}
         onClose={() => setShowLanguageSelector(false)}
       />
+      <AdBanner />
     </SafeAreaView>
   );
 }
