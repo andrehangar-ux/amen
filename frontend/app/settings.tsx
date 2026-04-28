@@ -75,11 +75,17 @@ export default function SettingsScreen() {
   const [dailyVerseEnabled, setDailyVerseEnabled] = useState(false);
   const [notificationHour, setNotificationHour] = useState(7);
   const [notificationMinute, setNotificationMinute] = useState(0);
+  const [quizEnabled, setQuizEnabled] = useState(false);
+  const [quizHour, setQuizHour] = useState(12);
+  const [quizMinute, setQuizMinute] = useState(0);
+  const [readingEnabled, setReadingEnabled] = useState(false);
+  const [readingHour, setReadingHour] = useState(20);
+  const [readingMinute, setReadingMinute] = useState(0);
+  const [activeTimePicker, setActiveTimePicker] = useState<'verse' | 'quiz' | 'reading' | null>(null);
   const [darkModeEnabled, setDarkModeEnabled] = useState(false);
   const [saving, setSaving] = useState(false);
   const [showLanguages, setShowLanguages] = useState(false);
   const [showBibles, setShowBibles] = useState(false);
-  const [showTimePicker, setShowTimePicker] = useState(false);
 
   // Parental Controls States
   const [showParentalControls, setShowParentalControls] = useState(false);
@@ -200,57 +206,73 @@ export default function SettingsScreen() {
   }, []);
 
   const loadNotificationSettings = async () => {
-    const isEnabled = await NotificationService.isDailyVerseEnabled();
-    const time = await NotificationService.getNotificationTime();
-    setDailyVerseEnabled(isEnabled);
-    setNotificationsEnabled(isEnabled);
-    setNotificationHour(time.hour);
-    setNotificationMinute(time.minute);
+    const settings = await NotificationService.getSettings();
+    setDailyVerseEnabled(settings.verse.enabled);
+    setNotificationsEnabled(settings.verse.enabled || settings.quiz.enabled || settings.reading.enabled);
+    setNotificationHour(settings.verse.hour);
+    setNotificationMinute(settings.verse.minute);
+    setQuizEnabled(settings.quiz.enabled);
+    setQuizHour(settings.quiz.hour);
+    setQuizMinute(settings.quiz.minute);
+    setReadingEnabled(settings.reading.enabled);
+    setReadingHour(settings.reading.hour);
+    setReadingMinute(settings.reading.minute);
   };
 
   const handleDailyVerseToggle = async (value: boolean) => {
     setDailyVerseEnabled(value);
-    setNotificationsEnabled(value);
-    
     if (value) {
-      const success = await NotificationService.scheduleDailyVerseNotification(
-        notificationHour,
-        notificationMinute
-      );
+      const success = await NotificationService.scheduleDailyVerseNotification(notificationHour, notificationMinute, currentLanguage);
       if (!success) {
         setDailyVerseEnabled(false);
-        setNotificationsEnabled(false);
-        if (Platform.OS === 'web') {
-          window.alert(t('notificationPermissionDenied') || 'Permessi notifiche non concessi. Abilita le notifiche nelle impostazioni del browser.');
-        } else {
-          Alert.alert(
-            t('error'),
-            t('notificationPermissionDenied') || 'Permessi notifiche non concessi. Abilita le notifiche nelle impostazioni.'
-          );
-        }
-      } else {
-        if (Platform.OS === 'web') {
-          window.alert(`Notifica versetto del giorno programmata per le ${notificationHour}:${notificationMinute.toString().padStart(2, '0')}`);
-        } else {
-          Alert.alert(
-            t('saved'),
-            `Notifica versetto del giorno programmata per le ${notificationHour}:${notificationMinute.toString().padStart(2, '0')}`
-          );
-        }
+        Alert.alert(t('error'), t('notificationPermissionDenied') || 'Permessi notifiche non concessi.');
       }
     } else {
       await NotificationService.cancelDailyVerseNotification();
     }
   };
 
-  const handleTimeChange = async (hour: number, minute: number) => {
-    setNotificationHour(hour);
-    setNotificationMinute(minute);
-    setShowTimePicker(false);
-    
-    if (dailyVerseEnabled) {
-      await NotificationService.scheduleDailyVerseNotification(hour, minute);
+  const handleQuizToggle = async (value: boolean) => {
+    setQuizEnabled(value);
+    if (value) {
+      const success = await NotificationService.scheduleQuizNotification(quizHour, quizMinute, currentLanguage);
+      if (!success) {
+        setQuizEnabled(false);
+        Alert.alert(t('error'), t('notificationPermissionDenied') || 'Permessi notifiche non concessi.');
+      }
+    } else {
+      await NotificationService.cancelQuizNotification();
     }
+  };
+
+  const handleReadingToggle = async (value: boolean) => {
+    setReadingEnabled(value);
+    if (value) {
+      const success = await NotificationService.scheduleReadingNotification(readingHour, readingMinute, currentLanguage);
+      if (!success) {
+        setReadingEnabled(false);
+        Alert.alert(t('error'), t('notificationPermissionDenied') || 'Permessi notifiche non concessi.');
+      }
+    } else {
+      await NotificationService.cancelReadingNotification();
+    }
+  };
+
+  const handleTimeChange = async (hour: number, minute: number) => {
+    if (activeTimePicker === 'verse') {
+      setNotificationHour(hour);
+      setNotificationMinute(minute);
+      if (dailyVerseEnabled) await NotificationService.scheduleDailyVerseNotification(hour, minute, currentLanguage);
+    } else if (activeTimePicker === 'quiz') {
+      setQuizHour(hour);
+      setQuizMinute(minute);
+      if (quizEnabled) await NotificationService.scheduleQuizNotification(hour, minute, currentLanguage);
+    } else if (activeTimePicker === 'reading') {
+      setReadingHour(hour);
+      setReadingMinute(minute);
+      if (readingEnabled) await NotificationService.scheduleReadingNotification(hour, minute, currentLanguage);
+    }
+    setActiveTimePicker(null);
   };
 
   const handleTestNotification = async () => {
@@ -267,6 +289,39 @@ export default function SettingsScreen() {
       }
     }
   };
+
+  const renderTimePicker = (hour: number, minute: number) => (
+    <View style={styles.timePickerContainer}>
+      <View style={styles.timePickerRow}>
+        <View style={styles.timePickerColumn}>
+          <Text style={styles.timePickerLabel}>{t('hour') || 'Ora'}</Text>
+          <View style={styles.timePickerButtons}>
+            <TouchableOpacity style={styles.timeButton} onPress={() => handleTimeChange((hour + 1) % 24, minute)}>
+              <Icon name="chevron-up" size={20} color={COLORS.primary} />
+            </TouchableOpacity>
+            <Text style={styles.timeValue}>{hour.toString().padStart(2, '0')}</Text>
+            <TouchableOpacity style={styles.timeButton} onPress={() => handleTimeChange((hour + 23) % 24, minute)}>
+              <Icon name="chevron-down" size={20} color={COLORS.primary} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <Text style={styles.timeSeparator}>:</Text>
+        <View style={styles.timePickerColumn}>
+          <Text style={styles.timePickerLabel}>{t('minute') || 'Min'}</Text>
+          <View style={styles.timePickerButtons}>
+            <TouchableOpacity style={styles.timeButton} onPress={() => handleTimeChange(hour, (minute + 15) % 60)}>
+              <Icon name="chevron-up" size={20} color={COLORS.primary} />
+            </TouchableOpacity>
+            <Text style={styles.timeValue}>{minute.toString().padStart(2, '0')}</Text>
+            <TouchableOpacity style={styles.timeButton} onPress={() => handleTimeChange(hour, (minute + 45) % 60)}>
+              <Icon name="chevron-down" size={20} color={COLORS.primary} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+
 
   const saveSettings = async () => {
     setSaving(true);
@@ -472,10 +527,11 @@ export default function SettingsScreen() {
 
         <Text style={styles.sectionTitle}>{t('notifications')}</Text>
         <View style={styles.card}>
+          {/* Daily Verse Notification */}
           <View style={styles.switchRow}>
             <View style={styles.switchContent}>
               <Text style={styles.switchLabel}>{t('dailyVerseNotification')}</Text>
-              <Text style={styles.switchDescription}>{t('receiveVerse')}</Text>
+              <Text style={styles.switchDescription}>{t('receiveVerse') || 'Ricevi un versetto ogni mattina'}</Text>
             </View>
             <Switch
               value={dailyVerseEnabled}
@@ -484,70 +540,76 @@ export default function SettingsScreen() {
               thumbColor="#fff"
             />
           </View>
-
           {dailyVerseEnabled && (
-            <>
-              <TouchableOpacity 
-                style={[styles.switchRow, { borderTopWidth: 1, borderTopColor: COLORS.border, marginTop: SPACING.md, paddingTop: SPACING.md }]}
-                onPress={() => setShowTimePicker(!showTimePicker)}
-              >
-                <View style={styles.switchContent}>
-                  <Text style={styles.switchLabel}>{t('notificationTime') || 'Orario notifica'}</Text>
-                  <Text style={styles.switchDescription}>{t('chooseTime') || 'Scegli quando ricevere il versetto'}</Text>
-                </View>
-                <View style={styles.timeDisplay}>
-                  <Text style={styles.timeText}>
-                    {notificationHour.toString().padStart(2, '0')}:{notificationMinute.toString().padStart(2, '0')}
-                  </Text>
-                  <Icon name={showTimePicker ? 'chevron-up' : 'chevron-down'} size={20} color={COLORS.textMuted} />
-                </View>
-              </TouchableOpacity>
-
-              {showTimePicker && (
-                <View style={styles.timePickerContainer}>
-                  <View style={styles.timePickerRow}>
-                    <View style={styles.timePickerColumn}>
-                      <Text style={styles.timePickerLabel}>{t('hour') || 'Ora'}</Text>
-                      <View style={styles.timePickerButtons}>
-                        <TouchableOpacity 
-                          style={styles.timeButton}
-                          onPress={() => handleTimeChange((notificationHour + 1) % 24, notificationMinute)}
-                        >
-                          <Icon name="chevron-up" size={20} color={COLORS.primary} />
-                        </TouchableOpacity>
-                        <Text style={styles.timeValue}>{notificationHour.toString().padStart(2, '0')}</Text>
-                        <TouchableOpacity 
-                          style={styles.timeButton}
-                          onPress={() => handleTimeChange((notificationHour + 23) % 24, notificationMinute)}
-                        >
-                          <Icon name="chevron-down" size={20} color={COLORS.primary} />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                    <Text style={styles.timeSeparator}>:</Text>
-                    <View style={styles.timePickerColumn}>
-                      <Text style={styles.timePickerLabel}>{t('minute') || 'Minuti'}</Text>
-                      <View style={styles.timePickerButtons}>
-                        <TouchableOpacity 
-                          style={styles.timeButton}
-                          onPress={() => handleTimeChange(notificationHour, (notificationMinute + 15) % 60)}
-                        >
-                          <Icon name="chevron-up" size={20} color={COLORS.primary} />
-                        </TouchableOpacity>
-                        <Text style={styles.timeValue}>{notificationMinute.toString().padStart(2, '0')}</Text>
-                        <TouchableOpacity 
-                          style={styles.timeButton}
-                          onPress={() => handleTimeChange(notificationHour, (notificationMinute + 45) % 60)}
-                        >
-                          <Icon name="chevron-down" size={20} color={COLORS.primary} />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                  </View>
-                </View>
-              )}
-            </>
+            <TouchableOpacity 
+              style={styles.timeRow}
+              onPress={() => setActiveTimePicker(activeTimePicker === 'verse' ? null : 'verse')}
+            >
+              <Icon name="time-outline" size={18} color={COLORS.textMuted} />
+              <Text style={styles.timeRowLabel}>{t('notificationTime') || 'Orario'}</Text>
+              <Text style={styles.timeRowValue}>
+                {notificationHour.toString().padStart(2, '0')}:{notificationMinute.toString().padStart(2, '0')}
+              </Text>
+              <Icon name={activeTimePicker === 'verse' ? 'chevron-up' : 'chevron-down'} size={16} color={COLORS.textMuted} />
+            </TouchableOpacity>
           )}
+          {activeTimePicker === 'verse' && renderTimePicker(notificationHour, notificationMinute)}
+
+          {/* Quiz Reminder */}
+          <View style={[styles.switchRow, { borderTopWidth: 1, borderTopColor: COLORS.border, marginTop: SPACING.sm, paddingTop: SPACING.sm }]}>
+            <View style={styles.switchContent}>
+              <Text style={styles.switchLabel}>{t('quizNotification') || 'Promemoria Quiz'}</Text>
+              <Text style={styles.switchDescription}>{t('quizNotificationDesc') || 'Ricorda di fare un quiz biblico'}</Text>
+            </View>
+            <Switch
+              value={quizEnabled}
+              onValueChange={handleQuizToggle}
+              trackColor={{ false: COLORS.border, true: COLORS.primary }}
+              thumbColor="#fff"
+            />
+          </View>
+          {quizEnabled && (
+            <TouchableOpacity 
+              style={styles.timeRow}
+              onPress={() => setActiveTimePicker(activeTimePicker === 'quiz' ? null : 'quiz')}
+            >
+              <Icon name="time-outline" size={18} color={COLORS.textMuted} />
+              <Text style={styles.timeRowLabel}>{t('notificationTime') || 'Orario'}</Text>
+              <Text style={styles.timeRowValue}>
+                {quizHour.toString().padStart(2, '0')}:{quizMinute.toString().padStart(2, '0')}
+              </Text>
+              <Icon name={activeTimePicker === 'quiz' ? 'chevron-up' : 'chevron-down'} size={16} color={COLORS.textMuted} />
+            </TouchableOpacity>
+          )}
+          {activeTimePicker === 'quiz' && renderTimePicker(quizHour, quizMinute)}
+
+          {/* Reading Reminder */}
+          <View style={[styles.switchRow, { borderTopWidth: 1, borderTopColor: COLORS.border, marginTop: SPACING.sm, paddingTop: SPACING.sm }]}>
+            <View style={styles.switchContent}>
+              <Text style={styles.switchLabel}>{t('readingNotification') || 'Promemoria Lettura'}</Text>
+              <Text style={styles.switchDescription}>{t('readingNotificationDesc') || 'Ricorda di leggere la Bibbia'}</Text>
+            </View>
+            <Switch
+              value={readingEnabled}
+              onValueChange={handleReadingToggle}
+              trackColor={{ false: COLORS.border, true: COLORS.primary }}
+              thumbColor="#fff"
+            />
+          </View>
+          {readingEnabled && (
+            <TouchableOpacity 
+              style={styles.timeRow}
+              onPress={() => setActiveTimePicker(activeTimePicker === 'reading' ? null : 'reading')}
+            >
+              <Icon name="time-outline" size={18} color={COLORS.textMuted} />
+              <Text style={styles.timeRowLabel}>{t('notificationTime') || 'Orario'}</Text>
+              <Text style={styles.timeRowValue}>
+                {readingHour.toString().padStart(2, '0')}:{readingMinute.toString().padStart(2, '0')}
+              </Text>
+              <Icon name={activeTimePicker === 'reading' ? 'chevron-up' : 'chevron-down'} size={16} color={COLORS.textMuted} />
+            </TouchableOpacity>
+          )}
+          {activeTimePicker === 'reading' && renderTimePicker(readingHour, readingMinute)}
 
           <TouchableOpacity 
             style={[styles.testButton, { borderTopWidth: 1, borderTopColor: COLORS.border, marginTop: SPACING.md, paddingTop: SPACING.md }]}
@@ -1103,6 +1165,24 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: COLORS.primary,
     fontWeight: '500',
+  },
+  timeRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.lg,
+    gap: SPACING.sm,
+  },
+  timeRowLabel: {
+    flex: 1,
+    fontSize: 14,
+    color: COLORS.textLight,
+  },
+  timeRowValue: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: COLORS.primary,
+    marginRight: 4,
   },
   // Parental Controls Styles
   parentalHeader: {

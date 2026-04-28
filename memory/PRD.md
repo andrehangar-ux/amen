@@ -91,11 +91,17 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - Mostra schermata di blocco con link a Impostazioni
 - [x] **Edge-to-edge fix** - Rimosso plugin `react-native-edge-to-edge` e flag `edgeToEdgeEnabled` per eliminare API deprecate Android 15.
 - [x] **Ricerca Globale** - Motore di ricerca interno per versetti biblici, libri, capitoli, dizionario, note e segnalibri. Backend con ricerca in bible_cache, BIBLE_BOOKS_MULTILANG e BIBLICAL_DICTIONARY. Frontend con suggerimenti, categorie colorate, card risultati. Aggiunta al FloatingMenu.
+- [x] **Notifiche Push** - Sistema completo con 3 notifiche schedulabili:
+  - Versetto del Giorno (default 07:00) — invita a leggere un versetto ogni mattina
+  - Promemoria Quiz (default 12:00) — stimola a fare quiz biblici
+  - Promemoria Lettura (default 20:00) — ricorda di leggere la Bibbia
+  - Ciascuna con toggle on/off e selettore orario personalizzabile
+  - Messaggi tradotti in 6 lingue (IT, EN, ES, PT, FR, DE)
+  - Canali Android dedicati per ciascun tipo
 
 ## Task Futuri (Backlog)
-1. **P1**: Notifiche push con versetto del giorno dinamico
-2. **P2**: UI Mappe Bibliche
-3. **P2**: Refactoring server.py (>6000 righe)
+1. **P2**: UI Mappe Bibliche
+2. **P2**: Refactoring server.py (>6000 righe)
 
 ## Credenziali Test
 - Email: `testbible@cibospirituale.it`
