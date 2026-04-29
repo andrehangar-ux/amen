@@ -7,14 +7,6 @@ import { COLORS } from '../src/utils/theme';
 import { FloatingMenu } from '../src/components/FloatingMenu';
 import * as SplashScreen from 'expo-splash-screen';
 
-// Initialize Google Mobile Ads SDK (native only)
-if (Platform.OS !== 'web') {
-  try {
-    const { default: mobileAds } = require('react-native-google-mobile-ads');
-    mobileAds().initialize().catch(() => {});
-  } catch {}
-}
-
 // Prevent splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
