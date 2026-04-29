@@ -59,42 +59,21 @@ export default function CommunityScreen() {
   const [allUsers, setAllUsers] = useState<Array<{user_id: string; name: string; is_online: boolean}>>([]);
   const [showChats, setShowChats] = useState(false);
   const [socialAccess, setSocialAccess] = useState<SocialAccess | null>(null);
-  const [showSafetyReminder, setShowSafetyReminder] = useState(false);
-  const [safetyAcknowledged, setSafetyAcknowledged] = useState(false);
 
-  // Check social access permissions
+  // Load social access info (for friends_only filtering, NOT for blocking - SocialGuard handles that)
   const checkSocialAccess = useCallback(async () => {
     try {
       const access = await api.canUseSocialFeatures();
       setSocialAccess(access);
-      
-      // MINORS: Always show safety reminder every session before allowing social
-      if (access.can_use_social && access.is_minor) {
-        setShowSafetyReminder(true);
-      } else if (!access.is_minor) {
-        // Adults: no reminder needed
-        setSafetyAcknowledged(true);
-      }
-      // If can_use_social is false, the blocked screen handles it
     } catch (error) {
       console.log('Error checking social access:', error);
-      setSocialAccess({ can_use_social: false, social_level: 'disabled', media_sharing: false, reason: 'error', message: 'Errore nel verificare l\'accesso. Riprova.' });
+      setSocialAccess({ can_use_social: true, social_level: 'all', media_sharing: true, reason: 'adult' });
     }
   }, []);
 
   useEffect(() => {
     checkSocialAccess();
   }, [checkSocialAccess]);
-
-  const handleAcknowledgeSafety = async () => {
-    try {
-      await api.acknowledgeSafetyReminder();
-    } catch (error) {
-      console.log('Error acknowledging:', error);
-    }
-    setShowSafetyReminder(false);
-    setSafetyAcknowledged(true);
-  };
 
   const loadMessages = useCallback(async () => {
     try {
@@ -281,123 +260,19 @@ export default function CommunityScreen() {
   return (
     <SocialGuard>
     <SafeAreaView style={styles.container}>
-      <Modal
-        visible={showSafetyReminder}
-        transparent
-        animationType="fade"
-        onRequestClose={() => {}}
-      >
-        <View style={styles.safetyModalOverlay}>
-          <View style={styles.safetyModal}>
-            <View style={styles.safetyIconContainer}>
-              <Icon name="shield-checkmark" size={56} color="#E74C3C" />
-            </View>
-            <Text style={styles.safetyTitle}>
-              {t('safetyReminderTitle') || 'Avviso di Sicurezza Online'}
-            </Text>
-            <Text style={styles.safetyMessage}>
-              {t('safetyReminderMessage') || 'IMPORTANTE: Interagire online comporta rischi reali. Prima di continuare, leggi attentamente:'}
-            </Text>
-            <View style={styles.safetyBullets}>
-              <View style={styles.safetyBulletItem}>
-                <Icon name="warning" size={20} color="#E74C3C" />
-                <Text style={styles.safetyBulletText}>
-                  {t('realWorldRisks') || 'Le interazioni online possono avere conseguenze reali. Non tutti sono chi dicono di essere.'}
-                </Text>
-              </View>
-              <View style={styles.safetyBulletItem}>
-                <Icon name="close-circle" size={20} color="#E74C3C" />
-                <Text style={styles.safetyBulletText}>
-                  {t('neverSharePersonalInfo') || 'NON condividere MAI: indirizzo, scuola, telefono, foto personali o posizione.'}
-                </Text>
-              </View>
-              <View style={styles.safetyBulletItem}>
-                <Icon name="people" size={20} color={COLORS.primary} />
-                <Text style={styles.safetyBulletText}>
-                  {t('chatOnlyWithKnown') || 'Chatta SOLO con persone che conosci nella vita reale e di cui ti fidi.'}
-                </Text>
-              </View>
-              <View style={styles.safetyBulletItem}>
-                <Icon name="hand-left" size={20} color="#F39C12" />
-                <Text style={styles.safetyBulletText}>
-                  {t('tellAdultIfUncomfortable') || 'Se qualcuno ti fa sentire a disagio o ti chiede informazioni personali, FERMATI e parlane subito con un genitore o un adulto di fiducia.'}
-                </Text>
-              </View>
-              <View style={styles.safetyBulletItem}>
-                <Icon name="eye-off" size={20} color="#9B59B6" />
-                <Text style={styles.safetyBulletText}>
-                  {t('beCarefulWithStrangers') || 'Non incontrare MAI di persona qualcuno conosciuto online senza un adulto.'}
-                </Text>
-              </View>
-            </View>
-            <Text style={styles.safetyParentNote}>
-              {t('parentApprovedAccess') || 'L\'accesso a questa sezione e stato approvato da un genitore tramite il Controllo Genitori nelle Impostazioni.'}
-            </Text>
-            <TouchableOpacity 
-              style={styles.safetyAcknowledgeBtn} 
-              onPress={handleAcknowledgeSafety}
-              data-testid="safety-acknowledge-btn"
-            >
-              <Icon name="checkmark-circle" size={24} color="#fff" />
-              <Text style={styles.safetyAcknowledgeBtnText}>
-                {t('iUnderstandAndAccept') || 'Ho letto e capisco i rischi'}
-              </Text>
-            </TouchableOpacity>
-          </View>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+          <Icon name="arrow-back" size={24} color={COLORS.text} />
+        </TouchableOpacity>
+        <View style={styles.headerContent}>
+          <Text style={styles.headerTitle}>{t('community')}</Text>
+          <Text style={styles.headerSubtitle}>{t('connectWithBrothers')}</Text>
         </View>
-      </Modal>
-
-      {/* Social Features Blocked Screen */}
-      {socialAccess && !socialAccess.can_use_social ? (
-        <View style={styles.blockedContainer}>
-          <Icon name="shield-checkmark" size={80} color={COLORS.primary} />
-          <Text style={styles.blockedTitle}>
-            {socialAccess.reason === 'no_parent_pin'
-              ? (t('parentSetupRequired') || 'Configurazione Genitore Richiesta')
-              : (t('socialFeaturesDisabled') || 'Funzionalita Social Disabilitate')}
-          </Text>
-          <Text style={styles.blockedMessage}>
-            {socialAccess.reason === 'no_parent_pin'
-              ? (t('parentMustSetupPin') || 'Per la tua sicurezza, un genitore o tutore deve prima configurare un PIN di Controllo Genitori nelle Impostazioni e abilitare le funzionalita social.')
-              : (socialAccess.message || t('parentalControlsBlockedSocial') || 'Il controllo genitori ha disabilitato le funzionalita social per questo account. Chiedi a un genitore di modificare le impostazioni.')}
-          </Text>
-          <View style={styles.blockedInfoBox}>
-            <Icon name="information-circle" size={20} color={COLORS.primary} />
-            <Text style={styles.blockedInfoText}>
-              {t('adultRequiredInfo') || 'Solo un adulto puo abilitare o disabilitare le funzionalita social tramite il PIN di Controllo Genitori.'}
-            </Text>
-          </View>
-          <TouchableOpacity 
-            style={styles.goToSettingsBtn}
-            onPress={() => router.push('/settings')}
-            data-testid="go-to-settings-btn"
-          >
-            <Icon name="settings" size={20} color="#fff" />
-            <Text style={styles.goToSettingsBtnText}>
-              {t('goToSettings') || 'Vai alle Impostazioni'}
-            </Text>
-          </TouchableOpacity>
+        <View style={styles.languageBadge}>
+          <Text style={styles.languageFlag}>{languages[currentLanguage]?.flag}</Text>
         </View>
-      ) : !safetyAcknowledged ? (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color={COLORS.primary} />
-          <Text style={styles.loadingText}>{t('checkingAccess') || 'Verifica accesso...'}</Text>
-        </View>
-      ) : (
-        <>
-          {/* Header */}
-          <View style={styles.header}>
-            <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-              <Icon name="arrow-back" size={24} color={COLORS.text} />
-            </TouchableOpacity>
-            <View style={styles.headerContent}>
-              <Text style={styles.headerTitle}>{t('community')}</Text>
-              <Text style={styles.headerSubtitle}>{t('connectWithBrothers')}</Text>
-            </View>
-            <View style={styles.languageBadge}>
-              <Text style={styles.languageFlag}>{languages[currentLanguage]?.flag}</Text>
-            </View>
-          </View>
+      </View>
 
           {/* Online Users + Chat Toggle */}
       <View style={styles.onlineBar}>
@@ -592,8 +467,6 @@ export default function CommunityScreen() {
         </View>
         )}
       </KeyboardAvoidingView>
-        </>
-      )}
     </SafeAreaView>
     </SocialGuard>
   );
