@@ -1,21 +1,14 @@
-"""
-Amen! API server entrypoint.
-
-Models, core infrastructure (db/app/api_router/logger), and shared dependencies
-have been extracted into separate modules:
-- core.py: FastAPI app, MongoDB client, env vars, logger, supported languages,
-  safety messages, content moderation lists.
-- models.py: All Pydantic models.
-- dependencies.py: Auth helpers, age helpers, friendship check, translate_text,
-  check_content_moderation.
-"""
-from fastapi import HTTPException, Depends, Request, Response, Query
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, Request, Response, Query
 from fastapi.responses import JSONResponse, HTMLResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
+from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
+from motor.motor_asyncio import AsyncIOMotorClient
+import os
+import logging
+from pathlib import Path
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict
-import os
 import uuid
 from datetime import datetime, timezone, timedelta
 import httpx
@@ -27,72 +20,451 @@ import resend
 from emergentintegrations.llm.chat import LlmChat, UserMessage
 from bible_data import NUOVA_DIODATI, REINA_VALERA_1960, get_bible_chapter
 
-# Core infrastructure
-from core import (
-    app,
-    api_router,
-    client,
-    db,
-    logger,
-    ROOT_DIR,
-    EMERGENT_LLM_KEY,
-    SENDER_EMAIL,
-    SUPPORTED_LANGUAGES,
-    SAFETY_MESSAGES,
-    BAD_WORDS,
-)
+ROOT_DIR = Path(__file__).parent
+load_dotenv(ROOT_DIR / '.env')
 
-# Pydantic models
-from models import (
-    User,
-    UserSession,
-    SessionDataResponse,
-    RegisterRequest,
-    LoginRequest,
-    ForgotPasswordRequest,
-    ResetPasswordRequest,
-    JournalEntry,
-    JournalCreate,
-    Bookmark,
-    BookmarkCreate,
-    ChatMessage,
-    ChatRequest,
-    MoodCheckIn,
-    MoodRequest,
-    Progress,
-    DonationRequest,
-    TranslateRequest,
-    CommunityMessage,
-    CommunityMessageCreate,
-    StudyGroupMember,
-    StudyGroup,
-    StudyGroupCreate,
-    StudyGroupMessage,
-    StudyGroupMessageCreate,
-    StudyGroupInvite,
-    FeelingRequest,
-    BibleGroup,
-    GroupCreate,
-    GroupPost,
-    GroupPostCreate,
-    PostComment,
-    PrivateMessage,
-    PrivateMessageCreate,
-    Notification,
-    StudyNote,
-    StudyNoteCreate,
-)
+# MongoDB connection
+mongo_url = os.environ['MONGO_URL']
+client = AsyncIOMotorClient(mongo_url)
+db = client[os.environ['DB_NAME']]
 
-# Shared dependencies
-from dependencies import (
-    get_current_user,
-    require_auth,
-    calculate_age,
-    is_minor,
-    check_users_are_friends,
-    translate_text,
-    check_content_moderation,
-)
+# LLM Key
+EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY', '')
+
+# Resend Email
+resend.api_key = os.environ.get('RESEND_API_KEY', '')
+SENDER_EMAIL = os.environ.get('SENDER_EMAIL', 'onboarding@resend.dev')
+
+# Create the main app
+app = FastAPI(title="Amen! API")
+
+# Create a router with the /api prefix
+api_router = APIRouter(prefix="/api")
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# ==================== SUPPORTED LANGUAGES ====================
+SUPPORTED_LANGUAGES = {
+    "it": {"name": "Italiano", "flag": "🇮🇹", "tts_code": "it-IT"},
+    "es": {"name": "Español", "flag": "🇪🇸", "tts_code": "es-ES"},
+    "en": {"name": "English", "flag": "🇬🇧", "tts_code": "en-US"},
+    "pt": {"name": "Português", "flag": "🇧🇷", "tts_code": "pt-BR"},
+    "fr": {"name": "Français", "flag": "🇫🇷", "tts_code": "fr-FR"},
+    "de": {"name": "Deutsch", "flag": "🇩🇪", "tts_code": "de-DE"},
+}
+
+# ==================== MODELS ====================
+
+class User(BaseModel):
+    user_id: str
+    email: str
+    name: str
+    picture: Optional[str] = None
+    preferred_bible: str = "nuova_diodati"
+    language: str = "it"
+    country: Optional[str] = None
+    bio: Optional[str] = None
+    is_public: bool = False
+    birth_date: Optional[str] = None  # Format: YYYY-MM-DD
+    parental_consent: bool = False  # For minors sharing personal info
+    safety_reminder_shown: bool = False  # Track if safety reminder was shown
+    # Parental Controls - settings managed by parents
+    parental_controls_enabled: bool = False  # Master switch for parental controls
+    social_features_enabled: bool = True  # Can use community/chat features
+    social_level: str = "friends_only"  # "disabled", "friends_only", "all" (only if adult approved)
+    media_sharing_enabled: bool = False  # Can share/receive images/media
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    
+    def get_age(self) -> Optional[int]:
+        """Calculate user's age from birth_date"""
+        if not self.birth_date:
+            return None
+        try:
+            birth = datetime.strptime(self.birth_date, "%Y-%m-%d")
+            today = datetime.now()
+            age = today.year - birth.year - ((today.month, today.day) < (birth.month, birth.day))
+            return age
+        except:
+            return None
+    
+    def is_minor(self) -> bool:
+        """Check if user is under 18"""
+        age = self.get_age()
+        return age is not None and age < 18
+
+class UserSession(BaseModel):
+    user_id: str
+    session_token: str
+    expires_at: datetime
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class SessionDataResponse(BaseModel):
+    id: str
+    email: str
+    name: str
+    picture: Optional[str] = None
+    session_token: str
+
+class RegisterRequest(BaseModel):
+    email: str
+    password: str
+    name: str
+    language: str = "it"
+    country: Optional[str] = None
+    birth_date: Optional[str] = None  # Format: YYYY-MM-DD
+
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+class ForgotPasswordRequest(BaseModel):
+    email: str
+
+class ResetPasswordRequest(BaseModel):
+    email: str
+    code: str
+    new_password: str
+
+class JournalEntry(BaseModel):
+    entry_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    content: str
+    mood: str
+    language: str = "it"
+    ai_insight: Optional[str] = None
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class JournalCreate(BaseModel):
+    content: str
+    mood: str
+    language: str = "it"
+
+class Bookmark(BaseModel):
+    bookmark_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    book: str
+    chapter: int
+    verse: int
+    text: str
+    note: Optional[str] = None
+    highlight_color: str = "#D4A574"
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class BookmarkCreate(BaseModel):
+    book: str
+    chapter: int
+    verse: int
+    text: str
+    note: Optional[str] = None
+    highlight_color: str = "#D4A574"
+
+class ChatMessage(BaseModel):
+    message_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    role: str
+    content: str
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class ChatRequest(BaseModel):
+    message: str
+    mood: Optional[str] = None
+    language: str = "it"
+
+class MoodCheckIn(BaseModel):
+    checkin_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    mood: str
+    verse_reference: str
+    verse_text: str
+    reflection: str
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class MoodRequest(BaseModel):
+    mood: str
+    language: str = "it"
+
+class Progress(BaseModel):
+    user_id: str
+    reading_streak: int = 0
+    total_chapters_read: int = 0
+    total_journal_entries: int = 0
+    last_reading_date: Optional[datetime] = None
+    achievements: List[str] = []
+
+class DonationRequest(BaseModel):
+    amount: float
+    method: str
+    message: Optional[str] = None
+
+class TranslateRequest(BaseModel):
+    text: str
+    source_lang: str
+    target_lang: str
+
+class CommunityMessage(BaseModel):
+    message_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    user_name: str
+    user_country: Optional[str] = None
+    content: str
+    original_language: str
+    translations: Dict[str, str] = {}
+    message_type: str = "text"  # text, audio, prayer_request
+    likes: int = 0
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class CommunityMessageCreate(BaseModel):
+    content: str
+    language: str = "it"
+
+# ==================== STUDY GROUPS MODELS ====================
+
+class StudyGroupMember(BaseModel):
+    user_id: str
+    user_name: str
+    role: str = "member"  # "admin", "member"
+    joined_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class StudyGroup(BaseModel):
+    group_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    description: Optional[str] = None
+    created_by: str
+    members: List[StudyGroupMember] = []
+    max_members: int = 30
+    current_study: Optional[Dict] = None  # {book, chapter, verse_start, verse_end}
+    is_active: bool = True
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class StudyGroupCreate(BaseModel):
+    name: str
+    description: Optional[str] = None
+
+class StudyGroupMessage(BaseModel):
+    message_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    group_id: str
+    user_id: str
+    user_name: str
+    content: str
+    message_type: str = "chat"  # "chat", "verse_share", "note_share", "study_update"
+    shared_content: Optional[Dict] = None  # For verse/note sharing
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class StudyGroupMessageCreate(BaseModel):
+    content: str
+    message_type: str = "chat"
+    shared_content: Optional[Dict] = None
+
+class StudyGroupInvite(BaseModel):
+    invite_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    group_id: str
+    group_name: str
+    invited_by: str
+    invited_by_name: str
+    invited_user_id: str
+    status: str = "pending"  # "pending", "accepted", "declined"
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    message_type: str = "text"
+
+# ==================== NEW MODELS FOR GROUPS, NOTIFICATIONS, FEELINGS ====================
+
+class FeelingRequest(BaseModel):
+    text: str
+    language: str = "it"
+
+class BibleGroup(BaseModel):
+    group_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    description: str
+    topic: str  # prayer, study, testimony, support, worship
+    creator_id: str
+    creator_name: str
+    members: List[str] = []
+    is_public: bool = True
+    language: str = "it"
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class GroupCreate(BaseModel):
+    name: str
+    description: str
+    topic: str
+    is_public: bool = True
+    language: str = "it"
+
+class GroupPost(BaseModel):
+    post_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    group_id: str
+    user_id: str
+    user_name: str
+    content: str
+    post_type: str = "text"  # text, prayer, verse, testimony
+    bible_reference: Optional[str] = None
+    likes: int = 0
+    comments: List[dict] = []
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class GroupPostCreate(BaseModel):
+    content: str
+    post_type: str = "text"
+    bible_reference: Optional[str] = None
+
+class PostComment(BaseModel):
+    comment_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    user_name: str
+    content: str
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class PrivateMessage(BaseModel):
+    message_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    sender_id: str
+    sender_name: str
+    receiver_id: str
+    content: str
+    is_read: bool = False
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class PrivateMessageCreate(BaseModel):
+    receiver_id: str
+    content: str
+
+class Notification(BaseModel):
+    notification_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    title: str
+    body: str
+    notification_type: str  # verse, group, message, like, comment
+    data: Dict = {}
+    is_read: bool = False
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class StudyNote(BaseModel):
+    book: str
+    chapter: int
+    verse: int
+    historical_context: str
+    cross_references: List[str]
+    hebrew_greek: Optional[str] = None
+    application: str
+    commentary: str
+
+# ==================== AUTH HELPERS ====================
+
+async def get_current_user(request: Request) -> Optional[User]:
+    session_token = request.cookies.get("session_token")
+    
+    if not session_token:
+        auth_header = request.headers.get("Authorization")
+        if auth_header and auth_header.startswith("Bearer "):
+            session_token = auth_header.replace("Bearer ", "")
+    
+    if not session_token:
+        return None
+    
+    session = await db.user_sessions.find_one({"session_token": session_token}, {"_id": 0})
+    if not session:
+        return None
+    
+    expires_at = session["expires_at"]
+    if expires_at.tzinfo is None:
+        expires_at = expires_at.replace(tzinfo=timezone.utc)
+    if expires_at < datetime.now(timezone.utc):
+        return None
+    
+    user_doc = await db.users.find_one({"user_id": session["user_id"]}, {"_id": 0})
+    if user_doc:
+        return User(**user_doc)
+    return None
+
+async def require_auth(request: Request) -> User:
+    user = await get_current_user(request)
+    if not user:
+        raise HTTPException(status_code=401, detail="Non autenticato")
+    return user
+
+# ==================== MINOR PROTECTION HELPERS ====================
+
+def calculate_age(birth_date: str) -> Optional[int]:
+    """Calculate age from birth_date string (YYYY-MM-DD)"""
+    if not birth_date:
+        return None
+    try:
+        birth = datetime.strptime(birth_date, "%Y-%m-%d")
+        today = datetime.now()
+        age = today.year - birth.year - ((today.month, today.day) < (birth.month, birth.day))
+        return age
+    except:
+        return None
+
+def is_minor(birth_date: str) -> bool:
+    """Check if user is under 18"""
+    age = calculate_age(birth_date)
+    return age is not None and age < 18
+
+async def check_users_are_friends(user_id: str, other_user_id: str) -> bool:
+    """Check if two users are friends"""
+    friendship = await db.friendships.find_one({
+        "$or": [
+            {"user_id": user_id, "friend_id": other_user_id, "status": "accepted"},
+            {"user_id": other_user_id, "friend_id": user_id, "status": "accepted"}
+        ]
+    })
+    return friendship is not None
+
+SAFETY_MESSAGES = {
+    "it": {
+        "title": "Promemoria Sicurezza Online",
+        "message": "Ricorda: non condividere mai informazioni personali come indirizzo, scuola o numero di telefono con persone che non conosci. Se qualcuno ti fa sentire a disagio, parlane con un adulto di fiducia.",
+        "confirm": "Ho capito"
+    },
+    "en": {
+        "title": "Online Safety Reminder",
+        "message": "Remember: never share personal information like address, school, or phone number with people you don't know. If someone makes you feel uncomfortable, talk to a trusted adult.",
+        "confirm": "I understand"
+    },
+    "es": {
+        "title": "Recordatorio de Seguridad en Línea",
+        "message": "Recuerda: nunca compartas información personal como dirección, escuela o número de teléfono con personas que no conoces. Si alguien te hace sentir incómodo, habla con un adulto de confianza.",
+        "confirm": "Entendido"
+    },
+    "de": {
+        "title": "Online-Sicherheitserinnerung",
+        "message": "Denk daran: Teile niemals persönliche Informationen wie Adresse, Schule oder Telefonnummer mit Personen, die du nicht kennst. Wenn dich jemand unwohl fühlen lässt, sprich mit einem vertrauenswürdigen Erwachsenen.",
+        "confirm": "Verstanden"
+    },
+    "fr": {
+        "title": "Rappel de Sécurité en Ligne",
+        "message": "N'oublie pas : ne partage jamais d'informations personnelles comme ton adresse, ton école ou ton numéro de téléphone avec des personnes que tu ne connais pas. Si quelqu'un te met mal à l'aise, parle à un adulte de confiance.",
+        "confirm": "J'ai compris"
+    },
+    "pt": {
+        "title": "Lembrete de Segurança Online",
+        "message": "Lembre-se: nunca compartilhe informações pessoais como endereço, escola ou número de telefone com pessoas que você não conhece. Se alguém fizer você se sentir desconfortável, fale com um adulto de confiança.",
+        "confirm": "Entendi"
+    }
+}
+
+# ==================== TRANSLATION HELPER ====================
+
+async def translate_text(text: str, source_lang: str, target_lang: str) -> str:
+    """Translate text using AI"""
+    if source_lang == target_lang:
+        return text
+    
+    try:
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=f"translate_{uuid.uuid4().hex[:8]}",
+            system_message=f"You are a translator. Translate the following text from {SUPPORTED_LANGUAGES.get(source_lang, {}).get('name', source_lang)} to {SUPPORTED_LANGUAGES.get(target_lang, {}).get('name', target_lang)}. Only return the translated text, nothing else."
+        ).with_model("openai", "gpt-4o")
+        
+        response = await chat.send_message(UserMessage(text=text))
+        return response.strip()
+    except Exception as e:
+        logger.error(f"Translation error: {e}")
+        return text
 
 # ==================== AUTH ENDPOINTS ====================
 
@@ -1509,6 +1881,14 @@ STUDY_CONTEXT = {
     },
 }
 
+class StudyNoteCreate(BaseModel):
+    book: str
+    chapter: int
+    verse: Optional[int] = None
+    note: str
+    highlight_color: Optional[str] = None
+    tags: List[str] = []
+
 @api_router.get("/bible/study/{book}/{chapter}")
 async def get_study_data(book: str, chapter: int, verse: Optional[int] = None, user: User = Depends(require_auth)):
     """Get study tools for a chapter/verse"""
@@ -1861,6 +2241,30 @@ async def mood_checkin(data: MoodRequest, user: User = Depends(require_auth)):
 
 # ==================== COMMUNITY ENDPOINTS ====================
 
+# Bad words filter for moderation
+BAD_WORDS = {
+    "it": ["cazzo", "minchia", "stronzo", "merda", "vaffanculo", "puttana", "coglione", "idiota", "deficiente"],
+    "es": ["mierda", "puta", "joder", "coño", "cabrón", "pendejo", "idiota"],
+    "en": ["fuck", "shit", "ass", "bitch", "damn", "bastard", "idiot"],
+    "generic": ["nazi", "hitler", "satan", "666"]
+}
+
+def check_content_moderation(content: str, lang: str = "it") -> tuple:
+    """Check content for offensive words. Returns (is_clean, filtered_content, warnings)"""
+    content_lower = content.lower()
+    warnings = []
+    
+    # Check all language bad words
+    for lang_code, words in BAD_WORDS.items():
+        for word in words:
+            if word in content_lower:
+                warnings.append(f"Parola non appropriata rilevata")
+                # Replace with asterisks
+                content = re.sub(re.escape(word), '*' * len(word), content, flags=re.IGNORECASE)
+    
+    is_clean = len(warnings) == 0
+    return is_clean, content, warnings
+
 @api_router.post("/community/messages")
 async def create_community_message(data: CommunityMessageCreate, user: User = Depends(require_auth)):
     """Create a community message with content moderation"""
@@ -1964,6 +2368,10 @@ async def user_offline(user: User = Depends(require_auth)):
     return {"status": "offline"}
 
 # ==================== PRIVATE MESSAGES ====================
+
+class PrivateMessageCreate(BaseModel):
+    receiver_id: str
+    content: str
 
 @api_router.post("/private-messages")
 async def send_private_message(data: PrivateMessageCreate, user: User = Depends(require_auth)):
