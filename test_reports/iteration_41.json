@@ -1,0 +1,38 @@
+{
+  "summary": "Backend regression for Fase 2 refactor continuation (server.py 4904 -> 4397 lines, 4 NEW route modules: legal_donations.py, community.py, private_messages.py, users_presence.py). Wrote /app/backend/tests/test_refactor_iteration_41.py with 62 tests covering: (a) all 21 endpoints in the 4 new modules incl. negative-auth checks, (b) regression of the iter-39/40 modules (auth, notifications_friends, journal_bookmarks_progress, forum, parental_safety) and (c) regression of ~21 endpoints that REMAIN in server.py incl. AI-powered POST /api/feelings/analyze. Result: 62/62 PASSED. Bearer-token auth used (per main agent guidance). No regressions detected from the extraction.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_refactor_iteration_41.py",
+    "/app/test_reports/pytest/iteration_41_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "server.py is now 4397 lines (down from 6431 at iter 38 start) - solid Fase 2 progress. Continue extraction toward <2000 lines per file (suggested next: bible/quiz/dictionary clusters which are large public-data endpoints).",
+    "routes/private_messages.py intentionally has TWO different write schemas pointing at the SAME collection db.private_messages: new POST /private-messages stores `read` + `conversation_id`, legacy POST /messages stores `is_read` (no conversation_id) + auto-creates a notification. This means GET /messages and GET /private-messages can show DIFFERENT subsets of the same logical thread depending on which write path was used. Recommend either (a) migrate legacy writes to also set `conversation_id`+`read` so the two read endpoints converge, or (b) use a separate collection for legacy data. Documented but not blocking.",
+    "routes/community.py GET /community/messages writes translation cache rows synchronously inside a for-loop; for 50 messages with new languages this can be slow on first hit. Consider asyncio.gather() or background task.",
+    "routes/legal_donations.py /policy/check is a public GET that takes free-text in a query string - fine for short content but may hit URL length limits if the frontend ever sends user-generated paragraphs. Consider switching to POST with JSON body.",
+    "routes/users_presence.py PUT /users/settings allow-list does NOT include `birth_date`/`parental_consent`/parental flags - which is correct (they have their own dedicated routes), but the function returns the FULL user document; verified password_hash is excluded but consider also excluding any other sensitive future fields by maintaining an explicit response shape.",
+    "Three test-side bugs were found and fixed locally (NOT product issues): (1) /api/languages returns dict not list, (2) /api/groups requires auth, (3) /api/feelings/analyze body model is FeelingRequest{text, language} not {feelings, context}. After fix all pass."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_refactor_iteration_41.py (new)"
+  ],
+  "success_rate": {
+    "backend": "100% (62/62)",
+    "frontend": "n/a (skipped per request)"
+  },
+  "test_credentials": "refactortest@amen.com / Test1234! (adult, 1990-01-01) ; secondary: refactortest2@amen.com / Test1234! (adult, 1990-05-05) - registered by this iteration if absent",
+  "seed_data_creation": "Created during run (TEST_ prefix where possible): 1 community message, 1 community like, 2 donations (1 paypal completed + 1 bonifico pending), 4-5 private messages (mix of new + legacy schemas), 1 notification on receiver (from legacy /messages path), consent record v=1 on primary user, second test user 'refactortest2@amen.com' if it didn't already exist. None of these affect existing seeded data; can be cleaned with prefix='TEST_iter41' if needed.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Iter 41 validated Fase 2 continuation refactor end-to-end with 62/62 pass on /app/backend/tests/test_refactor_iteration_41.py. The test file is reusable: it drives all 4 new modules (legal_donations, community, private_messages, users_presence), spot-checks iter-39/40 modules and re-validates the 21 endpoints still in server.py. Two important quirks documented: (a) /api/groups REQUIRES auth, (b) FeelingRequest body uses 'text' field not 'feelings'/'context'. /api/languages returns dict {code: {flag,name,tts_code}} not a list. Use Bearer-token auth (Authorization header), NOT shared cookie sessions, for negative-auth checks. Two test users present: refactortest@amen.com and refactortest2@amen.com (both adults, password Test1234!). Consent v=1 is now persisted for primary user; second user has no consent record yet.",
+  "rca of the issue": "No production bugs found. The 3 initial pytest failures were all test-side incorrect assumptions about request/response shapes (languages dict, groups requires auth, feelings body schema). Corrected the test assertions; all 62 tests now pass. The Fase 2 refactor is regression-free."
+}
