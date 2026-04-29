@@ -130,6 +130,13 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - `routes/parental_safety.py` (299 righe, 10 endpoint: safety + parental controls + birth-date update)
   - server.py ridotto a **4904 righe** (44 endpoint estratti totali, 110 rimangono)
   - Validazione: **68/68 test passati al 100%** (test_reports/iteration_40.json), zero regressioni
+- [x] **Refactoring server.py - Fase 2 (3° batch)** (Apr 2026) - 4 nuovi moduli aggiuntivi:
+  - `routes/legal_donations.py` (153 righe, 6 endpoint: consent + donations + policy/check)
+  - `routes/community.py` (135 righe, 5 endpoint: community messages + translate + like + users)
+  - `routes/private_messages.py` (219 righe, 6 endpoint: /private-messages + legacy /messages)
+  - `routes/users_presence.py` (74 righe, 4 endpoint: heartbeat + online + offline + settings)
+  - server.py ridotto a **4397 righe** (-32% dall'iniziale 6431, 65 endpoint estratti totali)
+  - Validazione: **62/62 test passati al 100%** (test_reports/iteration_41.json), zero regressioni
 - [x] **Resend Production Setup Guide** (Apr 2026) - `/app/memory/RESEND_SETUP.md`:
   - Guida step-by-step per verifica dominio (Resend dashboard, DNS records SPF/DKIM/DMARC)
   - Provider DNS supportati: Aruba, Cloudflare, Namecheap, GoDaddy
