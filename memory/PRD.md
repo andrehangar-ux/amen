@@ -123,10 +123,21 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - Popup interattivi con descrizione del luogo
   - postMessage bridge: tap marker → aggiorna card dettaglio in React Native sotto la mappa
   - Auto-fit bounds su tutti i marker
+- [x] **Refactoring server.py - Fase 2 (continuata)** (Apr 2026) - 4 nuovi moduli routes/* estratti:
+  - `routes/notifications_friends.py` (161 righe, 8 endpoint: notifications + friends)
+  - `routes/journal_bookmarks_progress.py` (234 righe, 10 endpoint: journal + bookmarks + progress + reading history)
+  - `routes/forum.py` (198 righe, 7 endpoint: forum CRUD + vote + AI mentor)
+  - `routes/parental_safety.py` (299 righe, 10 endpoint: safety + parental controls + birth-date update)
+  - server.py ridotto a **4904 righe** (44 endpoint estratti totali, 110 rimangono)
+  - Validazione: **68/68 test passati al 100%** (test_reports/iteration_40.json), zero regressioni
+- [x] **Resend Production Setup Guide** (Apr 2026) - `/app/memory/RESEND_SETUP.md`:
+  - Guida step-by-step per verifica dominio (Resend dashboard, DNS records SPF/DKIM/DMARC)
+  - Provider DNS supportati: Aruba, Cloudflare, Namecheap, GoDaddy
+  - **AZIONE MANUALE UTENTE**: serve un dominio proprio + 5-30 min DNS propagation
 
 ## Task Futuri (Backlog)
-1. **P2**: Refactoring server.py - Fase 2 (continuare) - estrarre i restanti 145 endpoint in routes/{bible,community,quiz,dictionary,groups,study_groups,forum,private_messages,notifications,friends,parental_controls,safety,ai_chat,misc}.py
-2. **P3**: Verificare dominio Resend per consentire email reset password a qualsiasi destinatario in produzione
+1. **P2**: Continuare Fase 2 - estrarre i restanti **110 endpoint** in routes/{bible,community,quiz,dictionary,groups,study_groups,private_messages,users,maps,events,faq,support,donations,worship,ai_chat,feelings}.py per portare server.py a <2000 righe
+2. **P3**: Completare configurazione Resend dominio (azione manuale utente — vedi `/app/memory/RESEND_SETUP.md`)
 
 ## Credenziali Test
 - Email: `testbible@cibospirituale.it`
