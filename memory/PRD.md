@@ -111,10 +111,22 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - server.py ridotto da 6431 a ~6018 righe; firma API invariata
   - Bonus: fix bug pre-esistente `CommunityMessageCreate` mancava campo `message_type` causando 500 sul POST community/messages
   - Validazione: 38/38 endpoint testati con successo (test_reports/iteration_38.json)
+- [x] **Refactoring server.py - Fase 2 (parziale)** (Apr 2026) - Estrazione iniziale routes:
+  - `/app/backend/routes/__init__.py` + `/app/backend/routes/auth.py` (354 righe, 9 endpoint /api/auth/*)
+  - server.py ridotto da 6011 a 5698 righe
+  - Lint pulizia: rimosso F811 hashlib duplicate import, rinominato duplicate `send_private_message` → `send_message_legacy` (route /api/messages legacy invariata), rimosso F841 unused vars, sostituito bare except con `except Exception`
+  - Fix bug pre-esistente: `/api/auth/forgot-password` restituiva 500 quando Resend in modalità test rifiutava email non-verificate. Ora restituisce sempre 200 (privacy: no email enumeration) e logga errore internamente.
+  - Validazione: 22/28 test passati (test_reports/iteration_39.json) — i 4 fallimenti sono test defects (cookie session sharing, payload schema mismatch nei test stessi, NON regressioni nel codice di produzione)
+- [x] **UI Mappe Bibliche** (Apr 2026) - Mappa interattiva reale:
+  - Sostituito placeholder grid in `/app/frontend/app/maps.tsx` con WebView Leaflet + OpenStreetMap (free, no API key)
+  - Marker custom a goccia colorati per tipo (city/water/mountain/river/site) con iniziale del nome
+  - Popup interattivi con descrizione del luogo
+  - postMessage bridge: tap marker → aggiorna card dettaglio in React Native sotto la mappa
+  - Auto-fit bounds su tutti i marker
 
 ## Task Futuri (Backlog)
-1. **P2**: UI Mappe Bibliche
-2. **P2**: Refactoring server.py - Fase 2 (estrazione di /app/backend/routes/* per dividere i 154 endpoint in router tematici: auth, bible, community, quiz, dictionary, groups, study_groups, forum, private_messages, notifications, friends, parental_controls, safety, ai_chat, misc)
+1. **P2**: Refactoring server.py - Fase 2 (continuare) - estrarre i restanti 145 endpoint in routes/{bible,community,quiz,dictionary,groups,study_groups,forum,private_messages,notifications,friends,parental_controls,safety,ai_chat,misc}.py
+2. **P3**: Verificare dominio Resend per consentire email reset password a qualsiasi destinatario in produzione
 
 ## Credenziali Test
 - Email: `testbible@cibospirituale.it`

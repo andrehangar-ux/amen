@@ -68,7 +68,7 @@ def calculate_age(birth_date: str) -> Optional[int]:
         today = datetime.now()
         age = today.year - birth.year - ((today.month, today.day) < (birth.month, birth.day))
         return age
-    except:
+    except Exception:
         return None
 
 
@@ -121,7 +121,7 @@ def check_content_moderation(content: str, lang: str = "it") -> tuple:
     for lang_code, words in BAD_WORDS.items():
         for word in words:
             if word in content_lower:
-                warnings.append(f"Parola non appropriata rilevata")
+                warnings.append("Parola non appropriata rilevata")
                 # Replace with asterisks
                 content = re.sub(re.escape(word), '*' * len(word), content, flags=re.IGNORECASE)
 

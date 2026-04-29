@@ -44,7 +44,7 @@ class User(BaseModel):
             today = datetime.now()
             age = today.year - birth.year - ((today.month, today.day) < (birth.month, birth.day))
             return age
-        except:
+        except Exception:
             return None
 
     def is_minor(self) -> bool:

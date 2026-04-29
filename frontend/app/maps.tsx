@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { WebView } from 'react-native-webview';
 import { Icon } from '../src/components/Icon';
 import { router } from 'expo-router';
 import { api } from '../src/utils/api';
@@ -96,6 +97,47 @@ export default function MapsScreen() {
     }
   };
 
+  const buildLeafletHtml = (mapData: MapData): string => {
+    const markers = mapData.locations.map((loc) => ({
+      name: loc.name,
+      lat: loc.lat,
+      lng: loc.lng,
+      type: loc.type,
+      description: loc.description.replace(/'/g, "\\'").replace(/"/g, '\\"'),
+      color: getLocationColor(loc.type),
+    }));
+    return `<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+  html,body,#map{height:100%;margin:0;padding:0;background:#e8eef0;font-family:-apple-system,sans-serif}
+  .leaflet-popup-content-wrapper{border-radius:12px}
+  .leaflet-popup-content{margin:12px 14px;font-size:14px;line-height:1.4}
+  .loc-pin{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,0.3);border:2px solid #fff}
+  .loc-pin span{transform:rotate(45deg);color:#fff;font-weight:700;font-size:13px}
+</style></head>
+<body>
+<div id="map"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map=L.map('map',{zoomControl:true,attributionControl:false}).setView([${mapData.center.lat},${mapData.center.lng}],${mapData.zoom});
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18}).addTo(map);
+  var markers=${JSON.stringify(markers)};
+  var bounds=[];
+  markers.forEach(function(m){
+    var pin=L.divIcon({className:'',html:'<div class="loc-pin" style="background:'+m.color+'"><span>'+m.name.charAt(0)+'</span></div>',iconSize:[28,28],iconAnchor:[14,28]});
+    var mk=L.marker([m.lat,m.lng],{icon:pin}).addTo(map);
+    mk.bindPopup('<strong>'+m.name+'</strong><br/>'+m.description);
+    mk.on('click',function(){window.ReactNativeWebView&&window.ReactNativeWebView.postMessage(JSON.stringify({type:'marker',name:m.name}));});
+    bounds.push([m.lat,m.lng]);
+  });
+  if(bounds.length>1){map.fitBounds(bounds,{padding:[40,40]});}
+</script>
+</body></html>`;
+  };
+
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
@@ -122,33 +164,29 @@ export default function MapsScreen() {
           <ScrollView contentContainerStyle={styles.scrollContent}>
             <Text style={styles.mapDescription}>{selectedMap.description}</Text>
 
-            {/* Simplified Map Visualization */}
+            {/* Real interactive map (Leaflet + OpenStreetMap) */}
             <View style={styles.mapContainer}>
-              <View style={styles.mapPlaceholder}>
-                <Icon name="map" size={60} color={COLORS.primary} />
-                <Text style={styles.mapPlaceholderText}>Mappa Interattiva</Text>
-                <Text style={styles.mapCoords}>
-                  Centro: {selectedMap.center.lat.toFixed(2)}°N, {selectedMap.center.lng.toFixed(2)}°E
-                </Text>
-              </View>
-
-              {/* Location Markers Grid */}
-              <View style={styles.locationsGrid}>
-                {selectedMap.locations.map((loc, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    style={[
-                      styles.locationMarker,
-                      selectedLocation?.name === loc.name && styles.locationMarkerSelected,
-                    ]}
-                    onPress={() => setSelectedLocation(loc)}
-                  >
-                    <View style={[styles.markerIcon, { backgroundColor: getLocationColor(loc.type) + '20' }]}>
-                      <Icon name={getLocationIcon(loc.type)} size={20} color={getLocationColor(loc.type)} />
-                    </View>
-                    <Text style={styles.markerName} numberOfLines={1}>{loc.name}</Text>
-                  </TouchableOpacity>
-                ))}
+              <View style={styles.mapWrapper}>
+                <WebView
+                  data-testid="biblical-leaflet-map"
+                  originWhitelist={['*']}
+                  source={{ html: buildLeafletHtml(selectedMap) }}
+                  style={styles.webview}
+                  javaScriptEnabled
+                  domStorageEnabled
+                  scalesPageToFit
+                  onMessage={(event) => {
+                    try {
+                      const msg = JSON.parse(event.nativeEvent.data);
+                      if (msg.type === 'marker') {
+                        const loc = selectedMap.locations.find((l) => l.name === msg.name);
+                        if (loc) setSelectedLocation(loc);
+                      }
+                    } catch {
+                      // ignore malformed messages
+                    }
+                  }}
+                />
               </View>
             </View>
 
@@ -334,6 +372,16 @@ const styles = StyleSheet.create({
     padding: SPACING.md,
     marginBottom: SPACING.lg,
     ...SHADOWS.small,
+  },
+  mapWrapper: {
+    height: 360,
+    borderRadius: BORDER_RADIUS.md,
+    overflow: 'hidden',
+    backgroundColor: '#e8eef0',
+  },
+  webview: {
+    flex: 1,
+    backgroundColor: 'transparent',
   },
   mapPlaceholder: {
     backgroundColor: COLORS.primary + '10',
