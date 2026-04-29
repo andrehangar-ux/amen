@@ -4605,7 +4605,7 @@ async def get_favorite_terms(user: User = Depends(require_auth), lang: str = "it
     favorites_cursor = db.dictionary_favorites.find(
         {"user_id": user.user_id},
         {"_id": 0}
-    ).sort("created_at", -1)
+    ).sort("created_at", -1).limit(200)
     
     favorites = []
     async for fav in favorites_cursor:
@@ -4686,7 +4686,7 @@ async def get_flashcards(user: User = Depends(require_auth), lang: str = "it"):
     flashcards_cursor = db.dictionary_flashcards.find(
         {"user_id": user.user_id},
         {"_id": 0}
-    ).sort("next_review", 1)  # Sort by next review date
+    ).sort("next_review", 1).limit(200)
     
     flashcards = []
     async for card in flashcards_cursor:
