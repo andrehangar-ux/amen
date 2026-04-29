@@ -104,17 +104,28 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - Componente `AdBanner` con banner adattivo in Home page
   - Test IDs in dev, production IDs in release
   - `googleServicesFile` configurato in `app.json`
+- [x] **Refactoring server.py - Fase 1** (Apr 2026) - Modularizzazione backend:
+  - `/app/backend/core.py` - app FastAPI, MongoDB client, env vars, logger, SUPPORTED_LANGUAGES, SAFETY_MESSAGES, BAD_WORDS
+  - `/app/backend/models.py` - tutti i 30+ modelli Pydantic (User, RegisterRequest, CommunityMessageCreate, ecc.)
+  - `/app/backend/dependencies.py` - helper condivisi (auth, age, friendship, translate, content moderation)
+  - server.py ridotto da 6431 a ~6018 righe; firma API invariata
+  - Bonus: fix bug pre-esistente `CommunityMessageCreate` mancava campo `message_type` causando 500 sul POST community/messages
+  - Validazione: 38/38 endpoint testati con successo (test_reports/iteration_38.json)
 
 ## Task Futuri (Backlog)
 1. **P2**: UI Mappe Bibliche
-2. **P2**: Refactoring server.py (>6000 righe)
+2. **P2**: Refactoring server.py - Fase 2 (estrazione di /app/backend/routes/* per dividere i 154 endpoint in router tematici: auth, bible, community, quiz, dictionary, groups, study_groups, forum, private_messages, notifications, friends, parental_controls, safety, ai_chat, misc)
 
 ## Credenziali Test
 - Email: `testbible@cibospirituale.it`
 - Password: `Test123!`
+- Email (creato in refactor smoke test): `refactortest@amen.com` / `Test1234!`
 
 ## File Chiave
-- `/app/backend/server.py` - API principale (include gruppi di studio)
+- `/app/backend/server.py` - API principale (route handlers)
+- `/app/backend/core.py` - infrastruttura condivisa
+- `/app/backend/models.py` - modelli Pydantic
+- `/app/backend/dependencies.py` - auth + helper condivisi
 - `/app/backend/data/daily_verses.py` - 365 versetti giornalieri
 - `/app/frontend/app/study-groups.tsx` - UI Gruppi di Studio
 - `/app/frontend/src/components/FloatingMenu.tsx` - Menu con link ai gruppi
