@@ -137,7 +137,13 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - `routes/users_presence.py` (74 righe, 4 endpoint: heartbeat + online + offline + settings)
   - server.py ridotto a **4397 righe** (-32% dall'iniziale 6431, 65 endpoint estratti totali)
   - Validazione: **62/62 test passati al 100%** (test_reports/iteration_41.json), zero regressioni
-- [x] **Resend Production Setup Guide** (Apr 2026) - `/app/memory/RESEND_SETUP.md`:
+- [x] **Resend Production Setup Guide** (Apr 2026) - `/app/memory/RESEND_SETUP.md`
+- [x] **Titoli di Sezione Biblici Multilingua** (Apr 2026) - Header tematici nei capitoli:
+  - `/app/backend/bible_titles.py` (920 righe): 66 BOOK_TITLES + descriptive subtitles in 6 lingue (Italiano, Inglese, Spagnolo, Portoghese, Francese, Tedesco) + 56 CHAPTER_TITLES per i capitoli più famosi (Creazione, Diluvio, 10 Comandamenti, Davide e Golia, Salmo 23, Sermone sul Monte, Padre Nostro, Crocifissione, Pentecoste, Inno alla Carità, ecc.)
+  - Endpoint `GET /api/bible/chapter/{book}/{chapter}` ora include `book_info` + `chapter_title` nella risposta
+  - Nuovo endpoint dedicato `GET /api/bible/section-title/{book}/{chapter}?lang={it|en|es|pt|fr|de}`
+  - Frontend `/app/frontend/app/(tabs)/bible.tsx`: header elegante in cima a ogni capitolo con titolo libro maiuscolo, sottotitolo italico, divisore decorativo, titolo capitolo (se disponibile)
+  - Fonti: nomenclatura tradizionale da Diodati 1641, KJV 1769, Reina-Valera 1909, Almeida 1911, Louis Segond 1910, Luther 1912 (tutti public domain):
   - Guida step-by-step per verifica dominio (Resend dashboard, DNS records SPF/DKIM/DMARC)
   - Provider DNS supportati: Aruba, Cloudflare, Namecheap, GoDaddy
   - **AZIONE MANUALE UTENTE**: serve un dominio proprio + 5-30 min DNS propagation

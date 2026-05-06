@@ -26,6 +26,7 @@ import hashlib
 import resend
 from emergentintegrations.llm.chat import LlmChat, UserMessage
 from bible_data import NUOVA_DIODATI, REINA_VALERA_1960, get_bible_chapter
+from bible_titles import get_book_info, get_chapter_title
 
 # Core infrastructure
 from core import (
@@ -1066,7 +1067,11 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
 async def get_chapter(book: str, chapter: int, lang: str = "it"):
     """Get verses for a chapter in specified language"""
     key = f"{book}:{chapter}"
-    
+
+    # Section title metadata (always included)
+    book_info = get_book_info(book, lang)
+    chapter_title = get_chapter_title(book, chapter, lang)
+
     # First try the real Bible data (Nuova Diodati or Reina Valera)
     if lang == "it":
         verses = NUOVA_DIODATI.get(key, [])
@@ -1074,18 +1079,20 @@ async def get_chapter(book: str, chapter: int, lang: str = "it"):
         verses = REINA_VALERA_1960.get(key, [])
     else:
         verses = []
-    
+
     if verses:
-        return {"book": book, "chapter": chapter, "verses": verses, "language": lang}
-    
+        return {"book": book, "chapter": chapter, "verses": verses, "language": lang,
+                "book_info": book_info, "chapter_title": chapter_title}
+
     # Check if we have it cached in MongoDB
     cached = await db.bible_cache.find_one({"book": book, "chapter": chapter, "language": lang})
     if cached and cached.get("verses") and len(cached.get("verses", [])) > 3:
-        return {"book": book, "chapter": chapter, "verses": cached["verses"], "language": lang}
-    
+        return {"book": book, "chapter": chapter, "verses": cached["verses"], "language": lang,
+                "book_info": book_info, "chapter_title": chapter_title}
+
     # Fetch from external APIs
     fetched_verses = await fetch_bible_chapter_any_lang(book, chapter, lang)
-    
+
     if fetched_verses and len(fetched_verses) > 3:
         # Cache in MongoDB for future use
         await db.bible_cache.update_one(
@@ -1093,8 +1100,9 @@ async def get_chapter(book: str, chapter: int, lang: str = "it"):
             {"$set": {"verses": fetched_verses, "source": "external_api", "cached_at": datetime.now(timezone.utc)}},
             upsert=True
         )
-        return {"book": book, "chapter": chapter, "verses": fetched_verses, "language": lang}
-    
+        return {"book": book, "chapter": chapter, "verses": fetched_verses, "language": lang,
+                "book_info": book_info, "chapter_title": chapter_title}
+
     # Return placeholder if nothing found
     verses = []
     placeholders = {
@@ -1106,11 +1114,24 @@ async def get_chapter(book: str, chapter: int, lang: str = "it"):
         "pt": "Este capítulo estará disponível em breve."
     }
     placeholder_text = placeholders.get(lang, placeholders["en"])
-    
+
     for i in range(1, 10):
         verses.append({"verse": i, "text": placeholder_text})
-    
-    return {"book": book, "chapter": chapter, "verses": verses, "language": lang}
+
+    return {"book": book, "chapter": chapter, "verses": verses, "language": lang,
+            "book_info": book_info, "chapter_title": chapter_title}
+
+
+@api_router.get("/bible/section-title/{book}/{chapter}")
+async def get_bible_section_title(book: str, chapter: int, lang: str = "it"):
+    """Get standalone book info + chapter section title (for headers/previews)"""
+    return {
+        "book": book,
+        "chapter": chapter,
+        "language": lang,
+        "book_info": get_book_info(book, lang),
+        "chapter_title": get_chapter_title(book, chapter, lang),
+    }
 
 # ==================== BIBLE STUDY TOOLS ====================
 

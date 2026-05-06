@@ -157,6 +157,8 @@ export default function BibleScreen() {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
   const [verses, setVerses] = useState<Verse[]>([]);
+  const [bookInfo, setBookInfo] = useState<{title: string; subtitle: string} | null>(null);
+  const [chapterTitle, setChapterTitle] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [loadingBooks, setLoadingBooks] = useState(true);
   const [view, setView] = useState<'books' | 'chapters' | 'reading'>('books');
@@ -225,6 +227,8 @@ export default function BibleScreen() {
     try {
       const data = await api.getChapter(book, chapter, languageToUse);
       setVerses(data.verses || []);
+      setBookInfo(data.book_info || null);
+      setChapterTitle(data.chapter_title || null);
       setView('reading');
       // Save reading history and update progress
       await Promise.all([
@@ -576,6 +580,8 @@ export default function BibleScreen() {
         if (newBook) setSelectedBook(newBook);
         const chapterData = await api.getChapter(bookToUse.name, selectedChapter, newLang);
         setVerses(chapterData.verses || []);
+        setBookInfo(chapterData.book_info || null);
+        setChapterTitle(chapterData.chapter_title || null);
         loadStudyData(bookToUse.name, selectedChapter);
       }
     } catch (error) {
@@ -606,6 +612,8 @@ export default function BibleScreen() {
         if (newBook) setSelectedBook(newBook);
         const chapterData = await api.getChapter(bookToUse.name, selectedChapter, lang);
         setVerses(chapterData.verses || []);
+        setBookInfo(chapterData.book_info || null);
+        setChapterTitle(chapterData.chapter_title || null);
         loadStudyData(bookToUse.name, selectedChapter);
       }
     } catch (error) {
@@ -782,6 +790,26 @@ export default function BibleScreen() {
         </View>
 
         <ScrollView contentContainerStyle={styles.readingContent}>
+          {/* Section Title - Book + Subtitle + Chapter Title */}
+          {(bookInfo || chapterTitle) && (
+            <View style={styles.sectionTitleContainer} data-testid="bible-section-title">
+              {bookInfo && (
+                <>
+                  <Text style={styles.sectionBookTitle}>{bookInfo.title?.toUpperCase()}</Text>
+                  {bookInfo.subtitle ? (
+                    <Text style={styles.sectionBookSubtitle}>{bookInfo.subtitle}</Text>
+                  ) : null}
+                </>
+              )}
+              {chapterTitle ? (
+                <>
+                  <View style={styles.sectionDivider} />
+                  <Text style={styles.sectionChapterTitle}>{chapterTitle}</Text>
+                </>
+              ) : null}
+            </View>
+          )}
+
           {/* Study Context Banner */}
           {studyData?.study_context && (
             <TouchableOpacity 
@@ -1751,6 +1779,40 @@ const styles = StyleSheet.create({
     padding: SPACING.md,
     borderRadius: BORDER_RADIUS.md,
     marginBottom: SPACING.md,
+  },
+  sectionTitleContainer: {
+    alignItems: 'center',
+    paddingVertical: SPACING.lg,
+    paddingHorizontal: SPACING.md,
+    marginBottom: SPACING.md,
+  },
+  sectionBookTitle: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: COLORS.primary,
+    letterSpacing: 2,
+    textAlign: 'center',
+  },
+  sectionBookSubtitle: {
+    fontSize: 14,
+    color: COLORS.textLight,
+    fontStyle: 'italic',
+    marginTop: 4,
+    textAlign: 'center',
+  },
+  sectionDivider: {
+    width: 60,
+    height: 2,
+    backgroundColor: COLORS.primary + '40',
+    marginVertical: SPACING.md,
+    borderRadius: 1,
+  },
+  sectionChapterTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: COLORS.text,
+    marginTop: 4,
+    textAlign: 'center',
   },
   studyContextText: {
     flex: 1,
