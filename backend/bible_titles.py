@@ -1022,17 +1022,53 @@ CHAPTER_TITLES = {
 }
 
 
-def get_book_info(italian_book: str, lang: str = "it") -> Optional[dict]:
-    """Get book title and subtitle for a given book in the requested language."""
-    book_info = BOOK_TITLES.get(italian_book)
+def _build_reverse_index() -> dict:
+    """Build a reverse lookup from translated book name (any language) -> Italian key."""
+    index = {}
+    for it_key, langs in BOOK_TITLES.items():
+        # Always include Italian key (case-insensitive)
+        index[it_key.lower()] = it_key
+        for lang_data in langs.values():
+            translated_title = lang_data.get("title")
+            if translated_title:
+                index[translated_title.lower()] = it_key
+    return index
+
+
+_BOOK_NAME_REVERSE_INDEX = _build_reverse_index()
+
+
+def _resolve_italian_key(book_name: str) -> Optional[str]:
+    """Map any localized book name back to the canonical Italian key."""
+    if not book_name:
+        return None
+    return _BOOK_NAME_REVERSE_INDEX.get(book_name.lower())
+
+
+def get_book_info(book_name: str, lang: str = "it") -> Optional[dict]:
+    """Get book title and subtitle for a given book in the requested language.
+
+    Accepts the book name in ANY supported language (it/en/es/pt/fr/de) and resolves
+    it to the canonical Italian key for lookup.
+    """
+    italian_key = _resolve_italian_key(book_name)
+    if not italian_key:
+        return None
+    book_info = BOOK_TITLES.get(italian_key)
     if not book_info:
         return None
     return book_info.get(lang) or book_info.get("it")
 
 
-def get_chapter_title(italian_book: str, chapter: int, lang: str = "it") -> Optional[str]:
-    """Get the standard chapter section title (None if not a famous chapter)."""
-    chapter_info = CHAPTER_TITLES.get((italian_book, chapter))
+def get_chapter_title(book_name: str, chapter: int, lang: str = "it") -> Optional[str]:
+    """Get the standard chapter section title (None if not a famous chapter).
+
+    Accepts the book name in ANY supported language.
+    """
+    italian_key = _resolve_italian_key(book_name)
+    if not italian_key:
+        return None
+    chapter_info = CHAPTER_TITLES.get((italian_key, chapter))
     if not chapter_info:
         return None
     return chapter_info.get(lang) or chapter_info.get("it")
