@@ -112,6 +112,7 @@ from routes import users_presence as _up_routes  # noqa: F401
 # ==================== BIBLE EDITIONS ====================
 
 BIBLE_EDITIONS = {
+    # Italian editions — all sourced from laparola.net
     "nuova_diodati": {
         "name": "Nuova Diodati",
         "language": "it",
@@ -124,41 +125,56 @@ BIBLE_EDITIONS = {
         "year": "1607",
         "description": "La storica traduzione di Giovanni Diodati"
     },
-    "cei": {
-        "name": "CEI",
+    "riveduta": {
+        "name": "Nuova Riveduta",
         "language": "it",
-        "year": "2008",
-        "description": "Traduzione della Conferenza Episcopale Italiana"
+        "year": "1994",
+        "description": "Revisione contemporanea della Bibbia Riveduta"
     },
+    # Spanish — single public-domain edition
     "reina_valera": {
-        "name": "Reina Valera",
+        "name": "Reina Valera 1960",
         "language": "es",
         "year": "1960",
         "description": "La clásica traducción española protestante"
     },
-    "reina_valera_antigua": {
-        "name": "Reina Valera Antigua",
-        "language": "es",
-        "year": "1569",
-        "description": "La traducción original de Casiodoro de Reina"
-    },
+    # English — multiple distinct public-domain editions via bible-api.com
     "kjv": {
         "name": "King James Version",
         "language": "en",
-        "year": "1611",
-        "description": "The classic English translation"
+        "year": "1769",
+        "description": "The classic English translation (1611, 1769 revision)"
     },
-    "niv": {
-        "name": "New International Version",
+    "web": {
+        "name": "World English Bible",
         "language": "en",
-        "year": "1978",
-        "description": "Modern English translation"
+        "year": "2000",
+        "description": "A modern public-domain English translation"
     },
+    "asv": {
+        "name": "American Standard Version",
+        "language": "en",
+        "year": "1901",
+        "description": "Revision of the KJV, widely used historically"
+    },
+    "bbe": {
+        "name": "Bible in Basic English",
+        "language": "en",
+        "year": "1965",
+        "description": "Simplified English vocabulary (≈1000 base words)"
+    },
+    "ylt": {
+        "name": "Young's Literal Translation",
+        "language": "en",
+        "year": "1898",
+        "description": "Strictly literal English rendering of the original texts"
+    },
+    # Other languages — single public-domain edition each
     "almeida": {
-        "name": "Almeida Revista",
+        "name": "Almeida",
         "language": "pt",
-        "year": "1969",
-        "description": "Tradução clássica portuguesa"
+        "year": "1911",
+        "description": "Clássica tradução portuguesa de João Ferreira de Almeida"
     },
     "louis_segond": {
         "name": "Louis Segond",
@@ -169,8 +185,8 @@ BIBLE_EDITIONS = {
     "luther": {
         "name": "Luther Bibel",
         "language": "de",
-        "year": "1545",
-        "description": "Die klassische deutsche Übersetzung"
+        "year": "1912",
+        "description": "Die klassische deutsche Übersetzung von Martin Luther"
     },
 }
 
@@ -944,7 +960,14 @@ async def get_bible_books(lang: str = "it"):
 
 # Helper function to fetch Bible text from laparola.net
 async def fetch_from_laparola(book: str, chapter: int, version: str = "Nuova+Diodati") -> list:
-    """Fetch Bible chapter from laparola.net"""
+    """Fetch Bible chapter from laparola.net.
+
+    Supported versions on laparola.net (Italian):
+      - Nuova+Diodati (default, Protestant 1991)
+      - Diodati (Diodati Classica 1641)
+      - NRiveduta (Nuova Riveduta 1994)
+      - CEI (Conferenza Episcopale Italiana 2008)
+    """
     try:
         # Map Italian book names to URL-friendly format
         book_url = book.lower().replace(" ", "+")
@@ -1081,26 +1104,52 @@ def get_book_name_for_lang(italian_name: str, lang: str) -> str:
     mapping = BOOK_NAME_MAPPING.get(italian_name, {})
     return mapping.get(lang, italian_name)
 
-async def fetch_from_bible_api(book: str, chapter: int, lang: str = "en") -> list:
-    """Fetch Bible chapter from bible-api.com (supports English and other languages)"""
+async def fetch_from_bible_api(book: str, chapter: int, lang: str = "en", edition: str = None) -> list:
+    """Fetch Bible chapter from bible-api.com supporting multiple translations.
+
+    Map of supported public-domain translations on bible-api.com:
+      English: kjv (1769), web (World English Bible), asv (American Standard 1901),
+               bbe (Bible in Basic English 1965), ylt (Young's Literal 1898),
+               dra (Douay-Rheims 1899, Catholic)
+      Other languages currently rely on the WEB fallback.
+    """
     try:
-        # Map Italian book name to English for API
+        # Map any-language book name to English for the API
         book_en = get_book_name_for_lang(book, "en")
 
-        # For now, use WEB (World English Bible) which is freely available
-        translation = "web" if lang == "en" else "kjv"
-        
+        # Edition → bible-api.com translation code
+        edition_to_code = {
+            # English public-domain
+            "kjv": "kjv",
+            "asv": "asv",
+            "web": "web",
+            "bbe": "bbe",
+            "ylt": "ylt",
+            "dra": "dra",
+            # NIV is copyrighted → fallback to WEB
+            "niv": "web",
+            # Italian, Spanish, French, German, Portuguese have no distinct
+            # public-domain alternates on bible-api.com. They are served from
+            # the static NUOVA_DIODATI / REINA_VALERA_1960 caches first, then
+            # fall back to the WEB English text (for any-lang) if missing.
+        }
+
+        if edition and edition in edition_to_code:
+            translation = edition_to_code[edition]
+        else:
+            translation = "web" if lang == "en" else "kjv"
+
         url = f"https://bible-api.com/{book_en}+{chapter}?translation={translation}"
-        
+
         async with httpx.AsyncClient(timeout=15.0) as client:
             response = await client.get(url)
             if response.status_code != 200:
                 logger.error(f"bible-api.com returned status {response.status_code}")
                 return []
-            
+
             data = response.json()
             verses = []
-            
+
             for v in data.get("verses", []):
                 verse_text = v.get("text", "").strip()
                 verse_text = verse_text.replace("\n", " ").strip()
@@ -1109,10 +1158,10 @@ async def fetch_from_bible_api(book: str, chapter: int, lang: str = "en") -> lis
                         "verse": v.get("verse", 0),
                         "text": verse_text
                     })
-            
-            logger.info(f"Fetched {len(verses)} verses from bible-api.com for {book} {chapter} ({lang})")
+
+            logger.info(f"Fetched {len(verses)} verses from bible-api.com for {book} {chapter} ({lang}/{translation})")
             return verses
-            
+
     except Exception as e:
         logger.error(f"Error fetching from bible-api.com: {e}")
         return []
@@ -1157,12 +1206,31 @@ BOOK_ABBREVS_IT = {
     "Giuda": "jd", "Apocalisse": "re"
 }
 
-async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> list:
-    """Fetch Bible chapter in any language using multiple free APIs"""
-    
-    # Try laparola.net for Italian first (best for Nuova Diodati)
+async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str, edition: str = None) -> list:
+    """Fetch Bible chapter in any language using multiple free APIs.
+
+    If `edition` is provided, the source is selected to honor that edition:
+      - Italian editions (nuova_diodati, diodati_classica, riveduta, cei) → laparola.net
+      - English editions (kjv, web, asv, bbe, ylt, dra) → bible-api.com
+      - Other languages have a single public-domain source per language.
+    """
+
+    # Italian: laparola.net supports multiple Italian versions
     if lang == "it":
-        verses = await fetch_from_laparola(book, chapter)
+        edition_to_version = {
+            "nuova_diodati": "Nuova+Diodati",
+            "diodati_classica": "Diodati",
+            "riveduta": "NRiveduta",
+            "cei": "CEI",
+        }
+        version = edition_to_version.get(edition, "Nuova+Diodati")
+        verses = await fetch_from_laparola(book, chapter, version=version)
+        if verses and len(verses) > 3:
+            return verses
+
+    # English: bible-api.com supports multiple public-domain translations
+    if lang == "en":
+        verses = await fetch_from_bible_api(book, chapter, lang="en", edition=edition)
         if verses and len(verses) > 3:
             return verses
     
@@ -1238,43 +1306,62 @@ async def fetch_bible_chapter_any_lang(book: str, chapter: int, lang: str) -> li
     return []
 
 @api_router.get("/bible/chapter/{book}/{chapter}")
-async def get_chapter(book: str, chapter: int, lang: str = "it"):
-    """Get verses for a chapter in specified language"""
+async def get_chapter(book: str, chapter: int, lang: str = "it", edition: str = None):
+    """Get verses for a chapter in specified language and edition.
+
+    `edition` is a key from BIBLE_EDITIONS (e.g. "nuova_diodati", "kjv", "web", "asv").
+    If omitted, the system uses the default edition per language.
+    The cache key includes `edition` so different editions don't overwrite each other.
+    """
     key = f"{book}:{chapter}"
 
     # Section title metadata (always included)
     book_info = get_book_info(book, lang)
     chapter_title = get_chapter_title(book, chapter, lang)
 
-    # First try the real Bible data (Nuova Diodati or Reina Valera)
-    if lang == "it":
-        verses = NUOVA_DIODATI.get(key, [])
-    elif lang == "es":
-        verses = REINA_VALERA_1960.get(key, [])
-    else:
-        verses = []
+    # Resolve edition default per language
+    default_editions = {"it": "nuova_diodati", "es": "reina_valera", "en": "kjv",
+                        "pt": "almeida", "fr": "louis_segond", "de": "luther"}
+    resolved_edition = edition or default_editions.get(lang, "")
 
-    if verses:
-        return {"book": book, "chapter": chapter, "verses": verses, "language": lang,
-                "book_info": book_info, "chapter_title": chapter_title}
+    # For default Italian/Spanish editions, prefer the static curated data
+    use_static = (
+        (lang == "it" and resolved_edition == "nuova_diodati") or
+        (lang == "es" and resolved_edition == "reina_valera")
+    )
 
-    # Check if we have it cached in MongoDB
-    cached = await db.bible_cache.find_one({"book": book, "chapter": chapter, "language": lang})
+    if use_static:
+        if lang == "it":
+            verses = NUOVA_DIODATI.get(key, [])
+        else:
+            verses = REINA_VALERA_1960.get(key, [])
+
+        if verses:
+            return {"book": book, "chapter": chapter, "verses": verses, "language": lang,
+                    "edition": resolved_edition,
+                    "book_info": book_info, "chapter_title": chapter_title}
+
+    # Check MongoDB cache (per edition!)
+    cache_query = {"book": book, "chapter": chapter, "language": lang, "edition": resolved_edition}
+    cached = await db.bible_cache.find_one(cache_query)
     if cached and cached.get("verses") and len(cached.get("verses", [])) > 3:
         return {"book": book, "chapter": chapter, "verses": cached["verses"], "language": lang,
+                "edition": resolved_edition,
                 "book_info": book_info, "chapter_title": chapter_title}
 
-    # Fetch from external APIs
-    fetched_verses = await fetch_bible_chapter_any_lang(book, chapter, lang)
+    # Fetch from external APIs with edition awareness
+    fetched_verses = await fetch_bible_chapter_any_lang(book, chapter, lang, edition=resolved_edition)
 
     if fetched_verses and len(fetched_verses) > 3:
-        # Cache in MongoDB for future use
+        # Cache in MongoDB (key includes edition)
         await db.bible_cache.update_one(
-            {"book": book, "chapter": chapter, "language": lang},
-            {"$set": {"verses": fetched_verses, "source": "external_api", "cached_at": datetime.now(timezone.utc)}},
+            cache_query,
+            {"$set": {**cache_query, "verses": fetched_verses, "source": "external_api",
+                      "cached_at": datetime.now(timezone.utc)}},
             upsert=True
         )
         return {"book": book, "chapter": chapter, "verses": fetched_verses, "language": lang,
+                "edition": resolved_edition,
                 "book_info": book_info, "chapter_title": chapter_title}
 
     # Return placeholder if nothing found
@@ -1293,6 +1380,7 @@ async def get_chapter(book: str, chapter: int, lang: str = "it"):
         verses.append({"verse": i, "text": placeholder_text})
 
     return {"book": book, "chapter": chapter, "verses": verses, "language": lang,
+            "edition": resolved_edition,
             "book_info": book_info, "chapter_title": chapter_title}
 
 
