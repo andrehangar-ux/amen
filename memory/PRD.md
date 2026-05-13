@@ -148,12 +148,16 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - **142 endpoint totali registrati** dall'API
   - Validazione: **32/32 test passati al 100%** (test_reports/iteration_42.json), zero regressioni
   - 1 bug fix interno: ordine rotte in study_groups.py (`/search-users` ora prima di `/{group_id}`)
-- [x] **Quiz: Aggiunti 55 nuovi domande e nuova categoria** (Feb 2026):
-  - **Nuova categoria "Lettere Generali"** (`cat_lettere_generali`): 30 domande su Ebrei, Giacomo, 1-2 Pietro, 1-3 Giovanni, Giuda
-  - **Categoria "Profeti Minori" espansa**: da 7 a 32 domande, copertura completa dei 12 profeti minori (Osea, Gioele, Amos, Abdia, Giona, Michea, Naum, Abacuc, Sofonia, Aggeo, Zaccaria, Malachia)
-  - Aggiunta entry in `quiz_1000.py CATEGORY_TRANSLATIONS` per `lettere_generali` (it/es/en/pt/fr/de)
-  - Traduzioni domande on-demand via LLM cache (`quiz_translations_cache.json`) — già attive
-  - Totali: **1055 domande** in **35 categorie** (era 1000/33)
+- [x] **Cleanup massivo qualità domande quiz** (Feb 2026):
+  - Rimossi **88 duplicati esatti** + **7 noise off-topic** in profeti_minori (es. domande criptiche tipo "Pesce grande?", "AdP movement", "Velo Dimora?")
+  - **704 domande articolate** via LLM (gpt-4o-mini, 88 batch sequenziali): da "Apòkryphos?" → "Cosa significa il termine 'Apòkryphos' nella classificazione dei libri biblici?"
+  - **Cripte (<20 char)**: da 499 → **16** (-97%)
+  - **Spiegazioni con riferimenti `[123,456]`**: da 195 → **0** (regex cleanup post-LLM)
+  - Cache traduzioni invalidata per 149 entries (le riformulate vengono ri-tradotte on-demand alla prossima richiesta in lingua ≠ IT)
+  - Atomic write (`.tmp` + `os.replace`) per evitare letture parziali del backend
+  - Totale finale: **960 domande in 35 categorie** (qualità didattica drasticamente migliorata)
+  - Script riutilizzabile salvato in `/app/backend/articulate_quiz.py`
+
 
 ## Task Futuri (Backlog)
 1. **P2**: Continuare Fase 2 — estrarre i restanti ~60 endpoint in routes/{bible,bible_study,dictionary,groups,ai_chat,radios_feelings,study_history,downloads,well_known}.py per portare server.py sotto le 1500 righe
