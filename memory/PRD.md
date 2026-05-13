@@ -137,6 +137,29 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - `routes/users_presence.py` (74 righe, 4 endpoint: heartbeat + online + offline + settings)
   - server.py ridotto a **4397 righe** (-32% dall'iniziale 6431, 65 endpoint estratti totali)
   - Validazione: **62/62 test passati al 100%** (test_reports/iteration_41.json), zero regressioni
+- [x] **Refactoring server.py - Fase 2 (4° batch)** (Feb 2026) - 5 nuovi moduli + rimozione dead code:
+  - `routes/maps.py` (130 righe, 3 endpoint: /maps, /maps/{id}, /maps/{id}/location/{name})
+  - `routes/events.py` (121 righe, 6 endpoint: /events CRUD + join/start/end)
+  - `routes/faq.py` (113 righe, 3 endpoint: /faq, /faq/categories, /support/contact)
+  - `routes/study_groups.py` (375 righe, 13 endpoint completi)
+  - `routes/quiz.py` (265 righe, 9 endpoint: topics/categories/advanced/category/{id}/history/stats/{topic}/submit)
+  - Rimosso BIBLE_QUIZZES dead code (mai referenziato) da server.py
+  - server.py ridotto a **3459 righe** (-46% dall'iniziale 6431, **84 endpoint estratti totali** su ~145)
+  - **142 endpoint totali registrati** dall'API
+  - Validazione: **32/32 test passati al 100%** (test_reports/iteration_42.json), zero regressioni
+  - 1 bug fix interno: ordine rotte in study_groups.py (`/search-users` ora prima di `/{group_id}`)
+- [x] **Quiz: Aggiunti 55 nuovi domande e nuova categoria** (Feb 2026):
+  - **Nuova categoria "Lettere Generali"** (`cat_lettere_generali`): 30 domande su Ebrei, Giacomo, 1-2 Pietro, 1-3 Giovanni, Giuda
+  - **Categoria "Profeti Minori" espansa**: da 7 a 32 domande, copertura completa dei 12 profeti minori (Osea, Gioele, Amos, Abdia, Giona, Michea, Naum, Abacuc, Sofonia, Aggeo, Zaccaria, Malachia)
+  - Aggiunta entry in `quiz_1000.py CATEGORY_TRANSLATIONS` per `lettere_generali` (it/es/en/pt/fr/de)
+  - Traduzioni domande on-demand via LLM cache (`quiz_translations_cache.json`) — già attive
+  - Totali: **1055 domande** in **35 categorie** (era 1000/33)
+
+## Task Futuri (Backlog)
+1. **P2**: Continuare Fase 2 — estrarre i restanti ~60 endpoint in routes/{bible,bible_study,dictionary,groups,ai_chat,radios_feelings,study_history,downloads,well_known}.py per portare server.py sotto le 1500 righe
+2. **P3**: Completare configurazione Resend dominio (azione manuale utente — vedi `/app/memory/RESEND_SETUP.md`)
+3. **P3** (opzionale): backfill traduzioni statiche per le 55 nuove domande quiz (oggi tradotte on-demand via LLM)
+4. **P3**: pubblicare nuova build sullo Store con i 29 nuovi libri biblici + 55 nuove domande quiz
 - [x] **Resend Production Setup Guide** (Apr 2026) - `/app/memory/RESEND_SETUP.md`
 - [x] **Titoli di Sezione Biblici Multilingua** (Apr 2026) - Header tematici nei capitoli:
   - `/app/backend/bible_titles.py` (920 righe): 66 BOOK_TITLES + descriptive subtitles in 6 lingue (Italiano, Inglese, Spagnolo, Portoghese, Francese, Tedesco) + 56 CHAPTER_TITLES per i capitoli più famosi (Creazione, Diluvio, 10 Comandamenti, Davide e Golia, Salmo 23, Sermone sul Monte, Padre Nostro, Crocifissione, Pentecoste, Inno alla Carità, ecc.)
