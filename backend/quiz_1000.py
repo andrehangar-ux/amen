@@ -348,6 +348,14 @@ CATEGORY_TRANSLATIONS = {
         'fr': {'title': 'Apocalypse', 'desc': 'La Révélation'},
         'de': {'title': 'Offenbarung', 'desc': 'Die Apokalypse'},
     },
+    'lettere_generali': {
+        'it': {'title': 'Lettere Generali', 'desc': 'Ebrei, Giacomo, 1-2 Pietro, 1-3 Giovanni, Giuda'},
+        'es': {'title': 'Cartas Generales', 'desc': 'Hebreos, Santiago, 1-2 Pedro, 1-3 Juan, Judas'},
+        'en': {'title': 'General Epistles', 'desc': 'Hebrews, James, 1-2 Peter, 1-3 John, Jude'},
+        'pt': {'title': 'Cartas Gerais', 'desc': 'Hebreus, Tiago, 1-2 Pedro, 1-3 João, Judas'},
+        'fr': {'title': 'Épîtres Générales', 'desc': 'Hébreux, Jacques, 1-2 Pierre, 1-3 Jean, Jude'},
+        'de': {'title': 'Allgemeine Briefe', 'desc': 'Hebräer, Jakobus, 1-2 Petrus, 1-3 Johannes, Judas'},
+    },
     'lingue_termini': {
         'it': {'title': 'Lingue e Termini', 'desc': 'Terminologia biblica'},
         'es': {'title': 'Lenguas y Términos', 'desc': 'Terminología bíblica'},

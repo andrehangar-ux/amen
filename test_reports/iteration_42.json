@@ -1,0 +1,37 @@
+{
+  "summary": "Backend regression for Fase 2 refactor continuation (server.py 4397 -> 3459 lines; NEW route modules: quiz.py, maps.py, events.py, faq.py, study_groups.py). Wrote /app/backend/tests/test_refactor_iteration_42.py with 32 tests covering: 35 quiz categories IT/EN, lettere_generali (30 q) and profeti_minori (30+ q) expansions, EN 'General Epistles' translation, quiz history/stats, end-to-end POST /quiz/submit on cat_lettere_generali with persistence verification, 4 maps + palestine full data, 8 FAQ + categories, full event lifecycle (create/join/start/end), study groups CRUD + messages + search-users + minor exclusion, 66 bible books, 12 bible editions, edition-cache fix verification (Salmi 23 nuova_diodati vs diodati_classica AND Genesis 1 KJV vs ASV both return DIFFERENT texts). Result: 32/32 PASSED after one production bug fix (route ordering) and three test-side corrections.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/study-groups/search-users", "issue": "Route was shadowed by /study-groups/{group_id} because it was declared AFTER the path-param route in routes/study_groups.py, causing every request to return 404 'Gruppo non trovato'. FIXED in this iteration by moving the literal-path route above the {group_id} catch-all route (and removing duplicate at file bottom)."}
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_refactor_iteration_42.py",
+    "/app/test_reports/pytest/iteration_42_results.xml"
+  ],
+  "action_items": [
+    "Apply the same route-ordering audit to other refactored route modules (events, private_messages, journal_bookmarks_progress, etc.) - any literal sub-path under a `/{id}` parent must be declared FIRST.",
+    "Optional: backfill the EN 'General Epistles' question content itself (currently only the category title is translated; questions stay in IT when translate=false on EN — by design but worth confirming with product)."
+  ],
+  "critical_code_review_comments": [
+    "routes/study_groups.py had a CRITICAL route-ordering bug: /study-groups/search-users matched /study-groups/{group_id} → 404. Fixed by relocating. Same risk pattern exists wherever a `{param}` route is declared before sibling literal paths — recommend a unit-style smoke that walks app.routes and asserts no literal path is shadowed by a preceding `{var}` pattern at the same depth.",
+    "routes/maps.py and routes/faq.py embed large data dicts inline (good for v1, but consider extracting to JSON resources to keep modules <150 LOC and decouple data updates from code review).",
+    "routes/quiz.py duplicates a 6-language feedback_prompts/default_feedback dict per submit; extracting to module-level constants would shrink the function and ease future locale additions.",
+    "routes/events.py has no validation that scheduled_at is in the future; trivially accepts past dates (got 2030 here but a typo could create an immediately-stale event).",
+    "Negative-auth check on POST /events confirmed 401 OK after we cleared the shared cookie jar — but note the in-test 'session' fixture stored a session_token cookie after /auth/login; cleared in adult_token fixture to keep negative-auth tests valid. Production frontends that use Bearer tokens are not affected, but cookie-based clients should be aware.",
+    "Quiz title for cat_profeti_minori shows questions_count=32 in EN listing but get_quiz_1000_by_category returns 30 questions for both IT and EN — the count metadata is computed independently; consider deriving from len(questions) to stay in sync."
+  ],
+  "updated_files": [
+    "/app/backend/routes/study_groups.py (moved search-users route above {group_id}, removed duplicate definition)",
+    "/app/backend/tests/test_refactor_iteration_42.py (new)"
+  ],
+  "success_rate": {"backend": "100% (32/32)", "frontend": "n/a (skipped per request)"},
+  "test_credentials": "refactortest@amen.com / Test1234! (adult)",
+  "seed_data_creation": "Created during run (TEST_iter42 prefix where possible): 1 quiz_results row for cat_lettere_generali (100% score), 1 live_event 'TEST_iter42 Event' (now ended), 1 study_group 'TEST_iter42 Group' with 1 system+user message. Safe to leave; identifiable by the TEST_iter42 string.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Iter 42 validated Fase 2 continuation refactor (quiz/maps/events/faq/study_groups extraction) with 32/32 pass. Reusable test file at /app/backend/tests/test_refactor_iteration_42.py. Key gotchas: (1) login response key is `session_token` NOT access_token/token; the dependencies.py auth helper accepts it both as cookie and as Bearer header. (2) /api/bible/editions returns a DICT {edition_id: meta} not a list. (3) /api/study-groups/{group_id} catch-all MUST stay below any literal sub-path like search-users — production bug was caught & fixed here. (4) Quiz answers POST shape: {topic, answers: {question_id: index}, language}. (5) Use distinct requests session per negative-auth check (or clear cookies) since /auth/login also sets a `session_token` cookie. (6) Edition cache fix verified — Salmi/23 IT and Genesis/1 EN return different texts across editions.",
+  "rca of the issue": "Route shadowing bug in routes/study_groups.py: when /study-groups/{group_id} (line 64) is declared before /study-groups/search-users (line 352 originally), FastAPI matches the catch-all first and `search-users` becomes the value of group_id, hitting the membership check and returning 404. Reproduction: GET /api/study-groups/search-users?q=test with valid Bearer → 404 'Gruppo non trovato o non sei membro'. Mitigation applied: relocated the search-users route above the {group_id} route (and removed the duplicate at end of file). Verified: 200 OK returning {users: [...]}."
+}
