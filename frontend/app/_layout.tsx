@@ -6,6 +6,7 @@ import { View, ActivityIndicator, StyleSheet, Platform } from 'react-native';
 import { COLORS } from '../src/utils/theme';
 import { FloatingMenu } from '../src/components/FloatingMenu';
 import * as SplashScreen from 'expo-splash-screen';
+import { initializeAdsWithConsent } from '../src/utils/ads';
 
 // Prevent splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync().catch(() => {});
@@ -15,6 +16,11 @@ export default function RootLayout() {
 
   useEffect(() => {
     checkAuth();
+    // Google UMP consent flow MUST run before any ad request.
+    // This is enforced by Google Play policy for apps shown in EEA/UK.
+    // The call is safe to fire-and-forget: it gates ads internally and
+    // never throws to the React tree.
+    initializeAdsWithConsent();
   }, []);
 
   useEffect(() => {

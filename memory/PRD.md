@@ -148,7 +148,16 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - **142 endpoint totali registrati** dall'API
   - Validazione: **32/32 test passati al 100%** (test_reports/iteration_42.json), zero regressioni
   - 1 bug fix interno: ordine rotte in study_groups.py (`/search-users` ora prima di `/{group_id}`)
-- [x] **Espansione titoli capitoli biblici tradotti** (Feb 2026):
+- [x] **Google UMP SDK integration (consenso GDPR/EEA prima dei banner)** (Feb 2026):
+  - `src/utils/ads.ts` (NUOVO): modulo dedicato con `initializeAdsWithConsent()`, `canShowAds()`, `showPrivacyOptionsForm()`. Usa `AdsConsent.gatherConsent()` ufficiale di `react-native-google-mobile-ads@16.3.3` (wrapper di Google UMP SDK Android/iOS).
+  - `_layout.tsx`: chiamata di `initializeAdsWithConsent()` nello stesso `useEffect` di mount → il form di consenso UMP viene mostrato (se richiesto da geografia) PRIMA di qualsiasi richiesta di annuncio. Conforme alle linee guida ufficiali Google (https://developers.google.com/admob/android/privacy/gdpr).
+  - `AdBanner.tsx`: rinnovato da no-op completo a componente che renderizza `BannerAd` nativo (formato `ANCHORED_ADAPTIVE_BANNER`) SOLO quando `canShowAds()` è `true`. Polling 500ms con timeout 15s mentre attende il completamento UMP.
+  - `settings.tsx`: aggiunta voce "Preferenze annunci" (con `Platform !== 'web'` guard) che chiama `showPrivacyOptionsForm()` — richiesto da Google per consentire all'utente EEA di modificare il consenso dopo il primo lancio.
+  - DEV: `AdsConsentDebugGeography.EEA` forzato in `__DEV__` per rendere visibile il form durante i test.
+  - Tutto wrappato in `try/catch` con `Platform.OS === 'web'` short-circuit: nessun crash su web preview e nessuna AdMob request prima del consenso anche su Android/iOS APK.
+  - Test ID Google development banner (`ca-app-pub-3940256099942544/6300978111`) usato in `__DEV__`, unit ID produzione in release builds.
+
+
   - Da **58 → 283 capitoli** con titolo (+225 capitoli famosi aggiunti)
   - Copertura: 55/66 libri (i libri puramente genealogici/rituali rimangono senza titolo a capitolo, intenzionalmente)
   - Tutti in **6 lingue** (it, en, es, pt, fr, de) — titoli tradizionali da Bibbie storiche pubblico dominio (Diodati, KJV, Reina-Valera, Almeida, Louis Segond, Luther)

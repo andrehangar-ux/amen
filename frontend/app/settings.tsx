@@ -21,6 +21,7 @@ import { api } from '../src/utils/api';
 import { NotificationService } from '../src/services/NotificationService';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../src/utils/theme';
 import OfflineManager from '../src/components/OfflineManager';
+import { showPrivacyOptionsForm } from '../src/utils/ads';
 
 // Helper to show long text alerts
 const showInfoAlert = (title: string, message: string, buttonText: string) => {
@@ -925,6 +926,18 @@ export default function SettingsScreen() {
             <Text style={styles.legalText}>{t('gdprConsents')}</Text>
             <Icon name="chevron-forward" size={20} color={COLORS.textMuted} />
           </TouchableOpacity>
+
+          {Platform.OS !== 'web' && (
+            <TouchableOpacity 
+              style={styles.legalItem}
+              onPress={() => showPrivacyOptionsForm()}
+              data-testid="ads-privacy-options-button"
+            >
+              <Icon name="megaphone" size={22} color="#F39C12" />
+              <Text style={styles.legalText}>{t('adsPrivacyOptions') || 'Preferenze annunci'}</Text>
+              <Icon name="chevron-forward" size={20} color={COLORS.textMuted} />
+            </TouchableOpacity>
+          )}
 
           <TouchableOpacity 
             style={[styles.legalItem, { borderBottomWidth: 0 }]}
