@@ -148,7 +148,16 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - **142 endpoint totali registrati** dall'API
   - Validazione: **32/32 test passati al 100%** (test_reports/iteration_42.json), zero regressioni
   - 1 bug fix interno: ordine rotte in study_groups.py (`/search-users` ora prima di `/{group_id}`)
-- [x] **Cleanup massivo qualità domande quiz** (Feb 2026):
+- [x] **Espansione titoli capitoli biblici tradotti** (Feb 2026):
+  - Da **58 → 283 capitoli** con titolo (+225 capitoli famosi aggiunti)
+  - Copertura: 55/66 libri (i libri puramente genealogici/rituali rimangono senza titolo a capitolo, intenzionalmente)
+  - Tutti in **6 lingue** (it, en, es, pt, fr, de) — titoli tradizionali da Bibbie storiche pubblico dominio (Diodati, KJV, Reina-Valera, Almeida, Louis Segond, Luther)
+  - Top capitoli per libro: Salmi (30), Genesi (26), Esodo (17), Matteo (16), Giovanni (14), Apocalisse (12)
+  - Generati via LLM gpt-4o-mini (19 batch da 12, ~50 secondi totali)
+  - Endpoint `/api/bible/chapter/{book}/{chapter}?lang=X` ora ritorna `chapter_title` localizzato in tutte le 6 lingue
+  - Script riutilizzabile: `/app/backend/generate_chapter_titles.py`
+
+
   - Rimossi **88 duplicati esatti** + **7 noise off-topic** in profeti_minori (es. domande criptiche tipo "Pesce grande?", "AdP movement", "Velo Dimora?")
   - **704 domande articolate** via LLM (gpt-4o-mini, 88 batch sequenziali): da "Apòkryphos?" → "Cosa significa il termine 'Apòkryphos' nella classificazione dei libri biblici?"
   - **Cripte (<20 char)**: da 499 → **16** (-97%)

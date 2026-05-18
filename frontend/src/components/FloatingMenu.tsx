@@ -8,6 +8,7 @@ import {
   Pressable,
   Platform,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import { router, usePathname } from 'expo-router';
 import { Icon } from './Icon';
@@ -91,6 +92,7 @@ export const FloatingMenu: React.FC = () => {
         transparent
         animationType="fade"
         onRequestClose={() => setVisible(false)}
+        statusBarTranslucent
       >
         <View style={styles.modalFull}>
           {/* Tappable top area to close */}
@@ -107,8 +109,10 @@ export const FloatingMenu: React.FC = () => {
             </View>
 
             <ScrollView
+              style={styles.scrollView}
               showsVerticalScrollIndicator={true}
               bounces={false}
+              nestedScrollEnabled={true}
               contentContainerStyle={styles.scrollContent}
             >
               {menuItems.map((item) => (
@@ -174,8 +178,21 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.card,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    maxHeight: '85%',
+    // Numeric maxHeight (Dimensions) instead of '85%': some Android versions
+    // do not resolve % maxHeight correctly inside a transparent Modal, leaving
+    // the ScrollView unbounded and therefore not scrollable.
+    maxHeight: Math.round(Dimensions.get('window').height * 0.85),
+    // flexShrink lets the panel respect its maxHeight even when content is
+    // larger than the available space.
+    flexShrink: 1,
     ...SHADOWS.large,
+  },
+  scrollView: {
+    // Required on Android: without an explicit flex/flexGrow inside a parent
+    // that uses maxHeight, the ScrollView may render with 0 height and lose
+    // its scrolling capability on certain devices.
+    flexGrow: 1,
+    flexShrink: 1,
   },
   menuHeader: {
     flexDirection: 'row',
