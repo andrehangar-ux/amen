@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import {
   View,
   Text,
@@ -9,7 +9,10 @@ import {
   Platform,
   ScrollView,
   Dimensions,
+  Animated,
+  PanResponder,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router, usePathname } from 'expo-router';
 import { Icon } from './Icon';
 import { COLORS, SHADOWS, SPACING } from '../utils/theme';
@@ -27,12 +30,100 @@ const MENU_LABELS: Record<string, Record<string, string>> = {
 
 const HIDDEN_ON = ['/(auth)', '/login', '/register', '/forgot-password'];
 
+// Persisted position storage key. The user can drag the FAB anywhere and the
+// last position is restored on next launch.
+const FAB_POSITION_KEY = '@amen/fab_position_v1';
+const FAB_SIZE = 56;
+const EDGE_MARGIN = 8;          // minimum distance from any screen edge
+const DRAG_THRESHOLD = 6;       // px of movement before a press becomes a drag
+
 export const FloatingMenu: React.FC = () => {
   const [visible, setVisible] = useState(false);
   const { currentLanguage } = useLanguageStore();
   const { user } = useAuthStore();
   const pathname = usePathname();
   const labels = MENU_LABELS[currentLanguage] || MENU_LABELS['it'];
+
+  // ---- Draggable FAB position ------------------------------------------------
+  const { width: screenW, height: screenH } = Dimensions.get('window');
+  // Default = old hardcoded position (bottom-right).
+  const defaultX = screenW - FAB_SIZE - 20;
+  const defaultY = screenH - FAB_SIZE - (Platform.OS === 'ios' ? 100 : 90);
+
+  const pan = useRef(new Animated.ValueXY({ x: defaultX, y: defaultY })).current;
+  // Snapshot of the current position — needed because Animated.Value lives outside React state.
+  const lastPos = useRef({ x: defaultX, y: defaultY });
+  const isDragging = useRef(false);
+
+  // Restore saved position on mount.
+  useEffect(() => {
+    (async () => {
+      try {
+        const raw = await AsyncStorage.getItem(FAB_POSITION_KEY);
+        if (raw) {
+          const saved = JSON.parse(raw);
+          if (typeof saved.x === 'number' && typeof saved.y === 'number') {
+            // Clamp to current screen in case the device was rotated since.
+            const x = Math.min(Math.max(saved.x, EDGE_MARGIN), screenW - FAB_SIZE - EDGE_MARGIN);
+            const y = Math.min(Math.max(saved.y, EDGE_MARGIN), screenH - FAB_SIZE - EDGE_MARGIN);
+            pan.setValue({ x, y });
+            lastPos.current = { x, y };
+          }
+        }
+      } catch {
+        /* ignore */
+      }
+    })();
+  }, []);
+
+  const panResponder = useMemo(
+    () =>
+      PanResponder.create({
+        // Activate only on real drag — a static press still goes to onPress.
+        onStartShouldSetPanResponder: () => false,
+        onMoveShouldSetPanResponder: (_evt, gesture) =>
+          Math.abs(gesture.dx) > DRAG_THRESHOLD || Math.abs(gesture.dy) > DRAG_THRESHOLD,
+
+        onPanResponderGrant: () => {
+          isDragging.current = true;
+          pan.setOffset({ x: lastPos.current.x, y: lastPos.current.y });
+          pan.setValue({ x: 0, y: 0 });
+        },
+
+        onPanResponderMove: Animated.event([null, { dx: pan.x, dy: pan.y }], {
+          useNativeDriver: false,
+        }),
+
+        onPanResponderRelease: (_evt, gesture) => {
+          pan.flattenOffset();
+          // Clamp inside screen.
+          let nx = lastPos.current.x + gesture.dx;
+          let ny = lastPos.current.y + gesture.dy;
+          nx = Math.min(Math.max(nx, EDGE_MARGIN), screenW - FAB_SIZE - EDGE_MARGIN);
+          ny = Math.min(Math.max(ny, EDGE_MARGIN), screenH - FAB_SIZE - EDGE_MARGIN);
+
+          Animated.spring(pan, {
+            toValue: { x: nx, y: ny },
+            useNativeDriver: false,
+            friction: 7,
+          }).start();
+
+          lastPos.current = { x: nx, y: ny };
+          AsyncStorage.setItem(FAB_POSITION_KEY, JSON.stringify({ x: nx, y: ny })).catch(() => {});
+          // Reset drag flag on next tick so onPress fires for taps but not for drags.
+          setTimeout(() => {
+            isDragging.current = false;
+          }, 50);
+        },
+
+        onPanResponderTerminate: () => {
+          pan.flattenOffset();
+          isDragging.current = false;
+        },
+      }),
+    [screenW, screenH],
+  );
+  // ---------------------------------------------------------------------------
 
   if (!user || HIDDEN_ON.some(p => pathname.startsWith(p))) return null;
 
@@ -71,21 +162,34 @@ export const FloatingMenu: React.FC = () => {
 
   return (
     <>
-      <TouchableOpacity
-        style={styles.fab}
-        onPress={() => setVisible(true)}
-        activeOpacity={0.7}
-        testID="floating-menu-button"
-        accessibilityLabel="Menu"
-        accessibilityRole="button"
-        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+      <Animated.View
+        style={[
+          styles.fab,
+          {
+            transform: pan.getTranslateTransform(),
+          },
+        ]}
+        {...panResponder.panHandlers}
       >
-        <View style={styles.fabInner} pointerEvents="none">
-          <View style={styles.burgLine} />
-          <View style={styles.burgLine} />
-          <View style={styles.burgLine} />
-        </View>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.fabTouchable}
+          onPress={() => {
+            if (isDragging.current) return; // ignore tap if user just dragged
+            setVisible(true);
+          }}
+          activeOpacity={0.7}
+          testID="floating-menu-button"
+          accessibilityLabel="Menu"
+          accessibilityRole="button"
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        >
+          <View style={styles.fabInner} pointerEvents="none">
+            <View style={styles.burgLine} />
+            <View style={styles.burgLine} />
+            <View style={styles.burgLine} />
+          </View>
+        </TouchableOpacity>
+      </Animated.View>
 
       <Modal
         visible={visible}
@@ -143,17 +247,27 @@ export const FloatingMenu: React.FC = () => {
 const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
-    bottom: Platform.OS === 'ios' ? 100 : 90,
-    right: 20,
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+    // top/left are 0 — the actual placement is driven by `pan` (Animated.ValueXY)
+    // via `transform: [{translateX}, {translateY}]`. This lets the user drag
+    // the burger anywhere on the screen and we persist that position.
+    top: 0,
+    left: 0,
+    width: FAB_SIZE,
+    height: FAB_SIZE,
+    borderRadius: FAB_SIZE / 2,
     backgroundColor: COLORS.primary,
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 9999,
     elevation: 8,
     ...SHADOWS.large,
+  },
+  fabTouchable: {
+    width: FAB_SIZE,
+    height: FAB_SIZE,
+    borderRadius: FAB_SIZE / 2,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   fabInner: {
     width: 22,

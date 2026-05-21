@@ -148,7 +148,23 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - **142 endpoint totali registrati** dall'API
   - Validazione: **32/32 test passati al 100%** (test_reports/iteration_42.json), zero regressioni
   - 1 bug fix interno: ordine rotte in study_groups.py (`/search-users` ora prima di `/{group_id}`)
-- [x] **Google UMP SDK integration (consenso GDPR/EEA prima dei banner)** (Feb 2026):
+- [x] **FAB Menu Burger draggabile con posizione persistente** (Feb 2026):
+  - Sostituita `TouchableOpacity` statica con `Animated.View` + `PanResponder` in `FloatingMenu.tsx`
+  - L'utente può ora **trascinare il tasto burger ovunque sullo schermo** con un drag prolungato (soglia 6px per distinguere tap da drag)
+  - **Posizione persistente** salvata in AsyncStorage (chiave `@amen/fab_position_v1`) → ripristinata al prossimo lancio
+  - Clamp automatico ai limiti dello schermo (margine 8px) — il FAB non può uscire dal viewport
+  - Animazione `Animated.spring(friction: 7)` al rilascio per un feel naturale
+  - Distinzione tap vs drag tramite flag `isDragging` (timeout 50ms): il tap apre il menu, il drag NON lo apre
+  - Funziona su clamp dopo cambio di orientation (riposiziona dentro lo schermo nuovo)
+- [x] **Fix Bundle Web rotto da UMP integration** (Feb 2026):
+  - Errore: `Metro: Importing native-only module "react-native/Libraries/Utilities/codegenNativeComponent" on web from: GoogleMobileAdsBannerViewNativeComponent.ts`
+  - Causa: `react-native-google-mobile-ads` viene importato in `ads.ts` e `AdBanner.tsx` — Metro web bundler risolve staticamente anche i `require()` lazy
+  - Fix: separati in file Platform-specific che Metro risolve automaticamente:
+    - `src/utils/ads.ts` (stub web no-op) + `src/utils/ads.native.ts` (impl Android/iOS con UMP)
+    - `src/components/AdBanner.tsx` (stub web) + `src/components/AdBanner.native.tsx` (impl con BannerAd)
+  - Web bundle ora compila correttamente: `Web Bundled 3357ms (1908 modules)` ✅
+
+
   - `src/utils/ads.ts` (NUOVO): modulo dedicato con `initializeAdsWithConsent()`, `canShowAds()`, `showPrivacyOptionsForm()`. Usa `AdsConsent.gatherConsent()` ufficiale di `react-native-google-mobile-ads@16.3.3` (wrapper di Google UMP SDK Android/iOS).
   - `_layout.tsx`: chiamata di `initializeAdsWithConsent()` nello stesso `useEffect` di mount → il form di consenso UMP viene mostrato (se richiesto da geografia) PRIMA di qualsiasi richiesta di annuncio. Conforme alle linee guida ufficiali Google (https://developers.google.com/admob/android/privacy/gdpr).
   - `AdBanner.tsx`: rinnovato da no-op completo a componente che renderizza `BannerAd` nativo (formato `ANCHORED_ADAPTIVE_BANNER`) SOLO quando `canShowAds()` è `true`. Polling 500ms con timeout 15s mentre attende il completamento UMP.
