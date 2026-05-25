@@ -56,6 +56,29 @@ export const AdBanner: React.FC<AdBannerProps> = ({ style }) => {
         unitId={unitId}
         size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
         requestOptions={{ requestNonPersonalizedAdsOnly: false }}
+        onAdLoaded={() => {
+          // eslint-disable-next-line no-console
+          console.log('[ads] BannerAd LOADED — unitId:', unitId);
+        }}
+        onAdFailedToLoad={(error: any) => {
+          // Surface the precise Google error code/message in Logcat.
+          // Common codes:
+          //   ERROR_CODE_NO_FILL          → no inventory matched (account too new / region)
+          //   ERROR_CODE_INVALID_REQUEST  → wrong unit id, App ID mismatch, package not registered
+          //   ERROR_CODE_NETWORK_ERROR    → device offline / DNS issue
+          //   ERROR_CODE_INTERNAL_ERROR   → SDK glitch (retry helps)
+          // eslint-disable-next-line no-console
+          console.warn(
+            '[ads] BannerAd FAILED — unitId:',
+            unitId,
+            'code:',
+            error?.code,
+            'message:',
+            error?.message,
+            'domain:',
+            error?.domain,
+          );
+        }}
       />
     </View>
   );

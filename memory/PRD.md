@@ -148,7 +148,31 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
   - **142 endpoint totali registrati** dall'API
   - Validazione: **32/32 test passati al 100%** (test_reports/iteration_42.json), zero regressioni
   - 1 bug fix interno: ordine rotte in study_groups.py (`/search-users` ora prima di `/{group_id}`)
-- [x] **FAB Menu Burger draggabile con posizione persistente** (Feb 2026):
+- [x] **Fix AdMob banner not loading on device + UMP state corrupted by Auto Backup** (Feb 2026):
+  Risposta ai 4 punti diagnostici del QA team:
+
+  1. **UMP reset attivato** in `src/utils/ads.native.ts`:
+     - `AdsConsent.reset()` chiamato all'inizio di `initializeAdsWithConsent()` se `__DEV__` o `EXPO_PUBLIC_RESET_UMP=1`
+     - Forza la comparsa del form GDPR ad ogni avvio durante i test (sblocca lo stato bloccato)
+     - **IMPORTANTE**: rimuovere `EXPO_PUBLIC_RESET_UMP=1` prima della build di produzione Play Store
+
+  2. **Android Auto Backup disabilitato** tramite nuovo config plugin `plugins/withDisableAndroidBackup.js`:
+     - Patcha `AndroidManifest.xml` aggiungendo `android:allowBackup="false"`, `android:fullBackupContent="false"`, `tools:replace="android:allowBackup,android:fullBackupContent"`
+     - Impedisce ad Android di ripristinare lo stato del consenso al primo lancio dopo reinstallazione
+     - Plugin registrato in `app.json` → applicato automaticamente a `eas build` / `expo prebuild`
+
+  3. **Logcat debug avanzato** in `src/components/AdBanner.native.tsx`:
+     - `onAdLoaded` → log `[ads] BannerAd LOADED — unitId: ...`
+     - `onAdFailedToLoad` → log dettagliato con `code`, `message`, `domain` (filtra con `adb logcat | grep -E "\[ads\]|Ads"`)
+     - In `ads.native.ts` aggiunti log per: status consenso (OBTAINED/NOT_REQUIRED/REQUIRED), `canRequestAds`, `privacyOptionsRequirementStatus`, esito `mobileAds().initialize()`
+
+  4. **Verifica App ID 🚨 PROBLEMA RILEVATO**:
+     - In `app.json` `androidAppId = "ca-app-pub-1876565863299921~6716733612"` (App ID)
+     - Banner Unit ID nel codice = `"ca-app-pub-1876565863299921/6716733612"` (Unit ID)
+     - **STESSO numero finale `6716733612`**: l'App ID e l'Unit ID NON possono avere la stessa cifra finale in un account AdMob valido — quasi certamente causa di `ERROR_CODE_INVALID_REQUEST`
+     - Azione richiesta utente: verificare in AdMob Console l'esatto App ID (con `~`) e gli Unit IDs (con `/`) e aggiornare i valori in `app.json` e `AdBanner.native.tsx`
+
+
   - Sostituita `TouchableOpacity` statica con `Animated.View` + `PanResponder` in `FloatingMenu.tsx`
   - L'utente può ora **trascinare il tasto burger ovunque sullo schermo** con un drag prolungato (soglia 6px per distinguere tap da drag)
   - **Posizione persistente** salvata in AsyncStorage (chiave `@amen/fab_position_v1`) → ripristinata al prossimo lancio
