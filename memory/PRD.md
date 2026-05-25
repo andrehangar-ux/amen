@@ -170,7 +170,14 @@ Applicazione mobile/web per lo studio della Bibbia con funzionalità multilingue
      - In `app.json` `androidAppId = "ca-app-pub-1876565863299921~6716733612"` (App ID)
      - Banner Unit ID nel codice = `"ca-app-pub-1876565863299921/6716733612"` (Unit ID)
      - **STESSO numero finale `6716733612`**: l'App ID e l'Unit ID NON possono avere la stessa cifra finale in un account AdMob valido — quasi certamente causa di `ERROR_CODE_INVALID_REQUEST`
-     - Azione richiesta utente: verificare in AdMob Console l'esatto App ID (con `~`) e gli Unit IDs (con `/`) e aggiornare i valori in `app.json` e `AdBanner.native.tsx`
+
+  5. **Banner Unit IDs corretti** (forniti dall'utente da AdMob Console, Feb 2026):
+     - Slot 1: `ca-app-pub-1876565863299921/5471187240`
+     - Slot 2: `ca-app-pub-1876565863299921/7118323752`
+     - Slot 3: `ca-app-pub-1876565863299921/5567117090`
+     - `AdBanner.native.tsx`: prop `unitIndex` (1|2|3) ora funzionale per scegliere quale slot mostrare. Default = 1.
+     - App ID confermato corretto: `~6716733612` (lasciato invariato in `app.json`)
+     - iOS: stesso array (l'utente non ha unit IDs iOS separati al momento)
 
 
   - Sostituita `TouchableOpacity` statica con `Animated.View` + `PanResponder` in `FloatingMenu.tsx`
