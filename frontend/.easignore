@@ -1,0 +1,37 @@
+# EAS Build ignore list — keep upload lean and avoid stale generated artifacts
+
+# Node
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Build artifacts (must NOT be uploaded; EAS regenerates them)
+android/build/
+android/app/build/
+android/.gradle/
+android/.cxx/
+ios/build/
+ios/Pods/
+.gradle/
+
+# Local caches
+.metro-cache/
+.expo/
+web-build/
+dist/
+
+# Logs & cores
+*.log
+*.core
+qemu_lld.real_*
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Misc
+*.local
+.env.local
+.env.development.local

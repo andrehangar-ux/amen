@@ -13,7 +13,7 @@
       "bundleIdentifier": "com.amen.myapp"
     },
     "android": {
-      "package": "com.amen.myapp",
+      "package": "app.emergent.spiritstudyupdate50228c46",
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
